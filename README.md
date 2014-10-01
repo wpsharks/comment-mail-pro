@@ -1,4 +1,5 @@
-comment-mail-pro
-================
+## Comment Mail™ Pro (WP Comment Subscriptions)
 
-Pro version of Comment Mail™. Private repo.
+A WordPress plugin enabling email subscriptions for comments.
+
+![logo](assets/logo.png)
