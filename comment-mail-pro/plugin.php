@@ -9,7 +9,7 @@
 /*
 Version: 141206
 Text Domain: comment-mail
-Plugin Name: Comment Mail
+Plugin Name: Comment Mail Pro
 
 Author: WebSharks, Inc.
 Author URI: http://www.websharks-inc.com
