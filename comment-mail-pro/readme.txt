@@ -1,4 +1,4 @@
-=== Comment Mail™ (WP Comment Subscriptions) ===
+=== Comment Mail™ Pro (WP Comment Subscriptions) ===
 
 Stable tag: 141206
 Requires at least: 4.0

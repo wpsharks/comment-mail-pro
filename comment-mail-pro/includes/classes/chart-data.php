@@ -25,28 +25,28 @@ namespace comment_mail // Root namespace.
 			 *
 			 * @since 141111 First documented version.
 			 */
-			protected $input_view;
+			public $input_view; // Public for PHP v5.3 compat.
 
 			/**
 			 * @var string Current view.
 			 *
 			 * @since 141111 First documented version.
 			 */
-			protected $view;
+			public $view; // Public for PHP v5.3 compat.
 
 			/**
 			 * @var \stdClass Chart specs.
 			 *
 			 * @since 141111 First documented version.
 			 */
-			protected $chart;
+			public $chart; // Public for PHP v5.3 compat.
 
 			/**
 			 * @var array Any errors.
 			 *
 			 * @since 141111 First documented version.
 			 */
-			protected $errors;
+			public $errors; // Public for PHP v5.3 compat.
 
 			/**
 			 * @var array Chart colors.

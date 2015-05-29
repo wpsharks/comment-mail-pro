@@ -6,8 +6,8 @@
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license GNU General Public License, version 3
  */
-namespace comment_mail
-{
+namespace comment_mail {
+
 	if(!defined('WPINC')) // MUST have WordPress.
 		exit('Do NOT access this file directly: '.basename(__FILE__));
 
@@ -59,15 +59,6 @@ namespace comment_mail
 			 * @var boolean `TRUE` for pro version.
 			 */
 			public $is_pro = TRUE;
-
-			/**
-			 * Identifies enterprise version.
-			 *
-			 * @since 141111 First documented version.
-			 *
-			 * @var boolean `TRUE` for enterprise version.
-			 */
-			public $is_enterprise = TRUE;
 
 			/**
 			 * Plugin name.
@@ -318,7 +309,7 @@ namespace comment_mail
 				 * Fire pre-setup hooks.
 				 */
 				if($this->enable_hooks) // Hooks enabled?
-					do_action('before__'.__METHOD__, get_defined_vars());
+					do_action('before_'.__METHOD__, get_defined_vars());
 
 				/*
 				 * Load the plugin's text domain for translations.
@@ -342,6 +333,7 @@ namespace comment_mail
 
 					'version'                                                                              => $this->version,
 					'crons_setup'                                                                          => '0', // `0` or timestamp.
+					'stcr_transition_complete'                                                             => '0', // `0|1` transitioned?
 
 					/* Related to data safeguards. */
 
@@ -636,16 +628,22 @@ namespace comment_mail
 					'template__type_a__email__comment_notification__message___php'                         => '', // HTML/PHP code.
 
 				); // Default options are merged with those defined by the site owner.
-				$this->default_options = apply_filters(__METHOD__.'__default_options', $this->default_options); // Allow filters.
+				$this->default_options = apply_filters(__METHOD__.'_default_options', $this->default_options); // Allow filters.
 				$this->options         = is_array($this->options = get_option(__NAMESPACE__.'_options')) ? $this->options : array();
 
 				$this->options = array_merge($this->default_options, $this->options); // Merge into default options.
 				$this->options = array_intersect_key($this->options, $this->default_options); // Valid keys only.
-				$this->options = apply_filters(__METHOD__.'__options', $this->options); // Allow filters.
+				$this->options = apply_filters(__METHOD__.'_options', $this->options); // Allow filters.
 				$this->options = array_map('strval', $this->options); // Force string values.
 
 				if($this->options['manage_cap']) // This can be altered by plugin config. options.
 					$this->manage_cap = apply_filters(__METHOD__.'_manage_cap', $this->options['manage_cap']);
+
+				if(!$this->options['auto_confirm_force_enable'])
+					$this->options['all_wp_users_confirm_email'] = '0';
+
+				require_once dirname(__FILE__).'/includes/api.php';
+				require_once dirname(__FILE__).'/includes/stcr.php';
 
 				/*
 				 * With or without hooks?
@@ -723,7 +721,7 @@ namespace comment_mail
 				/*
 				 * Fire setup completion hooks.
 				 */
-				do_action('after__'.__METHOD__, get_defined_vars());
+				do_action('after_'.__METHOD__, get_defined_vars());
 				do_action(__METHOD__.'_complete', get_defined_vars());
 			}
 

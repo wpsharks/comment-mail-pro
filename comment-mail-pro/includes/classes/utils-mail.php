@@ -8,6 +8,7 @@
  */
 namespace comment_mail // Root namespace.
 {
+
 	if(!defined('WPINC')) // MUST have WordPress.
 		exit('Do NOT access this file directly: '.basename(__FILE__));
 
@@ -312,15 +313,18 @@ namespace comment_mail // Root namespace.
 				$debug_output_markup = $this->plugin->utils_string->trim_html($debug_output_markup);
 
 				if($via === 'wp_mail') // Convert this to HTML markup.
-					$via_markup = $this->plugin->utils_markup->x_anchor('https://developer.wordpress.org/reference/functions/wp_mail/', 'wp_mail');
+					$via_markup = $this->plugin->utils_markup->x_anchor('https://developer.wordpress.org/reference/functions/wp_mail/', 'wp_mail()');
 
 				else if($via === 'smtp') // Convert this to HTML markup.
 					$via_markup = $this->plugin->utils_markup->x_anchor('http://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol', 'SMTP');
 
 				else $via_markup = esc_html($via); // Convert this to HTML markup.
 
-				if(!$debug_output_markup) // There might not be any output in some cases; e.g. if SMTP is not in use.
-					$debug_output_markup = esc_html(__('— please check your email to be sure you received the message —', $this->plugin->text_domain));
+				if($sent && !$debug_output_markup) // There might not be any output in some cases; e.g. if SMTP is not in use.
+					$debug_output_markup = '<em>'.esc_html(__('— please check your email to be sure you received the message —', $this->plugin->text_domain)).'</em>';
+
+				else if(!$sent && !$debug_output_markup) // There might not be any output in some cases; e.g., if SMTP is not in use.
+					$debug_output_markup = '<em>'.esc_html(__('— please seek assistance from your hosting company —', $this->plugin->text_domain)).'</em>';
 
 				$results_markup = '<h4 style="margin:0 0 1em 0;">'.
 				                  '   '.sprintf(__('%1$s&trade; sent a test email via %2$s to:', $this->plugin->text_domain),
@@ -333,10 +337,7 @@ namespace comment_mail // Root namespace.
 				                   '<code>'.esc_html($sent ? __('seems so; please check your email to be sure', $this->plugin->text_domain) : __('no', $this->plugin->text_domain)).'</code>'.
 				                   '</h4>';
 
-				$results_markup .= '<h4 style="margin:0;">'.
-				                   '   '.__('Debug Output:', $this->plugin->text_domain).
-				                   '</h4>'.
-				                   '<hr />'.
+				$results_markup .= '<hr />'.
 				                   '<div style="margin:0 0 1em 0;">'.
 				                   '   '.$debug_output_markup.
 				                   '</div>';

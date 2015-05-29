@@ -34,6 +34,8 @@ namespace comment_mail // Root namespace.
 				$this->create_db_tables();
 				$this->maybe_enqueue_notice();
 				$this->set_install_time();
+
+				stcr_deactivate_transition();
 			}
 
 			/**

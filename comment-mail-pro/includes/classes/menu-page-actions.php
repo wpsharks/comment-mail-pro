@@ -167,6 +167,8 @@ namespace comment_mail // Root namespace.
 				delete_option(__NAMESPACE__.'_options');
 				$this->plugin->options = $this->plugin->default_options;
 
+				import_stcr::delete_post_meta_keys(); // Reset import tracking.
+
 				$notice_markup = // Notice regarding options having been retored successfully.
 					sprintf(__('%1$s&trade; default options restored successfully.', $this->plugin->text_domain), esc_html($this->plugin->name));
 				$this->plugin->enqueue_user_notice($notice_markup, array('transient' => TRUE));
@@ -185,7 +187,7 @@ namespace comment_mail // Root namespace.
 			{
 				$request_args = (array)$request_args;
 
-				if(empty($request_args['key']))
+				if(empty($request_args['notice_key']))
 					return; // Not possible.
 
 				if(!current_user_can($this->plugin->manage_cap))
@@ -195,7 +197,7 @@ namespace comment_mail // Root namespace.
 				$notices = get_option(__NAMESPACE__.'_notices');
 				if(!is_array($notices)) $notices = array();
 
-				unset($notices[$request_args['key']]);
+				unset($notices[$request_args['notice_key']]);
 				update_option(__NAMESPACE__.'_notices', $notices);
 
 				wp_redirect($this->plugin->utils_url->notice_dismissed()).exit();
