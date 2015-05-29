@@ -329,17 +329,17 @@ namespace comment_mail {
 				 * Setup the array of all plugin options.
 				 */
 				$this->default_options = array(
-					/* Core/systematic option keys. */
+					# Core/systematic option keys.
 
 					'version'                                                                              => $this->version,
 					'crons_setup'                                                                          => '0', // `0` or timestamp.
 					'stcr_transition_complete'                                                             => '0', // `0|1` transitioned?
 
-					/* Related to data safeguards. */
+					# Related to data safeguards.
 
 					'uninstall_safeguards_enable'                                                          => '1', // `0|1`; safeguards on?
 
-					/* Related to user authentication. */
+					# Related to user authentication.
 
 					'manage_cap'                                                                           => $this->manage_cap, // Capability.
 
@@ -384,7 +384,7 @@ namespace comment_mail {
 					'comment_form_default_sub_type_option'                                                 => 'comment', // ``, `comment` or `comments`.
 					'comment_form_default_sub_deliver_option'                                              => 'asap', // `asap`, `hourly`, `daily`, `weekly`.
 
-					/* Related to SSO and service integrations. */
+					# Related to SSO and service integrations.
 
 					'sso_enable'                                                                           => '0', // `0|1`; enable?
 
@@ -410,7 +410,7 @@ namespace comment_mail {
 					'sso_linkedin_secret'                                                                  => '',
 					// See: <https://www.linkedin.com/secure/developer?newapp=>
 
-					/* Related to CAN-SPAM compliance. */
+					# Related to CAN-SPAM compliance.
 
 					'can_spam_postmaster'                                                                  => get_bloginfo('admin_email'),
 					'can_spam_mailing_address'                                                             => get_bloginfo('name').'<br />'."\n".
@@ -419,7 +419,7 @@ namespace comment_mail {
 					                                                                                          'Somewhere, USA 99999 ~ Ph: 555-555-5555', // CAN-SPAM contact info.
 					'can_spam_privacy_policy_url'                                                          => '', // CAN-SPAM privacy policy.
 
-					/* Related to auto-subscribe functionality. */
+					# Related to auto-subscribe functionality.
 
 					'auto_subscribe_enable'                                                                => '1', // `0|1`; auto-subscribe enable?
 					'auto_subscribe_deliver'                                                               => 'asap', // `asap`, `hourly`, `daily`, `weekly`.
@@ -461,13 +461,13 @@ namespace comment_mail {
 					'auto_confirm_if_already_subscribed_u0ip_enable'                                       => '0', // `0|1`; auto-confirm enable?
 					'all_wp_users_confirm_email'                                                           => '0', // WP users confirm their email?
 
-					/* Related to email headers. */
+					# Related to email headers.
 
 					'from_name'                                                                            => get_bloginfo('name'), // From: name.
 					'from_email'                                                                           => get_bloginfo('admin_email'), // From: <email>.
 					'reply_to_email'                                                                       => get_bloginfo('admin_email'), // Reply-To: <email>.
 
-					/* Related to SMPT configuration. */
+					# Related to SMPT configuration.
 
 					'smtp_enable'                                                                          => '0', // `0|1`; enable?
 
@@ -483,7 +483,7 @@ namespace comment_mail {
 					'smtp_reply_to_email'                                                                  => get_bloginfo('admin_email'), // Reply-To: <email>.
 					'smtp_force_from'                                                                      => '1', // `0|1`; force? Not configurable at this time.
 
-					/* Related to replies via email. */
+					# Related to replies via email.
 
 					'replies_via_email_enable'                                                             => '0', // `0|1`; enable?
 					'replies_via_email_handler'                                                            => '', // `mandrill`.
@@ -494,11 +494,11 @@ namespace comment_mail {
 					'rve_mandrill_spf_check_enable'                                                        => '1', // `0|1|2|3|4`; where `0` = disable.
 					'rve_mandrill_dkim_check_enable'                                                       => '1', // `0|1|2`; where `0` = disable.
 
-					/* Related to blacklisting. */
+					# Related to blacklisting.
 
 					'email_blacklist_patterns'                                                             => implode("\n", utils_mail::$role_based_blacklist_patterns),
 
-					/* Related to performance tuning. */
+					# Related to performance tuning.
 
 					'queue_processor_max_time'                                                             => '30', // In seconds.
 					'queue_processor_delay'                                                                => '250', // In milliseconds.
@@ -513,25 +513,25 @@ namespace comment_mail {
 					'sub_event_log_expiration_time'                                                        => '', // `strtotime()` compatible.
 					'queue_event_log_expiration_time'                                                      => '', // `strtotime()` compatible.
 
-					/* Related to IP tracking. */
+					# Related to IP tracking.
 
 					'prioritize_remote_addr'                                                               => '0', // `0|1`; enable?
 					'geo_location_tracking_enable'                                                         => '0', // `0|1`; enable?
 
-					/* Related to meta boxes. */
+					# Related to meta boxes.
 
 					'excluded_meta_box_post_types'                                                         => 'link,comment,revision,attachment,nav_menu_item,snippet,redirect',
 
-					/* Related to comment notifications. */
+					# Related to comment notifications.
 
 					'comment_notification_parent_content_clip_max_chars'                                   => '100', // Max chars to include in notifications.
 					'comment_notification_content_clip_max_chars'                                          => '200', // Max chars to include in notifications.
 
-					/* Related to subscription summary. */
+					# Related to subscription summary.
 
 					'sub_manage_summary_max_limit'                                                         => '25', // Subscriptions per page.
 
-					/* Related to select options. */
+					# Related to select options.
 
 					'post_select_options_enable'                                                           => '1', // `0|1`; enable?
 					'post_select_options_media_enable'                                                     => '0', // `0|1`; enable?
@@ -539,7 +539,7 @@ namespace comment_mail {
 					'user_select_options_enable'                                                           => '1', // `0|1`; enable?
 					'max_select_options'                                                                   => '2000', // Max options.
 
-					/* Related to menu pages; i.e. logo display. */
+					# Related to menu pages; i.e. logo display.
 
 					'menu_pages_logo_icon_enable'                                                          => '0', // `0|1`; display?
 
@@ -551,7 +551,7 @@ namespace comment_mail {
 					'email_footer_powered_by_enable'                                                       => '0', // `0|1`; enable?
 					'site_footer_powered_by_enable'                                                        => '0', // `0|1`; enable?
 
-					/* Template-related config. options. */
+					# Template-related config. options.
 
 					'template_type'                                                                        => 's', // `a|s`.
 
