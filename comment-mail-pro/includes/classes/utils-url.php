@@ -537,6 +537,23 @@ namespace comment_mail // Root namespace.
 			}
 
 			/**
+			 * Pro updater menu page URL.
+			 *
+			 * @since 141111 First documented version.
+			 *
+			 * @param string|null $scheme Optional . Defaults to `admin`.
+			 *    See {@link set_scheme()} method for further details.
+			 *
+			 * @return string Pro updater menu page URL.
+			 */
+			public function pro_updater_menu_page_only($scheme = 'admin')
+			{
+				$url = admin_url('/admin.php');
+
+				return $this->page_only(__NAMESPACE__.'_pro_updater', $url, $scheme);
+			}
+
+			/**
 			 * Options updated URL.
 			 *
 			 * @since 141111 First documented version.

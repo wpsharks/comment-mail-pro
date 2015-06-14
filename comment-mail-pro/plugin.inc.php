@@ -222,7 +222,7 @@ namespace comment_mail {
 			 * @var string Capability required to upgrade.
 			 *    i.e. the ability to run any sort of plugin upgrader.
 			 */
-			public $upgrade_cap;
+			public $update_cap;
 
 			/**
 			 * Uninstall capability requirement.
@@ -322,7 +322,7 @@ namespace comment_mail {
 				$this->cap                = apply_filters(__METHOD__.'_cap', 'activate_plugins');
 				$this->manage_cap         = apply_filters(__METHOD__.'_manage_cap', 'moderate_comments');
 				$this->auto_recompile_cap = apply_filters(__METHOD__.'_auto_recompile_cap', 'activate_plugins');
-				$this->upgrade_cap        = apply_filters(__METHOD__.'_upgrade_cap', 'update_plugins');
+				$this->update_cap         = apply_filters(__METHOD__.'_update_cap', 'update_plugins');
 				$this->uninstall_cap      = apply_filters(__METHOD__.'_uninstall_cap', 'delete_plugins');
 
 				/*
@@ -342,6 +342,14 @@ namespace comment_mail {
 					# Related to user authentication.
 
 					'manage_cap'                                                                           => $this->manage_cap, // Capability.
+
+		            # Related to automatic pro updates.
+
+		            'pro_update_check'                                                                     => '1', // `0|1`; enable?
+		            'last_pro_update_check'                                                                => '0', // Timestamp.
+
+		            'pro_update_username'                                                                  => '', // Username.
+		            'pro_update_password'                                                                  => '', // Password or license key.
 
 					/* Low-level switches to enable/disable certain functionalities.
 					 *
@@ -657,6 +665,10 @@ namespace comment_mail {
 				add_action('init', array($this, 'actions'), -10);
 
 				add_action('admin_init', array($this, 'check_version'), 10);
+		        add_action('admin_init', array($this, 'check_latest_pro_version'), 10);
+		        add_filter('fs_ftp_connection_types', array($this, 'fs_ftp_connection_types'), 10);
+		        add_filter('pre_site_transient_update_plugins', array($this, 'pre_site_transient_update_plugins'), 10);
+
 				add_action('all_admin_notices', array($this, 'all_admin_notices'), 10);
 
 				add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_styles'), 10);
@@ -1184,6 +1196,15 @@ namespace comment_mail {
 				add_action('load-'.$this->menu_page_hooks[__NAMESPACE__.'_stats'], array($this, 'menu_page_stats_screen'));
 
 				unset($_menu_title, $_page_title); // Housekeeping.
+
+				/* ----------------------------------------- */
+
+				$_menu_title                                         = $divider.__('Pro Updater', $this->text_domain);
+				$_page_title                                         = $this->name.'&trade; &#10609; '.__('Pro Updater', $this->text_domain);
+				$this->menu_page_hooks[__NAMESPACE__.'_pro_updater'] = add_submenu_page(__NAMESPACE__, $_page_title, $_menu_title, $this->update_cap, __NAMESPACE__.'_pro_updater', array($this, 'menu_page_pro_updater'));
+				add_action('load-'.$this->menu_page_hooks[__NAMESPACE__.'_pro_updater'], array($this, 'menu_page_pro_updater_screen'));
+
+				unset($_menu_title, $_page_title); // Housekeeping.
 			}
 
 			/**
@@ -1466,6 +1487,40 @@ namespace comment_mail {
 			}
 
 			/**
+			 * Menu page screen; for pro updater.
+			 *
+			 * @since 141111 First documented version.
+			 *
+			 * @attaches-to `'load-'.$this->menu_page_hooks[__NAMESPACE__.'_pro_updater']` action.
+			 *
+			 * @see add_menu_pages()
+			 */
+			public function menu_page_pro_updater_screen()
+			{
+				$screen = get_current_screen();
+				if(!($screen instanceof \WP_Screen))
+					return; // Not possible.
+
+				if(empty($this->menu_page_hooks[__NAMESPACE__.'_pro_updater'])
+				   || $screen->id !== $this->menu_page_hooks[__NAMESPACE__.'_pro_updater']
+				) return; // Not applicable.
+
+				return; // No screen for this page right now.
+			}
+
+			/**
+			 * Menu page for pro updater.
+			 *
+			 * @since 141111 First documented version.
+			 *
+			 * @see add_menu_pages()
+			 */
+			public function menu_page_pro_updater()
+			{
+				new menu_page('pro_updater');
+			}
+
+			/**
 			 * Menu page screen; for import/export.
 			 *
 			 * @since 141111 First documented version.
@@ -1588,6 +1643,129 @@ namespace comment_mail {
 			}
 
 			/*
+			 * Pro Update-Related Methods
+			 */
+
+			/**
+			 * Checks for a new pro release once every hour.
+			 *
+			 * @since 150422 Rewrite.
+			 *
+			 * @attaches-to `admin_init` hook.
+			 *
+			 * @see pre_site_transient_update_plugins()
+			 */
+			public function check_latest_pro_version()
+			{
+			    if(!$this->options['pro_update_check'])
+			        return; // Disabled here.
+
+			    if(!current_user_can($this->update_cap))
+			        return; // Nothing to do.
+
+			    if($this->options['last_pro_update_check'] >= strtotime('-1 hour'))
+			        return; // No reason to keep checking on this.
+
+			    $this->options_quick_save(array('last_pro_update_check' => (string)time()));
+
+			    $product_api_url        = $this->utils_url->product_page('https');
+			    $product_api_input_vars = array('product_api' => array('action' => 'latest_pro_version'));
+
+			    $product_api_response = wp_remote_post($product_api_url, array('body' => $product_api_input_vars));
+			    $product_api_response = json_decode(wp_remote_retrieve_body($product_api_response), true);
+
+			    if(!is_array($product_api_response) || empty($product_api_response['pro_version']) || version_compare($this->version, $product_api_response['pro_version'], '>='))
+			        return; // Current pro version is the latest stable version. Nothing more to do here.
+
+			    $this->enqueue_notice(sprintf(__('<strong>%1$s Pro:</strong> a new version is now available. Please <a href="%2$s">upgrade to v%3$s</a>.', $this->text_domain), esc_html($this->name), esc_attr($this->utils_url->pro_updater_menu_page_only()), esc_html($product_api_response['pro_version'])), array('persistent' => TRUE, 'persistent_id' => 'new-pro-version-available', 'requires_cap' => $this->update_cap));
+			}
+
+			/**
+			 * Modifies transient data associated with this plugin.
+			 *
+			 * @since 150422 Rewrite.
+			 *
+			 * @attaches-to `pre_site_transient_update_plugins` filter.
+			 *
+			 * @param object $transient Transient data provided by the WP filter.
+			 *
+			 * @return object Transient object; possibly altered by this routine.
+			 */
+			public function pre_site_transient_update_plugins($transient)
+			{
+			    if(!is_admin() || $GLOBALS['pagenow'] !== 'update.php')
+			        return $transient; // Nothing to do.
+
+			    $_r = $this->utils_string->trim_strip_deep($_REQUEST);
+
+			    if(empty($_r['action']) || $_r['action'] !== 'upgrade-plugin')
+			        return $transient; // Nothing to do.
+
+			    if(!current_user_can($this->update_cap))
+			        return $transient; // Nothing to do.
+
+			    if(empty($_r['_wpnonce']) || !wp_verify_nonce((string) $_r['_wpnonce'], 'upgrade-plugin_'.plugin_basename($this->file)))
+			        return $transient; // Nothing to doe.
+
+			    if(empty($_r[__NAMESPACE__.'_update_pro_version']) || !($update_pro_version = (string) $_r[__NAMESPACE__.'_update_pro_version']))
+			        return $transient; // Nothing to do.
+
+			    if(empty($_r[__NAMESPACE__.'_update_pro_zip']) || !($update_pro_zip = base64_decode((string) $_r[__NAMESPACE__.'_update_pro_zip'], true)))
+			        return $transient; // Nothing to do.
+
+			    if(!is_object($transient)) $transient = new \stdClass();
+
+			    $transient->last_checked                           = time();
+			    $transient->checked[plugin_basename($this->file)]  = $this->version;
+			    $transient->response[plugin_basename($this->file)] = (object) array(
+			        'id'          => 0, // It has no ID in this case.
+			        'slug'        => $this->slug.'-pro',
+			        'url'         => $this->utils_url->pro_updater_menu_page_only(),
+			        'new_version' => $update_pro_version,
+			        'package'     => $update_pro_zip,
+			    );
+			    return $transient; // Nodified now.
+			}
+
+			/**
+			 * Appends hidden inputs for pro updater when FTP credentials are requested by WP.
+			 *
+			 * @since 141111 First documented version.
+			 *
+			 * @attaches-to `fs_ftp_connection_types` filter.
+			 *
+			 * @param array $types Types of connections.
+			 *
+			 * @return array $types Types of connections.
+			 */
+			public function fs_ftp_connection_types($types)
+			{
+				if (!is_admin() || $GLOBALS['pagenow'] !== 'update.php')
+					return $types; // Nothing to do here.
+
+				$_r = $this->utils_string->trim_strip_deep($_REQUEST);
+
+				if (empty($_r['action']) || $_r['action'] !== 'upgrade-plugin')
+					return $types; // Nothing to do here.
+
+				if (empty($_r[__NAMESPACE__.'_update_pro_version']) || !($update_pro_version = (string) $_r[__NAMESPACE__.'_update_pro_version']))
+					return $types; // Nothing to do here.
+
+				if (empty($_r[__NAMESPACE__.'_update_pro_zip']) || !($update_pro_zip = (string) $_r[__NAMESPACE__.'_update_pro_zip']))
+					return $types; // Nothing to do here.
+
+				echo '<script type="text/javascript">';
+				echo '   (function($){ $(document).ready(function(){';
+				echo '      var $form = $(\'input#hostname\').closest(\'form\');';
+				echo '      $form.append(\'<input type="hidden" name="'.esc_attr(__NAMESPACE__.'_update_pro_version').'" value="'.esc_attr($update_pro_version).'" />\');';
+				echo '      $form.append(\'<input type="hidden" name="'.esc_attr(__NAMESPACE__.'_update_pro_zip').'" value="'.esc_attr($update_pro_zip).'" />\');';
+				echo '   }); })(jQuery);';
+				echo '</script>';
+
+				return $types; // Filter through.
+			}
+
+			/*
 			 * Admin Notice/Error Related Methods
 			 */
 
@@ -1605,14 +1783,15 @@ namespace comment_mail {
 					return; // Nothing to do here.
 
 				$default_args   = array(
-					'markup'       => '',
-					'requires_cap' => '',
-					'for_user_id'  => 0,
-					'for_page'     => '',
-					'persistent'   => FALSE,
-					'transient'    => FALSE,
-					'push_to_top'  => FALSE,
-					'type'         => 'notice',
+					'markup'        => '',
+					'requires_cap'  => '',
+					'for_user_id'   => 0,
+					'for_page'      => '',
+					'persistent'    => FALSE,
+					'persistent_id' => '',
+					'transient'     => FALSE,
+					'push_to_top'   => FALSE,
+					'type'          => 'notice',
 				);
 				$args['markup'] = (string)$markup; // + markup.
 				$args           = array_merge($default_args, $args);
@@ -1625,9 +1804,10 @@ namespace comment_mail {
 				$args['for_user_id'] = (integer)$args['for_user_id'];
 				$args['for_page']    = trim((string)$args['for_page']);
 
-				$args['persistent']  = (boolean)$args['persistent'];
-				$args['transient']   = (boolean)$args['transient'];
-				$args['push_to_top'] = (boolean)$args['push_to_top'];
+				$args['persistent']     = (boolean)$args['persistent'];
+				$args['persistent_id']  = (string)$args['persistent_id'];
+				$args['transient']      = (boolean)$args['transient'];
+				$args['push_to_top']    = (boolean)$args['push_to_top'];
 
 				if(!in_array($args['type'], array('notice', 'error'), TRUE))
 					$args['type'] = 'notice'; // Use default type.
@@ -1712,14 +1892,15 @@ namespace comment_mail {
 				foreach($notices as $_key => $_args)
 				{
 					$default_args = array(
-						'markup'       => '',
-						'requires_cap' => '',
-						'for_user_id'  => 0,
-						'for_page'     => '',
-						'persistent'   => FALSE,
-						'transient'    => FALSE,
-						'push_to_top'  => FALSE,
-						'type'         => 'notice',
+						'markup'        => '',
+						'requires_cap'  => '',
+						'for_user_id'   => 0,
+						'for_page'      => '',
+						'persistent'    => FALSE,
+						'persistent_id' => '',
+						'transient'     => FALSE,
+						'push_to_top'   => FALSE,
+						'type'          => 'notice',
 					);
 					$_args        = array_merge($default_args, $_args);
 					$_args        = array_intersect_key($_args, $default_args);
@@ -1733,9 +1914,10 @@ namespace comment_mail {
 					$_args['for_user_id'] = (integer)$_args['for_user_id'];
 					$_args['for_page']    = trim((string)$_args['for_page']);
 
-					$_args['persistent']  = (boolean)$_args['persistent'];
-					$_args['transient']   = (boolean)$_args['transient'];
-					$_args['push_to_top'] = (boolean)$_args['push_to_top'];
+					$_args['persistent']     = (boolean)$_args['persistent'];
+					$_args['persistent_id']  = (string)$_args['persistent_id'];
+					$_args['transient']      = (boolean)$_args['transient'];
+					$_args['push_to_top']    = (boolean)$_args['push_to_top'];
 
 					if(!in_array($_args['type'], array('notice', 'error'), TRUE))
 						$_args['type'] = 'notice'; // Use default type.

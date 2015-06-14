@@ -53,6 +53,8 @@ namespace comment_mail // Root namespace.
 					'sub_form_user_id_info_via_ajax',
 
 					'stats_chart_data_via_ajax',
+
+					'pro_update',
 				);
 				$this->maybe_handle();
 			}
@@ -354,6 +356,80 @@ namespace comment_mail // Root namespace.
 
 				exit(); // Stop after output; always.
 			}
+
+			/**
+		     * Action handler.
+			 *
+			 * @since 141111 First documented version.
+		     *
+		     * @param mixed $request_args Input action argument(s).
+		     */
+		    protected function pro_update($request_args)
+		    {
+		        $request_args = (array)$request_args;
+
+				if(!current_user_can($this->plugin->update_cap))
+		            return; // Nothing to do.
+
+		        $args = $this->plugin->utils_string->trim_strip_deep($request_args);
+
+		        if(!isset($args['check']))
+		            $args['check'] = $this->plugin->options['pro_update_check'];
+
+		        if(empty($args['username']))
+		            $args['username'] = $this->plugin->options['pro_update_username'];
+
+		        if(empty($args['password']))
+		            $args['password'] = $this->plugin->options['pro_update_password'];
+
+		        $product_api_url        = $this->plugin->utils_url->product_page('https');
+		        $product_api_input_vars = array(
+		            'product_api' => array(
+		                'action'   => 'latest_pro_update',
+		                'username' => $args['username'],
+		                'password' => $args['password'],
+		            ),
+		        );
+		        $product_api_response = wp_remote_post($product_api_url, array('body' => $product_api_input_vars));
+		        $product_api_response = json_decode(wp_remote_retrieve_body($product_api_response), true);
+
+		        if (!is_array($product_api_response) || !empty($product_api_response['error'])
+		           || empty($product_api_response['pro_version']) || empty($product_api_response['pro_zip'])
+		        ) {
+		            if (!empty($product_api_response['error']))
+		                $error = (string)$product_api_response['error'];
+		            else $error = __('Unknown error. Please wait 15 minutes and try again.', $this->plugin->text_domain);
+
+					$this->plugin->enqueue_user_error($error); // For the current user only.
+
+		            wp_redirect($this->plugin->utils_url->pro_updater_menu_page_only()).exit();
+		        }
+		        $this->plugin->options['last_pro_update_check'] = (string)time();
+		        $this->plugin->options['pro_update_check']      = (string)$args['check'];
+		        $this->plugin->options['pro_update_username']   = (string)$args['username'];
+		        $this->plugin->options['pro_update_password']   = (string)$args['password'];
+
+		        $this->plugin->options_quick_save($this->plugin->options);
+
+		        foreach(($notices = is_array($notices = get_option(__NAMESPACE__.'_notices')) ? $notices : array()) as $_key => $_notice)
+					if(!empty($_notice['persistent_id']) && $_notice['persistent_id'] === 'new-pro-version-available')
+						unset($notices[$_key]); // Remove this one! :-)
+				unset($_key, $_notice); // Housekeeping.
+
+		        update_option(__NAMESPACE__.'_notices', $notices); // Update notices.
+
+		        $redirect_to = self_admin_url('/update.php');
+		        $query_args  = array(
+		            'action'                            => 'upgrade-plugin',
+		            'plugin'                            => plugin_basename($this->plugin->file),
+		            '_wpnonce'                          => wp_create_nonce('upgrade-plugin_'.plugin_basename($this->plugin->file)),
+		            __NAMESPACE__.'_update_pro_version' => $product_api_response['pro_version'],
+		            __NAMESPACE__.'_update_pro_zip'     => base64_encode($product_api_response['pro_zip']),
+		        );
+		        $redirect_to = add_query_arg(urlencode_deep($query_args), $redirect_to);
+
+		        wp_redirect($redirect_to).exit();
+		    }
 		}
 	}
 }
