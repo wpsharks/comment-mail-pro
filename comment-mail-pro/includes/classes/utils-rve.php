@@ -235,34 +235,34 @@ namespace comment_mail // Root namespace.
 				$post_id = $comment_id = $sub_key = NULL; // Initialize.
 
 				if(!isset($post_id, $comment_id, $sub_key))
-					if($plain_text_body && preg_match_all('/^'.$regex_irt_marker_frag.'/', $plain_text_body, $m) === 1)
-					{ // Found an IRT marker at the beginning of the text body.
-						if(!isset($post_id) && isset($m['post_id'][0][0])) $post_id = (integer)$m['post_id'][0];
-						if(!isset($comment_id) && isset($m['comment_id'][0][0])) $comment_id = (integer)$m['comment_id'][0];
-						if(!isset($sub_key) && isset($m['sub_key'][0][0])) $sub_key = $m['sub_key'][0];
-					}
-				if(!isset($post_id, $comment_id, $sub_key))
-					if($reply_to_email && preg_match_all('/'.$regex_irt_suffix_frag.'/', $reply_to_email, $m) === 1)
-					{ // Found a single IRT suffix in the email address.
-						if(!isset($post_id) && isset($m['post_id'][0][0])) $post_id = (integer)$m['post_id'][0];
-						if(!isset($comment_id) && isset($m['comment_id'][0][0])) $comment_id = (integer)$m['comment_id'][0];
-						if(!isset($sub_key) && isset($m['sub_key'][0][0])) $sub_key = $m['sub_key'][0];
-					}
-				if(!isset($post_id, $comment_id, $sub_key))
-					if($subject && preg_match_all('/'.$regex_irt_marker_frag.'/', $subject, $m) === 1)
-					{ // Found a single IRT marker in the subject line.
-						if(!isset($post_id) && isset($m['post_id'][0][0])) $post_id = (integer)$m['post_id'][0];
-						if(!isset($comment_id) && isset($m['comment_id'][0][0])) $comment_id = (integer)$m['comment_id'][0];
-						if(!isset($sub_key) && isset($m['sub_key'][0][0])) $sub_key = $m['sub_key'][0];
-					}
-				if(!isset($post_id, $comment_id, $sub_key))
-					if($plain_text_body && preg_match_all('/'.$regex_irt_marker_frag.'/', $plain_text_body, $m) === 1)
-					{ // Found a single IRT marker in the text body.
-						if(!isset($post_id) && isset($m['post_id'][0][0])) $post_id = (integer)$m['post_id'][0];
-						if(!isset($comment_id) && isset($m['comment_id'][0][0])) $comment_id = (integer)$m['comment_id'][0];
-						if(!isset($sub_key) && isset($m['sub_key'][0][0])) $sub_key = $m['sub_key'][0];
-					}
-				return (object)compact('post_id', 'comment_id', 'sub_key'); // Possibly all NULL values.
+			        if($plain_text_body && preg_match_all('/^'.$regex_irt_marker_frag.'/', $plain_text_body, $m, PREG_SET_ORDER) === 1)
+			        { //var_dump($m); // Found an IRT marker at the beginning of the text body.
+			            if(!isset($post_id) && isset($m[0]['post_id'][0])) $post_id = (integer)$m[0]['post_id'];
+			            if(!isset($comment_id) && isset($m[0]['comment_id'][0])) $comment_id = (integer)$m[0]['comment_id'];
+			            if(!isset($sub_key) && isset($m[0]['sub_key'][0])) $sub_key = $m[0]['sub_key'];
+			        }
+			    if(!isset($post_id, $comment_id, $sub_key))
+			        if($reply_to_email && preg_match_all('/'.$regex_irt_suffix_frag.'/', $reply_to_email, $m, PREG_SET_ORDER) === 1)
+			        { var_dump($m); // Found a single IRT suffix in the email address.
+			            if(!isset($post_id) && isset($m[0]['post_id'][0])) $post_id = (integer)$m[0]['post_id'];
+			            if(!isset($comment_id) && isset($m[0]['comment_id'][0])) $comment_id = (integer)$m[0]['comment_id'];
+			            if(!isset($sub_key) && isset($m[0]['sub_key'][0])) $sub_key = $m[0]['sub_key'];
+			        }
+			    if(!isset($post_id, $comment_id, $sub_key))
+			        if($subject && preg_match_all('/'.$regex_irt_marker_frag.'/', $subject, $m, PREG_SET_ORDER) === 1)
+			        { //var_dump($m); // Found a single IRT marker in the subject line.
+			            if(!isset($post_id) && isset($m[0]['post_id'][0])) $post_id = (integer)$m[0]['post_id'];
+			            if(!isset($comment_id) && isset($m[0]['comment_id'][0])) $comment_id = (integer)$m[0]['comment_id'];
+			            if(!isset($sub_key) && isset($m[0]['sub_key'][0])) $sub_key = $m[0]['sub_key'];
+			        }
+			    if(!isset($post_id, $comment_id, $sub_key))
+			        if($plain_text_body && preg_match_all('/'.$regex_irt_marker_frag.'/', $plain_text_body, $m, PREG_SET_ORDER) === 1)
+			        { //var_dump($m); // Found a single IRT marker in the text body.
+			            if(!isset($post_id) && isset($m[0]['post_id'][0])) $post_id = (integer)$m[0]['post_id'];
+			            if(!isset($comment_id) && isset($m[0]['comment_id'][0])) $comment_id = (integer)$m[0]['comment_id'];
+			            if(!isset($sub_key) && isset($m[0]['sub_key'][0])) $sub_key = $m[0]['sub_key'];
+			        }
+			    return (object)compact('post_id', 'comment_id', 'sub_key'); // Possibly all NULL values.
 			}
 
 			/**
