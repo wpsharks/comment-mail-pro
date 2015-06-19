@@ -233,7 +233,7 @@ namespace comment_mail // Root namespace.
 						$this->mailer->normalizeBreaks($this->message_text);
 
 					foreach($this->headers as $_header => $_value)
-						$this->mailer->AddCustomHeader($this->plugin->utils_mail->ucwords_header($_header, $_value);
+						$this->mailer->AddCustomHeader($this->plugin->utils_mail->ucwords_header($_header), $_value);
 					unset($_header, $_value); // Housekeeping.
 
 					foreach($this->attachments as $_attachment)
