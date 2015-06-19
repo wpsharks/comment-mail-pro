@@ -318,6 +318,7 @@ namespace comment_mail // Root namespace.
 
 				// Some of the above details may be overridden by headers parsed here; e.g. `from_name`, `from_email`, `reply_to_email`, or `recipients`.
 				$this->headers = $this->plugin->utils_mail->parse_headers_deep($headers, $this->from_name, $this->from_email, $this->reply_to_email, $this->recipients);
+				if(empty($this->headers['to'])) $this->headers['to'] = 'undisclosed-recipients'; // Avoid problems with SMTP not sending a `To:` header.
 				unset($this->headers['content-type']); // Ignore this at all times. We always send multipart messages w/ UTF-8 encoding.
 
 				// Parse any attachments that may or may not exist in the call to this method.
