@@ -139,7 +139,7 @@ namespace comment_mail // Root namespace.
 			 * @since 141111 First documented version.
 			 *
 			 * @param string $pattern_name The type of match we're looking for.
-			 *    One of: `irt_suffix`, `irt_marker`, `manual_end_divider`, `end_divider`.
+			 *    One of: `irt_suffix`, `irt_marker`, `manual_end_divider`, `end_divider`, `wrote_by_line`.
 			 *
 			 * @return string Regex fragment for various reply via email markers/dividers/etc.
 			 *
@@ -178,6 +178,9 @@ namespace comment_mail // Root namespace.
 
 				if($pattern_name === 'end_divider') // Auto-generated end divider line.
 					return '(?is:\!~{3}end\-rve\-{3}.*?\-{3}end\-rve~{3}\!)';
+
+				if($pattern_name === 'wrote_by_line') // Auto-generated `wrote:` line.
+					return '(?i:.*?\s(?:wrote|writes|said|says)\:)'; // Variations.
 
 				throw new \exception(__('Invalid `$pattern_name`.', $this->plugin->text_domain));
 			}
@@ -296,6 +299,37 @@ namespace comment_mail // Root namespace.
 			}
 
 			/**
+			 * Strips `wrote:` by line.
+			 *
+			 * @since 150619 Improving RVE handler.
+			 *
+			 * @param string $rich_text_body Rich text body.
+			 *
+			 * @return string Rich text body w/ `wrote:` stripped away.
+			 */
+			public function strip_wrote_by_line($rich_text_body)
+			{
+				if(!($rich_text_body = trim((string)$rich_text_body)))
+					return $rich_text_body; // Empty.
+
+				$regex_wrote_by_line_frag = $this->regex_frag_for('wrote_by_line');
+
+				$regex_wrote_by_line = // Last line w/ `wrote:` in rich text body.
+
+					'/'. // Open regex; let's find a trailing `wrote:` by line.
+
+					'(?:\s*\<[^\/<>]+\>\s*)*'. // Any HTML open tags wrapping it up.
+
+					'\s*'.$regex_wrote_by_line_frag.'\s*'. // Any surrounding whitespace.
+
+					'(?:\s*\<\/[^<>]+\>\s*)*'. // Any closing tags wrapping it up.
+
+					'$/'; // End of the string (very important in this case).
+
+				return preg_replace($regex_wrote_by_line, '', $rich_text_body);
+			}
+
+			/**
 			 * Sanitizes reply via email message body.
 			 *
 			 * @since 141111 First documented version.
@@ -351,18 +385,21 @@ namespace comment_mail // Root namespace.
 				{
 					$force_moderation = FALSE; // Found end divider, no need to moderate.
 					list($sanitized_rich_text_body) = preg_split($regex_manual_end_divider, $rich_text_body, 2);
-					$sanitized_rich_text_body = $this->plugin->utils_string->trim_html($sanitized_rich_text_body);
+					$sanitized_rich_text_body       = $this->strip_wrote_by_line($sanitized_rich_text_body);
+					$sanitized_rich_text_body       = $this->plugin->utils_string->trim_html($sanitized_rich_text_body);
 				}
 				else if(preg_match($regex_end_divider, $rich_text_body))
 				{
 					$force_moderation = FALSE; // Found end divider, no need to moderate.
 					list($sanitized_rich_text_body) = preg_split($regex_end_divider, $rich_text_body, 2);
-					$sanitized_rich_text_body = $this->plugin->utils_string->trim_html($sanitized_rich_text_body);
+					$sanitized_rich_text_body       = $this->strip_wrote_by_line($sanitized_rich_text_body);
+					$sanitized_rich_text_body       = $this->plugin->utils_string->trim_html($sanitized_rich_text_body);
 				}
 				else // If unable to find a valid end divider; force moderation on this reply.
 				{
-					$force_moderation         = TRUE; // Force moderation; unable to find end divider.
-					$sanitized_rich_text_body = $this->plugin->utils_string->trim_html($rich_text_body);
+					$force_moderation         = TRUE; // Force moderation in this case.
+					$sanitized_rich_text_body = $rich_text_body; // Initialize sanitized form.
+					$sanitized_rich_text_body = $this->plugin->utils_string->trim_html($sanitized_rich_text_body);
 				}
 				return (object)compact('force_moderation', 'sanitized_rich_text_body');
 			}
