@@ -203,7 +203,7 @@ namespace comment_mail // Root namespace.
 						$this->mailer->Debugoutput = 'html';
 					}
 					$this->mailer->IsSMTP();
-					$this->mailer->SingleTo = TRUE;
+					$this->mailer->SingleTo = count($this->recipients) > 1;
 
 					$this->mailer->SMTPSecure = $this->plugin->options['smtp_secure'];
 					$this->mailer->Host       = $this->plugin->options['smtp_host'];
@@ -233,7 +233,7 @@ namespace comment_mail // Root namespace.
 						$this->mailer->normalizeBreaks($this->message_text);
 
 					foreach($this->headers as $_header => $_value)
-						$this->mailer->AddCustomHeader($this->plugin->utils_mail->ucwords_header($_header), $_value);
+						$this->mailer->AddCustomHeader($this->plugin->utils_mail->ucwords_header($_header, $_value);
 					unset($_header, $_value); // Housekeeping.
 
 					foreach($this->attachments as $_attachment)
@@ -348,7 +348,7 @@ namespace comment_mail // Root namespace.
 				$this->mailer->isSMTP();
 				$this->mailer->SMTPDebug   = 0;
 				$this->mailer->Debugoutput = 'html';
-				$this->mailer->SingleTo    = TRUE;
+				$this->mailer->SingleTo    = FALSE;
 
 				$this->mailer->SMTPSecure = '';
 				$this->mailer->Host       = '';
