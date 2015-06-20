@@ -671,7 +671,7 @@ namespace comment_mail // Root namespace.
 				return // Sub IDs that were inserted during this timeframe.
 
 					($sub_select_optimize // Optimize?
-						? "SELECT `sub_id` FROM(" : "").
+						? "SELECT `sub_id` FROM (" : "").
 					// ↑ See: <http://jas.xyz/1I52mVE>
 
 					"SELECT".($calc_enable ? " SQL_CALC_FOUND_ROWS" : '')." `sub_id`".
@@ -740,7 +740,7 @@ namespace comment_mail // Root namespace.
 				return // Sub IDs that were overwritten during this timeframe.
 
 					($sub_select_optimize // Optimize?
-						? "SELECT `sub_id` FROM(" : "").
+						? "SELECT `sub_id` FROM (" : "").
 					// ↑ See: <http://jas.xyz/1I52mVE>
 
 					"SELECT `sub_id`". // Need the sub IDs for sub-queries.
@@ -964,20 +964,27 @@ namespace comment_mail // Root namespace.
 				$to_time   = (integer)$to_time;
 
 				$default_args = array(
-					'calc_enable'      => FALSE,
-					'check_post_id'    => TRUE,
-					'check_exclusions' => TRUE,
+					'calc_enable'         => FALSE,
+					'check_post_id'       => TRUE,
+					'check_exclusions'    => TRUE,
+					'sub_select_optimize' => TRUE,
 				);
 				$args         = array_merge($default_args, $args);
 				$args         = array_intersect_key($args, $default_args);
 
-				$calc_enable      = (boolean)$args['calc_enable'];
-				$check_post_id    = (boolean)$args['check_post_id'];
-				$check_exclusions = (boolean)$args['check_exclusions'];
+				$calc_enable         = (boolean)$args['calc_enable'];
+				$check_post_id       = (boolean)$args['check_post_id'];
+				$check_exclusions    = (boolean)$args['check_exclusions'];
+				$sub_select_optimize = (boolean)$args['sub_select_optimize'];
+				if($calc_enable) $sub_select_optimize = FALSE; // Incompatible.
 
 				$dby_queue_ids_sql = $this->dby_queue_ids_sql($from_time, $to_time);
 
 				return // Queue IDs that were processed during this timeframe.
+
+					($sub_select_optimize // Optimize?
+						? "SELECT `queue_id` FROM (" : "").
+					// ↑ See: <http://jas.xyz/1I52mVE>
 
 					"SELECT".($calc_enable ? " SQL_CALC_FOUND_ROWS" : '')." `queue_id`".
 					" FROM `".esc_sql($this->plugin->utils_db->prefix().'queue_event_log')."`".
@@ -995,7 +1002,10 @@ namespace comment_mail // Root namespace.
 					" GROUP BY `queue_id`". // Unique entries only (always).
 
 					($calc_enable  // Only need one to check?
-						? " LIMIT 1" : '');
+						? " LIMIT 1" : '').
+
+					($sub_select_optimize // Optimizing?
+						? ") AS `queue_id`" : "");
 			}
 
 			/**
@@ -1026,11 +1036,19 @@ namespace comment_mail // Root namespace.
 				$from_time = (integer)$from_time;
 				$to_time   = (integer)$to_time;
 
-				$default_args = array(); // None at this time.
+				$default_args = array(
+					'sub_select_optimize' => TRUE,
+				); // Default arguments.
 				$args         = array_merge($default_args, $args);
 				$args         = array_intersect_key($args, $default_args);
 
+				$sub_select_optimize = (boolean)$args['sub_select_optimize'];
+
 				return // Queue IDs that were digested by others during this timeframe.
+
+					($sub_select_optimize // Optimize?
+						? "SELECT `queue_id` FROM (" : "").
+					// ↑ See: <http://jas.xyz/1I52mVE>
 
 					"SELECT `queue_id`". // Need the queue IDs for sub-queries.
 					" FROM `".esc_sql($this->plugin->utils_db->prefix().'queue_event_log')."`".
@@ -1041,7 +1059,10 @@ namespace comment_mail // Root namespace.
 
 					" AND `time` BETWEEN '".esc_sql($from_time)."' AND '".esc_sql($to_time)."'".
 
-					" GROUP BY `queue_id`"; // Unique queue entries only (always).
+					" GROUP BY `queue_id`". // Unique queue entries only (always).
+
+					($sub_select_optimize // Optimizing?
+						? ") AS `queue_id`" : "");
 			}
 
 			/**

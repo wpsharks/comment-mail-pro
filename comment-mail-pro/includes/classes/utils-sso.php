@@ -190,9 +190,13 @@ namespace comment_mail // Root namespace.
 
 				$matching_user_ids_sql = // Find a matching SSO ID in the `wp_users` table; for this blog.
 
-					"SELECT `user_id` FROM `".esc_sql($this->plugin->utils_db->wp->usermeta)."`".
-					" WHERE `meta_key` = '".esc_sql($meta_key)."'".
-					" AND `meta_value` = '".esc_sql($sso_id)."'";
+					"SELECT `user_id` FROM (". // See: <http://jas.xyz/1I52mVE>
+
+					"	SELECT `user_id` FROM `".esc_sql($this->plugin->utils_db->wp->usermeta)."`".
+					"	 WHERE `meta_key` = '".esc_sql($meta_key)."'".
+					"	 AND `meta_value` = '".esc_sql($sso_id)."'".
+
+					") AS `user_id`"; // Alias requirement.
 
 				$sql = // Find a user ID matching the SSO ID; if possible.
 
