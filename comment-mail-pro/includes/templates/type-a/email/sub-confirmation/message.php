@@ -88,7 +88,7 @@ $sub_last_update_time_ago = $plugin->utils_date->i18n_utc('M jS, Y @ g:i a T', $
 		<?php endif; ?><br />
 
 		<span style="font-size:120%;">
-			&ldquo;<?php echo esc_html($sub_post_title_clip); ?>&rdquo;
+			"<?php echo esc_html($sub_post_title_clip); ?>"
 		</span><br />
 
 		<?php if($sub_comment): // A specific comment? ?>
