@@ -45,8 +45,9 @@ namespace comment_mail // Root namespace.
 				if(!$this->plugin->options['comment_form_sso_template_enable'])
 					return; // Disabled currently.
 
-				if(!get_option('comment_registration') || is_user_logged_in())
-					return; // Not applicable; i.e. unnecessary.
+				if(is_user_logged_in()) return; // Not unnecessary.
+				//if(!get_option('comment_registration') || is_user_logged_in())
+				//	return; // Not applicable; i.e. unnecessary.
 
 				foreach(($sso_services = sso_actions::$valid_services) as $_key => $_service)
 					if(!$this->plugin->options['sso_'.$_service.'_key'] || !$this->plugin->options['sso_'.$_service.'_secret'])
