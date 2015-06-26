@@ -262,7 +262,7 @@ namespace comment_mail // Root namespace.
 						//    i.e. if they exist, we simply log them in.
 						if(!$sso_id // Hmm, the SSO ID is missing?
 
-						   || !$this->plugin->utils_user->can_register()
+						   // || !$this->plugin->utils_user->can_register()
 
 						   || ($this->request_args['action'] !== 'callback'
 						       && !wp_verify_nonce($_wpnonce, __NAMESPACE__.'_sso_complete'))
