@@ -351,6 +351,10 @@ namespace comment_mail {
 		            'pro_update_username'                                                                  => '', // Username.
 		            'pro_update_password'                                                                  => '', // Password or license key.
 
+					# Related to the stats pinger.
+
+					'last_pro_stats_log'                                                                   => '0', // Timestamp.
+
 					/* Low-level switches to enable/disable certain functionalities.
 					 *
 					 * With the `enable=0` option, here is an overview of what happens:
@@ -671,6 +675,8 @@ namespace comment_mail {
 		        add_filter('fs_ftp_connection_types', array($this, 'fs_ftp_connection_types'), 10);
 		        add_filter('pre_site_transient_update_plugins', array($this, 'pre_site_transient_update_plugins'), 10);
 
+				add_action('admin_init', array($this, 'stats_pinger'), 10); // Anonymous stats collection.
+
 				add_action('all_admin_notices', array($this, 'all_admin_notices'), 10);
 
 				add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_styles'), 10);
@@ -835,6 +841,22 @@ namespace comment_mail {
 			public function uninstall()
 			{
 				new uninstaller(); // Uninstall handler.
+			}
+
+			/*
+			 * Ping-Related Methods
+			 */
+
+			/**
+			 * Maybe ping stats logger.
+			 *
+			 * @since 150708 Adding stats pinger.
+			 *
+			 * @attaches-to `admin_init` action.
+			 */
+			public function stats_pinger()
+			{
+				new stats_pinger(); // Stats pinger.
 			}
 
 			/*
