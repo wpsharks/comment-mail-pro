@@ -43,7 +43,7 @@ $icon_bubbles_url = $plugin->utils_url->to('/client-s/images/icon-bubbles.png');
 			<td style="vertical-align:top;">
 				<h1 style="margin:0;">
 					<?php echo esc_html($blog_name_clip); ?><br />
-					<small style="color:#888888;">&nbsp;&#42774;&nbsp;&nbsp;<a href="<?php echo esc_attr($home_url); ?>" style="color:#888888;"><?php echo esc_html($current_host_path); ?></a></small>
+					<small style="color:#888888;">&nbsp;&nbsp;&nbsp;<a href="<?php echo esc_attr($home_url); ?>" style="color:#888888;"><?php echo esc_html($current_host_path); ?></a></small>
 				</h1>
 			</td>
 			<td style="vertical-align:top; text-align:right;">
