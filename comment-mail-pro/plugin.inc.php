@@ -1022,6 +1022,7 @@ namespace comment_mail {
 			 *
 			 * @see add_meta_boxes()
 			 */
+
 			public function post_small_meta_box(\WP_Post $post)
 			{
 				new post_small_meta_box($post);
@@ -1196,7 +1197,7 @@ namespace comment_mail {
 
 				/* ----------------------------------------- */
 
-				$_menu_title                          = $this->name;
+				$_menu_title                          = $this->name.' <sup style="font-size:60%; line-height:1;">Pro</sup>';
 				$_page_title                          = $this->name.'&trade;';
 				$_menu_position                       = apply_filters(__METHOD__.'_position', '25.00001');
 				$this->menu_page_hooks[__NAMESPACE__] = add_menu_page($_page_title, $_menu_title, $this->cap, __NAMESPACE__, array($this, 'menu_page_options'), 'data:image/svg+xml;base64,'.base64_encode($icon), $_menu_position);
