@@ -49,8 +49,6 @@ namespace comment_mail // Root namespace.
 				if(!current_user_can($this->plugin->cap))
 					return; // Extra layer of security.
 
-				// @TODO Apply to each child blog in a multisite network.
-
 				$this->delete_options();
 				$this->delete_notices();
 				$this->delete_install_time();
@@ -60,6 +58,23 @@ namespace comment_mail // Root namespace.
 				$this->delete_user_meta_keys();
 				$this->clear_cron_hooks();
 				$this->drop_db_tables();
+
+				if(is_multisite() && is_array($child_blogs = wp_get_sites()))
+					foreach($child_blogs as $_child_blog)
+					{
+						switch_to_blog($_child_blog['blog_id']);
+						$this->delete_options();
+						$this->delete_notices();
+						$this->delete_install_time();
+						$this->delete_option_keys();
+						$this->delete_transient_keys();
+						$this->delete_post_meta_keys();
+						$this->delete_user_meta_keys();
+						$this->clear_cron_hooks();
+						$this->drop_db_tables();
+						restore_current_blog();
+					}
+					unset($_child_blog); // Housekeeping.
 			}
 
 			/**
