@@ -49,6 +49,8 @@ namespace comment_mail // Root namespace.
 				if(!current_user_can($this->plugin->cap))
 					return; // Extra layer of security.
 
+				// @TODO Apply to each child blog in a multisite network.
+
 				$this->delete_options();
 				$this->delete_notices();
 				$this->delete_install_time();
@@ -131,8 +133,6 @@ namespace comment_mail // Root namespace.
 
 				$like2 = // e.g. Delete all keys LIKE `%\_transient\_timeout\_cmtmail\_%`.
 					'%'.$this->plugin->utils_db->wp->esc_like('_transient_timeout_'.$this->plugin->transient_prefix).'%';
-
-				// Note: the above LIKE queries need to match `_site_transient_*` also; and they do.
 
 				$sql = // This will remove our transients/timeouts.
 					"DELETE FROM `".esc_sql($this->plugin->utils_db->wp->options)."`".
