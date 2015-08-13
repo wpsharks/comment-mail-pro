@@ -27,6 +27,7 @@ namespace comment_mail {
 		 * @property-read utils_fs              $utils_fs
 		 * @property-read utils_i18n            $utils_i18n
 		 * @property-read utils_ip              $utils_ip
+		 * @property-read utils_list_server     $utils_list_server
 		 * @property-read utils_log             $utils_log
 		 * @property-read utils_mail            $utils_mail
 		 * @property-read utils_map             $utils_map
