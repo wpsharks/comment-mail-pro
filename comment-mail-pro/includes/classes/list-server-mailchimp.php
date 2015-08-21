@@ -32,6 +32,44 @@ namespace comment_mail // Root namespace.
             public function subscribe(array $list, array $args)
             {
                 // Integration with MailChimp API.
+                if(!class_exists('Mailchimp')) // Include the MailChimp API class here.
+                    include_once dirname(dirname(dirname(__FILE__))).'/submodules/mailchimp/src/Mailchimp.php';
+
+                $mailchimp                = new \Mailchimp($this->plugin->options['list_server_mailchimp_api_key'], array('timeout' => 30));
+
+                if(empty($list['id'])) // If no specific list ID, use global config. option.
+                    $list['id'] = $this->plugin->options['list_server_mailchimp_list_id'];
+
+                $default_args             = array(
+                    'email'               => '',
+                    'fname'               => '',
+                    'lname'               => '',
+                    'ip'                  => '',
+                );
+                $args                     = array_merge($default_args, $args);
+                $args                     = array_intersect_key($args, $default_args);
+
+                $mailchimp_subscribe_args = array(
+                    'list_id'             => (string)$list['id'],
+                    'email'               => array('email' => (string)$args['email']),
+                    'merge_array'         => array(
+                        'MERGE1'          => (string)$args['fname'],
+                        'MERGE2'          => (string)$args['lname'],
+                        'OPTIN_IP'        => (string)$args['ip'],
+                        'OPTIN_TIME'      => date('Y-m-d H:i:s'),
+                    ),
+                    'email_type'          => 'html',
+                    'double_optin'        => true,
+                    'update_existing'     => true,
+                    'replace_interests'   => true,
+                    'send_welcome'        => true,
+                );
+                $mailchimp_response       = call_user_func_array(array($mailchimp->lists, 'subscribe'), $mailchimp_subscribe_args);
+
+                if(!empty($mailchimp_response['leid']) && is_string($mailchimp_response['leid']))
+                    return (string)$mailchimp_response['leid'];
+
+                return ''; // Failure.
             }
 
             /**
