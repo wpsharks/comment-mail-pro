@@ -85,6 +85,33 @@ namespace comment_mail // Root namespace.
             public function unsubscribe(array $list, array $args)
             {
                 // Integration with MailChimp API.
+                if(!class_exists('Mailchimp')) // Include the MailChimp API class here.
+                    include_once dirname(dirname(dirname(__FILE__))).'/submodules/mailchimp/src/Mailchimp.php';
+
+                $mailchimp                = new \Mailchimp($this->plugin->options['list_server_mailchimp_api_key'], array('timeout' => 30));
+
+                if(empty($list['id'])) // If no specific list ID, use global config. option.
+                    $list['id'] = $this->plugin->options['list_server_mailchimp_list_id'];
+
+                $default_args             = array(
+                    'email'               => '',
+                    'fname'               => '',
+                    'lname'               => '',
+                    'ip'                  => '',
+                );
+                $args                     = array_merge($default_args, $args);
+                $args                     = array_intersect_key($args, $default_args);
+
+                $mailchimp_subscribe_args = array(
+                    'list_id'             => (string)$list['id'],
+                    'email'               => array('email' => (string)$args['email']),
+                    'delete_member'       => false,
+                    'send_goodbye'        => true,
+                    'send_notify'         => true,
+                );
+                $mailchimp_response       = call_user_func_array(array($mailchimp->lists, 'unsubscribe'), $mailchimp_unsubscribe_args);
+
+                return !empty($mailchimp_response['complete']); // Test the return value for a true complete key.
             }
         }
     }
