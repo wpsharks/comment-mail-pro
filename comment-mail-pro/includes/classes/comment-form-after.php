@@ -87,6 +87,9 @@ namespace comment_mail // Root namespace.
 				$sub_deliver_id   = str_replace('_', '-', __NAMESPACE__.'_sub_deliver');
 				$sub_deliver_name = __NAMESPACE__.'_sub_deliver';
 
+				$sub_list_id   = str_replace('_', '-', __NAMESPACE__.'_sub_list');
+				$sub_list_name = __NAMESPACE__.'_sub_list';
+
 				$sub_summary_url = $this->plugin->utils_url->sub_manage_summary_url();
 				$sub_new_url     = $this->plugin->utils_url->sub_manage_sub_new_url(NULL, NULL, compact('post_id'));
 				$inline_icon_svg = $this->plugin->utils_fs->inline_icon_svg();

@@ -26,6 +26,9 @@ namespace comment_mail;
  * @var string    $sub_deliver_id The `id=""` value for the subscription delivery option select menu.
  * @var string    $sub_deliver_name The `name=""` value for the subscription delivery option select menu.
  *
+ * @var string    $sub_list_id The `id=""` value for the subscription list checkbox.
+ * @var string    $sub_list_name The `name=""` value for the subscription list checkbox.
+ *
  * @var string    $sub_summary_url A URL leading the subscription summary page (i.e. the My Subscriptions page).
  *    A link to the summary page (i.e. the My Subscriptions page) should not be displayed if `$sub_email` is empty.
  *
