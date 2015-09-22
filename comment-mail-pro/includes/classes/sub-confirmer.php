@@ -42,6 +42,13 @@ namespace comment_mail // Root namespace.
 			protected $process_events;
 
 			/**
+			 * @var boolean Proces list server?
+			 *
+			 * @since 150922 Adding list server.
+			 */
+			protected $process_list_server;
+
+			/**
 			 * @var boolean User initiated?
 			 *
 			 * @since 141111 First documented version.
@@ -86,16 +93,22 @@ namespace comment_mail // Root namespace.
 				$this->sub = $this->plugin->utils_sub->get($sub_id);
 
 				$defaults_args = array(
-					'auto_confirm'   => NULL,
-					'process_events' => TRUE,
-					'user_initiated' => FALSE,
+					'auto_confirm'        => NULL,
+
+					'process_events'      => TRUE,
+					'process_list_server' => FALSE,
+
+					'user_initiated'      => FALSE,
 				);
 				$args          = array_merge($defaults_args, $args);
 				$args          = array_intersect_key($args, $defaults_args);
 
 				if(isset($args['auto_confirm']))
 					$this->auto_confirm = (boolean)$args['auto_confirm'];
+
 				$this->process_events          = (boolean)$args['process_events'];
+				$this->process_list_server     = (boolean)$args['process_list_server'];
+
 				$this->user_initiated          = (boolean)$args['user_initiated'];
 				$this->user_initiated          = $this->plugin->utils_sub->check_user_initiated_by_admin(
 					$this->sub ? $this->sub->email : '', $this->user_initiated
@@ -162,8 +175,9 @@ namespace comment_mail // Root namespace.
 				if($this->maybe_auto_confirm())
 					return; // Nothing more to do.
 
-				$sub      = $this->sub; // For template.
-				$sub_post = $sub_comment = NULL; // Initialize.
+				$sub                 = $this->sub;
+				$sub_post            = $sub_comment = NULL;
+				$process_list_server = $this->process_list_server;
 
 				if(!($sub_post = get_post($this->sub->post_id)))
 					return; // Post no longer exists.

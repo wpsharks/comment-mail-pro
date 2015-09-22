@@ -282,7 +282,7 @@ namespace comment_mail // Root namespace.
 					return FALSE; // Confirmed already.
 
 				$updater = new sub_updater(array('ID' => $sub->ID, 'status' => 'subscribed'), $args);
-
+				
 				return $updater->did_update();
 			}
 

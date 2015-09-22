@@ -88,11 +88,14 @@ namespace comment_mail // Root namespace.
 					? (string)$_POST[__NAMESPACE__.'_sub_deliver']
 					: $this->plugin->options['comment_form_default_sub_deliver_option'];
 
+				$sub_list = (boolean)@$_POST[__NAMESPACE__.'_sub_list'];
+
 				new sub_injector(wp_get_current_user(), $this->comment_id, array(
-					'type'           => $sub_type,
-					'deliver'        => $sub_deliver,
-					'user_initiated' => TRUE,
-					'keep_existing'  => TRUE,
+					'type'                => $sub_type,
+					'deliver'             => $sub_deliver,
+					'process_list_server' => $sub_list,
+					'user_initiated'      => TRUE,
+					'keep_existing'       => TRUE,
 				));
 			}
 

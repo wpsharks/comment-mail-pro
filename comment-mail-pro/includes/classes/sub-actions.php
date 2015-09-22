@@ -75,14 +75,22 @@ namespace comment_mail // Root namespace.
 			 */
 			protected function confirm($request_args)
 			{
-				$sub_key = ''; // Initialize.
+				$sub_key             = '';
+				$user_initiated      = true;
+				$process_list_server = false;
 
 				// Initialize others needed by template.
 				$sub = $sub_post = $sub_comment = NULL;
 
 				$error_codes = array(); // Initialize.
 
-				if(!($sub_key = $this->plugin->utils_sub->sanitize_key($request_args)))
+				$sub_key = (string)$request_args;
+				if(stripos($sub_key, '.pls') !== false)
+				{
+					list($sub_key)       = explode('.pls', $sub_key, 2);
+					$process_list_server = true; // Processing.
+				}
+				if(!($sub_key = $this->plugin->utils_sub->sanitize_key($sub_key)))
 					$error_codes[] = 'missing_sub_key';
 
 				else if(!($sub = $this->plugin->utils_sub->get($sub_key)))
@@ -97,7 +105,7 @@ namespace comment_mail // Root namespace.
 				if(!$error_codes) // If no errors; set current email.
 					$this->plugin->utils_sub->set_current_email($sub_key, $sub->email);
 
-				if(!$error_codes && !($confirmed = $this->plugin->utils_sub->confirm($sub->ID, array('user_initiated' => TRUE))))
+				if(!$error_codes && !($confirmed = $this->plugin->utils_sub->confirm($sub->ID, compact('user_initiated', 'process_list_server'))))
 					$error_codes[] = $confirmed === NULL ? 'invalid_sub_key' : 'sub_already_confirmed';
 
 				$template_vars = get_defined_vars(); // Everything above.
@@ -119,7 +127,8 @@ namespace comment_mail // Root namespace.
 			 */
 			protected function unsubscribe($request_args)
 			{
-				$sub_key = ''; // Initialize.
+				$sub_key        = '';
+				$user_initiated = true;
 
 				// Initialize others needed by template.
 				$sub = $sub_post = $sub_comment = NULL;
@@ -141,7 +150,7 @@ namespace comment_mail // Root namespace.
 				if(!$error_codes) // Note: this MUST come before deletion.
 					$this->plugin->utils_sub->set_current_email($sub_key, $sub->email);
 
-				if(!$error_codes && !($deleted = $this->plugin->utils_sub->delete($sub->ID, array('user_initiated' => TRUE))))
+				if(!$error_codes && !($deleted = $this->plugin->utils_sub->delete($sub->ID, compact('user_initiated'))))
 					$error_codes[] = $deleted === NULL ? 'invalid_sub_key' : 'sub_already_unsubscribed';
 
 				$template_vars = get_defined_vars(); // Everything above.

@@ -63,6 +63,13 @@ namespace comment_mail // Root namespace.
 			protected $process_events;
 
 			/**
+			 * @var boolean Process list server?
+			 *
+			 * @since 150922 Adding list server.
+			 */
+			protected $process_list_server;
+
+			/**
 			 * @var boolean User initiated?
 			 *
 			 * @since 141111 First documented version.
@@ -104,16 +111,17 @@ namespace comment_mail // Root namespace.
 					$this->comment = get_comment($comment_id);
 
 				$defaults_args = array(
-					'type'           => 'comment',
-					'deliver'        => 'asap',
+					'type'                => 'comment',
+					'deliver'             => 'asap',
 
-					'auto_confirm'   => NULL,
+					'auto_confirm'        => NULL,
 
-					'process_events' => TRUE,
+					'process_events'      => TRUE,
+					'process_list_server' => FALSE,
 
-					'user_initiated' => FALSE,
+					'user_initiated'      => FALSE,
 
-					'keep_existing'  => FALSE,
+					'keep_existing'       => FALSE,
 				);
 				$args          = array_merge($defaults_args, $args);
 				$args          = array_intersect_key($args, $defaults_args);
@@ -123,15 +131,16 @@ namespace comment_mail // Root namespace.
 				$this->deliver = !$this->deliver ? 'asap' : $this->deliver;
 
 				if(isset($args['auto_confirm']))
-					$this->auto_confirm = (boolean)$args['auto_confirm'];
+					$this->auto_confirm    = (boolean)$args['auto_confirm'];
 
-				$this->process_events = (boolean)$args['process_events'];
+				$this->process_events      = (boolean)$args['process_events'];
+				$this->process_list_server = (boolean)$args['process_list_server'];
 
-				$this->user_initiated = (boolean)$args['user_initiated'];
-				$this->user_initiated = $this->plugin->utils_sub->check_user_initiated_by_admin(
+				$this->user_initiated      = (boolean)$args['user_initiated'];
+				$this->user_initiated      = $this->plugin->utils_sub->check_user_initiated_by_admin(
 					$this->comment ? $this->comment->comment_author_email : '', $this->user_initiated
 				);
-				$this->keep_existing  = (boolean)$args['keep_existing'];
+				$this->keep_existing       = (boolean)$args['keep_existing'];
 
 				$this->maybe_inject();
 			}
@@ -185,6 +194,7 @@ namespace comment_mail // Root namespace.
 					'process_confirmation' => TRUE, // Always.
 					'auto_confirm'         => $this->auto_confirm,
 					'process_events'       => $this->process_events,
+					'process_list_server'  => $this->process_list_server,
 					'user_initiated'       => $this->user_initiated,
 					'keep_existing'        => $this->keep_existing,
 				));

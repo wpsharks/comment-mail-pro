@@ -41,6 +41,8 @@ namespace comment_mail // Root namespace.
                     $list['id'] = $this->plugin->options['list_server_mailchimp_list_id'];
 
                 $default_args             = array(
+                    'double_optin'        => true,
+
                     'email'               => '',
                     'fname'               => '',
                     'lname'               => '',
@@ -51,6 +53,8 @@ namespace comment_mail // Root namespace.
 
                 $mailchimp_subscribe_args = array(
                     'list_id'             => (string)$list['id'],
+                    'double_optin'        => $args['double_optin'],
+
                     'email'               => array('email' => (string)$args['email']),
                     'merge_array'         => array(
                         'MERGE1'          => (string)$args['fname'],
@@ -59,7 +63,7 @@ namespace comment_mail // Root namespace.
                         'OPTIN_TIME'      => date('Y-m-d H:i:s'),
                     ),
                     'email_type'          => 'html',
-                    'double_optin'        => true,
+
                     'update_existing'     => true,
                     'replace_interests'   => true,
                     'send_welcome'        => true,
@@ -105,6 +109,7 @@ namespace comment_mail // Root namespace.
                 $mailchimp_subscribe_args = array(
                     'list_id'             => (string)$list['id'],
                     'email'               => array('email' => (string)$args['email']),
+
                     'delete_member'       => false,
                     'send_goodbye'        => true,
                     'send_notify'         => true,

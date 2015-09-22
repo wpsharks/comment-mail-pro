@@ -1183,18 +1183,20 @@ namespace comment_mail // Root namespace.
 			 *
 			 * @param string      $sub_key Unique subscription key.
 			 *
+			 * @param boolean     $pls Process list server?
+			 *
 			 * @param string|null $scheme Optional. Defaults to a `NULL` value.
 			 *    See {@link set_scheme()} method for further details.
 			 *
 			 * @return string URL w/ the given `$scheme`.
 			 */
-			public function sub_confirm_url($sub_key, $scheme = NULL)
+			public function sub_confirm_url($sub_key, $pls = FALSE, $scheme = NULL)
 			{
 				$sub_key = trim((string)$sub_key);
 				$sub_key = !isset($sub_key[0]) ? '0' : $sub_key;
 
 				$url  = home_url('/', $scheme);
-				$args = array(__NAMESPACE__ => array('confirm' => $sub_key));
+				$args = array(__NAMESPACE__ => array('confirm' => $sub_key.($pls ? '.pls' : ''));
 
 				return add_query_arg(urlencode_deep($args), $url);
 			}
