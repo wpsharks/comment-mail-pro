@@ -104,6 +104,12 @@ namespace comment_mail;
 	</select>
 <?php $sub_deliver_options = ob_get_clean(); ?>
 
+<?php ob_start(); ?>
+	<?php if($plugin->options['list_server_enable'] && $plugin->options['list_server']): ?>
+		<input type="checkbox" id="<?php echo esc_attr($sub_list_id); ?>" name="<?php echo esc_attr($sub_list_name); ?>" value="1" /> <?php echo __('Yes, I want to receive blog updates also.', $plugin->text_domain); ?>
+	<?php endif; ?>
+<?php $sub_list_options = ob_get_clean(); ?>
+
 <?php echo $template->snippet(
 	'sub-ops.php', array(
 		'[css_styles]'          => $css_styles,
