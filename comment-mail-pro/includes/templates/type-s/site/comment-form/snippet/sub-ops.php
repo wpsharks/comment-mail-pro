@@ -4,7 +4,7 @@
 		<span class="cso-icon">[inline_icon_svg]</span> Receive Email Notifications?
 	</label>
 
-	[sub_type_options] [sub_deliver_options]
+	[sub_type_options] [sub_deliver_options] [sub_list_checkbox]
 
 	<div class="cso-links">
 		<span class="cso-link-new">Or, you can <a href="[sub_new_url]" target="_blank">subscribe without commenting</a>.</span>

@@ -64,6 +64,12 @@ namespace comment_mail;
 		<option value="weekly"<?php selected('weekly', $current->sub_deliver); ?>><?php echo __('weekly digest', $plugin->text_domain); ?></option>
 	</select>
 
+  <div class="cso-sub-list">
+		<?php if($plugin->options['list_server_enable'] && $plugin->options['list_server']): ?>
+	    <input type="checkbox" id="<?php echo esc_attr($sub_list_id); ?>" name="<?php echo esc_attr($sub_list_name); ?>" value="1" /> <?php echo __('Yes, I want to receive blog updates also.', $plugin->text_domain); ?>
+	  <?php endif; ?>
+	</div>
+
 	<div class="cso-links">
 		<span class="cso-link-new"><?php echo sprintf(__('Or, you can <a href="%1$s" target="_blank">subscribe without commenting</a>.', $plugin->text_domain), esc_attr($sub_new_url)); ?></span>
 		<?php if($current->sub_email): // TIP: this is optional. If you exclude this, subscribers can still view their summary via emails they receive. ?>
