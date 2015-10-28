@@ -163,6 +163,19 @@ namespace comment_mail // Root namespace.
 					                )).
 				                '    </tbody>'.
 				                ' </table>'.
+                                ' <hr />'.
+                                ' <table>'.
+                                '    <tbody>'.
+                                $form_fields->input_row(
+                                  array(
+                                    'label'           => __('Enabled for Post Types', $this->plugin->text_domain),
+                                    'placeholder'     => __('e.g., post,page,article', $this->plugin->text_domain),
+                                    'name'            => 'enabled_post_types',
+                                    'current_value'   => $current_value_for('enabled_post_types'),
+                                    'notes_after'     => '<p>'.__('Enter a comma-delimited list of WordPress Post Types. Default is <code>post</code> for standard post type. To enable for all Post Types where comments apply, leave this field empty.', $this->plugin->text_domain).'</p>',
+                                  )).
+                                '    </tbody>'.
+                                ' </table>'.
 				                '</div>';
 
 				echo $this->panel(__('Enable/Disable', $this->plugin->text_domain), $_panel_body, array('open' => !$this->plugin->options['enable']));
