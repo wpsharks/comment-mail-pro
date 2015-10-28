@@ -575,6 +575,7 @@ namespace comment_mail {
 					# Template-related config. options.
 
 					'template_type'                                                                        => 's', // `a|s`.
+					'template_syntax_theme' => 'monokai',
 
 					# Simple snippet-based templates for the site.
 
@@ -1075,7 +1076,7 @@ namespace comment_mail {
 
 				wp_enqueue_style('codemirror', set_url_scheme('//cdnjs.cloudflare.com/ajax/libs/codemirror/4.7.0/codemirror.min.css'), array(), NULL, 'all');
 				wp_enqueue_style('codemirror-fullscreen', set_url_scheme('//cdnjs.cloudflare.com/ajax/libs/codemirror/4.7.0/addon/display/fullscreen.min.css'), array('codemirror'), NULL, 'all');
-				wp_enqueue_style('codemirror-ambiance-theme', set_url_scheme('//cdnjs.cloudflare.com/ajax/libs/codemirror/4.7.0/theme/ambiance.min.css'), array('codemirror'), NULL, 'all');
+				wp_enqueue_style('codemirror-'.$this->options['template_syntax_theme'].'-theme', set_url_scheme('//cdnjs.cloudflare.com/ajax/libs/codemirror/4.7.0/theme/'.urlencode($this->options['template_syntax_theme']).'.min.css'), array('codemirror'), NULL, 'all');
 
 				wp_enqueue_style('jquery-datetimepicker', $this->utils_url->to('/submodules/datetimepicker/jquery.datetimepicker.css'), array(), NULL, 'all');
 				wp_enqueue_style('chosen', set_url_scheme('//cdnjs.cloudflare.com/ajax/libs/chosen/1.1.0/chosen.min.css'), array(), NULL, 'all');
