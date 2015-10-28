@@ -64,6 +64,13 @@ namespace comment_mail // Root namespace.
 					return; // Not possible here.
 
 				$post_id = $GLOBALS['post']->ID; // Current post ID.
+                $post_type = $GLOBALS['post']->post_type; // Current post type.
+
+                $enabled_post_types = strtolower($this->plugin->options['enabled_post_types']);
+                $enabled_post_types = preg_split('/[\s;,]+/', $enabled_post_types, NULL, PREG_SPLIT_NO_EMPTY);
+
+                if($enabled_post_types && !in_array($post_type, $enabled_post_types, TRUE))
+                    return; // Ignore; not enabled for this post type.
 
 				$current_info = // Current info; for this post ID.
 					$this->plugin->utils_sub->current_email_latest_info(
