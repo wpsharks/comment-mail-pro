@@ -1196,7 +1196,7 @@ namespace comment_mail // Root namespace.
 				$sub_key = !isset($sub_key[0]) ? '0' : $sub_key;
 
 				$url  = home_url('/', $scheme);
-				$args = array(__NAMESPACE__ => array('confirm' => $sub_key.($pls ? '.pls' : ''));
+				$args = array(__NAMESPACE__ => array('confirm' => $sub_key.($pls ? '.pls' : '')));
 
 				return add_query_arg(urlencode_deep($args), $url);
 			}
