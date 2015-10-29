@@ -696,6 +696,9 @@ namespace comment_mail {
 				add_filter('set-screen-option', array($this, 'set_screen_option'), 10, 3);
 				add_filter('plugin_action_links_'.plugin_basename($this->file), array($this, 'add_settings_link'), 10, 1);
 
+				add_filter('manage_users_columns', array($this, 'manage_users_columns'), 10, 1);
+				add_filter('manage_users_custom_column', array($this, 'manage_users_custom_column'), 10, 3);
+
 				add_action('init', array($this, 'comment_shortlink_redirect'), -11);
 
 				add_action('wp_print_scripts', array($this, 'enqueue_front_scripts'), 10);
@@ -1731,6 +1734,46 @@ namespace comment_mail {
 				if(!$this->is_pro) $links[] = '<a href="'.esc_attr($this->utils_url->product_page()).'" target="_blank">'.__('Upgrade', $this->text_domain).'</a>';
 
 				return apply_filters(__METHOD__, $links, get_defined_vars());
+			}
+
+			/**
+			* Adds columns to the list of users.
+			*
+			* @since 15xxxx Enhancing users list.
+			*
+			* @attaches-to `manage_users_columns` filter.
+			*
+			* @param array $columns Existing columns passed in by filter.
+			*
+			* @return array Filtered columns.
+			*/
+			public function manage_users_columns(array $columns)
+			{
+			  $user_columns = &$this->static_key(__FUNCTION__);
+			  $user_columns = new user_columns();
+
+			  return $user_columns->filter($columns);
+			}
+
+			/**
+			* Fills columns in the list of users.
+			*
+			* @since 15xxxx Enhancing users list.
+			*
+			* @attaches-to `manage_users_custom_column` filter.
+			*
+			* @param mixed $value Existing column value passed in by filter.
+			* @param string $column Column name; passed in by filter.
+			* @param int|string $user_id User ID; passed in by filter.
+			*
+			* @return mixed Filtered column value.
+			*/
+			public function manage_users_custom_column($value, $column, $user_id)
+			{
+			  if(!($user_columns = &$this->static_key('manage_users_columns')))
+			    return $value; // Not possible to fill; no class instance.
+
+			  return $user_columns->maybe_fill($value, $column, $user_id);
 			}
 
 			/*
