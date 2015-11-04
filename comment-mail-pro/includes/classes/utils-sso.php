@@ -149,6 +149,10 @@ namespace comment_mail // Root namespace.
 					if(is_wp_error($user_id = wp_insert_user($user_data)) || !$user_id)
 						return FALSE; // Insertion failure.
 				}
+				$user_sso_services = get_user_option(__NAMESPACE__.'_sso_services');
+				$user_sso_services = is_array($user_sso_services) ? $user_sso_services : array();
+				$user_sso_services = array_unique(array_merge($user_sso_services, array($service)));
+				update_user_option($user_id, __NAMESPACE__.'_sso_services', $user_sso_services);
 				update_user_option($user_id, __NAMESPACE__.'_'.$service.'_sso_id', $sso_id);
 
 				return $this->auto_login($service, $sso_id, $args_no_cache_true);
