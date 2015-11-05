@@ -539,6 +539,18 @@ namespace comment_mail // Root namespace.
 					                )).
 				                '    </tbody>'.
 				                ' </table>'.
+												' <table>'.
+												'    <tbody>'.
+												$form_fields->input_row(
+  												array(
+    												'label'         => __('Auto-Subscribe the Following WordPress Roles:', $this->plugin->text_domain),
+    												'placeholder'   => __('e.g., administrator,editor,author,contributor', $this->plugin->text_domain),
+    												'name'          => 'auto_subscribe_roles',
+    												'current_value' => $current_value_for('auto_subscribe_roles'),
+    												'notes_after'   => '<p>'.__('You can enter a comma-delimited list of WordPress Roles; e.g., <code>administrator,editor,author,contributor</code>.', $this->plugin->text_domain).'</p>',
+  												)).
+												'    </tbody>'.
+												' </table>'.
 
 				                ' <table>'.
 				                '    <tbody>'.
