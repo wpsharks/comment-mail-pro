@@ -1733,7 +1733,7 @@ namespace comment_mail // Root namespace.
 																'zenburn'          => __('Zenburn', $this->plugin->text_domain),
 													         // add additional lines each for each of the available themes.
 													    ),
-													    'notes_after'     => '',
+													    'notes_after' => '<p>'.__('This changes the syntax highlighting color scheme used in textarea fields; e.g., Email Templates and Site Templates.', $this->plugin->text_domain).'</p>',
 													  )).
 												  '  </tbody>'.
 												  '</table>';
