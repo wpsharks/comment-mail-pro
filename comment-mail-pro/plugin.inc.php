@@ -2017,6 +2017,10 @@ namespace comment_mail {
 			 */
 			public function all_admin_notices()
 			{
+				if (!$this->options['enable']) {
+			    $this->enqueue_notice(sprintf(__('<strong>%1$s is disabled. Please visit the <a href="#">%1$s settings</a> and enable the plugin</strong>.', $this->text_domain), esc_html($this->name)));
+			  }
+
 				if(!is_array($notices = get_option(__NAMESPACE__.'_notices')))
 					update_option(__NAMESPACE__.'_notices', ($notices = array()));
 
