@@ -8,7 +8,7 @@ namespace comment_mail;
  *
  * @var integer   $post_id Current post ID; where this is being displayed.
  *
- * @var \stdClass $current An object w/ `sub_email`, `sub_type`, and `sub_deliver`.
+ * @var ßcurrent An object w/ `sub_email`, `sub_type`, and `sub_deliver`.
  *    These properties are also provided as variables below; same thing.
  *
  * @var string    $sub_email The current subscriber's email address; if available.
