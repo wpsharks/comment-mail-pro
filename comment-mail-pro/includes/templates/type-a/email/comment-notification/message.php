@@ -61,7 +61,7 @@ $is_digest = count($comments) > 1; // `TRUE`, if more than one comment in the no
 // Plugin is configured to allow replies via email? If so, this will be `TRUE`.
 $replies_via_email_enable = $sub_post_comments_open && $plugin->options['replies_via_email_enable'];
 ?>
-	<h2 style="margin-top:0; font-family:serif;">
+	<h2 style="margin-top:0;">
 		<?php if($is_digest): // Multiple comments/replies in this notification? ?>
 
 			<?php if($sub_comment): // Subscribed to a specific comment? ?>
@@ -121,13 +121,14 @@ $replies_via_email_enable = $sub_post_comments_open && $plugin->options['replies
 
 		<?php if($_comment_parent): // This is a reply to someone? ?>
 
-			<p style="margin-bottom:0;">
-				<?php echo sprintf(__('In response to comment ID <a href="%1$s">#%2$s</a>', $plugin->text_domain), esc_attr($_comment_parent_url), esc_html($_comment_parent->comment_ID)); ?>
+			<p style="font-weight: bold;">
+				<?php echo sprintf(__('In response to <a href="%1$s">this comment</a>', $plugin->text_domain), esc_attr($_comment_parent_url)); ?>
 				<?php if($_comment_parent->comment_author): ?>
-					<?php echo sprintf(__('— posted by %1$s', $plugin->text_domain), esc_html($_comment_parent->comment_author)); ?>
+					<?php echo sprintf(__(' posted by %1$s', $plugin->text_domain), esc_html($_comment_parent->comment_author)); ?>
 				<?php endif; ?>
+				<?php echo ':'; ?>
 			</p>
-			<p style="font-style:italic; font-size:90%; margin-top:0;">
+			<p style="font-style:italic;">
 				<?php echo esc_html($_comment_parent_clip); ?>
 			</p>
 			<p style="font-size:110%; font-weight:bold;">
@@ -137,10 +138,10 @@ $replies_via_email_enable = $sub_post_comments_open && $plugin->options['replies
 					<?php echo sprintf(__('This reply was posted %1$s.', $plugin->text_domain), esc_html($_comment_time_ago)); ?>
 				<?php endif; ?>
 			</p>
-			<p style="font-size:130%; font-family:serif; max-width:800px;">
+			<p style="font-size:130%;">
 				<?php echo esc_html($_comment_clip); ?>
 			</p>
-			<p style="margin-bottom:0;">
+			<p>
 				<a href="<?php echo esc_attr($_comment_url); ?>">
 					<?php echo __('continue reading', $plugin->text_domain); ?>
 				</a>
@@ -162,15 +163,15 @@ $replies_via_email_enable = $sub_post_comments_open && $plugin->options['replies
 
 			<p style="font-size:110%; font-weight:bold;">
 				<?php if($_comment->comment_author): ?>
-					<?php echo sprintf(__('%1$s left this comment %2$s.', $plugin->text_domain), esc_html($_comment->comment_author), esc_html($_comment_time_ago)); ?>
+					<?php echo sprintf(__('%1$s posted this comment %2$s.', $plugin->text_domain), esc_html($_comment->comment_author), esc_html($_comment_time_ago)); ?>
 				<?php else: // The site is not collecting comment author names. ?>
 					<?php echo sprintf(__('This comment was posted %1$s.', $plugin->text_domain), esc_html($_comment_time_ago)); ?>
 				<?php endif; ?>
 			</p>
-			<p style="font-size:130%; font-family:serif; max-width:800px;">
+			<p style="font-size:130%;">
 				<?php echo esc_html($_comment_clip); ?>
 			</p>
-			<p style="margin-bottom:0;">
+			<p>
 				<a href="<?php echo esc_attr($_comment_url); ?>">
 					<?php echo __('continue reading', $plugin->text_domain); ?>
 				</a>

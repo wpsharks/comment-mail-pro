@@ -117,7 +117,7 @@ $replies_via_email_enable = $sub_post_comments_open && $plugin->options['replies
 					'[comment_author]'   => esc_html($_comment->comment_author),
 					'[comment_clip]'     => esc_html($_comment_clip),
 				)); ?>
-			<p style="margin-bottom:0;">
+			<p>
 				<a href="<?php echo esc_attr($_comment_url); ?>">
 					<?php echo __('continue reading', $plugin->text_domain); ?>
 				</a>
@@ -145,7 +145,7 @@ $replies_via_email_enable = $sub_post_comments_open && $plugin->options['replies
 					'[comment_author]'   => esc_html($_comment->comment_author),
 					'[comment_clip]'     => esc_html($_comment_clip),
 				)); ?>
-			<p style="margin-bottom:0;">
+			<p>
 				<a href="<?php echo esc_attr($_comment_url); ?>">
 					<?php echo __('continue reading', $plugin->text_domain); ?>
 				</a>
