@@ -105,6 +105,9 @@ $replies_via_email_enable = $sub_post_comments_open && $plugin->options['replies
 		// A shorter clip of the full parent comment message body; in plain text.
 		$_comment_parent_clip = $_comment_parent ? $plugin->utils_markup->comment_content_clip($_comment_parent, 'notification_parent') : '';
 
+		// A reply to their own comment?
+		$_comment_reply_to_own_comment = $_comment_parent && strcasecmp($_comment_parent->comment_author_email, $sub->email) === 0;
+
 		// URL to this comment; i.e. the one we're notifying about.
 		$_comment_url = get_comment_link($_comment->comment_ID);
 
@@ -125,9 +128,13 @@ $replies_via_email_enable = $sub_post_comments_open && $plugin->options['replies
 		<?php if($_comment_parent): // This is a reply to someone? ?>
 
 			<p style="font-weight: bold;">
-				<?php echo sprintf(__('In response to <a href="%1$s">this comment</a>', $plugin->text_domain), esc_attr($_comment_parent_url)); ?>
-				<?php if($_comment_parent->comment_author): ?>
-					<?php echo sprintf(__(' posted by %1$s', $plugin->text_domain), esc_html($_comment_parent->comment_author)); ?>
+				<?php if($_comment_reply_to_own_comment) : ?>
+					<?php echo sprintf(__('In response to <a href="%1$s">your comment</a>', $plugin->text_domain), esc_attr($_comment_parent_url)); ?>
+				<?php else : ?>
+					<?php echo sprintf(__('In response to <a href="%1$s">this comment</a>', $plugin->text_domain), esc_attr($_comment_parent_url)); ?>
+					<?php if($_comment_parent->comment_author): ?>
+						<?php echo sprintf(__(' posted by %1$s', $plugin->text_domain), esc_html($_comment_parent->comment_author)); ?>
+					<?php endif; ?>
 				<?php endif; ?>
 				<?php echo ':'; ?>
 			</p>
