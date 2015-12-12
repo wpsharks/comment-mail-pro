@@ -158,7 +158,7 @@ $replies_via_email_enable = $sub_post_comments_open && $plugin->options['replies
 				<?php if($sub_post_comments_open): ?>
 					| <a href="<?php echo esc_attr($_comment_reply_url); ?>">
 						<?php if($_comment->comment_author) : ?>
-							<?php echo __('Reply to ', $plugin->text_domain).esc_html($_comment->comment_author); ?>
+							<?php echo __('Reply to', $plugin->text_domain).' '.esc_html($_comment->comment_author); ?>
 						<?php else : ?>
 							<?php echo __('Reply', $plugin->text_domain); ?>
 						<?php endif; ?>
@@ -192,7 +192,7 @@ $replies_via_email_enable = $sub_post_comments_open && $plugin->options['replies
 				<?php if($sub_post_comments_open): ?>
 					| <a href="<?php echo esc_attr($_comment_reply_url); ?>">
 						<?php if($_comment->comment_author) : ?>
-							<?php echo __('Reply to ', $plugin->text_domain).esc_html($_comment->comment_author); ?>
+							<?php echo __('Reply to', $plugin->text_domain).' '.esc_html($_comment->comment_author); ?>
 						<?php else : ?>
 							<?php echo __('Reply', $plugin->text_domain); ?>
 						<?php endif; ?>
