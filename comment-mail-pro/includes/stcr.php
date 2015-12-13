@@ -98,11 +98,10 @@ namespace comment_mail { // Root namespace.
 		           '   <li>'.sprintf(__('%1$s automatically imported many of your StCR options (to learn what was imported, see <a href="http://comment-mail.com/kb-article/stcr-options-transitioned-by-comment-mail/" target="_blank">this article</a>). It\'s still a good idea to review your %1$s configuration though.', $plugin->text_domain), esc_html($plugin->name)).'</li>'.
 		           '   <li>'.sprintf(__('<strong>IMPORTANT TIP:</strong> %1$s can import your existing StCR subscribers automatically too! <strong><a href="%2$s">Click here to review the StCR → %1$s import process</a></strong>.', $plugin->text_domain), esc_html($plugin->name), esc_attr($plugin->utils_url->import_export_menu_page_only())).'</li>'.
 		           '</ul>';
-		$plugin->enqueue_notice($notice, array('persistent' => TRUE));
+		$plugin->enqueue_notice($notice, array('persistent' => TRUE, 'persistent_id' => 'upgrading-from-stcr'));
 	}
 }
 namespace { // Global namespace.
-
 	add_action('init', function () // After StCR is loaded up.
 	{
 		if(!is_admin() && !function_exists('subscribe_reloaded_show')):
