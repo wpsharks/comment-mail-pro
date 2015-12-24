@@ -2,7 +2,7 @@
 /**
 * User Columns
 *
-* @since 15xxxx Adding custom user columns.
+* @since 151224 Adding custom user columns.
 * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
 * @license GNU General Public License, version 3
 */
@@ -16,14 +16,14 @@ namespace comment_mail // Root namespace.
     /**
      * User Columns
      *
-     * @since 15xxxx Adding custom user columns.
+     * @since 151224 Adding custom user columns.
      */
     class user_columns extends abs_base
     {
       /**
        * Class constructor.
        *
-       * @since 15xxxx Adding custom user columns.
+       * @since 151224 Adding custom user columns.
        */
       public function __construct()
       {
@@ -33,7 +33,7 @@ namespace comment_mail // Root namespace.
       /**
        * Filter (and add) user columns.
        *
-       * @since 15xxxx Adding custom user columns.
+       * @since 151224 Adding custom user columns.
        *
        * @param array $columns Existing columns.
        *
@@ -53,7 +53,7 @@ namespace comment_mail // Root namespace.
       /**
        * Maybe fill custom user columns.
        *
-       * @since 15xxxx Adding custom user columns.
+       * @since 151224 Adding custom user columns.
        *
        * @param mixed $value Existing column value.
        * @param string $column Column name.

@@ -2,7 +2,7 @@
 /**
  * List Server Utilities
  *
- * @since 15xxxx Adding list server integrations.
+ * @since 151224 Adding list server integrations.
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license GNU General Public License, version 3
  */
@@ -15,14 +15,14 @@ namespace comment_mail // Root namespace.
         /**
          * List Server Utilities
          *
-         * @since 15xxxx Adding list server integrations.
+         * @since 151224 Adding list server integrations.
          */
         class utils_list_server extends abs_base
         {
             /**
              * Subscribe to list.
              *
-             * @since 15xxxx Adding support for mailing lists.
+             * @since 151224 Adding support for mailing lists.
              *
              * @param array $args User ID, email address, IP, etc. Details needed by the list server.
              *
@@ -45,7 +45,7 @@ namespace comment_mail // Root namespace.
             /**
              * Unsubscribe from list.
              *
-             * @since 15xxxx Adding support for mailing lists.
+             * @since 151224 Adding support for mailing lists.
              *
              * @param array $args User ID, email address, IP, etc. Details needed by the list server.
              *
