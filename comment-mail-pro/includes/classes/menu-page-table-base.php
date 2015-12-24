@@ -454,7 +454,7 @@ namespace comment_mail // Root namespace.
 				if(!$item->{$key})
 					return '—'; // Not possible.
 
-				$id_only = '<i class="'.esc_attr('wsi-'.$this->plugin->slug.'-one').'"></i>'.
+				$id_only = '<i class="'.esc_attr('si si-'.$this->plugin->slug.'-one').'"></i>'.
 				           ' <span style="font-weight:bold;">ID #'.esc_html($item->{$key}).'</span>';
 
 				if(empty($this->merged_result_sets['subs'][$item->{$key}]))
@@ -467,7 +467,7 @@ namespace comment_mail // Root namespace.
 					'email_style' => 'font-weight:normal;',
 				);
 				$name            = $item->{$prefix.'fname'}.' '.$item->{$prefix.'lname'};
-				$sub_info        = '<i class="'.esc_attr('wsi-'.$this->plugin->slug.'-one').'"></i>'.
+				$sub_info        = '<i class="'.esc_attr('si si-'.$this->plugin->slug.'-one').'"></i>'.
 				                   ' '.$this->plugin->utils_markup->name_email($name, $item->{$prefix.'email'}, $name_email_args);
 
 				$edit_url = $this->plugin->utils_url->edit_sub_short($item->{$key});
@@ -611,7 +611,7 @@ namespace comment_mail // Root namespace.
 				$post_title_clip        = $this->plugin->utils_string->mid_clip($item->{$prefix.'title'});
 				$post_date              = $this->plugin->utils_date->i18n('M j, Y', strtotime($item->{$prefix.'date_gmt'}));
 				$post_date_ago          = $this->plugin->utils_date->approx_time_difference(strtotime($item->{$prefix.'date_gmt'}));
-				$post_comments_status   = $this->plugin->utils_i18n->status_label($this->plugin->utils_db->post_comment_status__($item->{$prefix.'comment_status'}));
+				$post_comments_status = $this->plugin->utils_i18n->status_label($this->plugin->utils_db->post_comment_status__($item->{$prefix.'comment_status'}), 'ucwords');
 				$post_edit_comments_url = $this->plugin->utils_url->post_edit_comments_short($item->{$key});
 				$post_total_subs        = $this->plugin->utils_sub->query_total($item->{$key});
 				$post_total_comments    = (integer)$item->{$prefix.'comment_count'};
@@ -678,7 +678,7 @@ namespace comment_mail // Root namespace.
 				);
 				$comment_date_time = $this->plugin->utils_date->i18n('M j, Y g:i a', strtotime($item->{$prefix.'date_gmt'}));
 				$comment_time_ago  = $this->plugin->utils_date->approx_time_difference(strtotime($item->{$prefix.'date_gmt'}));
-				$comment_status    = $this->plugin->utils_i18n->status_label($this->plugin->utils_db->comment_status__($item->{$prefix.'approved'}));
+				$comment_status = $this->plugin->utils_i18n->status_label($this->plugin->utils_db->comment_status__($item->{$prefix.'approved'}), 'ucwords');
 
 				$comment_info = '<i class="fa fa-comment"></i>'. // Start w/ a comment bubble icon.
 				                ' '.$this->plugin->utils_markup->name_email($item->{$prefix.'author'}, $item->{$prefix.'author_email'}, $name_email_args);
@@ -1939,7 +1939,7 @@ namespace comment_mail // Root namespace.
 					$_sub_edit_link   = $this->plugin->utils_url->edit_sub_short($_sub->ID);
 
 					$sub_lis[$_sub->ID] = '<li>'. // [icon] ID "Name" <email> [edit].
-					                      '<i class="'.esc_attr('wsi-'.$this->plugin->slug).'"></i>'.
+					                      '<i class="'.esc_attr('si si-'.$this->plugin->slug).'"></i>'.
 					                      ' '.$this->plugin->utils_markup->name_email($_sub_name, $_sub->email, $_name_email_args).
 					                      ($_sub_edit_link // Only if they can edit the subscription ID; else this will be empty.
 						                      ? ' [<a href="'.esc_attr($_sub_edit_link).'">'.__('edit', $this->plugin->text_domain).'</a>]' : '').

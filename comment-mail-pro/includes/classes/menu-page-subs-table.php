@@ -197,10 +197,10 @@ namespace comment_mail // Root namespace.
 				$plugin = plugin(); // Needed for translations.
 
 				return array(
-					'status::unconfirmed' => $plugin->utils_i18n->status_label('unconfirmed'),
-					'status::subscribed'  => $plugin->utils_i18n->status_label('subscribed'),
-					'status::suspended'   => $plugin->utils_i18n->status_label('suspended'),
-					'status::trashed'     => $plugin->utils_i18n->status_label('trashed'),
+					'status::unconfirmed' => $plugin->utils_i18n->status_label('unconfirmed', 'ucwords'),
+					'status::subscribed'  => $plugin->utils_i18n->status_label('subscribed', 'ucwords'),
+					'status::suspended'   => $plugin->utils_i18n->status_label('suspended', 'ucwords'),
+					'status::trashed'     => $plugin->utils_i18n->status_label('trashed', 'ucwords'),
 				);
 			}
 
@@ -228,7 +228,7 @@ namespace comment_mail // Root namespace.
 					'email_style'  => 'font-weight:normal;',
 				);
 				$name            = $item->fname.' '.$item->lname; // Concatenate.
-				$email_info      = '<i class="'.esc_attr('wsi-'.$this->plugin->slug.'-one').'"></i>'.
+				$email_info      = '<i class="'.esc_attr('si si-'.$this->plugin->slug.'-one').'"></i>'.
 				                   ' '.$this->plugin->utils_markup->name_email($name, $item->email, $name_email_args);
 
 				$edit_url      = $this->plugin->utils_url->edit_sub_short($item->ID);

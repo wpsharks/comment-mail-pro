@@ -26,6 +26,9 @@ namespace comment_mail;
  * @var string    $sub_deliver_id The `id=""` value for the subscription delivery option select menu.
  * @var string    $sub_deliver_name The `name=""` value for the subscription delivery option select menu.
  *
+ * @var string    $sub_list_id The `id=""` value for the subscription list checkbox.
+ * @var string    $sub_list_name The `name=""` value for the subscription list checkbox.
+ *
  * @var string    $sub_summary_url A URL leading the subscription summary page (i.e. the My Subscriptions page).
  *    A link to the summary page (i.e. the My Subscriptions page) should not be displayed if `$sub_email` is empty.
  *
@@ -60,6 +63,12 @@ namespace comment_mail;
 		<option value="daily"<?php selected('daily', $current->sub_deliver); ?>><?php echo __('daily digest', $plugin->text_domain); ?></option>
 		<option value="weekly"<?php selected('weekly', $current->sub_deliver); ?>><?php echo __('weekly digest', $plugin->text_domain); ?></option>
 	</select>
+
+  <div class="cso-sub-list">
+		<?php if($plugin->options['list_server_enable'] && $plugin->options['list_server']): ?>
+	    <input type="checkbox" id="<?php echo esc_attr($sub_list_id); ?>" name="<?php echo esc_attr($sub_list_name); ?>" value="1" /> <?php echo __('Yes, I want to receive blog updates also.', $plugin->text_domain); ?>
+	  <?php endif; ?>
+	</div>
 
 	<div class="cso-links">
 		<span class="cso-link-new"><?php echo sprintf(__('Or, you can <a href="%1$s" target="_blank">subscribe without commenting</a>.', $plugin->text_domain), esc_attr($sub_new_url)); ?></span>

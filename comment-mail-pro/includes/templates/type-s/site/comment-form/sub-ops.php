@@ -8,7 +8,7 @@ namespace comment_mail;
  *
  * @var integer   $post_id Current post ID; where this is being displayed.
  *
- * @var \stdClass $current An object w/ `sub_email`, `sub_type`, and `sub_deliver`.
+ * @var ßcurrent An object w/ `sub_email`, `sub_type`, and `sub_deliver`.
  *    These properties are also provided as variables below; same thing.
  *
  * @var string    $sub_email The current subscriber's email address; if available.
@@ -25,6 +25,9 @@ namespace comment_mail;
  *
  * @var string    $sub_deliver_id The `id=""` value for the subscription delivery option select menu.
  * @var string    $sub_deliver_name The `name=""` value for the subscription delivery option select menu.
+ *
+ * @var string    $sub_list_id The `id=""` value for the subscription list checkbox.
+ * @var string    $sub_list_name The `name=""` value for the subscription list checkbox.
  *
  * @var string    $sub_summary_url A URL leading the subscription summary page (i.e. the My Subscriptions page).
  *    A link to the summary page (i.e. the My Subscriptions page) should not be displayed if `$sub_email` is empty.
@@ -101,12 +104,19 @@ namespace comment_mail;
 	</select>
 <?php $sub_deliver_options = ob_get_clean(); ?>
 
+<?php ob_start(); ?>
+	<?php if($plugin->options['list_server_enable'] && $plugin->options['list_server']): ?>
+		<input type="checkbox" id="<?php echo esc_attr($sub_list_id); ?>" name="<?php echo esc_attr($sub_list_name); ?>" value="1" /> <?php echo __('Yes, I want to receive blog updates also.', $plugin->text_domain); ?>
+	<?php endif; ?>
+<?php $sub_list_checkbox = ob_get_clean(); ?>
+
 <?php echo $template->snippet(
 	'sub-ops.php', array(
 		'[css_styles]'          => $css_styles,
 		'[inline_icon_svg]'     => $inline_icon_svg,
 		'[sub_type_options]'    => $sub_type_options,
 		'[sub_deliver_options]' => $sub_deliver_options,
+		'[sub_list_checkbox]'   => $sub_list_checkbox,
 		'[sub_type_id]'         => esc_html($sub_type_id),
 		'[current_sub_email]'   => esc_html($current->sub_email),
 		'[sub_new_url]'         => esc_attr($sub_new_url),

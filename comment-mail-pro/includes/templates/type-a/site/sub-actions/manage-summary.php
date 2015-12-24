@@ -167,9 +167,13 @@ str_replace('%%title%%', __('My Comment Subscriptions', $plugin->text_domain), $
 			<?php endif; ?>
 
 			<h2 style="margin-top:0;">
+				<?php // Disable this functionality for now; see http://bit.ly/1OYd4ie ?>
+				<?php // @todo Remove completely, or reconsider, Add New Subscription from front-end ?>
+				<?php /*
 				<a href="<?php echo esc_attr($sub_new_url); ?>" title="<?php echo __('Add New Subscription', $plugin->text_domain); ?>">
 					<i class="fa fa-plus-square text-success pull-right" style="margin-left:.5em;"></i>
 				</a>
+ 				*/?>
 				<a href="<?php echo esc_attr($sub_unsubscribe_all_url); ?>"
 				   data-action="<?php echo esc_attr($sub_unsubscribe_all_url); ?>"
 				   data-confirmation="<?php echo __('Delete (unsubscribe) ALL subscriptions associated with your email address? Are you absolutely sure?', $plugin->text_domain); ?>"
@@ -256,7 +260,7 @@ str_replace('%%title%%', __('My Comment Subscriptions', $plugin->text_domain), $
 									// Subscribed to their own comment?
 									$_subscribed_to_own_comment = $_sub_comment && in_array(strtolower($_sub_comment->comment_author_email), $sub_emails, TRUE);
 									?>
-									<i class="<?php echo esc_attr('wsi-'.$plugin->slug.'-one'); ?>"></i> <?php echo $_sub_name_email_markup; ?><br />
+									<i class="<?php echo esc_attr('si si-'.$plugin->slug.'-one'); ?>"></i> <?php echo $_sub_name_email_markup; ?><br />
 
 									<div class="hover-links">
 										<a href="<?php echo esc_attr($_sub_edit_url); ?>"

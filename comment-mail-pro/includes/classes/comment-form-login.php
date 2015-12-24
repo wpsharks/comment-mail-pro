@@ -49,6 +49,18 @@ namespace comment_mail // Root namespace.
 				//if(!get_option('comment_registration') || is_user_logged_in())
 				//	return; // Not applicable; i.e. unnecessary.
 
+                if(empty($GLOBALS['post']) || !($GLOBALS['post'] instanceof \WP_Post))
+                    return; // Not possible here.
+
+                $post_id   = $GLOBALS['post']->ID; // Current post ID.
+                $post_type = $GLOBALS['post']->post_type; // Current post type.
+
+                $enabled_post_types = strtolower($this->plugin->options['enabled_post_types']);
+                $enabled_post_types = preg_split('/[\s;,]+/', $enabled_post_types, NULL, PREG_SPLIT_NO_EMPTY);
+
+                if($enabled_post_types && !in_array($post_type, $enabled_post_types, TRUE))
+                    return; // Ignore; not enabled for this post type.
+
 				foreach(($sso_services = sso_actions::$valid_services) as $_key => $_service)
 					if(!$this->plugin->options['sso_'.$_service.'_key'] || !$this->plugin->options['sso_'.$_service.'_secret'])
 						unset($sso_services[$_key]); // Remove from the array.

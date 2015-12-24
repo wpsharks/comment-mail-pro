@@ -120,6 +120,13 @@ namespace comment_mail // Root namespace.
 			protected $process_confirmation;
 
 			/**
+			 * @var boolean Process list server?
+			 *
+			 * @since 150922 Adding list server.
+			 */
+			protected $process_list_server;
+
+			/**
 			 * @var boolean User initiated?
 			 *
 			 * @since 141111 First documented version.
@@ -341,6 +348,7 @@ namespace comment_mail // Root namespace.
 
 					'process_events'                => TRUE,
 					'process_confirmation'          => FALSE,
+					'process_list_server'           => FALSE,
 
 					'user_initiated'                => FALSE,
 					'ui_protected_data_keys_enable' => FALSE,
@@ -358,6 +366,7 @@ namespace comment_mail // Root namespace.
 
 				$this->process_events       = (boolean)$args['process_events'];
 				$this->process_confirmation = (boolean)$args['process_confirmation'];
+				$this->process_list_server  = (boolean)$args['process_list_server'];
 
 				$this->user_initiated                = (boolean)$args['user_initiated'];
 				$this->user_initiated                = $this->plugin->utils_sub->check_user_initiated_by_admin(
@@ -710,13 +719,13 @@ namespace comment_mail // Root namespace.
 						'user_initiated' => $this->user_initiated,
 					))); // Log event data.
 				}
-				if($this->auto_confirm || $this->process_confirmation)
-					if($this->sub->status === 'unconfirmed')
+				if(($this->auto_confirm || $this->process_confirmation) && $this->sub->status === 'unconfirmed')
 					{
 						$this->sub_confirmer = new sub_confirmer($this->sub->ID, array(
-							'auto_confirm'   => $this->auto_confirm,
-							'process_events' => $this->process_events,
-							'user_initiated' => $this->user_initiated,
+							'auto_confirm'        => $this->auto_confirm,
+							'process_events'      => $this->process_events,
+							'process_list_server' => $this->process_list_server,
+							'user_initiated'      => $this->user_initiated,
 						)); // With behavioral args.
 
 						if($this->sub_confirmer->sent_email_successfully())
@@ -769,8 +778,7 @@ namespace comment_mail // Root namespace.
 						'user_initiated' => $this->user_initiated,
 					)), $sub_before); // Log event data.
 				}
-				if($this->auto_confirm || $this->process_confirmation)
-					if($this->sub->status === 'unconfirmed')
+				if(($this->auto_confirm || $this->process_confirmation) && $this->sub->status === 'unconfirmed')
 					{
 						$this->sub_confirmer = new sub_confirmer($this->sub->ID, array(
 							'auto_confirm'   => $this->auto_confirm,
@@ -782,6 +790,16 @@ namespace comment_mail // Root namespace.
 							$this->successes['sent_confirmation_email_successfully'] // Success entry!
 								= __('Request for email confirmation sent successfully.', $this->plugin->text_domain);
 					}
+				else if($this->sub->status === 'subscribed' && $this->process_list_server)
+					$this->plugin->utils_list_server->maybe_subscribe(
+						array(
+							'double_optin'        => false,
+							'email'               => $this->sub->email,
+							'fname'               => $this->sub->fname,
+							'lname'               => $this->sub->lname,
+							'ip'                  => $this->sub->last_ip,
+						)
+					);
 				$this->overwrite_any_others_after_insert_update(); // Overwrites any others.
 			}
 

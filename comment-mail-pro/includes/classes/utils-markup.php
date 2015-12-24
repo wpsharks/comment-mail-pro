@@ -230,7 +230,7 @@ namespace comment_mail // Root namespace.
 					if($show_lname) $_name_maybe .= ' '.$_sub->lname;
 
 					$last_x_email_lis[] = '<li>'. // Display varies based on arguments.
-					                      ' <i class="'.esc_attr('wsi-'.$this->plugin->slug).'"></i> '.
+					                      ' <i class="'.esc_attr('si si-'.$this->plugin->slug).'"></i> '.
 					                      $this->name_email($_name_maybe, $_sub->email, $name_email_args).'</a>'.
 					                      '</li>';
 				}
@@ -351,6 +351,7 @@ namespace comment_mail // Root namespace.
 						(integer)$this->plugin->options['max_select_options'],
 					'fail_on_max'                => TRUE,
 					'for_comments_only'          => FALSE,
+                    'include_post_types'         => array(),
 					'exclude_post_types'         => array(),
 					'exclude_post_statuses'      => array(),
 					'exclude_password_protected' => !is_admin(),
@@ -361,6 +362,13 @@ namespace comment_mail // Root namespace.
 				);
 				$args         = array_merge($default_args, $args);
 				$args         = array_intersect_key($args, $default_args);
+
+                $args['include_post_types'] = (array)$args['include_post_types'];
+                if ($this->plugin->options['enabled_post_types']) {
+                    $enabled_post_types = strtolower($this->plugin->options['enabled_post_types']);
+                    $enabled_post_types = preg_split('/[\s;,]+/', $enabled_post_types, NULL, PREG_SPLIT_NO_EMPTY);
+                    $args['include_post_types'] = array_unique(array_merge($args['include_post_types'], $enabled_post_types));
+                }
 
 				$args['exclude_post_types'] = (array)$args['exclude_post_types'];
 				if(!$this->plugin->options['post_select_options_media_enable'])
@@ -453,6 +461,7 @@ namespace comment_mail // Root namespace.
 						(integer)$this->plugin->options['max_select_options'],
 					'fail_on_max'                => TRUE,
 					'parents_only'               => FALSE,
+                    'include_post_types'         => array(),
 					'exclude_post_types'         => array(),
 					'exclude_post_statuses'      => array(),
 					'exclude_password_protected' => !is_admin(),
@@ -465,6 +474,17 @@ namespace comment_mail // Root namespace.
 				);
 				$args         = array_merge($default_args, $args);
 				$args         = array_intersect_key($args, $default_args);
+
+                $args['include_post_types'] = (array)$args['include_post_types'];
+                if ($this->plugin->options['enabled_post_types']) {
+                    $enabled_post_types = strtolower($this->plugin->options['enabled_post_types']);
+                    $enabled_post_types = preg_split('/[\s;,]+/', $enabled_post_types, NULL, PREG_SPLIT_NO_EMPTY);
+                    $args['include_post_types'] = array_unique(array_merge($args['include_post_types'], $enabled_post_types));
+                }
+
+                $args['exclude_post_types'] = (array)$args['exclude_post_types'];
+                if(!$this->plugin->options['post_select_options_media_enable'])
+                    $args['exclude_post_types'][] = 'attachment';
 
 				if(!$args['exclude_post_statuses'] && !is_admin()) // If not in an admin area.
 					$args['exclude_post_statuses'] = array('future', 'draft', 'pending', 'private');
@@ -723,11 +743,11 @@ namespace comment_mail // Root namespace.
 			 *
 			 * @since 141111 First documented version.
 			 *
-			 * @param \stdClass $comment Comment object.
+			 * @param \WP_Comment $comment Comment object.
 			 *
 			 * @return string Comment content markup.
 			 */
-			public function comment_content(\stdClass $comment)
+			public function comment_content(/* \WP_Comment */  $comment)
 			{
 				$markup = $comment->comment_content; // Initialize.
 				$markup = apply_filters('get_comment_text', $markup, $comment, array());
@@ -741,7 +761,7 @@ namespace comment_mail // Root namespace.
 			 *
 			 * @since 141111 First documented version.
 			 *
-			 * @param \stdClass      $comment Comment object.
+			 * @param \WP_Comment      $comment Comment object.
 			 *
 			 * @param integer|string $max_length Defaults to a value of `100`.
 			 *    To use the default plugin option for notifications, pass the string `notification`.
@@ -751,7 +771,7 @@ namespace comment_mail // Root namespace.
 			 *
 			 * @return string Comment content text; after markup/filters and then clipping.
 			 */
-			public function comment_content_clip(\stdClass $comment, $max_length = 100, $force_ellipsis = FALSE)
+			public function comment_content_clip(/* \WP_Comment */  $comment, $max_length = 100, $force_ellipsis = FALSE)
 			{
 				if($max_length === 'notification') // An empty string indicates plugin option value.
 					$max_length = $this->plugin->options['comment_notification_content_clip_max_chars'];
@@ -771,7 +791,7 @@ namespace comment_mail // Root namespace.
 			 *
 			 * @since 141111 First documented version.
 			 *
-			 * @param \stdClass      $comment Comment object.
+			 * @param \WP_Comment      $comment Comment object.
 			 *
 			 * @param integer|string $max_length Defaults to a value of `100`.
 			 *    To use the default plugin option for notifications, pass the string `notification`.
@@ -779,7 +799,7 @@ namespace comment_mail // Root namespace.
 			 *
 			 * @return string Comment content text; after markup/filters and then mid-clipping.
 			 */
-			public function comment_content_mid_clip(\stdClass $comment, $max_length = 100)
+			public function comment_content_mid_clip(/* \WP_Comment */ $comment, $max_length = 100)
 			{
 				if($max_length === 'notification') // An empty string indicates plugin option value.
 					$max_length = $this->plugin->options['comment_notification_content_clip_max_chars'];
@@ -824,7 +844,7 @@ namespace comment_mail // Root namespace.
 				$icon_prefix          = (boolean)$args['icon_prefix'];
 				$for_wordpress_suffix = (boolean)$args['for_wordpress_suffix'];
 
-				$icon   = '<i class="'.esc_attr('wsi-'.$this->plugin->slug).'"></i>';
+				$icon   = '<i class="'.esc_attr('si si-'.$this->plugin->slug).'"></i>';
 				$anchor = '<a href="'.esc_attr($anchor_to).'" target="'.esc_attr($anchor_target).'" style="'.esc_attr($anchor_style).'">'.
 				          ($icon_prefix ? $icon.' ' : '').esc_html($this->plugin->name).'&trade;'.
 				          '</a>';

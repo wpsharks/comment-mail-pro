@@ -16,3 +16,6 @@
 [submodule "comment-mail-pro/submodules/parsedown-extra"]
 	path = comment-mail-pro/submodules/parsedown-extra
 	url = https://github.com/erusev/parsedown-extra
+[submodule "comment-mail-pro/submodules/mailchimp"]
+	path = comment-mail-pro/submodules/mailchimp
+	url = https://bitbucket.org/mailchimp/mailchimp-api-php

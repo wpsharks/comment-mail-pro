@@ -163,6 +163,19 @@ namespace comment_mail // Root namespace.
 					                )).
 				                '    </tbody>'.
 				                ' </table>'.
+                                ' <hr />'.
+                                ' <table>'.
+                                '    <tbody>'.
+                                $form_fields->input_row(
+                                  array(
+                                    'label'           => __('Enabled for Post Types', $this->plugin->text_domain),
+                                    'placeholder'     => __('e.g., post,page,article', $this->plugin->text_domain),
+                                    'name'            => 'enabled_post_types',
+                                    'current_value'   => $current_value_for('enabled_post_types'),
+                                    'notes_after'     => '<p>'.__('Enter a comma-delimited list of WordPress Post Types. Default is <code>post</code> for standard post type. To enable for all Post Types where comments apply, leave this field empty.', $this->plugin->text_domain).'</p>',
+                                  )).
+                                '    </tbody>'.
+                                ' </table>'.
 				                '</div>';
 
 				echo $this->panel(__('Enable/Disable', $this->plugin->text_domain), $_panel_body, array('open' => !$this->plugin->options['enable']));
@@ -260,9 +273,7 @@ namespace comment_mail // Root namespace.
 
 				/* ----------------------------------------------------------------------------------------- */
 
-				$_panel_body = '<p>'.sprintf(__('The %1$s, is a law that sets the rules for commercial email, establishes requirements for commercial messages, gives recipients the right to have you stop emailing them, and spells out tough penalties for violations. Among other things, the CAN-SPAM Act says that each message must include your valid physical postal address. This can be your current street address, a post office box you’ve registered with the U.S. Postal Service, or a private mailbox you\'ve registered with a commercial mail receiving agency established under Postal Service regulations. For further details, please see: %2$s.', $this->plugin->text_domain), $this->plugin->utils_markup->x_anchor('http://comment-mail.com/r/can-spam-act/', __('CAN-SPAM Act', $this->plugin->text_domain)), $this->plugin->utils_markup->x_anchor('http://comment-mail.com/kb-article/can-spam-compliance/', __('CAN-SPAM Compliance', $this->plugin->text_domain))).'</p>';
-
-				$_panel_body .= '<table>'.
+				$_panel_body = '<table>'.
 				               '  <tbody>'.
 				               $form_fields->input_row(
 					               array(
@@ -280,12 +291,12 @@ namespace comment_mail // Root namespace.
 				                '  <tbody>'.
 				                $form_fields->textarea_row(
 					                array(
-						                'label'         => sprintf(__('Mailing Address (Required for %1$s)', $this->plugin->text_domain), $this->plugin->utils_markup->x_anchor('http://comment-mail.com/kb-article/can-spam-compliance/', __('CAN-SPAM Compliance', $this->plugin->text_domain))),
+						                'label'         => __('Mailing Address', $this->plugin->text_domain),
 						                'placeholder'   => __('e.g., 123 Somewhere Street; Somewhere, USA 99999', $this->plugin->text_domain),
 						                'cm_mode'       => 'text/html', 'cm_height' => 150,
 						                'name'          => 'can_spam_mailing_address',
 						                'current_value' => $current_value_for('can_spam_mailing_address'),
-						                'notes_before'  => '<p class="pmp-note pmp-notice">'.sprintf(__('Please be sure to provide a mailing address that %1$s can include at the bottom of every email that it sends. This is required for %2$s.', $this->plugin->text_domain), esc_html($this->plugin->name), $this->plugin->utils_markup->x_anchor('http://comment-mail.com/kb-article/can-spam-compliance/', __('CAN-SPAM Compliance', $this->plugin->text_domain))).'</p>',
+						                'notes_before'  => '<p class="pmp-note pmp-notice">'.sprintf(__('Please be sure to provide a mailing address that %1$s can include at the bottom of every email that it sends', $this->plugin->text_domain), esc_html($this->plugin->name)).'</p>',
 						                'notes_after'   => '<p class="pmp-note pmp-info">'.__('<strong>Note:</strong> this needs to be provided in HTML format please. For line breaks please use: <code>&lt;br /&gt;</code>', $this->plugin->text_domain).'</p>',
 					                )).
 				                '  </tbody>'.
@@ -305,7 +316,7 @@ namespace comment_mail // Root namespace.
 				                '  </tbody>'.
 				                '</table>';
 
-				echo $this->panel(__('CAN-SPAM Compliance', $this->plugin->text_domain), $_panel_body, array());
+				echo $this->panel(__('Postmaster / Contact Info', $this->plugin->text_domain), $_panel_body, array());
 
 				unset($_panel_body); // Housekeeping.
 
@@ -504,7 +515,8 @@ namespace comment_mail // Root namespace.
 						                                    '  <p style="font-weight:bold; font-size:110%; margin:0;">'.__('When Auto-Subscribe is enabled:', $this->plugin->text_domain).'</p>'.
 						                                    '  <ul class="pmp-list-items">'.
 						                                    '     <li>'.__('The author of a post can be subscribed to all comments/replies automatically. This way they\'ll receive email notifications w/o needing to go through the normal comment subscription process.', $this->plugin->text_domain).'</li>'.
-						                                    '     <li>'.__('A list of other recipients can be added, allowing you to auto-subscribe other email addresses to every post automatically.', $this->plugin->text_domain).'</li>'.
+																								'     <li>'.__('A list of <a href="https://codex.wordpress.org/Roles_and_Capabilities" target="_blank">WordPress Roles</a> can be provided. All users who have one of the listed Roles will be auto-subscribed to all comments/replies for every new post automatically.', $this->plugin->text_domain).'</li>'.
+																								'     <li>'.__('A list of other recipients can be added, allowing you to auto-subscribe other email addresses to every post automatically.', $this->plugin->text_domain).'</li>'.
 						                                    '  </ul>'.
 						                                    '</div>',
 					               )).
@@ -528,6 +540,18 @@ namespace comment_mail // Root namespace.
 					                )).
 				                '    </tbody>'.
 				                ' </table>'.
+												' <table>'.
+												'    <tbody>'.
+												$form_fields->input_row(
+  												array(
+    												'label'         => __('Auto-Subscribe the Following WordPress Roles:', $this->plugin->text_domain),
+    												'placeholder'   => __('e.g., administrator,editor,author,contributor', $this->plugin->text_domain),
+    												'name'          => 'auto_subscribe_roles',
+    												'current_value' => $current_value_for('auto_subscribe_roles'),
+    												'notes_after'   => '<p>'.__('You can enter a comma-delimited list of WordPress Roles; e.g., <code>administrator,editor,author,contributor</code>', $this->plugin->text_domain).'</p>',
+  												)).
+												'    </tbody>'.
+												' </table>'.
 
 				                ' <table>'.
 				                '    <tbody>'.
@@ -1666,6 +1690,66 @@ namespace comment_mail // Root namespace.
 						               )).
 					               '  </tbody>'.
 					               '</table>';
+					$_panel_body .= '<table>'.
+												  '  <tbody>'.
+												  $form_fields->select_row(
+												    array(
+													    'label'           => sprintf(__('Syntax Highlighting Theme', $this->plugin->text_domain), esc_html($this->plugin->name)),
+													    'placeholder'     => __('Select an Option...', $this->plugin->text_domain),
+													    'name'            => 'template_syntax_theme',
+													    'current_value'   => $current_value_for('template_syntax_theme'),
+													    'allow_arbitrary' => FALSE,
+													    'options'         => array(
+																'3024-day'         => __('3024 Day', $this->plugin->text_domain),
+																'3024-night'       => __('3024 Night', $this->plugin->text_domain),
+																'ambiance'         => __('Ambiance', $this->plugin->text_domain),
+																'base16-dark'      => __('Base 16 Dark', $this->plugin->text_domain),
+																'base16-light'     => __('Base 16 Light', $this->plugin->text_domain),
+																'bespin'           => __('Bespin', $this->plugin->text_domain),
+																'blackboard'       => __('Blackboard', $this->plugin->text_domain),
+																'cobalt'           => __('Cobalt', $this->plugin->text_domain),
+																'colorforth'       => __('Color Forth', $this->plugin->text_domain),
+																'dracula'          => __('Dracula', $this->plugin->text_domain),
+																'eclipse'          => __('Eclipse', $this->plugin->text_domain),
+																'elegant'          => __('Elegant', $this->plugin->text_domain),
+																'erlang-dark'      => __('Erlang Dark', $this->plugin->text_domain),
+																'hopscotch'        => __('Hopscotch', $this->plugin->text_domain),
+																'icecoder'         => __('IceCoder', $this->plugin->text_domain),
+																'isotope'          => __('Isotope', $this->plugin->text_domain),
+																'lesser-dark'      => __('Lesser Dark', $this->plugin->text_domain),
+																'liquibyte'        => __('Liquibyte', $this->plugin->text_domain),
+																'material'         => __('Material', $this->plugin->text_domain),
+																'mbo'              => __('MBO', $this->plugin->text_domain),
+																'mdn-like'         => __('MDN Like', $this->plugin->text_domain),
+																'midnight'         => __('Midnight', $this->plugin->text_domain),
+																'monokai'          => __('Monokai', $this->plugin->text_domain),
+																'neat'             => __('Neat', $this->plugin->text_domain),
+																'neo'              => __('Neo', $this->plugin->text_domain),
+																'night'            => __('Night', $this->plugin->text_domain),
+																'paraiso-dark'     => __('Paraiso Dark', $this->plugin->text_domain),
+																'paraiso-light'    => __('Paraiso Light', $this->plugin->text_domain),
+																'pastel-on-dark'   => __('Pastel On Dark', $this->plugin->text_domain),
+																'railscasts'       => __('RailsCasts', $this->plugin->text_domain),
+																'rubyblue'         => __('Rubyblue', $this->plugin->text_domain),
+																'seti'             => __('Seti', $this->plugin->text_domain),
+																'solarized dark'   => __('Solarized Dark', $this->plugin->text_domain),
+																'solarized light'  => __('Solarized Light', $this->plugin->text_domain),
+																'the-matrix'       => __('The Matrix', $this->plugin->text_domain),
+																'tomorrow-night-bright'    => __('Tomorrow Night Bright', $this->plugin->text_domain),
+																'tomorrow-night-eighties'  => __('Tomorrow Night Eighties', $this->plugin->text_domain),
+																'ttcn'             => __('TTCN', $this->plugin->text_domain),
+																'twilight'         => __('Twilight', $this->plugin->text_domain),
+																'vibrant-ink'      => __('Vibrant Ink', $this->plugin->text_domain),
+																'xq-dark'          => __('XQ Dark', $this->plugin->text_domain),
+																'xq-light'         => __('XQ Light', $this->plugin->text_domain),
+																'yeti'             => __('Yeti', $this->plugin->text_domain),
+																'zenburn'          => __('Zenburn', $this->plugin->text_domain),
+													         // add additional lines each for each of the available themes.
+													    ),
+													    'notes_after' => '<p>'.__('This changes the syntax highlighting color scheme used in textarea fields; e.g., Email Templates and Site Templates.', $this->plugin->text_domain).'</p>',
+													  )).
+												  '  </tbody>'.
+												  '</table>';
 
 					echo $this->panel(__('Template-Related Settings', $this->plugin->text_domain), $_panel_body, array('pro_only' => TRUE));
 
@@ -1955,8 +2039,13 @@ namespace comment_mail // Root namespace.
 					                '    </tbody>'.
 					                ' </table>';
 
+					$_panel_body .= '<iframe src="'.esc_attr($this->plugin->utils_url->to('/client-s/iframes/stcr-import-start.html')).'" name="'.esc_attr(__NAMESPACE__.'_import_stcr_iframe').'" class="pmp-import-iframe-output"></iframe>';
+
+					$_panel_body .= '<p><em>'.sprintf(__('Note: Running the import multiple times will not result in duplicate data; %1$s&trade; will simply ignore any subscriptions that have already been imported.', $this->plugin->text_domain), esc_html($this->plugin->name)).'</em></p>';
+
 					$_panel_body .= ' <hr />';
 
+					$_panel_body .= ' <h1>'.sprintf(__('How to Import StCR Subscriptions into Comment Mail', $this->plugin->text_domain), esc_html($this->plugin->name)).'</h1>'."\n";
 					$_panel_body .= ' <h3>'.sprintf(__('Step 1: Import StCR Subscriptions', $this->plugin->text_domain), esc_html($this->plugin->name)).'</h3>'."\n";
 					$_panel_body .= ' <p>'.sprintf(__('Click the "Begin StCR Auto-Importation" button above to start the import process. %1$s will import all of your existing Subscribe to Comments Reloaded comment subscriptions. Your existing StCR comment subscriptions will remain intact—nothing will be deleted or removed. %1$s will simply copy the subscriptions from StCR into %1$s\'s database.', $this->plugin->text_domain), esc_html($this->plugin->name)).'</p>'."\n";
 					$_panel_body .= ' <p class="pmp-note pmp-info" style="font-size:90%;">'.sprintf(__('<strong>Note:</strong> This process may take several minutes. %1$s will work through each post in your database, collecting all of the StCR subscriptions that exist (just a few at a time to prevent any script timeouts). The status bar below may refresh several times during this process. When it\'s complete, you should see a message that reads "<strong>Import complete!</strong>", along with a few details regarding the importation. If the importation is interrupted for any reason, you may simply click the button again and %1$s will resume where it left off.', $this->plugin->text_domain), esc_html($this->plugin->name), esc_attr($this->plugin->utils_url->subs_menu_page_only())).'</p>';
@@ -1978,8 +2067,6 @@ namespace comment_mail // Root namespace.
 					                ' </div>';
 
 					$_panel_body .= '</form>';
-
-					$_panel_body .= '<iframe src="'.esc_attr($this->plugin->utils_url->to('/client-s/iframes/stcr-import-start.html')).'" name="'.esc_attr(__NAMESPACE__.'_import_stcr_iframe').'" class="pmp-import-iframe-output"></iframe>';
 
 					echo $this->panel(__('Subscribe to Comments Reloaded (StCR)', $this->plugin->text_domain), $_panel_body, array('icon' => '<i class="fa fa-upload"></i>', 'open' => (!$this->plugin->is_pro && !$this->plugin->utils_env->is_pro_preview()) || !import_stcr::ever_imported()));
 
@@ -3581,7 +3668,7 @@ namespace comment_mail // Root namespace.
 						echo '<div class="'.esc_attr($this->plugin->slug.'-menu-page-subs '.$this->plugin->slug.'-menu-page-table '.$this->plugin->slug.'-menu-page-area wrap').'">'."\n";
 						echo '   <form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->page_nonce_table_nav_vars_only()).'" novalidate="novalidate">'."\n";
 
-						echo '      <h2>'.sprintf(__('%1$s&trade; &raquo; Subscriptions', $this->plugin->text_domain), esc_html($this->plugin->name)).' <i class="'.esc_attr('wsi-'.$this->plugin->slug).'"></i>'.
+						echo '      <h2>'.sprintf(__('%1$s&trade; &raquo; Subscriptions', $this->plugin->text_domain), esc_html($this->plugin->name)).' <i class="'.esc_attr('si si-'.$this->plugin->slug).'"></i>'.
 						     '       <a href="'.esc_attr($this->plugin->utils_url->new_sub_short()).'" class="add-new-h2">'.__('Add New', $this->plugin->text_domain).'</a></h2>'."\n";
 
 						new menu_page_subs_table(); // Displays table.
@@ -3601,7 +3688,7 @@ namespace comment_mail // Root namespace.
 				echo '<div class="'.esc_attr($this->plugin->slug.'-menu-page-sub-new '.$this->plugin->slug.'-menu-page-form '.$this->plugin->slug.'-menu-page-area wrap').'">'."\n";
 				echo '   <form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->page_nonce_table_nav_vars_only(array('action'))).'" novalidate="novalidate">'."\n";
 
-				echo '      <h2>'.sprintf(__('%1$s&trade; &raquo; New Subscription', $this->plugin->text_domain), esc_html($this->plugin->name)).' <i class="'.esc_attr('wsi-'.$this->plugin->slug.'-one').'"></i></h2>'."\n";
+				echo '      <h2>'.sprintf(__('%1$s&trade; &raquo; New Subscription', $this->plugin->text_domain), esc_html($this->plugin->name)).' <i class="'.esc_attr('si si-'.$this->plugin->slug.'-one').'"></i></h2>'."\n";
 
 				new menu_page_sub_new_form(); // Displays form to add new subscription.
 
@@ -3619,7 +3706,7 @@ namespace comment_mail // Root namespace.
 				echo '<div class="'.esc_attr($this->plugin->slug.'-menu-page-sub-edit '.$this->plugin->slug.'-menu-page-form '.$this->plugin->slug.'-menu-page-area wrap').'">'."\n";
 				echo '   <form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->page_nonce_table_nav_vars_only(array('action', 'subscription'))).'" novalidate="novalidate">'."\n";
 
-				echo '      <h2>'.sprintf(__('%1$s&trade; &raquo; Edit Subscription', $this->plugin->text_domain), esc_html($this->plugin->name)).' <i class="'.esc_attr('wsi-'.$this->plugin->slug.'-one').'"></i></h2>'."\n";
+				echo '      <h2>'.sprintf(__('%1$s&trade; &raquo; Edit Subscription', $this->plugin->text_domain), esc_html($this->plugin->name)).' <i class="'.esc_attr('si si-'.$this->plugin->slug.'-one').'"></i></h2>'."\n";
 
 				new menu_page_sub_edit_form(!empty($_REQUEST['subscription']) ? (integer)$_REQUEST['subscription'] : 0); // Displays form.
 
@@ -4303,7 +4390,7 @@ namespace comment_mail // Root namespace.
 				$heading .= '     <a href="#" data-pmp-action="'.esc_attr($this->plugin->utils_url->restore_default_options()).'" data-pmp-confirmation="'.esc_attr(__('Restore default plugin options? You will lose all of your current settings! Are you absolutely sure?', $this->plugin->text_domain)).'"><i class="fa fa-ambulance"></i> '.__('Restore Default Options', $this->plugin->text_domain).'</a>'."\n";
 
 				$heading .= '     <a href="'.esc_attr($this->plugin->utils_url->subscribe_page()).'" target="_blank"><i class="fa fa-envelope-o"></i> '.__('Newsletter (Subscribe)', $this->plugin->text_domain).'</a>'."\n";
-				$heading .= '     <a href="'.esc_attr($this->plugin->utils_url->product_page()).'" target="_blank"><i class="wsi wsi-comment-mail"></i> '.esc_html($this->plugin->site_name).'</a>'."\n";
+				$heading .= '     <a href="'.esc_attr($this->plugin->utils_url->product_page()).'" target="_blank"><i class="si si-comment-mail"></i> '.esc_html($this->plugin->site_name).'</a>'."\n";
 
 				$heading .= '  </div>'."\n";
 
