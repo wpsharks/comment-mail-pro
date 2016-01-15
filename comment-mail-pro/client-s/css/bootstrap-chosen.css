@@ -27,3 +27,6 @@
 {
 	top : 10px;
 }
+.chosen-container-single-nosearch .search-choice-close {
+  display: none !important;
+}
