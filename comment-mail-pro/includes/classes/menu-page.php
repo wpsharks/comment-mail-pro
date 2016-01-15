@@ -4344,7 +4344,7 @@ namespace comment_mail // Root namespace.
 
 				$heading .= '<div class="pmp-heading">'."\n";
 
-				$heading .= '     <button type="button" class="plugin-menu-page-restore-defaults"'.'<a href="#" data-pmp-action="'.esc_attr($this->plugin->utils_url->restore_default_options()).'" data-pmp-confirmation="'.esc_attr(__('Restore default plugin options? You will lose all of your current settings! Are you absolutely sure?', $this->plugin->text_domain)).'"> '.__('Restore', $this->plugin->text_domain).' <i class="fa fa-ambulance"></i></button>'.'</a>'."\n";
+				$heading .= '  <button type="button" class="plugin-menu-page-restore-defaults"'.'<a href="#" data-pmp-action="'.esc_attr($this->plugin->utils_url->restore_default_options()).'" data-pmp-confirmation="'.esc_attr(__('Restore default plugin options? You will lose all of your current settings! Are you absolutely sure?', $this->plugin->text_domain)).'"> '.__('Restore', $this->plugin->text_domain).' <i class="fa fa-ambulance"></i></button>'.'</a>'."\n";
 
 				$heading .= '  <div class="pmp-heading-options">'."\n";
 				$heading .= '     <a href="'.esc_attr($this->plugin->utils_url->subscribe_page()).'" target="_blank"><i class="fa fa-envelope-o"></i> '.__('Newsletter (Subscribe)', $this->plugin->text_domain).'</a>'."\n";
@@ -4393,6 +4393,8 @@ namespace comment_mail // Root namespace.
 				$heading .= '  <a href="'.esc_attr($this->plugin->utils_url->site_templates_menu_page_only()).'"'.
 				            ($this->plugin->utils_env->is_menu_page(__NAMESPACE__.'_site_templates') ? ' class="pmp-active"' : '').'>'.
 				            '<i class="fa fa-code"></i> '.__('Site Templates', $this->plugin->text_domain).'</a>'."\n";
+
+				$heading .= '  </div>'."\n";
 
 				$heading .= '</div>'."\n";
 
