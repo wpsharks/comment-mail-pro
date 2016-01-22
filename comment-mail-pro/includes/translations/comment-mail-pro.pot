@@ -4957,15 +4957,15 @@ msgid "your subscription."
 msgstr ""
 
 #: includes/templates/type-a/email/sub-confirmation/message.php:83
-msgid "You are receiving this email because asked to be notified about replies to <a href=\"%1$s\">your comment</a>; on:"
+msgid "You are receiving this email because you asked to be notified about replies to <a href=\"%1$s\">your comment</a>; on:"
 msgstr ""
 
 #: includes/templates/type-a/email/sub-confirmation/message.php:85
-msgid "You are receiving this email because asked to be notified about replies to <a href=\"%1$s\">this comment</a>; on:"
+msgid "You are receiving this email because you asked to be notified about replies to <a href=\"%1$s\">this comment</a>; on:"
 msgstr ""
 
 #: includes/templates/type-a/email/sub-confirmation/message.php:89
-msgid "You are receiving this email because asked to be notified about all comments/replies to:"
+msgid "You are receiving this email because you asked to be notified about all comments/replies to:"
 msgstr ""
 
 #: includes/templates/type-a/email/sub-confirmation/message.php:117
