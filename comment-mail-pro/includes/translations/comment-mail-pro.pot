@@ -590,11 +590,6 @@ msgstr ""
 msgid "<i class=\"fa fa-fw fa-comment-o\"></i> Comment ID #"
 msgstr ""
 
-#: includes/classes/menu-page-sub-form-base.php:119
-#: includes/classes/menu-page-sub-form-base.php:276
-msgid "If empty, they'll be subscribed to all comments/replies; i.e. NOT to a specific comment."
-msgstr ""
-
 #: includes/classes/menu-page-sub-form-base.php:124
 msgid "— N/A; no WP User ID —"
 msgstr ""
@@ -5220,13 +5215,6 @@ msgstr ""
 #: includes/templates/type-s/site/sub-actions/manage-sub-form-comment-id-row-via-ajax.php:20
 #: includes/templates/type-s/site/sub-actions/manage-sub-form.php:203
 msgid "<i class=\"fa fa-fw fa-comment-o\"></i> Comment"
-msgstr ""
-
-#: includes/templates/type-a/site/sub-actions/manage-sub-form-comment-id-row-via-ajax.php:22
-#: includes/templates/type-a/site/sub-actions/manage-sub-form.php:205
-#: includes/templates/type-s/site/sub-actions/manage-sub-form-comment-id-row-via-ajax.php:22
-#: includes/templates/type-s/site/sub-actions/manage-sub-form.php:205
-msgid "If empty, you'll be subscribed to all comments/replies; i.e. NOT to a specific comment."
 msgstr ""
 
 #: includes/templates/type-a/site/sub-actions/manage-sub-form.php:60
