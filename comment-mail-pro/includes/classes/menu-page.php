@@ -4358,7 +4358,7 @@ namespace comment_mail // Root namespace.
         $heading .= '  </div>'."\n";
 
         $heading .= '  <div class="pmp-version">'."\n";
-        $heading .= '     <span> '.sprintf(__('%1$s&trade; Pro v%2$s (<a href="https://comment-mail.com/changelog/">changelog</a>)', $this->plugin->text_domain), esc_html($this->plugin->name), esc_html($this->plugin->version)).'</span>'."\n";
+        $heading .= '     <span> '.sprintf(__('%1$s&trade; Pro v%2$s (<a href="https://comment-mail.com/changelog/" target="_blank">changelog</a>)', 'comment-mail'), esc_html($this->plugin->name), esc_html($this->plugin->version)).'</span>'."\n";
         $heading .= '  </div>'."\n";
 
         if($logo_icon && $this->plugin->options['menu_pages_logo_icon_enable'])
