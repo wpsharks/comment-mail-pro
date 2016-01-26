@@ -26,6 +26,7 @@
 .chosen-container-single .chosen-single abbr
 {
 	top : 10px;
+	display:none !important;
 }
 .chosen-container-single-nosearch .search-choice-close {
   display: none !important;
