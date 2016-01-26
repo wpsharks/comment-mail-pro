@@ -692,7 +692,7 @@ msgstr ""
 #: includes/classes/menu-page-sub-form-base.php:195
 #: includes/templates/type-a/site/sub-actions/manage-sub-form.php:246
 #: includes/templates/type-s/site/sub-actions/manage-sub-form.php:246
-msgid "Any value that is not <code>asap</code> results in a digest instead of instant notifications."
+msgid "Any value that is not <code>instantly</code> results in a digest instead of instant notifications."
 msgstr ""
 
 #: includes/classes/menu-page-sub-form-base.php:210
@@ -1319,7 +1319,7 @@ msgid "Select menu options. Allows a subscriber to choose if they wan't to subsc
 msgstr ""
 
 #: includes/classes/menu-page.php:442 includes/classes/menu-page.php:3097
-msgid "Select menu options. Allows a subscriber to choose a delivery option; e.g., asap, hourly, daily, weeky. This can be excluded if you wish. A default value of <code>asap</code> will be used in that case."
+msgid "Select menu options. Allows a subscriber to choose a delivery option; e.g., instantly, hourly, daily, weeky. This can be excluded if you wish. A default value of <code>instantly</code> will be used in that case."
 msgstr ""
 
 #: includes/classes/menu-page.php:443 includes/classes/menu-page.php:3098
@@ -1367,11 +1367,11 @@ msgid "Default Subscription Delivery Option Selected for Commenters:"
 msgstr ""
 
 #: includes/classes/menu-page.php:487
-msgid "This is the option that will be pre-selected for each commenter as the default value. You can change the wording that appears for these options by editing the template above. However, the default choice is determined systematically, based on the one that you choose here — assuming that you haven't dramatically altered code in the template. For most sites, the most logical default choice is: <code>asap</code> (aka: instantly); i.e., the commenter will receive instant notifications regarding replies to their comment."
+msgid "This is the option that will be pre-selected for each commenter as the default value. You can change the wording that appears for these options by editing the template above. However, the default choice is determined systematically, based on the one that you choose here — assuming that you haven't dramatically altered code in the template. For most sites, the most logical default choice is: <code>instantly</code> (aka: instantly); i.e., the commenter will receive instant notifications regarding replies to their comment."
 msgstr ""
 
 #: includes/classes/menu-page.php:488
-msgid "This is the option that will be pre-selected for each commenter as the default value. For most sites, the most logical default choice is: <code>asap</code> (aka: instantly); i.e., the commenter will receive instant notifications regarding replies to their comment."
+msgid "This is the option that will be pre-selected for each commenter as the default value. For most sites, the most logical default choice is: <code>instantly</code> (aka: instantly); i.e., the commenter will receive instant notifications regarding replies to their comment."
 msgstr ""
 
 #: includes/classes/menu-page.php:494
@@ -1447,7 +1447,7 @@ msgid "Auto-Subscribe Delivery Option:"
 msgstr ""
 
 #: includes/classes/menu-page.php:580
-msgid "Whenever someone is auto-subscribed, this is the delivery option that will be used. Any value that is not <code>asap</code> results in a digest instead of instant notifications."
+msgid "Whenever someone is auto-subscribed, this is the delivery option that will be used. Any value that is not <code>instantly</code> results in a digest instead of instant notifications."
 msgstr ""
 
 #: includes/classes/menu-page.php:591
@@ -1791,11 +1791,11 @@ msgid "The <code>Reply-To</code> address that you configure below, will serve as
 msgstr ""
 
 #: includes/classes/menu-page.php:992
-msgid "For single-comment notifications; i.e., where a subscriber chooses delivery type <code>asap</code> (aka: instantly), there is just a single comment in each notification that a subscriber receives. This works best with replies via email, since the <code>Reply-To:</code> header (on its own) is enough for everything to work as expected. Someone replying via email need only hit the Reply button in their email program and start typing. Very simple."
+msgid "For single-comment notifications; i.e., where a subscriber chooses delivery type <code>instantly</code> (aka: instantly), there is just a single comment in each notification that a subscriber receives. This works best with replies via email, since the <code>Reply-To:</code> header (on its own) is enough for everything to work as expected. Someone replying via email need only hit the Reply button in their email program and start typing. Very simple."
 msgstr ""
 
 #: includes/classes/menu-page.php:993
-msgid "For multi-comment notifications; i.e., where a subscriber chooses a delivery type that is not <code>asap</code> (e.g., <code>hourly</code>, <code>daily</code>, etc.); there can be more than a single comment in each notification they receive. If there is more than one comment in the notification, instructions will be provided to the end-user explaining how to reply. The special <code>Reply-To</code> address is still used in this case. However, they also need to specify which comment they want to reply to. To do this, the end-user must start their reply with a special marker provided by %1$s. Again, if there is more than one comment in the notification, instructions will be provided to the end-user explaining how to reply."
+msgid "For multi-comment notifications; i.e., where a subscriber chooses a delivery type that is not <code>instantly</code> (e.g., <code>hourly</code>, <code>daily</code>, etc.); there can be more than a single comment in each notification they receive. If there is more than one comment in the notification, instructions will be provided to the end-user explaining how to reply. The special <code>Reply-To</code> address is still used in this case. However, they also need to specify which comment they want to reply to. To do this, the end-user must start their reply with a special marker provided by %1$s. Again, if there is more than one comment in the notification, instructions will be provided to the end-user explaining how to reply."
 msgstr ""
 
 #: includes/classes/menu-page.php:994
@@ -3276,7 +3276,7 @@ msgid "Subscriber's email address."
 msgstr ""
 
 #: includes/classes/menu-page.php:2992
-msgid "Delivery option label; e.g., asap, hourly, daily, weekly."
+msgid "Delivery option label; e.g., instantly, hourly, daily, weekly."
 msgstr ""
 
 #: includes/classes/menu-page.php:2993

@@ -243,7 +243,7 @@ echo str_replace('%%title%%', $is_edit ? __('Edit Subscription', $plugin->text_d
 							'placeholder' => __('Select a Delivery Option...', $plugin->text_domain),
 							'label'       => __('<i class="fa fa-fw fa-paper-plane-o"></i> Deliver', $plugin->text_domain),
 							'name'        => 'deliver', 'required' => TRUE, 'options' => '%%deliver%%', 'current_value' => $current_value_for('deliver'),
-							'notes_after' => __('Any value that is not <code>asap</code> results in a digest instead of instant notifications.', $plugin->text_domain),
+							'notes_after' => __('Any value that is not <code>instantly</code> results in a digest instead of instant notifications.', $plugin->text_domain),
 						)); ?>
 
 					</tbody>

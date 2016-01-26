@@ -192,7 +192,7 @@ namespace comment_mail // Root namespace.
 						'placeholder' => __('Select a Delivery Option...', $this->plugin->text_domain),
 						'label'       => __('<i class="fa fa-fw fa-paper-plane-o"></i> Deliver', $this->plugin->text_domain),
 						'name'        => 'deliver', 'required' => TRUE, 'options' => '%%deliver%%', 'current_value' => $this->current_value_for('deliver'),
-						'notes_after' => __('Any value that is not <code>asap</code> results in a digest instead of instant notifications.', $this->plugin->text_domain),
+						'notes_after' => __('Any value that is not <code>instantly</code> results in a digest instead of instant notifications.', $this->plugin->text_domain),
 					));
 
 				echo '   </tbody>';
