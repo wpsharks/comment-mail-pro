@@ -289,7 +289,7 @@ namespace comment_mail // Root namespace.
 
 				        case 'lname':
 				            if(!empty($current->last_name)) {
-				                return $this->plugin->utils_string->last_name((string)$current->last_name);
+				                return $this->plugin->utils_string->last_name('- '.(string)$current->last_name);
 				            }
 				            break;
 
@@ -299,7 +299,7 @@ namespace comment_mail // Root namespace.
 				            }
 				            break;
 				    }
-				}						
+				}
 
 				return NULL; // Default value.
 			}
