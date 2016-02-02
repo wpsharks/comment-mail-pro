@@ -129,9 +129,9 @@ echo str_replace('%%title%%', __('Confirmation', $plugin->text_domain), $site_he
 			<h4>
 				<i class="fa fa-thumb-tack"></i>
 				<?php if($sub_comment): // A specific comment? ?>
-					"<a href="<?php echo esc_attr($sub_comment_url); ?>"><?php echo esc_html($sub_post_title_clip); ?></a>"
+					<em><a href="<?php echo esc_attr($sub_comment_url); ?>"><?php echo esc_html($sub_post_title_clip); ?></a></em>
 				<?php else: // Subscribing to all comments/replies to this post. ?>
-					"<a href="<?php echo esc_attr($sub_post_comments_url); ?>"><?php echo esc_html($sub_post_title_clip); ?></a>"
+					<em><a href="<?php echo esc_attr($sub_post_comments_url); ?>"><?php echo esc_html($sub_post_title_clip); ?></a></em>
 				<?php endif; ?>
 			</h4>
 

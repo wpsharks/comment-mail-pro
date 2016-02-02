@@ -67,13 +67,13 @@ $replies_via_email_enable = $sub_post_comments_open && $plugin->options['replies
 			<?php if($sub_comment): // Subscribed to a specific comment? ?>
 
 				<?php if($subscribed_to_own_comment): ?>
-					<?php echo sprintf(__('New Replies to Your Comment</a> on "%1$s"', $plugin->text_domain), esc_html($sub_post_title_clip)); ?>
+					<?php echo sprintf(__('New Replies to Your Comment</a> on <em>%1$s</em>', $plugin->text_domain), esc_html($sub_post_title_clip)); ?>
 				<?php else: // The comment was not authored by this subscriber; i.e. it's not their own. ?>
-					<?php echo sprintf(__('New Replies to <a href="%1$s">a Comment</a> on "%2$s"', $plugin->text_domain), esc_attr($sub_comment_url), esc_html($sub_post_title_clip)); ?>
+					<?php echo sprintf(__('New Replies to <a href="%1$s">a Comment</a> on <em>%2$s</em>', $plugin->text_domain), esc_attr($sub_comment_url), esc_html($sub_post_title_clip)); ?>
 				<?php endif; ?>
 
 			<?php else: // All comments/replies on this post. ?>
-				<?php echo sprintf(__('New Comments on "<a href="%1$s">%2$s</a>"', $plugin->text_domain), esc_attr($sub_post_comments_url), esc_html($sub_post_title_clip)); ?>
+				<?php echo sprintf(__('New Comments on <em><a href="%1$s">%2$s</a></em>', $plugin->text_domain), esc_attr($sub_post_comments_url), esc_html($sub_post_title_clip)); ?>
 			<?php endif; ?>
 
 		<?php else: // There's just a single comment/reply in this notification. ?>
@@ -81,13 +81,13 @@ $replies_via_email_enable = $sub_post_comments_open && $plugin->options['replies
 			<?php if($sub_comment): // Subscribed to a specific comment? ?>
 
 				<?php if($subscribed_to_own_comment): ?>
-					<?php echo sprintf(__('New Reply to Your Comment</a> on "%1$s"', $plugin->text_domain), esc_html($sub_post_title_clip)); ?>
+					<?php echo sprintf(__('New Reply to Your Comment</a> on <em>%1$s</em>', $plugin->text_domain), esc_html($sub_post_title_clip)); ?>
 				<?php else: // The comment was not authored by this subscriber; i.e. it's not their own. ?>
-					<?php echo sprintf(__('New Reply to <a href="%1$s">a Comment</a> on "%2$s"', $plugin->text_domain), esc_attr($sub_comment_url), esc_html($sub_post_title_clip)); ?>
+					<?php echo sprintf(__('New Reply to <a href="%1$s">a Comment</a> on <em>%2$s</em>', $plugin->text_domain), esc_attr($sub_comment_url), esc_html($sub_post_title_clip)); ?>
 				<?php endif; ?>
 
 			<?php else: // All comments/replies on this post ID. ?>
-				<?php echo sprintf(__('New Comment on "<a href="%1$s">%2$s</a>"', $plugin->text_domain), esc_attr($sub_post_comments_url), esc_html($sub_post_title_clip)); ?>
+				<?php echo sprintf(__('New Comment on <em><a href="%1$s">%2$s</a></em>', $plugin->text_domain), esc_attr($sub_post_comments_url), esc_html($sub_post_title_clip)); ?>
 			<?php endif; ?>
 
 		<?php endif; ?>
