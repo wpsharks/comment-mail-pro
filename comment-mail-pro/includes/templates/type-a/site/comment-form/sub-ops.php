@@ -71,9 +71,9 @@ namespace comment_mail;
 	</div>
 
 	<div class="cso-links">
-		<span class="cso-link-new"><?php echo sprintf(__('Or, you can <a href="%1$s" target="_blank">subscribe without commenting</a>.', $plugin->text_domain), esc_attr($sub_new_url)); ?></span>
+		<span class="cso-link-new"><?php echo sprintf(__('Or, you can <a href="%1$s">subscribe without commenting</a>.', $plugin->text_domain), esc_attr($sub_new_url)); ?></span>
 		<?php if($current->sub_email): // TIP: this is optional. If you exclude this, subscribers can still view their summary via emails they receive. ?>
-			<span class="cso-link-summary">~ <a href="<?php echo esc_attr($sub_summary_url); ?>" target="_blank"><?php echo __('manage my subscriptions', $plugin->text_domain); ?></a></span>
+			<span class="cso-link-summary">~ <a href="<?php echo esc_attr($sub_summary_url); ?>"><?php echo __('manage my subscriptions', $plugin->text_domain); ?></a></span>
 		<?php endif; ?>
 	</div>
 
