@@ -94,7 +94,7 @@ $sub_last_update_time_ago = $plugin->utils_date->i18n_utc('M jS, Y @ g:i a T', $
 	<p>
 
 		<span style="font-size:120%;">
-			"<?php echo esc_html($sub_post_title_clip); ?>"
+			<em><?php echo esc_html($sub_post_title_clip); ?></em>
 		</span>
 
 	</p>
