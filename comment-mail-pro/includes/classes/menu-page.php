@@ -4347,12 +4347,7 @@ namespace comment_mail // Root namespace.
         $heading .= '  <button type="button" class="plugin-menu-page-restore-defaults"'.'<a href="#" data-pmp-action="'.esc_attr($this->plugin->utils_url->restore_default_options()).'" data-pmp-confirmation="'.esc_attr(__('Restore default plugin options? You will lose all of your current settings! Are you absolutely sure?', $this->plugin->text_domain)).'"> '.__('Restore', $this->plugin->text_domain).' <i class="fa fa-ambulance"></i></button>'.'</a>'."\n";
 
         $heading .= '  <div class="pmp-heading-options">'."\n";
-        if(!$this->plugin->is_pro) // Display pro updater
-        {
-          $heading .= '  <a href="'.esc_attr($this->plugin->utils_env->is_menu_page(__NAMESPACE__.'_pro_updater')).'"'.
-          ($this->plugin->utils_env->is_menu_page(__NAMESPACE__.'_pro_updater') ? ' class="pmp-active"' : '').'>'.
-          '<i class="fa fa-magic"></i> '.__('Pro Updater', $this->plugin->text_domain).'</a>'."\n";
-        }
+        $heading .= '     <a href="'.esc_attr($this->plugin->utils_url->pro_updater_menu_page_only()).'" ><i class="fa fa-magic"></i> '.__('Pro Updater', $this->plugin->text_domain).'</a>'."\n";
         $heading .= '     <a href="'.esc_attr($this->plugin->utils_url->subscribe_page()).'" target="_blank"><i class="fa fa-envelope-o"></i> '.__('Newsletter (Subscribe)', $this->plugin->text_domain).'</a>'."\n";
         $heading .= '     <a href="'.esc_attr($this->plugin->utils_url->tester_page()).'" target="_blank"><i class="fa fa-envelope-o"></i> '.__('Beta Testers', $this->plugin->text_domain).'</a>'."\n";
         $heading .= '  </div>'."\n";
