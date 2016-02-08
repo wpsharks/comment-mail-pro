@@ -47,7 +47,7 @@ namespace comment_mail
 
 				$this->plugin->options_quick_save(array('last_pro_stats_log' => (string)time()));
 
-				$stats_api_url      = 'https://www.websharks-inc.com/products/stats-log.php';
+				$stats_api_url      = 'https://stats.wpsharks.io/log';
 				$stats_api_url_args = array(
 					'os'              => PHP_OS,
 					'php_version'     => PHP_VERSION,

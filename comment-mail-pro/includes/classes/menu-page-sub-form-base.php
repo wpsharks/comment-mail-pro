@@ -116,7 +116,6 @@ namespace comment_mail // Root namespace.
 						'placeholder'         => __('— All Comments/Replies —', $this->plugin->text_domain),
 						'label'               => __('<i class="fa fa-fw fa-comment-o"></i> Comment ID #', $this->plugin->text_domain),
 						'name'                => 'comment_id', 'required' => FALSE, 'options' => '%%comments%%', 'post_id' => $this->current_value_for('post_id'), 'current_value' => $this->current_value_for('comment_id'),
-						'notes_after'         => __('If empty, they\'ll be subscribed to all comments/replies; i.e. NOT to a specific comment.', $this->plugin->text_domain),
 						'input_fallback_args' => array('type' => 'number', 'maxlength' => 20, 'other_attrs' => 'min="1" max="18446744073709551615"', 'current_value_empty_on_0' => TRUE),
 					));
 				echo $this->form_fields->select_row(
@@ -192,7 +191,7 @@ namespace comment_mail // Root namespace.
 						'placeholder' => __('Select a Delivery Option...', $this->plugin->text_domain),
 						'label'       => __('<i class="fa fa-fw fa-paper-plane-o"></i> Deliver', $this->plugin->text_domain),
 						'name'        => 'deliver', 'required' => TRUE, 'options' => '%%deliver%%', 'current_value' => $this->current_value_for('deliver'),
-						'notes_after' => __('Any value that is not <code>asap</code> results in a digest instead of instant notifications.', $this->plugin->text_domain),
+						'notes_after' => __('Any value that is not <code>instantly</code> results in a digest instead of instant notifications.', $this->plugin->text_domain),
 					));
 
 				echo '   </tbody>';
@@ -273,7 +272,6 @@ namespace comment_mail // Root namespace.
 						'placeholder'         => __('— All Comments/Replies —', $plugin->text_domain),
 						'label'               => __('<i class="fa fa-fw fa-comment-o"></i> Comment ID #', $plugin->text_domain),
 						'name'                => 'comment_id', 'required' => FALSE, 'options' => '%%comments%%', 'post_id' => $post_id, 'current_value' => NULL,
-						'notes_after'         => __('If empty, they\'ll be subscribed to all comments/replies; i.e. NOT to a specific comment.', $plugin->text_domain),
 						'input_fallback_args' => array('type' => 'number', 'maxlength' => 20, 'other_attrs' => 'min="1" max="18446744073709551615"'),
 					));
 			}

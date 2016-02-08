@@ -255,7 +255,7 @@ namespace comment_mail // Root namespace.
 				switch($deliver) // Convert to label.
 				{
 					case 'asap':
-						$i18n = __('asap', $this->plugin->text_domain);
+						$i18n = __('instantly', $this->plugin->text_domain);
 						break;
 
 					case 'hourly':
