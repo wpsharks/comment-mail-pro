@@ -9,7 +9,7 @@ namespace WebSharks\CommentMail\Pro;
 if (!defined('WPINC')) {
     exit('Do NOT access this file directly: '.basename(__FILE__));
 }
-require_once dirname(__FILE__).'/stub.php';
+require_once __DIR__.'/stub.php';
 
 $GLOBALS[GLOBAL_NS.'_uninstalling'] = true;
 $GLOBALS[GLOBAL_NS]                 = new Plugin(false);
