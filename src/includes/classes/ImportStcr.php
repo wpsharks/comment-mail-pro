@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class import_stcr extends abs_base
+		class import_stcr extends AbsBase
 		{
 			/**
 			 * @var integer Max number of post IDs.

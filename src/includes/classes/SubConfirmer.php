@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class sub_confirmer extends abs_base
+		class sub_confirmer extends AbsBase
 		{
 			/**
 			 * @var \stdClass|null Subscription.

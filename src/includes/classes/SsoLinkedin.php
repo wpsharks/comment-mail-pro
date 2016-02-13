@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class sso_linkedin extends sso_service_base
+		class sso_linkedin extends SsoServiceBase
 		{
 			/**
 			 * Class constructor.
@@ -120,4 +120,3 @@ namespace WebSharks\CommentMail\Pro;
 				}
 			}
 		}
-	

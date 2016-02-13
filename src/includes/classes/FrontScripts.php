@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class front_scripts extends abs_base
+		class front_scripts extends AbsBase
 		{
 			/**
 			 * Class constructor.

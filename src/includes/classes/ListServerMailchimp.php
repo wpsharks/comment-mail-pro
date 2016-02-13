@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
          *
          * @since 151224 Adding support for mailing lists.
          */
-        class list_server_mailchimp extends list_server_base
+        class list_server_mailchimp extends ListServerBase
         {
             /**
              * Subscribe to list.
@@ -117,4 +117,3 @@ namespace WebSharks\CommentMail\Pro;
                 return !empty($mailchimp_response['complete']); // Test the return value for a true complete key.
             }
         }
-    

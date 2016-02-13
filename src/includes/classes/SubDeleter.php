@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class sub_deleter extends abs_base
+		class sub_deleter extends AbsBase
 		{
 			/**
 			 * @var \stdClass|null Subscription.

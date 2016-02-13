@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class template extends abs_base
+		class template extends AbsBase
 		{
 			/**
 			 * @var string Type of template.

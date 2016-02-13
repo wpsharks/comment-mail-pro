@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class upgrader_vs extends abs_base
+		class upgrader_vs extends AbsBase
 		{
 			/**
 			 * @var string Previous version.

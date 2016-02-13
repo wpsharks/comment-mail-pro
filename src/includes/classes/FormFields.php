@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class form_fields extends abs_base
+		class form_fields extends AbsBase
 		{
 			/**
 			 * @var string Namespaced ID suffix.

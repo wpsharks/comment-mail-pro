@@ -19,7 +19,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class autoloader extends abs_base
+		class autoloader extends AbsBase
 		{
 			/**
 			 * Class constructor.

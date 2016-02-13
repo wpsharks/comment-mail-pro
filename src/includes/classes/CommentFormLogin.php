@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class comment_form_login extends abs_base
+		class comment_form_login extends AbsBase
 		{
 			/**
 			 * Class constructor.

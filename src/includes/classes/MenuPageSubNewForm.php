@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class menu_page_sub_new_form extends menu_page_sub_form_base
+		class menu_page_sub_new_form extends MenuPageSubFormBase
 		{
 			/**
 			 * Class constructor.
@@ -27,4 +27,3 @@ namespace WebSharks\CommentMail\Pro;
 				parent::__construct();
 			}
 		}
-	

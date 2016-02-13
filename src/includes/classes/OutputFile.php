@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class output_file extends abs_base
+		class output_file extends AbsBase
 		{
 			/**
 			 * @var string Data to output.

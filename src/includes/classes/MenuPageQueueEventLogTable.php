@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class menu_page_queue_event_log_table extends menu_page_table_base
+		class menu_page_queue_event_log_table extends MenuPageTableBase
 		{
 			/*
 			 * Class constructor.
@@ -401,4 +401,3 @@ namespace WebSharks\CommentMail\Pro;
 				return !empty($counter) ? (integer)$counter : 0;
 			}
 		}
-	

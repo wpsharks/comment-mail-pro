@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class sso_facebook extends sso_service_base
+		class sso_facebook extends SsoServiceBase
 		{
 			/**
 			 * Class constructor.
@@ -117,4 +117,3 @@ namespace WebSharks\CommentMail\Pro;
 				}
 			}
 		}
-	

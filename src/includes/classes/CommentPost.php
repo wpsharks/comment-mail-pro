@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class comment_post extends abs_base
+		class comment_post extends AbsBase
 		{
 			/**
 			 * @var integer Comment ID.

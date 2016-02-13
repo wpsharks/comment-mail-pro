@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class utils_url extends abs_base
+		class utils_url extends AbsBase
 		{
 			/**
 			 * Class constructor.

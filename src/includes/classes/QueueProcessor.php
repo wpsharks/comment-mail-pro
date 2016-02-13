@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class queue_processor extends abs_base
+		class queue_processor extends AbsBase
 		{
 			/**
 			 * @var boolean A CRON job?

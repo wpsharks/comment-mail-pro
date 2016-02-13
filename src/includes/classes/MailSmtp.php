@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class mail_smtp extends abs_base
+		class mail_smtp extends AbsBase
 		{
 			/**
 			 * @var boolean Debugging enable?

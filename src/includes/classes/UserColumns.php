@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
      *
      * @since 151224 Adding custom user columns.
      */
-    class user_columns extends abs_base
+    class user_columns extends AbsBase
     {
       /**
        * Class constructor.

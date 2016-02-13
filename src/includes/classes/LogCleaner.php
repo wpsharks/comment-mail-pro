@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class log_cleaner extends abs_base
+		class log_cleaner extends AbsBase
 		{
 			/**
 			 * @var integer Start time.

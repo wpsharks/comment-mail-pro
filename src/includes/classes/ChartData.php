@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class chart_data extends abs_base
+		class chart_data extends AbsBase
 		{
 			/**
 			 * @var string Input view.

@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class sub_manage_sub_new_form extends sub_manage_sub_form_base
+		class sub_manage_sub_new_form extends SubManageSubFormBase
 		{
 			/**
 			 * Class constructor.
@@ -27,4 +27,3 @@ namespace WebSharks\CommentMail\Pro;
 				parent::__construct();
 			}
 		}
-	

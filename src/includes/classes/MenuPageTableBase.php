@@ -9,7 +9,7 @@
 namespace WebSharks\CommentMail\Pro;
 
 
-	if(!class_exists('\\WP_List_Table')) // WP core.
+	if(!class_exists('WP_List_Table')) // WP core.
 		require_once ABSPATH.'wp-admin/includes/class-wp-list-table.php';
 
 
@@ -2150,4 +2150,3 @@ namespace WebSharks\CommentMail\Pro;
 				parent::display(); // Call parent handler now.
 			}
 		}
-	

@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class sub_updater extends sub_inserter
+		class sub_updater extends SubInserter
 		{
 			/**
 			 * Class constructor.
@@ -35,4 +35,3 @@ namespace WebSharks\CommentMail\Pro;
 				parent::__construct($request_args, $args);
 			}
 		}
-	

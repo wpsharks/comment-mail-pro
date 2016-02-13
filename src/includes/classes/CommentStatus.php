@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class comment_status extends abs_base
+		class comment_status extends AbsBase
 		{
 			/**
 			 * @var \stdClass|null Comment.

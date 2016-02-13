@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class export_subs extends abs_base
+		class export_subs extends AbsBase
 		{
 			/**
 			 * @var integer Starting row.
