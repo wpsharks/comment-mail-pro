@@ -1,18 +1,12 @@
 <?php
 /**
- * API Functions.
+ * API Classes.
  *
- * @since 141111 First documented version.
- * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
- * @license GNU General Public License, version 3
+ * @since 160212 PSR compliance.
  */
-if(!defined('WPINC')) // MUST have WordPress.
-	exit('Do NOT access this file directly: '.basename(__FILE__));
+namespace WebSharks\CommentMail\Pro;
 
-class comment_mail
-{
-	public static function sub_ops()
-	{
-		new \comment_mail\comment_form_after(TRUE);
-	}
+if (!defined('WPINC')) {
+    exit('Do NOT access this file directly: '.basename(__FILE__));
 }
+class_alias(__NAMESPACE__.'\\ApiBase', GLOBAL_NS);

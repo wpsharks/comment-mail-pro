@@ -107,7 +107,7 @@ namespace { // Global namespace.
 		if(!is_admin() && !function_exists('subscribe_reloaded_show')):
 			function subscribe_reloaded_show()
 			{
-				comment_mail::sub_ops();
+				comment_mail::subOps();
 			}
 		endif;
 	});
