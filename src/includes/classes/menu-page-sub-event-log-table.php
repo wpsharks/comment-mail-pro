@@ -38,7 +38,7 @@ namespace WebSharks\CommentMail\Pro
 					'plural_name'    => 'sub_event_log_entries',
 					'singular_label' => __('sub. event log entry', $plugin->text_domain),
 					'plural_label'   => __('sub. event log entries', $plugin->text_domain),
-					'screen'         => $plugin->menu_page_hooks[__NAMESPACE__.'_sub_event_log'],
+					'screen'         => $plugin->menu_page_hooks[GLOBAL_NS.'_sub_event_log'],
 				);
 				parent::__construct($args); // Parent constructor.
 			}

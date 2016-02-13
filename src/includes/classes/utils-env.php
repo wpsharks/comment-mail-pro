@@ -42,10 +42,10 @@ namespace WebSharks\CommentMail\Pro
 				if(!is_null($is = &$this->static_key(__FUNCTION__)))
 					return $is; // Cached this already.
 
-				if(!$this->is_menu_page(__NAMESPACE__.'*'))
+				if(!$this->is_menu_page(GLOBAL_NS.'*'))
 					return ($is = FALSE);
 
-				return ($is = !empty($_REQUEST[__NAMESPACE__.'_pro_preview']));
+				return ($is = !empty($_REQUEST[GLOBAL_NS.'_pro_preview']));
 			}
 
 			/**

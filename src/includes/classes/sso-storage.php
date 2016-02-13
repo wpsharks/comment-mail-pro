@@ -74,10 +74,10 @@ namespace WebSharks\CommentMail\Pro
 
 				$this->ttl = apply_filters(__CLASS__.'_ttl', 31556926);
 
-				if(!($this->key = $this->plugin->utils_enc->get_cookie(__NAMESPACE__.'_sso_key')))
+				if(!($this->key = $this->plugin->utils_enc->get_cookie(GLOBAL_NS.'_sso_key')))
 				{
 					$this->key = $this->plugin->utils_enc->uunnci_key_20_max();
-					$this->plugin->utils_enc->set_cookie(__NAMESPACE__.'_sso_key', $this->key, $this->ttl);
+					$this->plugin->utils_enc->set_cookie(GLOBAL_NS.'_sso_key', $this->key, $this->ttl);
 				}
 				$this->key       = preg_replace('/[^a-z0-9]/i', '', $this->key);
 				$this->key       = substr($this->key, 0, 20); // 20 chars max.

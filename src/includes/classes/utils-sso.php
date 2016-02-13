@@ -149,11 +149,11 @@ namespace WebSharks\CommentMail\Pro
 					if(is_wp_error($user_id = wp_insert_user($user_data)) || !$user_id)
 						return FALSE; // Insertion failure.
 				}
-				$user_sso_services = get_user_option(__NAMESPACE__.'_sso_services');
+				$user_sso_services = get_user_option(GLOBAL_NS.'_sso_services');
 				$user_sso_services = is_array($user_sso_services) ? $user_sso_services : array();
 				$user_sso_services = array_unique(array_merge($user_sso_services, array($service)));
-				update_user_option($user_id, __NAMESPACE__.'_sso_services', $user_sso_services);
-				update_user_option($user_id, __NAMESPACE__.'_'.$service.'_sso_id', $sso_id);
+				update_user_option($user_id, GLOBAL_NS.'_sso_services', $user_sso_services);
+				update_user_option($user_id, GLOBAL_NS.'_'.$service.'_sso_id', $sso_id);
 
 				return $this->auto_login($service, $sso_id, $args_no_cache_true);
 			}
@@ -190,7 +190,7 @@ namespace WebSharks\CommentMail\Pro
 				if(!is_null($user_id = &$this->cache_key(__FUNCTION__, $cache_keys)) && !$no_cache)
 					return $user_id; // Already cached this.
 
-				$meta_key = $this->plugin->utils_db->wp->prefix.__NAMESPACE__.'_'.$service.'_sso_id';
+				$meta_key = $this->plugin->utils_db->wp->prefix.GLOBAL_NS.'_'.$service.'_sso_id';
 
 				$matching_user_ids_sql = // Find a matching SSO ID in the `wp_users` table; for this blog.
 
@@ -298,7 +298,7 @@ namespace WebSharks\CommentMail\Pro
 					else if(!$sso_id) // SSO ID is missing?
 						$error_codes[] = 'missing_sso_id';
 
-					else if(!wp_verify_nonce($_wpnonce, __NAMESPACE__.'_sso_complete'))
+					else if(!wp_verify_nonce($_wpnonce, GLOBAL_NS.'_sso_complete'))
 						$error_codes[] = 'invalid_wpnonce';
 
 					if(!$fname) // First name is missing?
@@ -388,9 +388,9 @@ namespace WebSharks\CommentMail\Pro
 				$hidden_inputs .= $form_fields->hidden_input(
 						array(
 							'name'          => '_wpnonce',
-							'current_value' => wp_create_nonce(__NAMESPACE__.'_sso_complete'),
+							'current_value' => wp_create_nonce(GLOBAL_NS.'_sso_complete'),
 						))."\n";
-				$sso_get_vars = !empty($_GET[__NAMESPACE__]['sso']) ? (array)$_GET[__NAMESPACE__]['sso'] : array();
+				$sso_get_vars = !empty($_GET[GLOBAL_NS]['sso']) ? (array)$_GET[GLOBAL_NS]['sso'] : array();
 				$sso_get_vars = $this->plugin->utils_string->trim_strip_deep($sso_get_vars);
 
 				foreach($sso_get_vars as $_sso_var_key => $_sso_var_value)

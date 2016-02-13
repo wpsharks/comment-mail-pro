@@ -48,7 +48,7 @@ namespace WebSharks\CommentMail\Pro
 			 */
 			public function prefix()
 			{
-				return $this->wp->prefix.__NAMESPACE__.'_';
+				return $this->wp->prefix.GLOBAL_NS.'_';
 			}
 
 			/**

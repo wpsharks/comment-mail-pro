@@ -125,7 +125,7 @@ namespace WebSharks\CommentMail\Pro {
 			public $enable_hooks;
 
 			/**
-			 * Text domain for translations; based on `__NAMESPACE__`.
+			 * Text domain for translations; based on `GLOBAL_NS`.
 			 *
 			 * @since 141111 First documented version.
 			 *
@@ -134,7 +134,7 @@ namespace WebSharks\CommentMail\Pro {
 			public $text_domain;
 
 			/**
-			 * Plugin slug; based on `__NAMESPACE__`.
+			 * Plugin slug; based on `GLOBAL_NS`.
 			 *
 			 * @since 141111 First documented version.
 			 *
@@ -258,14 +258,14 @@ namespace WebSharks\CommentMail\Pro {
 				/*
 				 * Parent constructor.
 				 */
-				$GLOBALS[__NAMESPACE__] = $this; // Global ref.
+				$GLOBALS[GLOBAL_NS] = $this; // Global ref.
 				parent::__construct(); // Run parent constructor.
 
 				/*
 				 * Initialize properties.
 				 */
 				$this->enable_hooks = (boolean)$enable_hooks;
-				$this->text_domain  = $this->slug = str_replace('_', '-', __NAMESPACE__);
+				$this->text_domain  = $this->slug = str_replace('_', '-', GLOBAL_NS);
 				$this->file         = preg_replace('/\.inc\.php$/', '.php', __FILE__);
 
 				/*
@@ -653,7 +653,7 @@ namespace WebSharks\CommentMail\Pro {
 
 				); // Default options are merged with those defined by the site owner.
 				$this->default_options = apply_filters(__METHOD__.'_default_options', $this->default_options); // Allow filters.
-				$this->options         = is_array($this->options = get_option(__NAMESPACE__.'_options')) ? $this->options : array();
+				$this->options         = is_array($this->options = get_option(GLOBAL_NS.'_options')) ? $this->options : array();
 
 				$this->options = array_merge($this->default_options, $this->options); // Merge into default options.
 				$this->options = array_intersect_key($this->options, $this->default_options); // Valid keys only.
@@ -738,21 +738,21 @@ namespace WebSharks\CommentMail\Pro {
 
 				if((integer)$this->options['crons_setup'] < 1382523750)
 				{
-					wp_clear_scheduled_hook('_cron_'.__NAMESPACE__.'_queue_processor');
-					wp_schedule_event(time() + 60, 'every5m', '_cron_'.__NAMESPACE__.'_queue_processor');
+					wp_clear_scheduled_hook('_cron_'.GLOBAL_NS.'_queue_processor');
+					wp_schedule_event(time() + 60, 'every5m', '_cron_'.GLOBAL_NS.'_queue_processor');
 
-					wp_clear_scheduled_hook('_cron_'.__NAMESPACE__.'_sub_cleaner');
-					wp_schedule_event(time() + 60, 'hourly', '_cron_'.__NAMESPACE__.'_sub_cleaner');
+					wp_clear_scheduled_hook('_cron_'.GLOBAL_NS.'_sub_cleaner');
+					wp_schedule_event(time() + 60, 'hourly', '_cron_'.GLOBAL_NS.'_sub_cleaner');
 
-					wp_clear_scheduled_hook('_cron_'.__NAMESPACE__.'_log_cleaner');
-					wp_schedule_event(time() + 60, 'hourly', '_cron_'.__NAMESPACE__.'_log_cleaner');
+					wp_clear_scheduled_hook('_cron_'.GLOBAL_NS.'_log_cleaner');
+					wp_schedule_event(time() + 60, 'hourly', '_cron_'.GLOBAL_NS.'_log_cleaner');
 
 					$this->options['crons_setup'] = (string)time();
-					update_option(__NAMESPACE__.'_options', $this->options);
+					update_option(GLOBAL_NS.'_options', $this->options);
 				}
-				add_action('_cron_'.__NAMESPACE__.'_queue_processor', array($this, 'queue_processor'), 10);
-				add_action('_cron_'.__NAMESPACE__.'_sub_cleaner', array($this, 'sub_cleaner'), 10);
-				add_action('_cron_'.__NAMESPACE__.'_log_cleaner', array($this, 'log_cleaner'), 10);
+				add_action('_cron_'.GLOBAL_NS.'_queue_processor', array($this, 'queue_processor'), 10);
+				add_action('_cron_'.GLOBAL_NS.'_sub_cleaner', array($this, 'sub_cleaner'), 10);
+				add_action('_cron_'.GLOBAL_NS.'_log_cleaner', array($this, 'log_cleaner'), 10);
 
 				/*
 				 * Fire setup completion hooks.
@@ -801,7 +801,7 @@ namespace WebSharks\CommentMail\Pro {
 			 */
 			public function install_time()
 			{
-				return (integer)get_option(__NAMESPACE__.'_install_time');
+				return (integer)get_option(GLOBAL_NS.'_install_time');
 			}
 
 			/**
@@ -888,7 +888,7 @@ namespace WebSharks\CommentMail\Pro {
 			 */
 			public function actions()
 			{
-				if(empty($_REQUEST[__NAMESPACE__]))
+				if(empty($_REQUEST[GLOBAL_NS]))
 					return; // Nothing to do here.
 
 				new actions(); // Handle action(s).
@@ -960,7 +960,7 @@ namespace WebSharks\CommentMail\Pro {
 				$this->options = array_intersect_key($this->options, $this->default_options);
 				$this->options = array_map('strval', $this->options); // Force strings.
 
-				update_option(__NAMESPACE__.'_options', $this->options); // DB update.
+				update_option(GLOBAL_NS.'_options', $this->options); // DB update.
 			}
 
 			/**
@@ -989,7 +989,7 @@ namespace WebSharks\CommentMail\Pro {
 				unset($_key, $_key_data, $_value, // Housekeeping.
 					$_default_template, $_option_template_nws, $_default_template_nws);
 
-				update_option(__NAMESPACE__.'_options', $this->options); // DB update.
+				update_option(GLOBAL_NS.'_options', $this->options); // DB update.
 			}
 
 			/*
@@ -1029,10 +1029,10 @@ namespace WebSharks\CommentMail\Pro {
 				$icon = $this->utils_fs->inline_icon_svg();
 
 				if(!$this->utils_env->is_menu_page('post-new.php'))
-					add_meta_box(__NAMESPACE__.'_small', $icon.' '.$this->name.'&trade;', array($this, 'post_small_meta_box'), $post_type, 'normal', 'default');
+					add_meta_box(GLOBAL_NS.'_small', $icon.' '.$this->name.'&trade;', array($this, 'post_small_meta_box'), $post_type, 'normal', 'default');
 
 				// @TODO disabling this for now.
-				//add_meta_box(__NAMESPACE__.'_large', $icon.' '.$this->name.'&trade; '.__('Subscriptions', $this->text_domain),
+				//add_meta_box(GLOBAL_NS.'_large', $icon.' '.$this->name.'&trade; '.__('Subscriptions', $this->text_domain),
 				//             array($this, 'post_large_meta_box'), $post_type, 'normal', 'high');
 			}
 
@@ -1082,7 +1082,7 @@ namespace WebSharks\CommentMail\Pro {
 				   || $this->utils_env->is_menu_page('post-new.php')
 				) $this->_enqueue_post_admin_styles();
 
-				if(!$this->utils_env->is_menu_page(__NAMESPACE__.'*'))
+				if(!$this->utils_env->is_menu_page(GLOBAL_NS.'*'))
 					return; // Nothing to do; not applicable.
 
 				$deps = array('codemirror', 'jquery-datetimepicker', 'chosen', 'font-awesome', 'sharkicons'); // Dependencies.
@@ -1097,7 +1097,7 @@ namespace WebSharks\CommentMail\Pro {
 				wp_enqueue_style('font-awesome', set_url_scheme('//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'), array(), NULL, 'all');
 				wp_enqueue_style('sharkicons', $this->utils_url->to('/submodules/sharkicons/src/short-classes.min.css'), array(), NULL, 'all');
 
-				wp_enqueue_style(__NAMESPACE__, $this->utils_url->to('/client-s/css/menu-pages.min.css'), $deps, $this->version, 'all');
+				wp_enqueue_style(GLOBAL_NS, $this->utils_url->to('/client-s/css/menu-pages.min.css'), $deps, $this->version, 'all');
 			}
 
 			/**
@@ -1118,7 +1118,7 @@ namespace WebSharks\CommentMail\Pro {
 				wp_enqueue_style('font-awesome', set_url_scheme('//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'), array(), NULL, 'all');
 				wp_enqueue_style('sharkicons', $this->utils_url->to('/submodules/sharkicons/src/short-classes.min.css'), array(), NULL, 'all');
 
-				wp_enqueue_style(__NAMESPACE__, $this->utils_url->to('/client-s/css/menu-pages.min.css'), $deps, $this->version, 'all');
+				wp_enqueue_style(GLOBAL_NS, $this->utils_url->to('/client-s/css/menu-pages.min.css'), $deps, $this->version, 'all');
 			}
 
 			/**
@@ -1130,7 +1130,7 @@ namespace WebSharks\CommentMail\Pro {
 			 */
 			public function enqueue_admin_scripts()
 			{
-				if(!$this->utils_env->is_menu_page(__NAMESPACE__.'*'))
+				if(!$this->utils_env->is_menu_page(GLOBAL_NS.'*'))
 					return; // Nothing to do; NOT a plugin menu page.
 
 				$deps = array('jquery', 'postbox', 'codemirror', 'google-jsapi-modules', 'chartjs', 'jquery-datetimepicker', 'chosen'); // Dependencies.
@@ -1152,14 +1152,14 @@ namespace WebSharks\CommentMail\Pro {
 				wp_enqueue_script('jquery-datetimepicker', $this->utils_url->to('/submodules/datetimepicker/jquery.datetimepicker.js'), array('jquery'), NULL, TRUE);
 				wp_enqueue_script('chosen', set_url_scheme('//cdnjs.cloudflare.com/ajax/libs/chosen/1.1.0/chosen.jquery.min.js'), array('jquery'), NULL, TRUE);
 
-				wp_enqueue_script(__NAMESPACE__, $this->utils_url->to('/client-s/js/menu-pages.min.js'), $deps, $this->version, TRUE);
+				wp_enqueue_script(GLOBAL_NS, $this->utils_url->to('/client-s/js/menu-pages.min.js'), $deps, $this->version, TRUE);
 
-				wp_localize_script(__NAMESPACE__, __NAMESPACE__.'_vars', array(
+				wp_localize_script(GLOBAL_NS, GLOBAL_NS.'_vars', array(
 					'pluginUrl'    => rtrim($this->utils_url->to('/'), '/'),
 					'ajaxEndpoint' => rtrim($this->utils_url->page_nonce_only(), '/'),
 					'templateSyntaxTheme' => $this->options['template_syntax_theme'],
 				));
-				wp_localize_script(__NAMESPACE__, __NAMESPACE__.'_i18n', array(
+				wp_localize_script(GLOBAL_NS, GLOBAL_NS.'_i18n', array(
 					'bulkReconfirmConfirmation' => __('Resend email confirmation link? Are you sure?', $this->text_domain),
 					'bulkDeleteConfirmation'    => $this->utils_env->is_menu_page('*_event_log')
 						? $this->utils_i18n->log_entry_js_deletion_confirmation_warning()
@@ -1224,8 +1224,8 @@ namespace WebSharks\CommentMail\Pro {
 				$_menu_title                          = $this->name.' <sup style="font-size:60%; line-height:1;">Pro</sup>';
 				$_page_title                          = $this->name.'&trade;';
 				$_menu_position                       = apply_filters(__METHOD__.'_position', '25.00001');
-				$this->menu_page_hooks[__NAMESPACE__] = add_menu_page($_page_title, $_menu_title, $this->cap, __NAMESPACE__, array($this, 'menu_page_options'), 'data:image/svg+xml;base64,'.base64_encode($icon), $_menu_position);
-				add_action('load-'.$this->menu_page_hooks[__NAMESPACE__], array($this, 'menu_page_options_screen'));
+				$this->menu_page_hooks[GLOBAL_NS] = add_menu_page($_page_title, $_menu_title, $this->cap, GLOBAL_NS, array($this, 'menu_page_options'), 'data:image/svg+xml;base64,'.base64_encode($icon), $_menu_position);
+				add_action('load-'.$this->menu_page_hooks[GLOBAL_NS], array($this, 'menu_page_options_screen'));
 
 				unset($_menu_title, $_page_title, $_menu_position); // Housekeeping.
 
@@ -1233,28 +1233,28 @@ namespace WebSharks\CommentMail\Pro {
 
 				$_menu_title = __('Config. Options', $this->text_domain);
 				$_page_title = $this->name.'&trade; &#10609; '.__('Config. Options', $this->text_domain);
-				add_submenu_page(__NAMESPACE__, $_page_title, $_menu_title, $this->cap, __NAMESPACE__, array($this, 'menu_page_options'));
+				add_submenu_page(GLOBAL_NS, $_page_title, $_menu_title, $this->cap, GLOBAL_NS, array($this, 'menu_page_options'));
 
 				$_menu_title                                           = // Visible on-demand only.
 					'<small><em>'.$child_branch_indent.__('Import/Export', $this->text_domain).'</em></small>';
 				$_page_title                                           = $this->name.'&trade; &#10609; '.__('Import/Export', $this->text_domain);
-				//$_menu_parent                                          = $current_menu_page === __NAMESPACE__.'_import_export' ? __NAMESPACE__ : NULL;
-				$this->menu_page_hooks[__NAMESPACE__.'_import_export'] = add_submenu_page(__NAMESPACE__, $_page_title, $_menu_title, $this->cap, __NAMESPACE__.'_import_export', array($this, 'menu_page_import_export'));
-				add_action('load-'.$this->menu_page_hooks[__NAMESPACE__.'_import_export'], array($this, 'menu_page_import_export_screen'));
+				//$_menu_parent                                          = $current_menu_page === GLOBAL_NS.'_import_export' ? GLOBAL_NS : NULL;
+				$this->menu_page_hooks[GLOBAL_NS.'_import_export'] = add_submenu_page(GLOBAL_NS, $_page_title, $_menu_title, $this->cap, GLOBAL_NS.'_import_export', array($this, 'menu_page_import_export'));
+				add_action('load-'.$this->menu_page_hooks[GLOBAL_NS.'_import_export'], array($this, 'menu_page_import_export_screen'));
 
 				$_menu_title                                             = // Visible on-demand only.
 					'<small><em>'.$child_branch_indent.__('Email Templates', $this->text_domain).'</em></small>';
 				$_page_title                                             = $this->name.'&trade; &#10609; '.__('Email Templates', $this->text_domain);
-				//$_menu_parent                                            = $current_menu_page === __NAMESPACE__.'_email_templates' ? __NAMESPACE__ : NULL;
-				$this->menu_page_hooks[__NAMESPACE__.'_email_templates'] = add_submenu_page(__NAMESPACE__, $_page_title, $_menu_title, $this->cap, __NAMESPACE__.'_email_templates', array($this, 'menu_page_email_templates'));
-				add_action('load-'.$this->menu_page_hooks[__NAMESPACE__.'_email_templates'], array($this, 'menu_page_email_templates_screen'));
+				//$_menu_parent                                            = $current_menu_page === GLOBAL_NS.'_email_templates' ? GLOBAL_NS : NULL;
+				$this->menu_page_hooks[GLOBAL_NS.'_email_templates'] = add_submenu_page(GLOBAL_NS, $_page_title, $_menu_title, $this->cap, GLOBAL_NS.'_email_templates', array($this, 'menu_page_email_templates'));
+				add_action('load-'.$this->menu_page_hooks[GLOBAL_NS.'_email_templates'], array($this, 'menu_page_email_templates_screen'));
 
 				$_menu_title                                            = // Visible on-demand only.
 					'<small><em>'.$child_branch_indent.__('Site Templates', $this->text_domain).'</em></small>';
 				$_page_title                                            = $this->name.'&trade; &#10609; '.__('Site Templates', $this->text_domain);
-				//$_menu_parent                                           = $current_menu_page === __NAMESPACE__.'_site_templates' ? __NAMESPACE__ : NULL;
-				$this->menu_page_hooks[__NAMESPACE__.'_site_templates'] = add_submenu_page(__NAMESPACE__, $_page_title, $_menu_title, $this->cap, __NAMESPACE__.'_site_templates', array($this, 'menu_page_site_templates'));
-				add_action('load-'.$this->menu_page_hooks[__NAMESPACE__.'_site_templates'], array($this, 'menu_page_site_templates_screen'));
+				//$_menu_parent                                           = $current_menu_page === GLOBAL_NS.'_site_templates' ? GLOBAL_NS : NULL;
+				$this->menu_page_hooks[GLOBAL_NS.'_site_templates'] = add_submenu_page(GLOBAL_NS, $_page_title, $_menu_title, $this->cap, GLOBAL_NS.'_site_templates', array($this, 'menu_page_site_templates'));
+				add_action('load-'.$this->menu_page_hooks[GLOBAL_NS.'_site_templates'], array($this, 'menu_page_site_templates_screen'));
 
 				unset($_menu_title, $_page_title, $_menu_parent); // Housekeeping.
 
@@ -1262,13 +1262,13 @@ namespace WebSharks\CommentMail\Pro {
 
 				$_menu_title                                  = $divider.__('Subscriptions', $this->text_domain);
 				$_page_title                                  = $this->name.'&trade; &#10609; '.__('Subscriptions', $this->text_domain);
-				$this->menu_page_hooks[__NAMESPACE__.'_subs'] = add_submenu_page(__NAMESPACE__, $_page_title, $_menu_title, $this->manage_cap, __NAMESPACE__.'_subs', array($this, 'menu_page_subs'));
-				add_action('load-'.$this->menu_page_hooks[__NAMESPACE__.'_subs'], array($this, 'menu_page_subs_screen'));
+				$this->menu_page_hooks[GLOBAL_NS.'_subs'] = add_submenu_page(GLOBAL_NS, $_page_title, $_menu_title, $this->manage_cap, GLOBAL_NS.'_subs', array($this, 'menu_page_subs'));
+				add_action('load-'.$this->menu_page_hooks[GLOBAL_NS.'_subs'], array($this, 'menu_page_subs_screen'));
 
 				$_menu_title                                           = $child_branch_indent.__('Event Log', $this->text_domain);
 				$_page_title                                           = $this->name.'&trade; &#10609; '.__('Sub. Event Log', $this->text_domain);
-				$this->menu_page_hooks[__NAMESPACE__.'_sub_event_log'] = add_submenu_page(__NAMESPACE__, $_page_title, $_menu_title, $this->manage_cap, __NAMESPACE__.'_sub_event_log', array($this, 'menu_page_sub_event_log'));
-				add_action('load-'.$this->menu_page_hooks[__NAMESPACE__.'_sub_event_log'], array($this, 'menu_page_sub_event_log_screen'));
+				$this->menu_page_hooks[GLOBAL_NS.'_sub_event_log'] = add_submenu_page(GLOBAL_NS, $_page_title, $_menu_title, $this->manage_cap, GLOBAL_NS.'_sub_event_log', array($this, 'menu_page_sub_event_log'));
+				add_action('load-'.$this->menu_page_hooks[GLOBAL_NS.'_sub_event_log'], array($this, 'menu_page_sub_event_log_screen'));
 
 				unset($_menu_title, $_page_title); // Housekeeping.
 
@@ -1276,13 +1276,13 @@ namespace WebSharks\CommentMail\Pro {
 
 				$_menu_title                                   = $divider.__('Mail Queue', $this->text_domain);
 				$_page_title                                   = $this->name.'&trade; &#10609; '.__('Mail Queue', $this->text_domain);
-				$this->menu_page_hooks[__NAMESPACE__.'_queue'] = add_submenu_page(__NAMESPACE__, $_page_title, $_menu_title, $this->manage_cap, __NAMESPACE__.'_queue', array($this, 'menu_page_queue'));
-				add_action('load-'.$this->menu_page_hooks[__NAMESPACE__.'_queue'], array($this, 'menu_page_queue_screen'));
+				$this->menu_page_hooks[GLOBAL_NS.'_queue'] = add_submenu_page(GLOBAL_NS, $_page_title, $_menu_title, $this->manage_cap, GLOBAL_NS.'_queue', array($this, 'menu_page_queue'));
+				add_action('load-'.$this->menu_page_hooks[GLOBAL_NS.'_queue'], array($this, 'menu_page_queue_screen'));
 
 				$_menu_title                                             = $child_branch_indent.__('Event Log', $this->text_domain);
 				$_page_title                                             = $this->name.'&trade; &#10609; '.__('Queue Event Log', $this->text_domain);
-				$this->menu_page_hooks[__NAMESPACE__.'_queue_event_log'] = add_submenu_page(__NAMESPACE__, $_page_title, $_menu_title, $this->manage_cap, __NAMESPACE__.'_queue_event_log', array($this, 'menu_page_queue_event_log'));
-				add_action('load-'.$this->menu_page_hooks[__NAMESPACE__.'_queue_event_log'], array($this, 'menu_page_queue_event_log_screen'));
+				$this->menu_page_hooks[GLOBAL_NS.'_queue_event_log'] = add_submenu_page(GLOBAL_NS, $_page_title, $_menu_title, $this->manage_cap, GLOBAL_NS.'_queue_event_log', array($this, 'menu_page_queue_event_log'));
+				add_action('load-'.$this->menu_page_hooks[GLOBAL_NS.'_queue_event_log'], array($this, 'menu_page_queue_event_log_screen'));
 
 				unset($_menu_title, $_page_title); // Housekeeping.
 
@@ -1290,8 +1290,8 @@ namespace WebSharks\CommentMail\Pro {
 
 				$_menu_title                                   = $divider.__('Statistics/Charts', $this->text_domain);
 				$_page_title                                   = $this->name.'&trade; &#10609; '.__('Statistics/Charts', $this->text_domain);
-				$this->menu_page_hooks[__NAMESPACE__.'_stats'] = add_submenu_page(__NAMESPACE__, $_page_title, $_menu_title, $this->manage_cap, __NAMESPACE__.'_stats', array($this, 'menu_page_stats'));
-				add_action('load-'.$this->menu_page_hooks[__NAMESPACE__.'_stats'], array($this, 'menu_page_stats_screen'));
+				$this->menu_page_hooks[GLOBAL_NS.'_stats'] = add_submenu_page(GLOBAL_NS, $_page_title, $_menu_title, $this->manage_cap, GLOBAL_NS.'_stats', array($this, 'menu_page_stats'));
+				add_action('load-'.$this->menu_page_hooks[GLOBAL_NS.'_stats'], array($this, 'menu_page_stats_screen'));
 
 				unset($_menu_title, $_page_title); // Housekeeping.
 
@@ -1299,8 +1299,8 @@ namespace WebSharks\CommentMail\Pro {
 
 				$_menu_title                                         = $divider.__('Pro Updater', $this->text_domain);
 				$_page_title                                         = $this->name.'&trade; &#10609; '.__('Pro Updater', $this->text_domain);
-				$this->menu_page_hooks[__NAMESPACE__.'_pro_updater'] = add_submenu_page(__NAMESPACE__, $_page_title, $_menu_title, $this->update_cap, __NAMESPACE__.'_pro_updater', array($this, 'menu_page_pro_updater'));
-				add_action('load-'.$this->menu_page_hooks[__NAMESPACE__.'_pro_updater'], array($this, 'menu_page_pro_updater_screen'));
+				$this->menu_page_hooks[GLOBAL_NS.'_pro_updater'] = add_submenu_page(GLOBAL_NS, $_page_title, $_menu_title, $this->update_cap, GLOBAL_NS.'_pro_updater', array($this, 'menu_page_pro_updater'));
+				add_action('load-'.$this->menu_page_hooks[GLOBAL_NS.'_pro_updater'], array($this, 'menu_page_pro_updater_screen'));
 
 				unset($_menu_title, $_page_title); // Housekeeping.
 			}
@@ -1324,7 +1324,7 @@ namespace WebSharks\CommentMail\Pro {
 			 */
 			public function set_screen_option($what_wp_says, $option, $value)
 			{
-				if(strpos($option, __NAMESPACE__.'_') === 0)
+				if(strpos($option, GLOBAL_NS.'_') === 0)
 					return $value; // Yes, save this.
 
 				return $what_wp_says;
@@ -1335,7 +1335,7 @@ namespace WebSharks\CommentMail\Pro {
 			 *
 			 * @since 141111 First documented version.
 			 *
-			 * @attaches-to `'load-'.$this->menu_page_hooks[__NAMESPACE__]` action.
+			 * @attaches-to `'load-'.$this->menu_page_hooks[GLOBAL_NS]` action.
 			 *
 			 * @see add_menu_pages()
 			 */
@@ -1345,8 +1345,8 @@ namespace WebSharks\CommentMail\Pro {
 				if(!($screen instanceof \WP_Screen))
 					return; // Not possible.
 
-				if(empty($this->menu_page_hooks[__NAMESPACE__])
-				   || $screen->id !== $this->menu_page_hooks[__NAMESPACE__]
+				if(empty($this->menu_page_hooks[GLOBAL_NS])
+				   || $screen->id !== $this->menu_page_hooks[GLOBAL_NS]
 				) return; // Not applicable.
 
 				return; // No screen for this page right now.
@@ -1369,7 +1369,7 @@ namespace WebSharks\CommentMail\Pro {
 			 *
 			 * @since 141111 First documented version.
 			 *
-			 * @attaches-to `'load-'.$this->menu_page_hooks[__NAMESPACE__.'_subs']` action.
+			 * @attaches-to `'load-'.$this->menu_page_hooks[GLOBAL_NS.'_subs']` action.
 			 *
 			 * @see add_menu_pages()
 			 * @see subs_table::get_hidden_columns()
@@ -1380,14 +1380,14 @@ namespace WebSharks\CommentMail\Pro {
 				if(!($screen instanceof \WP_Screen))
 					return; // Not possible.
 
-				if(empty($this->menu_page_hooks[__NAMESPACE__.'_subs'])
-				   || $screen->id !== $this->menu_page_hooks[__NAMESPACE__.'_subs']
+				if(empty($this->menu_page_hooks[GLOBAL_NS.'_subs'])
+				   || $screen->id !== $this->menu_page_hooks[GLOBAL_NS.'_subs']
 				) return; // Not applicable.
 
 				add_screen_option('per_page', array(
 					'default' => '20', // Default items per page.
 					'label'   => __('Per Page', $this->text_domain),
-					'option'  => __NAMESPACE__.'_subs_per_page',
+					'option'  => GLOBAL_NS.'_subs_per_page',
 				));
 				add_filter('manage_'.$screen->id.'_columns', function ()
 				{
@@ -1416,7 +1416,7 @@ namespace WebSharks\CommentMail\Pro {
 			 *
 			 * @since 141111 First documented version.
 			 *
-			 * @attaches-to `'load-'.$this->menu_page_hooks[__NAMESPACE__.'_subs']` action.
+			 * @attaches-to `'load-'.$this->menu_page_hooks[GLOBAL_NS.'_subs']` action.
 			 *
 			 * @see add_menu_pages()
 			 * @see subs_table::get_hidden_columns()
@@ -1427,14 +1427,14 @@ namespace WebSharks\CommentMail\Pro {
 				if(!($screen instanceof \WP_Screen))
 					return; // Not possible.
 
-				if(empty($this->menu_page_hooks[__NAMESPACE__.'_sub_event_log'])
-				   || $screen->id !== $this->menu_page_hooks[__NAMESPACE__.'_sub_event_log']
+				if(empty($this->menu_page_hooks[GLOBAL_NS.'_sub_event_log'])
+				   || $screen->id !== $this->menu_page_hooks[GLOBAL_NS.'_sub_event_log']
 				) return; // Not applicable.
 
 				add_screen_option('per_page', array(
 					'default' => '20', // Default items per page.
 					'label'   => __('Per Page', $this->text_domain),
-					'option'  => __NAMESPACE__.'_sub_event_log_entries_per_page',
+					'option'  => GLOBAL_NS.'_sub_event_log_entries_per_page',
 				));
 				add_filter('manage_'.$screen->id.'_columns', function ()
 				{
@@ -1463,7 +1463,7 @@ namespace WebSharks\CommentMail\Pro {
 			 *
 			 * @since 141111 First documented version.
 			 *
-			 * @attaches-to `'load-'.$this->menu_page_hooks[__NAMESPACE__.'_queue']` action.
+			 * @attaches-to `'load-'.$this->menu_page_hooks[GLOBAL_NS.'_queue']` action.
 			 *
 			 * @see add_menu_pages()
 			 */
@@ -1473,14 +1473,14 @@ namespace WebSharks\CommentMail\Pro {
 				if(!($screen instanceof \WP_Screen))
 					return; // Not possible.
 
-				if(empty($this->menu_page_hooks[__NAMESPACE__.'_queue'])
-				   || $screen->id !== $this->menu_page_hooks[__NAMESPACE__.'_queue']
+				if(empty($this->menu_page_hooks[GLOBAL_NS.'_queue'])
+				   || $screen->id !== $this->menu_page_hooks[GLOBAL_NS.'_queue']
 				) return; // Not applicable.
 
 				add_screen_option('per_page', array(
 					'default' => '20', // Default items per page.
 					'label'   => __('Per Page', $this->text_domain),
-					'option'  => __NAMESPACE__.'_queued_notifications_per_page',
+					'option'  => GLOBAL_NS.'_queued_notifications_per_page',
 				));
 				add_filter('manage_'.$screen->id.'_columns', function ()
 				{
@@ -1509,7 +1509,7 @@ namespace WebSharks\CommentMail\Pro {
 			 *
 			 * @since 141111 First documented version.
 			 *
-			 * @attaches-to `'load-'.$this->menu_page_hooks[__NAMESPACE__.'_queue_event_log']` action.
+			 * @attaches-to `'load-'.$this->menu_page_hooks[GLOBAL_NS.'_queue_event_log']` action.
 			 *
 			 * @see add_menu_pages()
 			 */
@@ -1519,14 +1519,14 @@ namespace WebSharks\CommentMail\Pro {
 				if(!($screen instanceof \WP_Screen))
 					return; // Not possible.
 
-				if(empty($this->menu_page_hooks[__NAMESPACE__.'_queue_event_log'])
-				   || $screen->id !== $this->menu_page_hooks[__NAMESPACE__.'_queue_event_log']
+				if(empty($this->menu_page_hooks[GLOBAL_NS.'_queue_event_log'])
+				   || $screen->id !== $this->menu_page_hooks[GLOBAL_NS.'_queue_event_log']
 				) return; // Not applicable.
 
 				add_screen_option('per_page', array(
 					'default' => '20', // Default items per page.
 					'label'   => __('Per Page', $this->text_domain),
-					'option'  => __NAMESPACE__.'_queue_event_log_entries_per_page',
+					'option'  => GLOBAL_NS.'_queue_event_log_entries_per_page',
 				));
 				add_filter('manage_'.$screen->id.'_columns', function ()
 				{
@@ -1555,7 +1555,7 @@ namespace WebSharks\CommentMail\Pro {
 			 *
 			 * @since 141111 First documented version.
 			 *
-			 * @attaches-to `'load-'.$this->menu_page_hooks[__NAMESPACE__.'_stats']` action.
+			 * @attaches-to `'load-'.$this->menu_page_hooks[GLOBAL_NS.'_stats']` action.
 			 *
 			 * @see add_menu_pages()
 			 */
@@ -1565,8 +1565,8 @@ namespace WebSharks\CommentMail\Pro {
 				if(!($screen instanceof \WP_Screen))
 					return; // Not possible.
 
-				if(empty($this->menu_page_hooks[__NAMESPACE__.'_stats'])
-				   || $screen->id !== $this->menu_page_hooks[__NAMESPACE__.'_stats']
+				if(empty($this->menu_page_hooks[GLOBAL_NS.'_stats'])
+				   || $screen->id !== $this->menu_page_hooks[GLOBAL_NS.'_stats']
 				) return; // Not applicable.
 
 				return; // No screen for this page right now.
@@ -1589,7 +1589,7 @@ namespace WebSharks\CommentMail\Pro {
 			 *
 			 * @since 141111 First documented version.
 			 *
-			 * @attaches-to `'load-'.$this->menu_page_hooks[__NAMESPACE__.'_pro_updater']` action.
+			 * @attaches-to `'load-'.$this->menu_page_hooks[GLOBAL_NS.'_pro_updater']` action.
 			 *
 			 * @see add_menu_pages()
 			 */
@@ -1599,8 +1599,8 @@ namespace WebSharks\CommentMail\Pro {
 				if(!($screen instanceof \WP_Screen))
 					return; // Not possible.
 
-				if(empty($this->menu_page_hooks[__NAMESPACE__.'_pro_updater'])
-				   || $screen->id !== $this->menu_page_hooks[__NAMESPACE__.'_pro_updater']
+				if(empty($this->menu_page_hooks[GLOBAL_NS.'_pro_updater'])
+				   || $screen->id !== $this->menu_page_hooks[GLOBAL_NS.'_pro_updater']
 				) return; // Not applicable.
 
 				return; // No screen for this page right now.
@@ -1623,7 +1623,7 @@ namespace WebSharks\CommentMail\Pro {
 			 *
 			 * @since 141111 First documented version.
 			 *
-			 * @attaches-to `'load-'.$this->menu_page_hooks[__NAMESPACE__.'_import_export']` action.
+			 * @attaches-to `'load-'.$this->menu_page_hooks[GLOBAL_NS.'_import_export']` action.
 			 *
 			 * @see add_menu_pages()
 			 */
@@ -1633,8 +1633,8 @@ namespace WebSharks\CommentMail\Pro {
 				if(!($screen instanceof \WP_Screen))
 					return; // Not possible.
 
-				if(empty($this->menu_page_hooks[__NAMESPACE__.'_import_export'])
-				   || $screen->id !== $this->menu_page_hooks[__NAMESPACE__.'_import_export']
+				if(empty($this->menu_page_hooks[GLOBAL_NS.'_import_export'])
+				   || $screen->id !== $this->menu_page_hooks[GLOBAL_NS.'_import_export']
 				) return; // Not applicable.
 
 				return; // No screen for this page right now.
@@ -1657,7 +1657,7 @@ namespace WebSharks\CommentMail\Pro {
 			 *
 			 * @since 141111 First documented version.
 			 *
-			 * @attaches-to `'load-'.$this->menu_page_hooks[__NAMESPACE__.'_email_templates']` action.
+			 * @attaches-to `'load-'.$this->menu_page_hooks[GLOBAL_NS.'_email_templates']` action.
 			 *
 			 * @see add_menu_pages()
 			 */
@@ -1667,8 +1667,8 @@ namespace WebSharks\CommentMail\Pro {
 				if(!($screen instanceof \WP_Screen))
 					return; // Not possible.
 
-				if(empty($this->menu_page_hooks[__NAMESPACE__.'_email_templates'])
-				   || $screen->id !== $this->menu_page_hooks[__NAMESPACE__.'_email_templates']
+				if(empty($this->menu_page_hooks[GLOBAL_NS.'_email_templates'])
+				   || $screen->id !== $this->menu_page_hooks[GLOBAL_NS.'_email_templates']
 				) return; // Not applicable.
 
 				return; // No screen for this page right now.
@@ -1691,7 +1691,7 @@ namespace WebSharks\CommentMail\Pro {
 			 *
 			 * @since 141111 First documented version.
 			 *
-			 * @attaches-to `'load-'.$this->menu_page_hooks[__NAMESPACE__.'_site_templates']` action.
+			 * @attaches-to `'load-'.$this->menu_page_hooks[GLOBAL_NS.'_site_templates']` action.
 			 *
 			 * @see add_menu_pages()
 			 */
@@ -1701,8 +1701,8 @@ namespace WebSharks\CommentMail\Pro {
 				if(!($screen instanceof \WP_Screen))
 					return; // Not possible.
 
-				if(empty($this->menu_page_hooks[__NAMESPACE__.'_site_templates'])
-				   || $screen->id !== $this->menu_page_hooks[__NAMESPACE__.'_site_templates']
+				if(empty($this->menu_page_hooks[GLOBAL_NS.'_site_templates'])
+				   || $screen->id !== $this->menu_page_hooks[GLOBAL_NS.'_site_templates']
 				) return; // Not applicable.
 
 				return; // No screen for this page right now.
@@ -1845,10 +1845,10 @@ namespace WebSharks\CommentMail\Pro {
 			    if(empty($_r['_wpnonce']) || !wp_verify_nonce((string) $_r['_wpnonce'], 'upgrade-plugin_'.plugin_basename($this->file)))
 			        return $transient; // Nothing to doe.
 
-			    if(empty($_r[__NAMESPACE__.'_update_pro_version']) || !($update_pro_version = (string) $_r[__NAMESPACE__.'_update_pro_version']))
+			    if(empty($_r[GLOBAL_NS.'_update_pro_version']) || !($update_pro_version = (string) $_r[GLOBAL_NS.'_update_pro_version']))
 			        return $transient; // Nothing to do.
 
-			    if(empty($_r[__NAMESPACE__.'_update_pro_zip']) || !($update_pro_zip = base64_decode((string) $_r[__NAMESPACE__.'_update_pro_zip'], true)))
+			    if(empty($_r[GLOBAL_NS.'_update_pro_zip']) || !($update_pro_zip = base64_decode((string) $_r[GLOBAL_NS.'_update_pro_zip'], true)))
 			        return $transient; // Nothing to do.
 
 			    if(!is_object($transient)) $transient = new \stdClass();
@@ -1886,17 +1886,17 @@ namespace WebSharks\CommentMail\Pro {
 				if (empty($_r['action']) || $_r['action'] !== 'upgrade-plugin')
 					return $types; // Nothing to do here.
 
-				if (empty($_r[__NAMESPACE__.'_update_pro_version']) || !($update_pro_version = (string) $_r[__NAMESPACE__.'_update_pro_version']))
+				if (empty($_r[GLOBAL_NS.'_update_pro_version']) || !($update_pro_version = (string) $_r[GLOBAL_NS.'_update_pro_version']))
 					return $types; // Nothing to do here.
 
-				if (empty($_r[__NAMESPACE__.'_update_pro_zip']) || !($update_pro_zip = (string) $_r[__NAMESPACE__.'_update_pro_zip']))
+				if (empty($_r[GLOBAL_NS.'_update_pro_zip']) || !($update_pro_zip = (string) $_r[GLOBAL_NS.'_update_pro_zip']))
 					return $types; // Nothing to do here.
 
 				echo '<script type="text/javascript">';
 				echo '   (function($){ $(document).ready(function(){';
 				echo '      var $form = $(\'input#hostname\').closest(\'form\');';
-				echo '      $form.append(\'<input type="hidden" name="'.esc_attr(__NAMESPACE__.'_update_pro_version').'" value="'.esc_attr($update_pro_version).'" />\');';
-				echo '      $form.append(\'<input type="hidden" name="'.esc_attr(__NAMESPACE__.'_update_pro_zip').'" value="'.esc_attr($update_pro_zip).'" />\');';
+				echo '      $form.append(\'<input type="hidden" name="'.esc_attr(GLOBAL_NS.'_update_pro_version').'" value="'.esc_attr($update_pro_version).'" />\');';
+				echo '      $form.append(\'<input type="hidden" name="'.esc_attr(GLOBAL_NS.'_update_pro_zip').'" value="'.esc_attr($update_pro_zip).'" />\');';
 				echo '   }); })(jQuery);';
 				echo '</script>';
 
@@ -1953,14 +1953,14 @@ namespace WebSharks\CommentMail\Pro {
 				ksort($args); // Sort args (by key) for key generation.
 				$key = $this->utils_enc->hmac_sha256_sign(serialize($args));
 
-				if(!is_array($notices = get_option(__NAMESPACE__.'_notices')))
+				if(!is_array($notices = get_option(GLOBAL_NS.'_notices')))
 					$notices = array(); // Force an array of notices.
 
 				if($args['push_to_top']) // Push this notice to the top?
 					$this->utils_array->unshift_assoc($notices, $key, $args);
 				else $notices[$key] = $args; // Default behavior.
 
-				update_option(__NAMESPACE__.'_notices', $notices);
+				update_option(GLOBAL_NS.'_notices', $notices);
 			}
 
 			/**
@@ -2034,8 +2034,8 @@ namespace WebSharks\CommentMail\Pro {
 				  $this->enqueue_warning(sprintf(__('<strong>%1$s is disabled. Please visit the <a href="%2$s">settings</a> and enable the plugin</strong>.', $this->text_domain), esc_html($this->name), esc_attr($this->utils_url->main_menu_page_only())));
 				}
 
-				if(!is_array($notices = get_option(__NAMESPACE__.'_notices')))
-					update_option(__NAMESPACE__.'_notices', ($notices = array()));
+				if(!is_array($notices = get_option(GLOBAL_NS.'_notices')))
+					update_option(GLOBAL_NS.'_notices', ($notices = array()));
 
 				if(!$notices) return; // Nothing more to do in this case.
 
@@ -2132,7 +2132,7 @@ namespace WebSharks\CommentMail\Pro {
 				}
 				unset($_key, $_args, $_dismiss_style, $_dismiss_url, $_dismiss, $_classes, $_full_markup); // Housekeeping.
 
-				if($original_notices !== $notices) update_option(__NAMESPACE__.'_notices', $notices);
+				if($original_notices !== $notices) update_option(GLOBAL_NS.'_notices', $notices);
 			}
 
 			/*
@@ -2508,7 +2508,7 @@ namespace WebSharks\CommentMail\Pro {
 			 *
 			 * @since 141111 First documented version.
 			 *
-			 * @attaches-to `_cron_'.__NAMESPACE__.'_queue_processor` action.
+			 * @attaches-to `_cron_'.GLOBAL_NS.'_queue_processor` action.
 			 */
 			public function queue_processor()
 			{
@@ -2520,7 +2520,7 @@ namespace WebSharks\CommentMail\Pro {
 			 *
 			 * @since 141111 First documented version.
 			 *
-			 * @attaches-to `_cron_'.__NAMESPACE__.'_sub_cleaner` action.
+			 * @attaches-to `_cron_'.GLOBAL_NS.'_sub_cleaner` action.
 			 */
 			public function sub_cleaner()
 			{
@@ -2532,7 +2532,7 @@ namespace WebSharks\CommentMail\Pro {
 			 *
 			 * @since 141111 First documented version.
 			 *
-			 * @attaches-to `_cron_'.__NAMESPACE__.'_log_cleaner` action.
+			 * @attaches-to `_cron_'.GLOBAL_NS.'_log_cleaner` action.
 			 */
 			public function log_cleaner()
 			{
@@ -2554,7 +2554,7 @@ namespace WebSharks\CommentMail\Pro {
 		 */
 		function plugin() // Easy reference.
 		{
-			return $GLOBALS[__NAMESPACE__];
+			return $GLOBALS[GLOBAL_NS];
 		}
 
 		/*
@@ -2568,8 +2568,8 @@ namespace WebSharks\CommentMail\Pro {
 		 *
 		 * @var plugin Main plugin class.
 		 */
-		if(!isset($GLOBALS[__NAMESPACE__.'_autoload_plugin']) || $GLOBALS[__NAMESPACE__.'_autoload_plugin'])
-			$GLOBALS[__NAMESPACE__] = new plugin(); // Load plugin automatically.
+		if(!isset($GLOBALS[GLOBAL_NS.'_autoload_plugin']) || $GLOBALS[GLOBAL_NS.'_autoload_plugin'])
+			$GLOBALS[GLOBAL_NS] = new plugin(); // Load plugin automatically.
 	}
 
 	/*
@@ -2577,12 +2577,12 @@ namespace WebSharks\CommentMail\Pro {
 	 *    Assume both lite/pro are running in this case.
 	 */
 
-	else if(empty($GLOBALS[__NAMESPACE__.'_uninstalling'])) add_action('all_admin_notices', function ()
+	else if(empty($GLOBALS[GLOBAL_NS.'_uninstalling'])) add_action('all_admin_notices', function ()
 	{
 		echo '<div class="error">'. // Notify the site owner.
 		     '   <p>'.
 		     '      '.sprintf(__('Please disable the lite version of <code>%1$s</code> before activating the pro version.',
-		                         str_replace('_', '-', __NAMESPACE__)), esc_html(str_replace('_', '-', __NAMESPACE__))).
+		                         str_replace('_', '-', GLOBAL_NS)), esc_html(str_replace('_', '-', GLOBAL_NS))).
 		     '   </p>'.
 		     '</div>';
 	});

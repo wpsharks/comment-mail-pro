@@ -19,7 +19,7 @@ namespace WebSharks\CommentMail\Pro
 		 * @since 141111 First documented version.
 		 *
 		 * @note (front|back)-end actions share the SAME namespace.
-		 *    i.e. `$_REQUEST[__NAMESPACE__][action]`, where `action` should be unique
+		 *    i.e. `$_REQUEST[GLOBAL_NS][action]`, where `action` should be unique
 		 *    across any/all (front|back)-end action handlers.
 		 *
 		 *    This limitation applies only within each classification (context).
@@ -53,7 +53,7 @@ namespace WebSharks\CommentMail\Pro
 				if(is_admin())
 					return; // Not applicable.
 
-				if(empty($_REQUEST[__NAMESPACE__]))
+				if(empty($_REQUEST[GLOBAL_NS]))
 					return; // Nothing to do.
 
 				new sso_actions();
@@ -69,7 +69,7 @@ namespace WebSharks\CommentMail\Pro
 				if(is_admin())
 					return; // Not applicable.
 
-				if(empty($_REQUEST[__NAMESPACE__]))
+				if(empty($_REQUEST[GLOBAL_NS]))
 					return; // Nothing to do.
 
 				new sub_actions();
@@ -85,7 +85,7 @@ namespace WebSharks\CommentMail\Pro
 				if(is_admin())
 					return; // Not applicable.
 
-				if(empty($_REQUEST[__NAMESPACE__]))
+				if(empty($_REQUEST[GLOBAL_NS]))
 					return; // Nothing to do.
 
 				new webhook_actions();
@@ -101,7 +101,7 @@ namespace WebSharks\CommentMail\Pro
 				if(!is_admin())
 					return; // Not applicable.
 
-				if(empty($_REQUEST[__NAMESPACE__]))
+				if(empty($_REQUEST[GLOBAL_NS]))
 					return; // Nothing to do.
 
 				new menu_page_actions();

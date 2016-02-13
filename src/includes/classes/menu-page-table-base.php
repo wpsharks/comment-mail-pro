@@ -155,7 +155,7 @@ namespace WebSharks\CommentMail\Pro
 				$args = array(
 					'singular' => $this->singular_name, 'plural' => $this->plural_name,
 					'screen'   => !empty($args['screen']) ? (string)$args['screen']
-						: $this->plugin->menu_page_hooks[__NAMESPACE__.'_'.$this->plural_name],
+						: $this->plugin->menu_page_hooks[GLOBAL_NS.'_'.$this->plural_name],
 				);
 				parent::__construct($args); // Parent constructor.
 

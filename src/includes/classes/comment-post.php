@@ -77,18 +77,18 @@ namespace WebSharks\CommentMail\Pro
 				if(!$this->comment_id)
 					return; // Not applicable.
 
-				if(empty($_POST[__NAMESPACE__.'_sub_type']))
+				if(empty($_POST[GLOBAL_NS.'_sub_type']))
 					return; // Not applicable.
 
-				$sub_type = (string)$_POST[__NAMESPACE__.'_sub_type'];
+				$sub_type = (string)$_POST[GLOBAL_NS.'_sub_type'];
 				if(!($sub_type = $this->plugin->utils_string->trim_strip($sub_type)))
 					return; // Not applicable.
 
-				$sub_deliver = !empty($_POST[__NAMESPACE__.'_sub_deliver'])
-					? (string)$_POST[__NAMESPACE__.'_sub_deliver']
+				$sub_deliver = !empty($_POST[GLOBAL_NS.'_sub_deliver'])
+					? (string)$_POST[GLOBAL_NS.'_sub_deliver']
 					: $this->plugin->options['comment_form_default_sub_deliver_option'];
 
-				$sub_list = (boolean)@$_POST[__NAMESPACE__.'_sub_list'];
+				$sub_list = (boolean)@$_POST[GLOBAL_NS.'_sub_list'];
 
 				new sub_injector(wp_get_current_user(), $this->comment_id, array(
 					'type'                => $sub_type,

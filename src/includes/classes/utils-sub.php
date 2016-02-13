@@ -1140,13 +1140,13 @@ namespace WebSharks\CommentMail\Pro
 					if(!$sub_key || !in_array($sub_key, $this->email_keys($sub_email), TRUE))
 						throw new \exception(__('Key-to-email mismatch; possible security issue.', $this->plugin->text_domain));
 
-					if(is_admin() || (!isset($_REQUEST[__NAMESPACE__]['confirm']) && !isset($_REQUEST[__NAMESPACE__]['unsubscribe']) && !isset($_REQUEST[__NAMESPACE__]['manage'])))
+					if(is_admin() || (!isset($_REQUEST[GLOBAL_NS]['confirm']) && !isset($_REQUEST[GLOBAL_NS]['unsubscribe']) && !isset($_REQUEST[GLOBAL_NS]['manage'])))
 						throw new \exception(__('Trying to set current email w/o a user-initiated sub. action.', $this->plugin->text_domain));
 				}
 				// Cookie is ONLY set for subscribers that received a secret `key` in one way or another.
 				// A subscriber only receives a secret key if we can confirm they own the email associated w/ it.
 				// ~ Note also that this cookie is encrypted via `MCRYPT_RIJNDAEL_256` w/ a unique salt.
-				$this->plugin->utils_enc->set_cookie(__NAMESPACE__.'_sub_email', $sub_email);
+				$this->plugin->utils_enc->set_cookie(GLOBAL_NS.'_sub_email', $sub_email);
 			}
 
 			/**
@@ -1165,7 +1165,7 @@ namespace WebSharks\CommentMail\Pro
 				// Cookie is ONLY set for subscribers that received a secret `key` in one way or another.
 				// A subscriber only receives a secret key if we can confirm they own the email associated w/ it.
 				// ~ Note also that this cookie is encrypted via `MCRYPT_RIJNDAEL_256` w/ a unique salt.
-				if(($sub_email = $this->plugin->utils_enc->get_cookie(__NAMESPACE__.'_sub_email')))
+				if(($sub_email = $this->plugin->utils_enc->get_cookie(GLOBAL_NS.'_sub_email')))
 					return trim(strtolower((string)$sub_email));
 
 				return ''; // Not possible.

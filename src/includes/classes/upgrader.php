@@ -52,7 +52,7 @@ namespace WebSharks\CommentMail\Pro
 					return; // Nothing to do; already @ latest version.
 
 				$this->plugin->options['version'] = $this->plugin->version;
-				update_option(__NAMESPACE__.'_options', $this->plugin->options);
+				update_option(GLOBAL_NS.'_options', $this->plugin->options);
 
 				new upgrader_vs($this->prev_version); // Run version-specific upgrader(s).
 

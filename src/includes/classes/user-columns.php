@@ -45,7 +45,7 @@ namespace WebSharks\CommentMail\Pro
           return $columns; // Not applicable.
 
         if($this->plugin->options['sso_enable'])
-          $columns[__NAMESPACE__.'_sso_services'] = __('SSO Service', $this->plugin->text_domain);
+          $columns[GLOBAL_NS.'_sso_services'] = __('SSO Service', $this->plugin->text_domain);
 
         return $columns;
       }
@@ -63,8 +63,8 @@ namespace WebSharks\CommentMail\Pro
        */
       public function maybe_fill($value, $column, $user_id)
       {
-        if ($column === __NAMESPACE__.'_sso_services') {
-          $user_sso_services = get_user_option(__NAMESPACE__.'_sso_services', $user_id);
+        if ($column === GLOBAL_NS.'_sso_services') {
+          $user_sso_services = get_user_option(GLOBAL_NS.'_sso_services', $user_id);
           $user_sso_services = is_array($user_sso_services) ? $user_sso_services : array();
           $value = $user_sso_services ? implode(', ', $user_sso_services) : '—';
         }

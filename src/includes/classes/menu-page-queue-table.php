@@ -38,7 +38,7 @@ namespace WebSharks\CommentMail\Pro
 					'plural_name'    => 'queued_notifications',
 					'singular_label' => __('queued notification', $plugin->text_domain),
 					'plural_label'   => __('queued notifications', $plugin->text_domain),
-					'screen'         => $plugin->menu_page_hooks[__NAMESPACE__.'_queue'],
+					'screen'         => $plugin->menu_page_hooks[GLOBAL_NS.'_queue'],
 				);
 				parent::__construct($args); // Parent constructor.
 			}

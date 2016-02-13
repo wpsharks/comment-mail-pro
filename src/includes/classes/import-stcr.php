@@ -128,12 +128,12 @@ namespace WebSharks\CommentMail\Pro
 				if(!current_user_can($this->plugin->cap))
 					return; // Unauthenticated; ignore.
 
-				foreach(($notices = is_array($notices = get_option(__NAMESPACE__.'_notices')) ? $notices : array()) as $_key => $_notice)
+				foreach(($notices = is_array($notices = get_option(GLOBAL_NS.'_notices')) ? $notices : array()) as $_key => $_notice)
 					if(!empty($_notice['persistent_id']) && $_notice['persistent_id'] === 'upgrading-from-stcr')
 						unset($notices[$_key]); // Remove this one! :-)
 				unset($_key, $_notice); // Housekeeping.
 
-				update_option(__NAMESPACE__.'_notices', $notices); // Update notices.
+				update_option(GLOBAL_NS.'_notices', $notices); // Update notices.
 
 				foreach($this->unimported_post_ids as $_post_id)
 				{
@@ -160,7 +160,7 @@ namespace WebSharks\CommentMail\Pro
 				if(!($post_id = (integer)$post_id))
 					return; // Nothing to do.
 
-				update_post_meta($post_id, __NAMESPACE__.'_imported_stcr_subs', '1');
+				update_post_meta($post_id, GLOBAL_NS.'_imported_stcr_subs', '1');
 			}
 
 			/**
@@ -436,7 +436,7 @@ namespace WebSharks\CommentMail\Pro
 
 				$post_ids_imported_already = // Those already imported by this class.
 				"SELECT DISTINCT `post_id` FROM `".esc_sql($this->plugin->utils_db->wp->postmeta)."`".
-				" WHERE `meta_key` = '".esc_sql(__NAMESPACE__.'_imported_stcr_subs')."'";
+				" WHERE `meta_key` = '".esc_sql(GLOBAL_NS.'_imported_stcr_subs')."'";
 
 				$sql = "SELECT `ID` FROM `".esc_sql($this->plugin->utils_db->wp->posts)."`".
 
@@ -471,7 +471,7 @@ namespace WebSharks\CommentMail\Pro
 
 				$child_status_request_args = array(
 				$child_status_var => 1, // Child process identifier.
-				__NAMESPACE__     => array('import' => array('type' => 'stcr')),
+				GLOBAL_NS     => array('import' => array('type' => 'stcr')),
 				);
 				$child_status_url          = $this->plugin->utils_url->nonce();
 				$child_status_url          = add_query_arg(urlencode_deep($child_status_request_args), $child_status_url);
@@ -628,7 +628,7 @@ namespace WebSharks\CommentMail\Pro
 				$plugin = plugin(); // Need this below.
 
 				$like = // e.g. LIKE `%comment\_mail\_imported\_stcr\_subs%`.
-				'%'.$plugin->utils_db->wp->esc_like(__NAMESPACE__.'_imported_stcr_subs').'%';
+				'%'.$plugin->utils_db->wp->esc_like(GLOBAL_NS.'_imported_stcr_subs').'%';
 
 				$sql = "SELECT `meta_id` FROM `".esc_sql($plugin->utils_db->wp->postmeta)."`".
 					   " WHERE `meta_key` LIKE '".esc_sql($like)."' LIMIT 1";
@@ -646,7 +646,7 @@ namespace WebSharks\CommentMail\Pro
 				$plugin = plugin(); // Need this below.
 
 				$like = // e.g. Delete all keys LIKE `%comment\_mail%`.
-				'%'.$plugin->utils_db->wp->esc_like(__NAMESPACE__.'_imported_stcr_subs').'%';
+				'%'.$plugin->utils_db->wp->esc_like(GLOBAL_NS.'_imported_stcr_subs').'%';
 
 				$sql = // This will remove our StCR import history also.
 				"DELETE FROM `".esc_sql($plugin->utils_db->wp->postmeta)."`".

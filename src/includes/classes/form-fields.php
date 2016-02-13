@@ -116,7 +116,7 @@ namespace WebSharks\CommentMail\Pro
 				$slug = $root_name ? 'root-'.$slug : $slug;
 
 				$id   = $this->plugin->slug.$this->ns_id_suffix.'-'.$slug;
-				$name = $root_name ? $name : __NAMESPACE__.$this->ns_name_suffix.'['.$name.']';
+				$name = $root_name ? $name : GLOBAL_NS.$this->ns_name_suffix.'['.$name.']';
 
 				$required                 = (boolean)$args['required'];
 				$maxlength                = (integer)$args['maxlength'];
@@ -241,7 +241,7 @@ namespace WebSharks\CommentMail\Pro
 				$slug = $root_name ? 'root-'.$slug : $slug;
 
 				$id   = $this->plugin->slug.$this->ns_id_suffix.'-'.$slug;
-				$name = $root_name ? $name : __NAMESPACE__.$this->ns_name_suffix.'['.$name.']';
+				$name = $root_name ? $name : GLOBAL_NS.$this->ns_name_suffix.'['.$name.']';
 
 				$rows                     = (integer)$args['rows'];
 				$required                 = (boolean)$args['required'];
@@ -375,7 +375,7 @@ namespace WebSharks\CommentMail\Pro
 				$slug = $root_name ? 'root-'.$slug : $slug;
 
 				$id   = $this->plugin->slug.$this->ns_id_suffix.'-'.$slug;
-				$name = $root_name ? $name : __NAMESPACE__.$this->ns_name_suffix.'['.$name.']';
+				$name = $root_name ? $name : GLOBAL_NS.$this->ns_name_suffix.'['.$name.']';
 
 				$required                 = (boolean)$args['required'];
 				$maxlength                = (integer)$args['maxlength'];
@@ -515,7 +515,7 @@ namespace WebSharks\CommentMail\Pro
 				$slug = $root_name ? 'root-'.$slug : $slug;
 
 				$id   = $this->plugin->slug.$this->ns_id_suffix.'-'.$slug;
-				$name = $root_name ? $name : __NAMESPACE__.$this->ns_name_suffix.'['.$name.']';
+				$name = $root_name ? $name : GLOBAL_NS.$this->ns_name_suffix.'['.$name.']';
 
 				$current_value = $this->isset_or($args['current_value'], NULL, 'string');
 				$checked       = $current_value ? ' checked="checked"' : '';
@@ -574,7 +574,7 @@ namespace WebSharks\CommentMail\Pro
 				$slug = $root_name ? 'root-'.$slug : $slug;
 
 				$id   = $this->plugin->slug.$this->ns_id_suffix.'-'.$slug;
-				$name = $root_name ? $name : __NAMESPACE__.$this->ns_name_suffix.'['.$name.']';
+				$name = $root_name ? $name : GLOBAL_NS.$this->ns_name_suffix.'['.$name.']';
 
 				$current_value = $this->isset_or($args['current_value'], NULL, 'string');
 

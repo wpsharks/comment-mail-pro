@@ -511,9 +511,9 @@ namespace WebSharks\CommentMail\Pro
 
 						'akismet_comment_nonce'           => wp_create_nonce('akismet_comment_nonce_'.$post_id),
 
-						__NAMESPACE__.'_rve_key'          => static::key(), // Key identifier.
-						__NAMESPACE__.'_rve_sub_key'      => $sub_key, // Subscription key identifier.
-						__NAMESPACE__.'_rve_force_status' => $force_status, // Force a status?
+						GLOBAL_NS.'_rve_key'          => static::key(), // Key identifier.
+						GLOBAL_NS.'_rve_sub_key'      => $sub_key, // Subscription key identifier.
+						GLOBAL_NS.'_rve_force_status' => $force_status, // Force a status?
 					),
 				));
 				if(is_wp_error($response)) // Log for possible debugging later.
@@ -533,7 +533,7 @@ namespace WebSharks\CommentMail\Pro
 			 */
 			public function pre_option_comment_registration($requires_logged_in_user)
 			{
-				if(empty($_REQUEST[__NAMESPACE__.'_rve']))
+				if(empty($_REQUEST[GLOBAL_NS.'_rve']))
 					return $requires_logged_in_user; // Nothing to do here.
 
 				if(!($current_uri = $this->plugin->utils_url->current_uri()))
@@ -550,7 +550,7 @@ namespace WebSharks\CommentMail\Pro
 				 *    Please see {@link pre_comment_approved()} for further details on this.
 				 */
 				$valid_rve_key = static::key(); // Class identifier.
-				$rve_key       = trim(stripslashes((string)$_REQUEST[__NAMESPACE__.'_rve_key']));
+				$rve_key       = trim(stripslashes((string)$_REQUEST[GLOBAL_NS.'_rve_key']));
 
 				if(!$requires_logged_in_user) // Not required at all anyway?
 					return $requires_logged_in_user; // Nothing to do here.
@@ -581,7 +581,7 @@ namespace WebSharks\CommentMail\Pro
 			 */
 			public function pre_comment_approved($comment_status, array $comment_data)
 			{
-				if(empty($_REQUEST[__NAMESPACE__.'_rve']))
+				if(empty($_REQUEST[GLOBAL_NS.'_rve']))
 					return $comment_status; // Nothing to do here.
 
 				if(!($current_uri = $this->plugin->utils_url->current_uri()))
@@ -605,9 +605,9 @@ namespace WebSharks\CommentMail\Pro
 				 *    In short, any RVE that we are unable to verify, will be forced into moderation here.
 				 */
 				$valid_rve_key       = static::key(); // Class identifier.
-				$rve_key             = trim(stripslashes((string)$_REQUEST[__NAMESPACE__.'_rve_key']));
-				$sub_key             = trim(stripslashes($this->isset_or($_REQUEST[__NAMESPACE__.'_rve_sub_key'], '', 'string')));
-				$force_status        = trim(stripslashes($this->isset_or($_REQUEST[__NAMESPACE__.'_rve_force_status'], '', 'string')));
+				$rve_key             = trim(stripslashes((string)$_REQUEST[GLOBAL_NS.'_rve_key']));
+				$sub_key             = trim(stripslashes($this->isset_or($_REQUEST[GLOBAL_NS.'_rve_sub_key'], '', 'string')));
+				$force_status        = trim(stripslashes($this->isset_or($_REQUEST[GLOBAL_NS.'_rve_force_status'], '', 'string')));
 				$current_hard_status = $this->plugin->utils_db->comment_status__($comment_status);
 
 				if($force_status === '0') $force_status = 0;

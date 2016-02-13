@@ -71,7 +71,7 @@ namespace WebSharks\CommentMail\Pro
 			 */
 			protected function maybe_enqueue_notice()
 			{
-				if(get_option(__NAMESPACE__.'_install_time'))
+				if(get_option(GLOBAL_NS.'_install_time'))
 					return; // Not applicable.
 
 				$notice_markup = $this->plugin->utils_fs->inline_icon_svg().
@@ -88,8 +88,8 @@ namespace WebSharks\CommentMail\Pro
 			 */
 			protected function set_install_time()
 			{
-				if(!get_option(__NAMESPACE__.'_install_time'))
-					update_option(__NAMESPACE__.'_install_time', time());
+				if(!get_option(GLOBAL_NS.'_install_time'))
+					update_option(GLOBAL_NS.'_install_time', time());
 			}
 		}
 	}

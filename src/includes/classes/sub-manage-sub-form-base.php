@@ -238,8 +238,8 @@ namespace WebSharks\CommentMail\Pro
 					return NULL; // Not possible.
 
 				if(!static::$processing || static::$processing_error_codes)
-					if(isset($_REQUEST[__NAMESPACE__]['manage']['sub_form'][$key_prop]))
-						return trim(stripslashes((string)$_REQUEST[__NAMESPACE__]['manage']['sub_form'][$key_prop]));
+					if(isset($_REQUEST[GLOBAL_NS]['manage']['sub_form'][$key_prop]))
+						return trim(stripslashes((string)$_REQUEST[GLOBAL_NS]['manage']['sub_form'][$key_prop]));
 
 				if($this->is_edit && isset($this->sub->{$key_prop}))
 					return trim((string)$this->sub->{$key_prop});
@@ -345,7 +345,7 @@ namespace WebSharks\CommentMail\Pro
 					$hidden_inputs .= $this->form_fields->hidden_input(
 							array(
 								'root_name'     => TRUE,
-								'name'          => __NAMESPACE__.'[manage][sub_edit]',
+								'name'          => GLOBAL_NS.'[manage][sub_edit]',
 								'current_value' => $this->sub->key,
 							))."\n";
 				}
@@ -354,7 +354,7 @@ namespace WebSharks\CommentMail\Pro
 					$hidden_inputs .= $this->form_fields->hidden_input(
 							array(
 								'root_name'     => TRUE,
-								'name'          => __NAMESPACE__.'[manage][sub_new]',
+								'name'          => GLOBAL_NS.'[manage][sub_new]',
 								'current_value' => 0,
 							))."\n";
 				}
@@ -367,7 +367,7 @@ namespace WebSharks\CommentMail\Pro
 						$hidden_inputs .= $this->form_fields->hidden_input(
 								array(
 									'root_name'     => TRUE,
-									'name'          => __NAMESPACE__.'[manage][summary_nav]['.$_summary_nav_var_key.']',
+									'name'          => GLOBAL_NS.'[manage][summary_nav]['.$_summary_nav_var_key.']',
 									'current_value' => (string)$current_summary_nav_vars[$_summary_nav_var_key],
 								))."\n";
 					}

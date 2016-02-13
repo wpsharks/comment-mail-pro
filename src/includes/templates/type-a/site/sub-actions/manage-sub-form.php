@@ -272,8 +272,8 @@ echo str_replace('%%title%%', $is_edit ? __('Edit Subscription', $plugin->text_d
 
 					var plugin = {}, $window = $(window), $document = $(document),
 
-						namespace = '<?php echo $plugin->utils_string->esc_js_sq(__NAMESPACE__); ?>',
-						namespaceSlug = '<?php echo $plugin->utils_string->esc_js_sq(str_replace('_', '-', __NAMESPACE__)); ?>',
+						namespace = '<?php echo $plugin->utils_string->esc_js_sq(GLOBAL_NS); ?>',
+						namespaceSlug = '<?php echo $plugin->utils_string->esc_js_sq(str_replace('_', '-', GLOBAL_NS)); ?>',
 
 						ajaxEndpoint = '<?php echo $plugin->utils_string->esc_js_sq(home_url('/')); ?>',
 						pluginUrl = '<?php echo $plugin->utils_string->esc_js_sq(rtrim($plugin->utils_url->to('/'), '/')); ?>',

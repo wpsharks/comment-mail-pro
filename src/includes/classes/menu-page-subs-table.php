@@ -38,7 +38,7 @@ namespace WebSharks\CommentMail\Pro
 					'plural_name'    => 'subscriptions',
 					'singular_label' => __('subscription', $plugin->text_domain),
 					'plural_label'   => __('subscriptions', $plugin->text_domain),
-					'screen'         => $plugin->menu_page_hooks[__NAMESPACE__.'_subs'],
+					'screen'         => $plugin->menu_page_hooks[GLOBAL_NS.'_subs'],
 				);
 				parent::__construct($args); // Parent constructor.
 			}

@@ -622,10 +622,10 @@ namespace WebSharks\CommentMail\Pro
                                                 '   <p class="pmp-note pmp-warning" style="margin:0;">'.__('<strong>WARNING:</strong> Auto-Confirm Everyone is Enabled', $this->plugin->text_domain).'</p>'.
                                                 '   <ul class="pmp-list-items">'.
                                                 '      <li>'.sprintf(__('Nobody will be required to confirm a subscription. For instance, when someone leaves a comment and chooses to be subscribed (with whatever email address they\'ve entered), that email address will be added to the list w/o getting confirmation from the real owner of that address. This scenario changes slightly if you %1$s before leaving a comment, via WordPress Discussion Settings. If that\'s the case, then depending on the way your users register (i.e., if they are required to verify their email address in some way), this option might be feasible. That said, in 99%% of all cases this option is NOT recommended. If you enable auto-confirmation for everyone, please take extreme caution.', $this->plugin->text_domain), $this->plugin->utils_markup->x_anchor(admin_url('/options-discussion.php'), __('require users to be logged-in', $this->plugin->text_domain))).'</li>'.
-                                                '      <li>'.sprintf(__('In addition to security issues associated w/ auto-confirming everyone automatically; if you enable this behavior it will also have the negative side-effect of making it slightly more difficult for users to view a summary of their existing subscriptions; i.e., they won\'t get an encrypted <code>%2$s</code> cookie right away via email confirmation, as would normally occur. This is how %1$s identifies a user when they are not currently logged into the site (typical w/ commenters). Therefore, if Auto-Confirm Everyone is enabled, the only way users can view a summary of their subscriptions, is if:', $this->plugin->text_domain), esc_html($this->plugin->name), esc_html(__NAMESPACE__.'_sub_email')).
+                                                '      <li>'.sprintf(__('In addition to security issues associated w/ auto-confirming everyone automatically; if you enable this behavior it will also have the negative side-effect of making it slightly more difficult for users to view a summary of their existing subscriptions; i.e., they won\'t get an encrypted <code>%2$s</code> cookie right away via email confirmation, as would normally occur. This is how %1$s identifies a user when they are not currently logged into the site (typical w/ commenters). Therefore, if Auto-Confirm Everyone is enabled, the only way users can view a summary of their subscriptions, is if:', $this->plugin->text_domain), esc_html($this->plugin->name), esc_html(GLOBAL_NS.'_sub_email')).
                                                 '        <ul>'.
                                                 '           <li>'.__('They\'re a logged-in user, and you\'ve enabled "All WP Users Confirm Email" below; i.e., a logged-in user\'s email address can be trusted — known to be confirmed already.', $this->plugin->text_domain).'</li>'.
-                                                '           <li>'.sprintf(__('Or, if they click a link to manage their subscription after having received an email notification regarding a new comment. It is at this point that an auto-confirmed subscriber will finally get their encrypted <code>%1$s</code> cookie. That said, it\'s important to note that <em>anyone</em> can manage their subscriptions after receiving an email notification regarding a new comment. In every email notification there is a "Manage My Subscriptions" link provided for them. This link provides access to subscription management through a secret subscription key; not dependent upon a cookie.', $this->plugin->text_domain), esc_html(__NAMESPACE__.'_sub_email')).'</li>'.
+                                                '           <li>'.sprintf(__('Or, if they click a link to manage their subscription after having received an email notification regarding a new comment. It is at this point that an auto-confirmed subscriber will finally get their encrypted <code>%1$s</code> cookie. That said, it\'s important to note that <em>anyone</em> can manage their subscriptions after receiving an email notification regarding a new comment. In every email notification there is a "Manage My Subscriptions" link provided for them. This link provides access to subscription management through a secret subscription key; not dependent upon a cookie.', $this->plugin->text_domain), esc_html(GLOBAL_NS.'_sub_email')).'</li>'.
                                                 '        </ul>'.
                                                 '     </li>'.
                                                 '   </ul>'.
@@ -670,8 +670,8 @@ namespace WebSharks\CommentMail\Pro
                               '1' => __('Yes, ALL of my users register &amp; confirm their email address before being allowed to log in', $this->plugin->text_domain),
                             ),
                             'notes_before'    => '<p><em>'.__('Please do a review of your theme and all plugins before answering yes to this question.', $this->plugin->text_domain).'</em></p>',
-                            'notes_after'     => '<p>'.sprintf(__('If %1$s sees that a user is currently logged into the site as a real user (i.e., not <em>just</em> a commenter); it can detect the current user\'s email address w/o needing the encrypted <code>%2$s</code> cookie that is normally set via email confirmation. However, in order for this to occur, this option must be set to <code>Yes</code>; i.e., %1$s needs to know that it can trust the email address associated w/ each user account within WordPress before it will read an email address from <code>wp_users</code> table.', $this->plugin->text_domain), esc_html($this->plugin->name), esc_html(__NAMESPACE__.'_sub_email')).'</p>'.
-                                                 '<p class="pmp-note pmp-warning">'.sprintf(__('<strong>Warning:</strong> Please be cautious about how you answer this question. Do all of your users <em>really</em> register and confirm their email address before being allowed to log in? If a user updates their profile, is an email change-of-address always confirmed too? Some themes/plugins make it possible for registration/updates to occur <em>without</em> doing so. If that\'s the case, you should answer <code>No</code> here (default behavior), and just let the encrypted <code>%2$s</code> cookie do it\'s thing. That\'s what it\'s there for <i class="fa fa-smile-o"></i>', $this->plugin->text_domain), esc_html($this->plugin->name), esc_html(__NAMESPACE__.'_sub_email')).'</p>'.
+                            'notes_after'     => '<p>'.sprintf(__('If %1$s sees that a user is currently logged into the site as a real user (i.e., not <em>just</em> a commenter); it can detect the current user\'s email address w/o needing the encrypted <code>%2$s</code> cookie that is normally set via email confirmation. However, in order for this to occur, this option must be set to <code>Yes</code>; i.e., %1$s needs to know that it can trust the email address associated w/ each user account within WordPress before it will read an email address from <code>wp_users</code> table.', $this->plugin->text_domain), esc_html($this->plugin->name), esc_html(GLOBAL_NS.'_sub_email')).'</p>'.
+                                                 '<p class="pmp-note pmp-warning">'.sprintf(__('<strong>Warning:</strong> Please be cautious about how you answer this question. Do all of your users <em>really</em> register and confirm their email address before being allowed to log in? If a user updates their profile, is an email change-of-address always confirmed too? Some themes/plugins make it possible for registration/updates to occur <em>without</em> doing so. If that\'s the case, you should answer <code>No</code> here (default behavior), and just let the encrypted <code>%2$s</code> cookie do it\'s thing. That\'s what it\'s there for <i class="fa fa-smile-o"></i>', $this->plugin->text_domain), esc_html($this->plugin->name), esc_html(GLOBAL_NS.'_sub_email')).'</p>'.
                                                  '<p class="pmp-note pmp-info">'.sprintf(__('<strong>Note:</strong> Your answer here does not enable or disable auto-confirmation in any way. It\'s simply a flag that is used by %1$s (internally), to help it make the most logical (safest) decision under certain scenarios that are impacted by the email address of the current user. It\'s important to realize that no matter what you answer here, %1$s will still be fully functional. You can only go wrong by saying <code>Yes</code> when in fact your users do NOT always confirm their email. <strong>If in doubt, please answer <code>No</code> (default behavior)</strong>.', $this->plugin->text_domain), esc_html($this->plugin->name)).'</p>'.
                                                  '<p class="pmp-note pmp-info">'.sprintf(__('<strong>Note:</strong> If you enable SSO "Single Sign-on" (another %1$s feature), then this setting is ignored; i.e., enabling SSO is an automatic flag which tells %1$s that all WP users do NOT confirm their email address in every scenario.', $this->plugin->text_domain), esc_html($this->plugin->name)).'</p>'
                           )).
@@ -1954,7 +1954,7 @@ namespace WebSharks\CommentMail\Pro
                               'placeholder'   => __('"email", "post_id", "status"'."\n".'"john@example.com", "1", "subscribed"', $this->plugin->text_domain),
                               'name'          => 'data',
                               'rows'          => 15,
-                              'current_value' => !empty($_REQUEST[__NAMESPACE__]['import']['data']) ? trim(stripslashes((string)$_REQUEST[__NAMESPACE__]['import']['data'])) : NULL,
+                              'current_value' => !empty($_REQUEST[GLOBAL_NS]['import']['data']) ? trim(stripslashes((string)$_REQUEST[GLOBAL_NS]['import']['data'])) : NULL,
                               'notes_before'  => '<p>'.__('The first line of this input should be CSV headers; e.g., <code>"email", "post_id", "status"</code>', $this->plugin->text_domain).'</p>',
                             )).
                           '   </tbody>'.
@@ -2022,7 +2022,7 @@ namespace WebSharks\CommentMail\Pro
           $_form_fields     = new form_fields($_form_field_args);
 
           $_panel_body = '<form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->page_nonce_only()).'"'.
-                         ' target="'.esc_attr(__NAMESPACE__.'_import_stcr_iframe').'" novalidate="novalidate">'."\n";
+                         ' target="'.esc_attr(GLOBAL_NS.'_import_stcr_iframe').'" novalidate="novalidate">'."\n";
 
           $_panel_body .= ' <table style="table-layout:auto;">'.
                           '    <tbody>'.
@@ -2039,7 +2039,7 @@ namespace WebSharks\CommentMail\Pro
                           '    </tbody>'.
                           ' </table>';
 
-          $_panel_body .= '<iframe src="'.esc_attr($this->plugin->utils_url->to('/client-s/iframes/stcr-import-start.html')).'" name="'.esc_attr(__NAMESPACE__.'_import_stcr_iframe').'" class="pmp-import-iframe-output"></iframe>';
+          $_panel_body .= '<iframe src="'.esc_attr($this->plugin->utils_url->to('/client-s/iframes/stcr-import-start.html')).'" name="'.esc_attr(GLOBAL_NS.'_import_stcr_iframe').'" class="pmp-import-iframe-output"></iframe>';
 
           $_panel_body .= '<p><em>'.sprintf(__('Note: Running the import multiple times will not result in duplicate data; %1$s&trade; will simply ignore any subscriptions that have already been imported.', $this->plugin->text_domain), esc_html($this->plugin->name)).'</em></p>';
 
@@ -3782,8 +3782,8 @@ namespace WebSharks\CommentMail\Pro
         $timezone             = $this->plugin->utils_date->i18n('T');
         $current_value_for    = function ($key) use ($_this)
         {
-          return isset($_REQUEST[__NAMESPACE__]['stats'][$key])
-            ? trim(stripslashes((string)$_REQUEST[__NAMESPACE__]['stats'][$key])) : NULL;
+          return isset($_REQUEST[GLOBAL_NS]['stats'][$key])
+            ? trim(stripslashes((string)$_REQUEST[GLOBAL_NS]['stats'][$key])) : NULL;
         };
         $current_postbox_view = $current_value_for('view'); // Current statistical view.
 
@@ -4362,7 +4362,7 @@ namespace WebSharks\CommentMail\Pro
         $heading .= '  <div class="pmp-heading-links">'."\n";
 
         $heading .= '  <a href="'.esc_attr($this->plugin->utils_url->main_menu_page_only()).'"'.
-                    ($this->plugin->utils_env->is_menu_page(__NAMESPACE__) ? ' class="pmp-active"' : '').'>'.
+                    ($this->plugin->utils_env->is_menu_page(GLOBAL_NS) ? ' class="pmp-active"' : '').'>'.
                     '<i class="fa fa-gears"></i> '.__('Options', $this->plugin->text_domain).'</a>'."\n";
 
         if(!$this->plugin->is_pro) // Display pro preview/upgrade related links?
@@ -4376,27 +4376,27 @@ namespace WebSharks\CommentMail\Pro
         if($this->plugin->is_pro) // Display import options for pro users.
         {
           $heading .= '  <a href="'.esc_attr($this->plugin->utils_url->import_export_menu_page_only()).'"'.
-                      ($this->plugin->utils_env->is_menu_page(__NAMESPACE__.'_import_export') ? ' class="pmp-active"' : '').'>'.
+                      ($this->plugin->utils_env->is_menu_page(GLOBAL_NS.'_import_export') ? ' class="pmp-active"' : '').'>'.
                       '<i class="fa fa-upload"></i> '.__('Import/Export', $this->plugin->text_domain).
 
-                      ((!$this->plugin->utils_env->is_menu_page(__NAMESPACE__.'_import_export') && import_stcr::data_exists() && !import_stcr::ever_imported())
+                      ((!$this->plugin->utils_env->is_menu_page(GLOBAL_NS.'_import_export') && import_stcr::data_exists() && !import_stcr::ever_imported())
                         ? '<span class="pmp-blink">'.__('StCR Auto-Import', $this->plugin->text_domain).'</span>' : '').'</a>'."\n";
         }
         else if(import_stcr::data_exists()) // Lite version exposes import functionality for StCR users.
         {
           $heading .= '  <a href="'.esc_attr($this->plugin->utils_url->import_export_menu_page_only()).'"'.
-                      ($this->plugin->utils_env->is_menu_page(__NAMESPACE__.'_import_export') ? ' class="pmp-active"' : '').'>'.
+                      ($this->plugin->utils_env->is_menu_page(GLOBAL_NS.'_import_export') ? ' class="pmp-active"' : '').'>'.
                       '<i class="fa fa-upload"></i> '.__('Import/Export', $this->plugin->text_domain).
 
-                      ((!$this->plugin->utils_env->is_menu_page(__NAMESPACE__.'_import_export') && import_stcr::data_exists() && !import_stcr::ever_imported())
+                      ((!$this->plugin->utils_env->is_menu_page(GLOBAL_NS.'_import_export') && import_stcr::data_exists() && !import_stcr::ever_imported())
                         ? '<span class="pmp-blink">'.__('StCR Auto-Import', $this->plugin->text_domain).'</span>' : '').'</a>'."\n";
         }
         $heading .= '  <a href="'.esc_attr($this->plugin->utils_url->email_templates_menu_page_only()).'"'.
-                    ($this->plugin->utils_env->is_menu_page(__NAMESPACE__.'_email_templates') ? ' class="pmp-active"' : '').'>'.
+                    ($this->plugin->utils_env->is_menu_page(GLOBAL_NS.'_email_templates') ? ' class="pmp-active"' : '').'>'.
                     '<i class="fa fa-code"></i> '.__('Email Templates', $this->plugin->text_domain).'</a>'."\n";
 
         $heading .= '  <a href="'.esc_attr($this->plugin->utils_url->site_templates_menu_page_only()).'"'.
-                    ($this->plugin->utils_env->is_menu_page(__NAMESPACE__.'_site_templates') ? ' class="pmp-active"' : '').'>'.
+                    ($this->plugin->utils_env->is_menu_page(GLOBAL_NS.'_site_templates') ? ' class="pmp-active"' : '').'>'.
                     '<i class="fa fa-code"></i> '.__('Site Templates', $this->plugin->text_domain).'</a>'."\n";
 
         $heading .= '  </div>'."\n";
@@ -4442,13 +4442,13 @@ namespace WebSharks\CommentMail\Pro
           $notes .= '  '.sprintf(__('<small><strong>MORE:</strong> in addition to what you see below, the pro version also includes import/export functionality, stats/graphs, and advanced PHP-based template options. [<a href="%2$s" target="_blank">learn more</a>]</small>', $this->plugin->text_domain), esc_html($this->plugin->name), esc_attr($this->plugin->utils_url->product_page()))."\n";
           $notes .= '</div>'."\n";
         }
-        if($this->plugin->install_time() > strtotime('-48 hours') && $this->plugin->utils_env->is_menu_page(__NAMESPACE__.'_*_templates'))
+        if($this->plugin->install_time() > strtotime('-48 hours') && $this->plugin->utils_env->is_menu_page(GLOBAL_NS.'_*_templates'))
         {
           $notes .= '<div class="pmp-note pmp-notice">'."\n";
           $notes .= '  '.__('All templates come preconfigured; customization is optional <i class="fa fa-smile-o"></i>', $this->plugin->text_domain)."\n";
           $notes .= '</div>'."\n";
         }
-        if($this->plugin->utils_env->is_menu_page(__NAMESPACE__) && (get_option('comment_moderation') || get_option('comment_whitelist')))
+        if($this->plugin->utils_env->is_menu_page(GLOBAL_NS) && (get_option('comment_moderation') || get_option('comment_whitelist')))
         {
           $notes .= '<div class="pmp-note pmp-notice">'."\n";
           $notes .= '  '.sprintf(__('<strong>Note:</strong> Your <a href="%1$s">Discussion Settings</a> indicate that comment moderation is enabled. That\'s fine. However, please remember that no emails will be sent until a comment (or reply) is approved.', $this->plugin->text_domain), esc_attr(admin_url('/options-discussion.php')))."\n";

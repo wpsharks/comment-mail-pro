@@ -37,7 +37,7 @@ namespace WebSharks\CommentMail\Pro
 				if(!defined('WP_UNINSTALL_PLUGIN'))
 					return; // Disallow.
 
-				if(empty($GLOBALS[__NAMESPACE__.'_uninstalling']))
+				if(empty($GLOBALS[GLOBAL_NS.'_uninstalling']))
 					return; // Expecting uninstall file.
 
 				if($this->plugin->options['uninstall_safeguards_enable'])
@@ -84,7 +84,7 @@ namespace WebSharks\CommentMail\Pro
 			 */
 			protected function delete_options()
 			{
-				delete_option(__NAMESPACE__.'_options');
+				delete_option(GLOBAL_NS.'_options');
 			}
 
 			/**
@@ -94,7 +94,7 @@ namespace WebSharks\CommentMail\Pro
 			 */
 			protected function delete_notices()
 			{
-				delete_option(__NAMESPACE__.'_notices');
+				delete_option(GLOBAL_NS.'_notices');
 			}
 
 			/**
@@ -104,7 +104,7 @@ namespace WebSharks\CommentMail\Pro
 			 */
 			protected function delete_install_time()
 			{
-				delete_option(__NAMESPACE__.'_install_time');
+				delete_option(GLOBAL_NS.'_install_time');
 			}
 
 			/**
@@ -114,9 +114,9 @@ namespace WebSharks\CommentMail\Pro
 			 */
 			protected function clear_cron_hooks()
 			{
-				wp_clear_scheduled_hook('_cron_'.__NAMESPACE__.'_queue_processor');
-				wp_clear_scheduled_hook('_cron_'.__NAMESPACE__.'_sub_cleaner');
-				wp_clear_scheduled_hook('_cron_'.__NAMESPACE__.'_log_cleaner');
+				wp_clear_scheduled_hook('_cron_'.GLOBAL_NS.'_queue_processor');
+				wp_clear_scheduled_hook('_cron_'.GLOBAL_NS.'_sub_cleaner');
+				wp_clear_scheduled_hook('_cron_'.GLOBAL_NS.'_log_cleaner');
 			}
 
 			/**
@@ -127,7 +127,7 @@ namespace WebSharks\CommentMail\Pro
 			protected function delete_option_keys()
 			{
 				$like = // e.g. Delete all keys LIKE `%comment\_mail%`.
-					'%'.$this->plugin->utils_db->wp->esc_like(__NAMESPACE__).'%';
+					'%'.$this->plugin->utils_db->wp->esc_like(GLOBAL_NS).'%';
 
 				$sql = // Removes any other option keys for this plugin.
 					"DELETE FROM `".esc_sql($this->plugin->utils_db->wp->options)."`".
@@ -164,7 +164,7 @@ namespace WebSharks\CommentMail\Pro
 			protected function delete_post_meta_keys()
 			{
 				$like = // e.g. Delete all keys LIKE `%comment\_mail%`.
-					'%'.$this->plugin->utils_db->wp->esc_like(__NAMESPACE__).'%';
+					'%'.$this->plugin->utils_db->wp->esc_like(GLOBAL_NS).'%';
 
 				$sql = // This will remove our StCR import history also.
 					"DELETE FROM `".esc_sql($this->plugin->utils_db->wp->postmeta)."`".
@@ -187,7 +187,7 @@ namespace WebSharks\CommentMail\Pro
 					$like = $this->plugin->utils_db->wp->esc_like($ms_prefix).
 					        // e.g. Delete all keys LIKE `wp\_5\_%comment\_mail%`.
 					        // Or, on the main site it might be: `wp\_%comment\_mail%`.
-					        '%'.$this->plugin->utils_db->wp->esc_like(__NAMESPACE__).'%';
+					        '%'.$this->plugin->utils_db->wp->esc_like(GLOBAL_NS).'%';
 
 					$sql = // This will delete all screen options too.
 						"DELETE FROM `".esc_sql($this->plugin->utils_db->wp->usermeta)."`".
@@ -196,7 +196,7 @@ namespace WebSharks\CommentMail\Pro
 				else // No special considerations; there is only one blog.
 				{
 					$like = // e.g. Delete all keys LIKE `%comment\_mail%`.
-						'%'.$this->plugin->utils_db->wp->esc_like(__NAMESPACE__).'%';
+						'%'.$this->plugin->utils_db->wp->esc_like(GLOBAL_NS).'%';
 
 					$sql = // This will delete all screen options too.
 						"DELETE FROM `".esc_sql($this->plugin->utils_db->wp->usermeta)."`".

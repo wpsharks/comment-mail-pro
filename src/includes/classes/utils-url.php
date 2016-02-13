@@ -277,7 +277,7 @@ namespace WebSharks\CommentMail\Pro
 			 * @since 141111 First documented version.
 			 *
 			 * @param string      $nonce_action A specific nonce action.
-			 *    Defaults to `__NAMESPACE__`.
+			 *    Defaults to `GLOBAL_NS`.
 			 *
 			 * @param string      $url The input URL to work from (optional).
 			 *    If empty, defaults to the current URL.
@@ -287,7 +287,7 @@ namespace WebSharks\CommentMail\Pro
 			 *
 			 * @return string URL with `_wpnonce`.
 			 */
-			public function nonce($nonce_action = __NAMESPACE__, $url = '', $scheme = 'admin')
+			public function nonce($nonce_action = GLOBAL_NS, $url = '', $scheme = 'admin')
 			{
 				if(!($url = trim((string)$url)))
 					$url = $this->current();
@@ -346,7 +346,7 @@ namespace WebSharks\CommentMail\Pro
 			 *    If empty, we use `page` from the URL; else current `page`.
 			 *
 			 * @param string      $nonce_action A specific nonce action.
-			 *    Defaults to `__NAMESPACE__`.
+			 *    Defaults to `GLOBAL_NS`.
 			 *
 			 * @param string      $url The input URL to work from (optional).
 			 *    If empty, defaults to the current URL.
@@ -356,7 +356,7 @@ namespace WebSharks\CommentMail\Pro
 			 *
 			 * @return string URL with only a `page` var (if applicable) and `_wpnonce`.
 			 */
-			public function page_nonce_only($page = '', $nonce_action = __NAMESPACE__, $url = '', $scheme = 'admin')
+			public function page_nonce_only($page = '', $nonce_action = GLOBAL_NS, $url = '', $scheme = 'admin')
 			{
 				$url = $this->page_only($page, $url);
 
@@ -377,7 +377,7 @@ namespace WebSharks\CommentMail\Pro
 			{
 				$url = admin_url('/admin.php');
 
-				return $this->page_only(__NAMESPACE__, $url, $scheme);
+				return $this->page_only(GLOBAL_NS, $url, $scheme);
 			}
 
 			/**
@@ -386,14 +386,14 @@ namespace WebSharks\CommentMail\Pro
 			 * @since 141111 First documented version.
 			 *
 			 * @param string      $nonce_action A specific nonce action.
-			 *    Defaults to `__NAMESPACE__`.
+			 *    Defaults to `GLOBAL_NS`.
 			 *
 			 * @param string|null $scheme Optional . Defaults to `admin`.
 			 *    See {@link set_scheme()} method for further details.
 			 *
 			 * @return string Main menu page URL; w/ `_wpnonce`.
 			 */
-			public function main_menu_page_nonce_only($nonce_action = __NAMESPACE__, $scheme = 'admin')
+			public function main_menu_page_nonce_only($nonce_action = GLOBAL_NS, $scheme = 'admin')
 			{
 				$url = $this->main_menu_page_only();
 
@@ -414,7 +414,7 @@ namespace WebSharks\CommentMail\Pro
 			{
 				$url = admin_url('/admin.php');
 
-				return $this->page_only(__NAMESPACE__.'_subs', $url, $scheme);
+				return $this->page_only(GLOBAL_NS.'_subs', $url, $scheme);
 			}
 
 			/**
@@ -431,7 +431,7 @@ namespace WebSharks\CommentMail\Pro
 			{
 				$url = admin_url('/admin.php');
 
-				return $this->page_only(__NAMESPACE__.'_sub_event_log', $url, $scheme);
+				return $this->page_only(GLOBAL_NS.'_sub_event_log', $url, $scheme);
 			}
 
 			/**
@@ -448,7 +448,7 @@ namespace WebSharks\CommentMail\Pro
 			{
 				$url = admin_url('/admin.php');
 
-				return $this->page_only(__NAMESPACE__.'_queue', $url, $scheme);
+				return $this->page_only(GLOBAL_NS.'_queue', $url, $scheme);
 			}
 
 			/**
@@ -465,7 +465,7 @@ namespace WebSharks\CommentMail\Pro
 			{
 				$url = admin_url('/admin.php');
 
-				return $this->page_only(__NAMESPACE__.'_queue_event_log', $url, $scheme);
+				return $this->page_only(GLOBAL_NS.'_queue_event_log', $url, $scheme);
 			}
 
 			/**
@@ -482,7 +482,7 @@ namespace WebSharks\CommentMail\Pro
 			{
 				$url = admin_url('/admin.php');
 
-				return $this->page_only(__NAMESPACE__.'_stats', $url, $scheme);
+				return $this->page_only(GLOBAL_NS.'_stats', $url, $scheme);
 			}
 
 			/**
@@ -499,7 +499,7 @@ namespace WebSharks\CommentMail\Pro
 			{
 				$url = admin_url('/admin.php');
 
-				return $this->page_only(__NAMESPACE__.'_import_export', $url, $scheme);
+				return $this->page_only(GLOBAL_NS.'_import_export', $url, $scheme);
 			}
 
 			/**
@@ -516,7 +516,7 @@ namespace WebSharks\CommentMail\Pro
 			{
 				$url = admin_url('/admin.php');
 
-				return $this->page_only(__NAMESPACE__.'_email_templates', $url, $scheme);
+				return $this->page_only(GLOBAL_NS.'_email_templates', $url, $scheme);
 			}
 
 			/**
@@ -533,7 +533,7 @@ namespace WebSharks\CommentMail\Pro
 			{
 				$url = admin_url('/admin.php');
 
-				return $this->page_only(__NAMESPACE__.'_site_templates', $url, $scheme);
+				return $this->page_only(GLOBAL_NS.'_site_templates', $url, $scheme);
 			}
 
 			/**
@@ -550,7 +550,7 @@ namespace WebSharks\CommentMail\Pro
 			{
 				$url = admin_url('/admin.php');
 
-				return $this->page_only(__NAMESPACE__.'_pro_updater', $url, $scheme);
+				return $this->page_only(GLOBAL_NS.'_pro_updater', $url, $scheme);
 			}
 
 			/**
@@ -580,8 +580,8 @@ namespace WebSharks\CommentMail\Pro
 			 */
 			public function restore_default_options($scheme = 'admin')
 			{
-				$url  = $this->main_menu_page_nonce_only(__NAMESPACE__, $scheme);
-				$args = array(__NAMESPACE__ => array('restore_default_options' => time()));
+				$url  = $this->main_menu_page_nonce_only(GLOBAL_NS, $scheme);
+				$args = array(GLOBAL_NS => array('restore_default_options' => time()));
 
 				return add_query_arg(urlencode_deep($args), $url);
 			}
@@ -616,8 +616,8 @@ namespace WebSharks\CommentMail\Pro
 			public function set_template_type($type, $scheme = 'admin')
 			{
 				$type = trim(strtolower((string)$type));
-				$url  = $this->page_nonce_only('', __NAMESPACE__, '', $scheme);
-				$args = array(__NAMESPACE__ => array('set_template_type' => $type));
+				$url  = $this->page_nonce_only('', GLOBAL_NS, '', $scheme);
+				$args = array(GLOBAL_NS => array('set_template_type' => $type));
 
 				return add_query_arg(urlencode_deep($args), $url);
 			}
@@ -655,7 +655,7 @@ namespace WebSharks\CommentMail\Pro
 				if(!($url = trim((string)$url)))
 					$url = $this->main_menu_page_only();
 
-				$args = array(__NAMESPACE__.'_pro_preview' => '1');
+				$args = array(GLOBAL_NS.'_pro_preview' => '1');
 				$url  = add_query_arg(urlencode_deep($args), $url);
 
 				return $this->set_scheme($url, $scheme);
@@ -786,7 +786,7 @@ namespace WebSharks\CommentMail\Pro
 			 *    i.e. If the given (and/or default) URL contains a particular table nav var, it's given precedence.
 			 *    Otherwise, if the URL does not have a particular table nav var, we look at `$_REQUEST` vars.
 			 */
-			public function page_table_nav_vars_only(array $also_keep = array(), $url = '', $scheme = 'admin', $nonce_action = __NAMESPACE__)
+			public function page_table_nav_vars_only(array $also_keep = array(), $url = '', $scheme = 'admin', $nonce_action = GLOBAL_NS)
 			{
 				if(!($url = trim((string)$url)))
 					$url = $this->current();
@@ -829,7 +829,7 @@ namespace WebSharks\CommentMail\Pro
 			 *
 			 * @return string See {@link page_table_nav_vars_only()}.
 			 */
-			public function page_nonce_table_nav_vars_only(array $also_keep = array(), $url = '', $scheme = 'admin', $nonce_action = __NAMESPACE__)
+			public function page_nonce_table_nav_vars_only(array $also_keep = array(), $url = '', $scheme = 'admin', $nonce_action = GLOBAL_NS)
 			{
 				return $this->page_table_nav_vars_only(array_merge($also_keep, array('_wpnonce')), $url, $scheme, $nonce_action);
 			}
@@ -850,8 +850,8 @@ namespace WebSharks\CommentMail\Pro
 			{
 				$notice_key = trim((string)$notice_key);
 
-				$url  = $this->nonce(__NAMESPACE__, '', $scheme);
-				$args = array(__NAMESPACE__ => array('dismiss_notice' => compact('notice_key')));
+				$url  = $this->nonce(GLOBAL_NS, '', $scheme);
+				$args = array(GLOBAL_NS => array('dismiss_notice' => compact('notice_key')));
 
 				return add_query_arg(urlencode_deep($args), $url);
 			}
@@ -870,7 +870,7 @@ namespace WebSharks\CommentMail\Pro
 			{
 				$url = $this->current($scheme);
 
-				return remove_query_arg(__NAMESPACE__, $url);
+				return remove_query_arg(GLOBAL_NS, $url);
 			}
 
 			/**
@@ -957,14 +957,14 @@ namespace WebSharks\CommentMail\Pro
 			 * @since 141111 First documented version.
 			 *
 			 * @param string $nonce_action A specific nonce action.
-			 *    Defaults to `__NAMESPACE__`.
+			 *    Defaults to `GLOBAL_NS`.
 			 *
 			 * @param string $url A specific URL to check?
 			 *    Defaults to the current URL; i.e. current `$_REQUEST`.
 			 *
 			 * @return boolean TRUE if it has a valid `_wpnonce`.
 			 */
-			public function has_valid_nonce($nonce_action = __NAMESPACE__, $url = '')
+			public function has_valid_nonce($nonce_action = GLOBAL_NS, $url = '')
 			{
 				if(($url = trim((string)$url)))
 					wp_parse_str((string)@parse_url($url, PHP_URL_QUERY), $_r);
@@ -1216,7 +1216,7 @@ namespace WebSharks\CommentMail\Pro
 				$sub_key = !isset($sub_key[0]) ? '0' : $sub_key;
 
 				$url  = home_url('/', $scheme);
-				$args = array(__NAMESPACE__ => array('confirm' => $sub_key.($pls ? '.pls' : '')));
+				$args = array(GLOBAL_NS => array('confirm' => $sub_key.($pls ? '.pls' : '')));
 
 				return add_query_arg(urlencode_deep($args), $url);
 			}
@@ -1239,7 +1239,7 @@ namespace WebSharks\CommentMail\Pro
 				$sub_key = !isset($sub_key[0]) ? '0' : $sub_key;
 
 				$url  = home_url('/', $scheme);
-				$args = array(__NAMESPACE__ => array('unsubscribe' => $sub_key));
+				$args = array(GLOBAL_NS => array('unsubscribe' => $sub_key));
 
 				return add_query_arg(urlencode_deep($args), $url);
 			}
@@ -1262,7 +1262,7 @@ namespace WebSharks\CommentMail\Pro
 				$sub_email = $this->plugin->utils_enc->encrypt($sub_email);
 
 				$url  = home_url('/', $scheme);
-				$args = array(__NAMESPACE__ => array('unsubscribe_all' => $sub_email));
+				$args = array(GLOBAL_NS => array('unsubscribe_all' => $sub_email));
 
 				return add_query_arg(urlencode_deep($args), $url);
 			}
@@ -1287,7 +1287,7 @@ namespace WebSharks\CommentMail\Pro
 				$sub_key = !isset($sub_key[0]) ? '0' : $sub_key;
 
 				$url  = home_url('/', $scheme);
-				$args = array(__NAMESPACE__ => array('manage' => $sub_key));
+				$args = array(GLOBAL_NS => array('manage' => $sub_key));
 
 				return add_query_arg(urlencode_deep($args), $url);
 			}
@@ -1321,10 +1321,10 @@ namespace WebSharks\CommentMail\Pro
 				$sub_key = !isset($sub_key[0]) ? '0' : $sub_key;
 
 				$url  = home_url('/', $scheme);
-				$args = array(__NAMESPACE__ => array('manage' => array('summary' => $sub_key)));
+				$args = array(GLOBAL_NS => array('manage' => array('summary' => $sub_key)));
 
 				if($include_nav_vars && ($nav_vars = $this->sub_manage_summary_nav_vars($include_nav_vars)))
-					$args[__NAMESPACE__]['manage']['summary_nav'] = $nav_vars;
+					$args[GLOBAL_NS]['manage']['summary_nav'] = $nav_vars;
 
 				return $return_type === 'array' ? compact('url', 'args') : add_query_arg(urlencode_deep($args), $url);
 			}
@@ -1379,11 +1379,11 @@ namespace WebSharks\CommentMail\Pro
 					$query = (string)parse_url($url, PHP_URL_QUERY);
 					wp_parse_str($query, $query_vars); // By reference.
 
-					if(!empty($query_vars[__NAMESPACE__]['manage']['summary_nav']))
-						$query_nav_vars = (array)$query_vars[__NAMESPACE__]['manage']['summary_nav'];
+					if(!empty($query_vars[GLOBAL_NS]['manage']['summary_nav']))
+						$query_nav_vars = (array)$query_vars[GLOBAL_NS]['manage']['summary_nav'];
 
-					if($_REQUEST && !empty($_REQUEST[__NAMESPACE__]['manage']['summary_nav']))
-						$_r_nav_vars = $this->plugin->utils_string->trim_strip_deep((array)$_REQUEST[__NAMESPACE__]['manage']['summary_nav']);
+					if($_REQUEST && !empty($_REQUEST[GLOBAL_NS]['manage']['summary_nav']))
+						$_r_nav_vars = $this->plugin->utils_string->trim_strip_deep((array)$_REQUEST[GLOBAL_NS]['manage']['summary_nav']);
 
 					foreach(array_keys(sub_manage_summary::$default_nav_vars) as $_nav_var_key)
 					{
@@ -1417,13 +1417,13 @@ namespace WebSharks\CommentMail\Pro
 			public function sub_manage_sub_new_url($scheme = NULL, $include_nav_vars = NULL, array $prefill = array())
 			{
 				$url  = home_url('/', $scheme);
-				$args = array(__NAMESPACE__ => array('manage' => array('sub_new' => '0')));
+				$args = array(GLOBAL_NS => array('manage' => array('sub_new' => '0')));
 
 				if($include_nav_vars && ($nav_vars = $this->sub_manage_summary_nav_vars($include_nav_vars)))
-					$args[__NAMESPACE__]['manage']['summary_nav'] = $nav_vars;
+					$args[GLOBAL_NS]['manage']['summary_nav'] = $nav_vars;
 
 				foreach($prefill as $_key => $_value)
-					$args[__NAMESPACE__]['manage']['sub_form'][$_key] = $_value;
+					$args[GLOBAL_NS]['manage']['sub_form'][$_key] = $_value;
 				unset($_key, $_value); // Housekeeping.
 
 				return add_query_arg(urlencode_deep($args), $url);
@@ -1451,10 +1451,10 @@ namespace WebSharks\CommentMail\Pro
 				$sub_key = !isset($sub_key[0]) ? '0' : $sub_key;
 
 				$url  = home_url('/', $scheme);
-				$args = array(__NAMESPACE__ => array('manage' => array('sub_edit' => $sub_key)));
+				$args = array(GLOBAL_NS => array('manage' => array('sub_edit' => $sub_key)));
 
 				if($include_nav_vars && ($nav_vars = $this->sub_manage_summary_nav_vars($include_nav_vars)))
-					$args[__NAMESPACE__]['manage']['summary_nav'] = $nav_vars;
+					$args[GLOBAL_NS]['manage']['summary_nav'] = $nav_vars;
 
 				return add_query_arg(urlencode_deep($args), $url);
 			}
@@ -1484,10 +1484,10 @@ namespace WebSharks\CommentMail\Pro
 				$sub_key = !isset($sub_key[0]) ? '0' : $sub_key;
 
 				$url  = home_url('/', $scheme);
-				$args = array(__NAMESPACE__ => array('manage' => array('sub_delete' => $sub_key, 'summary' => '0')));
+				$args = array(GLOBAL_NS => array('manage' => array('sub_delete' => $sub_key, 'summary' => '0')));
 
 				if($include_nav_vars && ($nav_vars = $this->sub_manage_summary_nav_vars($include_nav_vars)))
-					$args[__NAMESPACE__]['manage']['summary_nav'] = $nav_vars;
+					$args[GLOBAL_NS]['manage']['summary_nav'] = $nav_vars;
 
 				return add_query_arg(urlencode_deep($args), $url);
 			}
@@ -1506,7 +1506,7 @@ namespace WebSharks\CommentMail\Pro
 			{
 				$url  = home_url('/', $scheme);
 				$key  = rve_mandrill::key(); // Webhook key.
-				$args = array(__NAMESPACE__ => array('rve_mandrill' => $key));
+				$args = array(GLOBAL_NS => array('rve_mandrill' => $key));
 
 				return add_query_arg(urlencode_deep($args), $url);
 			}
@@ -1556,7 +1556,7 @@ namespace WebSharks\CommentMail\Pro
 				}
 				$url = home_url('/', $scheme);
 				if(!isset($redirect_to)) unset($redirect_to); // Prevent `compact()` inclusion.
-				$args = array(__NAMESPACE__ => array('sso' => compact('service', 'action', 'redirect_to')));
+				$args = array(GLOBAL_NS => array('sso' => compact('service', 'action', 'redirect_to')));
 
 				return add_query_arg(urlencode_deep($args), $url);
 			}

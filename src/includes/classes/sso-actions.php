@@ -65,7 +65,7 @@ namespace WebSharks\CommentMail\Pro
 				if(is_admin())
 					return; // Not applicable.
 
-				if(empty($_REQUEST[__NAMESPACE__]))
+				if(empty($_REQUEST[GLOBAL_NS]))
 					return; // Not applicable.
 
 				$cb_r_args = array(); // Initialize callback request args.
@@ -75,7 +75,7 @@ namespace WebSharks\CommentMail\Pro
 					if(isset($_r[$_cb_r_arg_key])) $cb_r_args[$_cb_r_arg_key] = $_r[$_cb_r_arg_key];
 				unset($_cb_r_arg_key); // Housekeeping.
 
-				foreach((array)$_REQUEST[__NAMESPACE__] as $_action => $_request_args)
+				foreach((array)$_REQUEST[GLOBAL_NS] as $_action => $_request_args)
 					if($_action && in_array($_action, $this->valid_actions, TRUE) && is_array($_request_args))
 						$this->{$_action}(array_merge($cb_r_args, $this->plugin->utils_string->trim_strip_deep($_request_args)));
 				unset($_action, $_request_args); // Housekeeping.

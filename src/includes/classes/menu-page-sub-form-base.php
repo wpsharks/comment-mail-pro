@@ -231,8 +231,8 @@ namespace WebSharks\CommentMail\Pro
 				if(!($key_prop = (string)$key_prop))
 					return NULL; // Not possible.
 
-				if(isset($_REQUEST[__NAMESPACE__]['sub_form'][$key_prop]))
-					return trim(stripslashes((string)$_REQUEST[__NAMESPACE__]['sub_form'][$key_prop]));
+				if(isset($_REQUEST[GLOBAL_NS]['sub_form'][$key_prop]))
+					return trim(stripslashes((string)$_REQUEST[GLOBAL_NS]['sub_form'][$key_prop]));
 
 				if($this->is_edit && isset($this->sub->{$key_prop}))
 					return trim((string)$this->sub->{$key_prop});

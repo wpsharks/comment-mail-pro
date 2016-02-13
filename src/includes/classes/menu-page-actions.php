@@ -69,13 +69,13 @@ namespace WebSharks\CommentMail\Pro
 				if(!is_admin())
 					return; // Not applicable.
 
-				if(empty($_REQUEST[__NAMESPACE__]))
+				if(empty($_REQUEST[GLOBAL_NS]))
 					return; // Not applicable.
 
 				if(!$this->plugin->utils_url->has_valid_nonce())
 					return; // Unauthenticated; ignore.
 
-				foreach((array)$_REQUEST[__NAMESPACE__] as $_action => $_request_args)
+				foreach((array)$_REQUEST[GLOBAL_NS] as $_action => $_request_args)
 					if($_action && in_array($_action, $this->valid_actions, TRUE))
 						$this->{$_action}($this->plugin->utils_string->trim_strip_deep($_request_args));
 				unset($_action, $_request_args); // Housekeeping.
@@ -166,7 +166,7 @@ namespace WebSharks\CommentMail\Pro
 				if(!current_user_can($this->plugin->cap))
 					return; // Unauthenticated; ignore.
 
-				delete_option(__NAMESPACE__.'_options');
+				delete_option(GLOBAL_NS.'_options');
 				$this->plugin->options = $this->plugin->default_options;
 
 				import_stcr::delete_post_meta_keys(); // Reset import tracking.
@@ -196,11 +196,11 @@ namespace WebSharks\CommentMail\Pro
 					if(!current_user_can($this->plugin->cap))
 						return; // Unauthenticated; ignore.
 
-				$notices = get_option(__NAMESPACE__.'_notices');
+				$notices = get_option(GLOBAL_NS.'_notices');
 				if(!is_array($notices)) $notices = array();
 
 				unset($notices[$request_args['notice_key']]);
-				update_option(__NAMESPACE__.'_notices', $notices);
+				update_option(GLOBAL_NS.'_notices', $notices);
 
 				wp_redirect($this->plugin->utils_url->notice_dismissed()).exit();
 			}
@@ -228,8 +228,8 @@ namespace WebSharks\CommentMail\Pro
 				if(!current_user_can($this->plugin->cap))
 					return; // Unauthenticated; ignore.
 
-				if(!empty($_FILES[__NAMESPACE__]['tmp_name']['import']['data_file']))
-					$request_args['data_file'] = $_FILES[__NAMESPACE__]['tmp_name']['import']['data_file'];
+				if(!empty($_FILES[GLOBAL_NS]['tmp_name']['import']['data_file']))
+					$request_args['data_file'] = $_FILES[GLOBAL_NS]['tmp_name']['import']['data_file'];
 
 				$importer = new $class($request_args); // Instantiate.
 			}
@@ -411,20 +411,20 @@ namespace WebSharks\CommentMail\Pro
 
 		        $this->plugin->options_quick_save($this->plugin->options);
 
-		        foreach(($notices = is_array($notices = get_option(__NAMESPACE__.'_notices')) ? $notices : array()) as $_key => $_notice)
+		        foreach(($notices = is_array($notices = get_option(GLOBAL_NS.'_notices')) ? $notices : array()) as $_key => $_notice)
 					if(!empty($_notice['persistent_id']) && $_notice['persistent_id'] === 'new-pro-version-available')
 						unset($notices[$_key]); // Remove this one! :-)
 				unset($_key, $_notice); // Housekeeping.
 
-		        update_option(__NAMESPACE__.'_notices', $notices); // Update notices.
+		        update_option(GLOBAL_NS.'_notices', $notices); // Update notices.
 
 		        $redirect_to = self_admin_url('/update.php');
 		        $query_args  = array(
 		            'action'                            => 'upgrade-plugin',
 		            'plugin'                            => plugin_basename($this->plugin->file),
 		            '_wpnonce'                          => wp_create_nonce('upgrade-plugin_'.plugin_basename($this->plugin->file)),
-		            __NAMESPACE__.'_update_pro_version' => $product_api_response['pro_version'],
-		            __NAMESPACE__.'_update_pro_zip'     => base64_encode($product_api_response['pro_zip']),
+		            GLOBAL_NS.'_update_pro_version' => $product_api_response['pro_version'],
+		            GLOBAL_NS.'_update_pro_zip'     => base64_encode($product_api_response['pro_zip']),
 		        );
 		        $redirect_to = add_query_arg(urlencode_deep($query_args), $redirect_to);
 

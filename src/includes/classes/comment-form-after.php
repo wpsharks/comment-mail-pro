@@ -88,14 +88,14 @@ namespace WebSharks\CommentMail\Pro
 				$sub_type    = $current->sub_type;
 				$sub_deliver = $current->sub_deliver;
 
-				$sub_type_id   = str_replace('_', '-', __NAMESPACE__.'_sub_type');
-				$sub_type_name = __NAMESPACE__.'_sub_type';
+				$sub_type_id   = str_replace('_', '-', GLOBAL_NS.'_sub_type');
+				$sub_type_name = GLOBAL_NS.'_sub_type';
 
-				$sub_deliver_id   = str_replace('_', '-', __NAMESPACE__.'_sub_deliver');
-				$sub_deliver_name = __NAMESPACE__.'_sub_deliver';
+				$sub_deliver_id   = str_replace('_', '-', GLOBAL_NS.'_sub_deliver');
+				$sub_deliver_name = GLOBAL_NS.'_sub_deliver';
 
-				$sub_list_id   = str_replace('_', '-', __NAMESPACE__.'_sub_list');
-				$sub_list_name = __NAMESPACE__.'_sub_list';
+				$sub_list_id   = str_replace('_', '-', GLOBAL_NS.'_sub_list');
+				$sub_list_name = GLOBAL_NS.'_sub_list';
 
 				$sub_summary_url = $this->plugin->utils_url->sub_manage_summary_url();
 				$sub_new_url     = $this->plugin->utils_url->sub_manage_sub_new_url(NULL, NULL, compact('post_id'));

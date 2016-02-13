@@ -265,7 +265,7 @@ namespace WebSharks\CommentMail\Pro
 						   // || !$this->plugin->utils_user->can_register()
 
 						   || ($this->request_args['action'] !== 'callback'
-						       && !wp_verify_nonce($_wpnonce, __NAMESPACE__.'_sso_complete'))
+						       && !wp_verify_nonce($_wpnonce, GLOBAL_NS.'_sso_complete'))
 
 						   || !$fname || !$email || !is_email($email)
 

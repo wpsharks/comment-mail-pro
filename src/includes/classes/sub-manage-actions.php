@@ -61,10 +61,10 @@ namespace WebSharks\CommentMail\Pro
 				if(is_admin())
 					return; // Not applicable.
 
-				if(empty($_REQUEST[__NAMESPACE__]['manage']))
+				if(empty($_REQUEST[GLOBAL_NS]['manage']))
 					return; // Not applicable.
 
-				foreach((array)$_REQUEST[__NAMESPACE__]['manage'] as $_action => $_request_args)
+				foreach((array)$_REQUEST[GLOBAL_NS]['manage'] as $_action => $_request_args)
 					if($_action && in_array($_action, $this->valid_actions, TRUE))
 						$this->{$_action}($this->plugin->utils_string->trim_strip_deep($_request_args));
 				unset($_action, $_request_args); // Housekeeping.
