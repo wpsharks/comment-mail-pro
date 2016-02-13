@@ -1,14 +1,14 @@
-# Copyright (C) 2015 Comment Mail Pro
+# Copyright (C) 2016 Comment Mail Pro
 # This file is distributed under the same license as the Comment Mail Pro package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Comment Mail Pro 151224\n"
+"Project-Id-Version: Comment Mail Pro 160213\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/comment-mail-pro\n"
-"POT-Creation-Date: 2015-12-24 21:49:36+00:00\n"
+"POT-Creation-Date: 2016-02-13 00:53:24+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2015-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2016-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
@@ -576,7 +576,7 @@ msgid "Required; the Post ID they are subscribed to."
 msgstr ""
 
 #: includes/classes/menu-page-sub-form-base.php:116
-#: includes/classes/menu-page-sub-form-base.php:273
+#: includes/classes/menu-page-sub-form-base.php:272
 #: includes/classes/utils-markup.php:504
 #: includes/templates/type-a/site/sub-actions/manage-sub-form-comment-id-row-via-ajax.php:19
 #: includes/templates/type-a/site/sub-actions/manage-sub-form.php:202
@@ -586,140 +586,135 @@ msgid "— All Comments/Replies —"
 msgstr ""
 
 #: includes/classes/menu-page-sub-form-base.php:117
-#: includes/classes/menu-page-sub-form-base.php:274
+#: includes/classes/menu-page-sub-form-base.php:273
 msgid "<i class=\"fa fa-fw fa-comment-o\"></i> Comment ID #"
 msgstr ""
 
-#: includes/classes/menu-page-sub-form-base.php:119
-#: includes/classes/menu-page-sub-form-base.php:276
-msgid "If empty, they'll be subscribed to all comments/replies; i.e. NOT to a specific comment."
-msgstr ""
-
-#: includes/classes/menu-page-sub-form-base.php:124
+#: includes/classes/menu-page-sub-form-base.php:123
 msgid "— N/A; no WP User ID —"
 msgstr ""
 
-#: includes/classes/menu-page-sub-form-base.php:125
+#: includes/classes/menu-page-sub-form-base.php:124
 msgid "<i class=\"fa fa-fw fa-user\"></i> WP User ID #"
 msgstr ""
 
-#: includes/classes/menu-page-sub-form-base.php:127
+#: includes/classes/menu-page-sub-form-base.php:126
 msgid "Associates subscription w/ a WP User ID (if applicable) to improve statistical reporting."
 msgstr ""
 
-#: includes/classes/menu-page-sub-form-base.php:128
+#: includes/classes/menu-page-sub-form-base.php:127
 msgid "If empty, the system will automatically try to find a matching user ID for the email address."
 msgstr ""
 
-#: includes/classes/menu-page-sub-form-base.php:138
-#: includes/templates/type-a/site/sub-actions/manage-sub-form.php:216
-#: includes/templates/type-s/site/sub-actions/manage-sub-form.php:216
+#: includes/classes/menu-page-sub-form-base.php:137
+#: includes/templates/type-a/site/sub-actions/manage-sub-form.php:215
+#: includes/templates/type-s/site/sub-actions/manage-sub-form.php:215
 msgid "<i class=\"fa fa-fw fa-envelope-o\"></i> Email"
 msgstr ""
 
-#: includes/classes/menu-page-sub-form-base.php:143
+#: includes/classes/menu-page-sub-form-base.php:142
 #: includes/templates/type-a/site/sso-actions/complete.php:103
-#: includes/templates/type-a/site/sub-actions/manage-sub-form.php:221
+#: includes/templates/type-a/site/sub-actions/manage-sub-form.php:220
 #: includes/templates/type-s/site/sso-actions/complete.php:103
-#: includes/templates/type-s/site/sub-actions/manage-sub-form.php:221
+#: includes/templates/type-s/site/sub-actions/manage-sub-form.php:220
 msgid "<i class=\"fa fa-fw fa-pencil-square-o\"></i> First Name"
 msgstr ""
 
-#: includes/classes/menu-page-sub-form-base.php:148
+#: includes/classes/menu-page-sub-form-base.php:147
 msgid "<i class=\"fa fa-fw fa-level-up fa-rotate-90\" style=\"margin-left:1px;\"></i> Last Name"
 msgstr ""
 
-#: includes/classes/menu-page-sub-form-base.php:157
+#: includes/classes/menu-page-sub-form-base.php:156
 msgid "<i class=\"fa fa-fw fa-bullseye\"></i> IP Address"
 msgstr ""
 
-#: includes/classes/menu-page-sub-form-base.php:159
+#: includes/classes/menu-page-sub-form-base.php:158
 msgid "If empty, this is filled automatically when a subscriber confirms or updates their subscription."
 msgstr ""
 
-#: includes/classes/menu-page-sub-form-base.php:165
+#: includes/classes/menu-page-sub-form-base.php:164
 msgid "<i class=\"fa fa-fw fa-map-marker\"></i> IP Region Code"
 msgstr ""
 
-#: includes/classes/menu-page-sub-form-base.php:167
+#: includes/classes/menu-page-sub-form-base.php:166
 msgid "If empty, this is filled automatically when a subscriber confirms or updates their subscription. Here is a map of all %1$s; found in the second column of the CSV file."
 msgstr ""
 
-#: includes/classes/menu-page-sub-form-base.php:167
+#: includes/classes/menu-page-sub-form-base.php:166
 msgid "Region Codes"
 msgstr ""
 
-#: includes/classes/menu-page-sub-form-base.php:171
+#: includes/classes/menu-page-sub-form-base.php:170
 msgid "<i class=\"fa fa-fw fa-globe\"></i> IP Country Code"
 msgstr ""
 
-#: includes/classes/menu-page-sub-form-base.php:173
+#: includes/classes/menu-page-sub-form-base.php:172
 msgid "If empty, this is filled automatically when a subscriber confirms or updates their subscription. Here is a map of all %1$s; found in the first column of the CSV file."
 msgstr ""
 
-#: includes/classes/menu-page-sub-form-base.php:173
+#: includes/classes/menu-page-sub-form-base.php:172
 msgid "Country Codes"
+msgstr ""
+
+#: includes/classes/menu-page-sub-form-base.php:181
+#: includes/templates/type-a/site/sub-actions/manage-sub-form.php:236
+#: includes/templates/type-s/site/sub-actions/manage-sub-form.php:236
+msgid "Select a Status..."
 msgstr ""
 
 #: includes/classes/menu-page-sub-form-base.php:182
 #: includes/templates/type-a/site/sub-actions/manage-sub-form.php:237
 #: includes/templates/type-s/site/sub-actions/manage-sub-form.php:237
-msgid "Select a Status..."
-msgstr ""
-
-#: includes/classes/menu-page-sub-form-base.php:183
-#: includes/templates/type-a/site/sub-actions/manage-sub-form.php:238
-#: includes/templates/type-s/site/sub-actions/manage-sub-form.php:238
 msgid "<i class=\"fa fa-fw fa-flag-o\"></i> Status"
 msgstr ""
 
-#: includes/classes/menu-page-sub-form-base.php:187
+#: includes/classes/menu-page-sub-form-base.php:186
 msgid "Request confirmation via email"
+msgstr ""
+
+#: includes/classes/menu-page-sub-form-base.php:191
+#: includes/templates/type-a/site/sub-actions/manage-sub-form.php:242
+#: includes/templates/type-s/site/sub-actions/manage-sub-form.php:242
+msgid "Select a Delivery Option..."
 msgstr ""
 
 #: includes/classes/menu-page-sub-form-base.php:192
 #: includes/templates/type-a/site/sub-actions/manage-sub-form.php:243
 #: includes/templates/type-s/site/sub-actions/manage-sub-form.php:243
-msgid "Select a Delivery Option..."
-msgstr ""
-
-#: includes/classes/menu-page-sub-form-base.php:193
-#: includes/templates/type-a/site/sub-actions/manage-sub-form.php:244
-#: includes/templates/type-s/site/sub-actions/manage-sub-form.php:244
 msgid "<i class=\"fa fa-fw fa-paper-plane-o\"></i> Deliver"
 msgstr ""
 
-#: includes/classes/menu-page-sub-form-base.php:195
-#: includes/templates/type-a/site/sub-actions/manage-sub-form.php:246
-#: includes/templates/type-s/site/sub-actions/manage-sub-form.php:246
-msgid "Any value that is not <code>asap</code> results in a digest instead of instant notifications."
+#: includes/classes/menu-page-sub-form-base.php:194
+#: includes/templates/type-a/site/sub-actions/manage-sub-form.php:245
+#: includes/templates/type-s/site/sub-actions/manage-sub-form.php:245
+msgid "Any value that is not <code>instantly</code> results in a digest instead of instant notifications."
+msgstr ""
+
+#: includes/classes/menu-page-sub-form-base.php:209
+#: includes/templates/type-a/site/sub-actions/manage-sub-form.php:258
+#: includes/templates/type-s/site/sub-actions/manage-sub-form.php:258
+msgid "Update Subscription"
 msgstr ""
 
 #: includes/classes/menu-page-sub-form-base.php:210
 #: includes/templates/type-a/site/sub-actions/manage-sub-form.php:259
 #: includes/templates/type-s/site/sub-actions/manage-sub-form.php:259
-msgid "Update Subscription"
-msgstr ""
-
-#: includes/classes/menu-page-sub-form-base.php:211
-#: includes/templates/type-a/site/sub-actions/manage-sub-form.php:260
-#: includes/templates/type-s/site/sub-actions/manage-sub-form.php:260
 msgid "Create Subscription"
 msgstr ""
 
-#: includes/classes/menu-page-sub-form-base.php:368
+#: includes/classes/menu-page-sub-form-base.php:366
 msgid "Subscription ID #<code>%1$s</code> updated successfully."
 msgstr ""
 
-#: includes/classes/menu-page-sub-form-base.php:376
+#: includes/classes/menu-page-sub-form-base.php:374
 msgid "Failed to update subscription ID #<code>%1$s</code>. Please review the following error(s):"
 msgstr ""
 
-#: includes/classes/menu-page-sub-form-base.php:388
+#: includes/classes/menu-page-sub-form-base.php:386
 msgid "Subscription ID #<code>%1$s</code> created successfully."
 msgstr ""
 
-#: includes/classes/menu-page-sub-form-base.php:396
+#: includes/classes/menu-page-sub-form-base.php:394
 msgid "Failed to create new subscription. Please review the following error(s):"
 msgstr ""
 
@@ -2301,12 +2296,12 @@ msgid "<strong>Tip:</strong> You'll notice that by changing this setting, all of
 msgstr ""
 
 #: includes/classes/menu-page.php:1689 includes/classes/menu-page.php:2288
-#: includes/classes/menu-page.php:4384 plugin.inc.php:1246 plugin.inc.php:1247
+#: includes/classes/menu-page.php:4396 plugin.inc.php:1246 plugin.inc.php:1247
 msgid "Email Templates"
 msgstr ""
 
 #: includes/classes/menu-page.php:1689 includes/classes/menu-page.php:2885
-#: includes/classes/menu-page.php:4388 plugin.inc.php:1253 plugin.inc.php:1254
+#: includes/classes/menu-page.php:4400 plugin.inc.php:1253 plugin.inc.php:1254
 msgid "Site Templates"
 msgstr ""
 
@@ -2615,8 +2610,8 @@ msgstr ""
 msgid "Save All Changes"
 msgstr ""
 
-#: includes/classes/menu-page.php:1916 includes/classes/menu-page.php:4368
-#: includes/classes/menu-page.php:4377 plugin.inc.php:1239 plugin.inc.php:1240
+#: includes/classes/menu-page.php:1916 includes/classes/menu-page.php:4380
+#: includes/classes/menu-page.php:4389 plugin.inc.php:1239 plugin.inc.php:1240
 msgid "Import/Export"
 msgstr ""
 
@@ -3800,7 +3795,8 @@ msgstr ""
 msgid "Queued Notifications by Post ID"
 msgstr ""
 
-#: includes/classes/menu-page.php:4256 plugin.inc.php:1300 plugin.inc.php:1301
+#: includes/classes/menu-page.php:4256 includes/classes/menu-page.php:4350
+#: plugin.inc.php:1300 plugin.inc.php:1301
 msgid "Pro Updater"
 msgstr ""
 
@@ -3844,67 +3840,75 @@ msgstr ""
 msgid "Update Now"
 msgstr ""
 
-#: includes/classes/menu-page.php:4354
-msgid "Options"
-msgstr ""
-
-#: includes/classes/menu-page.php:4360 plugin.inc.php:1737
-msgid "Preview Pro Features"
-msgstr ""
-
-#: includes/classes/menu-page.php:4362
-msgid "Pro Upgrade"
-msgstr ""
-
-#: includes/classes/menu-page.php:4371 includes/classes/menu-page.php:4380
-msgid "StCR Auto-Import"
-msgstr ""
-
-#: includes/classes/menu-page.php:4390
+#: includes/classes/menu-page.php:4347
 msgid "Restore default plugin options? You will lose all of your current settings! Are you absolutely sure?"
 msgstr ""
 
-#: includes/classes/menu-page.php:4390
-msgid "Restore Default Options"
+#: includes/classes/menu-page.php:4347
+msgid "Restore"
 msgstr ""
 
-#: includes/classes/menu-page.php:4392
+#: includes/classes/menu-page.php:4351
 msgid "Newsletter (Subscribe)"
 msgstr ""
 
-#: includes/classes/menu-page.php:4412
+#: includes/classes/menu-page.php:4352
+msgid "Beta Testers"
+msgstr ""
+
+#: includes/classes/menu-page.php:4356
+msgid "%1$s&trade; Pro v%2$s (<a href=\"https://comment-mail.com/changelog/\" target=\"_blank\">changelog</a>)"
+msgstr ""
+
+#: includes/classes/menu-page.php:4366
+msgid "Options"
+msgstr ""
+
+#: includes/classes/menu-page.php:4372 plugin.inc.php:1737
+msgid "Preview Pro Features"
+msgstr ""
+
+#: includes/classes/menu-page.php:4374
+msgid "Pro Upgrade"
+msgstr ""
+
+#: includes/classes/menu-page.php:4383 includes/classes/menu-page.php:4392
+msgid "StCR Auto-Import"
+msgstr ""
+
+#: includes/classes/menu-page.php:4419
 msgid "Open All Panels"
 msgstr ""
 
-#: includes/classes/menu-page.php:4413
+#: includes/classes/menu-page.php:4420
 msgid "Close All Panels"
 msgstr ""
 
-#: includes/classes/menu-page.php:4433
+#: includes/classes/menu-page.php:4440
 msgid "close"
 msgstr ""
 
-#: includes/classes/menu-page.php:4434
+#: includes/classes/menu-page.php:4441
 msgid "<strong>Pro Features (Preview)</strong> ~ New advanced option panels below. Please explore before <a href=\"%1$s\" target=\"_blank\">upgrading <i class=\"fa fa-heart-o\"></i></a>."
 msgstr ""
 
-#: includes/classes/menu-page.php:4435
+#: includes/classes/menu-page.php:4442
 msgid "<small><strong>MORE:</strong> in addition to what you see below, the pro version also includes import/export functionality, stats/graphs, and advanced PHP-based template options. [<a href=\"%2$s\" target=\"_blank\">learn more</a>]</small>"
 msgstr ""
 
-#: includes/classes/menu-page.php:4441
+#: includes/classes/menu-page.php:4448
 msgid "All templates come preconfigured; customization is optional <i class=\"fa fa-smile-o\"></i>"
 msgstr ""
 
-#: includes/classes/menu-page.php:4447
+#: includes/classes/menu-page.php:4454
 msgid "<strong>Note:</strong> Your <a href=\"%1$s\">Discussion Settings</a> indicate that comment moderation is enabled. That's fine. However, please remember that no emails will be sent until a comment (or reply) is approved."
 msgstr ""
 
-#: includes/classes/menu-page.php:4532
+#: includes/classes/menu-page.php:4539
 msgid "Display Chart"
 msgstr ""
 
-#: includes/classes/menu-page.php:4675
+#: includes/classes/menu-page.php:4682
 msgid "select all; copy"
 msgstr ""
 
@@ -3923,7 +3927,7 @@ msgid "Insertion failure."
 msgstr ""
 
 #: includes/classes/queue-processor.php:687
-#: includes/classes/sub-inserter.php:757 includes/classes/user-register.php:86
+#: includes/classes/sub-inserter.php:768 includes/classes/user-register.php:86
 #: includes/classes/user-register.php:95
 msgid "Update failure."
 msgstr ""
@@ -3991,134 +3995,134 @@ msgstr ""
 msgid "Missing oAuth token/verifier."
 msgstr ""
 
-#: includes/classes/sub-inserter.php:697 includes/classes/sub-inserter.php:700
+#: includes/classes/sub-inserter.php:708 includes/classes/sub-inserter.php:711
 msgid "Insert/replace failure."
 msgstr ""
 
-#: includes/classes/sub-inserter.php:710
+#: includes/classes/sub-inserter.php:721
 msgid "Sub after insert failure."
 msgstr ""
 
-#: includes/classes/sub-inserter.php:713
+#: includes/classes/sub-inserter.php:724
 msgid "Subscription created successfully."
 msgstr ""
 
-#: includes/classes/sub-inserter.php:733 includes/classes/sub-inserter.php:791
+#: includes/classes/sub-inserter.php:744 includes/classes/sub-inserter.php:802
 msgid "Request for email confirmation sent successfully."
 msgstr ""
 
-#: includes/classes/sub-inserter.php:764
+#: includes/classes/sub-inserter.php:775
 msgid "Sub after update failure."
 msgstr ""
 
-#: includes/classes/sub-inserter.php:772
+#: includes/classes/sub-inserter.php:783
 msgid "Subscription updated successfully."
 msgstr ""
 
-#: includes/classes/sub-inserter.php:1027
+#: includes/classes/sub-inserter.php:1038
 msgid "Missing key/prop: `%1$s`."
 msgstr ""
 
-#: includes/classes/sub-inserter.php:1056
+#: includes/classes/sub-inserter.php:1067
 msgid "Invalid; insertion w/ ID: `%1$s`."
 msgstr ""
 
-#: includes/classes/sub-inserter.php:1059
-#: includes/classes/sub-inserter.php:1062
+#: includes/classes/sub-inserter.php:1070
+#: includes/classes/sub-inserter.php:1073
 msgid "Invalid ID: `%1$s`."
 msgstr ""
 
-#: includes/classes/sub-inserter.php:1075
-#: includes/classes/sub-inserter.php:1078
-#: includes/classes/sub-inserter.php:1082
-#: includes/classes/sub-inserter.php:1097
+#: includes/classes/sub-inserter.php:1086
+#: includes/classes/sub-inserter.php:1089
+#: includes/classes/sub-inserter.php:1093
+#: includes/classes/sub-inserter.php:1108
 msgid "Invalid key: `%1$s`."
 msgstr ""
 
-#: includes/classes/sub-inserter.php:1117
-#: includes/classes/sub-inserter.php:1120
+#: includes/classes/sub-inserter.php:1128
+#: includes/classes/sub-inserter.php:1131
 msgid "Invalid user ID: `%1$s`."
 msgstr ""
 
-#: includes/classes/sub-inserter.php:1133
-#: includes/classes/sub-inserter.php:1136
-#: includes/classes/sub-inserter.php:1140
+#: includes/classes/sub-inserter.php:1144
+#: includes/classes/sub-inserter.php:1147
+#: includes/classes/sub-inserter.php:1151
 msgid "Invalid post ID: `%1$s`."
 msgstr ""
 
-#: includes/classes/sub-inserter.php:1153
-#: includes/classes/sub-inserter.php:1156
+#: includes/classes/sub-inserter.php:1164
+#: includes/classes/sub-inserter.php:1167
 msgid "Invalid comment ID: `%1$s`."
 msgstr ""
 
-#: includes/classes/sub-inserter.php:1169
-#: includes/classes/sub-inserter.php:1172
+#: includes/classes/sub-inserter.php:1180
+#: includes/classes/sub-inserter.php:1183
 msgid "Invalid delivery option: `%1$s`."
 msgstr ""
 
-#: includes/classes/sub-inserter.php:1203
-#: includes/classes/sub-inserter.php:1206
+#: includes/classes/sub-inserter.php:1214
+#: includes/classes/sub-inserter.php:1217
 msgid "Invalid first name: `%1$s`."
 msgstr ""
 
-#: includes/classes/sub-inserter.php:1228
-#: includes/classes/sub-inserter.php:1231
+#: includes/classes/sub-inserter.php:1239
+#: includes/classes/sub-inserter.php:1242
 msgid "Invalid last name: `%1$s`."
 msgstr ""
 
-#: includes/classes/sub-inserter.php:1250
-#: includes/classes/sub-inserter.php:1253
+#: includes/classes/sub-inserter.php:1261
+#: includes/classes/sub-inserter.php:1264
 msgid "Invalid email address: `%1$s`."
 msgstr ""
 
-#: includes/classes/sub-inserter.php:1256
+#: includes/classes/sub-inserter.php:1267
 msgid "Blacklisted email address: `%1$s`."
 msgstr ""
 
-#: includes/classes/sub-inserter.php:1288
-#: includes/classes/sub-inserter.php:1291
+#: includes/classes/sub-inserter.php:1299
+#: includes/classes/sub-inserter.php:1302
 msgid "Invalid insertion IP: `%1$s`."
 msgstr ""
 
-#: includes/classes/sub-inserter.php:1326
-#: includes/classes/sub-inserter.php:1329
+#: includes/classes/sub-inserter.php:1337
+#: includes/classes/sub-inserter.php:1340
 msgid "Invalid insertion region: `%1$s`."
 msgstr ""
 
-#: includes/classes/sub-inserter.php:1364
-#: includes/classes/sub-inserter.php:1367
+#: includes/classes/sub-inserter.php:1375
+#: includes/classes/sub-inserter.php:1378
 msgid "Invalid insertion country: `%1$s`."
 msgstr ""
 
-#: includes/classes/sub-inserter.php:1396
-#: includes/classes/sub-inserter.php:1399
+#: includes/classes/sub-inserter.php:1407
+#: includes/classes/sub-inserter.php:1410
 msgid "Invalid last IP: `%1$s`."
 msgstr ""
 
-#: includes/classes/sub-inserter.php:1428
-#: includes/classes/sub-inserter.php:1431
+#: includes/classes/sub-inserter.php:1439
+#: includes/classes/sub-inserter.php:1442
 msgid "Invalid last region: `%1$s`."
 msgstr ""
 
-#: includes/classes/sub-inserter.php:1460
-#: includes/classes/sub-inserter.php:1463
+#: includes/classes/sub-inserter.php:1471
+#: includes/classes/sub-inserter.php:1474
 msgid "Invalid last country: `%1$s`."
 msgstr ""
 
-#: includes/classes/sub-inserter.php:1482
-#: includes/classes/sub-inserter.php:1485
-#: includes/classes/sub-inserter.php:1488
-#: includes/classes/sub-inserter.php:1492
+#: includes/classes/sub-inserter.php:1493
+#: includes/classes/sub-inserter.php:1496
+#: includes/classes/sub-inserter.php:1499
+#: includes/classes/sub-inserter.php:1503
 msgid "Invalid status: `%1$s`."
 msgstr ""
 
-#: includes/classes/sub-inserter.php:1523
-#: includes/classes/sub-inserter.php:1526
+#: includes/classes/sub-inserter.php:1534
+#: includes/classes/sub-inserter.php:1537
 msgid "Invalid insertion time: `%1$s`."
 msgstr ""
 
-#: includes/classes/sub-inserter.php:1545
-#: includes/classes/sub-inserter.php:1548
+#: includes/classes/sub-inserter.php:1556
+#: includes/classes/sub-inserter.php:1559
 msgid "Invalid last update time: `%1$s`."
 msgstr ""
 
@@ -4607,7 +4611,9 @@ msgid "notified"
 msgstr ""
 
 #: includes/classes/utils-i18n.php:258
-msgid "asap"
+#: includes/templates/type-a/site/comment-form/sub-ops.php:61
+#: includes/templates/type-s/site/comment-form/sub-ops.php:100
+msgid "instantly"
 msgstr ""
 
 #: includes/classes/utils-i18n.php:262
@@ -4775,27 +4781,27 @@ msgid "unknown"
 msgstr ""
 
 #: includes/templates/type-a/email/comment-notification/message.php:70
-msgid "New Replies to Your Comment</a> on \"%1$s\""
+msgid "New Replies to Your Comment</a> on <em>%1$s</em>"
 msgstr ""
 
 #: includes/templates/type-a/email/comment-notification/message.php:72
-msgid "New Replies to <a href=\"%1$s\">a Comment</a> on \"%2$s\""
+msgid "New Replies to <a href=\"%1$s\">a Comment</a> on <em>%2$s</em>"
 msgstr ""
 
 #: includes/templates/type-a/email/comment-notification/message.php:76
-msgid "New Comments on \"<a href=\"%1$s\">%2$s</a>\""
+msgid "New Comments on <em><a href=\"%1$s\">%2$s</a></em>"
 msgstr ""
 
 #: includes/templates/type-a/email/comment-notification/message.php:84
-msgid "New Reply to Your Comment</a> on \"%1$s\""
+msgid "New Reply to Your Comment</a> on <em>%1$s</em>"
 msgstr ""
 
 #: includes/templates/type-a/email/comment-notification/message.php:86
-msgid "New Reply to <a href=\"%1$s\">a Comment</a> on \"%2$s\""
+msgid "New Reply to <a href=\"%1$s\">a Comment</a> on <em>%2$s</em>"
 msgstr ""
 
 #: includes/templates/type-a/email/comment-notification/message.php:90
-msgid "New Comment on \"<a href=\"%1$s\">%2$s</a>\""
+msgid "New Comment on <em><a href=\"%1$s\">%2$s</a></em>"
 msgstr ""
 
 #: includes/templates/type-a/email/comment-notification/message.php:132
@@ -4872,27 +4878,27 @@ msgid "Your reply will be posted publicly and immediately."
 msgstr ""
 
 #: includes/templates/type-a/email/comment-notification/subject.php:47
-msgid "New Replies to your Comment on \"%1$s\""
+msgid "[New Replies to Your Comment] %1$s"
 msgstr ""
 
 #: includes/templates/type-a/email/comment-notification/subject.php:49
-msgid "New Replies to Comment ID #%1$s on \"%2$s\""
+msgid "[New Replies to Comment ID #%1$s] %2$s"
 msgstr ""
 
 #: includes/templates/type-a/email/comment-notification/subject.php:53
-msgid "New Comments on \"%1$s\""
+msgid "[New Comments] %1$s"
 msgstr ""
 
 #: includes/templates/type-a/email/comment-notification/subject.php:61
-msgid "New Reply to your Comment on \"%1$s\""
+msgid "[New Reply to Your Comment] %1$s"
 msgstr ""
 
 #: includes/templates/type-a/email/comment-notification/subject.php:63
-msgid "New Reply to Comment ID #%1$s on \"%2$s\""
+msgid "[New Reply to Comment ID #%1$s] %2$s"
 msgstr ""
 
 #: includes/templates/type-a/email/comment-notification/subject.php:67
-msgid "New Comment on \"%1$s\""
+msgid "[New Comment] %1$s"
 msgstr ""
 
 #: includes/templates/type-a/email/footer.php:54
@@ -4957,15 +4963,15 @@ msgid "your subscription."
 msgstr ""
 
 #: includes/templates/type-a/email/sub-confirmation/message.php:83
-msgid "You are receiving this email because asked to be notified about replies to <a href=\"%1$s\">your comment</a>; on:"
+msgid "You are receiving this email because you asked to be notified about replies to <a href=\"%1$s\">your comment</a>; on:"
 msgstr ""
 
 #: includes/templates/type-a/email/sub-confirmation/message.php:85
-msgid "You are receiving this email because asked to be notified about replies to <a href=\"%1$s\">this comment</a>; on:"
+msgid "You are receiving this email because you asked to be notified about replies to <a href=\"%1$s\">this comment</a>; on:"
 msgstr ""
 
 #: includes/templates/type-a/email/sub-confirmation/message.php:89
-msgid "You are receiving this email because asked to be notified about all comments/replies to:"
+msgid "You are receiving this email because you asked to be notified about all comments/replies to:"
 msgstr ""
 
 #: includes/templates/type-a/email/sub-confirmation/message.php:117
@@ -4988,15 +4994,15 @@ msgid "Confirm subscription"
 msgstr ""
 
 #: includes/templates/type-a/email/sub-confirmation/subject.php:42
-msgid "to your comment on \"%1$s\""
+msgid "to your comment on: %1$s"
 msgstr ""
 
 #: includes/templates/type-a/email/sub-confirmation/subject.php:44
-msgid "to comment ID #%1$s on \"%2$s\""
+msgid "to comment ID #%1$s on: %2$s"
 msgstr ""
 
 #: includes/templates/type-a/email/sub-confirmation/subject.php:48
-msgid "to \"%1$s\""
+msgid "to: %1$s"
 msgstr ""
 
 #: includes/templates/type-a/site/comment-form/sso-ops.php:21
@@ -5032,11 +5038,6 @@ msgstr ""
 msgid "Notify Me"
 msgstr ""
 
-#: includes/templates/type-a/site/comment-form/sub-ops.php:61
-#: includes/templates/type-s/site/comment-form/sub-ops.php:100
-msgid "instantly"
-msgstr ""
-
 #: includes/templates/type-a/site/comment-form/sub-ops.php:62
 #: includes/templates/type-s/site/comment-form/sub-ops.php:101
 msgid "hourly digest"
@@ -5058,7 +5059,7 @@ msgid "Yes, I want to receive blog updates also."
 msgstr ""
 
 #: includes/templates/type-a/site/comment-form/sub-ops.php:74
-msgid "Or, you can <a href=\"%1$s\" target=\"_blank\">subscribe without commenting</a>."
+msgid "Or, you can <a href=\"%1$s\">subscribe without commenting</a>."
 msgstr ""
 
 #: includes/templates/type-a/site/comment-form/sub-ops.php:76
@@ -5074,7 +5075,7 @@ msgid "My Comment Subscriptions"
 msgstr ""
 
 #: includes/templates/type-a/site/footer-tag.php:56
-msgid "Return to \"%1$s\""
+msgid "Return to <em>%1$s</em>"
 msgstr ""
 
 #: includes/templates/type-a/site/footer-tag.php:62
@@ -5138,9 +5139,9 @@ msgid "<i class=\"fa fa-fw fa-envelope-o\"></i> Email Address"
 msgstr ""
 
 #: includes/templates/type-a/site/sso-actions/complete.php:108
-#: includes/templates/type-a/site/sub-actions/manage-sub-form.php:226
+#: includes/templates/type-a/site/sub-actions/manage-sub-form.php:225
 #: includes/templates/type-s/site/sso-actions/complete.php:108
-#: includes/templates/type-s/site/sub-actions/manage-sub-form.php:226
+#: includes/templates/type-s/site/sub-actions/manage-sub-form.php:225
 msgid "<i class=\"fa fa-fw fa-level-up fa-rotate-90\"></i> Last Name"
 msgstr ""
 
@@ -5220,13 +5221,6 @@ msgstr ""
 #: includes/templates/type-s/site/sub-actions/manage-sub-form-comment-id-row-via-ajax.php:20
 #: includes/templates/type-s/site/sub-actions/manage-sub-form.php:203
 msgid "<i class=\"fa fa-fw fa-comment-o\"></i> Comment"
-msgstr ""
-
-#: includes/templates/type-a/site/sub-actions/manage-sub-form-comment-id-row-via-ajax.php:22
-#: includes/templates/type-a/site/sub-actions/manage-sub-form.php:205
-#: includes/templates/type-s/site/sub-actions/manage-sub-form-comment-id-row-via-ajax.php:22
-#: includes/templates/type-s/site/sub-actions/manage-sub-form.php:205
-msgid "If empty, you'll be subscribed to all comments/replies; i.e. NOT to a specific comment."
 msgstr ""
 
 #: includes/templates/type-a/site/sub-actions/manage-sub-form.php:60

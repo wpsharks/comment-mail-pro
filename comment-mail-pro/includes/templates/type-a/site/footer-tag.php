@@ -53,7 +53,7 @@ $can_spam_privacy_policy_url = $plugin->options['can_spam_privacy_policy_url'];
 			<?php endif; ?>
 
 			<a href="<?php echo esc_attr($home_url); ?>">
-				<i class="fa fa-home"></i> <?php echo sprintf(__('Return to "%1$s"', $plugin->text_domain), esc_html($blog_name_clip)); ?>
+				<i class="fa fa-home"></i> <?php echo sprintf(__('Return to <em>%1$s</em>', $plugin->text_domain), esc_html($blog_name_clip)); ?>
 			</a>
 
 			<?php if($can_spam_privacy_policy_url): ?>
