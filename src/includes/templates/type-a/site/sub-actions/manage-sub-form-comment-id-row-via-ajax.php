@@ -1,5 +1,5 @@
 <?php
-namespace comment_mail;
+namespace WebSharks\CommentMail\Pro;
 /**
  * @var plugin      $plugin Plugin class.
  * @var template    $template Template class.

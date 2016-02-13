@@ -6,7 +6,7 @@
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license GNU General Public License, version 3
  */
-namespace comment_mail // Root namespace.
+namespace WebSharks\CommentMail\Pro
 {
 
   if(!defined('WPINC')) // MUST have WordPress.
