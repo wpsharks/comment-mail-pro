@@ -19,6 +19,10 @@
     "name": "raamdev",
     "homepage": "http://raam.org/",
     "role": "developer"
+  }, {
+    "name": "kristineds",
+    "homepage": "http://www.strivingcoder.com/",
+    "role": "developer"
   }],
 
   "support": {
