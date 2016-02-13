@@ -13,7 +13,7 @@ namespace comment_mail {
 
 	require_once dirname(__FILE__).'/includes/classes/abs-base.php';
 
-	if(!class_exists('\\'.__NAMESPACE__.'\\plugin'))
+	if(!class_exists('\\'.__NAMESPACE__.'\\Plugin'))
 	{
 		/**
 		 * Plugin Class
@@ -46,7 +46,7 @@ namespace comment_mail {
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class plugin extends abs_base
+		class Plugin extends abs_base
 		{
 			/*
 			 * Public Properties
