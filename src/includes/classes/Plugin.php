@@ -2535,33 +2535,4 @@ namespace WebSharks\CommentMail\Pro;
 			}
 		}
 
-		/*
-		 * Namespaced Functions
-		 */
-
-		/**
-		 * Used internally by other classes as an easy way to reference
-		 *    the core {@link plugin} class instance.
-		 *
-		 * @since 141111 First documented version.
-		 *
-		 * @return plugin Class instance.
-		 */
-		function plugin() // Easy reference.
-		{
-			return $GLOBALS[GLOBAL_NS];
-		}
-
-		/*
-		 * Automatic Plugin Loader
-		 */
-
-		/**
-		 * A global reference to the plugin.
-		 *
-		 * @since 141111 First documented version.
-		 *
-		 * @var plugin Main plugin class.
-		 */
-		if(!isset($GLOBALS[GLOBAL_NS.'_autoload_plugin']) || $GLOBALS[GLOBAL_NS.'_autoload_plugin'])
-			$GLOBALS[GLOBAL_NS] = new plugin(); // Load plugin automatically.
+		

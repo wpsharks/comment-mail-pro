@@ -11,7 +11,6 @@ if (!defined('WPINC')) {
 }
 require_once dirname(__FILE__).'/stub.php';
 
-$GLOBALS[GLOBAL_NS.'_uninstalling']    = true;
-$GLOBALS[GLOBAL_NS.'_autoload_plugin'] = false;
-$GLOBALS[GLOBAL_NS]                    = new Plugin(false);
+$GLOBALS[GLOBAL_NS.'_uninstalling'] = true;
+$GLOBALS[GLOBAL_NS]                 = new Plugin(false);
 $GLOBALS[GLOBAL_NS]->uninstall();
