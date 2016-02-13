@@ -9,11 +9,7 @@
 namespace WebSharks\CommentMail\Pro;
 
 
-	if(!defined('WPINC')) // MUST have WordPress.
-		exit('Do NOT access this file directly: '.basename(__FILE__));
 
-	if(!class_exists('\\'.__NAMESPACE__.'\\installer'))
-	{
 		/**
 		 * Install Routines
 		 *
@@ -93,4 +89,4 @@ namespace WebSharks\CommentMail\Pro;
 					update_option(GLOBAL_NS.'_install_time', time());
 			}
 		}
-	}
+	

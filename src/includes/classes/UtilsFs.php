@@ -9,11 +9,7 @@
 namespace WebSharks\CommentMail\Pro;
 
 
-	if(!defined('WPINC')) // MUST have WordPress.
-		exit('Do NOT access this file directly: '.basename(__FILE__));
 
-	if(!class_exists('\\'.__NAMESPACE__.'\\utils_fs'))
-	{
 		/**
 		 * File System Utilities
 		 *
@@ -232,4 +228,4 @@ namespace WebSharks\CommentMail\Pro;
 				return ($icon = file_get_contents(dirname(dirname(dirname(__FILE__))).'/client-s/images/inline-icon.svg'));
 			}
 		}
-	}
+	

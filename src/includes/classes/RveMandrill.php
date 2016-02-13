@@ -9,11 +9,7 @@
 namespace WebSharks\CommentMail\Pro;
 
 
-	if(!defined('WPINC')) // MUST have WordPress.
-		exit('Do NOT access this file directly: '.basename(__FILE__));
 
-	if(!class_exists('\\'.__NAMESPACE__.'\\rve_mandrill'))
-	{
 		/**
 		 * Replies via Email; Mandrill Webhook Listener
 		 *
@@ -270,4 +266,4 @@ namespace WebSharks\CommentMail\Pro;
 				$this->plugin->utils_rve->maybe_post_comment($post_comment_args);
 			}
 		}
-	}
+	

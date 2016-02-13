@@ -9,11 +9,7 @@
 namespace WebSharks\CommentMail\Pro;
 
 
-	if(!defined('WPINC')) // MUST have WordPress.
-		exit('Do NOT access this file directly: '.basename(__FILE__));
 
-	if(!class_exists('\\'.__NAMESPACE__.'\\utils_markup'))
-	{
 		/**
 		 * Markup Utilities
 		 *
@@ -963,4 +959,4 @@ namespace WebSharks\CommentMail\Pro;
 				'coffee'    => array('base' => '#F3F2F1', 'focus' => '#FFFFFF', 'current' => '#FFFFFF'),
 			);
 		}
-	}
+	

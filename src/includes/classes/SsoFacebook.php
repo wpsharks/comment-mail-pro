@@ -9,11 +9,7 @@
 namespace WebSharks\CommentMail\Pro;
 
 
-	if(!defined('WPINC')) // MUST have WordPress.
-		exit('Do NOT access this file directly: '.basename(__FILE__));
 
-	if(!class_exists('\\'.__NAMESPACE__.'\\sso_facebook'))
-	{
 		/**
 		 * SSO for Facebook
 		 *
@@ -121,4 +117,4 @@ namespace WebSharks\CommentMail\Pro;
 				}
 			}
 		}
-	}
+	

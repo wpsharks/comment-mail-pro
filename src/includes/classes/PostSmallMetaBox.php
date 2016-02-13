@@ -9,11 +9,7 @@
 namespace WebSharks\CommentMail\Pro;
 
 
-	if(!defined('WPINC')) // MUST have WordPress.
-		exit('Do NOT access this file directly: '.basename(__FILE__));
 
-	if(!class_exists('\\'.__NAMESPACE__.'\\post_small_meta_box'))
-	{
 		/**
 		 * Post Small Meta Box
 		 *
@@ -73,4 +69,4 @@ namespace WebSharks\CommentMail\Pro;
 					return; // For future implementation.
 			}
 		}
-	}
+	

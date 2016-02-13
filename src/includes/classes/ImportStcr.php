@@ -9,11 +9,7 @@
 namespace WebSharks\CommentMail\Pro;
 
 
-	if(!defined('WPINC')) // MUST have WordPress.
-		exit('Do NOT access this file directly: '.basename(__FILE__));
 
-	if(!class_exists('\\'.__NAMESPACE__.'\\import_stcr'))
-	{
 		/**
 		 * StCR Importer
 		 *
@@ -705,4 +701,4 @@ namespace WebSharks\CommentMail\Pro;
 				file_put_contents($log_file, $log_entry, FILE_APPEND);
 			}
 		}
-	}
+	

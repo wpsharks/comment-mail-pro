@@ -9,11 +9,7 @@
 namespace WebSharks\CommentMail\Pro;
 
 
-	if(!defined('WPINC')) // MUST have WordPress.
-		exit('Do NOT access this file directly: '.basename(__FILE__));
 
-	if(!class_exists('\\'.__NAMESPACE__.'\\sub_event_log_inserter'))
-	{
 		/**
 		 * Sub. Event Log Inserter
 		 *
@@ -154,4 +150,4 @@ namespace WebSharks\CommentMail\Pro;
 					throw new \exception(__('Insertion failure.', $this->plugin->text_domain));
 			}
 		}
-	}
+	

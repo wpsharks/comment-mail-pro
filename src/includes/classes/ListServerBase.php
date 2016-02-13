@@ -9,10 +9,7 @@
 namespace WebSharks\CommentMail\Pro;
 
 
-    if(!defined('WPINC')) // MUST have WordPress.
-        exit('Do NOT access this file directly: '.basename(__FILE__));
-    if(!class_exists('\\'.__NAMESPACE__.'\\list_server_base'))
-    {
+
         /**
          * List Server Abstraction
          *
@@ -44,4 +41,4 @@ namespace WebSharks\CommentMail\Pro;
              */
             abstract public function unsubscribe(array $list, array $args);
         }
-    }
+    

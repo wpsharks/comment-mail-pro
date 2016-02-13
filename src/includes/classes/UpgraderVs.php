@@ -9,11 +9,7 @@
 namespace WebSharks\CommentMail\Pro;
 
 
-	if(!defined('WPINC')) // MUST have WordPress.
-		exit('Do NOT access this file directly: '.basename(__FILE__));
 
-	if(!class_exists('\\'.__NAMESPACE__.'\\upgrader_vs'))
-	{
 		/**
 		 * Upgrader (Version-Specific)
 		 *
@@ -89,4 +85,4 @@ namespace WebSharks\CommentMail\Pro;
 				) throw new \exception(__('Query failure.', $this->plugin->text_domain));
 			}
 		}
-	}
+	

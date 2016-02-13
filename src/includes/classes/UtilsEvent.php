@@ -9,11 +9,7 @@
 namespace WebSharks\CommentMail\Pro;
 
 
-	if(!defined('WPINC')) // MUST have WordPress.
-		exit('Do NOT access this file directly: '.basename(__FILE__));
 
-	if(!class_exists('\\'.__NAMESPACE__.'\\utils_event'))
-	{
 		/**
 		 * Event Utilities
 		 *
@@ -440,4 +436,4 @@ namespace WebSharks\CommentMail\Pro;
 				return '<a href="#" class="pmp-q-link" data-toggle="alert" data-alert="'.esc_attr($details).'">'.__('[?]', $this->plugin->text_domain).'</a>';
 			}
 		}
-	}
+	

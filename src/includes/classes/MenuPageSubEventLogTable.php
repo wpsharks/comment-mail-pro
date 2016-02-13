@@ -9,11 +9,7 @@
 namespace WebSharks\CommentMail\Pro;
 
 
-	if(!defined('WPINC')) // MUST have WordPress.
-		exit('Do NOT access this file directly: '.basename(__FILE__));
 
-	if(!class_exists('\\'.__NAMESPACE__.'\\menu_page_sub_event_log_table'))
-	{
 		/**
 		 * Menu Page Sub. Event Log Table
 		 *
@@ -485,4 +481,4 @@ namespace WebSharks\CommentMail\Pro;
 				return !empty($counter) ? (integer)$counter : 0;
 			}
 		}
-	}
+	

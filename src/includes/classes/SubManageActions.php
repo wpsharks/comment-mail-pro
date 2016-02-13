@@ -9,11 +9,7 @@
 namespace WebSharks\CommentMail\Pro;
 
 
-	if(!defined('WPINC')) // MUST have WordPress.
-		exit('Do NOT access this file directly: '.basename(__FILE__));
 
-	if(!class_exists('\\'.__NAMESPACE__.'\\sub_manage_actions'))
-	{
 		/**
 		 * Sub. Management Actions
 		 *
@@ -203,4 +199,4 @@ namespace WebSharks\CommentMail\Pro;
 				// Do NOT stop; allow `summary` action to run also.
 			}
 		}
-	}
+	

@@ -9,11 +9,7 @@
 namespace WebSharks\CommentMail\Pro;
 
 
-	if(!defined('WPINC')) // MUST have WordPress.
-		exit('Do NOT access this file directly: '.basename(__FILE__));
 
-	if(!class_exists('\\'.__NAMESPACE__.'\\mail_smtp'))
-	{
 		/**
 		 * SMTP Mailer
 		 *
@@ -375,4 +371,4 @@ namespace WebSharks\CommentMail\Pro;
 				$this->mailer->AltBody = '';
 			}
 		}
-	}
+	

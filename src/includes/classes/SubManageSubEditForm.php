@@ -9,11 +9,7 @@
 namespace WebSharks\CommentMail\Pro;
 
 
-	if(!defined('WPINC')) // MUST have WordPress.
-		exit('Do NOT access this file directly: '.basename(__FILE__));
 
-	if(!class_exists('\\'.__NAMESPACE__.'\\sub_manage_sub_edit_form'))
-	{
 		/**
 		 * Sub. Management Sub. Edit Form
 		 *
@@ -33,4 +29,4 @@ namespace WebSharks\CommentMail\Pro;
 				parent::__construct((string)$sub_key);
 			}
 		}
-	}
+	

@@ -9,11 +9,7 @@
 namespace WebSharks\CommentMail\Pro;
 
 
-	if(!defined('WPINC')) // MUST have WordPress.
-		exit('Do NOT access this file directly: '.basename(__FILE__));
 
-	if(!class_exists('\\'.__NAMESPACE__.'\\user_register'))
-	{
 		/**
 		 * User Register
 		 *
@@ -96,4 +92,4 @@ namespace WebSharks\CommentMail\Pro;
 					throw new \exception(__('Update failure.', $this->plugin->text_domain));
 			}
 		}
-	}
+	

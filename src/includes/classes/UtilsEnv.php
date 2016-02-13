@@ -9,11 +9,7 @@
 namespace WebSharks\CommentMail\Pro;
 
 
-	if(!defined('WPINC')) // MUST have WordPress.
-		exit('Do NOT access this file directly: '.basename(__FILE__));
 
-	if(!class_exists('\\'.__NAMESPACE__.'\\utils_env'))
-	{
 		/**
 		 * Environment Utilities
 		 *
@@ -186,4 +182,4 @@ namespace WebSharks\CommentMail\Pro;
 				return ($max = min($limits));
 			}
 		}
-	}
+	

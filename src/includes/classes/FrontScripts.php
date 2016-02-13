@@ -9,11 +9,7 @@
 namespace WebSharks\CommentMail\Pro;
 
 
-	if(!defined('WPINC')) // MUST have WordPress.
-		exit('Do NOT access this file directly: '.basename(__FILE__));
 
-	if(!class_exists('\\'.__NAMESPACE__.'\\front_scripts'))
-	{
 		/**
 		 * Front Scripts
 		 *
@@ -122,4 +118,4 @@ namespace WebSharks\CommentMail\Pro;
 				}, PHP_INT_MAX - 10); // Very low priority; after footer scripts!
 			}
 		}
-	}
+	

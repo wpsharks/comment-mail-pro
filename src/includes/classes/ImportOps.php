@@ -9,11 +9,7 @@
 namespace WebSharks\CommentMail\Pro;
 
 
-	if(!defined('WPINC')) // MUST have WordPress.
-		exit('Do NOT access this file directly: '.basename(__FILE__));
 
-	if(!class_exists('\\'.__NAMESPACE__.'\\import_ops'))
-	{
 		/**
 		 * Options Importer
 		 *
@@ -102,4 +98,4 @@ namespace WebSharks\CommentMail\Pro;
 				wp_redirect($this->plugin->utils_url->page_only()).exit();
 			}
 		}
-	}
+	

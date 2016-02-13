@@ -9,11 +9,7 @@
 namespace WebSharks\CommentMail\Pro;
 
 
-	if(!defined('WPINC')) // MUST have WordPress.
-		exit('Do NOT access this file directly: '.basename(__FILE__));
 
-	if(!class_exists('\\'.__NAMESPACE__.'\\sub_purger'))
-	{
 		/**
 		 * Sub Purger
 		 *
@@ -135,4 +131,4 @@ namespace WebSharks\CommentMail\Pro;
 					$this->purged += $this->plugin->utils_sub->bulk_delete($ids, array('purging' => TRUE));
 			}
 		}
-	}
+	

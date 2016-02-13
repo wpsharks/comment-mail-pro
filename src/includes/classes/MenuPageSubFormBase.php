@@ -9,11 +9,7 @@
 namespace WebSharks\CommentMail\Pro;
 
 
-	if(!defined('WPINC')) // MUST have WordPress.
-		exit('Do NOT access this file directly: '.basename(__FILE__));
 
-	if(!class_exists('\\'.__NAMESPACE__.'\\menu_page_sub_form_base'))
-	{
 		/**
 		 * Menu Page Sub. Form Base
 		 *
@@ -410,4 +406,4 @@ namespace WebSharks\CommentMail\Pro;
 				}
 			}
 		}
-	}
+	

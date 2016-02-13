@@ -9,11 +9,7 @@
 namespace WebSharks\CommentMail\Pro;
 
 
-	if(!defined('WPINC')) // MUST have WordPress.
-		exit('Do NOT access this file directly: '.basename(__FILE__));
 
-	if(!class_exists('\\'.__NAMESPACE__.'\\utils_user'))
-	{
 		/**
 		 * User Utilities
 		 *
@@ -127,4 +123,4 @@ namespace WebSharks\CommentMail\Pro;
 				return (boolean)get_option('users_can_register');
 			}
 		}
-	}
+	

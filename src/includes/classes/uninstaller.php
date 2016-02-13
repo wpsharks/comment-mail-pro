@@ -9,11 +9,7 @@
 namespace WebSharks\CommentMail\Pro;
 
 
-	if(!defined('WPINC')) // MUST have WordPress.
-		exit('Do NOT access this file directly: '.basename(__FILE__));
 
-	if(!class_exists('\\'.__NAMESPACE__.'\\uninstaller'))
-	{
 		/**
 		 * Uninstall Routines
 		 *
@@ -226,4 +222,4 @@ namespace WebSharks\CommentMail\Pro;
 				unset($_sql_file, $_sql_file_table); // Housekeeping.
 			}
 		}
-	}
+	

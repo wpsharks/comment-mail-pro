@@ -9,11 +9,7 @@
 namespace WebSharks\CommentMail\Pro;
 
 
-	if(!defined('WPINC')) // MUST have WordPress.
-		exit('Do NOT access this file directly: '.basename(__FILE__));
 
-	if(!class_exists('\\'.__NAMESPACE__.'\\comment_form_after'))
-	{
 		/**
 		 * Comment Form After
 		 *
@@ -107,4 +103,4 @@ namespace WebSharks\CommentMail\Pro;
 				echo $template->parse($template_vars);
 			}
 		}
-	}
+	

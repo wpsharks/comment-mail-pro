@@ -9,11 +9,7 @@
 namespace WebSharks\CommentMail\Pro;
 
 
-	if(!defined('WPINC')) // MUST have WordPress.
-		exit('Do NOT access this file directly: '.basename(__FILE__));
 
-	if(!class_exists('\\'.__NAMESPACE__.'\\queue_processor'))
-	{
 		/**
 		 * Queue Processor
 		 *
@@ -941,4 +937,4 @@ namespace WebSharks\CommentMail\Pro;
 				return $this->is_out_of_time();
 			}
 		}
-	}
+	

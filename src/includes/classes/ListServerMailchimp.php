@@ -9,10 +9,7 @@
 namespace WebSharks\CommentMail\Pro;
 
 
-    if(!defined('WPINC')) // MUST have WordPress.
-        exit('Do NOT access this file directly: '.basename(__FILE__));
-    if(!class_exists('\\'.__NAMESPACE__.'\\list_server_mailchimp'))
-    {
+
         /**
          * MailChimp List Server
          *
@@ -120,4 +117,4 @@ namespace WebSharks\CommentMail\Pro;
                 return !empty($mailchimp_response['complete']); // Test the return value for a true complete key.
             }
         }
-    }
+    

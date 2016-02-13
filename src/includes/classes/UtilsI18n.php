@@ -9,11 +9,7 @@
 namespace WebSharks\CommentMail\Pro;
 
 
-	if(!defined('WPINC')) // MUST have WordPress.
-		exit('Do NOT access this file directly: '.basename(__FILE__));
 
-	if(!class_exists('\\'.__NAMESPACE__.'\\utils_i18n'))
-	{
 		/**
 		 * i18n Utilities
 		 *
@@ -417,4 +413,4 @@ namespace WebSharks\CommentMail\Pro;
 					   __('If you want statistical reports to remain accurate, please leave ALL log entries intact.', $this->plugin->text_domain);
 			}
 		}
-	}
+	

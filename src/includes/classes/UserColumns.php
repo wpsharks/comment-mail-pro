@@ -9,11 +9,7 @@
 namespace WebSharks\CommentMail\Pro;
 
 
-  if(!defined('WPINC')) // MUST have WordPress.
-    exit('Do NOT access this file directly: '.basename(__FILE__));
 
-  if(!class_exists('\\'.__NAMESPACE__.'\\user_columns'))
-  {
     /**
      * User Columns
      *
@@ -72,4 +68,4 @@ namespace WebSharks\CommentMail\Pro;
         return $value;
       }
     }
-  }
+  

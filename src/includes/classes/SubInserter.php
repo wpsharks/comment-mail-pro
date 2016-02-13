@@ -9,11 +9,7 @@
 namespace WebSharks\CommentMail\Pro;
 
 
-	if(!defined('WPINC')) // MUST have WordPress.
-		exit('Do NOT access this file directly: '.basename(__FILE__));
 
-	if(!class_exists('\\'.__NAMESPACE__.'\\sub_inserter'))
-	{
 		/**
 		 * Sub Inserter
 		 *
@@ -1567,4 +1563,4 @@ namespace WebSharks\CommentMail\Pro;
 				$this->validated = TRUE; // Flag as `TRUE`; data validated.
 			}
 		}
-	}
+	

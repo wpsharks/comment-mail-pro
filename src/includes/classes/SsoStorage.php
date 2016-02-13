@@ -9,15 +9,11 @@
 namespace WebSharks\CommentMail\Pro;
 
 
-	if(!defined('WPINC')) // MUST have WordPress.
-		exit('Do NOT access this file directly: '.basename(__FILE__));
-
 	use OAuth\Common\Token\TokenInterface;
 	use OAuth\Common\Storage\Exception\TokenNotFoundException;
 	use OAuth\Common\Storage\Exception\AuthorizationStateNotFoundException;
 
-	if(!class_exists('\\'.__NAMESPACE__.'\\sso_storage'))
-	{
+
 		/**
 		 * SSO Storage
 		 *
@@ -283,4 +279,4 @@ namespace WebSharks\CommentMail\Pro;
 				return $this; // Allow chaining.
 			}
 		}
-	}
+	

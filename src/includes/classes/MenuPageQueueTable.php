@@ -9,11 +9,7 @@
 namespace WebSharks\CommentMail\Pro;
 
 
-	if(!defined('WPINC')) // MUST have WordPress.
-		exit('Do NOT access this file directly: '.basename(__FILE__));
 
-	if(!class_exists('\\'.__NAMESPACE__.'\\menu_page_queue_table'))
-	{
 		/**
 		 * Menu Page Queue Table
 		 *
@@ -307,4 +303,4 @@ namespace WebSharks\CommentMail\Pro;
 				return !empty($counter) ? (integer)$counter : 0;
 			}
 		}
-	}
+	

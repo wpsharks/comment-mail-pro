@@ -9,11 +9,7 @@
 namespace WebSharks\CommentMail\Pro;
 
 
-	if(!defined('WPINC')) // MUST have WordPress.
-		exit('Do NOT access this file directly: '.basename(__FILE__));
 
-	if(!class_exists('\\'.__NAMESPACE__.'\\comment_post'))
-	{
 		/**
 		 * Comment Post
 		 *
@@ -138,4 +134,4 @@ namespace WebSharks\CommentMail\Pro;
 				new queue_processor(FALSE, 10, 0, $realtime_max_limit); // No delay.
 			}
 		}
-	}
+	

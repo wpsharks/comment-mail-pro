@@ -9,11 +9,7 @@
 namespace WebSharks\CommentMail\Pro;
 
 
-	if(!defined('WPINC')) // MUST have WordPress.
-		exit('Do NOT access this file directly: '.basename(__FILE__));
 
-	if(!class_exists('\\'.__NAMESPACE__.'\\comment_shortlink_redirect'))
-	{
 		/**
 		 * Comment Shortlink Redirect
 		 *
@@ -55,4 +51,4 @@ namespace WebSharks\CommentMail\Pro;
 				wp_redirect($comment_link, 301).exit();
 			}
 		}
-	}
+	

@@ -9,11 +9,7 @@
 namespace WebSharks\CommentMail\Pro;
 
 
-	if(!defined('WPINC')) // MUST have WordPress.
-		exit('Do NOT access this file directly: '.basename(__FILE__));
 
-	if(!class_exists('\\'.__NAMESPACE__.'\\sub_updater'))
-	{
 		/**
 		 * Sub Updater
 		 *
@@ -39,4 +35,4 @@ namespace WebSharks\CommentMail\Pro;
 				parent::__construct($request_args, $args);
 			}
 		}
-	}
+	

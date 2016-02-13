@@ -9,11 +9,7 @@
 namespace WebSharks\CommentMail\Pro;
 
 
-	if(!defined('WPINC')) // MUST have WordPress.
-		exit('Do NOT access this file directly: '.basename(__FILE__));
 
-	if(!class_exists('\\'.__NAMESPACE__.'\\post_status'))
-	{
 		/**
 		 * Post Status Change Handler
 		 *
@@ -144,4 +140,4 @@ namespace WebSharks\CommentMail\Pro;
 						new sub_auto_injector($this->post->ID);
 			}
 		}
-	}
+	

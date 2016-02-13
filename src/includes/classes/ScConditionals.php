@@ -9,11 +9,7 @@
 namespace WebSharks\CommentMail\Pro;
 
 
-	if(!defined('WPINC')) // MUST have WordPress.
-		exit('Do NOT access this file directly: '.basename(__FILE__));
 
-	if(!class_exists('\\'.__NAMESPACE__.'\\sc_conditionals'))
-	{
 		/**
 		 * Shortcode Conditionals
 		 *
@@ -267,4 +263,4 @@ namespace WebSharks\CommentMail\Pro;
 				$this->string = @$this->plugin->utils_php->evaluate($this->string, $this->vars);
 			}
 		}
-	}
+	

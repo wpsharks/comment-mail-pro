@@ -9,14 +9,10 @@
 namespace WebSharks\CommentMail\Pro;
 
 
-	if(!defined('WPINC')) // MUST have WordPress.
-		exit('Do NOT access this file directly: '.basename(__FILE__));
-
 	if(!class_exists('\\WP_List_Table')) // WP core.
 		require_once ABSPATH.'wp-admin/includes/class-wp-list-table.php';
 
-	if(!class_exists('\\'.__NAMESPACE__.'\\menu_page_table_base'))
-	{
+
 		/**
 		 * Menu Page Table Base
 		 *
@@ -2154,4 +2150,4 @@ namespace WebSharks\CommentMail\Pro;
 				parent::display(); // Call parent handler now.
 			}
 		}
-	}
+	

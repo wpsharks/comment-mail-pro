@@ -9,11 +9,7 @@
 namespace WebSharks\CommentMail\Pro;
 
 
-	if(!defined('WPINC')) // MUST have WordPress.
-		exit('Do NOT access this file directly: '.basename(__FILE__));
 
-	if(!class_exists('\\'.__NAMESPACE__.'\\export_subs'))
-	{
 		/**
 		 * Sub Exporter
 		 *
@@ -158,4 +154,4 @@ namespace WebSharks\CommentMail\Pro;
 				return $results ? $results : array();
 			}
 		}
-	}
+	

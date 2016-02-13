@@ -9,13 +9,7 @@
 namespace WebSharks\CommentMail\Pro;
 
 
-	if(!defined('WPINC')) // MUST have WordPress.
-		exit('Do NOT access this file directly: '.basename(__FILE__));
 
-	require_once dirname(__FILE__).'/includes/classes/abs-base.php';
-
-	if(!class_exists('\\'.__NAMESPACE__.'\\plugin'))
-	{
 		/**
 		 * Plugin Class
 		 *
@@ -2571,19 +2565,3 @@ namespace WebSharks\CommentMail\Pro;
 		 */
 		if(!isset($GLOBALS[GLOBAL_NS.'_autoload_plugin']) || $GLOBALS[GLOBAL_NS.'_autoload_plugin'])
 			$GLOBALS[GLOBAL_NS] = new plugin(); // Load plugin automatically.
-	}
-
-	/*
-	 * Catch a scenario where the plugin class already exists.
-	 *    Assume both lite/pro are running in this case.
-	 */
-
-	else if(empty($GLOBALS[GLOBAL_NS.'_uninstalling'])) add_action('all_admin_notices', function ()
-	{
-		echo '<div class="error">'. // Notify the site owner.
-		     '   <p>'.
-		     '      '.sprintf(__('Please disable the lite version of <code>%1$s</code> before activating the pro version.',
-		                         str_replace('_', '-', GLOBAL_NS)), esc_html(str_replace('_', '-', GLOBAL_NS))).
-		     '   </p>'.
-		     '</div>';
-	});

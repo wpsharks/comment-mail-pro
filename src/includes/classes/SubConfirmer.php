@@ -9,11 +9,7 @@
 namespace WebSharks\CommentMail\Pro;
 
 
-	if(!defined('WPINC')) // MUST have WordPress.
-		exit('Do NOT access this file directly: '.basename(__FILE__));
 
-	if(!class_exists('\\'.__NAMESPACE__.'\\sub_confirmer'))
-	{
 		/**
 		 * Sub Confirmer
 		 *
@@ -236,4 +232,4 @@ namespace WebSharks\CommentMail\Pro;
 				return ($this->auto_confirmed = FALSE);
 			}
 		}
-	}
+	

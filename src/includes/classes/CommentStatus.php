@@ -9,11 +9,7 @@
 namespace WebSharks\CommentMail\Pro;
 
 
-	if(!defined('WPINC')) // MUST have WordPress.
-		exit('Do NOT access this file directly: '.basename(__FILE__));
 
-	if(!class_exists('\\'.__NAMESPACE__.'\\comment_status'))
-	{
 		/**
 		 * Comment Status
 		 *
@@ -105,4 +101,4 @@ namespace WebSharks\CommentMail\Pro;
 					new sub_purger($this->comment->comment_post_ID, $this->comment->comment_ID);
 			}
 		}
-	}
+	

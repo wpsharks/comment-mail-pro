@@ -9,11 +9,7 @@
 namespace WebSharks\CommentMail\Pro;
 
 
-	if(!defined('WPINC')) // MUST have WordPress.
-		exit('Do NOT access this file directly: '.basename(__FILE__));
 
-	if(!class_exists('\\'.__NAMESPACE__.'\\chart_data'))
-	{
 		/**
 		 * Chart Data; for Stats
 		 *
@@ -1312,4 +1308,4 @@ namespace WebSharks\CommentMail\Pro;
 				       '</div>';
 			}
 		}
-	}
+	

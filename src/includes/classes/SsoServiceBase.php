@@ -9,11 +9,7 @@
 namespace WebSharks\CommentMail\Pro;
 
 
-	if(!defined('WPINC')) // MUST have WordPress.
-		exit('Do NOT access this file directly: '.basename(__FILE__));
 
-	if(!class_exists('\\'.__NAMESPACE__.'\\sso_service_base'))
-	{
 		/**
 		 * SSO Service Base Abstraction
 		 *
@@ -340,4 +336,4 @@ namespace WebSharks\CommentMail\Pro;
 				exit(__('An unexpected error ocurred. Please start over and try again. Sorry!', $this->plugin->text_domain));
 			}
 		}
-	}
+	
