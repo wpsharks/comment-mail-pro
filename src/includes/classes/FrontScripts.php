@@ -1,15 +1,16 @@
 <?php
 /**
- * Front Scripts
+ * Front Scripts.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * Front Scripts
+ * Front Scripts.
  *
  * @since 141111 First documented version.
  */
@@ -52,7 +53,7 @@ class FrontScripts extends AbsBase
         }
         wp_enqueue_script('jquery'); // Need jQuery.
 
-        add_action( // Very low priority; after footer scripts!
+        add_action(// Very low priority; after footer scripts!
             'login_footer',
             function () {
                 $template = new Template('site/login-form/sso-op-scripts.php');
@@ -82,7 +83,7 @@ class FrontScripts extends AbsBase
         }
         wp_enqueue_script('jquery'); // Need jQuery.
 
-        add_action( // Very low priority; after footer scripts!
+        add_action(// Very low priority; after footer scripts!
             'wp_footer',
             function () {
                 $template = new Template('site/comment-form/sso-op-scripts.php');
@@ -115,7 +116,7 @@ class FrontScripts extends AbsBase
         }
         wp_enqueue_script('jquery'); // Need jQuery.
 
-        add_action( // Very low priority; after footer scripts!
+        add_action(// Very low priority; after footer scripts!
             'wp_footer',
             function () {
                 $template = new Template('site/comment-form/sub-op-scripts.php');
