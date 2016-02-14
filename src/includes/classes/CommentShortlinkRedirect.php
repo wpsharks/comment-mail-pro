@@ -1,15 +1,16 @@
 <?php
 /**
- * Comment Shortlink Redirect
+ * Comment Shortlink Redirect.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * Comment Shortlink Redirect
+ * Comment Shortlink Redirect.
  *
  * @since 141111 First documented version.
  */
@@ -37,7 +38,7 @@ class CommentShortlinkRedirect extends AbsBase
         if (empty($_REQUEST['c']) || is_admin()) {
             return; // Nothing to do.
         }
-        if (!($comment_id = (integer)$_REQUEST['c'])) {
+        if (!($comment_id = (integer) $_REQUEST['c'])) {
             return; // Not applicable.
         }
         if (!($comment = get_comment($comment_id))) {
@@ -50,4 +51,3 @@ class CommentShortlinkRedirect extends AbsBase
         exit();
     }
 }
-	
