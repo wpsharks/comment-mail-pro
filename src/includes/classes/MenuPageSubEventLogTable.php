@@ -480,7 +480,7 @@ class MenuPageSubEventLogTable extends MenuPageTableBase
         switch ($bulk_action) // Bulk action handler.
         {
             case 'delete': // Deleting log entries?
-                $counter = $this->plugin->utils_sub_event_log->bulk_delete($ids);
+                $counter = $this->plugin->utils_sub_event_log->bulkDelete($ids);
                 break; // Break switch handler.
         }
         return !empty($counter) ? (integer)$counter : 0;
