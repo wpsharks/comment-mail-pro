@@ -402,7 +402,7 @@ class ChartData extends AbsBase
                 $data[]              = [ // Adds a new data row for the table we are building.
                                          [
                                            'v' => strtoupper($_result->country), // Value and full name.
-                                           'f' => $this->plugin->utils_map->country_name($_result->country),
+                                           'f' => $this->plugin->utils_map->countryName($_result->country),
                                          ],
                                          $_result->total_subs, '', // To be filled after.
                 ];
