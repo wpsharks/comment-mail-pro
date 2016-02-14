@@ -1,106 +1,107 @@
 <?php
 /**
- * SMTP Mailer
+ * SMTP Mailer.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * SMTP Mailer
+ * SMTP Mailer.
  *
  * @since 141111 First documented version.
  */
 class MailSmtp extends AbsBase
 {
     /**
-     * @var boolean Debugging enable?
+     * @type bool Debugging enable?
      *
      * @since 141111 First documented version.
      */
     protected $debug;
 
     /**
-     * @var string Debug output in HTML markup.
+     * @type string Debug output in HTML markup.
      *
      * @since 141111 First documented version.
      */
     protected $debug_output_markup;
 
     /**
-     * @var string From name.
+     * @type string From name.
      *
      * @since 141111 First documented version.
      */
     protected $from_name;
 
     /**
-     * @var string From email address.
+     * @type string From email address.
      *
      * @since 141111 First documented version.
      */
     protected $from_email;
 
     /**
-     * @var string Reply-to email address.
+     * @type string Reply-to email address.
      *
      * @since 141111 First documented version.
      */
     protected $reply_to_email;
 
     /**
-     * @var array Recipients.
+     * @type array Recipients.
      *
      * @since 141111 First documented version.
      */
     protected $recipients;
 
     /**
-     * @var string Subject line.
+     * @type string Subject line.
      *
      * @since 141111 First documented version.
      */
     protected $subject;
 
     /**
-     * @var string Raw message body.
+     * @type string Raw message body.
      *
      * @since 141111 First documented version.
      */
     protected $message;
 
     /**
-     * @var string Message HTML body.
+     * @type string Message HTML body.
      *
      * @since 141111 First documented version.
      */
     protected $message_html;
 
     /**
-     * @var string Message text body.
+     * @type string Message text body.
      *
      * @since 141111 First documented version.
      */
     protected $message_text;
 
     /**
-     * @var array Additional headers.
+     * @type array Additional headers.
      *
      * @since 141111 First documented version.
      */
     protected $headers;
 
     /**
-     * @var array Attachments.
+     * @type array Attachments.
      *
      * @since 141111 First documented version.
      */
     protected $attachments;
 
     /**
-     * @var \PHPMailer PHPMailer instance.
+     * @type \PHPMailer PHPMailer instance.
      *
      * @since 141111 First documented version.
      */
@@ -111,7 +112,7 @@ class MailSmtp extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param boolean $debug Enable debugging?
+     * @param bool $debug Enable debugging?
      *
      * @throws \exception If !`smtp_enable` or `smtp_host|port` are missing.
      */
@@ -119,7 +120,7 @@ class MailSmtp extends AbsBase
     {
         parent::__construct();
 
-        $this->debug               = (boolean)$debug;
+        $this->debug               = (boolean) $debug;
         $this->debug_output_markup = '';
 
         $this->from_name      = '';
@@ -174,13 +175,12 @@ class MailSmtp extends AbsBase
      * @param string       $message     Message contents.
      * @param string|array $headers     Optional. Additional headers.
      * @param string|array $attachments Optional. Files to attach.
-     *
-     * @param boolean      $throw       Defaults to a `FALSE` value.
+     * @param bool         $throw       Defaults to a `FALSE` value.
      *                                  If `TRUE`, an exception might be thrown here.
      *
-     * @return boolean `TRUE` if the email was sent successfully.
-     *
      * @throws \exception If `$throw` is `TRUE` and a failure occurs.
+     * @return bool `TRUE` if the email was sent successfully.
+     *
      */
     public function send($to, $subject, $message, $headers = [], $attachments = [], $throw = false)
     {
@@ -201,9 +201,9 @@ class MailSmtp extends AbsBase
 
             $this->mailer->SMTPSecure = $this->plugin->options['smtp_secure'];
             $this->mailer->Host       = $this->plugin->options['smtp_host'];
-            $this->mailer->Port       = (integer)$this->plugin->options['smtp_port'];
+            $this->mailer->Port       = (integer) $this->plugin->options['smtp_port'];
 
-            $this->mailer->SMTPAuth = (boolean)$this->plugin->options['smtp_username'];
+            $this->mailer->SMTPAuth = (boolean) $this->plugin->options['smtp_username'];
             $this->mailer->Username = $this->plugin->options['smtp_username'];
             $this->mailer->Password = $this->plugin->options['smtp_password'];
 
@@ -245,7 +245,7 @@ class MailSmtp extends AbsBase
                 // So we pickup goodbye errors too.
                 $this->debug_output_markup .= ob_get_clean();
             }
-            return (boolean)$response;
+            return (boolean) $response;
         } catch (\exception $exception) {
             if ($this->debug) { // Debugging?
                 $this->debug_output_markup // Add to debug output.
@@ -290,8 +290,8 @@ class MailSmtp extends AbsBase
         $this->recipients = $this->plugin->utils_mail->parseAddressesDeep($to, false, true);
 
         // Establish subject line and raw input message body.
-        $this->subject = (string)$subject; // Force string at all times.
-        $this->message = (string)$message; // Force string at all times.
+        $this->subject = (string) $subject; // Force string at all times.
+        $this->message = (string) $message; // Force string at all times.
 
         // Detect raw message body type for analysis below.
         $is_message_html = $this->plugin->utils_string->isHtml($this->message);
@@ -368,4 +368,3 @@ class MailSmtp extends AbsBase
         $this->mailer->AltBody = '';
     }
 }
-	
