@@ -1880,7 +1880,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
         $counter = $this->processBulkAction($bulk_action, $ids);
 
         if (method_exists($this->plugin->utils_i18n, $this->plural_name)) {
-            $this->plugin->enqueue_user_notice(
+            $this->plugin->enqueueUserNotice(
               sprintf(
                 __('Action complete. %1$s %2$s.', $this->plugin->text_domain),
                 esc_html($this->plugin->utils_i18n->{$this->plural_name}($counter)),

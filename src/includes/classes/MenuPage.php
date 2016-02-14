@@ -91,7 +91,7 @@ class MenuPage extends AbsBase
 
         echo '         <h2 class="pmp-section-heading">'.
              '            '.__('Basic Configuration (Required)', $this->plugin->text_domain).
-             '            <small><span'.($this->plugin->install_time() > strtotime('-1 hour') ? ' class="pmp-hilite"' : '').'>'.
+             '            <small><span'.($this->plugin->installTime() > strtotime('-1 hour') ? ' class="pmp-hilite"' : '').'>'.
              sprintf(__('Review these basic options and %1$s&trade; will be ready-to-go!', $this->plugin->text_domain), esc_html($this->plugin->name)).'</span></small>'.
              '         </h2>';
 
@@ -4636,7 +4636,7 @@ class MenuPage extends AbsBase
             $notes .= '  '.sprintf(__('<small><strong>MORE:</strong> in addition to what you see below, the pro version also includes import/export functionality, stats/graphs, and advanced PHP-based template options. [<a href="%2$s" target="_blank">learn more</a>]</small>', $this->plugin->text_domain), esc_html($this->plugin->name), esc_attr($this->plugin->utils_url->product_page()))."\n";
             $notes .= '</div>'."\n";
         }
-        if ($this->plugin->install_time() > strtotime('-48 hours') && $this->plugin->utils_env->is_menu_page(GLOBAL_NS.'_*_templates')) {
+        if ($this->plugin->installTime() > strtotime('-48 hours') && $this->plugin->utils_env->is_menu_page(GLOBAL_NS.'_*_templates')) {
             $notes .= '<div class="pmp-note pmp-notice">'."\n";
             $notes .= '  '.__('All templates come preconfigured; customization is optional <i class="fa fa-smile-o"></i>', $this->plugin->text_domain)."\n";
             $notes .= '</div>'."\n";

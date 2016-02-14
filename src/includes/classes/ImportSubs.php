@@ -239,10 +239,10 @@ class ImportSubs extends AbsBase
             $error_markup .= '<ul class="pmp-list-items"><li>'.implode('</li><li>', $this->errorsHtml()).'</li></ul>';
         }
         if ($notice_markup) { // This really should always be displayed; even if we imported `0` subscriptions.
-            $this->plugin->enqueue_user_notice($notice_markup, ['transient' => true, 'for_page' => $this->plugin->utils_env->current_menu_page()]);
+            $this->plugin->enqueueUserNotice($notice_markup, ['transient' => true, 'for_page' => $this->plugin->utils_env->current_menu_page()]);
         }
         if ($error_markup) { // Are there any specific error messages that we can report?
-            $this->plugin->enqueue_user_error($error_markup, ['transient' => true, 'for_page' => $this->plugin->utils_env->current_menu_page()]);
+            $this->plugin->enqueueUserError($error_markup, ['transient' => true, 'for_page' => $this->plugin->utils_env->current_menu_page()]);
         }
         wp_redirect($this->plugin->utils_url->page_only());
         exit();

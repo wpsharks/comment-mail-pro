@@ -80,7 +80,7 @@ class ImportOps extends AbsBase
         $options_to_import = (array)$options_to_import; // Force array.
         unset($options_to_import['version'], $options_to_import['crons_setup']);
 
-        $this->plugin->options_save($options_to_import);
+        $this->plugin->optionsSave($options_to_import);
 
         $this->enqueueNoticesAndRedirect();
     }
@@ -94,7 +94,7 @@ class ImportOps extends AbsBase
     {
         $notice_markup = sprintf(__('<strong>Imported %1$s&trade; config. options successfully.</strong>', $this->plugin->text_domain), esc_html($this->plugin->name));
 
-        $this->plugin->enqueue_user_notice($notice_markup, ['transient' => true, 'for_page' => $this->plugin->utils_env->current_menu_page()]);
+        $this->plugin->enqueueUserNotice($notice_markup, ['transient' => true, 'for_page' => $this->plugin->utils_env->current_menu_page()]);
 
         wp_redirect($this->plugin->utils_url->page_only()).exit();
     }

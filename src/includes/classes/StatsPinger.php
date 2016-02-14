@@ -42,7 +42,7 @@ namespace WebSharks\CommentMail\Pro;
 				if ($this->plugin->options['last_pro_stats_log'] >= strtotime('-1 week'))
 					return; // No reason to keep pinging.
 
-				$this->plugin->options_quick_save(array('last_pro_stats_log' => (string)time()));
+				$this->plugin->optionsQuickSave(array('last_pro_stats_log' => (string)time()));
 
 				$stats_api_url      = 'https://stats.wpsharks.io/log';
 				$stats_api_url_args = array(

@@ -91,11 +91,11 @@ class MenuPageActions extends AbsBase
         if (!current_user_can($this->plugin->cap)) {
             return; // Unauthenticated; ignore.
         }
-        $this->plugin->options_save($request_args);
+        $this->plugin->optionsSave($request_args);
 
         $notice_markup = // Notice regarding options having been updated successfully.
           sprintf(__('%1$s&trade; options updated successfully.', $this->plugin->text_domain), esc_html($this->plugin->name));
-        $this->plugin->enqueue_user_notice($notice_markup, ['transient' => true]);
+        $this->plugin->enqueueUserNotice($notice_markup, ['transient' => true]);
 
         if (!empty($request_args['mail_test']) && ($mail_test_to = trim((string)$request_args['mail_test']))) {
             $mail_test = $this->plugin->utils_mail->test(
@@ -103,7 +103,7 @@ class MenuPageActions extends AbsBase
               sprintf(__('Test Email Message sent by %1$s™', $this->plugin->text_domain), $this->plugin->name),
               sprintf(__('Test email message sent by %1$s&trade; from: <code>%2$s</code>.', $this->plugin->text_domain), esc_html($this->plugin->name), esc_html($this->plugin->utils_url->current_host_path()))
             );
-            $this->plugin->enqueue_user_notice($mail_test->results_markup, ['transient' => true]);
+            $this->plugin->enqueueUserNotice($mail_test->results_markup, ['transient' => true]);
         }
         if (!empty($request_args['mail_smtp_test']) && ($mail_smtp_test_to = trim((string)$request_args['mail_smtp_test']))) {
             $mail_smtp_test = $this->plugin->utils_mail->smtp_test(
@@ -111,7 +111,7 @@ class MenuPageActions extends AbsBase
               sprintf(__('Test Email Message sent by %1$s™', $this->plugin->text_domain), $this->plugin->name),
               sprintf(__('Test email message sent by %1$s&trade; from: <code>%2$s</code>.', $this->plugin->text_domain), esc_html($this->plugin->name), esc_html($this->plugin->utils_url->current_host_path()))
             );
-            $this->plugin->enqueue_user_notice($mail_smtp_test->results_markup, ['transient' => true]);
+            $this->plugin->enqueueUserNotice($mail_smtp_test->results_markup, ['transient' => true]);
         }
         wp_redirect($this->plugin->utils_url->options_updated());
         exit();
@@ -131,7 +131,7 @@ class MenuPageActions extends AbsBase
         if (!current_user_can($this->plugin->cap)) {
             return; // Unauthenticated; ignore.
         }
-        $this->plugin->options_save(compact('template_type'));
+        $this->plugin->optionsSave(compact('template_type'));
 
         $notice_markup = // Notice regarding options having been updated successfully.
 
@@ -144,7 +144,7 @@ class MenuPageActions extends AbsBase
             ? 'A new set of templates has been loaded below. This mode uses advanced PHP-based templates. Recommended for advanced customization.</i>'
             : 'A new set of templates has been loaded below. This mode uses simple shortcode templates. Easiest to work with <i class="fa fa-smile-o"></i>');
 
-        $this->plugin->enqueue_user_notice($notice_markup, ['transient' => true]);
+        $this->plugin->enqueueUserNotice($notice_markup, ['transient' => true]);
 
         wp_redirect($this->plugin->utils_url->template_type_updated());
         exit();
@@ -171,7 +171,7 @@ class MenuPageActions extends AbsBase
 
         $notice_markup = // Notice regarding options having been retored successfully.
           sprintf(__('%1$s&trade; default options restored successfully.', $this->plugin->text_domain), esc_html($this->plugin->name));
-        $this->plugin->enqueue_user_notice($notice_markup, ['transient' => true]);
+        $this->plugin->enqueueUserNotice($notice_markup, ['transient' => true]);
 
         wp_redirect($this->plugin->utils_url->default_options_restored());
         exit();
@@ -407,7 +407,7 @@ class MenuPageActions extends AbsBase
             } else {
                 $error = __('Unknown error. Please wait 15 minutes and try again.', $this->plugin->text_domain);
             }
-            $this->plugin->enqueue_user_error($error); // For the current user only.
+            $this->plugin->enqueueUserError($error); // For the current user only.
 
             wp_redirect($this->plugin->utils_url->pro_updater_menu_page_only());
             exit();
@@ -417,7 +417,7 @@ class MenuPageActions extends AbsBase
         $this->plugin->options['pro_update_username']   = (string)$args['username'];
         $this->plugin->options['pro_update_password']   = (string)$args['password'];
 
-        $this->plugin->options_quick_save($this->plugin->options);
+        $this->plugin->optionsQuickSave($this->plugin->options);
 
         foreach (($notices = is_array($notices = get_option(GLOBAL_NS.'_notices')) ? $notices : []) as $_key => $_notice) {
             if (!empty($_notice['persistent_id']) && $_notice['persistent_id'] === 'new-pro-version-available') {
