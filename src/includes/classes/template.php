@@ -210,16 +210,16 @@ namespace WebSharks\CommentMail\Pro;
 
 				// All header-related templates.
 
-				if(is_null($site_header_template = &$this->cache_key(__FUNCTION__, 'site_header_template')))
+				if(is_null($site_header_template = &$this->cacheKey(__FUNCTION__, 'site_header_template')))
 					$site_header_template = new Template('site/header.php');
 
-				if(is_null($site_header_styles_template = &$this->cache_key(__FUNCTION__, 'site_header_styles_template')))
+				if(is_null($site_header_styles_template = &$this->cacheKey(__FUNCTION__, 'site_header_styles_template')))
 					$site_header_styles_template = new Template('site/header-styles.php');
 
-				if(is_null($site_header_scripts_template = &$this->cache_key(__FUNCTION__, 'site_header_scripts_template')))
+				if(is_null($site_header_scripts_template = &$this->cacheKey(__FUNCTION__, 'site_header_scripts_template')))
 					$site_header_scripts_template = new Template('site/header-scripts.php');
 
-				if(is_null($site_header_tag_template = &$this->cache_key(__FUNCTION__, 'site_header_tag_template')))
+				if(is_null($site_header_tag_template = &$this->cacheKey(__FUNCTION__, 'site_header_tag_template')))
 					$site_header_tag_template = new Template('site/header-tag.php');
 
 				$site_header_styles  = $site_header_styles_template->parse($vars);
@@ -230,10 +230,10 @@ namespace WebSharks\CommentMail\Pro;
 
 				// All footer-related templates.
 
-				if(is_null($site_footer_tag_template = &$this->cache_key(__FUNCTION__, 'site_footer_tag_template')))
+				if(is_null($site_footer_tag_template = &$this->cacheKey(__FUNCTION__, 'site_footer_tag_template')))
 					$site_footer_tag_template = new Template('site/footer-tag.php');
 
-				if(is_null($site_footer_template = &$this->cache_key(__FUNCTION__, 'site_footer_template')))
+				if(is_null($site_footer_template = &$this->cacheKey(__FUNCTION__, 'site_footer_template')))
 					$site_footer_template = new Template('site/footer.php');
 
 				$site_footer_tag  = $site_footer_tag_template->parse($vars);
@@ -266,16 +266,16 @@ namespace WebSharks\CommentMail\Pro;
 
 				// All header-related templates.
 
-				if(is_null($email_header_template = &$this->cache_key(__FUNCTION__, 'email_header_template')))
+				if(is_null($email_header_template = &$this->cacheKey(__FUNCTION__, 'email_header_template')))
 					$email_header_template = new Template('email/header.php');
 
-				if(is_null($email_header_styles_template = &$this->cache_key(__FUNCTION__, 'email_header_styles_template')))
+				if(is_null($email_header_styles_template = &$this->cacheKey(__FUNCTION__, 'email_header_styles_template')))
 					$email_header_styles_template = new Template('email/header-styles.php');
 
-				if(is_null($email_header_scripts_template = &$this->cache_key(__FUNCTION__, 'email_header_scripts_template')))
+				if(is_null($email_header_scripts_template = &$this->cacheKey(__FUNCTION__, 'email_header_scripts_template')))
 					$email_header_scripts_template = new Template('email/header-scripts.php');
 
-				if(is_null($email_header_tag_template = &$this->cache_key(__FUNCTION__, 'email_header_tag_template')))
+				if(is_null($email_header_tag_template = &$this->cacheKey(__FUNCTION__, 'email_header_tag_template')))
 					$email_header_tag_template = new Template('email/header-tag.php');
 
 				$email_header_styles  = $email_header_styles_template->parse($vars);
@@ -286,10 +286,10 @@ namespace WebSharks\CommentMail\Pro;
 
 				// All footer-related templates.
 
-				if(is_null($email_footer_tag_template = &$this->cache_key(__FUNCTION__, 'email_footer_tag_template')))
+				if(is_null($email_footer_tag_template = &$this->cacheKey(__FUNCTION__, 'email_footer_tag_template')))
 					$email_footer_tag_template = new Template('email/footer-tag.php');
 
-				if(is_null($email_footer_template = &$this->cache_key(__FUNCTION__, 'email_footer_template')))
+				if(is_null($email_footer_template = &$this->cacheKey(__FUNCTION__, 'email_footer_template')))
 					$email_footer_template = new Template('email/footer.php');
 
 				$email_footer_tag  = $email_footer_tag_template->parse($vars);

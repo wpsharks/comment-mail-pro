@@ -117,7 +117,7 @@ namespace WebSharks\CommentMail\Pro;
 
 				$required                 = (boolean)$args['required'];
 				$maxlength                = (integer)$args['maxlength'];
-				$current_value            = $this->isset_or($args['current_value'], NULL, 'string');
+				$current_value            = $this->issetOr($args['current_value'], NULL, 'string');
 				$current_value_empty_on_0 = (boolean)$args['current_value_empty_on_0'];
 
 				if($current_value_empty_on_0 && in_array($current_value, array(0, '0'), TRUE))
@@ -126,7 +126,7 @@ namespace WebSharks\CommentMail\Pro;
 				$notes_before = trim((string)$args['notes_before']);
 				$notes_after  = trim((string)$args['notes_after']);
 
-				$post_id              = $this->isset_or($args['post_id'], NULL, 'integer');
+				$post_id              = $this->issetOr($args['post_id'], NULL, 'integer');
 				$nested_checkbox_args = (array)$args['nested_checkbox_args'];
 				$field_class          = trim((string)$args['field_class']);
 				$other_attrs          = trim((string)$args['other_attrs']);
@@ -243,7 +243,7 @@ namespace WebSharks\CommentMail\Pro;
 				$rows                     = (integer)$args['rows'];
 				$required                 = (boolean)$args['required'];
 				$maxlength                = (integer)$args['maxlength'];
-				$current_value            = $this->isset_or($args['current_value'], NULL, 'string');
+				$current_value            = $this->issetOr($args['current_value'], NULL, 'string');
 				$current_value_empty_on_0 = (boolean)$args['current_value_empty_on_0'];
 
 				if($current_value_empty_on_0 && in_array($current_value, array(0, '0'), TRUE))
@@ -256,7 +256,7 @@ namespace WebSharks\CommentMail\Pro;
 				$notes_before = trim((string)$args['notes_before']);
 				$notes_after  = trim((string)$args['notes_after']);
 
-				$post_id              = $this->isset_or($args['post_id'], NULL, 'integer');
+				$post_id              = $this->issetOr($args['post_id'], NULL, 'integer');
 				$nested_checkbox_args = (array)$args['nested_checkbox_args'];
 				$field_class          = trim((string)$args['field_class']);
 				$other_attrs          = trim((string)$args['other_attrs']);
@@ -377,7 +377,7 @@ namespace WebSharks\CommentMail\Pro;
 				$required                 = (boolean)$args['required'];
 				$maxlength                = (integer)$args['maxlength'];
 				$options                  = !is_array($args['options']) ? trim((string)$args['options']) : $args['options'];
-				$current_value            = $this->isset_or($args['current_value'], NULL, 'string');
+				$current_value            = $this->issetOr($args['current_value'], NULL, 'string');
 				$current_value_empty_on_0 = (boolean)$args['current_value_empty_on_0'];
 
 				if($current_value_empty_on_0 && in_array($current_value, array(0, '0'), TRUE))
@@ -386,7 +386,7 @@ namespace WebSharks\CommentMail\Pro;
 				$notes_before = trim((string)$args['notes_before']);
 				$notes_after  = trim((string)$args['notes_after']);
 
-				$post_id              = $this->isset_or($args['post_id'], NULL, 'integer');
+				$post_id              = $this->issetOr($args['post_id'], NULL, 'integer');
 				$nested_checkbox_args = (array)$args['nested_checkbox_args'];
 				$field_class          = trim((string)$args['field_class']);
 				$other_attrs          = trim((string)$args['other_attrs']);
@@ -514,7 +514,7 @@ namespace WebSharks\CommentMail\Pro;
 				$id   = $this->plugin->slug.$this->ns_id_suffix.'-'.$slug;
 				$name = $root_name ? $name : GLOBAL_NS.$this->ns_name_suffix.'['.$name.']';
 
-				$current_value = $this->isset_or($args['current_value'], NULL, 'string');
+				$current_value = $this->issetOr($args['current_value'], NULL, 'string');
 				$checked       = $current_value ? ' checked="checked"' : '';
 
 				$field_class = trim((string)$args['field_class']);
@@ -573,7 +573,7 @@ namespace WebSharks\CommentMail\Pro;
 				$id   = $this->plugin->slug.$this->ns_id_suffix.'-'.$slug;
 				$name = $root_name ? $name : GLOBAL_NS.$this->ns_name_suffix.'['.$name.']';
 
-				$current_value = $this->isset_or($args['current_value'], NULL, 'string');
+				$current_value = $this->issetOr($args['current_value'], NULL, 'string');
 
 				$field_class = trim((string)$args['field_class']);
 				$other_attrs = trim((string)$args['other_attrs']);

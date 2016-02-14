@@ -36,7 +36,7 @@ namespace WebSharks\CommentMail\Pro;
 			 */
 			public function current_scheme()
 			{
-				if(!is_null($scheme = &$this->static_key(__FUNCTION__)))
+				if(!is_null($scheme = &$this->staticKey(__FUNCTION__)))
 					return $scheme; // Cached this already.
 
 				return ($scheme = is_ssl() ? 'https' : 'http');
@@ -54,7 +54,7 @@ namespace WebSharks\CommentMail\Pro;
 			 */
 			public function current_front_scheme()
 			{
-				if(!is_null($scheme = &$this->static_key(__FUNCTION__)))
+				if(!is_null($scheme = &$this->staticKey(__FUNCTION__)))
 					return $scheme; // Cached this already.
 
 				return ($scheme = (string)parse_url(home_url(), PHP_URL_SCHEME));
@@ -112,7 +112,7 @@ namespace WebSharks\CommentMail\Pro;
 			 */
 			public function current_host($no_port = FALSE)
 			{
-				if(!is_null($host = &$this->static_key(__FUNCTION__, $no_port)))
+				if(!is_null($host = &$this->staticKey(__FUNCTION__, $no_port)))
 					return $host; // Cached this already.
 
 				$host = strtolower((string)$_SERVER['HTTP_HOST']);
@@ -185,7 +185,7 @@ namespace WebSharks\CommentMail\Pro;
 			 */
 			public function current_uri()
 			{
-				if(!is_null($uri = &$this->static_key(__FUNCTION__)))
+				if(!is_null($uri = &$this->staticKey(__FUNCTION__)))
 					return $uri; // Cached this already.
 
 				return ($uri = '/'.ltrim((string)$_SERVER['REQUEST_URI'], '/'));
@@ -200,7 +200,7 @@ namespace WebSharks\CommentMail\Pro;
 			 */
 			public function current_path()
 			{
-				if(!is_null($path = &$this->static_key(__FUNCTION__)))
+				if(!is_null($path = &$this->staticKey(__FUNCTION__)))
 					return $path; // Cached this already.
 
 				return ($path = '/'.ltrim((string)parse_url($this->current_uri(), PHP_URL_PATH), '/'));
@@ -215,7 +215,7 @@ namespace WebSharks\CommentMail\Pro;
 			 */
 			public function current_path_info()
 			{
-				if(!is_null($path_info = &$this->static_key(__FUNCTION__)))
+				if(!is_null($path_info = &$this->staticKey(__FUNCTION__)))
 					return $path_info; // Cached this already.
 
 				$path_info = isset($_SERVER['PATH_INFO']) ? (string)$_SERVER['PATH_INFO'] : '';
@@ -237,7 +237,7 @@ namespace WebSharks\CommentMail\Pro;
 			 */
 			public function current($scheme = NULL)
 			{
-				if(!is_null($url = &$this->static_key(__FUNCTION__, $scheme)))
+				if(!is_null($url = &$this->staticKey(__FUNCTION__, $scheme)))
 					return $url; // Cached this already.
 
 				$url = '//'.$this->current_host().$this->current_uri();
@@ -942,7 +942,7 @@ namespace WebSharks\CommentMail\Pro;
 			 */
 			public function to($file = '', $scheme = NULL)
 			{
-				if(is_null($plugin_dir_url = &$this->static_key(__FUNCTION__, 'plugin_dir_url')))
+				if(is_null($plugin_dir_url = &$this->staticKey(__FUNCTION__, 'plugin_dir_url')))
 					$plugin_dir_url = rtrim(plugin_dir_url($this->plugin->file), '/');
 
 				return $this->set_scheme($plugin_dir_url.(string)$file, $scheme);

@@ -68,7 +68,7 @@ namespace WebSharks\CommentMail\Pro;
 				foreach(array('ip', 'region', 'country') as $_key)
 				{
 					if(empty($entry[$_key])) // Coalesce; giving precedence to the `last_` value.
-						$entry[$_key] = $this->not_empty_coalesce($entry['last_'.$_key], $entry['insertion_'.$_key]);
+						$entry[$_key] = $this->notEmptyCoalesce($entry['last_'.$_key], $entry['insertion_'.$_key]);
 				}
 				unset($_key); // Just a little housekeeping.
 

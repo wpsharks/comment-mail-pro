@@ -158,7 +158,7 @@ namespace WebSharks\CommentMail\Pro;
 			 */
 			protected function content_length()
 			{
-				if(!is_null($content_length = &$this->cache_key(__FUNCTION__)))
+				if(!is_null($content_length = &$this->cacheKey(__FUNCTION__)))
 					return $content_length; // Already cached this.
 
 				if($this->data_file) // File has precedence.

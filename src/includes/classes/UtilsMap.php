@@ -87,7 +87,7 @@ namespace WebSharks\CommentMail\Pro;
 			 */
 			public function iso_3166_1()
 			{
-				if(!is_null($iso = &$this->static_key(__FUNCTION__)))
+				if(!is_null($iso = &$this->staticKey(__FUNCTION__)))
 					return $iso; // Already cached this.
 
 				$iso          = array(); // Initialize.
@@ -113,7 +113,7 @@ namespace WebSharks\CommentMail\Pro;
 			 */
 			public function iso_3166_2_us()
 			{
-				if(!is_null($iso = &$this->static_key(__FUNCTION__)))
+				if(!is_null($iso = &$this->staticKey(__FUNCTION__)))
 					return $iso; // Already cached this.
 
 				$iso          = array(); // Initialize.
@@ -139,7 +139,7 @@ namespace WebSharks\CommentMail\Pro;
 			 */
 			public function iso_3166_2_ca()
 			{
-				if(!is_null($iso = &$this->static_key(__FUNCTION__)))
+				if(!is_null($iso = &$this->staticKey(__FUNCTION__)))
 					return $iso; // Already cached this.
 
 				$iso          = array(); // Initialize.

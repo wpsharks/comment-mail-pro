@@ -141,7 +141,7 @@ namespace WebSharks\CommentMail\Pro;
 			{
 				if($this->is_smtp_enabled()) // Can use SMTP; i.e. enabled?
 				{
-					if(is_null($mail_smtp = &$this->cache_key(__FUNCTION__, 'mail_smtp')))
+					if(is_null($mail_smtp = &$this->cacheKey(__FUNCTION__, 'mail_smtp')))
 						/** @var $mail_smtp mail_smtp Reference for IDEs. */
 						$mail_smtp = new MailSmtp(); // Single instance.
 

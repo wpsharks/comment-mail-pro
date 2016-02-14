@@ -118,7 +118,7 @@ namespace WebSharks\CommentMail\Pro;
 			{
 				$fsmlc = ltrim(strtolower((string)$fsmlc), '\\');
 
-				if(!is_null($possible = &$this->static_key(__FUNCTION__, $fsmlc)) && !$no_cache)
+				if(!is_null($possible = &$this->staticKey(__FUNCTION__, $fsmlc)) && !$no_cache)
 					return $possible; // Cached this already.
 
 				if($fsmlc // Do we even have something to check?
@@ -144,7 +144,7 @@ namespace WebSharks\CommentMail\Pro;
 			 */
 			public function disabled_functions()
 			{
-				if(!is_null($disabled = &$this->static_key(__FUNCTION__)))
+				if(!is_null($disabled = &$this->staticKey(__FUNCTION__)))
 					return $disabled; // Cached this already.
 				$disabled = array(); // Initialize.
 

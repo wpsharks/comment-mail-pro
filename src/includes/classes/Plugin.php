@@ -290,7 +290,7 @@ namespace WebSharks\CommentMail\Pro;
 				/*
 				 * Setup already?
 				 */
-				if(!is_null($setup = &$this->cache_key(__FUNCTION__)))
+				if(!is_null($setup = &$this->cacheKey(__FUNCTION__)))
 					return; // Already setup. Once only!
 				$setup = TRUE; // Once only please.
 
@@ -1744,7 +1744,7 @@ namespace WebSharks\CommentMail\Pro;
 			*/
 			public function manage_users_columns(array $columns)
 			{
-			  $user_columns = &$this->static_key(__FUNCTION__);
+			  $user_columns = &$this->staticKey(__FUNCTION__);
 			  $user_columns = new UserColumns();
 
 			  return $user_columns->filter($columns);
@@ -1765,7 +1765,7 @@ namespace WebSharks\CommentMail\Pro;
 			*/
 			public function manage_users_custom_column($value, $column, $user_id)
 			{
-			  if(!($user_columns = &$this->static_key('manage_users_columns')))
+			  if(!($user_columns = &$this->staticKey('manage_users_columns')))
 			    return $value; // Not possible to fill; no class instance.
 
 			  return $user_columns->maybe_fill($value, $column, $user_id);
@@ -2156,7 +2156,7 @@ namespace WebSharks\CommentMail\Pro;
 			 */
 			public function login_form()
 			{
-				if(!is_null($fired = &$this->static_key(__FUNCTION__)))
+				if(!is_null($fired = &$this->staticKey(__FUNCTION__)))
 					return; // We only handle this for a single hook.
 				// The first hook to fire this will win automatically.
 
@@ -2261,7 +2261,7 @@ namespace WebSharks\CommentMail\Pro;
 			 */
 			public function comment_form_must_log_in_after()
 			{
-				if(!is_null($fired = &$this->static_key(__FUNCTION__)))
+				if(!is_null($fired = &$this->staticKey(__FUNCTION__)))
 					return; // We only handle this for a single hook.
 				// The first hook to fire this will win automatically.
 
@@ -2283,7 +2283,7 @@ namespace WebSharks\CommentMail\Pro;
 			*/
 			public function comment_form_filter_prepend($value)
 			{
-			  if(!is_null($fired = &$this->static_key('comment_form')))
+			  if(!is_null($fired = &$this->staticKey('comment_form')))
 			      return $value; // We only handle this for a single hook.
 			  // The first hook to fire this will win automatically.
 			  if(is_string($value))
@@ -2309,7 +2309,7 @@ namespace WebSharks\CommentMail\Pro;
 			 */
 			public function comment_form_filter_append($value)
 			{
-				if(!is_null($fired = &$this->static_key('comment_form')))
+				if(!is_null($fired = &$this->staticKey('comment_form')))
 					return $value; // We only handle this for a single hook.
 				// The first hook to fire this will win automatically.
 
@@ -2333,7 +2333,7 @@ namespace WebSharks\CommentMail\Pro;
 			 */
 			public function comment_form()
 			{
-				if(!is_null($fired = &$this->static_key(__FUNCTION__)))
+				if(!is_null($fired = &$this->staticKey(__FUNCTION__)))
 					return; // We only handle this for a single hook.
 				// The first hook to fire this will win automatically.
 

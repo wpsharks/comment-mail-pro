@@ -184,7 +184,7 @@ namespace WebSharks\CommentMail\Pro;
 				$this->query_vars->per_page     = (integer)$this->plugin->options['sub_manage_summary_max_limit'];
 				if($this->query_vars->per_page > $upper_max_limit) $this->query_vars->per_page = $upper_max_limit;
 
-				$this->query_vars->post_id = $this->isset_or($request_args['post_id'], NULL, 'integer');
+				$this->query_vars->post_id = $this->issetOr($request_args['post_id'], NULL, 'integer');
 				$this->query_vars->status  = trim(strtolower((string)$request_args['status']));
 
 				$this->subs            = array(); // Initialize.

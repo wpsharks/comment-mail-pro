@@ -603,8 +603,8 @@ namespace WebSharks\CommentMail\Pro;
 				 */
 				$valid_rve_key       = static::key(); // Class identifier.
 				$rve_key             = trim(stripslashes((string)$_REQUEST[GLOBAL_NS.'_rve_key']));
-				$sub_key             = trim(stripslashes($this->isset_or($_REQUEST[GLOBAL_NS.'_rve_sub_key'], '', 'string')));
-				$force_status        = trim(stripslashes($this->isset_or($_REQUEST[GLOBAL_NS.'_rve_force_status'], '', 'string')));
+				$sub_key             = trim(stripslashes($this->issetOr($_REQUEST[GLOBAL_NS.'_rve_sub_key'], '', 'string')));
+				$force_status        = trim(stripslashes($this->issetOr($_REQUEST[GLOBAL_NS.'_rve_force_status'], '', 'string')));
 				$current_hard_status = $this->plugin->utils_db->comment_status__($comment_status);
 
 				if($force_status === '0') $force_status = 0;

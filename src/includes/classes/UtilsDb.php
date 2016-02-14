@@ -270,7 +270,7 @@ namespace WebSharks\CommentMail\Pro;
 
 				$cache_keys = array(); // No cacheable keys at this time.
 
-				if(!is_null($total = &$this->cache_key(__FUNCTION__, $cache_keys)) && !$no_cache)
+				if(!is_null($total = &$this->cacheKey(__FUNCTION__, $cache_keys)) && !$no_cache)
 					return $total; // Already cached this.
 
 				$sql = "SELECT SQL_CALC_FOUND_ROWS `ID` FROM `".esc_html($this->wp->users)."`".
@@ -311,7 +311,7 @@ namespace WebSharks\CommentMail\Pro;
 
 				$cache_keys = compact('max', 'fail_on_max');
 
-				if(!is_null($users = &$this->cache_key(__FUNCTION__, $cache_keys)) && !$no_cache)
+				if(!is_null($users = &$this->cacheKey(__FUNCTION__, $cache_keys)) && !$no_cache)
 					return $users; // Already cached this.
 
 				if($fail_on_max && $this->total_users($args) > $max)
@@ -372,7 +372,7 @@ namespace WebSharks\CommentMail\Pro;
 
 				$cache_keys = compact('for_comments_only', 'exclude_post_types', 'exclude_post_statuses', 'exclude_password_protected');
 
-				if(!is_null($total = &$this->cache_key(__FUNCTION__, $cache_keys)) && !$no_cache)
+				if(!is_null($total = &$this->cacheKey(__FUNCTION__, $cache_keys)) && !$no_cache)
 					return $total; // Already cached this.
 
                 $post_types = $include_post_types ? $include_post_types : get_post_types(array('exclude_from_search' => FALSE));
@@ -439,7 +439,7 @@ namespace WebSharks\CommentMail\Pro;
 
 				$cache_keys = compact('max', 'fail_on_max', 'for_comments_only', 'exclude_post_types', 'exclude_post_statuses', 'exclude_password_protected');
 
-				if(!is_null($posts = &$this->cache_key(__FUNCTION__, $cache_keys)) && !$no_cache)
+				if(!is_null($posts = &$this->cacheKey(__FUNCTION__, $cache_keys)) && !$no_cache)
 					return $posts; // Already cached this.
 
 				if($fail_on_max && $this->total_posts($args) > $max)
@@ -547,7 +547,7 @@ namespace WebSharks\CommentMail\Pro;
 
 				$cache_keys = compact('post_id', 'parents_only', 'exclude_post_types', 'exclude_post_statuses', 'exclude_password_protected');
 
-				if(!is_null($total = &$this->cache_key(__FUNCTION__, $cache_keys)) && !$no_cache)
+				if(!is_null($total = &$this->cacheKey(__FUNCTION__, $cache_keys)) && !$no_cache)
 					return $total; // Already cached this.
 
 				if(!($post = get_post($post_id))) return ($total = 0);
@@ -622,7 +622,7 @@ namespace WebSharks\CommentMail\Pro;
 
 				$cache_keys = compact('post_id', 'max', 'fail_on_max', 'parents_only', 'exclude_post_types', 'exclude_post_statuses', 'exclude_password_protected');
 
-				if(!is_null($comments = &$this->cache_key(__FUNCTION__, $cache_keys)) && !$no_cache)
+				if(!is_null($comments = &$this->cacheKey(__FUNCTION__, $cache_keys)) && !$no_cache)
 					return $comments; // Already cached this.
 
 				if(!($post = get_post($post_id))) return ($comments = array());

@@ -166,7 +166,7 @@ namespace WebSharks\CommentMail\Pro;
 				if(!$sub_id_or_key)
 					return NULL; // Not possible.
 
-				if(is_null($cache = &$this->cache_key(__FUNCTION__)))
+				if(is_null($cache = &$this->cacheKey(__FUNCTION__)))
 					$cache = array(); // Initialize array.
 
 				if(!$no_cache && $cache && array_key_exists($sub_id_or_key, $cache))
@@ -576,8 +576,8 @@ namespace WebSharks\CommentMail\Pro;
 
 				$status     = trim((string)$args['status']);
 				$sub_email  = trim(strtolower((string)$args['sub_email']));
-				$user_id    = $this->isset_or($args['user_id'], NULL, 'integer');
-				$comment_id = $this->isset_or($args['comment_id'], NULL, 'integer');
+				$user_id    = $this->issetOr($args['user_id'], NULL, 'integer');
+				$comment_id = $this->issetOr($args['comment_id'], NULL, 'integer');
 
 				$auto_discount_trash   = (boolean)$args['auto_discount_trash'];
 				$sub_email_or_user_ids = (boolean)$args['sub_email_or_user_ids'];
@@ -588,7 +588,7 @@ namespace WebSharks\CommentMail\Pro;
 				                      'status', 'sub_email', 'user_id', 'comment_id',
 				                      'auto_discount_trash', 'sub_email_or_user_ids', 'group_by_email');
 
-				if(!is_null($total = &$this->cache_key(__FUNCTION__, $cache_keys)) && !$no_cache)
+				if(!is_null($total = &$this->cacheKey(__FUNCTION__, $cache_keys)) && !$no_cache)
 					return $total; // Already cached this.
 
 				$sql = "SELECT SQL_CALC_FOUND_ROWS `email`".
@@ -667,8 +667,8 @@ namespace WebSharks\CommentMail\Pro;
 				$offset     = abs((integer)$args['offset']);
 				$status     = trim((string)$args['status']);
 				$sub_email  = trim(strtolower((string)$args['sub_email']));
-				$user_id    = $this->isset_or($args['user_id'], NULL, 'integer');
-				$comment_id = $this->isset_or($args['comment_id'], NULL, 'integer');
+				$user_id    = $this->issetOr($args['user_id'], NULL, 'integer');
+				$comment_id = $this->issetOr($args['comment_id'], NULL, 'integer');
 
 				$auto_discount_trash   = (boolean)$args['auto_discount_trash'];
 				$sub_email_or_user_ids = (boolean)$args['sub_email_or_user_ids'];
@@ -679,7 +679,7 @@ namespace WebSharks\CommentMail\Pro;
 				                      'offset', 'status', 'sub_email', 'user_id', 'comment_id',
 				                      'auto_discount_trash', 'sub_email_or_user_ids', 'group_by_email');
 
-				if(!is_null($last_x = &$this->cache_key(__FUNCTION__, $cache_keys)) && !$no_cache)
+				if(!is_null($last_x = &$this->cacheKey(__FUNCTION__, $cache_keys)) && !$no_cache)
 					return $last_x; // Already cached this.
 
 				$sql = "SELECT * FROM `".esc_sql($this->plugin->utils_db->prefix().'subs')."`".
@@ -756,7 +756,7 @@ namespace WebSharks\CommentMail\Pro;
 				if(!($sub_email = trim(strtolower((string)$sub_email))))
 					return array(); // Not possible.
 
-				if(!is_null($sub_key = &$this->cache_key(__FUNCTION__, $sub_email)) && !$no_cache)
+				if(!is_null($sub_key = &$this->cacheKey(__FUNCTION__, $sub_email)) && !$no_cache)
 					return $sub_key; // Already cached this.
 
 				$sql = "SELECT `key` FROM `".esc_sql($this->plugin->utils_db->prefix().'subs')."`".
@@ -781,7 +781,7 @@ namespace WebSharks\CommentMail\Pro;
 				if(!($sub_email = trim(strtolower((string)$sub_email))))
 					return array(); // Not possible.
 
-				if(!is_null($sub_keys = &$this->cache_key(__FUNCTION__, $sub_email)) && !$no_cache)
+				if(!is_null($sub_keys = &$this->cacheKey(__FUNCTION__, $sub_email)) && !$no_cache)
 					return $sub_keys; // Already cached this.
 
 				$sql = "SELECT DISTINCT `key` FROM `".esc_sql($this->plugin->utils_db->prefix().'subs')."`".
@@ -807,7 +807,7 @@ namespace WebSharks\CommentMail\Pro;
 				if(!($sub_email = trim(strtolower((string)$sub_email))))
 					return array(); // Not possible.
 
-				if(!is_null($user_ids = &$this->cache_key(__FUNCTION__, $sub_email)) && !$no_cache)
+				if(!is_null($user_ids = &$this->cacheKey(__FUNCTION__, $sub_email)) && !$no_cache)
 					return $user_ids; // Already cached this.
 
 				$sql1 = "SELECT DISTINCT `user_id` FROM `".esc_sql($this->plugin->utils_db->prefix().'subs')."`".
@@ -841,7 +841,7 @@ namespace WebSharks\CommentMail\Pro;
 				if(!($sub_email = trim(strtolower((string)$sub_email))))
 					return array(); // Not possible.
 
-				if(!is_null($user_id_emails = &$this->cache_key(__FUNCTION__, $sub_email)) && !$no_cache)
+				if(!is_null($user_id_emails = &$this->cacheKey(__FUNCTION__, $sub_email)) && !$no_cache)
 					return $user_id_emails; // Already cached this.
 
 				if(!($user_ids = $this->email_user_ids($sub_email, $no_cache)))
@@ -871,7 +871,7 @@ namespace WebSharks\CommentMail\Pro;
 				if(!($sub_email = trim(strtolower((string)$sub_email))))
 					return ''; // Not possible.
 
-				if(!is_null($last_ip = &$this->cache_key(__FUNCTION__, $sub_email)) && !$no_cache)
+				if(!is_null($last_ip = &$this->cacheKey(__FUNCTION__, $sub_email)) && !$no_cache)
 					return $last_ip; // Already cached this.
 
 				$sql = "SELECT `last_ip` FROM `".esc_sql($this->plugin->utils_db->prefix().'subs')."`".
@@ -899,7 +899,7 @@ namespace WebSharks\CommentMail\Pro;
 				if(!($sub_email = trim(strtolower((string)$sub_email))))
 					return ''; // Not possible.
 
-				if(!is_null($last_region = &$this->cache_key(__FUNCTION__, $sub_email)) && !$no_cache)
+				if(!is_null($last_region = &$this->cacheKey(__FUNCTION__, $sub_email)) && !$no_cache)
 					return $last_region; // Already cached this.
 
 				$sql = "SELECT `last_region` FROM `".esc_sql($this->plugin->utils_db->prefix().'subs')."`".
@@ -927,7 +927,7 @@ namespace WebSharks\CommentMail\Pro;
 				if(!($sub_email = trim(strtolower((string)$sub_email))))
 					return ''; // Not possible.
 
-				if(!is_null($last_country = &$this->cache_key(__FUNCTION__, $sub_email)) && !$no_cache)
+				if(!is_null($last_country = &$this->cacheKey(__FUNCTION__, $sub_email)) && !$no_cache)
 					return $last_country; // Already cached this.
 
 				$sql = "SELECT `last_country` FROM `".esc_sql($this->plugin->utils_db->prefix().'subs')."`".
@@ -955,13 +955,13 @@ namespace WebSharks\CommentMail\Pro;
 				if(!($sub_email = trim(strtolower((string)$sub_email))))
 					return FALSE; // Not possible.
 
-				if(!is_null($is = &$this->cache_key(__FUNCTION__, $sub_email)) && !$no_cache)
+				if(!is_null($is = &$this->cacheKey(__FUNCTION__, $sub_email)) && !$no_cache)
 					return $is; // Already cached this.
 
 				if(!($blacklist = trim($this->plugin->options['email_blacklist_patterns'])))
 					return FALSE; // There is no blacklist.
 
-				if(is_null($blacklist_patterns = &$this->cache_key(__FUNCTION__, 'blacklist_patterns')))
+				if(is_null($blacklist_patterns = &$this->cacheKey(__FUNCTION__, 'blacklist_patterns')))
 					$blacklist_patterns = '(?:'.implode('|', array_map(function ($pattern)
 						{
 							return preg_replace(array('/\\\\\*/', '/\\\\\^/'), array('.*?', '[^@]*?'), preg_quote($pattern, '/')); #
@@ -1190,7 +1190,7 @@ namespace WebSharks\CommentMail\Pro;
 				$args         = array_merge($default_args, $args);
 				$args         = array_intersect_key($args, $default_args);
 
-				$post_id               = $this->isset_or($args['post_id'], NULL, 'integer');
+				$post_id               = $this->issetOr($args['post_id'], NULL, 'integer');
 				$comment_form_defaults = (boolean)$args['comment_form_defaults'];
 				$no_cache              = (boolean)$args['no_cache'];
 
@@ -1235,7 +1235,7 @@ namespace WebSharks\CommentMail\Pro;
 
 				$cache_keys = compact('sub_email', 'post_id', 'comment_form_defaults');
 
-				if(!is_null($info = &$this->cache_key(__FUNCTION__, $cache_keys)) && !$no_cache)
+				if(!is_null($info = &$this->cacheKey(__FUNCTION__, $cache_keys)) && !$no_cache)
 					return $info; // Already cached this.
 
 				$sql = "SELECT * FROM `".esc_sql($this->plugin->utils_db->prefix().'subs')."`".
@@ -1273,7 +1273,7 @@ namespace WebSharks\CommentMail\Pro;
 			{
 				$preserve = array(); // Initialize.
 				if($sub_ids_or_keys) $preserve[] = 'get';
-				$this->unset_cache_keys($preserve);
+				$this->unsetCacheKeys($preserve);
 
 				foreach($sub_ids_or_keys as $_sub_id_or_key)
 					unset($this->cache['get'][$_sub_id_or_key]);

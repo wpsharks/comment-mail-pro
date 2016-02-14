@@ -36,7 +36,7 @@ namespace WebSharks\CommentMail\Pro;
 			 */
 			public function is_pro_preview()
 			{
-				if(!is_null($is = &$this->static_key(__FUNCTION__)))
+				if(!is_null($is = &$this->staticKey(__FUNCTION__)))
 					return $is; // Cached this already.
 
 				if(!$this->is_menu_page(GLOBAL_NS.'*'))
@@ -54,7 +54,7 @@ namespace WebSharks\CommentMail\Pro;
 			 */
 			public function current_pagenow()
 			{
-				if(!is_null($pagenow = &$this->static_key(__FUNCTION__)))
+				if(!is_null($pagenow = &$this->staticKey(__FUNCTION__)))
 					return $pagenow; // Cached this already.
 
 				return ($pagenow = !empty($GLOBALS['pagenow']) ? (string)$GLOBALS['pagenow'] : '');
@@ -69,7 +69,7 @@ namespace WebSharks\CommentMail\Pro;
 			 */
 			public function current_menu_page()
 			{
-				if(!is_null($page = &$this->static_key(__FUNCTION__)))
+				if(!is_null($page = &$this->staticKey(__FUNCTION__)))
 					return $page; // Cached this already.
 
 				if(!is_admin()) return ($page = '');
@@ -99,7 +99,7 @@ namespace WebSharks\CommentMail\Pro;
 			{
 				$page_to_check = (string)$page_to_check;
 
-				if(!is_null($is = &$this->static_key(__FUNCTION__, $page_to_check)))
+				if(!is_null($is = &$this->staticKey(__FUNCTION__, $page_to_check)))
 					return $is; // Cached this already.
 
 				if(!is_admin()) // Not admin area?
@@ -165,7 +165,7 @@ namespace WebSharks\CommentMail\Pro;
 			 */
 			public function max_upload_size()
 			{
-				if(!is_null($max = &$this->static_key(__FUNCTION__)))
+				if(!is_null($max = &$this->staticKey(__FUNCTION__)))
 					return $max; // Already cached this.
 
 				$limits = array(PHP_INT_MAX); // Initialize.

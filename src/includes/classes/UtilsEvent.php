@@ -267,7 +267,7 @@ namespace WebSharks\CommentMail\Pro;
 			 */
 			public function sub_updated_summary(\stdClass $row)
 			{
-				if(is_null($keys = &$this->cache_key(__FUNCTION__, 'keys')))
+				if(is_null($keys = &$this->cacheKey(__FUNCTION__, 'keys')))
 					$keys = array(
 						'key'        => __('Subscr. Key', $this->plugin->text_domain),
 
@@ -308,7 +308,7 @@ namespace WebSharks\CommentMail\Pro;
 			 */
 			public function sub_updated_q_link(\stdClass $row)
 			{
-				if(is_null($keys = &$this->cache_key(__FUNCTION__, 'keys')))
+				if(is_null($keys = &$this->cacheKey(__FUNCTION__, 'keys')))
 					$keys = array(
 						'key'        => __('Subscr. Key', $this->plugin->text_domain),
 

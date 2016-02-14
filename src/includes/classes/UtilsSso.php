@@ -184,7 +184,7 @@ namespace WebSharks\CommentMail\Pro;
 				$no_cache = (boolean)$args['no_cache'];
 
 				$cache_keys = compact('service', 'sso_id');
-				if(!is_null($user_id = &$this->cache_key(__FUNCTION__, $cache_keys)) && !$no_cache)
+				if(!is_null($user_id = &$this->cacheKey(__FUNCTION__, $cache_keys)) && !$no_cache)
 					return $user_id; // Already cached this.
 
 				$meta_key = $this->plugin->utils_db->wp->prefix.GLOBAL_NS.'_'.$service.'_sso_id';

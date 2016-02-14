@@ -43,7 +43,7 @@ namespace WebSharks\CommentMail\Pro;
 			 */
 			public function screen_option(\WP_Screen $screen, $option, $user_id = NULL)
 			{
-				$user_id       = $this->isset_or($user_id, (integer)get_current_user_id(), 'integer');
+				$user_id       = $this->issetOr($user_id, (integer)get_current_user_id(), 'integer');
 				$value         = get_user_meta($user_id, $screen->get_option($option, 'option'), TRUE);
 				$default_value = $screen->get_option($option, 'default');
 
@@ -96,7 +96,7 @@ namespace WebSharks\CommentMail\Pro;
 				$blog_id    = get_current_blog_id();
 				$cache_keys = compact('email', 'blog_id');
 
-				if(!is_null($exists = &$this->cache_key(__FUNCTION__, $cache_keys)) && !$no_cache)
+				if(!is_null($exists = &$this->cacheKey(__FUNCTION__, $cache_keys)) && !$no_cache)
 					return $exists; // Already cached this.
 
 				if(!($user_id = email_exists($email)))

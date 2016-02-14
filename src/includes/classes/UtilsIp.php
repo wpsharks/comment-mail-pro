@@ -38,7 +38,7 @@ namespace WebSharks\CommentMail\Pro;
 			 */
 			public function current()
 			{
-				if(!is_null($ip = &$this->static_key(__FUNCTION__)))
+				if(!is_null($ip = &$this->staticKey(__FUNCTION__)))
 					return $ip; // Cached this already.
 
 				if(!empty($_SERVER['REMOTE_ADDR']) && $this->plugin->options['prioritize_remote_addr'])
@@ -189,7 +189,7 @@ namespace WebSharks\CommentMail\Pro;
 
 				# Check the static object cache.
 
-				if(!is_null($geo = &$this->static_key(__FUNCTION__, $ip)))
+				if(!is_null($geo = &$this->staticKey(__FUNCTION__, $ip)))
 					return $geo; // Cached this already.
 
 				# Check the filesystem cache; i.e., tmp directory.

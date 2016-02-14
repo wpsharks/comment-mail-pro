@@ -222,7 +222,7 @@ namespace WebSharks\CommentMail\Pro;
 			 */
 			public function inline_icon_svg()
 			{
-				if(!is_null($icon = &$this->static_key(__FUNCTION__)))
+				if(!is_null($icon = &$this->staticKey(__FUNCTION__)))
 					return $icon; // Already cached this.
 
 				return ($icon = file_get_contents(dirname(dirname(dirname(__FILE__))).'/client-s/images/inline-icon.svg'));

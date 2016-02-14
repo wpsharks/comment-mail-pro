@@ -195,7 +195,7 @@ namespace WebSharks\CommentMail\Pro;
 				}
 				$string = (string)$values;
 
-				if(is_null($whitespace = &$this->static_key(__FUNCTION__, 'whitespace')))
+				if(is_null($whitespace = &$this->staticKey(__FUNCTION__, 'whitespace')))
 					$whitespace = implode('|', array_keys($this->html_whitespace));
 
 				$string = preg_replace('/^(?:'.$whitespace.')+|(?:'.$whitespace.')+$/i', '', $string);
@@ -556,7 +556,7 @@ namespace WebSharks\CommentMail\Pro;
 				}
 				$string = (string)$values;
 
-				if(is_null($whitespace = &$this->static_key(__FUNCTION__, 'whitespace')))
+				if(is_null($whitespace = &$this->staticKey(__FUNCTION__, 'whitespace')))
 					$whitespace = implode('|', array_keys($this->html_whitespace));
 
 				$string = preg_replace('/('.$whitespace.')('.$whitespace.')('.$whitespace.')+/i', '${1}${2}', $string);
@@ -1013,7 +1013,7 @@ namespace WebSharks\CommentMail\Pro;
 				if(!class_exists('\\ParsedownExtra')) // Need Parsedown Extra class here.
 					require_once dirname(dirname(dirname(__FILE__))).'/submodules/parsedown-extra/ParsedownExtra.php';
 
-				if(is_null($parsedown = &$this->cache_key(__FUNCTION__, 'parsedown')))
+				if(is_null($parsedown = &$this->cacheKey(__FUNCTION__, 'parsedown')))
 					/** @var $parsedown \ParsedownExtra Reference for IDEs. */
 					$parsedown = new \ParsedownExtra(); // Singleton.
 

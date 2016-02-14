@@ -131,15 +131,15 @@ namespace WebSharks\CommentMail\Pro;
 					if(empty($_event->msg) || !($_event->msg instanceof \stdClass))
 						continue; // Expecting a msg object w/ properties.
 
-					$_reply_to_email = $this->isset_or($_event->msg->email, '', 'string');
+					$_reply_to_email = $this->issetOr($_event->msg->email, '', 'string');
 
-					$_from_name  = $this->isset_or($_event->msg->from_name, '', 'string');
-					$_from_email = $this->isset_or($_event->msg->from_email, '', 'string');
+					$_from_name  = $this->issetOr($_event->msg->from_name, '', 'string');
+					$_from_email = $this->issetOr($_event->msg->from_email, '', 'string');
 
-					$_subject = $this->isset_or($_event->msg->subject, '', 'string');
+					$_subject = $this->issetOr($_event->msg->subject, '', 'string');
 
-					$_text_body = $this->isset_or($_event->msg->text, '', 'string');
-					$_html_body = $this->isset_or($_event->msg->html, '', 'string');
+					$_text_body = $this->issetOr($_event->msg->text, '', 'string');
+					$_html_body = $this->issetOr($_event->msg->html, '', 'string');
 
 					if(isset($_event->msg->spam_report->score))
 						$_spam_score = (float)$_event->msg->spam_report->score;
