@@ -1,29 +1,30 @@
 <?php
 /**
- * Post Status Change Handler
+ * Post Status Change Handler.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * Post Status Change Handler
+ * Post Status Change Handler.
  *
  * @since 141111 First documented version.
  */
 class PostStatus extends AbsBase
 {
     /**
-     * @var \WP_Post|null Post object (now).
+     * @type \WP_Post|null Post object (now).
      *
      * @since 141111 First documented version.
      */
     protected $post;
 
     /**
-     * @var string New post status.
+     * @type string New post status.
      *
      *    One of the following statuses:
      *    See: <http://codex.wordpress.org/Function_Reference/get_post_status>
@@ -45,7 +46,7 @@ class PostStatus extends AbsBase
     protected $new_post_status;
 
     /**
-     * @var string Old post status.
+     * @type string Old post status.
      *
      *    One of the following statuses:
      *    See: <http://codex.wordpress.org/Function_Reference/get_post_status>
@@ -72,7 +73,7 @@ class PostStatus extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param string        $new_post_status New post status.
+     * @param string $new_post_status New post status.
      *
      *    One of the following statuses:
      *    See: <http://codex.wordpress.org/Function_Reference/get_post_status>
@@ -88,8 +89,7 @@ class PostStatus extends AbsBase
      *
      *    See also: {@link get_available_post_statuses()}
      *       Custom post types may have their own statuses.
-     *
-     * @param string        $old_post_status Old comment status.
+     * @param string $old_post_status Old comment status.
      *
      *    One of the following statuses:
      *    See: <http://codex.wordpress.org/Function_Reference/get_post_status>
@@ -106,16 +106,15 @@ class PostStatus extends AbsBase
      *
      *    See also: {@link get_available_post_statuses()}
      *       Custom post types may have their own statuses.
-     *
-     * @param \WP_Post|null $post            Post object (now).
+     * @param \WP_Post|null $post Post object (now).
      */
     public function __construct($new_post_status, $old_post_status, \WP_Post $post = null)
     {
         parent::__construct();
 
         $this->post            = $post; // \WP_Post|null.
-        $this->new_post_status = (string)$new_post_status;
-        $this->old_post_status = (string)$old_post_status;
+        $this->new_post_status = (string) $new_post_status;
+        $this->old_post_status = (string) $old_post_status;
 
         $this->maybeSubAutoInject();
     }
