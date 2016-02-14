@@ -98,9 +98,8 @@ namespace WebSharks\CommentMail\Pro;
 				$inline_icon_svg = $this->plugin->utils_fs->inline_icon_svg();
 
 				$template_vars = get_defined_vars(); // Everything above.
-				$template      = new template('site/comment-form/sub-ops.php');
+				$template      = new Template('site/comment-form/sub-ops.php');
 
 				echo $template->parse($template_vars);
 			}
 		}
-	

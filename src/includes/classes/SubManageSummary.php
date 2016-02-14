@@ -240,7 +240,7 @@ namespace WebSharks\CommentMail\Pro;
 					$pagination_vars = $this->pagination_vars;
 				}
 				$template_vars = get_defined_vars(); // Everything above.
-				$template      = new template('site/sub-actions/manage-summary.php');
+				$template      = new Template('site/sub-actions/manage-summary.php');
 
 				status_header(200); // Status header.
 				nocache_headers(); // Disallow caching.
@@ -373,4 +373,3 @@ namespace WebSharks\CommentMail\Pro;
 				}
 			}
 		}
-	

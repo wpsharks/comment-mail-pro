@@ -147,8 +147,8 @@ namespace WebSharks\CommentMail\Pro;
 				$upper_max_limit = (integer)apply_filters(__CLASS__.'_upper_max_limit', 1000);
 				if($this->max_limit > $upper_max_limit) $this->max_limit = $upper_max_limit;
 
-				$this->subject_template = new template('email/comment-notification/subject.php');
-				$this->message_template = new template('email/comment-notification/message.php');
+				$this->subject_template = new Template('email/comment-notification/subject.php');
+				$this->message_template = new Template('email/comment-notification/message.php');
 
 				$this->entries                 = array(); // Initialize.
 				$this->total_entries           = 0; // Initialize; zero for now.
@@ -301,7 +301,7 @@ namespace WebSharks\CommentMail\Pro;
 					'event'             => $entry_props->event,
 					'note_code'         => $entry_props->note_code,
 				);
-				new queue_event_log_inserter($log_entry);
+				new QueueEventLogInserter($log_entry);
 
 				$entry_props->logged        = TRUE; // Flag as `TRUE`.
 				$entry_props->entry->logged = TRUE; // Flag as `TRUE`.
@@ -937,4 +937,3 @@ namespace WebSharks\CommentMail\Pro;
 				return $this->is_out_of_time();
 			}
 		}
-	

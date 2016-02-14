@@ -81,7 +81,7 @@ namespace WebSharks\CommentMail\Pro;
 					if(!$this->sub) // Unexpected scenario; fail w/ message.
 						wp_die(__('Subscription ID not found.', $this->plugin->text_domain));
 				}
-				$this->form_fields = new form_fields(static::$form_field_args);
+				$this->form_fields = new FormFields(static::$form_field_args);
 
 				$this->maybe_display();
 			}
@@ -262,7 +262,7 @@ namespace WebSharks\CommentMail\Pro;
 						return ''; // Unauthenticated; ignore.
 
 				$post_id     = (integer)$post_id;
-				$form_fields = new form_fields(static::$form_field_args);
+				$form_fields = new FormFields(static::$form_field_args);
 
 				return $form_fields->select_row(
 					array(
@@ -355,7 +355,7 @@ namespace WebSharks\CommentMail\Pro;
 
 				if(isset($request_args['ID'])) // Updating an existing subscription via ID?
 				{
-					$sub_updater = new sub_updater($request_args, $args); // Run updater.
+					$sub_updater = new SubUpdater($request_args, $args); // Run updater.
 
 					if($sub_updater->did_update()) // Updated successfully?
 					{
@@ -375,7 +375,7 @@ namespace WebSharks\CommentMail\Pro;
 				}
 				else // We are doing a new insertion; i.e. a new subscription is being added here.
 				{
-					$sub_inserter = new sub_inserter($request_args, $args); // Run inserter.
+					$sub_inserter = new SubInserter($request_args, $args); // Run inserter.
 
 					if($sub_inserter->did_insert()) // Inserted successfully?
 					{
@@ -406,4 +406,3 @@ namespace WebSharks\CommentMail\Pro;
 				}
 			}
 		}
-	

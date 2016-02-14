@@ -61,7 +61,6 @@ namespace WebSharks\CommentMail\Pro;
 					'content_type'        => 'application/json; charset=UTF-8',
 					'content_disposition' => 'attachment',
 				);
-				new output_file($output_file_args);
+				new OutputFile($output_file_args);
 			}
 		}
-	

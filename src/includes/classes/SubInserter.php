@@ -722,14 +722,14 @@ namespace WebSharks\CommentMail\Pro;
 
 				if($this->process_events) // Processing events? i.e. log this insertion?
 				{
-					new sub_event_log_inserter(array_merge((array)$this->sub, array(
+					new SubEventLogInserter(array_merge((array)$this->sub, array(
 						'event'          => 'inserted',
 						'user_initiated' => $this->user_initiated,
 					))); // Log event data.
 				}
 				if(($this->auto_confirm || $this->process_confirmation) && $this->sub->status === 'unconfirmed')
 					{
-						$this->sub_confirmer = new sub_confirmer($this->sub->ID, array(
+						$this->sub_confirmer = new SubConfirmer($this->sub->ID, array(
 							'auto_confirm'        => $this->auto_confirm,
 							'process_events'      => $this->process_events,
 							'process_list_server' => $this->process_list_server,
@@ -781,14 +781,14 @@ namespace WebSharks\CommentMail\Pro;
 
 				if($this->process_events) // Processing events? i.e. log this update?
 				{
-					new sub_event_log_inserter(array_merge((array)$this->sub, array(
+					new SubEventLogInserter(array_merge((array)$this->sub, array(
 						'event'          => 'updated',
 						'user_initiated' => $this->user_initiated,
 					)), $sub_before); // Log event data.
 				}
 				if(($this->auto_confirm || $this->process_confirmation) && $this->sub->status === 'unconfirmed')
 					{
-						$this->sub_confirmer = new sub_confirmer($this->sub->ID, array(
+						$this->sub_confirmer = new SubConfirmer($this->sub->ID, array(
 							'auto_confirm'   => $this->auto_confirm,
 							'process_events' => $this->process_events,
 							'user_initiated' => $this->user_initiated,
@@ -1563,4 +1563,3 @@ namespace WebSharks\CommentMail\Pro;
 				$this->validated = TRUE; // Flag as `TRUE`; data validated.
 			}
 		}
-	

@@ -238,7 +238,7 @@ namespace WebSharks\CommentMail\Pro;
 				if($this->process_events) // Processing events?
 					if($this->deleted || ($this->event === 'overwritten' && $this->oby_sub_id && $this->oby_sub_id_did_replace))
 					{
-						new sub_event_log_inserter(array_merge((array)$this->sub, array(
+						new SubEventLogInserter(array_merge((array)$this->sub, array(
 							'event'          => $this->event,
 							'oby_sub_id'     => $this->oby_sub_id,
 							'user_initiated' => $this->user_initiated,
@@ -246,4 +246,3 @@ namespace WebSharks\CommentMail\Pro;
 					}
 			}
 		}
-	

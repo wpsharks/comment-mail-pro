@@ -87,7 +87,7 @@ namespace WebSharks\CommentMail\Pro;
 
 				# Initialize storage class.
 
-				$this->storage = new sso_storage();
+				$this->storage = new SsoStorage();
 
 				# Initialize extra data in storage.
 
@@ -336,4 +336,3 @@ namespace WebSharks\CommentMail\Pro;
 				exit(__('An unexpected error ocurred. Please start over and try again. Sorry!', $this->plugin->text_domain));
 			}
 		}
-	

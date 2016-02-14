@@ -137,7 +137,6 @@ namespace WebSharks\CommentMail\Pro;
 
 				if($this->new_post_status === 'publish' && $this->old_post_status !== 'publish')
 					if($this->old_post_status !== 'trash') // Ignore restorations.
-						new sub_auto_injector($this->post->ID);
+						new SubAutoInjector($this->post->ID);
 			}
 		}
-	

@@ -46,7 +46,7 @@ namespace WebSharks\CommentMail\Pro;
           'ns_name_suffix' => '[save_options]',
           'class_prefix'   => 'pmp-options-form-',
         );
-        $form_fields       = new form_fields($form_field_args);
+        $form_fields       = new FormFields($form_field_args);
         $current_value_for = function ($key) use ($_this)
         {
           if(strpos($key, 'template__') === 0 && isset($_this->plugin->options[$key]))
@@ -55,7 +55,7 @@ namespace WebSharks\CommentMail\Pro;
               return $_this->plugin->options[$key];
 
             $data             = template::option_key_data($key);
-            $default_template = new template($data->file, $data->type, TRUE);
+            $default_template = new Template($data->file, $data->type, TRUE);
 
             return $default_template->file_contents();
           }
@@ -1932,7 +1932,7 @@ namespace WebSharks\CommentMail\Pro;
             'ns_name_suffix' => '[import]',
             'class_prefix'   => 'pmp-import-subs-form-',
           );
-          $_form_fields     = new form_fields($_form_field_args);
+          $_form_fields     = new FormFields($_form_field_args);
 
           $_panel_body = '<form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->page_nonce_only()).'" novalidate="novalidate">'."\n";
 
@@ -2015,7 +2015,7 @@ namespace WebSharks\CommentMail\Pro;
             'ns_name_suffix' => '[import]',
             'class_prefix'   => 'pmp-import-stcr-form-',
           );
-          $_form_fields     = new form_fields($_form_field_args);
+          $_form_fields     = new FormFields($_form_field_args);
 
           $_panel_body = '<form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->page_nonce_only()).'"'.
                          ' target="'.esc_attr(GLOBAL_NS.'_import_stcr_iframe').'" novalidate="novalidate">'."\n";
@@ -2077,7 +2077,7 @@ namespace WebSharks\CommentMail\Pro;
             'ns_name_suffix' => '[export]',
             'class_prefix'   => 'pmp-export-subs-form-',
           );
-          $_form_fields     = new form_fields($_form_field_args);
+          $_form_fields     = new FormFields($_form_field_args);
 
           $_panel_body = '<form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->page_nonce_only()).'" novalidate="novalidate">'."\n";
 
@@ -2163,7 +2163,7 @@ namespace WebSharks\CommentMail\Pro;
             'ns_name_suffix' => '[import]',
             'class_prefix'   => 'pmp-import-ops-form-',
           );
-          $_form_fields     = new form_fields($_form_field_args);
+          $_form_fields     = new FormFields($_form_field_args);
 
           $_panel_body = '<form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->page_nonce_only()).'" novalidate="novalidate">'."\n";
 
@@ -2206,7 +2206,7 @@ namespace WebSharks\CommentMail\Pro;
             'ns_name_suffix' => '[export]',
             'class_prefix'   => 'pmp-export-ops-form-',
           );
-          $_form_fields     = new form_fields($_form_field_args);
+          $_form_fields     = new FormFields($_form_field_args);
 
           $_panel_body = '<form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->page_nonce_only()).'" novalidate="novalidate">'."\n";
 
@@ -2247,7 +2247,7 @@ namespace WebSharks\CommentMail\Pro;
           'ns_name_suffix' => '[save_options]',
           'class_prefix'   => 'pmp-email-templates-form-',
         );
-        $form_fields       = new form_fields($form_field_args);
+        $form_fields       = new FormFields($form_field_args);
         $current_value_for = function ($key) use ($_this)
         {
           if(strpos($key, 'template__') === 0 && isset($_this->plugin->options[$key]))
@@ -2256,7 +2256,7 @@ namespace WebSharks\CommentMail\Pro;
               return $_this->plugin->options[$key];
 
             $data             = template::option_key_data($key);
-            $default_template = new template($data->file, $data->type, TRUE);
+            $default_template = new Template($data->file, $data->type, TRUE);
 
             return $default_template->file_contents();
           }
@@ -2844,7 +2844,7 @@ namespace WebSharks\CommentMail\Pro;
           'ns_name_suffix' => '[save_options]',
           'class_prefix'   => 'pmp-site-templates-form-',
         );
-        $form_fields       = new form_fields($form_field_args);
+        $form_fields       = new FormFields($form_field_args);
         $current_value_for = function ($key) use ($_this)
         {
           if(strpos($key, 'template__') === 0 && isset($_this->plugin->options[$key]))
@@ -2853,7 +2853,7 @@ namespace WebSharks\CommentMail\Pro;
               return $_this->plugin->options[$key];
 
             $data             = template::option_key_data($key);
-            $default_template = new template($data->file, $data->type, TRUE);
+            $default_template = new Template($data->file, $data->type, TRUE);
 
             return $default_template->file_contents();
           }
@@ -3667,7 +3667,7 @@ namespace WebSharks\CommentMail\Pro;
             echo '      <h2>'.sprintf(__('%1$s&trade; &raquo; Subscriptions', $this->plugin->text_domain), esc_html($this->plugin->name)).' <i class="'.esc_attr('si si-'.$this->plugin->slug).'"></i>'.
                  '       <a href="'.esc_attr($this->plugin->utils_url->new_sub_short()).'" class="add-new-h2">'.__('Add New', $this->plugin->text_domain).'</a></h2>'."\n";
 
-            new menu_page_subs_table(); // Displays table.
+            new MenuPageSubsTable(); // Displays table.
 
             echo '   </form>';
             echo '</div>'."\n";
@@ -3686,7 +3686,7 @@ namespace WebSharks\CommentMail\Pro;
 
         echo '      <h2>'.sprintf(__('%1$s&trade; &raquo; New Subscription', $this->plugin->text_domain), esc_html($this->plugin->name)).' <i class="'.esc_attr('si si-'.$this->plugin->slug.'-one').'"></i></h2>'."\n";
 
-        new menu_page_sub_new_form(); // Displays form to add new subscription.
+        new MenuPageSubNewForm(); // Displays form to add new subscription.
 
         echo '   </form>';
         echo '</div>'."\n";
@@ -3704,7 +3704,7 @@ namespace WebSharks\CommentMail\Pro;
 
         echo '      <h2>'.sprintf(__('%1$s&trade; &raquo; Edit Subscription', $this->plugin->text_domain), esc_html($this->plugin->name)).' <i class="'.esc_attr('si si-'.$this->plugin->slug.'-one').'"></i></h2>'."\n";
 
-        new menu_page_sub_edit_form(!empty($_REQUEST['subscription']) ? (integer)$_REQUEST['subscription'] : 0); // Displays form.
+        new MenuPageSubEditForm(!empty($_REQUEST['subscription']) ? (integer)$_REQUEST['subscription'] : 0); // Displays form.
 
         echo '   </form>';
         echo '</div>'."\n";
@@ -3722,7 +3722,7 @@ namespace WebSharks\CommentMail\Pro;
 
         echo '      <h2>'.sprintf(__('%1$s&trade; &raquo; Subscriptions &raquo; Event Log', $this->plugin->text_domain), esc_html($this->plugin->name)).' <i class="fa fa-history"></i></h2>'."\n";
 
-        new menu_page_sub_event_log_table(); // Displays table.
+        new MenuPageSubEventLogTable(); // Displays table.
 
         echo '   </form>';
         echo '</div>'."\n";
@@ -3740,7 +3740,7 @@ namespace WebSharks\CommentMail\Pro;
 
         echo '      <h2>'.sprintf(__('%1$s&trade; &raquo; Queued (Pending) Notifications', $this->plugin->text_domain), esc_html($this->plugin->name)).' <i class="fa fa-envelope-o"></i></h2>'."\n";
 
-        new menu_page_queue_table(); // Displays table.
+        new MenuPageQueueTable(); // Displays table.
 
         echo '   </form>';
         echo '</div>'."\n";
@@ -3758,7 +3758,7 @@ namespace WebSharks\CommentMail\Pro;
 
         echo '      <h2>'.sprintf(__('%1$s&trade; &raquo; Queue &raquo; Event Log', $this->plugin->text_domain), esc_html($this->plugin->name)).' <i class="fa fa-paper-plane"></i></h2>'."\n";
 
-        new menu_page_queue_event_log_table(); // Displays table.
+        new MenuPageQueueEventLogTable(); // Displays table.
 
         echo '   </form>';
         echo '</div>'."\n";
@@ -3813,7 +3813,7 @@ namespace WebSharks\CommentMail\Pro;
           'ns_name_suffix' => '[stats_chart_data_via_ajax]',
           'class_prefix'   => 'pmp-stats-form-',
         );
-        $_form_fields     = new form_fields($_form_field_args);
+        $_form_fields     = new FormFields($_form_field_args);
 
         $_postbox_chart_type_options = array(
           '@optgroup_open_subscr_totals'                  => __('Subscr. Totals', $this->plugin->text_domain),
@@ -3921,7 +3921,7 @@ namespace WebSharks\CommentMail\Pro;
           'ns_name_suffix' => '[stats_chart_data_via_ajax]',
           'class_prefix'   => 'pmp-stats-form-',
         );
-        $_form_fields     = new form_fields($_form_field_args);
+        $_form_fields     = new FormFields($_form_field_args);
 
         $_postbox_chart_type_options = array(
           '@optgroup_open_subscr_totals'                 => __('Subscr. Totals', $this->plugin->text_domain),
@@ -4043,7 +4043,7 @@ namespace WebSharks\CommentMail\Pro;
           'ns_name_suffix' => '[stats_chart_data_via_ajax]',
           'class_prefix'   => 'pmp-stats-form-',
         );
-        $_form_fields     = new form_fields($_form_field_args);
+        $_form_fields     = new FormFields($_form_field_args);
 
         $_postbox_chart_type_options = array(
           '@optgroup_open_queued_notification_totals'          => __('Processed Notification Totals', $this->plugin->text_domain),
@@ -4121,7 +4121,7 @@ namespace WebSharks\CommentMail\Pro;
           'ns_name_suffix' => '[stats_chart_data_via_ajax]',
           'class_prefix'   => 'pmp-stats-form-',
         );
-        $_form_fields     = new form_fields($_form_field_args);
+        $_form_fields     = new FormFields($_form_field_args);
 
         $_postbox_chart_type_options = array(
           '@optgroup_open_queued_notification_totals'          => __('Processed Notification Totals', $this->plugin->text_domain),
@@ -4231,7 +4231,7 @@ namespace WebSharks\CommentMail\Pro;
           'ns_name_suffix' => '[pro_update]',
           'class_prefix'   => 'pmp-pro-updater-form-',
         );
-        $form_fields       = new form_fields($form_field_args);
+        $form_fields       = new FormFields($form_field_args);
         $current_value_for = function ($key) use ($_this)
         {
           if(strpos($key, 'template__') === 0 && isset($_this->plugin->options[$key]))
@@ -4240,7 +4240,7 @@ namespace WebSharks\CommentMail\Pro;
               return $_this->plugin->options[$key];
 
             $data             = template::option_key_data($key);
-            $default_template = new template($data->file, $data->type, TRUE);
+            $default_template = new Template($data->file, $data->type, TRUE);
 
             return $default_template->file_contents();
           }
@@ -4682,4 +4682,3 @@ namespace WebSharks\CommentMail\Pro;
           '</table>';
       }
     }
-  

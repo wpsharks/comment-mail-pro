@@ -178,7 +178,7 @@ namespace WebSharks\CommentMail\Pro;
 
 				$snippet = trim($this->snippet_file_contents($file));
 
-				$sc_conditionals = new sc_conditionals($snippet, $shortcodes_vars);
+				$sc_conditionals = new ScConditionals($snippet, $shortcodes_vars);
 				$snippet         = $sc_conditionals->parse(); // Evaluates [if expression] logic.
 
 				$snippet = str_ireplace(array_keys($shortcodes), array_values($shortcodes), $snippet);
@@ -211,16 +211,16 @@ namespace WebSharks\CommentMail\Pro;
 				// All header-related templates.
 
 				if(is_null($site_header_template = &$this->cache_key(__FUNCTION__, 'site_header_template')))
-					$site_header_template = new template('site/header.php');
+					$site_header_template = new Template('site/header.php');
 
 				if(is_null($site_header_styles_template = &$this->cache_key(__FUNCTION__, 'site_header_styles_template')))
-					$site_header_styles_template = new template('site/header-styles.php');
+					$site_header_styles_template = new Template('site/header-styles.php');
 
 				if(is_null($site_header_scripts_template = &$this->cache_key(__FUNCTION__, 'site_header_scripts_template')))
-					$site_header_scripts_template = new template('site/header-scripts.php');
+					$site_header_scripts_template = new Template('site/header-scripts.php');
 
 				if(is_null($site_header_tag_template = &$this->cache_key(__FUNCTION__, 'site_header_tag_template')))
-					$site_header_tag_template = new template('site/header-tag.php');
+					$site_header_tag_template = new Template('site/header-tag.php');
 
 				$site_header_styles  = $site_header_styles_template->parse($vars);
 				$site_header_scripts = $site_header_scripts_template->parse($vars);
@@ -231,10 +231,10 @@ namespace WebSharks\CommentMail\Pro;
 				// All footer-related templates.
 
 				if(is_null($site_footer_tag_template = &$this->cache_key(__FUNCTION__, 'site_footer_tag_template')))
-					$site_footer_tag_template = new template('site/footer-tag.php');
+					$site_footer_tag_template = new Template('site/footer-tag.php');
 
 				if(is_null($site_footer_template = &$this->cache_key(__FUNCTION__, 'site_footer_template')))
-					$site_footer_template = new template('site/footer.php');
+					$site_footer_template = new Template('site/footer.php');
 
 				$site_footer_tag  = $site_footer_tag_template->parse($vars);
 				$site_footer_vars = compact('site_footer_tag'); // Only one for now.
@@ -267,16 +267,16 @@ namespace WebSharks\CommentMail\Pro;
 				// All header-related templates.
 
 				if(is_null($email_header_template = &$this->cache_key(__FUNCTION__, 'email_header_template')))
-					$email_header_template = new template('email/header.php');
+					$email_header_template = new Template('email/header.php');
 
 				if(is_null($email_header_styles_template = &$this->cache_key(__FUNCTION__, 'email_header_styles_template')))
-					$email_header_styles_template = new template('email/header-styles.php');
+					$email_header_styles_template = new Template('email/header-styles.php');
 
 				if(is_null($email_header_scripts_template = &$this->cache_key(__FUNCTION__, 'email_header_scripts_template')))
-					$email_header_scripts_template = new template('email/header-scripts.php');
+					$email_header_scripts_template = new Template('email/header-scripts.php');
 
 				if(is_null($email_header_tag_template = &$this->cache_key(__FUNCTION__, 'email_header_tag_template')))
-					$email_header_tag_template = new template('email/header-tag.php');
+					$email_header_tag_template = new Template('email/header-tag.php');
 
 				$email_header_styles  = $email_header_styles_template->parse($vars);
 				$email_header_scripts = $email_header_scripts_template->parse($vars);
@@ -287,10 +287,10 @@ namespace WebSharks\CommentMail\Pro;
 				// All footer-related templates.
 
 				if(is_null($email_footer_tag_template = &$this->cache_key(__FUNCTION__, 'email_footer_tag_template')))
-					$email_footer_tag_template = new template('email/footer-tag.php');
+					$email_footer_tag_template = new Template('email/footer-tag.php');
 
 				if(is_null($email_footer_template = &$this->cache_key(__FUNCTION__, 'email_footer_template')))
-					$email_footer_template = new template('email/footer.php');
+					$email_footer_template = new Template('email/footer.php');
 
 				$email_footer_tag  = $email_footer_tag_template->parse($vars);
 				$email_footer_vars = compact('email_footer_tag'); // Only one for now.
@@ -469,4 +469,3 @@ namespace WebSharks\CommentMail\Pro;
 				return $option_key; // Plugin option key.
 			}
 		}
-	

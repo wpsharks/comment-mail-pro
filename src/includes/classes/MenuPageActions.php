@@ -348,7 +348,7 @@ namespace WebSharks\CommentMail\Pro;
 
 				header('Content-Type: application/json; charset=UTF-8');
 
-				new chart_data($request_args); // With JSON output.
+				new ChartData($request_args); // With JSON output.
 
 				exit(); // Stop after output; always.
 			}
@@ -427,4 +427,3 @@ namespace WebSharks\CommentMail\Pro;
 		        wp_redirect($redirect_to).exit();
 		    }
 		}
-	

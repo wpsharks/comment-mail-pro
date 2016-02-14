@@ -150,7 +150,7 @@ namespace WebSharks\CommentMail\Pro;
 
 					'status'     => 'subscribed',
 				);
-				new sub_inserter($data, array(
+				new SubInserter($data, array(
 					'process_events' => $this->process_events,
 				));
 			}
@@ -184,7 +184,7 @@ namespace WebSharks\CommentMail\Pro;
 
 						'status'     => 'subscribed',
 					);
-					new sub_inserter($_data, array(
+					new SubInserter($_data, array(
 						'process_events' => $this->process_events,
 					));
 				}
@@ -219,7 +219,7 @@ namespace WebSharks\CommentMail\Pro;
         			'email'      => $_user->user_email,
         			'status'     => 'subscribed',
       			);
-      			new sub_inserter($_data, array(
+      			new SubInserter($_data, array(
         			'process_events' => $this->process_events,
       			));
     			}
@@ -229,4 +229,3 @@ namespace WebSharks\CommentMail\Pro;
 			}
 
 		}
-	

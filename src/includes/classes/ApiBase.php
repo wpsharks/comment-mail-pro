@@ -13,6 +13,6 @@ abstract class ApiBase extends AbsBase
 {
     public static function subOps()
     {
-        new comment_form_after(true);
+        new CommentFormAfter(true);
     }
 }

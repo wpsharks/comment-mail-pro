@@ -51,7 +51,7 @@ namespace WebSharks\CommentMail\Pro;
 				$this->plugin->options['version'] = $this->plugin->version;
 				update_option(GLOBAL_NS.'_options', $this->plugin->options);
 
-				new upgrader_vs($this->prev_version); // Run version-specific upgrader(s).
+				new UpgraderVs($this->prev_version); // Run version-specific upgrader(s).
 
 				$this->plugin->enqueue_notice // Notify site owner about this upgrade process.
 				(
@@ -61,4 +61,3 @@ namespace WebSharks\CommentMail\Pro;
 				);
 			}
 		}
-	

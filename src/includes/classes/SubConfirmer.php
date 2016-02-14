@@ -184,8 +184,8 @@ namespace WebSharks\CommentMail\Pro;
 
 				$template_vars = get_defined_vars(); // Everything above.
 
-				$subject_template = new template('email/sub-confirmation/subject.php');
-				$message_template = new template('email/sub-confirmation/message.php');
+				$subject_template = new Template('email/sub-confirmation/subject.php');
+				$message_template = new Template('email/sub-confirmation/message.php');
 
 				$subject = trim(preg_replace('/\s+/', ' ', $subject_template->parse($template_vars)));
 				$message = $message_template->parse($template_vars); // With confirmation link.
@@ -232,4 +232,3 @@ namespace WebSharks\CommentMail\Pro;
 				return ($this->auto_confirmed = FALSE);
 			}
 		}
-	

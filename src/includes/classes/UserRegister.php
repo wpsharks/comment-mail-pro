@@ -68,7 +68,7 @@ namespace WebSharks\CommentMail\Pro;
 
 				if(($sub_ids = array_map('intval', $this->plugin->utils_db->wp->get_col($sql))))
 					foreach($sub_ids as $_sub_id) // Update the `user_id` on each of these.
-						new sub_updater(array('ID' => $_sub_id, 'user_id' => $this->user->ID));
+						new SubUpdater(array('ID' => $_sub_id, 'user_id' => $this->user->ID));
 				unset($_sub_id); // Housekeeping.
 
 				# Update event logs too; i.e. associate w/ this user where applicable.
@@ -92,4 +92,3 @@ namespace WebSharks\CommentMail\Pro;
 					throw new \exception(__('Update failure.', $this->plugin->text_domain));
 			}
 		}
-	

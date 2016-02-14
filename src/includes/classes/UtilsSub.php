@@ -225,7 +225,7 @@ namespace WebSharks\CommentMail\Pro;
 				if(!isset($args['process_confirmation']))
 					$args['process_confirmation'] = TRUE;
 
-				$updater = new sub_updater(array('ID' => $sub->ID, 'status' => 'unconfirmed'), $args);
+				$updater = new SubUpdater(array('ID' => $sub->ID, 'status' => 'unconfirmed'), $args);
 
 				return $updater->did_update();
 			}
@@ -278,7 +278,7 @@ namespace WebSharks\CommentMail\Pro;
 				if($sub->status === 'subscribed')
 					return FALSE; // Confirmed already.
 
-				$updater = new sub_updater(array('ID' => $sub->ID, 'status' => 'subscribed'), $args);
+				$updater = new SubUpdater(array('ID' => $sub->ID, 'status' => 'subscribed'), $args);
 
 				return $updater->did_update();
 			}
@@ -331,7 +331,7 @@ namespace WebSharks\CommentMail\Pro;
 				if($sub->status === 'unconfirmed')
 					return FALSE; // Unconfirmed already.
 
-				$updater = new sub_updater(array('ID' => $sub->ID, 'status' => 'unconfirmed'), $args);
+				$updater = new SubUpdater(array('ID' => $sub->ID, 'status' => 'unconfirmed'), $args);
 
 				return $updater->did_update();
 			}
@@ -384,7 +384,7 @@ namespace WebSharks\CommentMail\Pro;
 				if($sub->status === 'suspended')
 					return FALSE; // Suspended already.
 
-				$updater = new sub_updater(array('ID' => $sub->ID, 'status' => 'suspended'), $args);
+				$updater = new SubUpdater(array('ID' => $sub->ID, 'status' => 'suspended'), $args);
 
 				return $updater->did_update();
 			}
@@ -437,7 +437,7 @@ namespace WebSharks\CommentMail\Pro;
 				if($sub->status === 'trashed')
 					return FALSE; // Trashed already.
 
-				$updater = new sub_updater(array('ID' => $sub->ID, 'status' => 'trashed'), $args);
+				$updater = new SubUpdater(array('ID' => $sub->ID, 'status' => 'trashed'), $args);
 
 				return $updater->did_update();
 			}
@@ -487,7 +487,7 @@ namespace WebSharks\CommentMail\Pro;
 				if($sub->status === 'deleted')
 					return FALSE; // Deleted already.
 
-				$deleter = new sub_deleter($sub->ID, $args);
+				$deleter = new SubDeleter($sub->ID, $args);
 
 				return $deleter->did_delete();
 			}
@@ -1280,4 +1280,3 @@ namespace WebSharks\CommentMail\Pro;
 				unset($_sub_id_or_key); // Housekeeping.
 			}
 		}
-	

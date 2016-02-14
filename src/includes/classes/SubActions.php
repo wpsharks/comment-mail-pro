@@ -106,7 +106,7 @@ namespace WebSharks\CommentMail\Pro;
 					$error_codes[] = $confirmed === NULL ? 'invalid_sub_key' : 'sub_already_confirmed';
 
 				$template_vars = get_defined_vars(); // Everything above.
-				$template      = new template('site/sub-actions/confirmed.php');
+				$template      = new Template('site/sub-actions/confirmed.php');
 
 				status_header(200); // Status header.
 				nocache_headers(); // Disallow caching.
@@ -151,7 +151,7 @@ namespace WebSharks\CommentMail\Pro;
 					$error_codes[] = $deleted === NULL ? 'invalid_sub_key' : 'sub_already_unsubscribed';
 
 				$template_vars = get_defined_vars(); // Everything above.
-				$template      = new template('site/sub-actions/unsubscribed.php');
+				$template      = new Template('site/sub-actions/unsubscribed.php');
 
 				status_header(200); // Status header.
 				nocache_headers(); // Disallow caching.
@@ -181,7 +181,7 @@ namespace WebSharks\CommentMail\Pro;
 					$error_codes[] = 'sub_already_unsubscribed_all';
 
 				$template_vars = get_defined_vars(); // Everything above.
-				$template      = new template('site/sub-actions/unsubscribed-all.php');
+				$template      = new Template('site/sub-actions/unsubscribed-all.php');
 
 				status_header(200); // Status header.
 				nocache_headers(); // Disallow caching.
@@ -210,7 +210,6 @@ namespace WebSharks\CommentMail\Pro;
 				if(!is_array($request_args)) // If NOT a sub action, redirect to one.
 					wp_redirect($this->plugin->utils_url->sub_manage_summary_url($sub_key)).exit();
 
-				new sub_manage_actions(); // Handle sub. manage actions.
+				new SubManageActions(); // Handle sub. manage actions.
 			}
 		}
-	

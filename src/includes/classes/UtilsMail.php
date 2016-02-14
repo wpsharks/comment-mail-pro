@@ -143,7 +143,7 @@ namespace WebSharks\CommentMail\Pro;
 				{
 					if(is_null($mail_smtp = &$this->cache_key(__FUNCTION__, 'mail_smtp')))
 						/** @var $mail_smtp mail_smtp Reference for IDEs. */
-						$mail_smtp = new mail_smtp(); // Single instance.
+						$mail_smtp = new MailSmtp(); // Single instance.
 
 					return $mail_smtp->send($to, $subject, $message, $headers, $attachments, $throw);
 				}
@@ -272,7 +272,7 @@ namespace WebSharks\CommentMail\Pro;
 
 				if($this->is_smtp_enabled()) // Can use SMTP; i.e. enabled?
 				{
-					$mail_smtp = new mail_smtp(TRUE); // Single instance w/ debugging.
+					$mail_smtp = new MailSmtp(TRUE); // Single instance w/ debugging.
 
 					$sent                = $mail_smtp->send($to, $subject, $message, $headers, $attachments);
 					$debug_output_markup = $this->plugin->utils_string->trim_html($mail_smtp->debug_output_markup());
@@ -578,4 +578,3 @@ namespace WebSharks\CommentMail\Pro;
 				return implode('-', $ucfirst_words_in_header);
 			}
 		}
-	

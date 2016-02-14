@@ -55,7 +55,7 @@ namespace WebSharks\CommentMail\Pro;
 
 				add_action('login_footer', function ()
 				{
-					$template = new template('site/login-form/sso-op-scripts.php');
+					$template = new Template('site/login-form/sso-op-scripts.php');
 					echo $template->parse(); // Inline `<script></script>`.
 
 				}, PHP_INT_MAX - 10); // Very low priority; after footer scripts!
@@ -82,7 +82,7 @@ namespace WebSharks\CommentMail\Pro;
 
 				add_action('wp_footer', function ()
 				{
-					$template = new template('site/comment-form/sso-op-scripts.php');
+					$template = new Template('site/comment-form/sso-op-scripts.php');
 					echo $template->parse(); // Inline `<script></script>`.
 
 				}, PHP_INT_MAX - 10); // Very low priority; after footer scripts!
@@ -112,10 +112,9 @@ namespace WebSharks\CommentMail\Pro;
 
 				add_action('wp_footer', function ()
 				{
-					$template = new template('site/comment-form/sub-op-scripts.php');
+					$template = new Template('site/comment-form/sub-op-scripts.php');
 					echo $template->parse(); // Inline `<script></script>`.
 
 				}, PHP_INT_MAX - 10); // Very low priority; after footer scripts!
 			}
 		}
-	

@@ -84,7 +84,7 @@ namespace WebSharks\CommentMail\Pro;
 					return; // Not applicable.
 
 				if($this->new_comment_status === 'approve' && $this->old_comment_status === 'hold')
-					new queue_injector($this->comment->comment_ID);
+					new QueueInjector($this->comment->comment_ID);
 			}
 
 			/**
@@ -98,7 +98,6 @@ namespace WebSharks\CommentMail\Pro;
 					return; // Not applicable.
 
 				if($this->new_comment_status === 'delete' && $this->old_comment_status !== 'delete')
-					new sub_purger($this->comment->comment_post_ID, $this->comment->comment_ID);
+					new SubPurger($this->comment->comment_post_ID, $this->comment->comment_ID);
 			}
 		}
-	

@@ -218,7 +218,7 @@ namespace WebSharks\CommentMail\Pro;
 
 					'insertion_time' => $sub->time,
 					);
-					$sub_inserter    = new sub_inserter($sub_insert_data);
+					$sub_inserter    = new SubInserter($sub_insert_data);
 					if($sub_inserter->did_insert()){
 						$this->total_imported_subs++;
 						$this->total_created_subs++;
@@ -255,7 +255,7 @@ namespace WebSharks\CommentMail\Pro;
 
 							'insertion_time' => $sub->time,
 							);
-							$_sub_inserter    = new sub_inserter($_sub_insert_data);
+							$_sub_inserter    = new SubInserter($_sub_insert_data);
 							if ($_sub_inserter->did_insert()) {
 								$this->total_created_subs++;
 							} else {
@@ -701,4 +701,3 @@ namespace WebSharks\CommentMail\Pro;
 				file_put_contents($log_file, $log_entry, FILE_APPEND);
 			}
 		}
-	

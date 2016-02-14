@@ -179,7 +179,7 @@ namespace WebSharks\CommentMail\Pro;
 					$_import['insertion_time']   = $this->csv_line_column_value_for('insertion_time', $csv_headers, $_csv_line);
 					$_import['last_update_time'] = $this->csv_line_column_value_for('last_update_time', $csv_headers, $_csv_line);
 
-					$_sub_inserter = new sub_inserter($_import, array(
+					$_sub_inserter = new SubInserter($_import, array(
 						'process_confirmation' => $this->process_confirmations,
 					)); // Insert; or perhaps update existing subscription.
 
@@ -284,4 +284,3 @@ namespace WebSharks\CommentMail\Pro;
 				return array_map(array($this->plugin->utils_string, 'markdown_no_p'), $this->errors);
 			}
 		}
-	

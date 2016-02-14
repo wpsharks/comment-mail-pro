@@ -50,9 +50,8 @@ namespace WebSharks\CommentMail\Pro;
 				if(!$sso_services) return; // No configured services.
 
 				$template_vars = get_defined_vars(); // Everything above.
-				$template      = new template('site/login-form/sso-ops.php');
+				$template      = new Template('site/login-form/sso-ops.php');
 
 				echo $template->parse($template_vars);
 			}
 		}
-	

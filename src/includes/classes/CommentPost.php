@@ -87,7 +87,7 @@ namespace WebSharks\CommentMail\Pro;
 
 				$sub_list = (boolean)@$_POST[GLOBAL_NS.'_sub_list'];
 
-				new sub_injector(wp_get_current_user(), $this->comment_id, array(
+				new SubInjector(wp_get_current_user(), $this->comment_id, array(
 					'type'                => $sub_type,
 					'deliver'             => $sub_deliver,
 					'process_list_server' => $sub_list,
@@ -109,7 +109,7 @@ namespace WebSharks\CommentMail\Pro;
 				if($this->comment_status !== 'approve')
 					return; // Not applicable.
 
-				new queue_injector($this->comment_id);
+				new QueueInjector($this->comment_id);
 			}
 
 			/**
@@ -131,7 +131,6 @@ namespace WebSharks\CommentMail\Pro;
 				$upper_max_limit = (integer)apply_filters(__CLASS__.'_upper_max_limit', 100);
 				if($realtime_max_limit > $upper_max_limit) $realtime_max_limit = $upper_max_limit;
 
-				new queue_processor(FALSE, 10, 0, $realtime_max_limit); // No delay.
+				new QueueProcessor(FALSE, 10, 0, $realtime_max_limit); // No delay.
 			}
 		}
-	

@@ -86,7 +86,7 @@ namespace WebSharks\CommentMail\Pro;
 
 				$nav_vars = $this->plugin->utils_url->sub_manage_summary_nav_vars();
 
-				new sub_manage_summary($sub_key, $nav_vars);
+				new SubManageSummary($sub_key, $nav_vars);
 
 				exit(); // Stop after display; always.
 			}
@@ -157,7 +157,7 @@ namespace WebSharks\CommentMail\Pro;
 			{
 				$request_args = NULL; // N/A.
 
-				new sub_manage_sub_new_form();
+				new SubManageSubNewForm();
 
 				exit(); // Stop after display; always.
 			}
@@ -176,7 +176,7 @@ namespace WebSharks\CommentMail\Pro;
 				if($sub_key && ($sub = $this->plugin->utils_sub->get($sub_key)))
 					$this->plugin->utils_sub->set_current_email($sub_key, $sub->email);
 
-				new sub_manage_sub_edit_form($sub_key);
+				new SubManageSubEditForm($sub_key);
 
 				exit(); // Stop after display; always.
 			}
@@ -199,4 +199,3 @@ namespace WebSharks\CommentMail\Pro;
 				// Do NOT stop; allow `summary` action to run also.
 			}
 		}
-	

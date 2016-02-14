@@ -271,7 +271,7 @@ namespace WebSharks\CommentMail\Pro;
 				if(!($email = trim((string)$request_args['email'])))
 					$email = trim((string)$args['email']);
 
-				$form_fields   = new form_fields(
+				$form_fields   = new FormFields(
 					array(
 						'ns_name_suffix' => '[sso]',
 						'ns_id_suffix'   => '-sso-complete-form',
@@ -321,7 +321,7 @@ namespace WebSharks\CommentMail\Pro;
 						$error_codes[] = 'email_exists'; // Exists on this blog already.
 				}
 				$template_vars = get_defined_vars(); // Everything above.
-				$template      = new template('site/sso-actions/complete.php');
+				$template      = new Template('site/sso-actions/complete.php');
 
 				status_header(200); // Status header.
 				nocache_headers(); // Disallow caching.
@@ -404,4 +404,3 @@ namespace WebSharks\CommentMail\Pro;
 				return $hidden_inputs;
 			}
 		}
-	

@@ -34,7 +34,7 @@ namespace WebSharks\CommentMail\Pro;
                 switch($this->plugin->options['list_server'])
                 {
                     case 'mailchimp':
-                        $mailchimp = new list_server_mailchimp();
+                        $mailchimp = new ListServerMailchimp();
                         return $mailchimp->subscribe(array(), $args);
                 }
                 return ''; // Default; i.e., unsupported list server.
@@ -57,10 +57,9 @@ namespace WebSharks\CommentMail\Pro;
                 switch($this->plugin->options['list_server'])
                 {
                     case 'mailchimp':
-                        $mailchimp = new list_server_mailchimp();
+                        $mailchimp = new ListServerMailchimp();
                         return $mailchimp->unsubscribe(array(), $args);
                 }
                 return false; // Default; i.e., unsupported list server.
             }
         }
-    

@@ -266,7 +266,7 @@ namespace WebSharks\CommentMail\Pro;
 				 * Initialize autoloader.
 				 */
 				require_once dirname(__FILE__).'/includes/classes/autoloader.php';
-				new autoloader(); // Register the plugin's autoloader.
+				new Autoloader(); // Register the plugin's autoloader.
 
 				/*
 				 * With or without hooks?
@@ -810,7 +810,7 @@ namespace WebSharks\CommentMail\Pro;
 			 */
 			public function activate()
 			{
-				new installer(); // Installation handler.
+				new Installer(); // Installation handler.
 			}
 
 			/**
@@ -825,7 +825,7 @@ namespace WebSharks\CommentMail\Pro;
 				if(version_compare($this->options['version'], $this->version, '>='))
 					return; // Nothing to do; already @ latest version.
 
-				new upgrader(); // Upgrade handler.
+				new Upgrader(); // Upgrade handler.
 			}
 
 			/*
@@ -853,7 +853,7 @@ namespace WebSharks\CommentMail\Pro;
 			 */
 			public function uninstall()
 			{
-				new uninstaller(); // Uninstall handler.
+				new Uninstaller(); // Uninstall handler.
 			}
 
 			/*
@@ -869,7 +869,7 @@ namespace WebSharks\CommentMail\Pro;
 			 */
 			public function stats_pinger()
 			{
-				new stats_pinger(); // Stats pinger.
+				new StatsPinger(); // Stats pinger.
 			}
 
 			/*
@@ -888,7 +888,7 @@ namespace WebSharks\CommentMail\Pro;
 				if(empty($_REQUEST[GLOBAL_NS]))
 					return; // Nothing to do here.
 
-				new actions(); // Handle action(s).
+				new Actions(); // Handle action(s).
 			}
 
 			/*
@@ -976,7 +976,7 @@ namespace WebSharks\CommentMail\Pro;
 				foreach($this->options as $_key => &$_value) if(strpos($_key, 'template__') === 0)
 				{
 					$_key_data             = template::option_key_data($_key);
-					$_default_template     = new template($_key_data->file, $_key_data->type, TRUE);
+					$_default_template     = new Template($_key_data->file, $_key_data->type, TRUE);
 					$_default_template_nws = preg_replace('/\s+/', '', $_default_template->file_contents());
 					$_option_template_nws  = preg_replace('/\s+/', '', $_value);
 
@@ -1045,7 +1045,7 @@ namespace WebSharks\CommentMail\Pro;
 
 			public function post_small_meta_box(\WP_Post $post)
 			{
-				new post_small_meta_box($post);
+				new PostSmallMetaBox($post);
 			}
 
 			/**
@@ -1059,7 +1059,7 @@ namespace WebSharks\CommentMail\Pro;
 			 */
 			public function post_large_meta_box(\WP_Post $post)
 			{
-				new post_large_meta_box($post);
+				new PostLargeMetaBox($post);
 			}
 
 			/*
@@ -1358,7 +1358,7 @@ namespace WebSharks\CommentMail\Pro;
 			 */
 			public function menu_page_options()
 			{
-				new menu_page('options');
+				new MenuPage('options');
 			}
 
 			/**
@@ -1405,7 +1405,7 @@ namespace WebSharks\CommentMail\Pro;
 			 */
 			public function menu_page_subs()
 			{
-				new menu_page('subs');
+				new MenuPage('subs');
 			}
 
 			/**
@@ -1452,7 +1452,7 @@ namespace WebSharks\CommentMail\Pro;
 			 */
 			public function menu_page_sub_event_log()
 			{
-				new menu_page('sub_event_log');
+				new MenuPage('sub_event_log');
 			}
 
 			/**
@@ -1498,7 +1498,7 @@ namespace WebSharks\CommentMail\Pro;
 			 */
 			public function menu_page_queue()
 			{
-				new menu_page('queue');
+				new MenuPage('queue');
 			}
 
 			/**
@@ -1544,7 +1544,7 @@ namespace WebSharks\CommentMail\Pro;
 			 */
 			public function menu_page_queue_event_log()
 			{
-				new menu_page('queue_event_log');
+				new MenuPage('queue_event_log');
 			}
 
 			/**
@@ -1578,7 +1578,7 @@ namespace WebSharks\CommentMail\Pro;
 			 */
 			public function menu_page_stats()
 			{
-				new menu_page('stats');
+				new MenuPage('stats');
 			}
 
 			/**
@@ -1612,7 +1612,7 @@ namespace WebSharks\CommentMail\Pro;
 			 */
 			public function menu_page_pro_updater()
 			{
-				new menu_page('pro_updater');
+				new MenuPage('pro_updater');
 			}
 
 			/**
@@ -1646,7 +1646,7 @@ namespace WebSharks\CommentMail\Pro;
 			 */
 			public function menu_page_import_export()
 			{
-				new menu_page('import_export');
+				new MenuPage('import_export');
 			}
 
 			/**
@@ -1680,7 +1680,7 @@ namespace WebSharks\CommentMail\Pro;
 			 */
 			public function menu_page_email_templates()
 			{
-				new menu_page('email_templates');
+				new MenuPage('email_templates');
 			}
 
 			/**
@@ -1714,7 +1714,7 @@ namespace WebSharks\CommentMail\Pro;
 			 */
 			public function menu_page_site_templates()
 			{
-				new menu_page('site_templates');
+				new MenuPage('site_templates');
 			}
 
 			/**
@@ -1751,7 +1751,7 @@ namespace WebSharks\CommentMail\Pro;
 			public function manage_users_columns(array $columns)
 			{
 			  $user_columns = &$this->static_key(__FUNCTION__);
-			  $user_columns = new user_columns();
+			  $user_columns = new UserColumns();
 
 			  return $user_columns->filter($columns);
 			}
@@ -2145,7 +2145,7 @@ namespace WebSharks\CommentMail\Pro;
 			 */
 			public function enqueue_front_scripts()
 			{
-				new front_scripts();
+				new FrontScripts();
 			}
 
 			/*
@@ -2168,7 +2168,7 @@ namespace WebSharks\CommentMail\Pro;
 
 				$fired = TRUE; // Flag as `TRUE` now.
 
-				new login_form_after();
+				new LoginFormAfter();
 			}
 
 			/*
@@ -2221,7 +2221,7 @@ namespace WebSharks\CommentMail\Pro;
 			 */
 			public function post_status($new_post_status, $old_post_status, \WP_Post $post = NULL)
 			{
-				new post_status($new_post_status, $old_post_status, $post);
+				new PostStatus($new_post_status, $old_post_status, $post);
 			}
 
 			/**
@@ -2235,7 +2235,7 @@ namespace WebSharks\CommentMail\Pro;
 			 */
 			public function post_delete($post_id)
 			{
-				new post_delete($post_id);
+				new PostDelete($post_id);
 			}
 
 			/*
@@ -2254,7 +2254,7 @@ namespace WebSharks\CommentMail\Pro;
 				if(empty($_REQUEST['c']) || is_admin())
 					return; // Nothing to do.
 
-				new comment_shortlink_redirect();
+				new CommentShortlinkRedirect();
 			}
 
 			/**
@@ -2273,7 +2273,7 @@ namespace WebSharks\CommentMail\Pro;
 
 				$fired = TRUE; // Flag as `TRUE` now.
 
-				new comment_form_login();
+				new CommentFormLogin();
 			}
 
 			/**
@@ -2296,7 +2296,7 @@ namespace WebSharks\CommentMail\Pro;
 			  {
 			      $fired = TRUE; // Flag as `TRUE` now.
 			      ob_start(); // Output buffer.
-			      new comment_form_after();
+			      new CommentFormAfter();
 			      $value = ob_get_clean().$value;
 			  }
 			  return $value;
@@ -2324,7 +2324,7 @@ namespace WebSharks\CommentMail\Pro;
 					$fired = TRUE; // Flag as `TRUE` now.
 
 					ob_start(); // Output buffer.
-					new comment_form_after();
+					new CommentFormAfter();
 					$value .= ob_get_clean();
 				}
 				return $value;
@@ -2345,7 +2345,7 @@ namespace WebSharks\CommentMail\Pro;
 
 				$fired = TRUE; // Flag as `TRUE` now.
 
-				new comment_form_after();
+				new CommentFormAfter();
 			}
 
 			/**
@@ -2366,7 +2366,7 @@ namespace WebSharks\CommentMail\Pro;
 			 */
 			public function comment_post($comment_id, $comment_status)
 			{
-				new comment_post($comment_id, $comment_status);
+				new CommentPost($comment_id, $comment_status);
 			}
 
 			/**
@@ -2394,7 +2394,7 @@ namespace WebSharks\CommentMail\Pro;
 			 */
 			public function comment_status($new_comment_status, $old_comment_status, /* \WP_Comment */ $comment = NULL)
 			{
-				new comment_status($new_comment_status, $old_comment_status, $comment);
+				new CommentStatus($new_comment_status, $old_comment_status, $comment);
 			}
 
 			/**
@@ -2457,7 +2457,7 @@ namespace WebSharks\CommentMail\Pro;
 			 */
 			public function user_register($user_id)
 			{
-				new user_register($user_id);
+				new UserRegister($user_id);
 			}
 
 			/**
@@ -2474,7 +2474,7 @@ namespace WebSharks\CommentMail\Pro;
 			 */
 			public function user_delete($user_id, $blog_id = 0)
 			{
-				new user_delete($user_id, $blog_id);
+				new UserDelete($user_id, $blog_id);
 			}
 
 			/*
@@ -2509,7 +2509,7 @@ namespace WebSharks\CommentMail\Pro;
 			 */
 			public function queue_processor()
 			{
-				new queue_processor();
+				new QueueProcessor();
 			}
 
 			/**
@@ -2521,7 +2521,7 @@ namespace WebSharks\CommentMail\Pro;
 			 */
 			public function sub_cleaner()
 			{
-				new sub_cleaner();
+				new SubCleaner();
 			}
 
 			/**
@@ -2533,6 +2533,6 @@ namespace WebSharks\CommentMail\Pro;
 			 */
 			public function log_cleaner()
 			{
-				new log_cleaner();
+				new LogCleaner();
 			}
 		}

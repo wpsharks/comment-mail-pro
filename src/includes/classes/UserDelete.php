@@ -72,7 +72,7 @@ namespace WebSharks\CommentMail\Pro;
 					switch_to_blog($this->blog_id);
 					$this->switched_blog = TRUE;
 				}
-				new sub_purger(0, 0, $this->user_id);
+				new SubPurger(0, 0, $this->user_id);
 
 				if($this->blog_id && $this->switched_blog)
 				{
@@ -81,4 +81,3 @@ namespace WebSharks\CommentMail\Pro;
 				}
 			}
 		}
-	

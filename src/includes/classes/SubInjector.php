@@ -187,7 +187,7 @@ namespace WebSharks\CommentMail\Pro;
 					'lname'      => $this->plugin->utils_string->last_name($this->comment->comment_author),
 					'email'      => $this->comment->comment_author_email,
 				);
-				$this->sub_inserter = new sub_inserter($data, array(
+				$this->sub_inserter = new SubInserter($data, array(
 					'process_confirmation' => TRUE, // Always.
 					'auto_confirm'         => $this->auto_confirm,
 					'process_events'       => $this->process_events,
@@ -197,4 +197,3 @@ namespace WebSharks\CommentMail\Pro;
 				));
 			}
 		}
-	

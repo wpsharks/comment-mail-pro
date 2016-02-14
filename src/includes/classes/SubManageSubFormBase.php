@@ -141,7 +141,7 @@ namespace WebSharks\CommentMail\Pro;
 					$this->sub_key = trim((string)$sub_key);
 					$this->sub     = $this->plugin->utils_sub->get($this->sub_key);
 				}
-				$this->form_fields = new form_fields(static::$form_field_args);
+				$this->form_fields = new FormFields(static::$form_field_args);
 
 				$this->maybe_display();
 			}
@@ -206,7 +206,7 @@ namespace WebSharks\CommentMail\Pro;
 					$error_codes[] = 'new_subs_disabled';
 
 				$template_vars = get_defined_vars(); // Everything above.
-				$template      = new template('site/sub-actions/manage-sub-form.php');
+				$template      = new Template('site/sub-actions/manage-sub-form.php');
 
 				status_header(200); // Status header.
 				nocache_headers(); // Disallow caching.
@@ -391,10 +391,10 @@ namespace WebSharks\CommentMail\Pro;
 			public static function comment_id_row_via_ajax($post_id)
 			{
 				$post_id     = (integer)$post_id;
-				$form_fields = new form_fields(static::$form_field_args);
+				$form_fields = new FormFields(static::$form_field_args);
 
 				$template_vars = get_defined_vars(); // Everything above.
-				$template      = new template('site/sub-actions/manage-sub-form-comment-id-row-via-ajax.php');
+				$template      = new Template('site/sub-actions/manage-sub-form-comment-id-row-via-ajax.php');
 
 				return $template->parse($template_vars);
 			}
@@ -426,7 +426,7 @@ namespace WebSharks\CommentMail\Pro;
 
 				if(isset($request_args['ID'])) // Updating an existing subscription via ID?
 				{
-					$sub_updater = new sub_updater($request_args, $args); // Run updater.
+					$sub_updater = new SubUpdater($request_args, $args); // Run updater.
 
 					if($sub_updater->has_errors()) // Updater has errors?
 					{
@@ -445,7 +445,7 @@ namespace WebSharks\CommentMail\Pro;
 				else if($plugin->options['enable'] && $plugin->options['new_subs_enable'])
 					// This check is for added security only. The form should not be available.
 				{
-					$sub_inserter = new sub_inserter($request_args, $args); // Run inserter.
+					$sub_inserter = new SubInserter($request_args, $args); // Run inserter.
 
 					if($sub_inserter->has_errors()) // Inserter has errors?
 					{
@@ -462,4 +462,3 @@ namespace WebSharks\CommentMail\Pro;
 				}
 			}
 		}
-	

@@ -70,9 +70,8 @@ namespace WebSharks\CommentMail\Pro;
 			{
 				$key = trim((string)$request_args);
 
-				new rve_mandrill($key);
+				new RveMandrill($key);
 
 				exit(); // Stop; always.
 			}
 		}
-	

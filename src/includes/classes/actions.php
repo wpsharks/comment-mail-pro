@@ -52,7 +52,7 @@ namespace WebSharks\CommentMail\Pro;
 				if(empty($_REQUEST[GLOBAL_NS]))
 					return; // Nothing to do.
 
-				new sso_actions();
+				new SsoActions();
 			}
 
 			/**
@@ -68,7 +68,7 @@ namespace WebSharks\CommentMail\Pro;
 				if(empty($_REQUEST[GLOBAL_NS]))
 					return; // Nothing to do.
 
-				new sub_actions();
+				new SubActions();
 			}
 
 			/**
@@ -84,7 +84,7 @@ namespace WebSharks\CommentMail\Pro;
 				if(empty($_REQUEST[GLOBAL_NS]))
 					return; // Nothing to do.
 
-				new webhook_actions();
+				new WebhookActions();
 			}
 
 			/**
@@ -100,6 +100,6 @@ namespace WebSharks\CommentMail\Pro;
 				if(empty($_REQUEST[GLOBAL_NS]))
 					return; // Nothing to do.
 
-				new menu_page_actions();
+				new MenuPageActions();
 			}
 		}

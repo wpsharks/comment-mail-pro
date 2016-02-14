@@ -50,7 +50,6 @@ namespace WebSharks\CommentMail\Pro;
 				if(!$this->post_id)
 					return; // Nothing to do.
 
-				new sub_purger($this->post_id);
+				new SubPurger($this->post_id);
 			}
 		}
-	
