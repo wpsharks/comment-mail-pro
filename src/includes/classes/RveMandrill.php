@@ -161,24 +161,24 @@ class RveMandrill extends AbsBase
                 $_dkim_valid = false; // Default value.
             }
             $this->maybeProcessCommentReply(
-              [
-                'reply_to_email' => $_reply_to_email,
+                [
+                    'reply_to_email' => $_reply_to_email,
 
-                'from_name'  => $_from_name,
-                'from_email' => $_from_email,
+                    'from_name'  => $_from_name,
+                    'from_email' => $_from_email,
 
-                'subject' => $_subject,
+                    'subject' => $_subject,
 
-                'text_body' => $_text_body,
-                'html_body' => $_html_body,
+                    'text_body' => $_text_body,
+                    'html_body' => $_html_body,
 
-                'spam_score' => $_spam_score,
+                    'spam_score' => $_spam_score,
 
-                'spf_result' => $_spf_result,
+                    'spf_result' => $_spf_result,
 
-                'dkim_signed' => $_dkim_signed,
-                'dkim_valid'  => $_dkim_valid,
-              ]
+                    'dkim_signed' => $_dkim_signed,
+                    'dkim_valid'  => $_dkim_valid,
+                ]
             );
         }
         unset($_event); // Housekeeping.
@@ -194,22 +194,22 @@ class RveMandrill extends AbsBase
     protected function maybeProcessCommentReply(array $args)
     {
         $default_args = [
-          'reply_to_email' => '',
+            'reply_to_email' => '',
 
-          'from_name'  => '',
-          'from_email' => '',
+            'from_name'  => '',
+            'from_email' => '',
 
-          'subject' => '',
+            'subject' => '',
 
-          'text_body' => '',
-          'html_body' => '',
+            'text_body' => '',
+            'html_body' => '',
 
-          'spam_score' => 0.0,
+            'spam_score' => 0.0,
 
-          'spf_result' => 'none',
+            'spf_result' => 'none',
 
-          'dkim_signed' => false,
-          'dkim_valid'  => false,
+            'dkim_signed' => false,
+            'dkim_valid'  => false,
         ];
         $args         = array_merge($default_args, $args);
         $args         = array_intersect_key($args, $default_args);
@@ -260,16 +260,16 @@ class RveMandrill extends AbsBase
             }
         }
         $post_comment_args = compact(
-          'reply_to_email',
+            'reply_to_email',
 
-          'from_name',
-          'from_email',
+            'from_name',
+            'from_email',
 
-          'subject',
+            'subject',
 
-          'rich_text_body',
+            'rich_text_body',
 
-          'force_status'
+            'force_status'
         );
         $this->plugin->utils_rve->maybePostComment($post_comment_args);
     }

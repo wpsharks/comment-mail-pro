@@ -42,18 +42,18 @@ class UtilsMarkup extends AbsBase
         $email = (string)$email;
 
         $default_args = [
-          'separator' => ' ',
+            'separator' => ' ',
 
-          'span_title' => true,
+            'span_title' => true,
 
-          'name_style'  => '',
-          'email_style' => '',
+            'name_style'  => '',
+            'email_style' => '',
 
-          'anchor'                 => true,
-          'anchor_to'              => 'mailto',
-          // `mailto|search|summary|[custom URL]`.
-          'anchor_target'          => '',
-          'anchor_summary_sub_key' => '',
+            'anchor'                 => true,
+            'anchor_to'              => 'mailto',
+            // `mailto|search|summary|[custom URL]`.
+            'anchor_target'          => '',
+            'anchor_summary_sub_key' => '',
         ];
         $args         = array_merge($default_args, $args);
 
@@ -126,7 +126,7 @@ class UtilsMarkup extends AbsBase
         $post_total_comments = (integer)$post_total_comments;
 
         $default_args = [
-          'style' => 'float:right; margin-left:5px;',
+            'style' => 'float:right; margin-left:5px;',
         ];
         $args         = array_merge($default_args, $args);
 
@@ -157,8 +157,8 @@ class UtilsMarkup extends AbsBase
         $post_total_subs = (integer)$post_total_subs;
 
         $default_args = [
-          'style'         => 'float:right; margin-left:5px;',
-          'subscriptions' => false,
+            'style'         => 'float:right; margin-left:5px;',
+            'subscriptions' => false,
         ];
         $args         = array_merge($default_args, $args);
 
@@ -166,7 +166,7 @@ class UtilsMarkup extends AbsBase
         $subscriptions = (boolean)$args['subscriptions'];
 
         $post_total_subs_label = $subscriptions // What should label contain?
-          ? $this->plugin->utils_i18n->subscriptions($post_total_subs) : $post_total_subs;
+            ? $this->plugin->utils_i18n->subscriptions($post_total_subs) : $post_total_subs;
 
         $post_total_subs_desc = sprintf(_n('%1$s Subscription', '%1$s Subscriptions', $post_total_subs, $this->plugin->text_domain), esc_html($post_total_subs));
         $post_edit_subs_url   = $this->plugin->utils_url->postEditSubsShort($post_id);
@@ -197,22 +197,22 @@ class UtilsMarkup extends AbsBase
     public function lastXSubs($x = 0, $post_id = null, array $args = [])
     {
         $default_args = [
-          'offset' => 0,
+            'offset' => 0,
 
-          'status'     => '',
-          'sub_email'  => '',
-          'user_id'    => null,
-          'comment_id' => null,
+            'status'     => '',
+            'sub_email'  => '',
+            'user_id'    => null,
+            'comment_id' => null,
 
-          'auto_discount_trash'   => true,
-          'sub_email_or_user_ids' => false,
-          'group_by_email'        => false,
-          'no_cache'              => false,
+            'auto_discount_trash'   => true,
+            'sub_email_or_user_ids' => false,
+            'group_by_email'        => false,
+            'no_cache'              => false,
 
-          'show_fname'      => false,
-          'show_lname'      => false,
-          'name_email_args' => ['anchor_to' => 'search'],
-          'list_style'      => 'margin:0;',
+            'show_fname'      => false,
+            'show_lname'      => false,
+            'name_email_args' => ['anchor_to' => 'search'],
+            'list_style'      => 'margin:0;',
         ];
         $args         = array_merge($default_args, $args);
         $args         = array_intersect_key($args, $default_args);
@@ -268,18 +268,18 @@ class UtilsMarkup extends AbsBase
     {
         $selected_user_id = null; // Initialize.
         $current_user_id  = isset($current_user_id)
-          ? (integer)$current_user_id : null;
+            ? (integer)$current_user_id : null;
 
         $default_args = [
-          'max'         => // Plugin option value.
-            (integer)$this->plugin->options['max_select_options'],
-          'fail_on_max' => true,
-          'no_cache'    => false,
+            'max'         => // Plugin option value.
+                (integer)$this->plugin->options['max_select_options'],
+            'fail_on_max' => true,
+            'no_cache'    => false,
 
-          'display_emails'  => // Show emails?
-            is_admin() && current_user_can('list_users'),
-          'allow_empty'     => true,
-          'allow_arbitrary' => true,
+            'display_emails'  => // Show emails?
+                is_admin() && current_user_can('list_users'),
+            'allow_empty'     => true,
+            'allow_arbitrary' => true,
         ];
         $args         = array_merge($default_args, $args);
         $args         = array_intersect_key($args, $default_args);
@@ -311,9 +311,9 @@ class UtilsMarkup extends AbsBase
             }
             $options .= '<option value="'.esc_attr($_user->ID).'"'.$_selected.'>'.
                         '  '.esc_html(
-                          __('User', $this->plugin->text_domain).' ID #'.$_user->ID.
-                          ' :: '.$_user->user_login. // The user's username; i.e. what they log in with.
-                          ' :: "'.$_user->display_name.'"'.($display_emails ? ' <'.$_user->user_email.'>' : '')
+                            __('User', $this->plugin->text_domain).' ID #'.$_user->ID.
+                            ' :: '.$_user->user_login. // The user's username; i.e. what they log in with.
+                            ' :: "'.$_user->display_name.'"'.($display_emails ? ' <'.$_user->user_email.'>' : '')
                         ).
                         '</option>';
         }
@@ -349,21 +349,21 @@ class UtilsMarkup extends AbsBase
     {
         $selected_post_id = null; // Initialize.
         $current_post_id  = isset($current_post_id)
-          ? (integer)$current_post_id : null;
+            ? (integer)$current_post_id : null;
 
         $default_args = [
-          'max'                        => // Plugin option value.
-            (integer)$this->plugin->options['max_select_options'],
-          'fail_on_max'                => true,
-          'for_comments_only'          => false,
-          'include_post_types'         => [],
-          'exclude_post_types'         => [],
-          'exclude_post_statuses'      => [],
-          'exclude_password_protected' => !is_admin(),
-          'no_cache'                   => false,
+            'max'                        => // Plugin option value.
+                (integer)$this->plugin->options['max_select_options'],
+            'fail_on_max'                => true,
+            'for_comments_only'          => false,
+            'include_post_types'         => [],
+            'exclude_post_types'         => [],
+            'exclude_post_statuses'      => [],
+            'exclude_password_protected' => !is_admin(),
+            'no_cache'                   => false,
 
-          'allow_empty'     => true,
-          'allow_arbitrary' => true,
+            'allow_empty'     => true,
+            'allow_arbitrary' => true,
         ];
         $args         = array_merge($default_args, $args);
         $args         = array_intersect_key($args, $default_args);
@@ -411,15 +411,15 @@ class UtilsMarkup extends AbsBase
             if (is_admin()) { // Slightly different format in admin area.
                 $options .= '<option value="'.esc_attr($_post->ID).'"'.$_selected.'>'.
                             '  '.esc_html(
-                              $_post_type->labels->singular_name.' #'.$_post->ID.':'.
-                              ' '.($_post->post_title ? $_post->post_title : __('Untitled', $this->plugin->text_domain))
+                                $_post_type->labels->singular_name.' #'.$_post->ID.':'.
+                                ' '.($_post->post_title ? $_post->post_title : __('Untitled', $this->plugin->text_domain))
                             ).
                             '</option>';
             } else { // Front-end display should be friendlier in some ways.
                 $options .= '<option value="'.esc_attr($_post->ID).'"'.$_selected.'>'.
                             '  '.esc_html(
-                              $this->plugin->utils_date->i18n('M jS, Y', strtotime($_post->post_date_gmt)).
-                              ' — '.($_post->post_title ? $_post->post_title : __('Untitled', $this->plugin->text_domain))
+                                $this->plugin->utils_date->i18n('M jS, Y', strtotime($_post->post_date_gmt)).
+                                ' — '.($_post->post_title ? $_post->post_title : __('Untitled', $this->plugin->text_domain))
                             ).
                             '</option>';
             }
@@ -460,23 +460,23 @@ class UtilsMarkup extends AbsBase
         }
         $selected_comment_id = null; // Initialize.
         $current_comment_id  = isset($current_comment_id)
-          ? (integer)$current_comment_id : null;
+            ? (integer)$current_comment_id : null;
 
         $default_args = [
-          'max'                        => // Option value.
-            (integer)$this->plugin->options['max_select_options'],
-          'fail_on_max'                => true,
-          'parents_only'               => false,
-          'include_post_types'         => [],
-          'exclude_post_types'         => [],
-          'exclude_post_statuses'      => [],
-          'exclude_password_protected' => !is_admin(),
-          'no_cache'                   => false,
+            'max'                        => // Option value.
+                (integer)$this->plugin->options['max_select_options'],
+            'fail_on_max'                => true,
+            'parents_only'               => false,
+            'include_post_types'         => [],
+            'exclude_post_types'         => [],
+            'exclude_post_statuses'      => [],
+            'exclude_password_protected' => !is_admin(),
+            'no_cache'                   => false,
 
-          'display_emails'  => // Show emails?
-            is_admin() && current_user_can('moderate_comments'),
-          'allow_empty'     => true,
-          'allow_arbitrary' => true,
+            'display_emails'  => // Show emails?
+                is_admin() && current_user_can('moderate_comments'),
+            'allow_empty'     => true,
+            'allow_arbitrary' => true,
         ];
         $args         = array_merge($default_args, $args);
         $args         = array_intersect_key($args, $default_args);
@@ -521,17 +521,17 @@ class UtilsMarkup extends AbsBase
             if (is_admin()) { // Slightly different format in admin area.
                 $options .= '<option value="'.esc_attr($_comment->comment_ID).'"'.$_selected.'>'.
                             '  '.esc_html(
-                              '#'.$_comment->comment_ID.': '.$this->plugin->utils_date->i18n('M jS, Y g:i a', strtotime($_comment->comment_date_gmt)).
-                              ($_comment->comment_author ? ' — "'.$_comment->comment_author.'"'.($display_emails ? ' <'.$_comment->comment_author_email.'>' : '').' writes:' : ' — ').
-                              ' '.$this->commentContentClip($_comment, 45)
+                                '#'.$_comment->comment_ID.': '.$this->plugin->utils_date->i18n('M jS, Y g:i a', strtotime($_comment->comment_date_gmt)).
+                                ($_comment->comment_author ? ' — "'.$_comment->comment_author.'"'.($display_emails ? ' <'.$_comment->comment_author_email.'>' : '').' writes:' : ' — ').
+                                ' '.$this->commentContentClip($_comment, 45)
                             ).
                             '</option>';
             } else { // Front-end display should be friendlier in some ways.
                 $options .= '<option value="'.esc_attr($_comment->comment_ID).'"'.$_selected.'>'.
                             '  '.esc_html(
-                              $this->plugin->utils_date->i18n('M jS, Y g:i a', strtotime($_comment->comment_date_gmt)).
-                              ($_comment->comment_author ? ' — "'.$_comment->comment_author.'"'.($display_emails ? ' <'.$_comment->comment_author_email.'>' : '').' writes:' : ' — ').
-                              ' '.$this->commentContentClip($_comment, 45)
+                                $this->plugin->utils_date->i18n('M jS, Y g:i a', strtotime($_comment->comment_date_gmt)).
+                                ($_comment->comment_author ? ' — "'.$_comment->comment_author.'"'.($display_emails ? ' <'.$_comment->comment_author_email.'>' : '').' writes:' : ' — ').
+                                ' '.$this->commentContentClip($_comment, 45)
                             ).
                             '</option>';
             }
@@ -564,11 +564,11 @@ class UtilsMarkup extends AbsBase
     {
         $selected_deliver = null; // Initialize.
         $current_deliver  = isset($current_deliver)
-          ? (string)$current_deliver : null;
+            ? (string)$current_deliver : null;
 
         $default_args = [
-          'allow_empty'     => true,
-          'allow_arbitrary' => true,
+            'allow_empty'     => true,
+            'allow_arbitrary' => true,
         ];
         $args         = array_merge($default_args, $args);
         $args         = array_intersect_key($args, $default_args);
@@ -577,10 +577,10 @@ class UtilsMarkup extends AbsBase
         $allow_arbitrary = (boolean)$args['allow_arbitrary'];
 
         $deliver_options_available = [
-          'asap'   => $this->plugin->utils_i18n->deliverLabel('asap'),
-          'hourly' => $this->plugin->utils_i18n->deliverLabel('hourly'),
-          'daily'  => $this->plugin->utils_i18n->deliverLabel('daily'),
-          'weekly' => $this->plugin->utils_i18n->deliverLabel('weekly'),
+            'asap'   => $this->plugin->utils_i18n->deliverLabel('asap'),
+            'hourly' => $this->plugin->utils_i18n->deliverLabel('hourly'),
+            'daily'  => $this->plugin->utils_i18n->deliverLabel('daily'),
+            'weekly' => $this->plugin->utils_i18n->deliverLabel('weekly'),
         ]; // These are hard-coded; i.e. not expected to change.
 
         $options = ''; // Initialize.
@@ -627,12 +627,12 @@ class UtilsMarkup extends AbsBase
     {
         $selected_status = null; // Initialize.
         $current_status  = isset($current_status)
-          ? (string)$current_status : null;
+            ? (string)$current_status : null;
 
         $default_args = [
-          'allow_empty'                   => true,
-          'allow_arbitrary'               => true,
-          'ui_protected_data_keys_enable' => !is_admin(),
+            'allow_empty'                   => true,
+            'allow_arbitrary'               => true,
+            'ui_protected_data_keys_enable' => !is_admin(),
         ];
         $args         = array_merge($default_args, $args);
         $args         = array_intersect_key($args, $default_args);
@@ -642,10 +642,10 @@ class UtilsMarkup extends AbsBase
         $ui_protected_data_keys_enable = (boolean)$args['ui_protected_data_keys_enable'];
 
         $status_options_available = [
-          'unconfirmed' => $this->plugin->utils_i18n->statusLabel('unconfirmed'),
-          'subscribed'  => $this->plugin->utils_i18n->statusLabel('subscribed'),
-          'suspended'   => $this->plugin->utils_i18n->statusLabel('suspended'),
-          'trashed'     => $this->plugin->utils_i18n->statusLabel('trashed'),
+            'unconfirmed' => $this->plugin->utils_i18n->statusLabel('unconfirmed'),
+            'subscribed'  => $this->plugin->utils_i18n->statusLabel('subscribed'),
+            'suspended'   => $this->plugin->utils_i18n->statusLabel('suspended'),
+            'trashed'     => $this->plugin->utils_i18n->statusLabel('trashed'),
         ]; // These are hard-coded; i.e. not expected to change.
 
         if ($ui_protected_data_keys_enable) { // Front-end UI should limit choices.
@@ -699,10 +699,10 @@ class UtilsMarkup extends AbsBase
     {
         $_selected_value = null; // Initialize.
         $current_value   = isset($current_value)
-          ? (string)$current_value : null;
+            ? (string)$current_value : null;
 
         $default_args = [
-          'allow_arbitrary' => true,
+            'allow_arbitrary' => true,
         ];
         $args         = array_merge($default_args, $args);
         $args         = array_intersect_key($args, $default_args);
@@ -834,12 +834,12 @@ class UtilsMarkup extends AbsBase
     public function poweredBy(array $args = [])
     {
         $default_args = [
-          'anchor_to'     => '',
-          'anchor_target' => '_blank',
-          'anchor_style'  => 'text-decoration:none;',
+            'anchor_to'     => '',
+            'anchor_target' => '_blank',
+            'anchor_style'  => 'text-decoration:none;',
 
-          'icon_prefix'          => true,
-          'for_wordpress_suffix' => true,
+            'icon_prefix'          => true,
+            'for_wordpress_suffix' => true,
         ];
         $args         = array_merge($default_args, $args);
         $args         = array_intersect_key($args, $default_args);
@@ -875,8 +875,8 @@ class UtilsMarkup extends AbsBase
     public function anchor($url, $clickable, array $args = [])
     {
         $default_args = [
-          'target'   => '',
-          'tabindex' => '-1',
+            'target'   => '',
+            'tabindex' => '-1',
         ];
         $args         = array_merge($default_args, $args);
         $args         = array_intersect_key($args, $default_args);
@@ -960,14 +960,14 @@ class UtilsMarkup extends AbsBase
      *    in core until `admin_init`; i.e., too late for `admin_menu`.
      */
     public $wp_admin_icon_colors = [
-      'fresh'     => ['base' => '#999999', 'focus' => '#2EA2CC', 'current' => '#FFFFFF'],
-      'light'     => ['base' => '#999999', 'focus' => '#CCCCCC', 'current' => '#CCCCCC'],
-      'blue'      => ['base' => '#E5F8FF', 'focus' => '#FFFFFF', 'current' => '#FFFFFF'],
-      'midnight'  => ['base' => '#F1F2F3', 'focus' => '#FFFFFF', 'current' => '#FFFFFF'],
-      'sunrise'   => ['base' => '#F3F1F1', 'focus' => '#FFFFFF', 'current' => '#FFFFFF'],
-      'ectoplasm' => ['base' => '#ECE6F6', 'focus' => '#FFFFFF', 'current' => '#FFFFFF'],
-      'ocean'     => ['base' => '#F2FCFF', 'focus' => '#FFFFFF', 'current' => '#FFFFFF'],
-      'coffee'    => ['base' => '#F3F2F1', 'focus' => '#FFFFFF', 'current' => '#FFFFFF'],
+        'fresh'     => ['base' => '#999999', 'focus' => '#2EA2CC', 'current' => '#FFFFFF'],
+        'light'     => ['base' => '#999999', 'focus' => '#CCCCCC', 'current' => '#CCCCCC'],
+        'blue'      => ['base' => '#E5F8FF', 'focus' => '#FFFFFF', 'current' => '#FFFFFF'],
+        'midnight'  => ['base' => '#F1F2F3', 'focus' => '#FFFFFF', 'current' => '#FFFFFF'],
+        'sunrise'   => ['base' => '#F3F1F1', 'focus' => '#FFFFFF', 'current' => '#FFFFFF'],
+        'ectoplasm' => ['base' => '#ECE6F6', 'focus' => '#FFFFFF', 'current' => '#FFFFFF'],
+        'ocean'     => ['base' => '#F2FCFF', 'focus' => '#FFFFFF', 'current' => '#FFFFFF'],
+        'coffee'    => ['base' => '#F3F2F1', 'focus' => '#FFFFFF', 'current' => '#FFFFFF'],
     ];
 }
 	

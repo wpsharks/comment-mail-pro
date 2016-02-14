@@ -115,18 +115,18 @@ class SubDeleter extends AbsBase
         $this->sub = $this->plugin->utils_sub->get($sub_id);
 
         $defaults_args = [
-          'last_ip'      => '',
-          'last_region'  => '',
-          'last_country' => '',
+            'last_ip'      => '',
+            'last_region'  => '',
+            'last_country' => '',
 
-          'oby_sub_id'             => 0,
-          'oby_sub_id_did_replace' => false,
-          'purging'                => false,
-          'cleaning'               => false,
+            'oby_sub_id'             => 0,
+            'oby_sub_id_did_replace' => false,
+            'purging'                => false,
+            'cleaning'               => false,
 
-          'process_events' => true,
+            'process_events' => true,
 
-          'user_initiated' => false,
+            'user_initiated' => false,
         ];
         $args          = array_merge($defaults_args, $args);
         $args          = array_intersect_key($args, $defaults_args);
@@ -144,7 +144,7 @@ class SubDeleter extends AbsBase
 
         $this->user_initiated = (boolean)$args['user_initiated'];
         $this->user_initiated = $this->plugin->utils_sub->checkUserInitiatedByAdmin(
-          $this->sub ? $this->sub->email : '', $this->user_initiated
+            $this->sub ? $this->sub->email : '', $this->user_initiated
         );
         # Auto-fill last IP, region, country if it's the current user.
 
@@ -241,15 +241,15 @@ class SubDeleter extends AbsBase
         if ($this->process_events) { // Processing events?
             if ($this->deleted || ($this->event === 'overwritten' && $this->oby_sub_id && $this->oby_sub_id_did_replace)) {
                 new SubEventLogInserter(
-                  array_merge(
-                    (array)$this->sub,
-                    [
-                      'event'          => $this->event,
-                      'oby_sub_id'     => $this->oby_sub_id,
-                      'user_initiated' => $this->user_initiated,
-                    ]
-                  ),
-                  $sub_before
+                    array_merge(
+                        (array)$this->sub,
+                        [
+                            'event'          => $this->event,
+                            'oby_sub_id'     => $this->oby_sub_id,
+                            'user_initiated' => $this->user_initiated,
+                        ]
+                    ),
+                    $sub_before
                 ); // Log event data.
             }
         }

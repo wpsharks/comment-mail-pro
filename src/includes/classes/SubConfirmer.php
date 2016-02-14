@@ -88,12 +88,12 @@ class SubConfirmer extends AbsBase
         $this->sub = $this->plugin->utils_sub->get($sub_id);
 
         $defaults_args = [
-          'auto_confirm' => null,
+            'auto_confirm' => null,
 
-          'process_events'      => true,
-          'process_list_server' => false,
+            'process_events'      => true,
+            'process_list_server' => false,
 
-          'user_initiated' => false,
+            'user_initiated' => false,
         ];
         $args          = array_merge($defaults_args, $args);
         $args          = array_intersect_key($args, $defaults_args);
@@ -106,7 +106,7 @@ class SubConfirmer extends AbsBase
 
         $this->user_initiated          = (boolean)$args['user_initiated'];
         $this->user_initiated          = $this->plugin->utils_sub->checkUserInitiatedByAdmin(
-          $this->sub ? $this->sub->email : '', $this->user_initiated
+            $this->sub ? $this->sub->email : '', $this->user_initiated
         );
         $this->auto_confirmed          = false; // Initialize.
         $this->confirming_via_email    = false; // Initialize.
@@ -193,7 +193,7 @@ class SubConfirmer extends AbsBase
         }
         $this->confirming_via_email    = true; // Flag this scenario.
         $this->sent_email_successfully = $this->plugin->utils_mail->send(
-          $this->sub->email, $subject, $message
+            $this->sub->email, $subject, $message
         );
     }
 
@@ -207,24 +207,24 @@ class SubConfirmer extends AbsBase
     protected function maybeAutoConfirm()
     {
         $can_auto_confirm_args = [
-          'post_id' => $this->sub->post_id,
+            'post_id' => $this->sub->post_id,
 
-          'sub_user_id' => $this->sub->user_id,
-          'sub_email'   => $this->sub->email,
-          'sub_last_ip' => $this->sub->last_ip,
+            'sub_user_id' => $this->sub->user_id,
+            'sub_email'   => $this->sub->email,
+            'sub_last_ip' => $this->sub->last_ip,
 
-          'user_initiated' => $this->user_initiated,
-          'auto_confirm'   => $this->auto_confirm,
+            'user_initiated' => $this->user_initiated,
+            'auto_confirm'   => $this->auto_confirm,
         ];
         $can_auto_confirm      = $this->plugin->utils_sub->canAutoConfirm($can_auto_confirm_args);
 
         if ($can_auto_confirm) { // Possible to auto-confirm?
             $this->plugin->utils_sub->confirm(
-              $this->sub->ID,
-              [
-                'process_events' => $this->process_events,
-                'user_initiated' => $this->user_initiated,
-              ]
+                $this->sub->ID,
+                [
+                    'process_events' => $this->process_events,
+                    'user_initiated' => $this->user_initiated,
+                ]
             ); // With behavioral args.
 
             return ($this->auto_confirmed = true);

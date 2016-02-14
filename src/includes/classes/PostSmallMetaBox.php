@@ -46,15 +46,15 @@ class PostSmallMetaBox extends AbsBase
     protected function display()
     {
         $post_comment_status // Translate/standardize this.
-          = $this->plugin->utils_db->postCommentStatusI18n($this->post->comment_status);
+            = $this->plugin->utils_db->postCommentStatusI18n($this->post->comment_status);
 
         $total_subs        = $this->plugin->utils_sub->queryTotal($this->post->ID);
         $total_subs_bubble = $this->plugin->utils_markup->subsCount(
-          $this->post->ID, $total_subs,
-          [
-            'subscriptions' => true,
-            'style'         => 'display:block; font-size:1.5em;',
-          ]
+            $this->post->ID, $total_subs,
+            [
+                'subscriptions' => true,
+                'style'         => 'display:block; font-size:1.5em;',
+            ]
         );
         echo '<div class="'.esc_attr($this->plugin->slug.'-menu-page-area').'">'.
 

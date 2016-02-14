@@ -71,12 +71,12 @@ class OutputFile extends AbsBase
         parent::__construct();
 
         $default_args = [
-          'data'                => '',
-          'data_file'           => '',
-          'file_name'           => '',
-          'content_type'        => '',
-          'content_disposition' => 'attachment',
-          'chunk_size'          => 2097152,
+            'data'                => '',
+            'data_file'           => '',
+            'file_name'           => '',
+            'content_type'        => '',
+            'content_disposition' => 'attachment',
+            'chunk_size'          => 2097152,
         ];
         $args         = array_merge($default_args, $args);
         $args         = array_intersect_key($args, $default_args);
@@ -144,10 +144,10 @@ class OutputFile extends AbsBase
         header('Cache-Control: post-check=0, pre-check=0', false);
 
         header(
-          'Content-Disposition:'.
-          ' '.$this->content_disposition.';'.
-          ' filename="'.$this->plugin->utils_string->escDq($this->file_name).'";'.
-          ' filename*=UTF-8\'\''.rawurlencode($this->file_name)
+            'Content-Disposition:'.
+            ' '.$this->content_disposition.';'.
+            ' filename="'.$this->plugin->utils_string->escDq($this->file_name).'";'.
+            ' filename*=UTF-8\'\''.rawurlencode($this->file_name)
         );
     }
 
@@ -183,7 +183,7 @@ class OutputFile extends AbsBase
         while ($_bytes_to_read > 0) { // While we have bytes.
             $_reading_from = $content_length - $_bytes_to_read;
             $_reading      = $_bytes_to_read > $this->chunk_size
-              ? $this->chunk_size : $_bytes_to_read;
+                ? $this->chunk_size : $_bytes_to_read;
 
             echo substr($this->data, $_reading_from, $_reading);
 
@@ -213,7 +213,7 @@ class OutputFile extends AbsBase
         while ($_bytes_to_read > 0) { // While we have bytes.
             $_reading_from = $content_length - $_bytes_to_read;
             $_reading      = $_bytes_to_read > $this->chunk_size
-              ? $this->chunk_size : $_bytes_to_read;
+                ? $this->chunk_size : $_bytes_to_read;
 
             echo fread($resource, $_reading);
 

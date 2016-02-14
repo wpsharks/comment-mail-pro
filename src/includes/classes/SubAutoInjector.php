@@ -61,7 +61,7 @@ class SubAutoInjector extends AbsBase
             $this->post = get_post($post_id);
         }
         $defaults_args = [
-          'process_events' => true,
+            'process_events' => true,
         ];
         $args          = array_merge($defaults_args, $args);
         $args          = array_intersect_key($args, $defaults_args);
@@ -137,22 +137,22 @@ class SubAutoInjector extends AbsBase
             return; // Not applicable.
         }
         $data = [
-          'post_id'    => $this->post->ID,
-          'user_id'    => $this->post_author->ID,
-          'comment_id' => 0, // Subscribe to all comments.
-          'deliver'    => $this->plugin->options['auto_subscribe_deliver'],
+            'post_id'    => $this->post->ID,
+            'user_id'    => $this->post_author->ID,
+            'comment_id' => 0, // Subscribe to all comments.
+            'deliver'    => $this->plugin->options['auto_subscribe_deliver'],
 
-          'fname' => $this->plugin->utils_string->firstName('', $this->post_author),
-          'lname' => $this->plugin->utils_string->lastName('', $this->post_author),
-          'email' => $this->post_author->user_email,
+            'fname' => $this->plugin->utils_string->firstName('', $this->post_author),
+            'lname' => $this->plugin->utils_string->lastName('', $this->post_author),
+            'email' => $this->post_author->user_email,
 
-          'status' => 'subscribed',
+            'status' => 'subscribed',
         ];
         new SubInserter(
-          $data,
-          [
-            'process_events' => $this->process_events,
-          ]
+            $data,
+            [
+                'process_events' => $this->process_events,
+            ]
         );
     }
 
@@ -174,21 +174,21 @@ class SubAutoInjector extends AbsBase
                 continue; // Not applicable.
             }
             $_data = [
-              'post_id'    => $this->post->ID,
-              'comment_id' => 0, // Subscribe to all comments.
-              'deliver'    => $this->plugin->options['auto_subscribe_deliver'],
+                'post_id'    => $this->post->ID,
+                'comment_id' => 0, // Subscribe to all comments.
+                'deliver'    => $this->plugin->options['auto_subscribe_deliver'],
 
-              'fname' => $_recipient->fname,
-              'lname' => $_recipient->lname,
-              'email' => $_recipient->email,
+                'fname' => $_recipient->fname,
+                'lname' => $_recipient->lname,
+                'email' => $_recipient->email,
 
-              'status' => 'subscribed',
+                'status' => 'subscribed',
             ];
             new SubInserter(
-              $_data,
-              [
-                'process_events' => $this->process_events,
-              ]
+                $_data,
+                [
+                    'process_events' => $this->process_events,
+                ]
             );
         }
         unset($_recipient, $_data); // Housekeeping.
@@ -214,19 +214,19 @@ class SubAutoInjector extends AbsBase
                     continue; // Not applicable/possible.
                 }
                 $_data = [
-                  'post_id'    => $this->post->ID,
-                  'comment_id' => 0, // Subscribe to all comments.
-                  'deliver'    => $this->plugin->options['auto_subscribe_deliver'],
-                  'fname'      => $_user->first_name,
-                  'lname'      => $_user->last_name,
-                  'email'      => $_user->user_email,
-                  'status'     => 'subscribed',
+                    'post_id'    => $this->post->ID,
+                    'comment_id' => 0, // Subscribe to all comments.
+                    'deliver'    => $this->plugin->options['auto_subscribe_deliver'],
+                    'fname'      => $_user->first_name,
+                    'lname'      => $_user->last_name,
+                    'email'      => $_user->user_email,
+                    'status'     => 'subscribed',
                 ];
                 new SubInserter(
-                  $_data,
-                  [
-                    'process_events' => $this->process_events,
-                  ]
+                    $_data,
+                    [
+                        'process_events' => $this->process_events,
+                    ]
                 );
             }
             unset($_user, $_data); // Housekeeping.

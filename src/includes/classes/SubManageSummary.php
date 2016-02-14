@@ -131,9 +131,9 @@ class SubManageSummary extends AbsBase
      * @since 141111 First documented version.
      */
     public static $default_nav_vars = [
-      'page'    => 1,
-      'post_id' => null,
-      'status'  => '',
+        'page'    => 1,
+        'post_id' => null,
+        'status'  => '',
     ];
 
     /*
@@ -266,14 +266,14 @@ class SubManageSummary extends AbsBase
                " WHERE (`email` = '".esc_sql($this->sub_email)."'".
                // See `assets/sma-diagram.png` for further details on this.
                ($this->sub_user_ids ? // Only if we DO have user IDs to look for here.
-                 "    OR `user_id` IN('".implode("','", array_map('esc_sql', $this->sub_user_ids))."')"
-                 : '').')'.
+                   "    OR `user_id` IN('".implode("','", array_map('esc_sql', $this->sub_user_ids))."')"
+                   : '').')'.
 
                (isset($post_id) // Specific post ID?
-                 ? " AND `post_id` = '".esc_sql($post_id)."'" : '').
+                   ? " AND `post_id` = '".esc_sql($post_id)."'" : '').
 
                ($status // Specific status in the request?
-                 ? " AND `status` = '".esc_sql($status)."'" : '').
+                   ? " AND `status` = '".esc_sql($status)."'" : '').
                " AND `status` NOT IN('unconfirmed', 'trashed')".
 
                " ORDER BY".

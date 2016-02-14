@@ -80,21 +80,21 @@ class CommentPost extends AbsBase
             return; // Not applicable.
         }
         $sub_deliver = !empty($_POST[GLOBAL_NS.'_sub_deliver'])
-          ? (string)$_POST[GLOBAL_NS.'_sub_deliver']
-          : $this->plugin->options['comment_form_default_sub_deliver_option'];
+            ? (string)$_POST[GLOBAL_NS.'_sub_deliver']
+            : $this->plugin->options['comment_form_default_sub_deliver_option'];
 
         $sub_list = (boolean)@$_POST[GLOBAL_NS.'_sub_list'];
 
         new SubInjector(
-          wp_get_current_user(),
-          $this->comment_id,
-          [
-            'type'                => $sub_type,
-            'deliver'             => $sub_deliver,
-            'process_list_server' => $sub_list,
-            'user_initiated'      => true,
-            'keep_existing'       => true,
-          ]
+            wp_get_current_user(),
+            $this->comment_id,
+            [
+                'type'                => $sub_type,
+                'deliver'             => $sub_deliver,
+                'process_list_server' => $sub_list,
+                'user_initiated'      => true,
+                'keep_existing'       => true,
+            ]
         );
     }
 

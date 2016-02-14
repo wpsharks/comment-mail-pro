@@ -543,8 +543,8 @@ class UtilsSub extends AbsBase
         $sql     = "SELECT `ID` FROM `".esc_sql($this->plugin->utils_db->prefix().'subs')."`".
                    " WHERE `email` = '".esc_sql($sub_email)."'".
                    ($user_ids // Only if we DO have user IDs to search for here.
-                     ? " OR `user_id` IN('".implode("','", array_map('esc_sql', $user_ids))."')"
-                     : '');
+                       ? " OR `user_id` IN('".implode("','", array_map('esc_sql', $user_ids))."')"
+                       : '');
         $sub_ids = array_map('intval', $this->plugin->utils_db->wp->get_col($sql));
 
         return $this->bulkDelete($sub_ids, $args);
@@ -570,15 +570,15 @@ class UtilsSub extends AbsBase
             $post_id = (integer)$post_id;
         }
         $default_args = [
-          'status'     => '',
-          'sub_email'  => '',
-          'user_id'    => null,
-          'comment_id' => null,
+            'status'     => '',
+            'sub_email'  => '',
+            'user_id'    => null,
+            'comment_id' => null,
 
-          'auto_discount_trash'   => true,
-          'sub_email_or_user_ids' => false,
-          'group_by_email'        => false,
-          'no_cache'              => false,
+            'auto_discount_trash'   => true,
+            'sub_email_or_user_ids' => false,
+            'group_by_email'        => false,
+            'no_cache'              => false,
         ];
         $args         = array_merge($default_args, $args);
         $args         = array_intersect_key($args, $default_args);
@@ -594,9 +594,9 @@ class UtilsSub extends AbsBase
         $no_cache              = (boolean)$args['no_cache'];
 
         $cache_keys = compact(
-          'post_id', // Cacheable keys.
-          'status', 'sub_email', 'user_id', 'comment_id',
-          'auto_discount_trash', 'sub_email_or_user_ids', 'group_by_email'
+            'post_id', // Cacheable keys.
+            'status', 'sub_email', 'user_id', 'comment_id',
+            'auto_discount_trash', 'sub_email_or_user_ids', 'group_by_email'
         );
         if (!is_null($total = &$this->cacheKey(__FUNCTION__, $cache_keys)) && !$no_cache) {
             return $total; // Already cached this.
@@ -607,21 +607,21 @@ class UtilsSub extends AbsBase
                " WHERE 1=1". // Initialize where clause.
 
                ($status // A specific status?
-                 ? " AND `status` = '".esc_sql((string)$status)."'"
-                 : ($auto_discount_trash ? " AND `status` != '".esc_sql('trashed')."'" : '')).
+                   ? " AND `status` = '".esc_sql((string)$status)."'"
+                   : ($auto_discount_trash ? " AND `status` != '".esc_sql('trashed')."'" : '')).
 
                ($sub_email // Match a specific email address?
-                 ? ($sub_email_or_user_ids // Email or user IDs?
-                   ? " AND (`email` = '".esc_sql($sub_email)."'".
-                     (isset($user_id) ? " OR `user_id` = '".esc_sql($user_id)."'" : '').
-                     (($_sub_email_user_ids = $this->emailUserIds($sub_email, $no_cache))
-                       ? " OR `user_id` IN('".implode("','", array_map('esc_sql', $_sub_email_user_ids))."')"
-                       : '').')' // ↑ Only if we DO have user IDs to look for.
-                   : " AND `email` = '".esc_sql($sub_email)."'")
-                 : ''). // End `sub_email` check.
+                   ? ($sub_email_or_user_ids // Email or user IDs?
+                       ? " AND (`email` = '".esc_sql($sub_email)."'".
+                         (isset($user_id) ? " OR `user_id` = '".esc_sql($user_id)."'" : '').
+                         (($_sub_email_user_ids = $this->emailUserIds($sub_email, $no_cache))
+                             ? " OR `user_id` IN('".implode("','", array_map('esc_sql', $_sub_email_user_ids))."')"
+                             : '').')' // ↑ Only if we DO have user IDs to look for.
+                       : " AND `email` = '".esc_sql($sub_email)."'")
+                   : ''). // End `sub_email` check.
 
                (isset($user_id) && (!$sub_email || !$sub_email_or_user_ids)
-                 ? " AND `user_id` = '".esc_sql($user_id)."'" : '').
+                   ? " AND `user_id` = '".esc_sql($user_id)."'" : '').
 
                (isset($post_id) ? " AND `post_id` = '".esc_sql($post_id)."'" : '').
                (isset($comment_id) ? " AND `comment_id` = '".esc_sql($comment_id)."'" : '').
@@ -659,17 +659,17 @@ class UtilsSub extends AbsBase
             $post_id = (integer)$post_id;
         }
         $default_args = [
-          'offset' => 0,
+            'offset' => 0,
 
-          'status'     => '',
-          'sub_email'  => '',
-          'user_id'    => null,
-          'comment_id' => null,
+            'status'     => '',
+            'sub_email'  => '',
+            'user_id'    => null,
+            'comment_id' => null,
 
-          'auto_discount_trash'   => true,
-          'sub_email_or_user_ids' => false,
-          'group_by_email'        => false,
-          'no_cache'              => false,
+            'auto_discount_trash'   => true,
+            'sub_email_or_user_ids' => false,
+            'group_by_email'        => false,
+            'no_cache'              => false,
         ];
         $args         = array_merge($default_args, $args);
         $args         = array_intersect_key($args, $default_args);
@@ -686,9 +686,9 @@ class UtilsSub extends AbsBase
         $no_cache              = (boolean)$args['no_cache'];
 
         $cache_keys = compact(
-          'x', 'post_id', // Cacheable keys.
-          'offset', 'status', 'sub_email', 'user_id', 'comment_id',
-          'auto_discount_trash', 'sub_email_or_user_ids', 'group_by_email'
+            'x', 'post_id', // Cacheable keys.
+            'offset', 'status', 'sub_email', 'user_id', 'comment_id',
+            'auto_discount_trash', 'sub_email_or_user_ids', 'group_by_email'
         );
         if (!is_null($last_x = &$this->cacheKey(__FUNCTION__, $cache_keys)) && !$no_cache) {
             return $last_x; // Already cached this.
@@ -698,21 +698,21 @@ class UtilsSub extends AbsBase
                " WHERE 1=1". // Initialize where clause.
 
                ($status // A specific status in this case?
-                 ? " AND `status` = '".esc_sql((string)$status)."'"
-                 : ($auto_discount_trash ? " AND `status` != '".esc_sql('trashed')."'" : '')).
+                   ? " AND `status` = '".esc_sql((string)$status)."'"
+                   : ($auto_discount_trash ? " AND `status` != '".esc_sql('trashed')."'" : '')).
 
                ($sub_email // Match a specific email address?
-                 ? ($sub_email_or_user_ids // Email or user IDs?
-                   ? " AND (`email` = '".esc_sql($sub_email)."'".
-                     (isset($user_id) ? " OR `user_id` = '".esc_sql($user_id)."'" : '').
-                     (($_sub_email_user_ids = $this->emailUserIds($sub_email, $no_cache))
-                       ? " OR `user_id` IN('".implode("','", array_map('esc_sql', $_sub_email_user_ids))."')"
-                       : '').')' // ↑ Only if we DO have user IDs to look for.
-                   : " AND `email` = '".esc_sql($sub_email)."'")
-                 : ''). // End `sub_email` check.
+                   ? ($sub_email_or_user_ids // Email or user IDs?
+                       ? " AND (`email` = '".esc_sql($sub_email)."'".
+                         (isset($user_id) ? " OR `user_id` = '".esc_sql($user_id)."'" : '').
+                         (($_sub_email_user_ids = $this->emailUserIds($sub_email, $no_cache))
+                             ? " OR `user_id` IN('".implode("','", array_map('esc_sql', $_sub_email_user_ids))."')"
+                             : '').')' // ↑ Only if we DO have user IDs to look for.
+                       : " AND `email` = '".esc_sql($sub_email)."'")
+                   : ''). // End `sub_email` check.
 
                (isset($user_id) && (!$sub_email || !$sub_email_or_user_ids)
-                 ? " AND `user_id` = '".esc_sql($user_id)."'" : '').
+                   ? " AND `user_id` = '".esc_sql($user_id)."'" : '').
 
                (isset($post_id) ? " AND `post_id` = '".esc_sql($post_id)."'" : '').
                (isset($comment_id) ? " AND `comment_id` = '".esc_sql($comment_id)."'" : '').
@@ -976,14 +976,14 @@ class UtilsSub extends AbsBase
         }
         if (is_null($blacklist_patterns = &$this->cacheKey(__FUNCTION__, 'blacklist_patterns'))) {
             $blacklist_patterns = '(?:'.implode(
-                '|',
-                array_map(
-                  function ($pattern) {
-                      return preg_replace(['/\\\\\*/', '/\\\\\^/'], ['.*?', '[^@]*?'], preg_quote($pattern, '/'));
-                  },
-                  preg_split('/['."\r\n".']+/', $blacklist, null, PREG_SPLIT_NO_EMPTY)
-                )
-              ).')';
+                    '|',
+                    array_map(
+                        function ($pattern) {
+                            return preg_replace(['/\\\\\*/', '/\\\\\^/'], ['.*?', '[^@]*?'], preg_quote($pattern, '/'));
+                        },
+                        preg_split('/['."\r\n".']+/', $blacklist, null, PREG_SPLIT_NO_EMPTY)
+                    )
+                ).')';
         }
         return ($is = (boolean)preg_match('/^'.$blacklist_patterns.'$/i', $sub_email));
     }
@@ -1059,14 +1059,14 @@ class UtilsSub extends AbsBase
     public function canAutoConfirm(array $args)
     {
         $default_args = [
-          'post_id' => 0,
+            'post_id' => 0,
 
-          'sub_user_id' => 0,
-          'sub_email'   => '',
-          'sub_last_ip' => '',
+            'sub_user_id' => 0,
+            'sub_email'   => '',
+            'sub_last_ip' => '',
 
-          'user_initiated' => false,
-          'auto_confirm'   => null,
+            'user_initiated' => false,
+            'auto_confirm'   => null,
         ];
         $args         = array_merge($default_args, $args);
         $args         = array_intersect_key($args, $default_args);
@@ -1114,9 +1114,9 @@ class UtilsSub extends AbsBase
                " AND `email` = '".esc_sql($sub_email)."'". // Must match email address.
 
                ($sub_user_id <= 0 || !$this->plugin->options['all_wp_users_confirm_email'] || $this->plugin->options['sso_enable']
-                 ? " AND (`insertion_ip` = '".esc_sql($sub_last_ip)."' OR `last_ip` = '".esc_sql($sub_last_ip)."')".
-                   " AND '".esc_sql($sub_last_ip)."' != ''" // The IP that we're checking cannot be empty.
-                 : ''). // Exclude otherwise; we have a good user ID we can check in this case.
+                   ? " AND (`insertion_ip` = '".esc_sql($sub_last_ip)."' OR `last_ip` = '".esc_sql($sub_last_ip)."')".
+                     " AND '".esc_sql($sub_last_ip)."' != ''" // The IP that we're checking cannot be empty.
+                   : ''). // Exclude otherwise; we have a good user ID we can check in this case.
 
                " AND `status` = 'subscribed' LIMIT 1"; // One to check.
 
@@ -1203,9 +1203,9 @@ class UtilsSub extends AbsBase
         $sub_email = $this->currentEmail();
 
         $default_args = [
-          'post_id'               => null,
-          'comment_form_defaults' => false,
-          'no_cache'              => false,
+            'post_id'               => null,
+            'comment_form_defaults' => false,
+            'no_cache'              => false,
         ];
         $args         = array_merge($default_args, $args);
         $args         = array_intersect_key($args, $default_args);
@@ -1224,32 +1224,32 @@ class UtilsSub extends AbsBase
             $default_sub_deliver = $this->plugin->options['comment_form_default_sub_deliver_option'];
         }
         $default_info = (object)[
-          'ID'  => 0,
-          'key' => '',
+            'ID'  => 0,
+            'key' => '',
 
-          'user_id'    => 0,
-          'post_id'    => 0,
-          'comment_id' => 0,
+            'user_id'    => 0,
+            'post_id'    => 0,
+            'comment_id' => 0,
 
-          'type'    => $default_sub_type,
-          'deliver' => $default_sub_deliver,
+            'type'    => $default_sub_type,
+            'deliver' => $default_sub_deliver,
 
-          'fname' => '',
-          'lname' => '',
-          'email' => $sub_email,
+            'fname' => '',
+            'lname' => '',
+            'email' => $sub_email,
 
-          'insertion_ip'      => '',
-          'insertion_region'  => '',
-          'insertion_country' => '',
+            'insertion_ip'      => '',
+            'insertion_region'  => '',
+            'insertion_country' => '',
 
-          'last_ip'      => '',
-          'last_region'  => '',
-          'last_country' => '',
+            'last_ip'      => '',
+            'last_region'  => '',
+            'last_country' => '',
 
-          'status' => '',
+            'status' => '',
 
-          'insertion_time'   => 0,
-          'last_update_time' => 0,
+            'insertion_time'   => 0,
+            'last_update_time' => 0,
         ];
         if (!$sub_email || (isset($post_id) && $post_id <= 0)) {
             return $default_info; // Not possible.
@@ -1264,7 +1264,7 @@ class UtilsSub extends AbsBase
                " WHERE `email` = '".esc_sql($sub_email)."'".
 
                ($post_id // For a specific post ID?
-                 ? " AND `post_id` = '".esc_sql($post_id)."'" : '').
+                   ? " AND `post_id` = '".esc_sql($post_id)."'" : '').
 
                " AND `status` = 'subscribed'". // Subscribed only.
 

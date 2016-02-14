@@ -14,14 +14,14 @@ if (!defined('WPINC')) {
 namespace { // Global namespace.
 
     add_action(
-      'init',
-      function () {
-          if (!is_admin() && !function_exists('subscribe_reloaded_show')) :
-              function subscribe_reloaded_show()
-              {
-                  comment_mail::subOps();
-              }
-          endif;
-      }
+        'init',
+        function () {
+            if (!is_admin() && !function_exists('subscribe_reloaded_show')) :
+                function subscribe_reloaded_show()
+                {
+                    comment_mail::subOps();
+                }
+            endif;
+        }
     );
 }

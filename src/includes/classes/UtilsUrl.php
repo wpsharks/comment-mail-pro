@@ -699,25 +699,25 @@ class UtilsUrl extends AbsBase
         foreach ($filters as $_filter) { // Remove filters in <group> or of <type><group>.
             if (preg_match('/^\:+$/', $_filter)) { // Specifies a <group> to remove only?
                 $s = preg_replace(
-                  str_replace(
-                    '<group>\:+', // Remove filters in this <group>.
-                    '<group>\:{'.strlen($_filter).'}', $filter_regex
-                  ),
-                  '',
-                  $s
+                    str_replace(
+                        '<group>\:+', // Remove filters in this <group>.
+                        '<group>\:{'.strlen($_filter).'}', $filter_regex
+                    ),
+                    '',
+                    $s
                 );
             } else if (preg_match($filter_regex, $_filter, $_filter_m)) { // Remove <type><group>?
                 $s = preg_replace(
-                  str_replace(
-                    '<type>\w+', // Remove filters of this <type><group>.
-                    '<type>'.preg_quote(rtrim($_filter_m['type'], 's'), '/').'s*',
                     str_replace(
-                      '<group>\:+', // We convert the <group> first; nested inside.
-                      '<group>\:{'.strlen($_filter_m['group']).'}', $filter_regex
-                    )
-                  ),
-                  '',
-                  $s
+                        '<type>\w+', // Remove filters of this <type><group>.
+                        '<type>'.preg_quote(rtrim($_filter_m['type'], 's'), '/').'s*',
+                        str_replace(
+                            '<group>\:+', // We convert the <group> first; nested inside.
+                            '<group>\:{'.strlen($_filter_m['group']).'}', $filter_regex
+                        )
+                    ),
+                    '',
+                    $s
                 );
             }
         }

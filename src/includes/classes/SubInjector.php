@@ -106,17 +106,17 @@ class SubInjector extends AbsBase
             $this->comment = get_comment($comment_id);
         }
         $defaults_args = [
-          'type'    => 'comment',
-          'deliver' => 'asap',
+            'type'    => 'comment',
+            'deliver' => 'asap',
 
-          'auto_confirm' => null,
+            'auto_confirm' => null,
 
-          'process_events'      => true,
-          'process_list_server' => false,
+            'process_events'      => true,
+            'process_list_server' => false,
 
-          'user_initiated' => false,
+            'user_initiated' => false,
 
-          'keep_existing' => false,
+            'keep_existing' => false,
         ];
         $args          = array_merge($defaults_args, $args);
         $args          = array_intersect_key($args, $defaults_args);
@@ -133,7 +133,7 @@ class SubInjector extends AbsBase
 
         $this->user_initiated = (boolean)$args['user_initiated'];
         $this->user_initiated = $this->plugin->utils_sub->checkUserInitiatedByAdmin(
-          $this->comment ? $this->comment->comment_author_email : '', $this->user_initiated
+            $this->comment ? $this->comment->comment_author_email : '', $this->user_initiated
         );
         $this->keep_existing  = (boolean)$args['keep_existing'];
 
@@ -177,25 +177,25 @@ class SubInjector extends AbsBase
             return; // Not applicable.
         }
         $data               = [
-          'post_id'    => $this->comment->comment_post_ID,
-          'user_id'    => $this->user ? $this->user->ID : null,
-          'comment_id' => $this->type === 'comments' ? 0 : $this->comment->comment_ID,
-          'deliver'    => $this->deliver, // Delivery option.
+            'post_id'    => $this->comment->comment_post_ID,
+            'user_id'    => $this->user ? $this->user->ID : null,
+            'comment_id' => $this->type === 'comments' ? 0 : $this->comment->comment_ID,
+            'deliver'    => $this->deliver, // Delivery option.
 
-          'fname' => $this->plugin->utils_string->firstName($this->comment->comment_author, $this->comment->comment_author_email),
-          'lname' => $this->plugin->utils_string->lastName($this->comment->comment_author),
-          'email' => $this->comment->comment_author_email,
+            'fname' => $this->plugin->utils_string->firstName($this->comment->comment_author, $this->comment->comment_author_email),
+            'lname' => $this->plugin->utils_string->lastName($this->comment->comment_author),
+            'email' => $this->comment->comment_author_email,
         ];
         $this->sub_inserter = new SubInserter(
-          $data,
-          [
-            'process_confirmation' => true, // Always.
-            'auto_confirm'         => $this->auto_confirm,
-            'process_events'       => $this->process_events,
-            'process_list_server'  => $this->process_list_server,
-            'user_initiated'       => $this->user_initiated,
-            'keep_existing'        => $this->keep_existing,
-          ]
+            $data,
+            [
+                'process_confirmation' => true, // Always.
+                'auto_confirm'         => $this->auto_confirm,
+                'process_events'       => $this->process_events,
+                'process_list_server'  => $this->process_list_server,
+                'user_initiated'       => $this->user_initiated,
+                'keep_existing'        => $this->keep_existing,
+            ]
         );
     }
 }

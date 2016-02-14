@@ -28,10 +28,10 @@ class SsoActions extends AbsBase
      * @since 141111 First documented version.
      */
     public static $valid_services = [
-      'twitter',
-      'facebook',
-      'google',
-      'linkedin',
+        'twitter',
+        'facebook',
+        'google',
+        'linkedin',
     ];
 
     /**
@@ -44,7 +44,7 @@ class SsoActions extends AbsBase
         parent::__construct();
 
         $this->valid_actions = [
-          'sso',
+            'sso',
         ];
         $this->maybeHandle();
     }

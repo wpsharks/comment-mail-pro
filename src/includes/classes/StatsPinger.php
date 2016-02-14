@@ -44,21 +44,21 @@ class StatsPinger extends AbsBase
 
         $stats_api_url      = 'https://stats.wpsharks.io/log';
         $stats_api_url_args = [
-          'os'              => PHP_OS,
-          'php_version'     => PHP_VERSION,
-          'mysql_version'   => $this->plugin->utils_db->wp->db_version(),
-          'wp_version'      => get_bloginfo('version'),
-          'product_version' => $this->plugin->version,
-          'product'         => $this->plugin->slug.($this->plugin->is_pro ? '-pro' : ''),
+            'os'              => PHP_OS,
+            'php_version'     => PHP_VERSION,
+            'mysql_version'   => $this->plugin->utils_db->wp->db_version(),
+            'wp_version'      => get_bloginfo('version'),
+            'product_version' => $this->plugin->version,
+            'product'         => $this->plugin->slug.($this->plugin->is_pro ? '-pro' : ''),
         ];
         $stats_api_url      = add_query_arg(urlencode_deep($stats_api_url_args), $stats_api_url);
 
         wp_remote_get(
-          $stats_api_url,
-          [
-            'blocking'  => false,
-            'sslverify' => false,
-          ]
+            $stats_api_url,
+            [
+                'blocking'  => false,
+                'sslverify' => false,
+            ]
         );
     }
 }

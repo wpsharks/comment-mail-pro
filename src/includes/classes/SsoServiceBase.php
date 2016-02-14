@@ -59,22 +59,22 @@ abstract class SsoServiceBase extends AbsBase
         $this->service = trim((string)$service);
 
         $default_request_args = [
-          'service'     => null,
-          'action'      => null,
-          'redirect_to' => null,
+            'service'     => null,
+            'action'      => null,
+            'redirect_to' => null,
 
-          'oauth_token'    => null,
-          'oauth_verifier' => null,
-          'oauth_problem'  => null,
-          'code'           => null,
-          'state'          => null,
+            'oauth_token'    => null,
+            'oauth_verifier' => null,
+            'oauth_problem'  => null,
+            'code'           => null,
+            'state'          => null,
 
-          'sso_id'   => null,
-          '_wpnonce' => null,
+            'sso_id'   => null,
+            '_wpnonce' => null,
 
-          'fname' => null,
-          'lname' => null,
-          'email' => null,
+            'fname' => null,
+            'lname' => null,
+            'email' => null,
         ];
         $this->request_args   = array_merge($default_request_args, $request_args);
         $this->request_args   = array_intersect_key($this->request_args, $default_request_args);
@@ -229,12 +229,12 @@ abstract class SsoServiceBase extends AbsBase
     {
         try { // Catch exceptions and log them for debugging.
             $default_args = [
-              'sso_id'   => '',
-              '_wpnonce' => '',
+                'sso_id'   => '',
+                '_wpnonce' => '',
 
-              'fname' => '',
-              'lname' => '',
-              'email' => '',
+                'fname' => '',
+                'lname' => '',
+                'email' => '',
             ];
             $args         = array_merge($default_args, $args);
             $args         = array_intersect_key($args, $default_args);
@@ -247,7 +247,7 @@ abstract class SsoServiceBase extends AbsBase
             $email = trim((string)$args['email']);
 
             $user_exists = // Do they exist already? i.e. just logging in?
-              $sso_id && $this->plugin->utils_sso->userExists($this->service, $sso_id);
+                $sso_id && $this->plugin->utils_sso->userExists($this->service, $sso_id);
 
             if (!$sso_id || !$user_exists) {
                 // If the user exists, we can skip this validation entirely;

@@ -167,7 +167,7 @@ class Template extends AbsBase
         $file = $this->plugin->utils_fs->nSeps($file);
 
         $shortcodes_vars = // Merge w/ current vars.
-          array_merge($this->current_vars, $shortcodes_vars);
+            array_merge($this->current_vars, $shortcodes_vars);
         $shortcodes      = []; // Initialize.
 
         foreach ($shortcodes_vars as $_key => $_value) {

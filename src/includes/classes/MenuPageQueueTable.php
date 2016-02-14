@@ -29,11 +29,11 @@ class MenuPageQueueTable extends MenuPageTableBase
         $plugin = plugin(); // Needed below.
 
         $args = [
-          'singular_name'  => 'queued_notification',
-          'plural_name'    => 'queued_notifications',
-          'singular_label' => __('queued notification', $plugin->text_domain),
-          'plural_label'   => __('queued notifications', $plugin->text_domain),
-          'screen'         => $plugin->menu_page_hooks[GLOBAL_NS.'_queue'],
+            'singular_name'  => 'queued_notification',
+            'plural_name'    => 'queued_notifications',
+            'singular_label' => __('queued notification', $plugin->text_domain),
+            'plural_label'   => __('queued notifications', $plugin->text_domain),
+            'screen'         => $plugin->menu_page_hooks[GLOBAL_NS.'_queue'],
         ];
         parent::__construct($args); // Parent constructor.
     }
@@ -54,16 +54,16 @@ class MenuPageQueueTable extends MenuPageTableBase
         $plugin = plugin(); // Plugin class instance.
 
         return [
-          'cb'                => '1', // Include checkboxes.
-          'ID'                => __('ID', $plugin->text_domain),
-          'insertion_time'    => __('Time', $plugin->text_domain),
-          'sub_id'            => __('Subscr. ID', $plugin->text_domain),
-          'user_id'           => __('WP User ID', $plugin->text_domain),
-          'post_id'           => __('Subscr. to Post ID', $plugin->text_domain),
-          'comment_parent_id' => __('Subscr. to Comment ID', $plugin->text_domain),
-          'comment_id'        => __('Regarding Comment ID', $plugin->text_domain),
-          'last_update_time'  => __('Last Update', $plugin->text_domain),
-          'hold_until_time'   => __('Holding Until', $plugin->text_domain),
+            'cb'                => '1', // Include checkboxes.
+            'ID'                => __('ID', $plugin->text_domain),
+            'insertion_time'    => __('Time', $plugin->text_domain),
+            'sub_id'            => __('Subscr. ID', $plugin->text_domain),
+            'user_id'           => __('WP User ID', $plugin->text_domain),
+            'post_id'           => __('Subscr. to Post ID', $plugin->text_domain),
+            'comment_parent_id' => __('Subscr. to Comment ID', $plugin->text_domain),
+            'comment_id'        => __('Regarding Comment ID', $plugin->text_domain),
+            'last_update_time'  => __('Last Update', $plugin->text_domain),
+            'hold_until_time'   => __('Holding Until', $plugin->text_domain),
         ];
     }
 
@@ -77,10 +77,10 @@ class MenuPageQueueTable extends MenuPageTableBase
     public static function getTheHiddenColumns()
     {
         return [
-          'user_id',
-          'comment_parent_id',
-          'comment_id',
-          'last_update_time',
+            'user_id',
+            'comment_parent_id',
+            'comment_id',
+            'last_update_time',
         ];
     }
 
@@ -106,7 +106,7 @@ class MenuPageQueueTable extends MenuPageTableBase
     public static function getTheSearchableColumns()
     {
         return [
-          'ID',
+            'ID',
         ];
     }
 
@@ -159,12 +159,12 @@ class MenuPageQueueTable extends MenuPageTableBase
         $delete_url = $this->plugin->utils_url->tableBulkAction($this->plural_name, [$item->ID], 'delete');
 
         $row_actions = [
-          'delete' => '<a href="#"'.  // Depends on `menu-pages.js`.
-                      ' data-pmp-action="'.esc_attr($delete_url).'"'. // The action URL.
-                      ' data-pmp-confirmation="'.esc_attr(__('Delete queued notification? Are you sure?', $this->plugin->text_domain)).'"'.
-                      ' title="'.esc_attr(__('Delete Queued Notification', $this->plugin->text_domain)).'">'.
-                      '  <i class="fa fa-times-circle"></i> '.__('Delete', $this->plugin->text_domain).
-                      '</a>',
+            'delete' => '<a href="#"'.  // Depends on `menu-pages.js`.
+                        ' data-pmp-action="'.esc_attr($delete_url).'"'. // The action URL.
+                        ' data-pmp-confirmation="'.esc_attr(__('Delete queued notification? Are you sure?', $this->plugin->text_domain)).'"'.
+                        ' title="'.esc_attr(__('Delete Queued Notification', $this->plugin->text_domain)).'">'.
+                        '  <i class="fa fa-times-circle"></i> '.__('Delete', $this->plugin->text_domain).
+                        '</a>',
         ];
         return $id_info.$this->row_actions($row_actions);
     }
@@ -203,27 +203,27 @@ class MenuPageQueueTable extends MenuPageTableBase
                " WHERE 1=1". // Default where clause.
 
                ($sub_ids_in_search_query /* || $sub_emails_in_search_query */ || $user_ids_in_search_query || $post_ids_in_search_query || $comment_ids_in_search_query
-                 ? " AND (".$this->plugin->utils_string->trim( // Trim the following...
+                   ? " AND (".$this->plugin->utils_string->trim( // Trim the following...
 
-                   ($sub_ids_in_search_query ? " ".$and_or." `sub_id` IN('".implode("','", array_map('esc_sql', $sub_ids_in_search_query))."')" : '').
-                   // ($sub_emails_in_search_query ? " ".$and_or." `email` IN('".implode("','", array_map('esc_sql', $sub_emails_in_search_query))."')" : '').
-                   ($user_ids_in_search_query ? " ".$and_or." `user_id` IN('".implode("','", array_map('esc_sql', $user_ids_in_search_query))."')" : '').
-                   ($post_ids_in_search_query ? " ".$and_or." `post_id` IN('".implode("','", array_map('esc_sql', $post_ids_in_search_query))."')" : '').
+                       ($sub_ids_in_search_query ? " ".$and_or." `sub_id` IN('".implode("','", array_map('esc_sql', $sub_ids_in_search_query))."')" : '').
+                       // ($sub_emails_in_search_query ? " ".$and_or." `email` IN('".implode("','", array_map('esc_sql', $sub_emails_in_search_query))."')" : '').
+                       ($user_ids_in_search_query ? " ".$and_or." `user_id` IN('".implode("','", array_map('esc_sql', $user_ids_in_search_query))."')" : '').
+                       ($post_ids_in_search_query ? " ".$and_or." `post_id` IN('".implode("','", array_map('esc_sql', $post_ids_in_search_query))."')" : '').
 
-                   ($comment_ids_in_search_query // Search both fields here.
-                     ? " ".$and_or." (`comment_parent_id` IN('".implode("','", array_map('esc_sql', $comment_ids_in_search_query))."')".
-                       "              OR `comment_id` IN('".implode("','", array_map('esc_sql', $comment_ids_in_search_query))."'))" : '')
+                       ($comment_ids_in_search_query // Search both fields here.
+                           ? " ".$and_or." (`comment_parent_id` IN('".implode("','", array_map('esc_sql', $comment_ids_in_search_query))."')".
+                             "              OR `comment_id` IN('".implode("','", array_map('esc_sql', $comment_ids_in_search_query))."'))" : '')
 
-                   , '', 'AND OR'
-                 ).")" : ''). // Trims `AND OR` leftover after concatenation occurs.
+                       , '', 'AND OR'
+                   ).")" : ''). // Trims `AND OR` leftover after concatenation occurs.
 
                ($clean_search_query // A search query?
-                 ? " AND (".$this->prepareSearchableOrCols().")"
-                 : ''). // Otherwise, we can simply exclude this.
+                   ? " AND (".$this->prepareSearchableOrCols().")"
+                   : ''). // Otherwise, we can simply exclude this.
 
                ($orderby // Ordering by a specific column, or relevance?
-                 ? " ORDER BY `".esc_sql($orderby)."`".($order ? " ".esc_sql($order) : '')
-                 : ''). // Otherwise, we can simply exclude this.
+                   ? " ORDER BY `".esc_sql($orderby)."`".($order ? " ".esc_sql($order) : '')
+                   : ''). // Otherwise, we can simply exclude this.
 
                " LIMIT ".esc_sql($current_offset).",".esc_sql($per_page);
 
@@ -276,7 +276,7 @@ class MenuPageQueueTable extends MenuPageTableBase
     protected function get_bulk_actions()
     {
         return [
-          'delete' => __('Delete', $this->plugin->text_domain),
+            'delete' => __('Delete', $this->plugin->text_domain),
         ];
     }
 

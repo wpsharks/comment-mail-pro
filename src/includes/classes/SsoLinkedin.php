@@ -37,9 +37,9 @@ class SsoLinkedin extends SsoServiceBase
         try { // Catch exceptions and log them for debugging.
             $service_factory = new \OAuth\ServiceFactory();
             $credentials     = new \OAuth\Common\Consumer\Credentials(
-              $this->plugin->options['sso_'.$this->service.'_key'],
-              $this->plugin->options['sso_'.$this->service.'_secret'],
-              $this->plugin->utils_url->ssoActionUrl($this->service, 'callback')
+                $this->plugin->options['sso_'.$this->service.'_key'],
+                $this->plugin->options['sso_'.$this->service.'_secret'],
+                $this->plugin->utils_url->ssoActionUrl($this->service, 'callback')
             );
             /** @var $service \OAuth\OAuth2\Service\Linkedin */
             $service = $service_factory->createService($this->service, $credentials, $this->storage, ['r_basicprofile', 'r_emailaddress']);
@@ -66,9 +66,9 @@ class SsoLinkedin extends SsoServiceBase
             }
             $service_factory = new \OAuth\ServiceFactory();
             $credentials     = new \OAuth\Common\Consumer\Credentials(
-              $this->plugin->options['sso_'.$this->service.'_key'],
-              $this->plugin->options['sso_'.$this->service.'_secret'],
-              $this->plugin->utils_url->ssoActionUrl($this->service, 'callback')
+                $this->plugin->options['sso_'.$this->service.'_key'],
+                $this->plugin->options['sso_'.$this->service.'_secret'],
+                $this->plugin->utils_url->ssoActionUrl($this->service, 'callback')
             );
             /** @var $service \OAuth\OAuth2\Service\Linkedin */
             $service = $service_factory->createService($this->service, $credentials, $this->storage, ['r_basicprofile', 'r_emailaddress']);
@@ -97,8 +97,8 @@ class SsoLinkedin extends SsoServiceBase
 
             if (!($fname = $this->request_args['fname'])) {
                 $fname = $this->plugin->utils_string->firstName(
-                  $this->coalesce($service_user->firstName, $service_user->formattedName),
-                  $this->coalesce($this->request_args['email'], $service_user->emailAddress)
+                    $this->coalesce($service_user->firstName, $service_user->formattedName),
+                    $this->coalesce($this->request_args['email'], $service_user->emailAddress)
                 );
             }
             if (!($lname = $this->request_args['lname'])) {

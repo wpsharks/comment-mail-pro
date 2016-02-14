@@ -50,9 +50,9 @@ class MenuPageSubFormBase extends AbsBase
      * @since 141111 First documented version.
      */
     protected static $form_field_args = [
-      'ns_id_suffix'   => '-sub-form',
-      'ns_name_suffix' => '[sub_form]',
-      'class_prefix'   => 'pmp-sub-form-',
+        'ns_id_suffix'   => '-sub-form',
+        'ns_name_suffix' => '[sub_form]',
+        'class_prefix'   => 'pmp-sub-form-',
     ];
 
     /*
@@ -99,80 +99,80 @@ class MenuPageSubFormBase extends AbsBase
         echo '   <tbody>';
 
         echo $this->form_fields->selectRow(
-          [
-            'placeholder'         => __('Select a Post ID...', $this->plugin->text_domain),
-            'label'               => __('<i class="fa fa-fw fa-thumb-tack"></i> Post ID #', $this->plugin->text_domain),
-            'name'                => 'post_id', 'required' => true, 'options' => '%%posts%%', 'current_value' => $this->currentValueFor('post_id'),
-            'notes_after'         => __('Required; the Post ID they are subscribed to.', $this->plugin->text_domain),
-            'input_fallback_args' => ['type' => 'number', 'maxlength' => 20, 'other_attrs' => 'min="1" max="18446744073709551615"', 'placeholder' => '', 'current_value_empty_on_0' => true],
-          ]
+            [
+                'placeholder'         => __('Select a Post ID...', $this->plugin->text_domain),
+                'label'               => __('<i class="fa fa-fw fa-thumb-tack"></i> Post ID #', $this->plugin->text_domain),
+                'name'                => 'post_id', 'required' => true, 'options' => '%%posts%%', 'current_value' => $this->currentValueFor('post_id'),
+                'notes_after'         => __('Required; the Post ID they are subscribed to.', $this->plugin->text_domain),
+                'input_fallback_args' => ['type' => 'number', 'maxlength' => 20, 'other_attrs' => 'min="1" max="18446744073709551615"', 'placeholder' => '', 'current_value_empty_on_0' => true],
+            ]
         );
         echo $this->form_fields->selectRow(
-          [
-            'placeholder'         => __('— All Comments/Replies —', $this->plugin->text_domain),
-            'label'               => __('<i class="fa fa-fw fa-comment-o"></i> Comment ID #', $this->plugin->text_domain),
-            'name'                => 'comment_id', 'required' => false, 'options' => '%%comments%%', 'post_id' => $this->currentValueFor('post_id'), 'current_value' => $this->currentValueFor('comment_id'),
-            'input_fallback_args' => ['type' => 'number', 'maxlength' => 20, 'other_attrs' => 'min="1" max="18446744073709551615"', 'current_value_empty_on_0' => true],
-          ]
+            [
+                'placeholder'         => __('— All Comments/Replies —', $this->plugin->text_domain),
+                'label'               => __('<i class="fa fa-fw fa-comment-o"></i> Comment ID #', $this->plugin->text_domain),
+                'name'                => 'comment_id', 'required' => false, 'options' => '%%comments%%', 'post_id' => $this->currentValueFor('post_id'), 'current_value' => $this->currentValueFor('comment_id'),
+                'input_fallback_args' => ['type' => 'number', 'maxlength' => 20, 'other_attrs' => 'min="1" max="18446744073709551615"', 'current_value_empty_on_0' => true],
+            ]
         );
         echo $this->form_fields->selectRow(
-          [
-            'placeholder'         => __('— N/A; no WP User ID —', $this->plugin->text_domain),
-            'label'               => __('<i class="fa fa-fw fa-user"></i> WP User ID #', $this->plugin->text_domain),
-            'name'                => 'user_id', 'required' => false, 'options' => '%%users%%', 'current_value' => $this->currentValueFor('user_id'),
-            'notes_after'         => __('Associates subscription w/ a WP User ID (if applicable) to improve statistical reporting.', $this->plugin->text_domain).
-                                     ' '.__('If empty, the system will automatically try to find a matching user ID for the email address.', $this->plugin->text_domain),
-            'input_fallback_args' => ['type' => 'number', 'maxlength' => 20, 'other_attrs' => 'min="1" max="18446744073709551615"', 'current_value_empty_on_0' => true],
-          ]
+            [
+                'placeholder'         => __('— N/A; no WP User ID —', $this->plugin->text_domain),
+                'label'               => __('<i class="fa fa-fw fa-user"></i> WP User ID #', $this->plugin->text_domain),
+                'name'                => 'user_id', 'required' => false, 'options' => '%%users%%', 'current_value' => $this->currentValueFor('user_id'),
+                'notes_after'         => __('Associates subscription w/ a WP User ID (if applicable) to improve statistical reporting.', $this->plugin->text_domain).
+                                         ' '.__('If empty, the system will automatically try to find a matching user ID for the email address.', $this->plugin->text_domain),
+                'input_fallback_args' => ['type' => 'number', 'maxlength' => 20, 'other_attrs' => 'min="1" max="18446744073709551615"', 'current_value_empty_on_0' => true],
+            ]
         );
         /* -------------------------------------------------------------------- */
         echo $this->form_fields->horizontalLineRow(/* -------------------------------------------------------------------- */);
         /* -------------------------------------------------------------------- */
 
         echo $this->form_fields->inputRow(
-          [
-            'type'  => 'email', // For `<input>` type.
-            'label' => __('<i class="fa fa-fw fa-envelope-o"></i> Email', $this->plugin->text_domain),
-            'name'  => 'email', 'required' => true, 'maxlength' => 100, 'current_value' => $this->currentValueFor('email'),
-          ]
+            [
+                'type'  => 'email', // For `<input>` type.
+                'label' => __('<i class="fa fa-fw fa-envelope-o"></i> Email', $this->plugin->text_domain),
+                'name'  => 'email', 'required' => true, 'maxlength' => 100, 'current_value' => $this->currentValueFor('email'),
+            ]
         );
         echo $this->form_fields->inputRow(
-          [
-            'label' => __('<i class="fa fa-fw fa-pencil-square-o"></i> First Name', $this->plugin->text_domain),
-            'name'  => 'fname', 'required' => true, 'maxlength' => 50, 'current_value' => $this->currentValueFor('fname'),
-          ]
+            [
+                'label' => __('<i class="fa fa-fw fa-pencil-square-o"></i> First Name', $this->plugin->text_domain),
+                'name'  => 'fname', 'required' => true, 'maxlength' => 50, 'current_value' => $this->currentValueFor('fname'),
+            ]
         );
         echo $this->form_fields->inputRow(
-          [
-            'label' => __('<i class="fa fa-fw fa-level-up fa-rotate-90" style="margin-left:1px;"></i> Last Name', $this->plugin->text_domain),
-            'name'  => 'lname', 'required' => false, 'maxlength' => 100, 'current_value' => $this->currentValueFor('lname'),
-          ]
+            [
+                'label' => __('<i class="fa fa-fw fa-level-up fa-rotate-90" style="margin-left:1px;"></i> Last Name', $this->plugin->text_domain),
+                'name'  => 'lname', 'required' => false, 'maxlength' => 100, 'current_value' => $this->currentValueFor('lname'),
+            ]
         );
         /* -------------------------------------------------------------------- */
         echo $this->form_fields->horizontalLineRow(/* -------------------------------------------------------------------- */);
         /* -------------------------------------------------------------------- */
 
         echo $this->form_fields->inputRow(
-          [
-            'label'       => __('<i class="fa fa-fw fa-bullseye"></i> IP Address', $this->plugin->text_domain),
-            'name'        => 'insertion_ip', 'required' => false, 'maxlength' => 39, 'current_value' => $this->currentValueFor('insertion_ip'),
-            'notes_after' => __('If empty, this is filled automatically when a subscriber confirms or updates their subscription.', $this->plugin->text_domain),
-          ]
+            [
+                'label'       => __('<i class="fa fa-fw fa-bullseye"></i> IP Address', $this->plugin->text_domain),
+                'name'        => 'insertion_ip', 'required' => false, 'maxlength' => 39, 'current_value' => $this->currentValueFor('insertion_ip'),
+                'notes_after' => __('If empty, this is filled automatically when a subscriber confirms or updates their subscription.', $this->plugin->text_domain),
+            ]
         );
         if ($this->plugin->options['geo_location_tracking_enable']) {
             echo $this->form_fields->inputRow(
-              [
-                'label'       => __('<i class="fa fa-fw fa-map-marker"></i> IP Region Code', $this->plugin->text_domain),
-                'name'        => 'insertion_region', 'required' => false, 'maxlength' => 2, 'current_value' => $this->currentValueFor('insertion_region'),
-                'notes_after' => sprintf(__('If empty, this is filled automatically when a subscriber confirms or updates their subscription. Here is a map of all %1$s; found in the second column of the CSV file.', $this->plugin->text_domain), $this->plugin->utils_markup->xAnchor('http://www.maxmind.com/download/geoip/misc/region_codes.csv', __('Region Codes', $this->plugin->text_domain))),
-              ]
+                [
+                    'label'       => __('<i class="fa fa-fw fa-map-marker"></i> IP Region Code', $this->plugin->text_domain),
+                    'name'        => 'insertion_region', 'required' => false, 'maxlength' => 2, 'current_value' => $this->currentValueFor('insertion_region'),
+                    'notes_after' => sprintf(__('If empty, this is filled automatically when a subscriber confirms or updates their subscription. Here is a map of all %1$s; found in the second column of the CSV file.', $this->plugin->text_domain), $this->plugin->utils_markup->xAnchor('http://www.maxmind.com/download/geoip/misc/region_codes.csv', __('Region Codes', $this->plugin->text_domain))),
+                ]
             );
             echo $this->form_fields->inputRow(
-              [
-                'label'       => __('<i class="fa fa-fw fa-globe"></i> IP Country Code', $this->plugin->text_domain),
-                'name'        => 'insertion_country', 'required' => false, 'maxlength' => 2, 'current_value' => $this->currentValueFor('insertion_country'),
-                'notes_after' => sprintf(__('If empty, this is filled automatically when a subscriber confirms or updates their subscription. Here is a map of all %1$s; found in the first column of the CSV file.', $this->plugin->text_domain), $this->plugin->utils_markup->xAnchor('http://www.maxmind.com/download/geoip/misc/region_codes.csv', __('Country Codes', $this->plugin->text_domain))),
-              ]
+                [
+                    'label'       => __('<i class="fa fa-fw fa-globe"></i> IP Country Code', $this->plugin->text_domain),
+                    'name'        => 'insertion_country', 'required' => false, 'maxlength' => 2, 'current_value' => $this->currentValueFor('insertion_country'),
+                    'notes_after' => sprintf(__('If empty, this is filled automatically when a subscriber confirms or updates their subscription. Here is a map of all %1$s; found in the first column of the CSV file.', $this->plugin->text_domain), $this->plugin->utils_markup->xAnchor('http://www.maxmind.com/download/geoip/misc/region_codes.csv', __('Country Codes', $this->plugin->text_domain))),
+                ]
             );
         }
         /* -------------------------------------------------------------------- */
@@ -180,25 +180,25 @@ class MenuPageSubFormBase extends AbsBase
         /* -------------------------------------------------------------------- */
 
         echo $this->form_fields->selectRow(
-          [
-            'placeholder' => __('Select a Status...', $this->plugin->text_domain),
-            'label'       => __('<i class="fa fa-fw fa-flag-o"></i> Status', $this->plugin->text_domain),
-            'name'        => 'status', 'required' => true, 'options' => '%%status%%', 'current_value' => $this->currentValueFor('status'),
+            [
+                'placeholder' => __('Select a Status...', $this->plugin->text_domain),
+                'label'       => __('<i class="fa fa-fw fa-flag-o"></i> Status', $this->plugin->text_domain),
+                'name'        => 'status', 'required' => true, 'options' => '%%status%%', 'current_value' => $this->currentValueFor('status'),
 
-            'nested_checkbox_args' => [
-              'name'          => 'process_confirmation', // With additional checkbox option too.
-              'label'         => __('Request confirmation via email', $this->plugin->text_domain).' <i class="fa fa-envelope-o"></i>',
-              'current_value' => $this->currentValueFor('process_confirmation'),
-            ],
-          ]
+                'nested_checkbox_args' => [
+                    'name'          => 'process_confirmation', // With additional checkbox option too.
+                    'label'         => __('Request confirmation via email', $this->plugin->text_domain).' <i class="fa fa-envelope-o"></i>',
+                    'current_value' => $this->currentValueFor('process_confirmation'),
+                ],
+            ]
         );
         echo $this->form_fields->selectRow(
-          [
-            'placeholder' => __('Select a Delivery Option...', $this->plugin->text_domain),
-            'label'       => __('<i class="fa fa-fw fa-paper-plane-o"></i> Deliver', $this->plugin->text_domain),
-            'name'        => 'deliver', 'required' => true, 'options' => '%%deliver%%', 'current_value' => $this->currentValueFor('deliver'),
-            'notes_after' => __('Any value that is not <code>instantly</code> results in a digest instead of instant notifications.', $this->plugin->text_domain),
-          ]
+            [
+                'placeholder' => __('Select a Delivery Option...', $this->plugin->text_domain),
+                'label'       => __('<i class="fa fa-fw fa-paper-plane-o"></i> Deliver', $this->plugin->text_domain),
+                'name'        => 'deliver', 'required' => true, 'options' => '%%deliver%%', 'current_value' => $this->currentValueFor('deliver'),
+                'notes_after' => __('Any value that is not <code>instantly</code> results in a digest instead of instant notifications.', $this->plugin->text_domain),
+            ]
         );
 
         echo '   </tbody>';
@@ -213,8 +213,8 @@ class MenuPageSubFormBase extends AbsBase
         }
         echo '   <input type="submit"'.
              ($this->is_edit  // Are we editing?
-               ? ' value="'.esc_attr(__('Update Subscription', $this->plugin->text_domain)).'"'
-               : ' value="'.esc_attr(__('Create Subscription', $this->plugin->text_domain)).'"').
+                 ? ' value="'.esc_attr(__('Update Subscription', $this->plugin->text_domain)).'"'
+                 : ' value="'.esc_attr(__('Create Subscription', $this->plugin->text_domain)).'"').
              '    class="button button-primary" />';
 
         echo '</p>';
@@ -276,12 +276,12 @@ class MenuPageSubFormBase extends AbsBase
         $form_fields = new FormFields(static::$form_field_args);
 
         return $form_fields->selectRow(
-          [
-            'placeholder'         => __('— All Comments/Replies —', $plugin->text_domain),
-            'label'               => __('<i class="fa fa-fw fa-comment-o"></i> Comment ID #', $plugin->text_domain),
-            'name'                => 'comment_id', 'required' => false, 'options' => '%%comments%%', 'post_id' => $post_id, 'current_value' => null,
-            'input_fallback_args' => ['type' => 'number', 'maxlength' => 20, 'other_attrs' => 'min="1" max="18446744073709551615"'],
-          ]
+            [
+                'placeholder'         => __('— All Comments/Replies —', $plugin->text_domain),
+                'label'               => __('<i class="fa fa-fw fa-comment-o"></i> Comment ID #', $plugin->text_domain),
+                'name'                => 'comment_id', 'required' => false, 'options' => '%%comments%%', 'post_id' => $post_id, 'current_value' => null,
+                'input_fallback_args' => ['type' => 'number', 'maxlength' => 20, 'other_attrs' => 'min="1" max="18446744073709551615"'],
+            ]
         );
     }
 
@@ -301,13 +301,13 @@ class MenuPageSubFormBase extends AbsBase
         $plugin = plugin();
 
         $default_info      = [
-          'email' => '',
-          'fname' => '',
-          'lname' => '',
+            'email' => '',
+            'fname' => '',
+            'lname' => '',
 
-          'ip'      => '',
-          'region'  => '',
-          'country' => '',
+            'ip'      => '',
+            'region'  => '',
+            'country' => '',
         ];
         $default_info_json = json_encode($default_info);
 
@@ -326,18 +326,18 @@ class MenuPageSubFormBase extends AbsBase
             return $default_info_json;
         }
         $info = [
-          'email' => $user->user_email,
-          'fname' => $plugin->utils_string->firstName('', $user),
-          'lname' => $plugin->utils_string->lastName('', $user),
+            'email' => $user->user_email,
+            'fname' => $plugin->utils_string->firstName('', $user),
+            'lname' => $plugin->utils_string->lastName('', $user),
 
-          'ip' => $plugin->utils_user->isCurrent($user) ? $plugin->utils_ip->current()
-            : $plugin->utils_sub->emailLastIp($user->user_email),
+            'ip' => $plugin->utils_user->isCurrent($user) ? $plugin->utils_ip->current()
+                : $plugin->utils_sub->emailLastIp($user->user_email),
 
-          'region' => $plugin->utils_user->isCurrent($user) ? $plugin->utils_ip->currentRegion()
-            : $plugin->utils_sub->emailLastRegion($user->user_email),
+            'region' => $plugin->utils_user->isCurrent($user) ? $plugin->utils_ip->currentRegion()
+                : $plugin->utils_sub->emailLastRegion($user->user_email),
 
-          'country' => $plugin->utils_user->isCurrent($user) ? $plugin->utils_ip->currentCountry()
-            : $plugin->utils_sub->emailLastCountry($user->user_email),
+            'country' => $plugin->utils_user->isCurrent($user) ? $plugin->utils_ip->currentCountry()
+                : $plugin->utils_sub->emailLastCountry($user->user_email),
         ];
         $info = array_merge($default_info, $info);
         $info = array_intersect_key($info, $default_info);
@@ -372,16 +372,16 @@ class MenuPageSubFormBase extends AbsBase
 
             if ($sub_updater->didUpdate()) { // Updated successfully?
                 $plugin->enqueueUserNotice( // Queue notice.
-                  sprintf(__('Subscription ID #<code>%1$s</code> updated successfully.', $plugin->text_domain), esc_html($request_args['ID'])),
-                  ['transient' => true, 'for_page' => $plugin->utils_env->currentMenuPage()]
+                    sprintf(__('Subscription ID #<code>%1$s</code> updated successfully.', $plugin->text_domain), esc_html($request_args['ID'])),
+                    ['transient' => true, 'for_page' => $plugin->utils_env->currentMenuPage()]
                 );
 
                 $redirect_to = $plugin->utils_url->pageTableNavVarsOnly();
             } else { // There were errors; display those errors to the current user.
                 $plugin->enqueueUserError( // Queue error notice.
-                  sprintf(__('Failed to update subscription ID #<code>%1$s</code>. Please review the following error(s):', $plugin->text_domain), esc_html($request_args['ID'])).
-                  '<ul class="pmp-list-items"><li>'.implode('</li><li>', $sub_updater->errorsHtml()).'</li></ul>',
-                  ['transient' => true, 'for_page' => $plugin->utils_env->currentMenuPage()]
+                    sprintf(__('Failed to update subscription ID #<code>%1$s</code>. Please review the following error(s):', $plugin->text_domain), esc_html($request_args['ID'])).
+                    '<ul class="pmp-list-items"><li>'.implode('</li><li>', $sub_updater->errorsHtml()).'</li></ul>',
+                    ['transient' => true, 'for_page' => $plugin->utils_env->currentMenuPage()]
                 );
             }
         } else { // We are doing a new insertion; i.e. a new subscription is being added here.
@@ -389,15 +389,15 @@ class MenuPageSubFormBase extends AbsBase
 
             if ($sub_inserter->didInsert()) { // Inserted successfully?
                 $plugin->enqueueUserNotice( // Queue notice.
-                  sprintf(__('Subscription ID #<code>%1$s</code> created successfully.', $plugin->text_domain), esc_html($sub_inserter->insertId())),
-                  ['transient' => true, 'for_page' => $plugin->utils_env->currentMenuPage()]
+                    sprintf(__('Subscription ID #<code>%1$s</code> created successfully.', $plugin->text_domain), esc_html($sub_inserter->insertId())),
+                    ['transient' => true, 'for_page' => $plugin->utils_env->currentMenuPage()]
                 );
                 $redirect_to = $plugin->utils_url->pageTableNavVarsOnly();
             } else { // There were errors; display those errors to the current user.
                 $plugin->enqueueUserError( // Queue error notice.
-                  __('Failed to create new subscription. Please review the following error(s):', $plugin->text_domain).
-                  '<ul class="pmp-list-items"><li>'.implode('</li><li>', $sub_inserter->errorsHtml()).'</li></ul>',
-                  ['transient' => true, 'for_page' => $plugin->utils_env->currentMenuPage()]
+                    __('Failed to create new subscription. Please review the following error(s):', $plugin->text_domain).
+                    '<ul class="pmp-list-items"><li>'.implode('</li><li>', $sub_inserter->errorsHtml()).'</li></ul>',
+                    ['transient' => true, 'for_page' => $plugin->utils_env->currentMenuPage()]
                 );
             }
         }

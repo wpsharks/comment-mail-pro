@@ -32,22 +32,22 @@ class MenuPageActions extends AbsBase
         parent::__construct();
 
         $this->valid_actions = [
-          'save_options',
-          'set_template_type',
-          'restore_default_options',
+            'save_options',
+            'set_template_type',
+            'restore_default_options',
 
-          'dismiss_notice',
+            'dismiss_notice',
 
-          'import',
-          'export',
+            'import',
+            'export',
 
-          'sub_form',
-          'sub_form_comment_id_row_via_ajax',
-          'sub_form_user_id_info_via_ajax',
+            'sub_form',
+            'sub_form_comment_id_row_via_ajax',
+            'sub_form_user_id_info_via_ajax',
 
-          'stats_chart_data_via_ajax',
+            'stats_chart_data_via_ajax',
 
-          'pro_update',
+            'pro_update',
         ];
         $this->maybeHandle();
     }
@@ -94,22 +94,22 @@ class MenuPageActions extends AbsBase
         $this->plugin->optionsSave($request_args);
 
         $notice_markup = // Notice regarding options having been updated successfully.
-          sprintf(__('%1$s&trade; options updated successfully.', $this->plugin->text_domain), esc_html($this->plugin->name));
+            sprintf(__('%1$s&trade; options updated successfully.', $this->plugin->text_domain), esc_html($this->plugin->name));
         $this->plugin->enqueueUserNotice($notice_markup, ['transient' => true]);
 
         if (!empty($request_args['mail_test']) && ($mail_test_to = trim((string)$request_args['mail_test']))) {
             $mail_test = $this->plugin->utils_mail->test(
-              $mail_test_to, // To the address specificed in the request args.
-              sprintf(__('Test Email Message sent by %1$s™', $this->plugin->text_domain), $this->plugin->name),
-              sprintf(__('Test email message sent by %1$s&trade; from: <code>%2$s</code>.', $this->plugin->text_domain), esc_html($this->plugin->name), esc_html($this->plugin->utils_url->currentHostPath()))
+                $mail_test_to, // To the address specificed in the request args.
+                sprintf(__('Test Email Message sent by %1$s™', $this->plugin->text_domain), $this->plugin->name),
+                sprintf(__('Test email message sent by %1$s&trade; from: <code>%2$s</code>.', $this->plugin->text_domain), esc_html($this->plugin->name), esc_html($this->plugin->utils_url->currentHostPath()))
             );
             $this->plugin->enqueueUserNotice($mail_test->results_markup, ['transient' => true]);
         }
         if (!empty($request_args['mail_smtp_test']) && ($mail_smtp_test_to = trim((string)$request_args['mail_smtp_test']))) {
             $mail_smtp_test = $this->plugin->utils_mail->smtpTest(
-              $mail_smtp_test_to, // To the address specificed in the request args.
-              sprintf(__('Test Email Message sent by %1$s™', $this->plugin->text_domain), $this->plugin->name),
-              sprintf(__('Test email message sent by %1$s&trade; from: <code>%2$s</code>.', $this->plugin->text_domain), esc_html($this->plugin->name), esc_html($this->plugin->utils_url->currentHostPath()))
+                $mail_smtp_test_to, // To the address specificed in the request args.
+                sprintf(__('Test Email Message sent by %1$s™', $this->plugin->text_domain), $this->plugin->name),
+                sprintf(__('Test email message sent by %1$s&trade; from: <code>%2$s</code>.', $this->plugin->text_domain), esc_html($this->plugin->name), esc_html($this->plugin->utils_url->currentHostPath()))
             );
             $this->plugin->enqueueUserNotice($mail_smtp_test->results_markup, ['transient' => true]);
         }
@@ -135,14 +135,14 @@ class MenuPageActions extends AbsBase
 
         $notice_markup = // Notice regarding options having been updated successfully.
 
-          sprintf(
-            __('Template mode updated to: <code>%2$s</code>.', $this->plugin->text_domain),
-            esc_html($this->plugin->name), $template_type === 'a' ? __('advanced', $this->plugin->text_domain) : __('simple', $this->plugin->text_domain)
-          ).
+            sprintf(
+                __('Template mode updated to: <code>%2$s</code>.', $this->plugin->text_domain),
+                esc_html($this->plugin->name), $template_type === 'a' ? __('advanced', $this->plugin->text_domain) : __('simple', $this->plugin->text_domain)
+            ).
 
-          ' '.($template_type === 'a' // Provide an additional note; to help explain what just occured in this scenario.
-            ? 'A new set of templates has been loaded below. This mode uses advanced PHP-based templates. Recommended for advanced customization.</i>'
-            : 'A new set of templates has been loaded below. This mode uses simple shortcode templates. Easiest to work with <i class="fa fa-smile-o"></i>');
+            ' '.($template_type === 'a' // Provide an additional note; to help explain what just occured in this scenario.
+                ? 'A new set of templates has been loaded below. This mode uses advanced PHP-based templates. Recommended for advanced customization.</i>'
+                : 'A new set of templates has been loaded below. This mode uses simple shortcode templates. Easiest to work with <i class="fa fa-smile-o"></i>');
 
         $this->plugin->enqueueUserNotice($notice_markup, ['transient' => true]);
 
@@ -170,7 +170,7 @@ class MenuPageActions extends AbsBase
         ImportStcr::deletePostMetaKeys(); // Reset import tracking.
 
         $notice_markup = // Notice regarding options having been retored successfully.
-          sprintf(__('%1$s&trade; default options restored successfully.', $this->plugin->text_domain), esc_html($this->plugin->name));
+            sprintf(__('%1$s&trade; default options restored successfully.', $this->plugin->text_domain), esc_html($this->plugin->name));
         $this->plugin->enqueueUserNotice($notice_markup, ['transient' => true]);
 
         wp_redirect($this->plugin->utils_url->defaultOptionsRestored());
@@ -390,11 +390,11 @@ class MenuPageActions extends AbsBase
         }
         $product_api_url        = $this->plugin->utils_url->productPage('https');
         $product_api_input_vars = [
-          'product_api' => [
-            'action'   => 'latest_pro_update',
-            'username' => $args['username'],
-            'password' => $args['password'],
-          ],
+            'product_api' => [
+                'action'   => 'latest_pro_update',
+                'username' => $args['username'],
+                'password' => $args['password'],
+            ],
         ];
         $product_api_response   = wp_remote_post($product_api_url, ['body' => $product_api_input_vars]);
         $product_api_response   = json_decode(wp_remote_retrieve_body($product_api_response), true);
@@ -430,11 +430,11 @@ class MenuPageActions extends AbsBase
 
         $redirect_to = self_admin_url('/update.php');
         $query_args  = [
-          'action'                        => 'upgrade-plugin',
-          'plugin'                        => plugin_basename($this->plugin->file),
-          '_wpnonce'                      => wp_create_nonce('upgrade-plugin_'.plugin_basename($this->plugin->file)),
-          GLOBAL_NS.'_update_pro_version' => $product_api_response['pro_version'],
-          GLOBAL_NS.'_update_pro_zip'     => base64_encode($product_api_response['pro_zip']),
+            'action'                        => 'upgrade-plugin',
+            'plugin'                        => plugin_basename($this->plugin->file),
+            '_wpnonce'                      => wp_create_nonce('upgrade-plugin_'.plugin_basename($this->plugin->file)),
+            GLOBAL_NS.'_update_pro_version' => $product_api_response['pro_version'],
+            GLOBAL_NS.'_update_pro_zip'     => base64_encode($product_api_response['pro_zip']),
         ];
         $redirect_to = add_query_arg(urlencode_deep($query_args), $redirect_to);
 

@@ -29,11 +29,11 @@ class MenuPageSubsTable extends MenuPageTableBase
         $plugin = plugin(); // Needed below.
 
         $args = [
-          'singular_name'  => 'subscription',
-          'plural_name'    => 'subscriptions',
-          'singular_label' => __('subscription', $plugin->text_domain),
-          'plural_label'   => __('subscriptions', $plugin->text_domain),
-          'screen'         => $plugin->menu_page_hooks[GLOBAL_NS.'_subs'],
+            'singular_name'  => 'subscription',
+            'plural_name'    => 'subscriptions',
+            'singular_label' => __('subscription', $plugin->text_domain),
+            'plural_label'   => __('subscriptions', $plugin->text_domain),
+            'screen'         => $plugin->menu_page_hooks[GLOBAL_NS.'_subs'],
         ];
         parent::__construct($args); // Parent constructor.
     }
@@ -54,32 +54,32 @@ class MenuPageSubsTable extends MenuPageTableBase
         $plugin = plugin(); // Plugin class instance.
 
         $columns = [
-          'cb' => '1', // Include checkboxes.
+            'cb' => '1', // Include checkboxes.
 
-          'email' => __('Subscriber', $plugin->text_domain),
-          'fname' => __('First Name', $plugin->text_domain),
-          'lname' => __('Last Name', $plugin->text_domain),
+            'email' => __('Subscriber', $plugin->text_domain),
+            'fname' => __('First Name', $plugin->text_domain),
+            'lname' => __('Last Name', $plugin->text_domain),
 
-          'user_id'    => __('WP User ID', $plugin->text_domain),
-          'post_id'    => __('Post', $plugin->text_domain),
-          'comment_id' => __('Comment', $plugin->text_domain),
+            'user_id'    => __('WP User ID', $plugin->text_domain),
+            'post_id'    => __('Post', $plugin->text_domain),
+            'comment_id' => __('Comment', $plugin->text_domain),
 
-          'deliver' => __('Delivery', $plugin->text_domain),
-          'status'  => __('Status', $plugin->text_domain),
+            'deliver' => __('Delivery', $plugin->text_domain),
+            'status'  => __('Status', $plugin->text_domain),
 
-          'insertion_time'   => __('Subscr. Time', $plugin->text_domain),
-          'last_update_time' => __('Last Update', $plugin->text_domain),
+            'insertion_time'   => __('Subscr. Time', $plugin->text_domain),
+            'last_update_time' => __('Last Update', $plugin->text_domain),
 
-          'insertion_ip'      => __('Subscr. IP', $plugin->text_domain),
-          'insertion_region'  => __('IP Region', $plugin->text_domain),
-          'insertion_country' => __('IP Country', $plugin->text_domain),
+            'insertion_ip'      => __('Subscr. IP', $plugin->text_domain),
+            'insertion_region'  => __('IP Region', $plugin->text_domain),
+            'insertion_country' => __('IP Country', $plugin->text_domain),
 
-          'last_ip'      => __('Last IP', $plugin->text_domain),
-          'last_region'  => __('Last IP Region', $plugin->text_domain),
-          'last_country' => __('Last IP Country', $plugin->text_domain),
+            'last_ip'      => __('Last IP', $plugin->text_domain),
+            'last_region'  => __('Last IP Region', $plugin->text_domain),
+            'last_country' => __('Last IP Country', $plugin->text_domain),
 
-          'key' => __('Key', $plugin->text_domain),
-          'ID'  => __('ID', $plugin->text_domain),
+            'key' => __('Key', $plugin->text_domain),
+            'ID'  => __('ID', $plugin->text_domain),
         ];
         if (!$plugin->options['geo_location_tracking_enable']) {
             foreach ($columns as $_key => $_column) {
@@ -105,25 +105,25 @@ class MenuPageSubsTable extends MenuPageTableBase
         $plugin = plugin(); // Plugin class instance.
 
         $columns = [
-          'fname',
-          'lname',
+            'fname',
+            'lname',
 
-          'user_id',
+            'user_id',
 
-          'deliver',
+            'deliver',
 
-          'last_update_time',
+            'last_update_time',
 
-          'insertion_ip',
-          'insertion_region',
-          'insertion_country',
+            'insertion_ip',
+            'insertion_region',
+            'insertion_country',
 
-          'last_ip',
-          'last_region',
-          'last_country',
+            'last_ip',
+            'last_region',
+            'last_country',
 
-          'key',
-          'ID',
+            'key',
+            'ID',
         ];
         if (!$plugin->options['geo_location_tracking_enable']) {
             foreach ($columns as $_key => $_column) {
@@ -147,14 +147,14 @@ class MenuPageSubsTable extends MenuPageTableBase
     public static function getTheFtSearchableColumns()
     {
         return [
-          'email',
-          'fname',
-          'lname',
+            'email',
+            'fname',
+            'lname',
 
-          'insertion_ip',
-          'last_ip',
+            'insertion_ip',
+            'last_ip',
 
-          'key',
+            'key',
         ];
     }
 
@@ -168,7 +168,7 @@ class MenuPageSubsTable extends MenuPageTableBase
     public static function getTheSearchableColumns()
     {
         return [
-          'ID',
+            'ID',
         ];
     }
 
@@ -200,10 +200,10 @@ class MenuPageSubsTable extends MenuPageTableBase
         $plugin = plugin(); // Needed for translations.
 
         return [
-          'status::unconfirmed' => $plugin->utils_i18n->statusLabel('unconfirmed', 'ucwords'),
-          'status::subscribed'  => $plugin->utils_i18n->statusLabel('subscribed', 'ucwords'),
-          'status::suspended'   => $plugin->utils_i18n->statusLabel('suspended', 'ucwords'),
-          'status::trashed'     => $plugin->utils_i18n->statusLabel('trashed', 'ucwords'),
+            'status::unconfirmed' => $plugin->utils_i18n->statusLabel('unconfirmed', 'ucwords'),
+            'status::subscribed'  => $plugin->utils_i18n->statusLabel('subscribed', 'ucwords'),
+            'status::suspended'   => $plugin->utils_i18n->statusLabel('suspended', 'ucwords'),
+            'status::trashed'     => $plugin->utils_i18n->statusLabel('trashed', 'ucwords'),
         ];
     }
 
@@ -225,10 +225,10 @@ class MenuPageSubsTable extends MenuPageTableBase
     protected function column_email(\stdClass $item, $prefix = '', $key = 'email')
     {
         $name_email_args = [
-          'separator'   => '<br />',
-          'anchor_to'   => 'search',
-          'name_style'  => 'font-weight:bold;',
-          'email_style' => 'font-weight:normal;',
+            'separator'   => '<br />',
+            'anchor_to'   => 'search',
+            'name_style'  => 'font-weight:bold;',
+            'email_style' => 'font-weight:normal;',
         ];
         $name            = $item->fname.' '.$item->lname; // Concatenate.
         $email_info      = '<i class="'.esc_attr('si si-'.$this->plugin->slug.'-one').'"></i>'.
@@ -243,25 +243,25 @@ class MenuPageSubsTable extends MenuPageTableBase
         $delete_url    = $this->plugin->utils_url->tableBulkAction($this->plural_name, [$item->ID], 'delete');
 
         $row_actions = [
-          'edit' => '<a href="'.esc_attr($edit_url).'">'.__('Edit Subscr.', $this->plugin->text_domain).'</a>',
+            'edit' => '<a href="'.esc_attr($edit_url).'">'.__('Edit Subscr.', $this->plugin->text_domain).'</a>',
 
-          'reconfirm' => '<a href="#"'.  // Depends on `menu-pages.js`.
-                         ' data-pmp-action="'.esc_attr($reconfirm_url).'"'. // The action URL.
-                         ' data-pmp-confirmation="'.esc_attr(__('Resend email confirmation link? Are you sure?', $this->plugin->text_domain)).'">'.
-                         '  '.__('Reconfirm', $this->plugin->text_domain).
-                         '</a>',
+            'reconfirm' => '<a href="#"'.  // Depends on `menu-pages.js`.
+                           ' data-pmp-action="'.esc_attr($reconfirm_url).'"'. // The action URL.
+                           ' data-pmp-confirmation="'.esc_attr(__('Resend email confirmation link? Are you sure?', $this->plugin->text_domain)).'">'.
+                           '  '.__('Reconfirm', $this->plugin->text_domain).
+                           '</a>',
 
-          'confirm'   => '<a href="'.esc_attr($confirm_url).'">'.__('Subscribe', $this->plugin->text_domain).'</a>',
-          'unconfirm' => '<a href="'.esc_attr($unconfirm_url).'">'.__('Unconfirm', $this->plugin->text_domain).'</a>',
-          'suspend'   => '<a href="'.esc_attr($suspend_url).'">'.__('Suspend', $this->plugin->text_domain).'</a>',
-          'trash'     => '<a href="'.esc_attr($trash_url).'" title="'.esc_attr(__('Trash', $this->plugin->text_domain)).'"><i class="fa fa-trash-o"></i></a>',
+            'confirm'   => '<a href="'.esc_attr($confirm_url).'">'.__('Subscribe', $this->plugin->text_domain).'</a>',
+            'unconfirm' => '<a href="'.esc_attr($unconfirm_url).'">'.__('Unconfirm', $this->plugin->text_domain).'</a>',
+            'suspend'   => '<a href="'.esc_attr($suspend_url).'">'.__('Suspend', $this->plugin->text_domain).'</a>',
+            'trash'     => '<a href="'.esc_attr($trash_url).'" title="'.esc_attr(__('Trash', $this->plugin->text_domain)).'"><i class="fa fa-trash-o"></i></a>',
 
-          'delete' => '<a href="#"'.  // Depends on `menu-pages.js`.
-                      ' data-pmp-action="'.esc_attr($delete_url).'"'. // The action URL.
-                      ' data-pmp-confirmation="'.esc_attr(__('Delete permanently? Are you sure?', $this->plugin->text_domain)).'"'.
-                      ' title="'.esc_attr(__('Delete', $this->plugin->text_domain)).'">'.
-                      '  <i class="fa fa-times-circle"></i>'.
-                      '</a>',
+            'delete' => '<a href="#"'.  // Depends on `menu-pages.js`.
+                        ' data-pmp-action="'.esc_attr($delete_url).'"'. // The action URL.
+                        ' data-pmp-confirmation="'.esc_attr(__('Delete permanently? Are you sure?', $this->plugin->text_domain)).'"'.
+                        ' title="'.esc_attr(__('Delete', $this->plugin->text_domain)).'">'.
+                        '  <i class="fa fa-times-circle"></i>'.
+                        '</a>',
         ];
         if ($item->status === 'unconfirmed') {
             unset($row_actions['unconfirm'], $row_actions['suspend']);
@@ -311,39 +311,39 @@ class MenuPageSubsTable extends MenuPageTableBase
         $sql = "SELECT SQL_CALC_FOUND_ROWS *". // w/ calc enabled.
 
                ($clean_search_query && $orderby === 'relevance' // Fulltext search?
-                 ? ", MATCH(`".implode('`,`', array_map('esc_sql', $this->getFtSearchableColumns()))."`)".
-                   "  AGAINST('".esc_sql($clean_search_query)."' IN BOOLEAN MODE) AS `relevance`"
-                 : ''). // Otherwise, we can simply exclude this.
+                   ? ", MATCH(`".implode('`,`', array_map('esc_sql', $this->getFtSearchableColumns()))."`)".
+                     "  AGAINST('".esc_sql($clean_search_query)."' IN BOOLEAN MODE) AS `relevance`"
+                   : ''). // Otherwise, we can simply exclude this.
 
                " FROM `".esc_sql($this->plugin->utils_db->prefix().'subs')."`".
 
                " WHERE 1=1". // Default where clause.
 
                ($sub_ids_in_search_query || $sub_emails_in_search_query || $user_ids_in_search_query || $post_ids_in_search_query || $comment_ids_in_search_query
-                 ? " AND (".$this->plugin->utils_string->trim( // Trim the following...
+                   ? " AND (".$this->plugin->utils_string->trim( // Trim the following...
 
-                   ($sub_ids_in_search_query ? " ".$and_or." `ID` IN('".implode("','", array_map('esc_sql', $sub_ids_in_search_query))."')" : '').
-                   ($sub_emails_in_search_query ? " ".$and_or." `email` IN('".implode("','", array_map('esc_sql', $sub_emails_in_search_query))."')" : '').
-                   ($user_ids_in_search_query ? " ".$and_or." `user_id` IN('".implode("','", array_map('esc_sql', $user_ids_in_search_query))."')" : '').
-                   ($post_ids_in_search_query ? " ".$and_or." `post_id` IN('".implode("','", array_map('esc_sql', $post_ids_in_search_query))."')" : '').
-                   ($comment_ids_in_search_query ? " ".$and_or." `comment_id` IN('".implode("','", array_map('esc_sql', $comment_ids_in_search_query))."')" : '')
+                       ($sub_ids_in_search_query ? " ".$and_or." `ID` IN('".implode("','", array_map('esc_sql', $sub_ids_in_search_query))."')" : '').
+                       ($sub_emails_in_search_query ? " ".$and_or." `email` IN('".implode("','", array_map('esc_sql', $sub_emails_in_search_query))."')" : '').
+                       ($user_ids_in_search_query ? " ".$and_or." `user_id` IN('".implode("','", array_map('esc_sql', $user_ids_in_search_query))."')" : '').
+                       ($post_ids_in_search_query ? " ".$and_or." `post_id` IN('".implode("','", array_map('esc_sql', $post_ids_in_search_query))."')" : '').
+                       ($comment_ids_in_search_query ? " ".$and_or." `comment_id` IN('".implode("','", array_map('esc_sql', $comment_ids_in_search_query))."')" : '')
 
-                   , '', 'AND OR'
-                 ).")" : ''). // Trims `AND OR` leftover after concatenation occurs.
+                       , '', 'AND OR'
+                   ).")" : ''). // Trims `AND OR` leftover after concatenation occurs.
 
                ($statuses_in_search_query // Specific statuses?
-                 ? " AND `status` IN('".implode("','", array_map('esc_sql', $statuses_in_search_query))."')"
-                 : " AND `status` != '".esc_sql('trashed')."'").
+                   ? " AND `status` IN('".implode("','", array_map('esc_sql', $statuses_in_search_query))."')"
+                   : " AND `status` != '".esc_sql('trashed')."'").
 
                ($clean_search_query // A fulltext search?
-                 ? " AND (MATCH(`".implode('`,`', array_map('esc_sql', $this->getFtSearchableColumns()))."`)".
-                   "     AGAINST('".esc_sql($clean_search_query)."' IN BOOLEAN MODE)".
-                   "     ".$this->prepareSearchableOrCols().")"
-                 : ''). // Otherwise, we can simply exclude this.
+                   ? " AND (MATCH(`".implode('`,`', array_map('esc_sql', $this->getFtSearchableColumns()))."`)".
+                     "     AGAINST('".esc_sql($clean_search_query)."' IN BOOLEAN MODE)".
+                     "     ".$this->prepareSearchableOrCols().")"
+                   : ''). // Otherwise, we can simply exclude this.
 
                ($orderby // Ordering by a specific column, or relevance?
-                 ? " ORDER BY `".esc_sql($orderby)."`".($order ? " ".esc_sql($order) : '')
-                 : ''). // Otherwise, we can simply exclude this.
+                   ? " ORDER BY `".esc_sql($orderby)."`".($order ? " ".esc_sql($order) : '')
+                   : ''). // Otherwise, we can simply exclude this.
 
                " LIMIT ".esc_sql($current_offset).",".esc_sql($per_page);
 
@@ -395,12 +395,12 @@ class MenuPageSubsTable extends MenuPageTableBase
     protected function get_bulk_actions()
     {
         return [
-          'reconfirm' => __('Reconfirm', $this->plugin->text_domain),
-          'confirm'   => __('Confirm', $this->plugin->text_domain),
-          'unconfirm' => __('Unconfirm', $this->plugin->text_domain),
-          'suspend'   => __('Suspend', $this->plugin->text_domain),
-          'trash'     => __('Trash', $this->plugin->text_domain),
-          'delete'    => __('Delete', $this->plugin->text_domain),
+            'reconfirm' => __('Reconfirm', $this->plugin->text_domain),
+            'confirm'   => __('Confirm', $this->plugin->text_domain),
+            'unconfirm' => __('Unconfirm', $this->plugin->text_domain),
+            'suspend'   => __('Suspend', $this->plugin->text_domain),
+            'trash'     => __('Trash', $this->plugin->text_domain),
+            'delete'    => __('Delete', $this->plugin->text_domain),
         ];
     }
 

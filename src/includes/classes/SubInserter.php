@@ -292,34 +292,34 @@ class SubInserter extends AbsBase
         /* Related to the data. */
 
         $default_request_args = [
-          'ID'  => null,
-          // A key is always auto-generated on insert.
-          // A key can NEVER be updated by anyone — only systematically!
-          // A read-only key is required to update w/ `ui_protected_data_keys_enable`.
-          'key' => null,
+            'ID'  => null,
+            // A key is always auto-generated on insert.
+            // A key can NEVER be updated by anyone — only systematically!
+            // A read-only key is required to update w/ `ui_protected_data_keys_enable`.
+            'key' => null,
 
-          'user_id'    => null,
-          'post_id'    => null,
-          'comment_id' => null,
+            'user_id'    => null,
+            'post_id'    => null,
+            'comment_id' => null,
 
-          'deliver' => null,
+            'deliver' => null,
 
-          'fname' => null,
-          'lname' => null,
-          'email' => null,
+            'fname' => null,
+            'lname' => null,
+            'email' => null,
 
-          'insertion_ip'      => null,
-          'insertion_region'  => null,
-          'insertion_country' => null,
+            'insertion_ip'      => null,
+            'insertion_region'  => null,
+            'insertion_country' => null,
 
-          'last_ip'      => null,
-          'last_region'  => null,
-          'last_country' => null,
+            'last_ip'      => null,
+            'last_region'  => null,
+            'last_country' => null,
 
-          'status' => null,
+            'status' => null,
 
-          'insertion_time'   => null,
-          'last_update_time' => null,
+            'insertion_time'   => null,
+            'last_update_time' => null,
         ];
         $request_args         = array_merge($default_request_args, $request_args);
         $request_args         = array_intersect_key($request_args, $default_request_args);
@@ -349,21 +349,21 @@ class SubInserter extends AbsBase
         /* Related to args/flags. */
 
         $defaults_args = [
-          'auto_confirm' => null,
+            'auto_confirm' => null,
 
-          'process_events'       => true,
-          'process_confirmation' => false,
-          'process_list_server'  => false,
+            'process_events'       => true,
+            'process_confirmation' => false,
+            'process_list_server'  => false,
 
-          'user_initiated'                => false,
-          'ui_protected_data_keys_enable' => false,
-          'ui_protected_data_user'        => null,
+            'user_initiated'                => false,
+            'ui_protected_data_keys_enable' => false,
+            'ui_protected_data_user'        => null,
 
-          'user_allow_0' => null,
+            'user_allow_0' => null,
 
-          'keep_existing' => false,
+            'keep_existing' => false,
 
-          'check_blacklist' => true,
+            'check_blacklist' => true,
         ];
         $args          = array_merge($defaults_args, $args);
         $args          = array_intersect_key($args, $defaults_args);
@@ -377,8 +377,8 @@ class SubInserter extends AbsBase
 
         $this->user_initiated                = (boolean)$args['user_initiated'];
         $this->user_initiated                = $this->plugin->utils_sub->checkUserInitiatedByAdmin(
-          $this->data['email'] ? $this->data['email'] // « On insert or update.
-            : ($this->is_update && $this->sub ? $this->sub->email : ''), $this->user_initiated
+            $this->data['email'] ? $this->data['email'] // « On insert or update.
+                : ($this->is_update && $this->sub ? $this->sub->email : ''), $this->user_initiated
         );
         $this->ui_protected_data_keys_enable = $this->user_initiated && $args['ui_protected_data_keys_enable'];
         $this->ui_protected_data_user        = null; // Recording here; but can't be filled until later below.
@@ -462,7 +462,7 @@ class SubInserter extends AbsBase
             $this->is_current_user = true;
         } else {
             $this->is_current_user = // `$this->user` is current user?
-              $this->user && $this->plugin->utils_user->isCurrent($this->user, $this->user_allow_0);
+                $this->user && $this->plugin->utils_user->isCurrent($this->user, $this->user_allow_0);
         }
         /* Related to duplicates. */
 
@@ -736,33 +736,33 @@ class SubInserter extends AbsBase
             throw new \exception(__('Sub after insert failure.', $this->plugin->text_domain));
         }
         $this->successes['inserted_successfully'] // Success entry!
-          = __('Subscription created successfully.', $this->plugin->text_domain);
+            = __('Subscription created successfully.', $this->plugin->text_domain);
 
         if ($this->process_events) { // Processing events? i.e. log this insertion?
             new SubEventLogInserter(
-              array_merge(
-                (array)$this->sub,
-                [
-                  'event'          => 'inserted',
-                  'user_initiated' => $this->user_initiated,
-                ]
-              )
+                array_merge(
+                    (array)$this->sub,
+                    [
+                        'event'          => 'inserted',
+                        'user_initiated' => $this->user_initiated,
+                    ]
+                )
             ); // Log event data.
         }
         if (($this->auto_confirm || $this->process_confirmation) && $this->sub->status === 'unconfirmed') {
             $this->sub_confirmer = new SubConfirmer(
-              $this->sub->ID,
-              [
-                'auto_confirm'        => $this->auto_confirm,
-                'process_events'      => $this->process_events,
-                'process_list_server' => $this->process_list_server,
-                'user_initiated'      => $this->user_initiated,
-              ]
+                $this->sub->ID,
+                [
+                    'auto_confirm'        => $this->auto_confirm,
+                    'process_events'      => $this->process_events,
+                    'process_list_server' => $this->process_list_server,
+                    'user_initiated'      => $this->user_initiated,
+                ]
             ); // With behavioral args.
 
             if ($this->sub_confirmer->sentEmailSuccessfully()) {
                 $this->successes['sent_confirmation_email_successfully'] // Success entry!
-                  = __('Request for email confirmation sent successfully.', $this->plugin->text_domain);
+                    = __('Request for email confirmation sent successfully.', $this->plugin->text_domain);
             }
         }
         $this->overwriteAnyOthersAfterInsertUpdate(); // Overwrites any others.
@@ -804,43 +804,43 @@ class SubInserter extends AbsBase
         unset($_property, $_value); // Housekeeping.
 
         $this->successes['updated_successfully'] // Success entry!
-          = __('Subscription updated successfully.', $this->plugin->text_domain);
+            = __('Subscription updated successfully.', $this->plugin->text_domain);
 
         if ($this->process_events) { // Processing events? i.e. log this update?
             new SubEventLogInserter(
-              array_merge(
-                (array)$this->sub,
-                [
-                  'event'          => 'updated',
-                  'user_initiated' => $this->user_initiated,
-                ]
-              ),
-              $sub_before
+                array_merge(
+                    (array)$this->sub,
+                    [
+                        'event'          => 'updated',
+                        'user_initiated' => $this->user_initiated,
+                    ]
+                ),
+                $sub_before
             ); // Log event data.
         }
         if (($this->auto_confirm || $this->process_confirmation) && $this->sub->status === 'unconfirmed') {
             $this->sub_confirmer = new SubConfirmer(
-              $this->sub->ID,
-              [
-                'auto_confirm'   => $this->auto_confirm,
-                'process_events' => $this->process_events,
-                'user_initiated' => $this->user_initiated,
-              ]
+                $this->sub->ID,
+                [
+                    'auto_confirm'   => $this->auto_confirm,
+                    'process_events' => $this->process_events,
+                    'user_initiated' => $this->user_initiated,
+                ]
             ); // With behavioral args.
 
             if ($this->sub_confirmer->sentEmailSuccessfully()) {
                 $this->successes['sent_confirmation_email_successfully'] // Success entry!
-                  = __('Request for email confirmation sent successfully.', $this->plugin->text_domain);
+                    = __('Request for email confirmation sent successfully.', $this->plugin->text_domain);
             }
         } else if ($this->sub->status === 'subscribed' && $this->process_list_server) {
             $this->plugin->utils_list_server->maybeSubscribe(
-              [
-                'double_optin' => false,
-                'email'        => $this->sub->email,
-                'fname'        => $this->sub->fname,
-                'lname'        => $this->sub->lname,
-                'ip'           => $this->sub->last_ip,
-              ]
+                [
+                    'double_optin' => false,
+                    'email'        => $this->sub->email,
+                    'fname'        => $this->sub->fname,
+                    'lname'        => $this->sub->lname,
+                    'ip'           => $this->sub->last_ip,
+                ]
             );
         }
         $this->overwriteAnyOthersAfterInsertUpdate(); // Overwrites any others.
@@ -904,14 +904,14 @@ class SubInserter extends AbsBase
         $new_last_ip = $this->newValueFor('last_ip');
 
         $can_auto_confirm_args = [
-          'post_id' => $new_post_id,
+            'post_id' => $new_post_id,
 
-          'sub_user_id' => $new_user_id,
-          'sub_email'   => $new_email,
-          'sub_last_ip' => $new_last_ip,
+            'sub_user_id' => $new_user_id,
+            'sub_email'   => $new_email,
+            'sub_last_ip' => $new_last_ip,
 
-          'user_initiated' => $this->user_initiated,
-          'auto_confirm'   => $this->auto_confirm,
+            'user_initiated' => $this->user_initiated,
+            'auto_confirm'   => $this->auto_confirm,
         ];
         $this->auto_confirm    = $this->plugin->utils_sub->canAutoConfirm($can_auto_confirm_args);
     }
@@ -962,12 +962,12 @@ class SubInserter extends AbsBase
             return; // Not necessary.
         }
         $this->plugin->utils_sub->bulkDelete(
-          $this->duplicate_key_ids,
-          [
-            'oby_sub_id'             => $this->insert_id,
-            'oby_sub_id_did_replace' => $this->replaced,
-            'process_events'         => $this->process_events,
-          ]
+            $this->duplicate_key_ids,
+            [
+                'oby_sub_id'             => $this->insert_id,
+                'oby_sub_id_did_replace' => $this->replaced,
+                'process_events'         => $this->process_events,
+            ]
         );
     }
 
@@ -1005,11 +1005,11 @@ class SubInserter extends AbsBase
 
         if (($this->duplicate_key_ids = array_map('intval', $this->plugin->utils_db->wp->get_col($sql)))) {
             $this->plugin->utils_sub->bulkDelete(
-              $this->duplicate_key_ids,
-              [
-                'oby_sub_id'     => $this->sub->ID,
-                'process_events' => $this->process_events,
-              ]
+                $this->duplicate_key_ids,
+                [
+                    'oby_sub_id'     => $this->sub->ID,
+                    'process_events' => $this->process_events,
+                ]
             );
         }
     }
@@ -1030,22 +1030,22 @@ class SubInserter extends AbsBase
                " WHERE `post_id` = '".esc_sql($this->sub->post_id)."'".
 
                (!$this->sub->comment_id ? '' // If all comments now; overwrite everything else.
-                 : " AND (`comment_id` = '0' OR `comment_id` = '".esc_sql($this->sub->comment_id)."')").
+                   : " AND (`comment_id` = '0' OR `comment_id` = '".esc_sql($this->sub->comment_id)."')").
 
                ($this->sub->user_id // Has a user ID?
-                 ? " AND (`user_id` = '".esc_sql($this->sub->user_id)."'".
-                   "       OR `email` = '".esc_sql($this->sub->email)."')"
-                 : " AND `email` = '".esc_sql($this->sub->email)."'").
+                   ? " AND (`user_id` = '".esc_sql($this->sub->user_id)."'".
+                     "       OR `email` = '".esc_sql($this->sub->email)."')"
+                   : " AND `email` = '".esc_sql($this->sub->email)."'").
 
                " AND `ID` != '".esc_sql($this->sub->ID)."'";
 
         if (($this->other_duplicate_ids = array_map('intval', $this->plugin->utils_db->wp->get_col($sql)))) {
             $this->plugin->utils_sub->bulkDelete(
-              $this->other_duplicate_ids,
-              [
-                'oby_sub_id'     => $this->sub->ID,
-                'process_events' => $this->process_events,
-              ]
+                $this->other_duplicate_ids,
+                [
+                    'oby_sub_id'     => $this->sub->ID,
+                    'process_events' => $this->process_events,
+                ]
             );
         }
     }

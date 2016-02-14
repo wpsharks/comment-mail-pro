@@ -57,9 +57,9 @@ class SubManageSubFormBase extends AbsBase
      * @since 141111 First documented version.
      */
     protected static $form_field_args = [
-      'ns_id_suffix'   => '-manage-sub-form',
-      'ns_name_suffix' => '[manage][sub_form]',
-      'class_prefix'   => 'manage-sub-form-',
+        'ns_id_suffix'   => '-manage-sub-form',
+        'ns_name_suffix' => '[manage][sub_form]',
+        'class_prefix'   => 'manage-sub-form-',
     ];
 
     /**
@@ -311,57 +311,57 @@ class SubManageSubFormBase extends AbsBase
 
         if ($this->is_edit && $this->sub) {
             $hidden_inputs .= $this->form_fields->hiddenInput(
-                [
-                  'name'          => 'ID',
-                  'current_value' => $this->sub->ID,
-                ]
-              )."\n";
+                    [
+                        'name'          => 'ID',
+                        'current_value' => $this->sub->ID,
+                    ]
+                )."\n";
             $hidden_inputs .= $this->form_fields->hiddenInput(
-                [
-                  'name'          => 'key',
-                  'current_value' => $this->sub->key,
-                ]
-              )."\n";
+                    [
+                        'name'          => 'key',
+                        'current_value' => $this->sub->key,
+                    ]
+                )."\n";
             $hidden_inputs .= $this->form_fields->hiddenInput(
-                [
-                  'name'          => 'post_id',
-                  'current_value' => $this->sub->post_id,
-                ]
-              )."\n";
+                    [
+                        'name'          => 'post_id',
+                        'current_value' => $this->sub->post_id,
+                    ]
+                )."\n";
             $hidden_inputs .= $this->form_fields->hiddenInput(
-                [
-                  'name'          => 'comment_id',
-                  'current_value' => $this->sub->comment_id,
-                ]
-              )."\n";
+                    [
+                        'name'          => 'comment_id',
+                        'current_value' => $this->sub->comment_id,
+                    ]
+                )."\n";
             $hidden_inputs .= $this->form_fields->hiddenInput(
-                [
-                  'root_name'     => true,
-                  'name'          => GLOBAL_NS.'[manage][sub_edit]',
-                  'current_value' => $this->sub->key,
-                ]
-              )."\n";
+                    [
+                        'root_name'     => true,
+                        'name'          => GLOBAL_NS.'[manage][sub_edit]',
+                        'current_value' => $this->sub->key,
+                    ]
+                )."\n";
         } else { // Adding a new subscription in this default case.
             $hidden_inputs .= $this->form_fields->hiddenInput(
-                [
-                  'root_name'     => true,
-                  'name'          => GLOBAL_NS.'[manage][sub_new]',
-                  'current_value' => 0,
-                ]
-              )."\n";
+                    [
+                        'root_name'     => true,
+                        'name'          => GLOBAL_NS.'[manage][sub_new]',
+                        'current_value' => 0,
+                    ]
+                )."\n";
         }
         $current_summary_nav_vars // Include these too.
-          = $this->plugin->utils_url->subManageSummaryNavVars();
+            = $this->plugin->utils_url->subManageSummaryNavVars();
 
         foreach (array_keys(sub_manage_summary::$default_nav_vars) as $_summary_nav_var_key) {
             if (isset($current_summary_nav_vars[$_summary_nav_var_key])) {
                 $hidden_inputs .= $this->form_fields->hiddenInput(
-                    [
-                      'root_name'     => true,
-                      'name'          => GLOBAL_NS.'[manage][summary_nav]['.$_summary_nav_var_key.']',
-                      'current_value' => (string)$current_summary_nav_vars[$_summary_nav_var_key],
-                    ]
-                  )."\n";
+                        [
+                            'root_name'     => true,
+                            'name'          => GLOBAL_NS.'[manage][summary_nav]['.$_summary_nav_var_key.']',
+                            'current_value' => (string)$current_summary_nav_vars[$_summary_nav_var_key],
+                        ]
+                    )."\n";
             }
         }
         unset($_summary_nav_var_key); // Housekeeping.

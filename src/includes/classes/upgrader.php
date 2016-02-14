@@ -52,8 +52,8 @@ class Upgrader extends AbsBase
         new UpgraderVs($this->prev_version); // Run version-specific upgrader(s).
 
         $this->plugin->enqueueNotice( // Notify site owner about this upgrade process.
-          sprintf(__('<strong>%1$s&trade;</strong> was automatically recompiled upon detecting an upgrade to v%2$s. Your existing configuration remains :-)', $this->plugin->text_domain), esc_html($this->plugin->name), esc_html($this->plugin->version)),
-          ['requires_cap' => $this->plugin->auto_recompile_cap, 'push_to_top' => true]
+            sprintf(__('<strong>%1$s&trade;</strong> was automatically recompiled upon detecting an upgrade to v%2$s. Your existing configuration remains :-)', $this->plugin->text_domain), esc_html($this->plugin->name), esc_html($this->plugin->version)),
+            ['requires_cap' => $this->plugin->auto_recompile_cap, 'push_to_top' => true]
         );
     }
 }

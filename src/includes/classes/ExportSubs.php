@@ -56,9 +56,9 @@ class ExportSubs extends AbsBase
         parent::__construct();
 
         $default_request_args = [
-          'start_from'       => 1,
-          'max_limit'        => 1000,
-          'include_utf8_bom' => false,
+            'start_from'       => 1,
+            'max_limit'        => 1000,
+            'include_utf8_bom' => false,
         ];
         $request_args         = array_merge($default_request_args, $request_args);
         $request_args         = array_intersect_key($request_args, $default_request_args);
@@ -107,10 +107,10 @@ class ExportSubs extends AbsBase
         $to   = $from - 1 + count($results);
 
         $output_file_args = [
-          'data'                => $data,
-          'file_name'           => $this->plugin->slug.'-subs-'.$from.'-'.$to.'.csv',
-          'content_type'        => 'text/csv; charset=UTF-8',
-          'content_disposition' => 'attachment',
+            'data'                => $data,
+            'file_name'           => $this->plugin->slug.'-subs-'.$from.'-'.$to.'.csv',
+            'content_type'        => 'text/csv; charset=UTF-8',
+            'content_disposition' => 'attachment',
         ];
         new OutputFile($output_file_args);
     }

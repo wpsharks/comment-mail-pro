@@ -32,7 +32,7 @@ class WebhookActions extends AbsBase
         parent::__construct();
 
         $this->valid_actions = [
-          'rve_mandrill',
+            'rve_mandrill',
         ];
         $this->maybeHandle();
     }

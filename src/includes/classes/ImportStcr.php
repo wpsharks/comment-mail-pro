@@ -84,7 +84,7 @@ class ImportStcr extends AbsBase
         parent::__construct();
 
         $default_request_args = [
-          'max_post_ids_limit' => 15,
+            'max_post_ids_limit' => 15,
         ];
         $request_args         = array_merge($default_request_args, $request_args);
         $request_args         = array_intersect_key($request_args, $default_request_args);
@@ -203,15 +203,15 @@ class ImportStcr extends AbsBase
         if ($sub->status === 'Y') // All comments?
         {
             $sub_insert_data = [
-              'post_id' => $post_id,
+                'post_id' => $post_id,
 
-              'status'  => 'subscribed',
-              'deliver' => 'asap',
+                'status'  => 'subscribed',
+                'deliver' => 'asap',
 
-              'fname' => $sub->fname,
-              'email' => $sub->email,
+                'fname' => $sub->fname,
+                'email' => $sub->email,
 
-              'insertion_time' => $sub->time,
+                'insertion_time' => $sub->time,
             ];
             $sub_inserter    = new SubInserter($sub_insert_data);
 
@@ -238,16 +238,16 @@ class ImportStcr extends AbsBase
 
                 foreach ($_sub_comment_ids as $_comment_id) {
                     $_sub_insert_data = [
-                      'post_id'    => $post_id,
-                      'comment_id' => $_comment_id,
+                        'post_id'    => $post_id,
+                        'comment_id' => $_comment_id,
 
-                      'status'  => 'subscribed',
-                      'deliver' => 'asap',
+                        'status'  => 'subscribed',
+                        'deliver' => 'asap',
 
-                      'fname' => $sub->fname,
-                      'email' => $sub->email,
+                        'fname' => $sub->fname,
+                        'email' => $sub->email,
 
-                      'insertion_time' => $sub->time,
+                        'insertion_time' => $sub->time,
                     ];
                     $_sub_inserter    = new SubInserter($_sub_insert_data);
                     if ($_sub_inserter->didInsert()) {
@@ -356,8 +356,8 @@ class ImportStcr extends AbsBase
                 // Give precedence to any subscription that chose to receive "Replies Only".
                 // See: <https://github.com/websharks/comment-mail/issues/7#issuecomment-57252200>
                 $subs[$_email] = (object)[
-                  'fname' => $this->plugin->utils_string->firstName('', $_email),
-                  'email' => $_email, 'time' => $_time, 'status' => $_status,
+                    'fname' => $this->plugin->utils_string->firstName('', $_email),
+                    'email' => $_email, 'time' => $_time, 'status' => $_status,
                 ];
             }
         }
@@ -412,12 +412,12 @@ class ImportStcr extends AbsBase
             $max_limit = $this->max_post_ids_limit + 1;
         }
         $post_ids_with_stcr_meta = // Those with StCR metadata.
-          "SELECT DISTINCT `post_id` FROM `".esc_sql($this->plugin->utils_db->wp->postmeta)."`".
-          " WHERE `meta_key` LIKE '%\\_stcr@\\_%'";
+            "SELECT DISTINCT `post_id` FROM `".esc_sql($this->plugin->utils_db->wp->postmeta)."`".
+            " WHERE `meta_key` LIKE '%\\_stcr@\\_%'";
 
         $post_ids_imported_already = // Those already imported by this class.
-          "SELECT DISTINCT `post_id` FROM `".esc_sql($this->plugin->utils_db->wp->postmeta)."`".
-          " WHERE `meta_key` = '".esc_sql(GLOBAL_NS.'_imported_stcr_subs')."'";
+            "SELECT DISTINCT `post_id` FROM `".esc_sql($this->plugin->utils_db->wp->postmeta)."`".
+            " WHERE `meta_key` = '".esc_sql(GLOBAL_NS.'_imported_stcr_subs')."'";
 
         $sql = "SELECT `ID` FROM `".esc_sql($this->plugin->utils_db->wp->posts)."`".
 
@@ -448,11 +448,11 @@ class ImportStcr extends AbsBase
         header('Content-Type: text/html; charset=UTF-8');
 
         $child_status_var = // Child identifier.
-          str_replace('\\', '_', __CLASS__).'_child_status';
+            str_replace('\\', '_', __CLASS__).'_child_status';
 
         $child_status_request_args = [
-          $child_status_var => 1, // Child process identifier.
-          GLOBAL_NS         => ['import' => ['type' => 'stcr']],
+            $child_status_var => 1, // Child process identifier.
+            GLOBAL_NS         => ['import' => ['type' => 'stcr']],
         ];
         $child_status_url          = $this->plugin->utils_url->nonce();
         $child_status_url          = add_query_arg(urlencode_deep($child_status_request_args), $child_status_url);
@@ -609,7 +609,7 @@ class ImportStcr extends AbsBase
         $plugin = plugin(); // Need this below.
 
         $like = // e.g. LIKE `%comment\_mail\_imported\_stcr\_subs%`.
-          '%'.$plugin->utils_db->wp->esc_like(GLOBAL_NS.'_imported_stcr_subs').'%';
+            '%'.$plugin->utils_db->wp->esc_like(GLOBAL_NS.'_imported_stcr_subs').'%';
 
         $sql = "SELECT `meta_id` FROM `".esc_sql($plugin->utils_db->wp->postmeta)."`".
                " WHERE `meta_key` LIKE '".esc_sql($like)."' LIMIT 1";
@@ -627,11 +627,11 @@ class ImportStcr extends AbsBase
         $plugin = plugin(); // Need this below.
 
         $like = // e.g. Delete all keys LIKE `%comment\_mail%`.
-          '%'.$plugin->utils_db->wp->esc_like(GLOBAL_NS.'_imported_stcr_subs').'%';
+            '%'.$plugin->utils_db->wp->esc_like(GLOBAL_NS.'_imported_stcr_subs').'%';
 
         $sql = // This will remove our StCR import history also.
-          "DELETE FROM `".esc_sql($plugin->utils_db->wp->postmeta)."`".
-          " WHERE `meta_key` LIKE '".esc_sql($like)."'";
+            "DELETE FROM `".esc_sql($plugin->utils_db->wp->postmeta)."`".
+            " WHERE `meta_key` LIKE '".esc_sql($like)."'";
 
         $plugin->utils_db->wp->query($sql);
     }
@@ -648,7 +648,7 @@ class ImportStcr extends AbsBase
     protected function totalSubsWithInvalidPostIds()
     {
         $valid_post_ids = // All valid Post IDs
-          "SELECT DISTINCT `ID` FROM `".esc_sql($this->plugin->utils_db->wp->posts)."`";
+            "SELECT DISTINCT `ID` FROM `".esc_sql($this->plugin->utils_db->wp->posts)."`";
 
         $sql = "SELECT COUNT(*) as `count` FROM `".esc_sql($this->plugin->utils_db->wp->postmeta)."`".
                " WHERE `meta_key` LIKE '%\\_stcr@\\_%'".

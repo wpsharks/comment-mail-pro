@@ -46,7 +46,7 @@ class UtilsSso extends AbsBase
             return false; // Not possible.
         }
         $default_args = [
-          'no_cache' => false,
+            'no_cache' => false,
         ];
         $args         = array_merge($default_args, $args);
         $args         = array_intersect_key($args, $default_args);
@@ -82,11 +82,11 @@ class UtilsSso extends AbsBase
             return false; // Not possible.
         }
         $default_args = [
-          'fname' => '',
-          'lname' => '',
-          'email' => '',
+            'fname' => '',
+            'lname' => '',
+            'email' => '',
 
-          'no_cache' => false,
+            'no_cache' => false,
         ];
         $args         = array_merge($default_args, $args);
         $args         = array_intersect_key($args, $default_args);
@@ -174,7 +174,7 @@ class UtilsSso extends AbsBase
             return 0; // Not possible.
         }
         $default_args = [
-          'no_cache' => false,
+            'no_cache' => false,
         ];
         $args         = array_merge($default_args, $args);
         $args         = array_intersect_key($args, $default_args);
@@ -189,18 +189,18 @@ class UtilsSso extends AbsBase
 
         $matching_user_ids_sql = // Find a matching SSO ID in the `wp_users` table; for this blog.
 
-          "SELECT `user_id` FROM (". // See: <http://jas.xyz/1I52mVE>
+            "SELECT `user_id` FROM (". // See: <http://jas.xyz/1I52mVE>
 
-          "	SELECT `user_id` FROM `".esc_sql($this->plugin->utils_db->wp->usermeta)."`".
-          "	 WHERE `meta_key` = '".esc_sql($meta_key)."'".
-          "	 AND `meta_value` = '".esc_sql($sso_id)."'".
+            "	SELECT `user_id` FROM `".esc_sql($this->plugin->utils_db->wp->usermeta)."`".
+            "	 WHERE `meta_key` = '".esc_sql($meta_key)."'".
+            "	 AND `meta_value` = '".esc_sql($sso_id)."'".
 
-          ") AS `user_id`"; // Alias requirement.
+            ") AS `user_id`"; // Alias requirement.
 
         $sql = // Find a user ID matching the SSO ID; if possible.
 
-          "SELECT `ID` FROM `".esc_sql($this->plugin->utils_db->wp->users)."`".
-          " WHERE `ID` IN(".$matching_user_ids_sql.") LIMIT 1";
+            "SELECT `ID` FROM `".esc_sql($this->plugin->utils_db->wp->users)."`".
+            " WHERE `ID` IN(".$matching_user_ids_sql.") LIMIT 1";
 
         return ($user_id = (integer)$this->plugin->utils_db->wp->get_var($sql));
     }
@@ -216,31 +216,31 @@ class UtilsSso extends AbsBase
     public function requestCompletion(array $request_args = [], array $args = [])
     {
         $default_request_args = [
-          'service'     => null,
-          'action'      => null,
-          'redirect_to' => null,
+            'service'     => null,
+            'action'      => null,
+            'redirect_to' => null,
 
-          'sso_id'   => null,
-          '_wpnonce' => null,
+            'sso_id'   => null,
+            '_wpnonce' => null,
 
-          'fname' => null,
-          'lname' => null,
-          'email' => null,
+            'fname' => null,
+            'lname' => null,
+            'email' => null,
         ];
         $request_args         = array_merge($default_request_args, $request_args);
         $request_args         = array_intersect_key($request_args, $default_request_args);
 
         $default_args = [
-          'service'     => '',
-          'action'      => '',
-          'redirect_to' => '',
+            'service'     => '',
+            'action'      => '',
+            'redirect_to' => '',
 
-          'sso_id'   => '',
-          '_wpnonce' => '',
+            'sso_id'   => '',
+            '_wpnonce' => '',
 
-          'fname' => '',
-          'lname' => '',
-          'email' => '',
+            'fname' => '',
+            'lname' => '',
+            'email' => '',
         ];
         $args         = array_merge($default_args, $args);
         $args         = array_intersect_key($args, $default_args);
@@ -270,11 +270,11 @@ class UtilsSso extends AbsBase
             $email = trim((string)$args['email']);
         }
         $form_fields   = new FormFields(
-          [
-            'ns_name_suffix' => '[sso]',
-            'ns_id_suffix'   => '-sso-complete-form',
-            'class_prefix'   => 'sso-complete-form-',
-          ]
+            [
+                'ns_name_suffix' => '[sso]',
+                'ns_id_suffix'   => '-sso-complete-form',
+                'class_prefix'   => 'sso-complete-form-',
+            ]
         );
         $_this         = $this; // Needed by this closure.
         $hidden_inputs = function () use ($_this, $form_fields, $service, $redirect_to, $sso_id) {
@@ -336,12 +336,12 @@ class UtilsSso extends AbsBase
     public function hiddenInputsForCompletion(array $args = [])
     {
         $default_args = [
-          'form_fields' => null,
+            'form_fields' => null,
 
-          'service'     => '',
-          'redirect_to' => '',
+            'service'     => '',
+            'redirect_to' => '',
 
-          'sso_id' => '',
+            'sso_id' => '',
         ];
         $args         = array_merge($default_args, $args);
         $args         = array_intersect_key($args, $default_args);
@@ -357,46 +357,46 @@ class UtilsSso extends AbsBase
         $hidden_inputs = ''; // Initialize.
 
         $hidden_inputs .= $form_fields->hiddenInput(
-            [
-              'name'          => 'service',
-              'current_value' => $service,
-            ]
-          )."\n";
+                [
+                    'name'          => 'service',
+                    'current_value' => $service,
+                ]
+            )."\n";
         $hidden_inputs .= $form_fields->hiddenInput(
-            [
-              'name'          => 'action',
-              'current_value' => 'complete',
-            ]
-          )."\n";
+                [
+                    'name'          => 'action',
+                    'current_value' => 'complete',
+                ]
+            )."\n";
         $hidden_inputs .= $form_fields->hiddenInput(
-            [
-              'name'          => 'redirect_to',
-              'current_value' => $redirect_to,
-            ]
-          )."\n";
+                [
+                    'name'          => 'redirect_to',
+                    'current_value' => $redirect_to,
+                ]
+            )."\n";
         $hidden_inputs .= $form_fields->hiddenInput(
-            [
-              'name'          => 'sso_id', // Encrypted for security.
-              'current_value' => $this->plugin->utils_enc->encrypt($sso_id),
-            ]
-          )."\n";
+                [
+                    'name'          => 'sso_id', // Encrypted for security.
+                    'current_value' => $this->plugin->utils_enc->encrypt($sso_id),
+                ]
+            )."\n";
         $hidden_inputs .= $form_fields->hiddenInput(
-            [
-              'name'          => '_wpnonce',
-              'current_value' => wp_create_nonce(GLOBAL_NS.'_sso_complete'),
-            ]
-          )."\n";
+                [
+                    'name'          => '_wpnonce',
+                    'current_value' => wp_create_nonce(GLOBAL_NS.'_sso_complete'),
+                ]
+            )."\n";
         $sso_get_vars = !empty($_GET[GLOBAL_NS]['sso']) ? (array)$_GET[GLOBAL_NS]['sso'] : [];
         $sso_get_vars = $this->plugin->utils_string->trimStripDeep($sso_get_vars);
 
         foreach ($sso_get_vars as $_sso_var_key => $_sso_var_value) {
             if (!in_array($_sso_var_key, ['action', 'service', 'redirect_to', 'sso_id', '_wpnonce'], true)) {
                 $hidden_inputs .= $form_fields->hiddenInput(
-                    [
-                      'name'          => $_sso_var_key,
-                      'current_value' => (string)$_sso_var_value,
-                    ]
-                  )."\n";
+                        [
+                            'name'          => $_sso_var_key,
+                            'current_value' => (string)$_sso_var_value,
+                        ]
+                    )."\n";
             }
         }
         unset($_sso_var_key, $_sso_var_value); // Housekeeping.

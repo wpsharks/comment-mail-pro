@@ -53,12 +53,12 @@ class FrontScripts extends AbsBase
         wp_enqueue_script('jquery'); // Need jQuery.
 
         add_action( // Very low priority; after footer scripts!
-          'login_footer',
-          function () {
-              $template = new Template('site/login-form/sso-op-scripts.php');
-              echo $template->parse(); // Inline `<script></script>`.
-          },
-          PHP_INT_MAX - 10
+            'login_footer',
+            function () {
+                $template = new Template('site/login-form/sso-op-scripts.php');
+                echo $template->parse(); // Inline `<script></script>`.
+            },
+            PHP_INT_MAX - 10
         );
     }
 
@@ -83,12 +83,12 @@ class FrontScripts extends AbsBase
         wp_enqueue_script('jquery'); // Need jQuery.
 
         add_action( // Very low priority; after footer scripts!
-          'wp_footer',
-          function () {
-              $template = new Template('site/comment-form/sso-op-scripts.php');
-              echo $template->parse(); // Inline `<script></script>`.
-          },
-          PHP_INT_MAX - 10
+            'wp_footer',
+            function () {
+                $template = new Template('site/comment-form/sso-op-scripts.php');
+                echo $template->parse(); // Inline `<script></script>`.
+            },
+            PHP_INT_MAX - 10
         );
     }
 
@@ -116,12 +116,12 @@ class FrontScripts extends AbsBase
         wp_enqueue_script('jquery'); // Need jQuery.
 
         add_action( // Very low priority; after footer scripts!
-          'wp_footer',
-          function () {
-              $template = new Template('site/comment-form/sub-op-scripts.php');
-              echo $template->parse(); // Inline `<script></script>`.
-          },
-          PHP_INT_MAX - 10
+            'wp_footer',
+            function () {
+                $template = new Template('site/comment-form/sub-op-scripts.php');
+                echo $template->parse(); // Inline `<script></script>`.
+            },
+            PHP_INT_MAX - 10
         );
     }
 }

@@ -24,21 +24,21 @@ class UtilsPhp extends AbsBase
      * @since 141111 First documented version.
      */
     protected $constructs = [
-      'die'             => 'die',
-      'echo'            => 'echo',
-      'empty'           => 'empty',
-      'exit'            => 'exit',
-      'eval'            => 'eval',
-      'include'         => 'include',
-      'include_once'    => 'include_once',
-      'isset'           => 'isset',
-      'list'            => 'list',
-      'require'         => 'require',
-      'require_once'    => 'require_once',
-      'return'          => 'return',
-      'print'           => 'print',
-      'unset'           => 'unset',
-      '__halt_compiler' => '__halt_compiler',
+        'die'             => 'die',
+        'echo'            => 'echo',
+        'empty'           => 'empty',
+        'exit'            => 'exit',
+        'eval'            => 'eval',
+        'include'         => 'include',
+        'include_once'    => 'include_once',
+        'isset'           => 'isset',
+        'list'            => 'list',
+        'require'         => 'require',
+        'require_once'    => 'require_once',
+        'return'          => 'return',
+        'print'           => 'print',
+        'unset'           => 'unset',
+        '__halt_compiler' => '__halt_compiler',
     ];
 
     /**
@@ -90,13 +90,13 @@ class UtilsPhp extends AbsBase
             return ob_get_clean();
         }
         throw new \exception(
-          __('The PHP `eval()` function (an application requirement) has been disabled on this server. Please check with your hosting provider to resolve this issue and have the PHP `eval()` function enabled.', $this->plugin->text_domain).
+            __('The PHP `eval()` function (an application requirement) has been disabled on this server. Please check with your hosting provider to resolve this issue and have the PHP `eval()` function enabled.', $this->plugin->text_domain).
 
-          // The rest of this explanation is not translatable; allowing us to keep it on multiple lines.
-          ' The use of `eval()` in this software is limited to areas where it is absolutely necessary to achieve a desired functionality.'.
-          ' For instance, where PHP code is supplied by a site owner (or by their developer) to achieve advanced customization through a UI panel. This can be evaluated at runtime to allow for the inclusion of PHP conditionals or dynamic values.'.
-          ' In cases such as these, the PHP `eval()` function serves a valid/useful purpose. This does NOT introduce a vulnerability, because the code being evaluated has actually been introduced by the site owner (i.e. the PHP code can be trusted in this case).'.
-          ' This software may also use `eval()` to generate dynamic classes and/or API functions for developers; where the use of `eval()` again serves a valid/useful purpose; and where the underlying code was packaged by the software vendor (i.e. the PHP code can be trusted).'
+            // The rest of this explanation is not translatable; allowing us to keep it on multiple lines.
+            ' The use of `eval()` in this software is limited to areas where it is absolutely necessary to achieve a desired functionality.'.
+            ' For instance, where PHP code is supplied by a site owner (or by their developer) to achieve advanced customization through a UI panel. This can be evaluated at runtime to allow for the inclusion of PHP conditionals or dynamic values.'.
+            ' In cases such as these, the PHP `eval()` function serves a valid/useful purpose. This does NOT introduce a vulnerability, because the code being evaluated has actually been introduced by the site owner (i.e. the PHP code can be trusted in this case).'.
+            ' This software may also use `eval()` to generate dynamic classes and/or API functions for developers; where the use of `eval()` again serves a valid/useful purpose; and where the underlying code was packaged by the software vendor (i.e. the PHP code can be trusted).'
         );
     }
 
@@ -123,8 +123,8 @@ class UtilsPhp extends AbsBase
         if ($fsmlc // Do we even have something to check?
 
             && ( // A language construct, or callable.
-              in_array($fsmlc, $this->constructs, true)
-              || is_callable($fsmlc) || function_exists($fsmlc)
+                in_array($fsmlc, $this->constructs, true)
+                || is_callable($fsmlc) || function_exists($fsmlc)
             )
             // And only if it has not been disabled in some way.
             && !in_array($fsmlc, $this->disabledFunctions(), true)

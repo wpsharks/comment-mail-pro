@@ -226,7 +226,7 @@ class MailSmtp extends AbsBase
 
             $this->mailer->MsgHTML($this->message_html);
             $this->mailer->AltBody = // Our text alternative.
-              $this->mailer->normalizeBreaks($this->message_text);
+                $this->mailer->normalizeBreaks($this->message_text);
 
             foreach ($this->headers as $_header => $_value) {
                 $this->mailer->AddCustomHeader($this->plugin->utils_mail->ucwordsHeader($_header), $_value);
@@ -249,13 +249,13 @@ class MailSmtp extends AbsBase
         } catch (\exception $exception) {
             if ($this->debug) { // Debugging?
                 $this->debug_output_markup // Add to debug output.
-                  .= esc_html($exception->getMessage()).'<br />'."\n";
+                    .= esc_html($exception->getMessage()).'<br />'."\n";
 
                 try { // So we pickup goodbye errors too.
                     $this->mailer->smtpClose();
                 } catch (\exception $exception_on_close) {
                     $this->debug_output_markup // Add to debug output.
-                      .= esc_html($exception_on_close->getMessage()).'<br />'."\n";
+                        .= esc_html($exception_on_close->getMessage()).'<br />'."\n";
                 }
                 $this->debug_output_markup .= ob_get_clean();
             }

@@ -54,10 +54,10 @@ class ExportOps extends AbsBase
         $file_name .= '.json'; // Use a JSON file extension.
 
         $output_file_args = [
-          'data'                => $data,
-          'file_name'           => $file_name,
-          'content_type'        => 'application/json; charset=UTF-8',
-          'content_disposition' => 'attachment',
+            'data'                => $data,
+            'file_name'           => $file_name,
+            'content_type'        => 'application/json; charset=UTF-8',
+            'content_disposition' => 'attachment',
         ];
         new OutputFile($output_file_args);
     }

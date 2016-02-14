@@ -65,7 +65,7 @@ class UtilsDate extends AbsBase
         $time   = (integer)$time; // Force integer.
 
         $format = $format ? $format // A specific format?
-          : get_option('date_format').' '.get_option('time_format');
+            : get_option('date_format').' '.get_option('time_format');
 
         $time = $time ? abs($time) : time(); // Default time.
         $time = $utc ? $time : $time + (get_option('gmt_offset') * 3600);

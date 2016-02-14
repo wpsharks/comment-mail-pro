@@ -36,30 +36,30 @@ class QueueEventLogInserter extends AbsBase
         parent::__construct();
 
         $defaults = [
-          'queue_id'     => 0,
-          'dby_queue_id' => 0,
+            'queue_id'     => 0,
+            'dby_queue_id' => 0,
 
-          'sub_id' => 0,
+            'sub_id' => 0,
 
-          'user_id'           => 0,
-          'post_id'           => 0,
-          'comment_parent_id' => 0,
-          'comment_id'        => 0,
+            'user_id'           => 0,
+            'post_id'           => 0,
+            'comment_parent_id' => 0,
+            'comment_id'        => 0,
 
-          'fname' => '',
-          'lname' => '',
-          'email' => '',
+            'fname' => '',
+            'lname' => '',
+            'email' => '',
 
-          'ip'      => '',
-          'region'  => '',
-          'country' => '',
+            'ip'      => '',
+            'region'  => '',
+            'country' => '',
 
-          'status' => '',
+            'status' => '',
 
-          'event'     => '',
-          'note_code' => '',
+            'event'     => '',
+            'note_code' => '',
 
-          'time' => time(),
+            'time' => time(),
         ];
         # IP, region, country; auto-fill from subscription data.
 

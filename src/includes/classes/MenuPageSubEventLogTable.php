@@ -29,11 +29,11 @@ class MenuPageSubEventLogTable extends MenuPageTableBase
         $plugin = plugin(); // Needed below.
 
         $args = [
-          'singular_name'  => 'sub_event_log_entry',
-          'plural_name'    => 'sub_event_log_entries',
-          'singular_label' => __('sub. event log entry', $plugin->text_domain),
-          'plural_label'   => __('sub. event log entries', $plugin->text_domain),
-          'screen'         => $plugin->menu_page_hooks[GLOBAL_NS.'_sub_event_log'],
+            'singular_name'  => 'sub_event_log_entry',
+            'plural_name'    => 'sub_event_log_entries',
+            'singular_label' => __('sub. event log entry', $plugin->text_domain),
+            'plural_label'   => __('sub. event log entries', $plugin->text_domain),
+            'screen'         => $plugin->menu_page_hooks[GLOBAL_NS.'_sub_event_log'],
         ];
         parent::__construct($args); // Parent constructor.
     }
@@ -54,51 +54,51 @@ class MenuPageSubEventLogTable extends MenuPageTableBase
         $plugin = plugin(); // Plugin class instance.
 
         $columns = [
-          'cb' => '1', // Include checkboxes.
-          'ID' => __('Entry', $plugin->text_domain),
+            'cb' => '1', // Include checkboxes.
+            'ID' => __('Entry', $plugin->text_domain),
 
-          'time'   => __('Time', $plugin->text_domain),
-          'sub_id' => __('Subscr. ID', $plugin->text_domain),
+            'time'   => __('Time', $plugin->text_domain),
+            'sub_id' => __('Subscr. ID', $plugin->text_domain),
 
-          'event'          => __('Event', $plugin->text_domain),
-          'oby_sub_id'     => __('Overwritten By', $plugin->text_domain),
-          'user_initiated' => __('User Initiated', $plugin->text_domain),
+            'event'          => __('Event', $plugin->text_domain),
+            'oby_sub_id'     => __('Overwritten By', $plugin->text_domain),
+            'user_initiated' => __('User Initiated', $plugin->text_domain),
 
-          'key_before' => __('Subscr. Key Before', $plugin->text_domain),
-          'key'        => __('Subscr. Key After', $plugin->text_domain),
+            'key_before' => __('Subscr. Key Before', $plugin->text_domain),
+            'key'        => __('Subscr. Key After', $plugin->text_domain),
 
-          'user_id_before' => __('WP User ID Before', $plugin->text_domain),
-          'user_id'        => __('WP User ID After', $plugin->text_domain),
+            'user_id_before' => __('WP User ID Before', $plugin->text_domain),
+            'user_id'        => __('WP User ID After', $plugin->text_domain),
 
-          'post_id_before' => __('Post ID Before', $plugin->text_domain),
-          'post_id'        => __('Post ID After', $plugin->text_domain),
+            'post_id_before' => __('Post ID Before', $plugin->text_domain),
+            'post_id'        => __('Post ID After', $plugin->text_domain),
 
-          'comment_id_before' => __('Comment ID Before', $plugin->text_domain),
-          'comment_id'        => __('Comment ID After', $plugin->text_domain),
+            'comment_id_before' => __('Comment ID Before', $plugin->text_domain),
+            'comment_id'        => __('Comment ID After', $plugin->text_domain),
 
-          'status_before' => __('Status Before', $plugin->text_domain),
-          'status'        => __('Status After', $plugin->text_domain),
+            'status_before' => __('Status Before', $plugin->text_domain),
+            'status'        => __('Status After', $plugin->text_domain),
 
-          'deliver_before' => __('Delivery Before', $plugin->text_domain),
-          'deliver'        => __('Delivery After', $plugin->text_domain),
+            'deliver_before' => __('Delivery Before', $plugin->text_domain),
+            'deliver'        => __('Delivery After', $plugin->text_domain),
 
-          'fname_before' => __('First Name Before', $plugin->text_domain),
-          'fname'        => __('First Name After', $plugin->text_domain),
+            'fname_before' => __('First Name Before', $plugin->text_domain),
+            'fname'        => __('First Name After', $plugin->text_domain),
 
-          'lname_before' => __('Last Name Before', $plugin->text_domain),
-          'lname'        => __('Last Name After', $plugin->text_domain),
+            'lname_before' => __('Last Name Before', $plugin->text_domain),
+            'lname'        => __('Last Name After', $plugin->text_domain),
 
-          'email_before' => __('Email Before', $plugin->text_domain),
-          'email'        => __('Email After', $plugin->text_domain),
+            'email_before' => __('Email Before', $plugin->text_domain),
+            'email'        => __('Email After', $plugin->text_domain),
 
-          'ip_before' => __('IP Address Before', $plugin->text_domain),
-          'ip'        => __('IP Address After', $plugin->text_domain),
+            'ip_before' => __('IP Address Before', $plugin->text_domain),
+            'ip'        => __('IP Address After', $plugin->text_domain),
 
-          'region_before' => __('IP Region Before', $plugin->text_domain),
-          'region'        => __('IP Region After', $plugin->text_domain),
+            'region_before' => __('IP Region Before', $plugin->text_domain),
+            'region'        => __('IP Region After', $plugin->text_domain),
 
-          'country_before' => __('IP Country Before', $plugin->text_domain),
-          'country'        => __('IP Country After', $plugin->text_domain),
+            'country_before' => __('IP Country Before', $plugin->text_domain),
+            'country'        => __('IP Country After', $plugin->text_domain),
         ];
         if (!$plugin->options['geo_location_tracking_enable']) {
             foreach ($columns as $_key => $_column) {
@@ -124,41 +124,41 @@ class MenuPageSubEventLogTable extends MenuPageTableBase
         $plugin = plugin(); // Plugin class instance.
 
         $columns = [
-          'oby_sub_id',
-          'user_initiated',
+            'oby_sub_id',
+            'user_initiated',
 
-          'key_before',
-          'key',
+            'key_before',
+            'key',
 
-          'user_id_before',
-          'user_id',
+            'user_id_before',
+            'user_id',
 
-          'post_id_before',
-          'post_id',
+            'post_id_before',
+            'post_id',
 
-          'comment_id_before',
-          'comment_id',
+            'comment_id_before',
+            'comment_id',
 
-          'deliver_before',
-          'deliver',
+            'deliver_before',
+            'deliver',
 
-          'fname_before',
-          'fname',
+            'fname_before',
+            'fname',
 
-          'lname_before',
-          'lname',
+            'lname_before',
+            'lname',
 
-          'email_before',
-          'email',
+            'email_before',
+            'email',
 
-          'ip_before',
-          'ip',
+            'ip_before',
+            'ip',
 
-          'region_before',
-          'region',
+            'region_before',
+            'region',
 
-          'country_before',
-          'country',
+            'country_before',
+            'country',
         ];
         if (!$plugin->options['geo_location_tracking_enable']) {
             foreach ($columns as $_key => $_column) {
@@ -182,17 +182,17 @@ class MenuPageSubEventLogTable extends MenuPageTableBase
     public static function getTheFtSearchableColumns()
     {
         return [
-          'key',
-          'fname',
-          'lname',
-          'email',
-          'ip',
+            'key',
+            'fname',
+            'lname',
+            'email',
+            'ip',
 
-          'key_before',
-          'fname_before',
-          'lname_before',
-          'email_before',
-          'ip_before',
+            'key_before',
+            'fname_before',
+            'lname_before',
+            'email_before',
+            'ip_before',
         ];
     }
 
@@ -206,7 +206,7 @@ class MenuPageSubEventLogTable extends MenuPageTableBase
     public static function getTheSearchableColumns()
     {
         return [
-          'ID',
+            'ID',
         ];
     }
 
@@ -238,12 +238,12 @@ class MenuPageSubEventLogTable extends MenuPageTableBase
         $plugin = plugin(); // Needed for translations.
 
         return [
-          'event::inserted'    => $plugin->utils_i18n->eventLabel('inserted', 'ucwords'),
-          'event::updated'     => $plugin->utils_i18n->eventLabel('updated', 'ucwords'),
-          'event::overwritten' => $plugin->utils_i18n->eventLabel('overwritten', 'ucwords'),
-          'event::purged'      => $plugin->utils_i18n->eventLabel('purged', 'ucwords'),
-          'event::cleaned'     => $plugin->utils_i18n->eventLabel('cleaned', 'ucwords'),
-          'event::deleted'     => $plugin->utils_i18n->eventLabel('deleted', 'ucwords'),
+            'event::inserted'    => $plugin->utils_i18n->eventLabel('inserted', 'ucwords'),
+            'event::updated'     => $plugin->utils_i18n->eventLabel('updated', 'ucwords'),
+            'event::overwritten' => $plugin->utils_i18n->eventLabel('overwritten', 'ucwords'),
+            'event::purged'      => $plugin->utils_i18n->eventLabel('purged', 'ucwords'),
+            'event::cleaned'     => $plugin->utils_i18n->eventLabel('cleaned', 'ucwords'),
+            'event::deleted'     => $plugin->utils_i18n->eventLabel('deleted', 'ucwords'),
         ];
     }
 
@@ -268,12 +268,12 @@ class MenuPageSubEventLogTable extends MenuPageTableBase
         $delete_url = $this->plugin->utils_url->tableBulkAction($this->plural_name, [$item->ID], 'delete');
 
         $row_actions = [
-          'delete' => '<a href="#"'.  // Depends on `menu-pages.js`.
-                      ' data-pmp-action="'.esc_attr($delete_url).'"'. // The action URL.
-                      ' data-pmp-confirmation="'.esc_attr($this->plugin->utils_i18n->logEntryJsDeletionConfirmationWarning()).'"'.
-                      ' title="'.esc_attr(__('Delete Sub. Event Log Entry', $this->plugin->text_domain)).'">'.
-                      '  <i class="fa fa-times-circle"></i> '.__('Delete', $this->plugin->text_domain).
-                      '</a>',
+            'delete' => '<a href="#"'.  // Depends on `menu-pages.js`.
+                        ' data-pmp-action="'.esc_attr($delete_url).'"'. // The action URL.
+                        ' data-pmp-confirmation="'.esc_attr($this->plugin->utils_i18n->logEntryJsDeletionConfirmationWarning()).'"'.
+                        ' title="'.esc_attr(__('Delete Sub. Event Log Entry', $this->plugin->text_domain)).'">'.
+                        '  <i class="fa fa-times-circle"></i> '.__('Delete', $this->plugin->text_domain).
+                        '</a>',
         ];
         return $id_info.$this->row_actions($row_actions);
     }
@@ -360,55 +360,55 @@ class MenuPageSubEventLogTable extends MenuPageTableBase
         $sql = "SELECT SQL_CALC_FOUND_ROWS *". // w/ calc enabled.
 
                ($clean_search_query && $orderby === 'relevance' // Fulltext search?
-                 ? ", MATCH(`".implode('`,`', array_map('esc_sql', $this->getFtSearchableColumns()))."`)".
-                   "  AGAINST('".esc_sql($clean_search_query)."' IN BOOLEAN MODE) AS `relevance`"
-                 : ''). // Otherwise, we can simply exclude this.
+                   ? ", MATCH(`".implode('`,`', array_map('esc_sql', $this->getFtSearchableColumns()))."`)".
+                     "  AGAINST('".esc_sql($clean_search_query)."' IN BOOLEAN MODE) AS `relevance`"
+                   : ''). // Otherwise, we can simply exclude this.
 
                " FROM `".esc_sql($this->plugin->utils_db->prefix().'sub_event_log')."`".
 
                " WHERE 1=1". // Default where clause.
 
                ($sub_ids_in_search_query || $sub_emails_in_search_query || $user_ids_in_search_query || $post_ids_in_search_query || $comment_ids_in_search_query
-                 ? " AND (".$this->plugin->utils_string->trim( // Trim the following...
+                   ? " AND (".$this->plugin->utils_string->trim( // Trim the following...
 
-                   ($sub_ids_in_search_query // Search both fields here.
-                     ? " ".$and_or." (`sub_id` IN('".implode("','", array_map('esc_sql', $sub_ids_in_search_query))."')".
-                       "               OR `oby_sub_id` IN('".implode("','", array_map('esc_sql', $sub_ids_in_search_query))."'))" : '').
+                       ($sub_ids_in_search_query // Search both fields here.
+                           ? " ".$and_or." (`sub_id` IN('".implode("','", array_map('esc_sql', $sub_ids_in_search_query))."')".
+                             "               OR `oby_sub_id` IN('".implode("','", array_map('esc_sql', $sub_ids_in_search_query))."'))" : '').
 
-                   ($sub_emails_in_search_query // Search both fields here.
-                     ? " ".$and_or." (`email` IN('".implode("','", array_map('esc_sql', $sub_emails_in_search_query))."')".
-                       "               OR `email_before` IN('".implode("','", array_map('esc_sql', $sub_emails_in_search_query))."'))" : '').
+                       ($sub_emails_in_search_query // Search both fields here.
+                           ? " ".$and_or." (`email` IN('".implode("','", array_map('esc_sql', $sub_emails_in_search_query))."')".
+                             "               OR `email_before` IN('".implode("','", array_map('esc_sql', $sub_emails_in_search_query))."'))" : '').
 
-                   ($user_ids_in_search_query // Search both fields here.
-                     ? " ".$and_or." (`user_id` IN('".implode("','", array_map('esc_sql', $user_ids_in_search_query))."')".
-                       "              OR `user_id_before` IN('".implode("','", array_map('esc_sql', $user_ids_in_search_query))."'))" : '').
+                       ($user_ids_in_search_query // Search both fields here.
+                           ? " ".$and_or." (`user_id` IN('".implode("','", array_map('esc_sql', $user_ids_in_search_query))."')".
+                             "              OR `user_id_before` IN('".implode("','", array_map('esc_sql', $user_ids_in_search_query))."'))" : '').
 
-                   ($post_ids_in_search_query // Search both fields here.
-                     ? " ".$and_or." (`post_id` IN('".implode("','", array_map('esc_sql', $post_ids_in_search_query))."')".
-                       "              OR `post_id_before` IN('".implode("','", array_map('esc_sql', $post_ids_in_search_query))."'))" : '').
+                       ($post_ids_in_search_query // Search both fields here.
+                           ? " ".$and_or." (`post_id` IN('".implode("','", array_map('esc_sql', $post_ids_in_search_query))."')".
+                             "              OR `post_id_before` IN('".implode("','", array_map('esc_sql', $post_ids_in_search_query))."'))" : '').
 
-                   ($comment_ids_in_search_query // Search both fields here.
-                     ? " ".$and_or." (`comment_id` IN('".implode("','", array_map('esc_sql', $comment_ids_in_search_query))."')".
-                       "              OR `comment_id_before` IN('".implode("','", array_map('esc_sql', $comment_ids_in_search_query))."'))" : '')
+                       ($comment_ids_in_search_query // Search both fields here.
+                           ? " ".$and_or." (`comment_id` IN('".implode("','", array_map('esc_sql', $comment_ids_in_search_query))."')".
+                             "              OR `comment_id_before` IN('".implode("','", array_map('esc_sql', $comment_ids_in_search_query))."'))" : '')
 
-                   , '', 'AND OR'
-                 ).")" : ''). // Trims `AND OR` leftover after concatenation occurs.
+                       , '', 'AND OR'
+                   ).")" : ''). // Trims `AND OR` leftover after concatenation occurs.
 
                ($statuses_in_search_query // Specific statuses?
-                 ? " AND `status` IN('".implode("','", array_map('esc_sql', $statuses_in_search_query))."')" : '').
+                   ? " AND `status` IN('".implode("','", array_map('esc_sql', $statuses_in_search_query))."')" : '').
 
                ($events_in_search_query // Specific events?
-                 ? " AND `event` IN('".implode("','", array_map('esc_sql', $events_in_search_query))."')" : '').
+                   ? " AND `event` IN('".implode("','", array_map('esc_sql', $events_in_search_query))."')" : '').
 
                ($clean_search_query // A fulltext search?
-                 ? " AND (MATCH(`".implode('`,`', array_map('esc_sql', $this->getFtSearchableColumns()))."`)".
-                   "     AGAINST('".esc_sql($clean_search_query)."' IN BOOLEAN MODE)".
-                   "     ".$this->prepareSearchableOrCols().")"
-                 : ''). // Otherwise, we can simply exclude this.
+                   ? " AND (MATCH(`".implode('`,`', array_map('esc_sql', $this->getFtSearchableColumns()))."`)".
+                     "     AGAINST('".esc_sql($clean_search_query)."' IN BOOLEAN MODE)".
+                     "     ".$this->prepareSearchableOrCols().")"
+                   : ''). // Otherwise, we can simply exclude this.
 
                ($orderby // Ordering by a specific column, or relevance?
-                 ? " ORDER BY `".esc_sql($orderby)."`".($order ? " ".esc_sql($order) : '')
-                 : ''). // Otherwise, we can simply exclude this.
+                   ? " ORDER BY `".esc_sql($orderby)."`".($order ? " ".esc_sql($order) : '')
+                   : ''). // Otherwise, we can simply exclude this.
 
                " LIMIT ".esc_sql($current_offset).",".esc_sql($per_page);
 
@@ -461,7 +461,7 @@ class MenuPageSubEventLogTable extends MenuPageTableBase
     protected function get_bulk_actions()
     {
         return [
-          'delete' => __('Delete', $this->plugin->text_domain),
+            'delete' => __('Delete', $this->plugin->text_domain),
         ];
     }
 

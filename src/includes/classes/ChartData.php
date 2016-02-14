@@ -49,10 +49,10 @@ class ChartData extends AbsBase
      * @since 141111 First documented version.
      */
     protected $colors = [
-      'fillColor'       => 'rgba(51, 158, 43, 1)',
-      'strokeColor'     => 'rgba(25, 79, 22, 1)',
-      'highlightFill'   => 'rgba(52, 96, 152, 1)',
-      'highlightStroke' => 'rgba(23, 44, 72, 1)',
+        'fillColor'       => 'rgba(51, 158, 43, 1)',
+        'strokeColor'     => 'rgba(25, 79, 22, 1)',
+        'highlightFill'   => 'rgba(52, 96, 152, 1)',
+        'highlightStroke' => 'rgba(23, 44, 72, 1)',
     ];
 
     /**
@@ -61,10 +61,10 @@ class ChartData extends AbsBase
      * @since 141111 First documented version.
      */
     protected $primary_colors = [
-      'fillColor'       => 'rgba(52, 96, 152, .5)',
-      'strokeColor'     => 'rgba(52, 96, 152, .7)',
-      'highlightFill'   => 'rgba(52, 96, 152, .7)',
-      'highlightStroke' => 'rgba(52, 96, 152, 1)',
+        'fillColor'       => 'rgba(52, 96, 152, .5)',
+        'strokeColor'     => 'rgba(52, 96, 152, .7)',
+        'highlightFill'   => 'rgba(52, 96, 152, .7)',
+        'highlightStroke' => 'rgba(52, 96, 152, 1)',
     ];
 
     /**
@@ -73,10 +73,10 @@ class ChartData extends AbsBase
      * @since 141111 First documented version.
      */
     protected $secondary_colors = [
-      'fillColor'       => 'rgba(51, 158, 43, .5)',
-      'strokeColor'     => 'rgba(51, 158, 43, .7)',
-      'highlightFill'   => 'rgba(51, 158, 43, .7)',
-      'highlightStroke' => 'rgba(51, 158, 43, 1)',
+        'fillColor'       => 'rgba(51, 158, 43, .5)',
+        'strokeColor'     => 'rgba(51, 158, 43, .7)',
+        'highlightFill'   => 'rgba(51, 158, 43, .7)',
+        'highlightStroke' => 'rgba(51, 158, 43, 1)',
     ];
 
     /**
@@ -85,7 +85,7 @@ class ChartData extends AbsBase
      * @since 141111 First documented version.
      */
     protected $gradient_colors = [
-      '#4EAD47', '#307D27', '#5A85BE', '#346098',
+        '#4EAD47', '#307D27', '#5A85BE', '#346098',
     ];
 
     /**
@@ -103,16 +103,16 @@ class ChartData extends AbsBase
         parent::__construct();
 
         $default_request_args = [
-          'view' => '',
+            'view' => '',
 
-          'type'    => '',
-          'post_id' => '',
-          'exclude' => [],
+            'type'    => '',
+            'post_id' => '',
+            'exclude' => [],
 
-          'from' => '',
-          'to'   => '',
+            'from' => '',
+            'to'   => '',
 
-          'by' => '',
+            'by' => '',
         ];
         $request_args         = array_merge($default_request_args, $request_args);
         $request_args         = array_intersect_key($request_args, $default_request_args);
@@ -320,7 +320,7 @@ class ChartData extends AbsBase
                     " AND `status` IN('subscribed')".
 
                     (in_array('systematics', $this->chart->exclude, true)
-                      ? " AND `user_initiated` > '0'" : ''). // User-initiated only.
+                        ? " AND `user_initiated` > '0'" : ''). // User-initiated only.
 
                     " GROUP BY `sub_id`". // Unique subs only.
 
@@ -334,24 +334,24 @@ class ChartData extends AbsBase
         unset($_time_period, $_oby_sub_ids, $_sql); // Housekeeping.
 
         return [
-          'data'    => [
-            'labels'   => $labels,
-            'datasets' => [
-              array_merge(
-                $this->colors, [
-                  'label' => __('Total Subscriptions', $this->plugin->text_domain),
-                  'data'  => $data,
-                ]
-              ),
+            'data'    => [
+                'labels'   => $labels,
+                'datasets' => [
+                    array_merge(
+                        $this->colors, [
+                            'label' => __('Total Subscriptions', $this->plugin->text_domain),
+                            'data'  => $data,
+                        ]
+                    ),
+                ],
             ],
-          ],
-          'options' => [
-            'scaleLabel' => '<%=value%>',
+            'options' => [
+                'scaleLabel' => '<%=value%>',
 
-            'tooltipTemplate' => '<%=label%>: <%=value%> '.
-                                 '<%if(parseInt(value) < 1 || parseInt(value) > 1){%>'.__('subscriptions', $this->plugin->text_domain).'<%}%>'.
-                                 '<%if(parseInt(value) === 1){%>'.__('subscription', $this->plugin->text_domain).'<%}%>',
-          ],
+                'tooltipTemplate' => '<%=label%>: <%=value%> '.
+                                     '<%if(parseInt(value) < 1 || parseInt(value) > 1){%>'.__('subscriptions', $this->plugin->text_domain).'<%}%>'.
+                                     '<%if(parseInt(value) === 1){%>'.__('subscription', $this->plugin->text_domain).'<%}%>',
+            ],
         ];
     }
 
@@ -367,42 +367,42 @@ class ChartData extends AbsBase
     public function subsOverviewEventSubscribedAudienceByGeoCountry()
     {
         $data            = [
-          [ // Initialize column headers.
-            __('Country', $this->plugin->text_domain),
-            __('Total Subscriptions', $this->plugin->text_domain),
-            __('Percentage', $this->plugin->text_domain),
-          ],
+            [ // Initialize column headers.
+              __('Country', $this->plugin->text_domain),
+              __('Total Subscriptions', $this->plugin->text_domain),
+              __('Percentage', $this->plugin->text_domain),
+            ],
         ];
         $grand_total     = 0; // Initialize.
         $new_sub_ids_sql = $this->newSubIdsSql($this->chart->from_time, $this->chart->to_time);
 
         $sql  // Counts country totals by distinct `sub_id`; ordered by popularity.
 
-          = "SELECT `country`, `sub_id`, COUNT(DISTINCT(`sub_id`)) AS `total_subs`".
-            " FROM `".esc_sql($this->plugin->utils_db->prefix().'sub_event_log')."`".
+            = "SELECT `country`, `sub_id`, COUNT(DISTINCT(`sub_id`)) AS `total_subs`".
+              " FROM `".esc_sql($this->plugin->utils_db->prefix().'sub_event_log')."`".
 
-            " WHERE 1=1". // Initialize where clause.
+              " WHERE 1=1". // Initialize where clause.
 
-            " AND `sub_id` IN(".$new_sub_ids_sql.")".
-            " AND `status` IN('subscribed')".
-            " AND `country` != ''".
+              " AND `sub_id` IN(".$new_sub_ids_sql.")".
+              " AND `status` IN('subscribed')".
+              " AND `country` != ''".
 
-            (in_array('systematics', $this->chart->exclude, true)
-              ? " AND `user_initiated` > '0'" : ''). // User-initiated only.
+              (in_array('systematics', $this->chart->exclude, true)
+                  ? " AND `user_initiated` > '0'" : ''). // User-initiated only.
 
-            " GROUP BY `country`". // Unique countries only.
+              " GROUP BY `country`". // Unique countries only.
 
-            " ORDER BY `total_subs` DESC".
+              " ORDER BY `total_subs` DESC".
 
-            " LIMIT 400"; // 400 max allowed by Google; should be plenty.
+              " LIMIT 400"; // 400 max allowed by Google; should be plenty.
 
         if (($results = $this->plugin->utils_db->wp->get_results($sql))) {
             foreach (($results = $this->plugin->utils_db->typifyDeep($results)) as $_result) {
                 $_result->total_subs = (integer)$_result->total_subs;
                 $data[]              = [ // Adds a new data row for the table we are building.
                                          [
-                                           'v' => strtoupper($_result->country), // Value and full name.
-                                           'f' => $this->plugin->utils_map->countryName($_result->country),
+                                             'v' => strtoupper($_result->country), // Value and full name.
+                                             'f' => $this->plugin->utils_map->countryName($_result->country),
                                          ],
                                          $_result->total_subs, '', // To be filled after.
                 ];
@@ -418,13 +418,13 @@ class ChartData extends AbsBase
         unset($_key, $_dataset); // Housekeeping.
 
         return [
-          'data'    => $data,
-          'options' => [
-            'region'      => 'world',
-            'displayMode' => 'regions',
-            'width'       => '100%', 'height' => 'auto',
-            'colors'      => $this->gradient_colors,
-          ],
+            'data'    => $data,
+            'options' => [
+                'region'      => 'world',
+                'displayMode' => 'regions',
+                'width'       => '100%', 'height' => 'auto',
+                'colors'      => $this->gradient_colors,
+            ],
         ];
     }
 
@@ -449,11 +449,11 @@ class ChartData extends AbsBase
         $country_lc = strtolower($country);
 
         $data            = [
-          [ // Initialize column headers.
-            __('Region', $this->plugin->text_domain),
-            __('Total Subscriptions', $this->plugin->text_domain),
-            __('Percentage', $this->plugin->text_domain),
-          ],
+            [ // Initialize column headers.
+              __('Region', $this->plugin->text_domain),
+              __('Total Subscriptions', $this->plugin->text_domain),
+              __('Percentage', $this->plugin->text_domain),
+            ],
         ];
         $grand_total     = 0; // Initialize.
         $new_sub_ids_sql = $this->newSubIdsSql($this->chart->from_time, $this->chart->to_time);
@@ -461,33 +461,33 @@ class ChartData extends AbsBase
 
         $sql  // Counts country totals by distinct `sub_id`; ordered by popularity.
 
-          = "SELECT `country`, `region`, `sub_id`, COUNT(DISTINCT(`sub_id`)) AS `total_subs`".
-            " FROM `".esc_sql($this->plugin->utils_db->prefix().'sub_event_log')."`".
+            = "SELECT `country`, `region`, `sub_id`, COUNT(DISTINCT(`sub_id`)) AS `total_subs`".
+              " FROM `".esc_sql($this->plugin->utils_db->prefix().'sub_event_log')."`".
 
-            " WHERE 1=1". // Initialize where clause.
+              " WHERE 1=1". // Initialize where clause.
 
-            " AND `sub_id` IN(".$new_sub_ids_sql.")".
-            " AND `status` IN('subscribed')".
+              " AND `sub_id` IN(".$new_sub_ids_sql.")".
+              " AND `status` IN('subscribed')".
 
-            " AND `region` IN('".implode("','", array_map('esc_sql', $region_codes))."')".
-            " AND `country` = '".esc_sql($country)."'".
+              " AND `region` IN('".implode("','", array_map('esc_sql', $region_codes))."')".
+              " AND `country` = '".esc_sql($country)."'".
 
-            (in_array('systematics', $this->chart->exclude, true)
-              ? " AND `user_initiated` > '0'" : ''). // User-initiated only.
+              (in_array('systematics', $this->chart->exclude, true)
+                  ? " AND `user_initiated` > '0'" : ''). // User-initiated only.
 
-            " GROUP BY `country`, `region`". // Unique regions.
+              " GROUP BY `country`, `region`". // Unique regions.
 
-            " ORDER BY `total_subs` DESC".
+              " ORDER BY `total_subs` DESC".
 
-            " LIMIT 400"; // 400 max allowed by Google; should be plenty.
+              " LIMIT 400"; // 400 max allowed by Google; should be plenty.
 
         if (($results = $this->plugin->utils_db->wp->get_results($sql))) {
             foreach (($results = $this->plugin->utils_db->typifyDeep($results)) as $_result) {
                 $_result->total_subs = (integer)$_result->total_subs;
                 $data[]              = [ // Adds a new data row for the table we are building.
                                          [
-                                           'v' => strtoupper($_result->country.'-'.$_result->region), // Value and full name.
-                                           'f' => $this->plugin->utils_map->{$country_lc.'_region_name'}($_result->region).', '.$_result->country,
+                                             'v' => strtoupper($_result->country.'-'.$_result->region), // Value and full name.
+                                             'f' => $this->plugin->utils_map->{$country_lc.'_region_name'}($_result->region).', '.$_result->country,
                                          ],
                                          $_result->total_subs, '', // To be filled after.
                 ];
@@ -503,14 +503,14 @@ class ChartData extends AbsBase
         unset($_key, $_dataset); // Housekeeping.
 
         return [
-          'data'    => $data,
-          'options' => [
-            'region'      => $country,
-            'resolution'  => 'provinces',
-            'displayMode' => 'regions',
-            'width'       => '100%', 'height' => 'auto',
-            'colors'      => $this->gradient_colors,
-          ],
+            'data'    => $data,
+            'options' => [
+                'region'      => $country,
+                'resolution'  => 'provinces',
+                'displayMode' => 'regions',
+                'width'       => '100%', 'height' => 'auto',
+                'colors'      => $this->gradient_colors,
+            ],
         ];
     }
 
@@ -549,7 +549,7 @@ class ChartData extends AbsBase
                      " AND `status` IN('".implode("','", array_map('esc_sql', $status))."')".
 
                      (in_array('systematics', $this->chart->exclude, true)
-                       ? " AND `user_initiated` > '0'" : ''). // User-initiated only.
+                         ? " AND `user_initiated` > '0'" : ''). // User-initiated only.
 
                      " GROUP BY `sub_id`". // Unique subs only.
 
@@ -573,29 +573,29 @@ class ChartData extends AbsBase
         unset($_key); // Housekeeping.
 
         return [
-          'data'    => [
-            'labels'   => $labels,
-            'datasets' => [
-              array_merge(
-                $this->secondary_colors, [
-                  'label' => __('New Subscriptions', $this->plugin->text_domain),
-                  'data'  => $data1,
-                ]
-              ),
-              array_merge(
-                $this->primary_colors, [
-                  'label' => sprintf(__('Total %1$s', $this->plugin->text_domain), $label),
-                  'data'  => $data2, 'percent' => $percent,
-                ]
-              ),
+            'data'    => [
+                'labels'   => $labels,
+                'datasets' => [
+                    array_merge(
+                        $this->secondary_colors, [
+                            'label' => __('New Subscriptions', $this->plugin->text_domain),
+                            'data'  => $data1,
+                        ]
+                    ),
+                    array_merge(
+                        $this->primary_colors, [
+                            'label' => sprintf(__('Total %1$s', $this->plugin->text_domain), $label),
+                            'data'  => $data2, 'percent' => $percent,
+                        ]
+                    ),
+                ],
             ],
-          ],
-          'options' => [
-            'scaleLabel' => '<%=value%>',
+            'options' => [
+                'scaleLabel' => '<%=value%>',
 
-            'multiTooltipTemplate' => '<%=datasetLabel%>: <%=value%>'.
-                                      '<%if(typeof percent === "number"){%> (<%=percent%>%)<%}%>',
-          ],
+                'multiTooltipTemplate' => '<%=datasetLabel%>: <%=value%>'.
+                                          '<%if(typeof percent === "number"){%> (<%=percent%>%)<%}%>',
+            ],
         ];
     }
 
@@ -618,23 +618,23 @@ class ChartData extends AbsBase
 
         $sql // Counts post totals by distinct `sub_id`; ordered by popularity.
 
-          = "SELECT `post_id`, `sub_id`, COUNT(DISTINCT(`sub_id`)) AS `total_subs`".
-            " FROM `".esc_sql($this->plugin->utils_db->prefix().'sub_event_log')."`".
+            = "SELECT `post_id`, `sub_id`, COUNT(DISTINCT(`sub_id`)) AS `total_subs`".
+              " FROM `".esc_sql($this->plugin->utils_db->prefix().'sub_event_log')."`".
 
-            " WHERE 1=1". // Initialize where clause.
+              " WHERE 1=1". // Initialize where clause.
 
-            " AND `sub_id` IN(".$new_sub_ids_sql.")".
-            " AND `status` IN('subscribed')".
+              " AND `sub_id` IN(".$new_sub_ids_sql.")".
+              " AND `status` IN('subscribed')".
 
-            (in_array('systematics', $this->chart->exclude, true)
-              ? " AND `user_initiated` > '0'" : ''). // User-initiated only.
+              (in_array('systematics', $this->chart->exclude, true)
+                  ? " AND `user_initiated` > '0'" : ''). // User-initiated only.
 
-            " GROUP BY `post_id`". // Unique posts only.
+              " GROUP BY `post_id`". // Unique posts only.
 
-            " ORDER BY `total_subs` ". // Most or least?
-            ($popularity === 'least' ? 'ASC' : 'DESC').
+              " ORDER BY `total_subs` ". // Most or least?
+              ($popularity === 'least' ? 'ASC' : 'DESC').
 
-            " LIMIT 25"; // 25 max.
+              " LIMIT 25"; // 25 max.
 
         if (($results = $this->plugin->utils_db->wp->get_results($sql))) {
             foreach (($results = $this->plugin->utils_db->typifyDeep($results)) as $_result) {
@@ -656,24 +656,24 @@ class ChartData extends AbsBase
             $data[] = 0; // Must have something.
         }
         return [
-          'data'    => [
-            'labels'   => $labels,
-            'datasets' => [
-              array_merge(
-                $this->colors, [
-                  'label' => __('Total Subscriptions', $this->plugin->text_domain),
-                  'data'  => $data,
-                ]
-              ),
+            'data'    => [
+                'labels'   => $labels,
+                'datasets' => [
+                    array_merge(
+                        $this->colors, [
+                            'label' => __('Total Subscriptions', $this->plugin->text_domain),
+                            'data'  => $data,
+                        ]
+                    ),
+                ],
             ],
-          ],
-          'options' => [
-            'scaleLabel' => '<%=value%>',
+            'options' => [
+                'scaleLabel' => '<%=value%>',
 
-            'tooltipTemplate' => '<%=label%>: <%=value%> '.
-                                 '<%if(parseInt(value) < 1 || parseInt(value) > 1){%>'.__('subscriptions', $this->plugin->text_domain).'<%}%>'.
-                                 '<%if(parseInt(value) === 1){%>'.__('subscription', $this->plugin->text_domain).'<%}%>',
-          ],
+                'tooltipTemplate' => '<%=label%>: <%=value%> '.
+                                     '<%if(parseInt(value) < 1 || parseInt(value) > 1){%>'.__('subscriptions', $this->plugin->text_domain).'<%}%>'.
+                                     '<%if(parseInt(value) === 1){%>'.__('subscription', $this->plugin->text_domain).'<%}%>',
+            ],
         ];
     }
 
@@ -694,10 +694,10 @@ class ChartData extends AbsBase
         $to_time   = (integer)$to_time;
 
         $default_args = [
-          'calc_enable'         => false,
-          'check_post_id'       => true,
-          'check_exclusions'    => true,
-          'sub_select_optimize' => true,
+            'calc_enable'         => false,
+            'check_post_id'       => true,
+            'check_exclusions'    => true,
+            'sub_select_optimize' => true,
         ];
         $args         = array_merge($default_args, $args);
         $args         = array_intersect_key($args, $default_args);
@@ -714,35 +714,35 @@ class ChartData extends AbsBase
 
         return // Sub IDs that were inserted during this timeframe.
 
-          ($sub_select_optimize // Optimize?
-            ? "SELECT `sub_id` FROM (" : "").
-          // ↑ See: <http://jas.xyz/1I52mVE>
+            ($sub_select_optimize // Optimize?
+                ? "SELECT `sub_id` FROM (" : "").
+            // ↑ See: <http://jas.xyz/1I52mVE>
 
-          "SELECT".($calc_enable ? " SQL_CALC_FOUND_ROWS" : '')." `sub_id`".
-          " FROM `".esc_sql($this->plugin->utils_db->prefix().'sub_event_log')."`".
+            "SELECT".($calc_enable ? " SQL_CALC_FOUND_ROWS" : '')." `sub_id`".
+            " FROM `".esc_sql($this->plugin->utils_db->prefix().'sub_event_log')."`".
 
-          " WHERE 1=1". // Initialize where clause.
+            " WHERE 1=1". // Initialize where clause.
 
-          ($check_post_id && $this->chart->post_id // Specific post ID?
-            ? " AND `post_id` = '".esc_sql($this->chart->post_id)."'" : '').
+            ($check_post_id && $this->chart->post_id // Specific post ID?
+                ? " AND `post_id` = '".esc_sql($this->chart->post_id)."'" : '').
 
-          " AND `event` IN('inserted')". // New insertions only.
+            " AND `event` IN('inserted')". // New insertions only.
 
-          ($check_exclusions && in_array('systematics', $this->chart->exclude, true)
-            ? " AND `user_initiated` > '0'" : ''). // User-initiated only.
+            ($check_exclusions && in_array('systematics', $this->chart->exclude, true)
+                ? " AND `user_initiated` > '0'" : ''). // User-initiated only.
 
-          " AND `time` BETWEEN '".esc_sql($from_time)."' AND '".esc_sql($to_time)."'".
+            " AND `time` BETWEEN '".esc_sql($from_time)."' AND '".esc_sql($to_time)."'".
 
-          " AND `sub_id` NOT IN(".$oby_sub_ids_sql.")". // Exclude these.
-          // See notes below regarding these overwritten exclusions.
+            " AND `sub_id` NOT IN(".$oby_sub_ids_sql.")". // Exclude these.
+            // See notes below regarding these overwritten exclusions.
 
-          " GROUP BY `sub_id`". // Unique subs only (always).
+            " GROUP BY `sub_id`". // Unique subs only (always).
 
-          ($calc_enable  // Only need one to check?
-            ? " LIMIT 1" : '').
+            ($calc_enable  // Only need one to check?
+                ? " LIMIT 1" : '').
 
-          ($sub_select_optimize // Optimizing?
-            ? ") AS `sub_id`" : "");
+            ($sub_select_optimize // Optimizing?
+                ? ") AS `sub_id`" : "");
     }
 
     /**
@@ -783,23 +783,23 @@ class ChartData extends AbsBase
 
         return // Sub IDs that were overwritten during this timeframe.
 
-          ($sub_select_optimize // Optimize?
-            ? "SELECT `sub_id` FROM (" : "").
-          // ↑ See: <http://jas.xyz/1I52mVE>
+            ($sub_select_optimize // Optimize?
+                ? "SELECT `sub_id` FROM (" : "").
+            // ↑ See: <http://jas.xyz/1I52mVE>
 
-          "SELECT `sub_id`". // Need the sub IDs for sub-queries.
-          " FROM `".esc_sql($this->plugin->utils_db->prefix().'sub_event_log')."`".
+            "SELECT `sub_id`". // Need the sub IDs for sub-queries.
+            " FROM `".esc_sql($this->plugin->utils_db->prefix().'sub_event_log')."`".
 
-          " WHERE 1=1". // Initialize where clause.
+            " WHERE 1=1". // Initialize where clause.
 
-          " AND `event` = 'overwritten' AND `oby_sub_id` > '0'".
+            " AND `event` = 'overwritten' AND `oby_sub_id` > '0'".
 
-          " AND `time` BETWEEN '".esc_sql($from_time)."' AND '".esc_sql($to_time)."'".
+            " AND `time` BETWEEN '".esc_sql($from_time)."' AND '".esc_sql($to_time)."'".
 
-          " GROUP BY `sub_id`". // Unique subs only (always).
+            " GROUP BY `sub_id`". // Unique subs only (always).
 
-          ($sub_select_optimize // Optimizing?
-            ? ") AS `sub_id`" : "");
+            ($sub_select_optimize // Optimizing?
+                ? ") AS `sub_id`" : "");
     }
 
     /**
@@ -903,24 +903,24 @@ class ChartData extends AbsBase
         unset($_time_period, $_oby_sub_ids, $_sql); // Housekeeping.
 
         return [
-          'data'    => [
-            'labels'   => $labels,
-            'datasets' => [
-              array_merge(
-                $this->colors, [
-                  'label' => __('Total Processed Notifications', $this->plugin->text_domain),
-                  'data'  => $data,
-                ]
-              ),
+            'data'    => [
+                'labels'   => $labels,
+                'datasets' => [
+                    array_merge(
+                        $this->colors, [
+                            'label' => __('Total Processed Notifications', $this->plugin->text_domain),
+                            'data'  => $data,
+                        ]
+                    ),
+                ],
             ],
-          ],
-          'options' => [
-            'scaleLabel' => '<%=value%>',
+            'options' => [
+                'scaleLabel' => '<%=value%>',
 
-            'tooltipTemplate' => '<%=label%>: <%=value%> '.
-                                 '<%if(parseInt(value) < 1 || parseInt(value) > 1){%>'.__('notifications', $this->plugin->text_domain).'<%}%>'.
-                                 '<%if(parseInt(value) === 1){%>'.__('notification', $this->plugin->text_domain).'<%}%>',
-          ],
+                'tooltipTemplate' => '<%=label%>: <%=value%> '.
+                                     '<%if(parseInt(value) < 1 || parseInt(value) > 1){%>'.__('notifications', $this->plugin->text_domain).'<%}%>'.
+                                     '<%if(parseInt(value) === 1){%>'.__('notification', $this->plugin->text_domain).'<%}%>',
+            ],
         ];
     }
 
@@ -980,29 +980,29 @@ class ChartData extends AbsBase
         unset($_key); // Housekeeping.
 
         return [
-          'data'    => [
-            'labels'   => $labels,
-            'datasets' => [
-              array_merge(
-                $this->secondary_colors, [
-                  'label' => __('Queued Notifications', $this->plugin->text_domain),
-                  'data'  => $data1,
-                ]
-              ),
-              array_merge(
-                $this->primary_colors, [
-                  'label' => sprintf(__('Total %1$s', $this->plugin->text_domain), $label),
-                  'data'  => $data2, 'percent' => $percent,
-                ]
-              ),
+            'data'    => [
+                'labels'   => $labels,
+                'datasets' => [
+                    array_merge(
+                        $this->secondary_colors, [
+                            'label' => __('Queued Notifications', $this->plugin->text_domain),
+                            'data'  => $data1,
+                        ]
+                    ),
+                    array_merge(
+                        $this->primary_colors, [
+                            'label' => sprintf(__('Total %1$s', $this->plugin->text_domain), $label),
+                            'data'  => $data2, 'percent' => $percent,
+                        ]
+                    ),
+                ],
             ],
-          ],
-          'options' => [
-            'scaleLabel' => '<%=value%>',
+            'options' => [
+                'scaleLabel' => '<%=value%>',
 
-            'multiTooltipTemplate' => '<%=datasetLabel%>: <%=value%>'.
-                                      '<%if(typeof percent === "number"){%> (<%=percent%>%)<%}%>',
-          ],
+                'multiTooltipTemplate' => '<%=datasetLabel%>: <%=value%>'.
+                                          '<%if(typeof percent === "number"){%> (<%=percent%>%)<%}%>',
+            ],
         ];
     }
 
@@ -1023,10 +1023,10 @@ class ChartData extends AbsBase
         $to_time   = (integer)$to_time;
 
         $default_args = [
-          'calc_enable'         => false,
-          'check_post_id'       => true,
-          'check_exclusions'    => true,
-          'sub_select_optimize' => true,
+            'calc_enable'         => false,
+            'check_post_id'       => true,
+            'check_exclusions'    => true,
+            'sub_select_optimize' => true,
         ];
         $args         = array_merge($default_args, $args);
         $args         = array_intersect_key($args, $default_args);
@@ -1043,30 +1043,30 @@ class ChartData extends AbsBase
 
         return // Queue IDs that were processed during this timeframe.
 
-          ($sub_select_optimize // Optimize?
-            ? "SELECT `queue_id` FROM (" : "").
-          // ↑ See: <http://jas.xyz/1I52mVE>
+            ($sub_select_optimize // Optimize?
+                ? "SELECT `queue_id` FROM (" : "").
+            // ↑ See: <http://jas.xyz/1I52mVE>
 
-          "SELECT".($calc_enable ? " SQL_CALC_FOUND_ROWS" : '')." `queue_id`".
-          " FROM `".esc_sql($this->plugin->utils_db->prefix().'queue_event_log')."`".
+            "SELECT".($calc_enable ? " SQL_CALC_FOUND_ROWS" : '')." `queue_id`".
+            " FROM `".esc_sql($this->plugin->utils_db->prefix().'queue_event_log')."`".
 
-          " WHERE 1=1". // Initialize where clause.
+            " WHERE 1=1". // Initialize where clause.
 
-          ($check_post_id && $this->chart->post_id // Specific post ID?
-            ? " AND `post_id` = '".esc_sql($this->chart->post_id)."'" : '').
+            ($check_post_id && $this->chart->post_id // Specific post ID?
+                ? " AND `post_id` = '".esc_sql($this->chart->post_id)."'" : '').
 
-          " AND `time` BETWEEN '".esc_sql($from_time)."' AND '".esc_sql($to_time)."'".
+            " AND `time` BETWEEN '".esc_sql($from_time)."' AND '".esc_sql($to_time)."'".
 
-          " AND `queue_id` NOT IN(".$dby_queue_ids_sql.")". // Exclude these.
-          // See notes below regarding these overwritten exclusions.
+            " AND `queue_id` NOT IN(".$dby_queue_ids_sql.")". // Exclude these.
+            // See notes below regarding these overwritten exclusions.
 
-          " GROUP BY `queue_id`". // Unique entries only (always).
+            " GROUP BY `queue_id`". // Unique entries only (always).
 
-          ($calc_enable  // Only need one to check?
-            ? " LIMIT 1" : '').
+            ($calc_enable  // Only need one to check?
+                ? " LIMIT 1" : '').
 
-          ($sub_select_optimize // Optimizing?
-            ? ") AS `queue_id`" : "");
+            ($sub_select_optimize // Optimizing?
+                ? ") AS `queue_id`" : "");
     }
 
     /**
@@ -1098,7 +1098,7 @@ class ChartData extends AbsBase
         $to_time   = (integer)$to_time;
 
         $default_args = [ // Default arguments.
-          'sub_select_optimize' => true,
+                          'sub_select_optimize' => true,
         ];
         $args         = array_merge($default_args, $args);
         $args         = array_intersect_key($args, $default_args);
@@ -1107,23 +1107,23 @@ class ChartData extends AbsBase
 
         return // Queue IDs that were digested by others during this timeframe.
 
-          ($sub_select_optimize // Optimize?
-            ? "SELECT `queue_id` FROM (" : "").
-          // ↑ See: <http://jas.xyz/1I52mVE>
+            ($sub_select_optimize // Optimize?
+                ? "SELECT `queue_id` FROM (" : "").
+            // ↑ See: <http://jas.xyz/1I52mVE>
 
-          "SELECT `queue_id`". // Need the queue IDs for sub-queries.
-          " FROM `".esc_sql($this->plugin->utils_db->prefix().'queue_event_log')."`".
+            "SELECT `queue_id`". // Need the queue IDs for sub-queries.
+            " FROM `".esc_sql($this->plugin->utils_db->prefix().'queue_event_log')."`".
 
-          " WHERE 1=1". // Initialize where clause.
+            " WHERE 1=1". // Initialize where clause.
 
-          " AND `dby_queue_id` > '0'". // Digested by another.
+            " AND `dby_queue_id` > '0'". // Digested by another.
 
-          " AND `time` BETWEEN '".esc_sql($from_time)."' AND '".esc_sql($to_time)."'".
+            " AND `time` BETWEEN '".esc_sql($from_time)."' AND '".esc_sql($to_time)."'".
 
-          " GROUP BY `queue_id`". // Unique queue entries only (always).
+            " GROUP BY `queue_id`". // Unique queue entries only (always).
 
-          ($sub_select_optimize // Optimizing?
-            ? ") AS `queue_id`" : "");
+            ($sub_select_optimize // Optimizing?
+                ? ") AS `queue_id`" : "");
     }
 
     /**
@@ -1181,17 +1181,17 @@ class ChartData extends AbsBase
         # Parse "from" time as a local timestamp.
 
         $local_relative_from_time_base = // GMT offset base.
-          time() + (get_option('gmt_offset') * 3600);
+            time() + (get_option('gmt_offset') * 3600);
 
         $this->chart->from_time = // Convert to timestamp; i.e. parse string.
-          (integer)strtotime($this->chart->from_time, $local_relative_from_time_base);
+            (integer)strtotime($this->chart->from_time, $local_relative_from_time_base);
 
         # Parse "to" time as a local timestamp.
 
         if ($this->chart->from_time) { // Only possible if we got a valid "from" time.
             $local_relative_to_time_base = // GMT offset base; with one exception for the word `now`.
-              preg_match('/^now$/', $this->chart->to_time) ? time() + (get_option('gmt_offset') * 3600)
-                : $this->chart->from_time; // Else use current local "from" time as the base.
+                preg_match('/^now$/', $this->chart->to_time) ? time() + (get_option('gmt_offset') * 3600)
+                    : $this->chart->from_time; // Else use current local "from" time as the base.
             $this->chart->to_time        = (integer)strtotime($this->chart->to_time, $local_relative_to_time_base);
         } else {
             $this->chart->to_time = 0; // Cannot use this if the "from" time is incorrect.
@@ -1334,16 +1334,16 @@ class ChartData extends AbsBase
             return $cal_days_in_current_month * 86400;
         };
         for (
-          $_period = 0, $_time_offset = 0;
-          $this->chart->from_time + $_time_offset + $time_offset_bump($_time_offset) <= $this->chart->to_time;
-          $_period++, $_time_offset += $time_offset_bump($_time_offset)
+            $_period = 0, $_time_offset = 0;
+            $this->chart->from_time + $_time_offset + $time_offset_bump($_time_offset) <= $this->chart->to_time;
+            $_period++, $_time_offset += $time_offset_bump($_time_offset)
         ) {
             $this->chart->time_periods[$_period] = [
-              'from_time'  => $this->chart->from_time + $_time_offset,
-              'from_label' => $this->plugin->utils_date->i18n($by_format, $this->chart->from_time + $_time_offset),
+                'from_time'  => $this->chart->from_time + $_time_offset,
+                'from_label' => $this->plugin->utils_date->i18n($by_format, $this->chart->from_time + $_time_offset),
 
-              'to_time'  => $this->chart->from_time + $_time_offset + $time_offset_bump($_time_offset) - 1,
-              'to_label' => $this->plugin->utils_date->i18n($by_format, $this->chart->from_time + $_time_offset + $time_offset_bump($_time_offset) - 1),
+                'to_time'  => $this->chart->from_time + $_time_offset + $time_offset_bump($_time_offset) - 1,
+                'to_label' => $this->plugin->utils_date->i18n($by_format, $this->chart->from_time + $_time_offset + $time_offset_bump($_time_offset) - 1),
             ];
         }
         unset($_period, $_time_offset); // Housekeeping.
@@ -1359,7 +1359,7 @@ class ChartData extends AbsBase
     protected function errorsMarkup()
     {
         $errors_html = // Convert all errors to HTML markup.
-          array_map([$this->plugin->utils_string, 'markdownNoP'], $this->errors);
+            array_map([$this->plugin->utils_string, 'markdownNoP'], $this->errors);
 
         return '<div class="pmp-note pmp-error" style="margin:1em 0 0 0;">'.
 

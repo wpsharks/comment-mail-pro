@@ -283,28 +283,28 @@ class QueueProcessor extends AbsBase
             return; // Nothing to log; no entry.
         }
         $log_entry = [
-          'queue_id'     => $entry_props->entry->ID,
-          'dby_queue_id' => $entry_props->dby_queue_id, // Digested?
+            'queue_id'     => $entry_props->entry->ID,
+            'dby_queue_id' => $entry_props->dby_queue_id, // Digested?
 
-          'sub_id' => $entry_props->sub ? $entry_props->sub->ID : $entry_props->entry->sub_id,
+            'sub_id' => $entry_props->sub ? $entry_props->sub->ID : $entry_props->entry->sub_id,
 
-          'user_id'           => $entry_props->sub ? $entry_props->sub->user_id : 0, // Default; no user; not possible.
-          'post_id'           => $entry_props->post ? $entry_props->post->ID : ($entry_props->comment ? $entry_props->comment->comment_post_ID : ($entry_props->sub ? $entry_props->sub->post_id : 0)),
-          'comment_id'        => $entry_props->comment ? $entry_props->comment->comment_ID : $entry_props->entry->comment_id,
-          'comment_parent_id' => $entry_props->comment ? $entry_props->comment->comment_parent : $entry_props->entry->comment_parent_id,
+            'user_id'           => $entry_props->sub ? $entry_props->sub->user_id : 0, // Default; no user; not possible.
+            'post_id'           => $entry_props->post ? $entry_props->post->ID : ($entry_props->comment ? $entry_props->comment->comment_post_ID : ($entry_props->sub ? $entry_props->sub->post_id : 0)),
+            'comment_id'        => $entry_props->comment ? $entry_props->comment->comment_ID : $entry_props->entry->comment_id,
+            'comment_parent_id' => $entry_props->comment ? $entry_props->comment->comment_parent : $entry_props->entry->comment_parent_id,
 
-          'fname' => $entry_props->sub ? $entry_props->sub->fname : '',
-          'lname' => $entry_props->sub ? $entry_props->sub->lname : '',
-          'email' => $entry_props->sub ? $entry_props->sub->email : '',
+            'fname' => $entry_props->sub ? $entry_props->sub->fname : '',
+            'lname' => $entry_props->sub ? $entry_props->sub->lname : '',
+            'email' => $entry_props->sub ? $entry_props->sub->email : '',
 
-          'ip'      => $entry_props->sub ? $entry_props->sub->last_ip : '',
-          'region'  => $entry_props->sub ? $entry_props->sub->last_region : '',
-          'country' => $entry_props->sub ? $entry_props->sub->last_country : '',
+            'ip'      => $entry_props->sub ? $entry_props->sub->last_ip : '',
+            'region'  => $entry_props->sub ? $entry_props->sub->last_region : '',
+            'country' => $entry_props->sub ? $entry_props->sub->last_country : '',
 
-          'status' => $entry_props->sub ? $entry_props->sub->status : '',
+            'status' => $entry_props->sub ? $entry_props->sub->status : '',
 
-          'event'     => $entry_props->event,
-          'note_code' => $entry_props->note_code,
+            'event'     => $entry_props->event,
+            'note_code' => $entry_props->note_code,
         ];
         new QueueEventLogInserter($log_entry);
 
@@ -543,24 +543,24 @@ class QueueProcessor extends AbsBase
      * @see   UtilsEvent::queueNoteCodeDesc()
      */
     protected function entryProps(
-      $event = '',
-      $note_code = '',
+        $event = '',
+        $note_code = '',
 
-      \stdClass $entry,
+        \stdClass $entry,
 
-      \stdClass $sub = null,
-      \WP_Post $sub_post = null,
-      \WP_Comment $sub_comment = null,
+        \stdClass $sub = null,
+        \WP_Post $sub_post = null,
+        \WP_Comment $sub_comment = null,
 
-      \WP_Post $post = null,
-      \WP_Comment $comment = null,
+        \WP_Post $post = null,
+        \WP_Comment $comment = null,
 
-      array $props = [],
-      array $comments = [],
+        array $props = [],
+        array $comments = [],
 
-      $held = false,
-      $dby_queue_id = 0,
-      $logged = false
+        $held = false,
+        $dby_queue_id = 0,
+        $logged = false
     ) {
         $event     = (string)$event;
         $note_code = (string)$note_code;
@@ -573,24 +573,24 @@ class QueueProcessor extends AbsBase
         $logged       = (boolean)$logged;
 
         $entry_props = (object)compact(
-          'event',
-          'note_code',
+            'event',
+            'note_code',
 
-          'entry',
+            'entry',
 
-          'sub',
-          'sub_post',
-          'sub_comment',
+            'sub',
+            'sub_post',
+            'sub_comment',
 
-          'post',
-          'comment',
+            'post',
+            'comment',
 
-          'props',
-          'comments',
+            'props',
+            'comments',
 
-          'held',
-          'dby_queue_id',
-          'logged'
+            'held',
+            'dby_queue_id',
+            'logged'
         );
         if (!$props && !$entry_props->props) {
             $entry_props->props = [$entry ? $entry->ID : 0 => $entry_props];
@@ -698,7 +698,7 @@ class QueueProcessor extends AbsBase
                " WHERE `post_id` = '".esc_sql($entry_props->post->ID)."'".
 
                (!$entry_props->sub->comment_id ? '' // If all comments; include everything.
-                 : " AND `comment_parent_id` = '".esc_sql($entry_props->comment->comment_parent)."'").
+                   : " AND `comment_parent_id` = '".esc_sql($entry_props->comment->comment_parent)."'").
 
                " AND `sub_id` = '".esc_sql($entry_props->sub->ID)."'".
                " AND `event` = 'notified'".
@@ -762,7 +762,7 @@ class QueueProcessor extends AbsBase
                " WHERE `post_id` = '".esc_sql($entry_props->post->ID)."'".
 
                (!$entry_props->sub->comment_id ? '' // If all comments; include everything.
-                 : " AND `comment_parent_id` = '".esc_sql($entry_props->comment->comment_parent)."'").
+                   : " AND `comment_parent_id` = '".esc_sql($entry_props->comment->comment_parent)."'").
 
                " AND `sub_id` = '".esc_sql($entry_props->sub->ID)."'".
 

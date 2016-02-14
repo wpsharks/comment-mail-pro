@@ -39,49 +39,49 @@ class SubEventLogInserter extends AbsBase
         parent::__construct();
 
         $defaults = [
-          'sub_id' => 0,
-          'key'    => '',
+            'sub_id' => 0,
+            'key'    => '',
 
-          'oby_sub_id' => 0,
+            'oby_sub_id' => 0,
 
-          'user_id'    => 0,
-          'post_id'    => 0,
-          'comment_id' => 0,
-          'deliver'    => '',
+            'user_id'    => 0,
+            'post_id'    => 0,
+            'comment_id' => 0,
+            'deliver'    => '',
 
-          'fname' => '',
-          'lname' => '',
-          'email' => '',
+            'fname' => '',
+            'lname' => '',
+            'email' => '',
 
-          'ip'      => '',
-          'region'  => '',
-          'country' => '',
+            'ip'      => '',
+            'region'  => '',
+            'country' => '',
 
-          'status' => '',
+            'status' => '',
 
-          'event'          => '',
-          'user_initiated' => 0,
+            'event'          => '',
+            'user_initiated' => 0,
 
-          'time' => time(),
+            'time' => time(),
 
-          /* ----------------- */
+            /* ----------------- */
 
-          'key_before' => '',
+            'key_before' => '',
 
-          'user_id_before'    => 0,
-          'post_id_before'    => 0,
-          'comment_id_before' => 0,
-          'deliver_before'    => '',
+            'user_id_before'    => 0,
+            'post_id_before'    => 0,
+            'comment_id_before' => 0,
+            'deliver_before'    => '',
 
-          'fname_before' => '',
-          'lname_before' => '',
-          'email_before' => '',
+            'fname_before' => '',
+            'lname_before' => '',
+            'email_before' => '',
 
-          'ip_before'      => '',
-          'region_before'  => '',
-          'country_before' => '',
+            'ip_before'      => '',
+            'region_before'  => '',
+            'country_before' => '',
 
-          'status_before' => '',
+            'status_before' => '',
         ];
         # Sub ID auto-fill from subscription data.
 

@@ -74,8 +74,8 @@ class UtilsEnv extends AbsBase
             return ($page = '');
         }
         $page = !empty($_REQUEST['page'])
-          ? trim(stripslashes((string)$_REQUEST['page']))
-          : $this->currentPagenow();
+            ? trim(stripslashes((string)$_REQUEST['page']))
+            : $this->currentPagenow();
 
         return $page; // Current menu page.
     }
@@ -124,8 +124,8 @@ class UtilsEnv extends AbsBase
     {
         if (is_admin()) { // In an admin area?
             @ini_set(
-              'memory_limit', // Maximize memory.
-              apply_filters('admin_memory_limit', WP_MAX_MEMORY_LIMIT)
+                'memory_limit', // Maximize memory.
+                apply_filters('admin_memory_limit', WP_MAX_MEMORY_LIMIT)
             );
         } else {
             @ini_set('memory_limit', WP_MAX_MEMORY_LIMIT);

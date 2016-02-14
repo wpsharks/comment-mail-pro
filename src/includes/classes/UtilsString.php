@@ -670,12 +670,12 @@ class UtilsString extends AbsBase
 
         $first_clip = $half_max_length - 5;
         $string     = ($first_clip >= 1) // Something?
-          ? substr($full_string, 0, $first_clip).'[...]'
-          : '[...]'; // Ellipsis only.
+            ? substr($full_string, 0, $first_clip).'[...]'
+            : '[...]'; // Ellipsis only.
 
         $second_clip = strlen($full_string) - ($max_length - strlen($string));
         $string .= ($second_clip >= 0 && $second_clip >= $first_clip)
-          ? substr($full_string, $second_clip) : ''; // Nothing more.
+            ? substr($full_string, $second_clip) : ''; // Nothing more.
 
         return $string; // Mid-clipped.
     }
@@ -786,10 +786,10 @@ class UtilsString extends AbsBase
             return $string; // Not possible.
         }
         $default_args = [
-          'br2nl' => true,
+            'br2nl' => true,
 
-          'strip_content_in_tags' => $this->invisible_tags,
-          'inject_eol_after_tags' => $this->block_tags,
+            'strip_content_in_tags' => $this->invisible_tags,
+            'inject_eol_after_tags' => $this->block_tags,
         ];
         $args         = array_merge($default_args, $args);
         $args         = array_intersect_key($args, $default_args);
@@ -838,22 +838,22 @@ class UtilsString extends AbsBase
             return $string; // Not possible.
         }
         $default_args = [
-          'br2nl' => true,
+            'br2nl' => true,
 
-          'allowed_tags'       => [
-            'a',
-            'strong', 'b',
-            'i', 'em',
-            'ul', 'ol', 'li',
-            'code', 'pre',
-            'q', 'blockquote',
-          ],
-          'allowed_attributes' => [
-            'href',
-          ],
+            'allowed_tags'       => [
+                'a',
+                'strong', 'b',
+                'i', 'em',
+                'ul', 'ol', 'li',
+                'code', 'pre',
+                'q', 'blockquote',
+            ],
+            'allowed_attributes' => [
+                'href',
+            ],
 
-          'strip_content_in_tags' => $this->invisible_tags,
-          'inject_eol_after_tags' => $this->block_tags,
+            'strip_content_in_tags' => $this->invisible_tags,
+            'inject_eol_after_tags' => $this->block_tags,
         ];
         $args         = array_merge($default_args, $args);
         $args         = array_intersect_key($args, $default_args);
@@ -910,28 +910,28 @@ class UtilsString extends AbsBase
     public function stripHtmlAttributes($string, array $args = [])
     {
         $default_args = [
-          'allowed_attributes' => [],
+            'allowed_attributes' => [],
         ];
         $args         = array_merge($default_args, $args);
         $args         = array_intersect_key($args, $default_args);
 
         $allowed_attributes = // Force lowercase.
-          array_map('strtolower', (array)$args['allowed_attributes']);
+            array_map('strtolower', (array)$args['allowed_attributes']);
 
         $regex_tags  = '/(?P<open>\<[\w\-]+)(?P<attrs>[^>]+)(?P<close>\>)/i';
         $regex_attrs = '/\s+(?P<attr>[\w\-]+)(?:\s*\=\s*(["\']).*?\\2|\s*\=[^\s]*)?/is';
 
         return preg_replace_callback(
-          $regex_tags,
-          function ($m) use ($allowed_attributes, $regex_attrs) {
-              return $m['open'].preg_replace_callback(
-                $regex_attrs, function ($m) use ($allowed_attributes) {
-                  return in_array(strtolower($m['attr']), $allowed_attributes, true) ? $m[0] : '';
-              }, $m['attrs']
-              ).$m['close']; // With modified attributes.
+            $regex_tags,
+            function ($m) use ($allowed_attributes, $regex_attrs) {
+                return $m['open'].preg_replace_callback(
+                    $regex_attrs, function ($m) use ($allowed_attributes) {
+                    return in_array(strtolower($m['attr']), $allowed_attributes, true) ? $m[0] : '';
+                }, $m['attrs']
+                ).$m['close']; // With modified attributes.
 
-          },
-          $string
+            },
+            $string
         ); // Removes attributes; leaving only those allowed explicitly.
     }
 
@@ -947,25 +947,25 @@ class UtilsString extends AbsBase
     public function stripPhpTags($string)
     {
         return preg_replace(
-          '/'. // Open regex; pattern delimiter.
+            '/'. // Open regex; pattern delimiter.
 
-          '(?:'. // Any of these.
+            '(?:'. // Any of these.
 
-          '\<\?php.*?\?\>'.
-          '|'.
-          '\<\?\=.*?\?\>'.
-          '|'.
-          '\<\?.*?\?\>'.
-          '|'.
-          '\<%.*?%\>'.
-          '|'.
-          '\<script\s+[^>]*?language\s*\=\s*(["\'])php\\1[^>]*\>.*?\<\s*\/\s*script\s*\>'.
-          '|'.
-          '\<script\s+[^>]*?language\s*\=\s*php[^>]*\>.*?\<\s*\/\s*script\s*\>'.
+            '\<\?php.*?\?\>'.
+            '|'.
+            '\<\?\=.*?\?\>'.
+            '|'.
+            '\<\?.*?\?\>'.
+            '|'.
+            '\<%.*?%\>'.
+            '|'.
+            '\<script\s+[^>]*?language\s*\=\s*(["\'])php\\1[^>]*\>.*?\<\s*\/\s*script\s*\>'.
+            '|'.
+            '\<script\s+[^>]*?language\s*\=\s*php[^>]*\>.*?\<\s*\/\s*script\s*\>'.
 
-          ')'. // Close regex group.
+            ')'. // Close regex group.
 
-          '/is', '', (string)$string
+            '/is', '', (string)$string
         );
     }
 
@@ -985,9 +985,9 @@ class UtilsString extends AbsBase
             return $string; // Not possible.
         }
         $default_args = [
-          'oembed' => false,
-          'breaks' => true,
-          'no_p'   => false,
+            'oembed' => false,
+            'breaks' => true,
+            'no_p'   => false,
         ];
         $args         = array_merge($default_args, $args);
         $args         = array_intersect_key($args, $default_args);
@@ -1000,12 +1000,12 @@ class UtilsString extends AbsBase
             $_spcsm           = $this->spcsmTokens($string, [], __FUNCTION__);
             $_oembed_args     = array_merge(wp_embed_defaults(), ['discover' => false]);
             $_spcsm['string'] = preg_replace_callback(
-              '/^\s*(https?:\/\/[^\s"]+)\s*$/im',
-              function ($m) use ($_oembed_args) {
-                  $oembed = wp_oembed_get($m[1], $_oembed_args);
-                  return $oembed ? $oembed : $m[0];
-              },
-              $_spcsm['string']
+                '/^\s*(https?:\/\/[^\s"]+)\s*$/im',
+                function ($m) use ($_oembed_args) {
+                    $oembed = wp_oembed_get($m[1], $_oembed_args);
+                    return $oembed ? $oembed : $m[0];
+                },
+                $_spcsm['string']
             );
             $string           = $this->spcsmRestore($_spcsm);
 
@@ -1110,7 +1110,7 @@ class UtilsString extends AbsBase
             return ['string' => $string, 'tokens' => [], 'marker' => $marker];
         }
         $spcsm = // Convert string to an array w/ token details.
-          ['string' => $string, 'tokens' => [], 'marker' => $marker];
+            ['string' => $string, 'tokens' => [], 'marker' => $marker];
 
         shortcodes: // Target point; `[shortcode][/shortcode]`.
 
@@ -1121,13 +1121,13 @@ class UtilsString extends AbsBase
             goto pre; // No `[` shortcodes.
         }
         $spcsm['string'] = preg_replace_callback(
-          '/'.get_shortcode_regex().'/s',
-          function ($m) use (&$spcsm) {
-              $spcsm['tokens'][] = $m[0]; // Tokenize.
-              return '%#%spcsm-'.$spcsm['marker'].'-'.(count($spcsm['tokens']) - 1).'%#%'; #
+            '/'.get_shortcode_regex().'/s',
+            function ($m) use (&$spcsm) {
+                $spcsm['tokens'][] = $m[0]; // Tokenize.
+                return '%#%spcsm-'.$spcsm['marker'].'-'.(count($spcsm['tokens']) - 1).'%#%'; #
 
-          },
-          $spcsm['string']
+            },
+            $spcsm['string']
         ); // Shortcodes replaced by tokens.
 
         pre: // Target point; HTML `<pre>` tags.
@@ -1139,20 +1139,20 @@ class UtilsString extends AbsBase
             goto code; // Nothing to tokenize here.
         }
         $pre = // HTML `<pre>` tags.
-          '/(?P<tag_open_bracket>\<)'. // Opening `<` bracket.
-          '(?P<tag_open_name>pre)'. // Tag name; e.g. a `pre` tag.
-          '(?P<tag_open_attrs_bracket>\>|\s+[^>]*\>)'. // Attributes & `>`.
-          '(?P<tag_contents>.*?)'. // Tag contents (multiline possible).
-          '(?P<tag_close>\<\/\\2\>)/is'; // e.g. closing `</pre>` tag.
+            '/(?P<tag_open_bracket>\<)'. // Opening `<` bracket.
+            '(?P<tag_open_name>pre)'. // Tag name; e.g. a `pre` tag.
+            '(?P<tag_open_attrs_bracket>\>|\s+[^>]*\>)'. // Attributes & `>`.
+            '(?P<tag_contents>.*?)'. // Tag contents (multiline possible).
+            '(?P<tag_close>\<\/\\2\>)/is'; // e.g. closing `</pre>` tag.
 
         $spcsm['string'] = preg_replace_callback(
-          $pre,
-          function ($m) use (&$spcsm) {
-              $spcsm['tokens'][] = $m[0]; // Tokenize.
-              return '%#%spcsm-'.$spcsm['marker'].'-'.(count($spcsm['tokens']) - 1).'%#%'; #
+            $pre,
+            function ($m) use (&$spcsm) {
+                $spcsm['tokens'][] = $m[0]; // Tokenize.
+                return '%#%spcsm-'.$spcsm['marker'].'-'.(count($spcsm['tokens']) - 1).'%#%'; #
 
-          },
-          $spcsm['string']
+            },
+            $spcsm['string']
         ); // Tags replaced by tokens.
 
         code: // Target point; HTML `<code>` tags.
@@ -1164,20 +1164,20 @@ class UtilsString extends AbsBase
             goto samp; // Nothing to tokenize here.
         }
         $code = // HTML `<code>` tags.
-          '/(?P<tag_open_bracket>\<)'. // Opening `<` bracket.
-          '(?P<tag_open_name>code)'. // Tag name; e.g. a `code` tag.
-          '(?P<tag_open_attrs_bracket>\>|\s+[^>]*\>)'. // Attributes & `>`.
-          '(?P<tag_contents>.*?)'. // Tag contents (multiline possible).
-          '(?P<tag_close>\<\/\\2\>)/is'; // e.g. closing `</code>` tag.
+            '/(?P<tag_open_bracket>\<)'. // Opening `<` bracket.
+            '(?P<tag_open_name>code)'. // Tag name; e.g. a `code` tag.
+            '(?P<tag_open_attrs_bracket>\>|\s+[^>]*\>)'. // Attributes & `>`.
+            '(?P<tag_contents>.*?)'. // Tag contents (multiline possible).
+            '(?P<tag_close>\<\/\\2\>)/is'; // e.g. closing `</code>` tag.
 
         $spcsm['string'] = preg_replace_callback(
-          $code,
-          function ($m) use (&$spcsm) {
-              $spcsm['tokens'][] = $m[0]; // Tokenize.
-              return '%#%spcsm-'.$spcsm['marker'].'-'.(count($spcsm['tokens']) - 1).'%#%'; #
+            $code,
+            function ($m) use (&$spcsm) {
+                $spcsm['tokens'][] = $m[0]; // Tokenize.
+                return '%#%spcsm-'.$spcsm['marker'].'-'.(count($spcsm['tokens']) - 1).'%#%'; #
 
-          },
-          $spcsm['string']
+            },
+            $spcsm['string']
         ); // Tags replaced by tokens.
 
         samp: // Target point; HTML `<samp>` tags.
@@ -1189,20 +1189,20 @@ class UtilsString extends AbsBase
             goto md_fences; // Nothing to tokenize here.
         }
         $samp = // HTML `<samp>` tags.
-          '/(?P<tag_open_bracket>\<)'. // Opening `<` bracket.
-          '(?P<tag_open_name>samp)'. // Tag name; e.g. a `samp` tag.
-          '(?P<tag_open_attrs_bracket>\>|\s+[^>]*\>)'. // Attributes & `>`.
-          '(?P<tag_contents>.*?)'. // Tag contents (multiline possible).
-          '(?P<tag_close>\<\/\\2\>)/is'; // e.g. closing `</samp>` tag.
+            '/(?P<tag_open_bracket>\<)'. // Opening `<` bracket.
+            '(?P<tag_open_name>samp)'. // Tag name; e.g. a `samp` tag.
+            '(?P<tag_open_attrs_bracket>\>|\s+[^>]*\>)'. // Attributes & `>`.
+            '(?P<tag_contents>.*?)'. // Tag contents (multiline possible).
+            '(?P<tag_close>\<\/\\2\>)/is'; // e.g. closing `</samp>` tag.
 
         $spcsm['string'] = preg_replace_callback(
-          $samp,
-          function ($m) use (&$spcsm) {
-              $spcsm['tokens'][] = $m[0]; // Tokenize.
-              return '%#%spcsm-'.$spcsm['marker'].'-'.(count($spcsm['tokens']) - 1).'%#%'; #
+            $samp,
+            function ($m) use (&$spcsm) {
+                $spcsm['tokens'][] = $m[0]; // Tokenize.
+                return '%#%spcsm-'.$spcsm['marker'].'-'.(count($spcsm['tokens']) - 1).'%#%'; #
 
-          },
-          $spcsm['string']
+            },
+            $spcsm['string']
         ); // Tags replaced by tokens.
 
         md_fences: // Target point; Markdown pre/code fences.
@@ -1214,18 +1214,18 @@ class UtilsString extends AbsBase
             goto md_links; // Nothing to tokenize here.
         }
         $md_fences = // Markdown pre/code fences.
-          '/(?P<fence_open>~{3,}|`{3,}|`)'. // Opening fence.
-          '(?P<fence_contents>.*?)'. // Contents (multiline possible).
-          '(?P<fence_close>\\1)/is'; // Closing fence; ~~~, ```, `.
+            '/(?P<fence_open>~{3,}|`{3,}|`)'. // Opening fence.
+            '(?P<fence_contents>.*?)'. // Contents (multiline possible).
+            '(?P<fence_close>\\1)/is'; // Closing fence; ~~~, ```, `.
 
         $spcsm['string'] = preg_replace_callback(
-          $md_fences,
-          function ($m) use (&$spcsm) {
-              $spcsm['tokens'][] = $m[0]; // Tokenize.
-              return '%#%spcsm-'.$spcsm['marker'].'-'.(count($spcsm['tokens']) - 1).'%#%'; #
+            $md_fences,
+            function ($m) use (&$spcsm) {
+                $spcsm['tokens'][] = $m[0]; // Tokenize.
+                return '%#%spcsm-'.$spcsm['marker'].'-'.(count($spcsm['tokens']) - 1).'%#%'; #
 
-          },
-          $spcsm['string']
+            },
+            $spcsm['string']
         ); // Fences replaced by tokens.
 
         md_links: // Target point; [Markdown](links).
@@ -1240,16 +1240,16 @@ class UtilsString extends AbsBase
             goto finale; // Not tokenizing these.
         }
         $spcsm['string'] = preg_replace_callback(
-          [
-            '/^[ ]*(?:\[[^\]]+\])+[ ]*\:[ ]*(?:\<[^>]+\>|\S+)(?:[ ]+.+)?$/m',
-            '/\!?\[(?:(?R)|[^\]]*)\]\([^)]+\)(?:\{[^}]*\})?/',
-          ],
-          function ($m) use (&$spcsm) {
-              $spcsm['tokens'][] = $m[0]; // Tokenize.
-              return '%#%spcsm-'.$spcsm['marker'].'-'.(count($spcsm['tokens']) - 1).'%#%'; #
+            [
+                '/^[ ]*(?:\[[^\]]+\])+[ ]*\:[ ]*(?:\<[^>]+\>|\S+)(?:[ ]+.+)?$/m',
+                '/\!?\[(?:(?R)|[^\]]*)\]\([^)]+\)(?:\{[^}]*\})?/',
+            ],
+            function ($m) use (&$spcsm) {
+                $spcsm['tokens'][] = $m[0]; // Tokenize.
+                return '%#%spcsm-'.$spcsm['marker'].'-'.(count($spcsm['tokens']) - 1).'%#%'; #
 
-          },
-          $spcsm['string']
+            },
+            $spcsm['string']
         ); // Shortcodes replaced by tokens.
 
         finale: // Target point; grand finale (return).
@@ -1438,14 +1438,14 @@ class UtilsString extends AbsBase
      * @var array HTML whitespace. Keys are actually regex patterns here.
      */
     public $html_whitespace = [
-      '\0'                      => "\0",
-      '\x0B'                    => "\x0B",
-      '\s'                      => "\r\n\t ",
-      '\xC2\xA0'                => "\xC2\xA0",
-      '&nbsp;'                  => '&nbsp;',
-      '\<br\>'                  => '<br>',
-      '\<br\s*\/\>'             => '<br/>',
-      '\<p\>(?:&nbsp;)*\<\/p\>' => '<p></p>',
+        '\0'                      => "\0",
+        '\x0B'                    => "\x0B",
+        '\s'                      => "\r\n\t ",
+        '\xC2\xA0'                => "\xC2\xA0",
+        '&nbsp;'                  => '&nbsp;',
+        '\<br\>'                  => '<br>',
+        '\<br\s*\/\>'             => '<br/>',
+        '\<p\>(?:&nbsp;)*\<\/p\>' => '<p></p>',
     ];
 
     /**
@@ -1454,10 +1454,10 @@ class UtilsString extends AbsBase
      * @var array HTML5 invisible tags.
      */
     public $invisible_tags = [
-      'head',
-      'title',
-      'style',
-      'script',
+        'head',
+        'title',
+        'style',
+        'script',
     ];
 
     /**
@@ -1466,39 +1466,39 @@ class UtilsString extends AbsBase
      * @var array HTML5 block-level tags.
      */
     public $block_tags = [
-      'address',
-      'article',
-      'aside',
-      'audio',
-      'blockquote',
-      'canvas',
-      'dd',
-      'div',
-      'dl',
-      'fieldset',
-      'figcaption',
-      'figure',
-      'footer',
-      'form',
-      'h1',
-      'h2',
-      'h3',
-      'h4',
-      'h5',
-      'h6',
-      'header',
-      'hgroup',
-      'hr',
-      'noscript',
-      'ol',
-      'output',
-      'p',
-      'pre',
-      'section',
-      'table',
-      'tfoot',
-      'ul',
-      'video',
+        'address',
+        'article',
+        'aside',
+        'audio',
+        'blockquote',
+        'canvas',
+        'dd',
+        'div',
+        'dl',
+        'fieldset',
+        'figcaption',
+        'figure',
+        'footer',
+        'form',
+        'h1',
+        'h2',
+        'h3',
+        'h4',
+        'h5',
+        'h6',
+        'header',
+        'hgroup',
+        'hr',
+        'noscript',
+        'ol',
+        'output',
+        'p',
+        'pre',
+        'section',
+        'table',
+        'tfoot',
+        'ul',
+        'video',
     ];
 
     /**
@@ -1508,8 +1508,8 @@ class UtilsString extends AbsBase
      * @since 141111 First documented version.
      */
     public $block_container_tags = [
-      'p',
-      'div',
+        'p',
+        'div',
     ];
 }
 	

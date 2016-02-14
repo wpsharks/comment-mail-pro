@@ -37,9 +37,9 @@ class SsoTwitter extends SsoServiceBase
         try { // Catch exceptions and log them for debugging.
             $service_factory = new \OAuth\ServiceFactory();
             $credentials     = new \OAuth\Common\Consumer\Credentials(
-              $this->plugin->options['sso_'.$this->service.'_key'],
-              $this->plugin->options['sso_'.$this->service.'_secret'],
-              $this->plugin->utils_url->ssoActionUrl($this->service, 'callback')
+                $this->plugin->options['sso_'.$this->service.'_key'],
+                $this->plugin->options['sso_'.$this->service.'_secret'],
+                $this->plugin->utils_url->ssoActionUrl($this->service, 'callback')
             );
             /** @var $service \OAuth\OAuth1\Service\Twitter */
             $service = $service_factory->createService($this->service, $credentials, $this->storage);
@@ -64,9 +64,9 @@ class SsoTwitter extends SsoServiceBase
             }
             $service_factory = new \OAuth\ServiceFactory();
             $credentials     = new \OAuth\Common\Consumer\Credentials(
-              $this->plugin->options['sso_'.$this->service.'_key'],
-              $this->plugin->options['sso_'.$this->service.'_secret'],
-              $this->plugin->utils_url->ssoActionUrl($this->service, 'callback')
+                $this->plugin->options['sso_'.$this->service.'_key'],
+                $this->plugin->options['sso_'.$this->service.'_secret'],
+                $this->plugin->utils_url->ssoActionUrl($this->service, 'callback')
             );
             /** @var $service \OAuth\OAuth1\Service\Twitter */
             $service = $service_factory->createService($this->service, $credentials, $this->storage);
@@ -95,8 +95,8 @@ class SsoTwitter extends SsoServiceBase
 
             if (!($fname = $this->request_args['fname'])) {
                 $fname = $this->plugin->utils_string->firstName(
-                  $this->coalesce($service_user->name, $service_user->screen_name),
-                  $this->request_args['email'] // Twitter does not provide this.
+                    $this->coalesce($service_user->name, $service_user->screen_name),
+                    $this->request_args['email'] // Twitter does not provide this.
                 );
             }
             if (!($lname = $this->request_args['lname'])) {

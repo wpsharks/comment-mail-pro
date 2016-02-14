@@ -91,18 +91,18 @@ class UtilsDb extends AbsBase
         $key = strtolower($key);
 
         $integer_keys             = [
-          'id',
-          'parent',
-          'time',
-          'count',
-          'counter',
-          'user_initiated',
+            'id',
+            'parent',
+            'time',
+            'count',
+            'counter',
+            'user_initiated',
         ];
         $preg_quoted_integer_keys = array_map(
-          function ($key) {
-              return preg_quote($key, '/'); #
+            function ($key) {
+                return preg_quote($key, '/'); #
 
-          }, $integer_keys
+            }, $integer_keys
         );
         if (preg_match('/(?:^|_)(?:'.implode('|', $preg_quoted_integer_keys).')(?:_before)?$/i', $key)) {
             return true; // e.g. `id`, `x_id`, `x_x_id`, `x_id_before`, `time_before`, `x_time_before`.
@@ -254,7 +254,7 @@ class UtilsDb extends AbsBase
     public function totalUsers(array $args = [])
     {
         $default_args = [
-          'no_cache' => false,
+            'no_cache' => false,
         ];
         $args         = array_merge($default_args, $args);
         $args         = array_intersect_key($args, $default_args);
@@ -290,9 +290,9 @@ class UtilsDb extends AbsBase
     public function allUsers(array $args = [])
     {
         $default_args = [
-          'max'         => PHP_INT_MAX,
-          'fail_on_max' => false,
-          'no_cache'    => false,
+            'max'         => PHP_INT_MAX,
+            'fail_on_max' => false,
+            'no_cache'    => false,
         ];
         $args         = array_merge($default_args, $args);
         $args         = array_intersect_key($args, $default_args);
@@ -311,15 +311,15 @@ class UtilsDb extends AbsBase
             return ($users = []); // Fail when there are too many.
         }
         $columns = [
-          'ID',
-          'user_login',
-          'user_nicename',
-          'user_email',
-          'user_url',
-          'user_registered',
-          'user_activation_key',
-          'user_status',
-          'display_name',
+            'ID',
+            'user_login',
+            'user_nicename',
+            'user_email',
+            'user_url',
+            'user_registered',
+            'user_activation_key',
+            'user_status',
+            'display_name',
         ];
         $sql     = "SELECT `".implode("`,`", array_map('esc_sql', $columns))."`".
                    " FROM `".esc_html($this->wp->users)."`".
@@ -346,12 +346,12 @@ class UtilsDb extends AbsBase
     public function totalPosts(array $args = [])
     {
         $default_args = [
-          'for_comments_only'          => false,
-          'include_post_types'         => [],
-          'exclude_post_types'         => [],
-          'exclude_post_statuses'      => [],
-          'exclude_password_protected' => false,
-          'no_cache'                   => false,
+            'for_comments_only'          => false,
+            'include_post_types'         => [],
+            'exclude_post_types'         => [],
+            'exclude_post_statuses'      => [],
+            'exclude_password_protected' => false,
+            'no_cache'                   => false,
         ];
         $args         = array_merge($default_args, $args);
         $args         = array_intersect_key($args, $default_args);
@@ -382,9 +382,9 @@ class UtilsDb extends AbsBase
                ($exclude_password_protected ? " AND `post_password` = ''" : ''). // Exlude password protected posts?
 
                ($for_comments_only // For comments only?
-                 ? " AND (`comment_status` IN('1', 'open', 'opened')".
-                   "     OR `comment_count` > '0')"
-                 : '').
+                   ? " AND (`comment_status` IN('1', 'open', 'opened')".
+                     "     OR `comment_count` > '0')"
+                   : '').
 
                " LIMIT 1"; // One to check.
 
@@ -408,14 +408,14 @@ class UtilsDb extends AbsBase
     public function allPosts(array $args = [])
     {
         $default_args = [
-          'max'                        => PHP_INT_MAX,
-          'fail_on_max'                => false,
-          'include_post_types'         => [],
-          'for_comments_only'          => false,
-          'exclude_post_types'         => [],
-          'exclude_post_statuses'      => [],
-          'exclude_password_protected' => false,
-          'no_cache'                   => false,
+            'max'                        => PHP_INT_MAX,
+            'fail_on_max'                => false,
+            'include_post_types'         => [],
+            'for_comments_only'          => false,
+            'exclude_post_types'         => [],
+            'exclude_post_statuses'      => [],
+            'exclude_password_protected' => false,
+            'no_cache'                   => false,
         ];
         $args         = array_merge($default_args, $args);
         $args         = array_intersect_key($args, $default_args);
@@ -442,16 +442,16 @@ class UtilsDb extends AbsBase
         $post_statuses = get_post_stati(['exclude_from_search' => false]);
 
         $columns = [
-          'ID',
-          'post_author',
-          'post_date_gmt',
-          'post_title',
-          'post_status',
-          'comment_status',
-          'post_name',
-          'post_parent',
-          'post_type',
-          'comment_count',
+            'ID',
+            'post_author',
+            'post_date_gmt',
+            'post_title',
+            'post_status',
+            'comment_status',
+            'post_name',
+            'post_parent',
+            'post_type',
+            'comment_count',
         ];
         $sql     = "SELECT `".implode("`,`", array_map('esc_sql', $columns))."`".
                    " FROM `".esc_html($this->wp->posts)."`".
@@ -465,9 +465,9 @@ class UtilsDb extends AbsBase
                    ($exclude_password_protected ? " AND `post_password` = ''" : ''). // Exlude password protected posts?
 
                    ($for_comments_only // For comments only?
-                     ? " AND (`comment_status` IN('1', 'open', 'opened')".
-                       "     OR `comment_count` > '0')"
-                     : '').
+                       ? " AND (`comment_status` IN('1', 'open', 'opened')".
+                         "     OR `comment_count` > '0')"
+                       : '').
 
                    " ORDER BY `post_type` ASC, `post_date_gmt` DESC".
 
@@ -475,7 +475,7 @@ class UtilsDb extends AbsBase
 
         if (($results = $this->wp->get_results($sql, OBJECT_K))) {
             $post_results = $page_results // Initialize.
-              = $media_results = $other_results = [];
+                = $media_results = $other_results = [];
 
             foreach ($results as $_key => $_result) {
                 if ($_result->post_type === 'post') {
@@ -491,9 +491,9 @@ class UtilsDb extends AbsBase
             unset($_key, $_result); // Housekeeping.
 
             $results // Change precedence of certain post types.
-              = $post_results + $page_results  // Highest priority.
-                + $other_results  // Everything else.
-                + $media_results; // Lowest priority.
+                = $post_results + $page_results  // Highest priority.
+                  + $other_results  // Everything else.
+                  + $media_results; // Lowest priority.
 
             return ($posts = $results = $this->typifyDeep($results));
         }
@@ -518,12 +518,12 @@ class UtilsDb extends AbsBase
             return 0; // Not possible.
         }
         $default_args = [
-          'parents_only'               => false,
-          'include_post_types'         => [],
-          'exclude_post_types'         => [],
-          'exclude_post_statuses'      => [],
-          'exclude_password_protected' => false,
-          'no_cache'                   => false,
+            'parents_only'               => false,
+            'include_post_types'         => [],
+            'exclude_post_types'         => [],
+            'exclude_post_statuses'      => [],
+            'exclude_password_protected' => false,
+            'no_cache'                   => false,
         ];
         $args         = array_merge($default_args, $args);
         $args         = array_intersect_key($args, $default_args);
@@ -561,7 +561,7 @@ class UtilsDb extends AbsBase
                " AND (`comment_type` = '' OR `comment_type` = 'comment')".
 
                ($parents_only // Parents only?
-                 ? " AND `comment_parent` <= '0'" : '').
+                   ? " AND `comment_parent` <= '0'" : '').
 
                " LIMIT 1"; // One to check.
 
@@ -589,14 +589,14 @@ class UtilsDb extends AbsBase
             return []; // Not possible.
         }
         $default_args = [
-          'max'                        => PHP_INT_MAX,
-          'fail_on_max'                => false,
-          'parents_only'               => false,
-          'include_post_types'         => [],
-          'exclude_post_types'         => [],
-          'exclude_post_statuses'      => [],
-          'exclude_password_protected' => false,
-          'no_cache'                   => false,
+            'max'                        => PHP_INT_MAX,
+            'fail_on_max'                => false,
+            'parents_only'               => false,
+            'include_post_types'         => [],
+            'exclude_post_types'         => [],
+            'exclude_post_statuses'      => [],
+            'exclude_password_protected' => false,
+            'no_cache'                   => false,
         ];
         $args         = array_merge($default_args, $args);
         $args         = array_intersect_key($args, $default_args);
@@ -635,15 +635,15 @@ class UtilsDb extends AbsBase
             return ($comments = []); // Fail when there are too many.
         }
         $columns = [
-          'comment_ID',
-          'comment_post_ID',
-          'comment_author',
-          'comment_author_email',
-          'comment_date_gmt',
-          'comment_approved',
-          'comment_type',
-          'comment_parent',
-          'comment_content',
+            'comment_ID',
+            'comment_post_ID',
+            'comment_author',
+            'comment_author_email',
+            'comment_date_gmt',
+            'comment_approved',
+            'comment_type',
+            'comment_parent',
+            'comment_content',
         ];
         $sql     = "SELECT `".implode("`,`", array_map('esc_sql', $columns))."`".
                    " FROM `".esc_html($this->wp->comments)."`".
@@ -652,7 +652,7 @@ class UtilsDb extends AbsBase
                    " AND (`comment_type` = '' OR `comment_type` = 'comment')".
 
                    ($parents_only // Parents only?
-                     ? " AND `comment_parent` <= '0'" : '').
+                       ? " AND `comment_parent` <= '0'" : '').
 
                    " ORDER BY `comment_date_gmt` ASC".
 

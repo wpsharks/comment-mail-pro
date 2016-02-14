@@ -137,21 +137,21 @@ abstract class MenuPageTableBase extends \WP_List_Table
         $this->plugin = plugin();
 
         $this->singular_name = !empty($args['singular_name'])
-          ? (string)$args['singular_name'] : 'item';
+            ? (string)$args['singular_name'] : 'item';
 
         $this->singular_label = !empty($args['singular_label'])
-          ? (string)$args['singular_label'] : 'item';
+            ? (string)$args['singular_label'] : 'item';
 
         $this->plural_name = !empty($args['plural_name'])
-          ? (string)$args['plural_name'] : 'items';
+            ? (string)$args['plural_name'] : 'items';
 
         $this->plural_label = !empty($args['plural_label'])
-          ? (string)$args['plural_label'] : 'items';
+            ? (string)$args['plural_label'] : 'items';
 
         $args = [
-          'singular' => $this->singular_name, 'plural' => $this->plural_name,
-          'screen'   => !empty($args['screen']) ? (string)$args['screen']
-            : $this->plugin->menu_page_hooks[GLOBAL_NS.'_'.$this->plural_name],
+            'singular' => $this->singular_name, 'plural' => $this->plural_name,
+            'screen'   => !empty($args['screen']) ? (string)$args['screen']
+                : $this->plugin->menu_page_hooks[GLOBAL_NS.'_'.$this->plural_name],
         ];
         parent::__construct($args); // Parent constructor.
 
@@ -459,10 +459,10 @@ abstract class MenuPageTableBase extends \WP_List_Table
             return $id_only; // All we can do.
         }
         $name_email_args = [
-          'separator'   => '<br />',
-          'anchor_to'   => 'search',
-          'name_style'  => 'font-weight:bold;',
-          'email_style' => 'font-weight:normal;',
+            'separator'   => '<br />',
+            'anchor_to'   => 'search',
+            'name_style'  => 'font-weight:bold;',
+            'email_style' => 'font-weight:normal;',
         ];
         $name            = $item->{$prefix.'fname'}.' '.$item->{$prefix.'lname'};
         $sub_info        = '<i class="'.esc_attr('si si-'.$this->plugin->slug.'-one').'"></i>'.
@@ -471,7 +471,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
         $edit_url = $this->plugin->utils_url->editSubShort($item->{$key});
 
         $row_actions = [
-          'edit' => '<a href="'.esc_attr($edit_url).'">'.__('Edit Subscr.', $this->plugin->text_domain).'</a>',
+            'edit' => '<a href="'.esc_attr($edit_url).'">'.__('Edit Subscr.', $this->plugin->text_domain).'</a>',
         ];
         return $sub_info.$this->row_actions($row_actions);
     }
@@ -544,10 +544,10 @@ abstract class MenuPageTableBase extends \WP_List_Table
             return $id_only; // All we can do.
         }
         $name_email_args = [
-          'separator'   => '<br />',
-          'anchor_to'   => 'search',
-          'name_style'  => 'font-weight:normal;',
-          'email_style' => 'font-weight:normal;',
+            'separator'   => '<br />',
+            'anchor_to'   => 'search',
+            'name_style'  => 'font-weight:normal;',
+            'email_style' => 'font-weight:normal;',
         ];
         $user_info       = '<i class="fa fa-user"></i>'. // e.g. ♙ "Name" <email>
                            ' '.$this->plugin->utils_markup->nameEmail($item->{$prefix.'display_name'}, $item->{$prefix.'email'}, $name_email_args);
@@ -555,7 +555,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
         $edit_url = $this->plugin->utils_url->editUserShort($item->{$key});
 
         $row_actions = [
-          'edit' => '<a href="'.esc_attr($edit_url).'">'.__('Edit User', $this->plugin->text_domain).'</a>',
+            'edit' => '<a href="'.esc_attr($edit_url).'">'.__('Edit User', $this->plugin->text_domain).'</a>',
         ];
         return $user_info.$this->row_actions($row_actions);
     }
@@ -622,8 +622,8 @@ abstract class MenuPageTableBase extends \WP_List_Table
         $post_view_url    = $this->plugin->utils_url->postShort($item->{$key});
         $post_edit_url    = $this->plugin->utils_url->postEditShort($item->{$key});
         $post_row_actions = [
-          'edit' => '<a href="'.esc_attr($post_edit_url).'">'.sprintf(__('Edit %1$s', $this->plugin->text_domain), esc_html($post_type_label)).'</a>',
-          'view' => '<a href="'.esc_attr($post_view_url).'">'.sprintf(__('View', $this->plugin->text_domain), esc_html($post_type_label)).'</a>',
+            'edit' => '<a href="'.esc_attr($post_edit_url).'">'.sprintf(__('Edit %1$s', $this->plugin->text_domain), esc_html($post_type_label)).'</a>',
+            'view' => '<a href="'.esc_attr($post_view_url).'">'.sprintf(__('View', $this->plugin->text_domain), esc_html($post_type_label)).'</a>',
         ];
         return $post_info.$this->row_actions($post_row_actions);
     }
@@ -671,9 +671,9 @@ abstract class MenuPageTableBase extends \WP_List_Table
             return $id_only; // All we can do.
         }
         $name_email_args   = [
-          'anchor_to'   => 'search',
-          'name_style'  => 'font-weight:bold;',
-          'email_style' => 'font-weight:normal;',
+            'anchor_to'   => 'search',
+            'name_style'  => 'font-weight:bold;',
+            'email_style' => 'font-weight:normal;',
         ];
         $comment_date_time = $this->plugin->utils_date->i18n('M j, Y g:i a', strtotime($item->{$prefix.'date_gmt'}));
         $comment_time_ago  = $this->plugin->utils_date->approxTimeDifference(strtotime($item->{$prefix.'date_gmt'}));
@@ -685,8 +685,8 @@ abstract class MenuPageTableBase extends \WP_List_Table
         $comment_view_url    = $this->plugin->utils_url->commentShort($item->{$key});
         $comment_edit_url    = $this->plugin->utils_url->commentEditShort($item->{$key});
         $comment_row_actions = [
-          'edit' => '<a href="'.esc_attr($comment_edit_url).'">'.__('Edit Comment', $this->plugin->text_domain).'</a>',
-          'view' => '<a href="'.esc_attr($comment_view_url).'">'.__('View', $this->plugin->text_domain).'</a>',
+            'edit' => '<a href="'.esc_attr($comment_edit_url).'">'.__('Edit Comment', $this->plugin->text_domain).'</a>',
+            'view' => '<a href="'.esc_attr($comment_view_url).'">'.__('View', $this->plugin->text_domain).'</a>',
         ];
         return $comment_info.$this->row_actions($comment_row_actions);
     }
@@ -753,8 +753,8 @@ abstract class MenuPageTableBase extends \WP_List_Table
             return '—'; // Not possible.
         }
         $name_email_args = [
-          'anchor_to'   => 'search',
-          'email_style' => 'font-weight:normal;',
+            'anchor_to'   => 'search',
+            'email_style' => 'font-weight:normal;',
         ];
         return $this->plugin->utils_markup->nameEmail('', $item->{$key}, $name_email_args);
     }
@@ -935,9 +935,9 @@ abstract class MenuPageTableBase extends \WP_List_Table
 
         if (($property === 'time' || substr($property, -5) === '_time') && is_integer($value)) {
             $value = $value <= 0
-              ? '—' // Use a default value of `—` in this case.
-              : esc_html($this->plugin->utils_date->i18n('M j, Y g:i a', $value)).'<br />'.
-                '<span style="font-style:italic;">('.esc_html($this->plugin->utils_date->approxTimeDifference($value)).')</span>';
+                ? '—' // Use a default value of `—` in this case.
+                : esc_html($this->plugin->utils_date->i18n('M j, Y g:i a', $value)).'<br />'.
+                  '<span style="font-style:italic;">('.esc_html($this->plugin->utils_date->approxTimeDifference($value)).')</span>';
         } else if (($property === 'ID' || substr($property, -3) === '_id') && is_integer($value)) {
             $value = $value <= 0 ? '—' : esc_html((string)$value);
         } else {
@@ -960,8 +960,8 @@ abstract class MenuPageTableBase extends \WP_List_Table
     protected function getRawSearchQuery()
     {
         $s = !empty($_REQUEST['s'])
-          ? trim(stripslashes((string)$_REQUEST['s']))
-          : ''; // Not searching.
+            ? trim(stripslashes((string)$_REQUEST['s']))
+            : ''; // Not searching.
 
         if (!isset($s[0])) {
             return '';
@@ -1201,8 +1201,8 @@ abstract class MenuPageTableBase extends \WP_List_Table
     protected function getOrderby()
     {
         $orderby = !empty($_REQUEST['orderby'])
-          ? strtolower(trim(stripslashes((string)$_REQUEST['orderby'])))
-          : ''; // Not specified explicitly by site owner.
+            ? strtolower(trim(stripslashes((string)$_REQUEST['orderby'])))
+            : ''; // Not specified explicitly by site owner.
 
         if (!$orderby || !in_array($orderby, array_keys($this->get_columns()), true)) {
             $orderby = $this->getCleanSearchQuery() && $this->getFtSearchableColumns() ? 'relevance' : '';
@@ -1243,8 +1243,8 @@ abstract class MenuPageTableBase extends \WP_List_Table
     protected function getOrder()
     {
         $order = !empty($_REQUEST['order'])
-          ? strtolower(trim(stripslashes((string)$_REQUEST['order'])))
-          : ''; // Not specified explicitly by site owner.
+            ? strtolower(trim(stripslashes((string)$_REQUEST['order'])))
+            : ''; // Not specified explicitly by site owner.
 
         if (!$order || !in_array($order, ['asc', 'desc'], true)) {
             $order = $this->getCleanSearchQuery() ? 'desc' : '';
@@ -1442,9 +1442,9 @@ abstract class MenuPageTableBase extends \WP_List_Table
         $sub_ids = []; // Initialize.
 
         $alts = [
-          'sub_before_'     => 'sub_id_before',
-          'oby_sub_'        => 'oby_sub_id',
-          'oby_sub_before_' => 'oby_sub_id_before',
+            'sub_before_'     => 'sub_id_before',
+            'oby_sub_'        => 'oby_sub_id',
+            'oby_sub_before_' => 'oby_sub_id_before',
         ];
         foreach ($this->items as $_item) {
             if (!empty($_item->sub_id)) {
@@ -1463,30 +1463,30 @@ abstract class MenuPageTableBase extends \WP_List_Table
         unset($_prefix, $_key, $_item); // Housekeeping.
 
         $sql_columns      = [
-          'ID',
-          'key',
+            'ID',
+            'key',
 
-          'user_id',
-          'post_id',
-          'comment_id',
+            'user_id',
+            'post_id',
+            'comment_id',
 
-          'deliver',
-          'status',
+            'deliver',
+            'status',
 
-          'fname',
-          'lname',
-          'email',
+            'fname',
+            'lname',
+            'email',
 
-          'insertion_ip',
-          'insertion_region',
-          'insertion_country',
+            'insertion_ip',
+            'insertion_region',
+            'insertion_country',
 
-          'last_ip',
-          'last_region',
-          'last_country',
+            'last_ip',
+            'last_region',
+            'last_country',
 
-          'insertion_time',
-          'last_update_time',
+            'insertion_time',
+            'last_update_time',
         ];
         $sql_item_columns = $sql_columns;
         unset($sql_item_columns[0]); // Exclude `ID`.
@@ -1537,7 +1537,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
                 foreach ($sql_item_columns as $_sql_item_column) {
                     $_item->{$_prefix. // Prefix each of these.
                              preg_replace('/^sub_/i', '', $_sql_item_column)}
-                      = $results[$_item->{$_key}]->{$_sql_item_column};
+                        = $results[$_item->{$_key}]->{$_sql_item_column};
                 }
             }
         }
@@ -1556,7 +1556,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
         $user_ids = []; // Initialize.
 
         $alts = [
-          'user_before_' => 'user_id_before',
+            'user_before_' => 'user_id_before',
         ];
         foreach ($this->items as $_item) {
             if (!empty($_item->user_id)) {
@@ -1575,15 +1575,15 @@ abstract class MenuPageTableBase extends \WP_List_Table
         unset($_prefix, $_key, $_item); // Housekeeping.
 
         $sql_columns      = [
-          'ID',
-          'user_login',
-          'user_nicename',
-          'user_email',
-          'user_url',
-          'user_registered',
-          'user_activation_key',
-          'user_status',
-          'display_name',
+            'ID',
+            'user_login',
+            'user_nicename',
+            'user_email',
+            'user_url',
+            'user_registered',
+            'user_activation_key',
+            'user_status',
+            'display_name',
         ];
         $sql_item_columns = $sql_columns;
         unset($sql_item_columns[0]); // Exclude `ID`.
@@ -1634,7 +1634,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
                 foreach ($sql_item_columns as $_sql_item_column) {
                     $_item->{$_prefix. // Prefix each of these.
                              preg_replace('/^user_/i', '', $_sql_item_column)}
-                      = $results[$_item->{$_key}]->{$_sql_item_column};
+                        = $results[$_item->{$_key}]->{$_sql_item_column};
                 }
             }
         }
@@ -1653,7 +1653,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
         $post_ids = []; // Initialize.
 
         $alts = [
-          'post_before_' => 'post_id_before',
+            'post_before_' => 'post_id_before',
         ];
         foreach ($this->items as $_item) {
             if (!empty($_item->post_id)) {
@@ -1672,13 +1672,13 @@ abstract class MenuPageTableBase extends \WP_List_Table
         unset($_prefix, $_key, $_item); // Housekeeping.
 
         $sql_columns      = [
-          'ID',
-          'post_title',
-          'post_status',
-          'comment_status',
-          'post_date_gmt',
-          'post_type',
-          'comment_count',
+            'ID',
+            'post_title',
+            'post_status',
+            'comment_status',
+            'post_date_gmt',
+            'post_type',
+            'comment_count',
         ];
         $sql_item_columns = $sql_columns;
         unset($sql_item_columns[0]); // Exclude `ID`.
@@ -1729,7 +1729,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
                 foreach ($sql_item_columns as $_sql_item_column) {
                     $_item->{$_prefix. // Prefix each of these.
                              preg_replace('/^post_/i', '', $_sql_item_column)}
-                      = $results[$_item->{$_key}]->{$_sql_item_column};
+                        = $results[$_item->{$_key}]->{$_sql_item_column};
                 }
             }
         }
@@ -1748,9 +1748,9 @@ abstract class MenuPageTableBase extends \WP_List_Table
         $comment_ids = []; // Initialize.
 
         $alts = [
-          'comment_before_'        => 'comment_id_before',
-          'comment_parent_'        => 'comment_parent_id',
-          'comment_parent_before_' => 'comment_parent_id_before',
+            'comment_before_'        => 'comment_id_before',
+            'comment_parent_'        => 'comment_parent_id',
+            'comment_parent_before_' => 'comment_parent_id_before',
         ];
         foreach ($this->items as $_item) {
             if (!empty($_item->comment_id)) {
@@ -1769,13 +1769,13 @@ abstract class MenuPageTableBase extends \WP_List_Table
         unset($_prefix, $_key, $_item); // Housekeeping.
 
         $sql_columns      = [
-          'comment_ID',
-          'comment_author',
-          'comment_author_email',
-          'comment_date_gmt',
-          'comment_approved',
-          'comment_type',
-          'comment_parent',
+            'comment_ID',
+            'comment_author',
+            'comment_author_email',
+            'comment_date_gmt',
+            'comment_approved',
+            'comment_type',
+            'comment_parent',
         ];
         $sql_item_columns = $sql_columns;
         unset($sql_item_columns[0]); // Exclude `comment_ID`.
@@ -1826,7 +1826,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
                 foreach ($sql_item_columns as $_sql_item_column) {
                     $_item->{$_prefix. // Prefix each of these.
                              preg_replace('/^comment_/i', '', $_sql_item_column)}
-                      = $results[$_item->{$_key}]->{$_sql_item_column};
+                        = $results[$_item->{$_key}]->{$_sql_item_column};
                 }
             }
         }
@@ -1881,12 +1881,12 @@ abstract class MenuPageTableBase extends \WP_List_Table
 
         if (method_exists($this->plugin->utils_i18n, $this->plural_name)) {
             $this->plugin->enqueueUserNotice(
-              sprintf(
-                __('Action complete. %1$s %2$s.', $this->plugin->text_domain),
-                esc_html($this->plugin->utils_i18n->{$this->plural_name}($counter)),
-                esc_html($this->plugin->utils_i18n->actionEd($bulk_action))
-              ),
-              ['transient' => true, 'for_page' => $this->plugin->utils_env->currentMenuPage()]
+                sprintf(
+                    __('Action complete. %1$s %2$s.', $this->plugin->text_domain),
+                    esc_html($this->plugin->utils_i18n->{$this->plural_name}($counter)),
+                    esc_html($this->plugin->utils_i18n->actionEd($bulk_action))
+                ),
+                ['transient' => true, 'for_page' => $this->plugin->utils_env->currentMenuPage()]
             );
         }
         $redirect_to = $this->plugin->utils_url->pageTableNavVarsOnly();
@@ -2028,9 +2028,9 @@ abstract class MenuPageTableBase extends \WP_List_Table
                 continue; // Duplicate.
             }
             $_name_email_args = [
-              'anchor_to'   => 'search',
-              'name_style'  => 'font-weight:bold;',
-              'email_style' => 'font-weight:normal;',
+                'anchor_to'   => 'search',
+                'name_style'  => 'font-weight:bold;',
+                'email_style' => 'font-weight:normal;',
             ];
             $_sub_name        = $_sub->fname.' '.$_sub->lname; // Concatenate.
             $_sub_edit_link   = $this->plugin->utils_url->editSubShort($_sub->ID);
@@ -2039,7 +2039,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
                                   '<i class="'.esc_attr('si si-'.$this->plugin->slug).'"></i>'.
                                   ' '.$this->plugin->utils_markup->nameEmail($_sub_name, $_sub->email, $_name_email_args).
                                   ($_sub_edit_link // Only if they can edit the subscription ID; else this will be empty.
-                                    ? ' [<a href="'.esc_attr($_sub_edit_link).'">'.__('edit', $this->plugin->text_domain).'</a>]' : '').
+                                      ? ' [<a href="'.esc_attr($_sub_edit_link).'">'.__('edit', $this->plugin->text_domain).'</a>]' : '').
                                   '</li>';
         }
         unset($_sub, $_name_email_args, $_sub_name, $_sub_edit_link); // Housekeeping.
@@ -2051,8 +2051,8 @@ abstract class MenuPageTableBase extends \WP_List_Table
                 continue; // Duplicate.
             }
             $_name_email_args           = [
-              'anchor_to'   => 'search',
-              'email_style' => 'font-weight:bold;',
+                'anchor_to'   => 'search',
+                'email_style' => 'font-weight:bold;',
             ];
             $sub_email_lis[$_sub_email] = '<li>'. // [icon] <email>.
                                           '<i class="fa fa-envelope"></i>'. // e.g. [icon] <email>.
@@ -2069,9 +2069,9 @@ abstract class MenuPageTableBase extends \WP_List_Table
                 continue; // Duplicate.
             }
             $_name_email_args = [
-              'anchor_to'   => 'search',
-              'name_style'  => 'font-weight:bold;',
-              'email_style' => 'font-weight:normal;',
+                'anchor_to'   => 'search',
+                'name_style'  => 'font-weight:bold;',
+                'email_style' => 'font-weight:normal;',
             ];
             $_user_edit_link  = get_edit_user_link($_user->ID);
 
@@ -2079,7 +2079,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
                                     '<i class="fa fa-user"></i>'. // e.g. [icon] "Name" <email>
                                     ' '.$this->plugin->utils_markup->nameEmail($_user->display_name, $_user->user_email, $_name_email_args).
                                     ($_user_edit_link // Only if they can edit the user ID; else this will be empty.
-                                      ? ' [<a href="'.esc_attr($_user_edit_link).'">'.__('edit', $this->plugin->text_domain).'</a>]' : '').
+                                        ? ' [<a href="'.esc_attr($_user_edit_link).'">'.__('edit', $this->plugin->text_domain).'</a>]' : '').
                                     '</li>';
         }
         unset($_user, $_name_email_args, $_user_edit_link); // Housekeeping.
@@ -2101,7 +2101,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
             $post_lis[$_post->ID] = '<li>'. // <title> [edit].
                                     '  "<a href="'.esc_attr($_post_permalink).'">'.esc_html($_post_title_clip).'</a>"'.
                                     ($_post_edit_link // Only if they can edit the post ID; else this will be empty.
-                                      ? ' [<a href="'.esc_attr($_post_edit_link).'">'.__('edit', $this->plugin->text_domain).'</a>]' : '').
+                                        ? ' [<a href="'.esc_attr($_post_edit_link).'">'.__('edit', $this->plugin->text_domain).'</a>]' : '').
                                     '</li>';
         }
         unset($_post, $_post_type, $_post_permalink, $_post_edit_link, $_post_title_clip, $_post_type_label); // Housekeeping.
@@ -2121,9 +2121,9 @@ abstract class MenuPageTableBase extends \WP_List_Table
                 continue; // Unable to determine type.
             }
             $_name_email_args = [
-              'anchor_to'   => 'search',
-              'name_style'  => 'font-weight:bold;',
-              'email_style' => 'font-weight:normal;',
+                'anchor_to'   => 'search',
+                'name_style'  => 'font-weight:bold;',
+                'email_style' => 'font-weight:normal;',
             ];
             $_post_permalink  = get_permalink($_post->ID);
             $_post_edit_link  = get_edit_post_link($_post->ID, '');
@@ -2137,7 +2137,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
             $comment_lis[$_comment->comment_ID] = '<li>'. // <title> [edit].
                                                   '   "<a href="'.esc_attr($_post_permalink).'">'.esc_html($_post_title_clip).'</a>"'.
                                                   ($_post_edit_link // Only if they can edit the post ID; else this will be empty.
-                                                    ? ' [<a href="'.esc_attr($_post_edit_link).'">'.__('edit', $this->plugin->text_domain).'</a>]' : '').
+                                                      ? ' [<a href="'.esc_attr($_post_edit_link).'">'.__('edit', $this->plugin->text_domain).'</a>]' : '').
 
                                                   '   <ul>'. // Nest comment under post.
                                                   '      <li>'. // Comment ID: <author> [edit] ... followed by a content clip.
@@ -2145,7 +2145,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
                                                   '         <span style="font-weight:bold;">ID <a href="'.esc_attr($_comment_permalink).'" target="_blank">#'.esc_html($_comment->comment_ID).'</a>:</span>'.
                                                   '         '.$this->plugin->utils_markup->nameEmail($_comment->comment_author, $_comment->comment_author_email, $_name_email_args).
                                                   ($_comment_edit_link // Only if they can edit the comment ID; else this will be empty.
-                                                    ? '     [<a href="'.esc_attr($_comment_edit_link).'">'.__('edit', $this->plugin->text_domain).'</a>]' : '').
+                                                      ? '     [<a href="'.esc_attr($_comment_edit_link).'">'.__('edit', $this->plugin->text_domain).'</a>]' : '').
                                                   '         <blockquote>'.esc_html($_comment_content_clip).'</blockquote>'.
                                                   '      </li>'.
                                                   '   </ul>'.
@@ -2178,9 +2178,9 @@ abstract class MenuPageTableBase extends \WP_List_Table
         if ($query_contains_filters) { // If query contains non-navigable filters.
             if (!$filter_lis_exist) { // Unable to build list items for search filter(s)?
                 $unknown_lis[] = '<li>'.sprintf(
-                    __('Unknown filter(s). Unable to build list items for: <code>%1$s</code>', $this->plugin->text_domain),
-                    esc_html($this->getRawSearchQuery())
-                  ).'</li>';
+                        __('Unknown filter(s). Unable to build list items for: <code>%1$s</code>', $this->plugin->text_domain),
+                        esc_html($this->getRawSearchQuery())
+                    ).'</li>';
             }
             echo '<h3>'. // Display.
                  '   <i class="fa fa-filter"></i>'. // Filter icon.
@@ -2230,14 +2230,14 @@ abstract class MenuPageTableBase extends \WP_List_Table
 
         if (($raw_search_query = $this->getRawSearchQuery())) {
             $column_headers = preg_replace_callback(
-              $regex,
-              function ($m) use ($raw_search_query) {
-                  $m[3] = wp_specialchars_decode($m[3], ENT_QUOTES);
-                  $m[3] = add_query_arg('s', urlencode($raw_search_query), $m[3]);
-                  return $m[1].$m[2].esc_attr($m[3]).$m[4]; #
+                $regex,
+                function ($m) use ($raw_search_query) {
+                    $m[3] = wp_specialchars_decode($m[3], ENT_QUOTES);
+                    $m[3] = add_query_arg('s', urlencode($raw_search_query), $m[3]);
+                    return $m[1].$m[2].esc_attr($m[3]).$m[4]; #
 
-              },
-              $column_headers
+                },
+                $column_headers
             );
         }
         echo $column_headers; // Display.

@@ -33,32 +33,32 @@ class ListServerMailchimp extends ListServerBase
             $list['id'] = $this->plugin->options['list_server_mailchimp_list_id'];
         }
         $default_args = [
-          'double_optin' => true,
+            'double_optin' => true,
 
-          'email' => '',
-          'fname' => '',
-          'lname' => '',
-          'ip'    => '',
+            'email' => '',
+            'fname' => '',
+            'lname' => '',
+            'ip'    => '',
         ];
         $args         = array_merge($default_args, $args);
         $args         = array_intersect_key($args, $default_args);
 
         $mailchimp_subscribe_args = [
-          'list_id'      => (string)$list['id'],
-          'double_optin' => $args['double_optin'],
+            'list_id'      => (string)$list['id'],
+            'double_optin' => $args['double_optin'],
 
-          'email'       => ['email' => (string)$args['email']],
-          'merge_array' => [
-            'MERGE1'     => (string)$args['fname'],
-            'MERGE2'     => (string)$args['lname'],
-            'OPTIN_IP'   => (string)$args['ip'],
-            'OPTIN_TIME' => date('Y-m-d H:i:s'),
-          ],
-          'email_type'  => 'html',
+            'email'       => ['email' => (string)$args['email']],
+            'merge_array' => [
+                'MERGE1'     => (string)$args['fname'],
+                'MERGE2'     => (string)$args['lname'],
+                'OPTIN_IP'   => (string)$args['ip'],
+                'OPTIN_TIME' => date('Y-m-d H:i:s'),
+            ],
+            'email_type'  => 'html',
 
-          'update_existing'   => true,
-          'replace_interests' => true,
-          'send_welcome'      => true,
+            'update_existing'   => true,
+            'replace_interests' => true,
+            'send_welcome'      => true,
         ];
         $mailchimp_response       = call_user_func_array([$mailchimp->lists, 'subscribe'], $mailchimp_subscribe_args);
 
@@ -86,21 +86,21 @@ class ListServerMailchimp extends ListServerBase
             $list['id'] = $this->plugin->options['list_server_mailchimp_list_id'];
         }
         $default_args = [
-          'email' => '',
-          'fname' => '',
-          'lname' => '',
-          'ip'    => '',
+            'email' => '',
+            'fname' => '',
+            'lname' => '',
+            'ip'    => '',
         ];
         $args         = array_merge($default_args, $args);
         $args         = array_intersect_key($args, $default_args);
 
         $mailchimp_subscribe_args = [
-          'list_id' => (string)$list['id'],
-          'email'   => ['email' => (string)$args['email']],
+            'list_id' => (string)$list['id'],
+            'email'   => ['email' => (string)$args['email']],
 
-          'delete_member' => false,
-          'send_goodbye'  => true,
-          'send_notify'   => true,
+            'delete_member' => false,
+            'send_goodbye'  => true,
+            'send_notify'   => true,
         ];
         $mailchimp_response       = call_user_func_array([$mailchimp->lists, 'unsubscribe'], $mailchimp_unsubscribe_args);
 

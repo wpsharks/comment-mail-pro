@@ -309,15 +309,15 @@ class UtilsRve extends AbsBase
 
         $regex_irt_markers = // IRT markers in rich text body.
 
-          '/'. // Open regex; markers can appear anywhere.
+            '/'. // Open regex; markers can appear anywhere.
 
-          '(?:\s*\<[^\/<>]+\>\s*)*'. // Any HTML open tags wrapping the marker.
+            '(?:\s*\<[^\/<>]+\>\s*)*'. // Any HTML open tags wrapping the marker.
 
-          '\s*'.$regex_irt_marker_frag.'\s*'. // Including any surrounding whitespace.
+            '\s*'.$regex_irt_marker_frag.'\s*'. // Including any surrounding whitespace.
 
-          '(?:\s*\<\/[^<>]+\>\s*)*'. // Any closing tags wrapping the marker.
+            '(?:\s*\<\/[^<>]+\>\s*)*'. // Any closing tags wrapping the marker.
 
-          '/';
+            '/';
         return preg_replace($regex_irt_markers, '', $rich_text_body);
     }
 
@@ -339,15 +339,15 @@ class UtilsRve extends AbsBase
 
         $regex_wrote_by_line = // Last line w/ `wrote:` in rich text body.
 
-          '/'. // Open regex; let's find a trailing `wrote:` by line.
+            '/'. // Open regex; let's find a trailing `wrote:` by line.
 
-          '(?:\s*\<[^\/<>]+\>\s*)*'. // Any HTML open tags wrapping it up.
+            '(?:\s*\<[^\/<>]+\>\s*)*'. // Any HTML open tags wrapping it up.
 
-          '\s*'.$regex_wrote_by_line_frag.'\s*'. // Any surrounding whitespace.
+            '\s*'.$regex_wrote_by_line_frag.'\s*'. // Any surrounding whitespace.
 
-          '(?:\s*\<\/[^<>]+\>\s*)*'. // Any closing tags wrapping it up.
+            '(?:\s*\<\/[^<>]+\>\s*)*'. // Any closing tags wrapping it up.
 
-          '$/'; // End of the string (very important in this case).
+            '$/'; // End of the string (very important in this case).
 
         return preg_replace($regex_wrote_by_line, '', $rich_text_body);
     }
@@ -380,27 +380,27 @@ class UtilsRve extends AbsBase
 
         $regex_manual_end_divider = // Manual end divider.
 
-          '/'. // Open regex; this divider can appear anywhere.
+            '/'. // Open regex; this divider can appear anywhere.
 
-          '(?:\s*\<[^\/<>]+\>\s*)*'. // Any HTML open tags wrapping the divider.
+            '(?:\s*\<[^\/<>]+\>\s*)*'. // Any HTML open tags wrapping the divider.
 
-          '\s*'.$regex_manual_end_divider_frag.'\s*'. // Including any surrounding whitespace.
+            '\s*'.$regex_manual_end_divider_frag.'\s*'. // Including any surrounding whitespace.
 
-          '(?:\s*\<\/[^<>]+\>\s*)*'. // Any closing tags wrapping the divider.
+            '(?:\s*\<\/[^<>]+\>\s*)*'. // Any closing tags wrapping the divider.
 
-          '/i'; // End of divider pattern.
+            '/i'; // End of divider pattern.
 
         $regex_end_divider = // Auto-generated end divider.
 
-          '/'. // Open regex; this divider can appear anywhere.
+            '/'. // Open regex; this divider can appear anywhere.
 
-          '(?:\s*\<[^\/<>]+\>\s*)*'. // Any HTML open tags wrapping the divider.
+            '(?:\s*\<[^\/<>]+\>\s*)*'. // Any HTML open tags wrapping the divider.
 
-          '\s*'.$regex_end_divider_frag.'\s*'. // Including any surrounding whitespace.
+            '\s*'.$regex_end_divider_frag.'\s*'. // Including any surrounding whitespace.
 
-          '(?:\s*\<\/[^<>]+\>\s*)*'. // Any closing tags wrapping the divider.
+            '(?:\s*\<\/[^<>]+\>\s*)*'. // Any closing tags wrapping the divider.
 
-          '/is'; // End of divider pattern.
+            '/is'; // End of divider pattern.
 
         $rich_text_body = $this->stripIrtMarkers($rich_text_body);
 
@@ -432,16 +432,16 @@ class UtilsRve extends AbsBase
     public function maybePostComment(array $args)
     {
         $default_args = [
-          'reply_to_email' => '',
+            'reply_to_email' => '',
 
-          'from_name'  => '',
-          'from_email' => '',
+            'from_name'  => '',
+            'from_email' => '',
 
-          'subject' => '',
+            'subject' => '',
 
-          'rich_text_body' => '',
+            'rich_text_body' => '',
 
-          'force_status' => '',
+            'force_status' => '',
         ];
         $args         = array_merge($default_args, $args);
         $args         = array_intersect_key($args, $default_args);
@@ -519,29 +519,29 @@ class UtilsRve extends AbsBase
         # Attempt to post; remaining validation performed by WP core and our filters.
 
         $response = wp_remote_post(
-          site_url('/wp-comments-post.php'), [
-            'user-agent'  => $this->plugin->name.'/'.$this->plugin->version,
-            'headers'     => [
-              'REMOTE_ADDR'          => $from_ip,
-              'HTTP_X_FORWARDED_FOR' => $from_ip,
-            ],
-            'redirection' => 0, // Don't follow redirects.
+            site_url('/wp-comments-post.php'), [
+                'user-agent'  => $this->plugin->name.'/'.$this->plugin->version,
+                'headers'     => [
+                    'REMOTE_ADDR'          => $from_ip,
+                    'HTTP_X_FORWARDED_FOR' => $from_ip,
+                ],
+                'redirection' => 0, // Don't follow redirects.
 
-            'body' => [
-              'comment_post_ID' => $post_id,
-              'comment_parent'  => $comment_id,
+                'body' => [
+                    'comment_post_ID' => $post_id,
+                    'comment_parent'  => $comment_id,
 
-              'author'  => $from_name,
-              'email'   => $from_email,
-              'comment' => $sanitized_rich_text_body,
+                    'author'  => $from_name,
+                    'email'   => $from_email,
+                    'comment' => $sanitized_rich_text_body,
 
-              'akismet_comment_nonce' => wp_create_nonce('akismet_comment_nonce_'.$post_id),
+                    'akismet_comment_nonce' => wp_create_nonce('akismet_comment_nonce_'.$post_id),
 
-              GLOBAL_NS.'_rve_key'          => static::key(), // Key identifier.
-              GLOBAL_NS.'_rve_sub_key'      => $sub_key, // Subscription key identifier.
-              GLOBAL_NS.'_rve_force_status' => $force_status, // Force a status?
-            ],
-          ]
+                    GLOBAL_NS.'_rve_key'          => static::key(), // Key identifier.
+                    GLOBAL_NS.'_rve_sub_key'      => $sub_key, // Subscription key identifier.
+                    GLOBAL_NS.'_rve_force_status' => $force_status, // Force a status?
+                ],
+            ]
         );
         if (is_wp_error($response)) { // Log for possible debugging later.
             $this->plugin->utils_log->maybeDebug($response);

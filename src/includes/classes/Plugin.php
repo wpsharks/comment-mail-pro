@@ -258,8 +258,8 @@ class Plugin extends AbsBase
         /*
          * Initialize properties.
          */
-        $this->enable_hooks = (boolean) $enable_hooks;
-        $this->text_domain  = $this->slug  = str_replace('_', '-', GLOBAL_NS);
+        $this->enable_hooks = (boolean)$enable_hooks;
+        $this->text_domain  = $this->slug = str_replace('_', '-', GLOBAL_NS);
         $this->file         = dirname(dirname(dirname(dirname(__DIR__)))).'/plugin.php';
 
         /*
@@ -343,7 +343,7 @@ class Plugin extends AbsBase
 
             # Related to the stats pinger.
 
-            'last_pro_stats_log' => '0', // Timestamp.
+            'last_pro_stats_log'      => '0', // Timestamp.
 
             /* Low-level switches to enable/disable certain functionalities.
              *
@@ -415,8 +415,8 @@ class Plugin extends AbsBase
 
             # Related to CAN-SPAM compliance.
 
-            'can_spam_postmaster'      => get_bloginfo('admin_email'),
-            'can_spam_mailing_address' => get_bloginfo('name').'<br />'."\n".
+            'can_spam_postmaster'         => get_bloginfo('admin_email'),
+            'can_spam_mailing_address'    => get_bloginfo('name').'<br />'."\n".
                                              '123 Somewhere Street<br />'."\n".
                                              'Attn: Comment Subscriptions<br />'."\n".
                                              'Somewhere, USA 99999 ~ Ph: 555-555-5555', // CAN-SPAM contact info.
@@ -424,12 +424,12 @@ class Plugin extends AbsBase
 
             # Related to auto-subscribe functionality.
 
-            'auto_subscribe_enable'             => '1', // `0|1`; auto-subscribe enable?
-            'auto_subscribe_deliver'            => 'asap', // `asap`, `hourly`, `daily`, `weekly`.
-            'auto_subscribe_post_types'         => 'post', // Comma-delimited post types.
-            'auto_subscribe_post_author_enable' => '1', // `0|1`; auto-subscribe post authors?
-            'auto_subscribe_recipients'         => '', // Others `;|,` delimited emails.
-            'auto_subscribe_roles'              => '', // Comma-delimited list of WP Roles.
+            'auto_subscribe_enable'                          => '1', // `0|1`; auto-subscribe enable?
+            'auto_subscribe_deliver'                         => 'asap', // `asap`, `hourly`, `daily`, `weekly`.
+            'auto_subscribe_post_types'                      => 'post', // Comma-delimited post types.
+            'auto_subscribe_post_author_enable'              => '1', // `0|1`; auto-subscribe post authors?
+            'auto_subscribe_recipients'                      => '', // Others `;|,` delimited emails.
+            'auto_subscribe_roles'                           => '', // Comma-delimited list of WP Roles.
 
             /* Auto-confirm functionality and security issues related to this.
 
@@ -722,7 +722,7 @@ class Plugin extends AbsBase
          */
         add_filter('cron_schedules', [$this, 'extendCronSchedules'], 10, 1);
 
-        if ((integer) $this->options['crons_setup'] < 1382523750) {
+        if ((integer)$this->options['crons_setup'] < 1382523750) {
             wp_clear_scheduled_hook('_cron_'.GLOBAL_NS.'_queue_processor');
             wp_schedule_event(time() + 60, 'every5m', '_cron_'.GLOBAL_NS.'_queue_processor');
 
@@ -732,7 +732,7 @@ class Plugin extends AbsBase
             wp_clear_scheduled_hook('_cron_'.GLOBAL_NS.'_log_cleaner');
             wp_schedule_event(time() + 60, 'hourly', '_cron_'.GLOBAL_NS.'_log_cleaner');
 
-            $this->options['crons_setup'] = (string) time();
+            $this->options['crons_setup'] = (string)time();
             update_option(GLOBAL_NS.'_options', $this->options);
         }
         add_action('_cron_'.GLOBAL_NS.'_queue_processor', [$this, 'queueProcessor'], 10);
@@ -763,11 +763,11 @@ class Plugin extends AbsBase
      */
     public function __get($property)
     {
-        $property = (string) $property;
+        $property = (string)$property;
 
         // This loads utilities.
         if (strpos($property, 'utils_') === 0) {
-            $class_property = ucfirst(
+            $class_property    = ucfirst(
                 preg_replace_callback(
                     '/_(.)/',
                     function ($m) {
@@ -800,7 +800,7 @@ class Plugin extends AbsBase
      */
     public function installTime()
     {
-        return (integer) get_option(GLOBAL_NS.'_install_time');
+        return (integer)get_option(GLOBAL_NS.'_install_time');
     }
 
     /**
@@ -1013,7 +1013,7 @@ class Plugin extends AbsBase
                 return; // Do not add meta boxes.
             }
         }
-        $post_type = strtolower((string) $post_type);
+        $post_type = strtolower((string)$post_type);
 
         $enabled_post_types = strtolower($this->options['enabled_post_types']);
         $enabled_post_types = preg_split('/[\s;,]+/', $enabled_post_types, null, PREG_SPLIT_NO_EMPTY);
@@ -1174,9 +1174,9 @@ class Plugin extends AbsBase
                 'bulkDeleteConfirmation'    => $this->utils_env->isMenuPage('*_event_log')
                     ? $this->utils_i18n->logEntryJsDeletionConfirmationWarning()
                     : __('Delete permanently? Are you sure?', $this->text_domain),
-                'dateTimePickerI18n' => [
+                'dateTimePickerI18n'        => [
                     'en' => [
-                        'months' => [
+                        'months'    => [
                             __('January', $this->text_domain),
                             __('February', $this->text_domain),
                             __('March', $this->text_domain),
@@ -1847,7 +1847,7 @@ class Plugin extends AbsBase
         if ($this->options['last_pro_update_check'] >= strtotime('-1 hour')) {
             return; // No reason to keep checking on this.
         }
-        $this->optionsQuickSave(['last_pro_update_check' => (string) time()]);
+        $this->optionsQuickSave(['last_pro_update_check' => (string)time()]);
 
         $product_api_url        = $this->utils_url->productPage('https');
         $product_api_input_vars = ['product_api' => ['action' => 'latest_pro_version']];
@@ -1885,13 +1885,13 @@ class Plugin extends AbsBase
         if (!current_user_can($this->update_cap)) {
             return $transient; // Nothing to do.
         }
-        if (empty($_r['_wpnonce']) || !wp_verify_nonce((string) $_r['_wpnonce'], 'upgrade-plugin_'.plugin_basename($this->file))) {
+        if (empty($_r['_wpnonce']) || !wp_verify_nonce((string)$_r['_wpnonce'], 'upgrade-plugin_'.plugin_basename($this->file))) {
             return $transient; // Nothing to doe.
         }
-        if (empty($_r[GLOBAL_NS.'_update_pro_version']) || !($update_pro_version = (string) $_r[GLOBAL_NS.'_update_pro_version'])) {
+        if (empty($_r[GLOBAL_NS.'_update_pro_version']) || !($update_pro_version = (string)$_r[GLOBAL_NS.'_update_pro_version'])) {
             return $transient; // Nothing to do.
         }
-        if (empty($_r[GLOBAL_NS.'_update_pro_zip']) || !($update_pro_zip = base64_decode((string) $_r[GLOBAL_NS.'_update_pro_zip'], true))) {
+        if (empty($_r[GLOBAL_NS.'_update_pro_zip']) || !($update_pro_zip = base64_decode((string)$_r[GLOBAL_NS.'_update_pro_zip'], true))) {
             return $transient; // Nothing to do.
         }
         if (!is_object($transient)) {
@@ -1899,7 +1899,7 @@ class Plugin extends AbsBase
         }
         $transient->last_checked                           = time();
         $transient->checked[plugin_basename($this->file)]  = $this->version;
-        $transient->response[plugin_basename($this->file)] = (object) [
+        $transient->response[plugin_basename($this->file)] = (object)[
             'id'          => 0, // It has no ID in this case.
             'slug'        => $this->slug.'-pro',
             'url'         => $this->utils_url->proUpdaterMenuPageOnly(),
@@ -1930,10 +1930,10 @@ class Plugin extends AbsBase
         if (empty($_r['action']) || $_r['action'] !== 'upgrade-plugin') {
             return $types; // Nothing to do here.
         }
-        if (empty($_r[GLOBAL_NS.'_update_pro_version']) || !($update_pro_version = (string) $_r[GLOBAL_NS.'_update_pro_version'])) {
+        if (empty($_r[GLOBAL_NS.'_update_pro_version']) || !($update_pro_version = (string)$_r[GLOBAL_NS.'_update_pro_version'])) {
             return $types; // Nothing to do here.
         }
-        if (empty($_r[GLOBAL_NS.'_update_pro_zip']) || !($update_pro_zip = (string) $_r[GLOBAL_NS.'_update_pro_zip'])) {
+        if (empty($_r[GLOBAL_NS.'_update_pro_zip']) || !($update_pro_zip = (string)$_r[GLOBAL_NS.'_update_pro_zip'])) {
             return $types; // Nothing to do here.
         }
         echo '<script type="text/javascript">';
@@ -1961,10 +1961,10 @@ class Plugin extends AbsBase
      */
     public function enqueueNotice($markup, array $args = [])
     {
-        if (!($markup = trim((string) $markup))) {
+        if (!($markup = trim((string)$markup))) {
             return; // Nothing to do here.
         }
-        $default_args = [
+        $default_args   = [
             'markup'        => '',
             'requires_cap'  => '',
             'for_user_id'   => 0,
@@ -1975,21 +1975,21 @@ class Plugin extends AbsBase
             'push_to_top'   => false,
             'type'          => 'notice',
         ];
-        $args['markup'] = (string) $markup; // + markup.
+        $args['markup'] = (string)$markup; // + markup.
         $args           = array_merge($default_args, $args);
         $args           = array_intersect_key($args, $default_args);
 
-        $args['requires_cap'] = trim((string) $args['requires_cap']);
+        $args['requires_cap'] = trim((string)$args['requires_cap']);
         $args['requires_cap'] = $args['requires_cap'] // Force valid format.
             ? strtolower(preg_replace('/\W/', '_', $args['requires_cap'])) : '';
 
-        $args['for_user_id'] = (integer) $args['for_user_id'];
-        $args['for_page']    = trim((string) $args['for_page']);
+        $args['for_user_id'] = (integer)$args['for_user_id'];
+        $args['for_page']    = trim((string)$args['for_page']);
 
-        $args['persistent']    = (boolean) $args['persistent'];
-        $args['persistent_id'] = (string) $args['persistent_id'];
-        $args['transient']     = (boolean) $args['transient'];
-        $args['push_to_top']   = (boolean) $args['push_to_top'];
+        $args['persistent']    = (boolean)$args['persistent'];
+        $args['persistent_id'] = (string)$args['persistent_id'];
+        $args['transient']     = (boolean)$args['transient'];
+        $args['push_to_top']   = (boolean)$args['push_to_top'];
 
         if (!in_array($args['type'], ['notice', 'error', 'warning'], true)) {
             $args['type'] = 'notice'; // Use default type.
@@ -2100,22 +2100,22 @@ class Plugin extends AbsBase
                 'push_to_top'   => false,
                 'type'          => 'notice',
             ];
-            $_args = array_merge($default_args, $_args);
-            $_args = array_intersect_key($_args, $default_args);
+            $_args        = array_merge($default_args, $_args);
+            $_args        = array_intersect_key($_args, $default_args);
 
-            $_args['markup'] = trim((string) $_args['markup']);
+            $_args['markup'] = trim((string)$_args['markup']);
 
-            $_args['requires_cap'] = trim((string) $_args['requires_cap']);
+            $_args['requires_cap'] = trim((string)$_args['requires_cap']);
             $_args['requires_cap'] = $_args['requires_cap'] // Force valid format.
                 ? strtolower(preg_replace('/\W/', '_', $_args['requires_cap'])) : '';
 
-            $_args['for_user_id'] = (integer) $_args['for_user_id'];
-            $_args['for_page']    = trim((string) $_args['for_page']);
+            $_args['for_user_id'] = (integer)$_args['for_user_id'];
+            $_args['for_page']    = trim((string)$_args['for_page']);
 
-            $_args['persistent']    = (boolean) $_args['persistent'];
-            $_args['persistent_id'] = (string) $_args['persistent_id'];
-            $_args['transient']     = (boolean) $_args['transient'];
-            $_args['push_to_top']   = (boolean) $_args['push_to_top'];
+            $_args['persistent']    = (boolean)$_args['persistent'];
+            $_args['persistent_id'] = (string)$_args['persistent_id'];
+            $_args['transient']     = (boolean)$_args['transient'];
+            $_args['push_to_top']   = (boolean)$_args['push_to_top'];
 
             if (!in_array($_args['type'], ['notice', 'error', 'warning'], true)) {
                 $_args['type'] = 'notice'; // Use default type.
@@ -2142,8 +2142,8 @@ class Plugin extends AbsBase
                                       'display: inline-block;'.
                                       'text-decoration: none;'.
                                       'font-weight: bold;';
-                    $_dismiss_url = $this->utils_url->dismissNotice($_key);
-                    $_dismiss     = '<a href="'.esc_attr($_dismiss_url).'"'.
+                    $_dismiss_url   = $this->utils_url->dismissNotice($_key);
+                    $_dismiss       = '<a href="'.esc_attr($_dismiss_url).'"'.
                                       '  style="'.esc_attr($_dismiss_style).'">'.
                                       '  '.__('dismiss &times;', $this->text_domain).
                                       '</a>';
@@ -2234,7 +2234,7 @@ class Plugin extends AbsBase
      *
      * @attaches-to `transition_post_status` action.
      *
-     * @param string $new_post_status New post status.
+     * @param string        $new_post_status New post status.
      *
      *    One of the following statuses:
      *    See: <http://codex.wordpress.org/Function_Reference/get_post_status>
@@ -2250,7 +2250,7 @@ class Plugin extends AbsBase
      *
      *    See also: {@link get_available_post_statuses()}
      *       Custom post types may have their own statuses.
-     * @param string $old_post_status Old post status.
+     * @param string        $old_post_status Old post status.
      *
      *    One of the following statuses:
      *    See: <http://codex.wordpress.org/Function_Reference/get_post_status>
@@ -2267,7 +2267,7 @@ class Plugin extends AbsBase
      *
      *    See also: {@link get_available_post_statuses()}
      *       Custom post types may have their own statuses.
-     * @param \WP_Post|null $post Post object instance.
+     * @param \WP_Post|null $post            Post object instance.
      */
     public function postStatus($new_post_status, $old_post_status, \WP_Post $post = null)
     {
@@ -2428,19 +2428,19 @@ class Plugin extends AbsBase
      *
      * @attaches-to `transition_comment_status` action.
      *
-     * @param int|string $new_comment_status New comment status.
+     * @param int|string       $new_comment_status New comment status.
      *
      *    One of the following:
      *       - `0` (aka: ``, `hold`, `unapprove`, `unapproved`, `moderated`),
      *       - `1` (aka: `approve`, `approved`),
      *       - or `trash`, `post-trashed`, `spam`, `delete`.
-     * @param int|string $old_comment_status Old comment status.
+     * @param int|string       $old_comment_status Old comment status.
      *
      *    One of the following:
      *       - `0` (aka: ``, `hold`, `unapprove`, `unapproved`, `moderated`),
      *       - `1` (aka: `approve`, `approved`),
      *       - or `trash`, `post-trashed`, `spam`, `delete`.
-     * @param \WP_Comment|null $comment Comment object (now).
+     * @param \WP_Comment|null $comment            Comment object (now).
      */
     public function commentStatus($new_comment_status, $old_comment_status, \WP_Comment $comment = null)
     {
@@ -2479,7 +2479,7 @@ class Plugin extends AbsBase
      *       - `0` (aka: ``, `hold`, `unapprove`, `unapproved`, `moderated`),
      *       - `1` (aka: `approve`, `approved`),
      *       - or `trash`, `post-trashed`, `spam`, `delete`.
-     * @param array $comment_data An array of all comment data associated w/ a new comment being created.
+     * @param array      $comment_data   An array of all comment data associated w/ a new comment being created.
      *
      * @return int|string Filtered `$comment_status` value.
      */

@@ -32,11 +32,11 @@ class SubActions extends AbsBase
         parent::__construct();
 
         $this->valid_actions = [
-          'confirm',
-          'unsubscribe',
-          'unsubscribe_all',
+            'confirm',
+            'unsubscribe',
+            'unsubscribe_all',
 
-          'manage',
+            'manage',
         ];
         $this->maybeHandle();
     }

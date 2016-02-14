@@ -68,14 +68,14 @@ class CommentFormAfter extends AbsBase
         } // Ignore; not enabled for this post type.
 
         $current_info = // Current info; for this post ID.
-          $this->plugin->utils_sub->currentEmailLatestInfo(
-            ['post_id' => $post_id, 'comment_form_defaults' => true]
-          );
+            $this->plugin->utils_sub->currentEmailLatestInfo(
+                ['post_id' => $post_id, 'comment_form_defaults' => true]
+            );
         // @TODO What if they have a subscription, but not on this post?
         $current = (object)[
-          'sub_email'   => $current_info->email,
-          'sub_type'    => $current_info->type,
-          'sub_deliver' => $current_info->deliver,
+            'sub_email'   => $current_info->email,
+            'sub_type'    => $current_info->type,
+            'sub_deliver' => $current_info->deliver,
         ];
         unset($current_info); // Ditch this now.
 

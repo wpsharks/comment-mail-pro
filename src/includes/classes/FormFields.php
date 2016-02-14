@@ -48,9 +48,9 @@ class FormFields extends AbsBase
         parent::__construct();
 
         $default_args = [
-          'ns_id_suffix'   => '',
-          'ns_name_suffix' => '',
-          'class_prefix'   => '',
+            'ns_id_suffix'   => '',
+            'ns_name_suffix' => '',
+            'class_prefix'   => '',
         ];
         $args         = array_merge($default_args, $args);
         $args         = array_intersect_key($args, $default_args);
@@ -72,28 +72,28 @@ class FormFields extends AbsBase
     public function inputRow(array $args = [])
     {
         $default_args = [
-          'type'           => 'text',
-          'label'          => '',
-          'checkbox_label' => '',
-          'radio_label'    => '',
-          'placeholder'    => '',
+            'type'           => 'text',
+            'label'          => '',
+            'checkbox_label' => '',
+            'radio_label'    => '',
+            'placeholder'    => '',
 
-          'name'      => '',
-          'root_name' => false,
+            'name'      => '',
+            'root_name' => false,
 
-          'required'                 => false,
-          'maxlength'                => 0,
-          'current_value'            => null,
-          'current_value_empty_on_0' => false,
+            'required'                 => false,
+            'maxlength'                => 0,
+            'current_value'            => null,
+            'current_value_empty_on_0' => false,
 
-          'notes_before' => '',
-          'notes_after'  => '',
+            'notes_before' => '',
+            'notes_after'  => '',
 
-          'post_id'              => null,
-          'nested_checkbox_args' => [],
-          'field_class'          => '',
-          'other_attrs'          => '',
-          'exclude_th'           => false,
+            'post_id'              => null,
+            'nested_checkbox_args' => [],
+            'field_class'          => '',
+            'other_attrs'          => '',
+            'exclude_th'           => false,
         ];
         $args         = array_merge($default_args, $args);
         $args         = array_intersect_key($args, $default_args);
@@ -137,7 +137,7 @@ class FormFields extends AbsBase
             $row .= '<th scope="row">';
             $row .= '   <label for="'.esc_attr($id).'">'.
                     '      '.$label.($required ? // Change the short description based on this boolean.
-                '        <span class="description">'.__('(required) *', $this->plugin->text_domain).'</span>' : '').
+                    '        <span class="description">'.__('(required) *', $this->plugin->text_domain).'</span>' : '').
                     '   </label>';
             $row .= '</th>';
         }
@@ -147,7 +147,7 @@ class FormFields extends AbsBase
             $row .= $this->hiddenInput($args);
         } else {
             $row .= ($notes_before ? // Display notes before?
-                '        <div class="notes notes-before">'.$notes_before.'</div>' : '').
+                    '        <div class="notes notes-before">'.$notes_before.'</div>' : '').
 
                     '    <input type="'.esc_attr($type).'"'.
 
@@ -168,16 +168,16 @@ class FormFields extends AbsBase
                     '     '.$other_attrs.' />'.
 
                     ($type === 'checkbox' && $checkbox_label
-                      ? '<label for="'.esc_attr($id).'">'.$checkbox_label.'</label>' : '').
+                        ? '<label for="'.esc_attr($id).'">'.$checkbox_label.'</label>' : '').
 
                     ($type === 'radio' && $radio_label
-                      ? '<label for="'.esc_attr($id).'">'.$radio_label.'</label>' : '').
+                        ? '<label for="'.esc_attr($id).'">'.$radio_label.'</label>' : '').
 
                     ($notes_after ? // Display notes after?
-                      '<div class="notes notes-after">'.$notes_after.'</div>' : '').
+                        '<div class="notes notes-after">'.$notes_after.'</div>' : '').
 
                     ($nested_checkbox_args // Include a nested checkbox?
-                      ? '<p class="checkbox">'.$this->nestedCheckbox($nested_checkbox_args).'</p>' : '');
+                        ? '<p class="checkbox">'.$this->nestedCheckbox($nested_checkbox_args).'</p>' : '');
         }
         $row .= ' </td>';
 
@@ -198,30 +198,30 @@ class FormFields extends AbsBase
     public function textareaRow(array $args = [])
     {
         $default_args = [
-          'label'       => '',
-          'placeholder' => '',
+            'label'       => '',
+            'placeholder' => '',
 
-          'name'      => '',
-          'root_name' => false,
+            'name'      => '',
+            'root_name' => false,
 
-          'rows'                     => 3,
-          'required'                 => false,
-          'maxlength'                => 0,
-          'current_value'            => null,
-          'current_value_empty_on_0' => false,
+            'rows'                     => 3,
+            'required'                 => false,
+            'maxlength'                => 0,
+            'current_value'            => null,
+            'current_value_empty_on_0' => false,
 
-          'cm_mode'    => '',
-          'cm_height'  => 500,
-          'cm_details' => '',
+            'cm_mode'    => '',
+            'cm_height'  => 500,
+            'cm_details' => '',
 
-          'notes_before' => '',
-          'notes_after'  => '',
+            'notes_before' => '',
+            'notes_after'  => '',
 
-          'post_id'              => null,
-          'nested_checkbox_args' => [],
-          'field_class'          => '',
-          'other_attrs'          => '',
-          'exclude_th'           => false,
+            'post_id'              => null,
+            'nested_checkbox_args' => [],
+            'field_class'          => '',
+            'other_attrs'          => '',
+            'exclude_th'           => false,
         ];
         $args         = array_merge($default_args, $args);
         $args         = array_intersect_key($args, $default_args);
@@ -266,7 +266,7 @@ class FormFields extends AbsBase
             $row .= '<th scope="row">';
             $row .= '   <label for="'.esc_attr($id).'">'.
                     '      '.$label.($required ? // Change the short description based on this boolean.
-                '        <span class="description">'.__('(required) *', $this->plugin->text_domain).'</span>' : '').
+                    '        <span class="description">'.__('(required) *', $this->plugin->text_domain).'</span>' : '').
                     ($cm_mode ? '<span class="description" style="margin-left:2em;">'.
                                 '   <small>'.__('(<code>F11</code> toggles fullscreen editing)', $this->plugin->text_domain).'</small>'.
                                 ($cm_details ? '<small style="margin-left:2em;">'.$cm_details.'</small>' : '').
@@ -277,10 +277,10 @@ class FormFields extends AbsBase
         $row .= ' <td>';
 
         $row .= ($notes_before ? // Display notes before?
-            '     <div class="notes notes-before">'.$notes_before.'</div>' : '').
+                '     <div class="notes notes-before">'.$notes_before.'</div>' : '').
 
                 ($cm_mode ? // For a CodeMirror?
-                  '<div data-cm-mode="'.esc_attr($cm_mode).'" data-cm-height="'.esc_attr($cm_height).'">' : '').
+                    '<div data-cm-mode="'.esc_attr($cm_mode).'" data-cm-height="'.esc_attr($cm_height).'">' : '').
 
                 '    <textarea'. // Possibly wrapped by a div.
 
@@ -301,13 +301,13 @@ class FormFields extends AbsBase
                 '     '.$other_attrs.'>'.esc_textarea(trim((string)$current_value)).'</textarea>'.
 
                 ($cm_mode ? // For a CodeMirror?
-                  '</div>' : ''). // Close div wrapper in this case.
+                    '</div>' : ''). // Close div wrapper in this case.
 
                 ($notes_after ? // Display notes after?
-                  '<div class="notes notes-after">'.$notes_after.'</div>' : '').
+                    '<div class="notes notes-after">'.$notes_after.'</div>' : '').
 
                 ($nested_checkbox_args // Include a nested checkbox?
-                  ? '<p class="checkbox">'.$this->nestedCheckbox($nested_checkbox_args).'</p>' : '');
+                    ? '<p class="checkbox">'.$this->nestedCheckbox($nested_checkbox_args).'</p>' : '');
 
         $row .= ' </td>';
 
@@ -329,31 +329,31 @@ class FormFields extends AbsBase
     public function selectRow(array $args = [])
     {
         $default_args = [
-          'type'        => 'text',
-          'label'       => '',
-          'placeholder' => '',
+            'type'        => 'text',
+            'label'       => '',
+            'placeholder' => '',
 
-          'name'      => '',
-          'root_name' => false,
+            'name'      => '',
+            'root_name' => false,
 
-          'required'                 => false,
-          'maxlength'                => 0,
-          'options'                  => '',
-          'current_value'            => null,
-          'current_value_empty_on_0' => false,
+            'required'                 => false,
+            'maxlength'                => 0,
+            'options'                  => '',
+            'current_value'            => null,
+            'current_value_empty_on_0' => false,
 
-          'notes_before' => '',
-          'notes_after'  => '',
+            'notes_before' => '',
+            'notes_after'  => '',
 
-          'post_id'              => null,
-          'nested_checkbox_args' => [],
-          'field_class'          => '',
-          'other_attrs'          => '',
-          'exclude_th'           => false,
+            'post_id'              => null,
+            'nested_checkbox_args' => [],
+            'field_class'          => '',
+            'other_attrs'          => '',
+            'exclude_th'           => false,
 
-          'allow_empty'         => true,
-          'allow_arbitrary'     => true,
-          'input_fallback_args' => [],
+            'allow_empty'         => true,
+            'allow_arbitrary'     => true,
+            'input_fallback_args' => [],
         ];
         $args         = array_merge($default_args, $args);
         $args         = array_intersect_key($args, $default_args);
@@ -421,14 +421,14 @@ class FormFields extends AbsBase
             $row .= '<th scope="row">';
             $row .= '   <label for="'.esc_attr($id).'">'.
                     '      '.$label.($required ? // Change the short description based on this boolean.
-                '        <span class="description">'.__('(required) *', $this->plugin->text_domain).'</span>' : '').
+                    '        <span class="description">'.__('(required) *', $this->plugin->text_domain).'</span>' : '').
                     '   </label>';
             $row .= '</th>';
         }
         $row .= ' <td>';
 
         $row .= ($notes_before ? // Display notes before?
-            '     <div class="notes notes-before">'.$notes_before.'</div>' : '').
+                '     <div class="notes notes-before">'.$notes_before.'</div>' : '').
 
                 '    <select'. // Select menu options.
 
@@ -451,10 +451,10 @@ class FormFields extends AbsBase
                 '    </select>'.
 
                 ($notes_after ? // Display notes after?
-                  '<div class="notes notes-after">'.$notes_after.'</div>' : '').
+                    '<div class="notes notes-after">'.$notes_after.'</div>' : '').
 
                 ($nested_checkbox_args // Include a nested checkbox?
-                  ? '<p class="checkbox">'.$this->nestedCheckbox($nested_checkbox_args).'</p>' : '');
+                    ? '<p class="checkbox">'.$this->nestedCheckbox($nested_checkbox_args).'</p>' : '');
 
         $row .= ' </td>';
 
@@ -495,15 +495,15 @@ class FormFields extends AbsBase
     public function nestedCheckbox(array $args = [])
     {
         $default_args = [
-          'label' => '',
+            'label' => '',
 
-          'name'      => '',
-          'root_name' => false,
+            'name'      => '',
+            'root_name' => false,
 
-          'current_value' => null,
+            'current_value' => null,
 
-          'field_class' => '',
-          'other_attrs' => '',
+            'field_class' => '',
+            'other_attrs' => '',
         ];
         $args         = array_merge($default_args, $args);
         $args         = array_intersect_key($args, $default_args);
@@ -558,13 +558,13 @@ class FormFields extends AbsBase
     public function hiddenInput(array $args = [])
     {
         $default_args = [
-          'name'      => '',
-          'root_name' => false,
+            'name'      => '',
+            'root_name' => false,
 
-          'current_value' => null,
+            'current_value' => null,
 
-          'field_class' => '',
-          'other_attrs' => '',
+            'field_class' => '',
+            'other_attrs' => '',
         ];
         $args         = array_merge($default_args, $args);
         $args         = array_intersect_key($args, $default_args);

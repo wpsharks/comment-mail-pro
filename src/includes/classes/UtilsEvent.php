@@ -266,22 +266,22 @@ class UtilsEvent extends AbsBase
     {
         if (is_null($keys = &$this->cacheKey(__FUNCTION__, 'keys'))) {
             $keys = [
-              'key' => __('Subscr. Key', $this->plugin->text_domain),
+                'key' => __('Subscr. Key', $this->plugin->text_domain),
 
-              'user_id'    => __('WP User ID', $this->plugin->text_domain),
-              'post_id'    => __('Post ID', $this->plugin->text_domain),
-              'comment_id' => __('Comment ID', $this->plugin->text_domain),
+                'user_id'    => __('WP User ID', $this->plugin->text_domain),
+                'post_id'    => __('Post ID', $this->plugin->text_domain),
+                'comment_id' => __('Comment ID', $this->plugin->text_domain),
 
-              'status'  => __('Status', $this->plugin->text_domain),
-              'deliver' => __('Delivery', $this->plugin->text_domain),
+                'status'  => __('Status', $this->plugin->text_domain),
+                'deliver' => __('Delivery', $this->plugin->text_domain),
 
-              'fname' => __('First Name', $this->plugin->text_domain),
-              'lname' => __('Last Name', $this->plugin->text_domain),
-              'email' => __('Email Address', $this->plugin->text_domain),
+                'fname' => __('First Name', $this->plugin->text_domain),
+                'lname' => __('Last Name', $this->plugin->text_domain),
+                'email' => __('Email Address', $this->plugin->text_domain),
 
-              'ip'      => __('IP Address', $this->plugin->text_domain),
-              'region'  => __('IP Region', $this->plugin->text_domain),
-              'country' => __('IP Country', $this->plugin->text_domain),
+                'ip'      => __('IP Address', $this->plugin->text_domain),
+                'region'  => __('IP Region', $this->plugin->text_domain),
+                'country' => __('IP Country', $this->plugin->text_domain),
             ];
         }
         $change_counter = 1; // Initialize; last update time always changes.
@@ -311,22 +311,22 @@ class UtilsEvent extends AbsBase
     {
         if (is_null($keys = &$this->cacheKey(__FUNCTION__, 'keys'))) {
             $keys = [
-              'key' => __('Subscr. Key', $this->plugin->text_domain),
+                'key' => __('Subscr. Key', $this->plugin->text_domain),
 
-              'user_id'    => __('WP User ID', $this->plugin->text_domain),
-              'post_id'    => __('Post ID', $this->plugin->text_domain),
-              'comment_id' => __('Comment ID', $this->plugin->text_domain),
+                'user_id'    => __('WP User ID', $this->plugin->text_domain),
+                'post_id'    => __('Post ID', $this->plugin->text_domain),
+                'comment_id' => __('Comment ID', $this->plugin->text_domain),
 
-              'status'  => __('Status', $this->plugin->text_domain),
-              'deliver' => __('Delivery', $this->plugin->text_domain),
+                'status'  => __('Status', $this->plugin->text_domain),
+                'deliver' => __('Delivery', $this->plugin->text_domain),
 
-              'fname' => __('First Name', $this->plugin->text_domain),
-              'lname' => __('Last Name', $this->plugin->text_domain),
-              'email' => __('Email Address', $this->plugin->text_domain),
+                'fname' => __('First Name', $this->plugin->text_domain),
+                'lname' => __('Last Name', $this->plugin->text_domain),
+                'email' => __('Email Address', $this->plugin->text_domain),
 
-              'ip'      => __('IP Address', $this->plugin->text_domain),
-              'region'  => __('IP Region', $this->plugin->text_domain),
-              'country' => __('IP Country', $this->plugin->text_domain),
+                'ip'      => __('IP Address', $this->plugin->text_domain),
+                'region'  => __('IP Region', $this->plugin->text_domain),
+                'country' => __('IP Country', $this->plugin->text_domain),
             ];
         }
         $change_lis = []; // Initialize.

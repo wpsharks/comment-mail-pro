@@ -72,10 +72,10 @@ class ImportSubs extends AbsBase
         parent::__construct();
 
         $default_request_args = [
-          'data'                  => '',
-          'data_file'             => '',
-          'process_confirmations' => false,
-          'max_limit'             => 5000,
+            'data'                  => '',
+            'data_file'             => '',
+            'process_confirmations' => false,
+            'max_limit'             => 5000,
         ];
         $request_args         = array_merge($default_request_args, $request_args);
         $request_args         = array_intersect_key($request_args, $default_request_args);
@@ -139,14 +139,14 @@ class ImportSubs extends AbsBase
             }
             if ($current_csv_line_index >= 1 && !$csv_headers) {
                 $this->errors[] = // Missing required headers.
-                  __('Missing first-line CSV headers; please try again.', $this->plugin->text_domain);
+                    __('Missing first-line CSV headers; please try again.', $this->plugin->text_domain);
                 break; // Stop here; we have no headers in this importation.
             }
             if ($current_csv_line_index >= 1 && !in_array('ID', $csv_headers, true)) {
                 if (!in_array('email', $csv_headers, true) || !in_array('post_id', $csv_headers, true)) {
                     $this->errors[] = // Missing required headers.
-                      __('First-line CSV headers MUST contain (at a minimum); one of:', $this->plugin->text_domain).
-                      ' '.__('<code>"ID"</code>, or <code>"email"</code> together with a <code>"post_id"</code>.', $this->plugin->text_domain);
+                        __('First-line CSV headers MUST contain (at a minimum); one of:', $this->plugin->text_domain).
+                        ' '.__('<code>"ID"</code>, or <code>"email"</code> together with a <code>"post_id"</code>.', $this->plugin->text_domain);
                     break; // Stop here; we have no headers in this importation.
                 }
             }
@@ -191,7 +191,7 @@ class ImportSubs extends AbsBase
                 $this->errors = array_merge($this->errors, $_sub_inserter_errors);
             }
             unset($_sub_inserter, $_sub_inserter_errors, // Housekeeping.
-              $_sub_inserter_error, $_sub_inserter_error_prefix);
+                $_sub_inserter_error, $_sub_inserter_error_prefix);
 
             if ($current_csv_line_number + 1 > $this->max_limit) {
                 break; // Reached the max limit.
@@ -220,7 +220,7 @@ class ImportSubs extends AbsBase
 
         return $key !== false && isset($csv_line[$key])
                && is_string($csv_line[$key]) && isset($csv_line[$key][0])
-          ? (string)$csv_line[$key] : null;
+            ? (string)$csv_line[$key] : null;
     }
 
     /**

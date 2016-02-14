@@ -32,15 +32,15 @@ class SubManageActions extends AbsBase
         parent::__construct();
 
         $this->valid_actions = [
-          'summary',
-          'summary_nav',
+            'summary',
+            'summary_nav',
 
-          'sub_form',
-          'sub_form_comment_id_row_via_ajax',
+            'sub_form',
+            'sub_form_comment_id_row_via_ajax',
 
-          'sub_new',
-          'sub_edit',
-          'sub_delete',
+            'sub_new',
+            'sub_edit',
+            'sub_delete',
         ];
         $this->maybeHandle();
     }
