@@ -275,7 +275,7 @@ namespace WebSharks\CommentMail\Pro;
 					$mail_smtp = new MailSmtp(TRUE); // Single instance w/ debugging.
 
 					$sent                = $mail_smtp->send($to, $subject, $message, $headers, $attachments);
-					$debug_output_markup = $this->plugin->utils_string->trim_html($mail_smtp->debug_output_markup());
+					$debug_output_markup = $this->plugin->utils_string->trim_html($mail_smtp->debugOutputMarkup());
 				}
 				else $debug_output_markup = __('Complete failure; configuration incomplete.', $this->plugin->text_domain);
 
