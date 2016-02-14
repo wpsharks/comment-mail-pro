@@ -2,281 +2,279 @@
 /**
  * SSO Storage
  *
- * @since 141111 First documented version.
+ * @since     141111 First documented version.
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
- * @license GNU General Public License, version 3
+ * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
+use OAuth\Common\Token\TokenInterface;
+use OAuth\Common\Storage\Exception\TokenNotFoundException;
+use OAuth\Common\Storage\Exception\AuthorizationStateNotFoundException;
 
-	use OAuth\Common\Token\TokenInterface;
-	use OAuth\Common\Storage\Exception\TokenNotFoundException;
-	use OAuth\Common\Storage\Exception\AuthorizationStateNotFoundException;
+/**
+ * SSO Storage
+ *
+ * @since 141111 First documented version.
+ */
+class SsoStorage implements \OAuth\Common\Storage\TokenStorageInterface
+{
+    /**
+     * @var plugin Plugin class reference.
+     *
+     * @since 141111 First documented version.
+     */
+    protected $plugin;
 
+    /**
+     * @var integer Time to live.
+     *
+     * @since 141111 First documented version.
+     */
+    protected $ttl;
 
-		/**
-		 * SSO Storage
-		 *
-		 * @since 141111 First documented version.
-		 */
-	class SsoStorage implements \OAuth\Common\Storage\TokenStorageInterface
-		{
-			/**
-			 * @var plugin Plugin class reference.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected $plugin;
+    /**
+     * @var string SSO cookie key.
+     *
+     * @since 141111 First documented version.
+     */
+    protected $key;
 
-			/**
-			 * @var integer Time to live.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected $ttl;
+    /**
+     * @var string Transient key.
+     *
+     * @since 141111 First documented version.
+     */
+    protected $transient;
 
-			/**
-			 * @var string SSO cookie key.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected $key;
+    /**
+     * @var array Transient SSO data.
+     *
+     * @since 141111 First documented version.
+     */
+    protected $data;
 
-			/**
-			 * @var string Transient key.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected $transient;
+    /*
+     * Constructor.
+     */
 
-			/**
-			 * @var array Transient SSO data.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected $data;
+    /**
+     * Class constructor.
+     *
+     * @since 141111 First documented version.
+     */
+    public function __construct()
+    {
+        $this->plugin = plugin();
 
-			/*
-			 * Constructor.
-			 */
+        $this->ttl = apply_filters(__CLASS__.'_ttl', 31556926);
 
-			/**
-			 * Class constructor.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			public function __construct()
-			{
-				$this->plugin = plugin();
+        if (!($this->key = $this->plugin->utils_enc->get_cookie(GLOBAL_NS.'_sso_key'))) {
+            $this->key = $this->plugin->utils_enc->uunnci_key_20_max();
+            $this->plugin->utils_enc->set_cookie(GLOBAL_NS.'_sso_key', $this->key, $this->ttl);
+        }
+        $this->key       = preg_replace('/[^a-z0-9]/i', '', $this->key);
+        $this->key       = substr($this->key, 0, 20); // 20 chars max.
+        $this->transient = $this->plugin->transient_prefix.'sso_key_'.$this->key;
 
-				$this->ttl = apply_filters(__CLASS__.'_ttl', 31556926);
+        if (!($this->data = get_transient($this->transient))) {
+            $this->data = []; // Initialize.
+        }
+    }
 
-				if(!($this->key = $this->plugin->utils_enc->get_cookie(GLOBAL_NS.'_sso_key')))
-				{
-					$this->key = $this->plugin->utils_enc->uunnci_key_20_max();
-					$this->plugin->utils_enc->set_cookie(GLOBAL_NS.'_sso_key', $this->key, $this->ttl);
-				}
-				$this->key       = preg_replace('/[^a-z0-9]/i', '', $this->key);
-				$this->key       = substr($this->key, 0, 20); // 20 chars max.
-				$this->transient = $this->plugin->transient_prefix.'sso_key_'.$this->key;
+    /*
+     * Access tokens.
+     */
 
-				if(!($this->data = get_transient($this->transient)))
-					$this->data = array(); // Initialize.
-			}
+    /**
+     * {@inheritDoc}
+     */
+    public function hasAccessToken($service)
+    {
+        $service = trim(strtolower((string)$service));
 
-			/*
-			 * Access tokens.
-			 */
+        return !empty($this->data['tokens'][$service]);
+    }
 
-			/**
-			 * {@inheritDoc}
-			 */
-			public function hasAccessToken($service)
-			{
-				$service = trim(strtolower((string)$service));
+    /**
+     * {@inheritDoc}
+     *
+     * @return \OAuth\oAuth1\Token\StdOAuth1Token
+     *    |\OAuth\oAuth2\Token\StdOAuth2Token
+     */
+    public function retrieveAccessToken($service)
+    {
+        $service = trim(strtolower((string)$service));
 
-				return !empty($this->data['tokens'][$service]);
-			}
+        if ($this->hasAccessToken($service)) {
+            return unserialize($this->data['tokens'][$service]);
+        }
+        throw new TokenNotFoundException(__('Token not found.', $this->plugin->text_domain));
+    }
 
-			/**
-			 * {@inheritDoc}
-			 *
-			 * @return \OAuth\oAuth1\Token\StdOAuth1Token
-			 *    |\OAuth\oAuth2\Token\StdOAuth2Token
-			 */
-			public function retrieveAccessToken($service)
-			{
-				$service = trim(strtolower((string)$service));
+    /**
+     * {@inheritDoc}
+     */
+    public function storeAccessToken($service, TokenInterface $token)
+    {
+        $service = trim(strtolower((string)$service));
 
-				if($this->hasAccessToken($service))
-					return unserialize($this->data['tokens'][$service]);
+        $this->data['tokens'][$service] = serialize($token);
+        set_transient($this->transient, $this->data, $this->ttl);
 
-				throw new TokenNotFoundException(__('Token not found.', $this->plugin->text_domain));
-			}
+        return $this; // Allow chaining.
+    }
 
-			/**
-			 * {@inheritDoc}
-			 */
-			public function storeAccessToken($service, TokenInterface $token)
-			{
-				$service = trim(strtolower((string)$service));
+    /**
+     * {@inheritDoc}
+     */
+    public function clearToken($service)
+    {
+        $service = trim(strtolower((string)$service));
 
-				$this->data['tokens'][$service] = serialize($token);
-				set_transient($this->transient, $this->data, $this->ttl);
+        unset($this->data['tokens'][$service]);
+        set_transient($this->transient, $this->data, $this->ttl);
 
-				return $this; // Allow chaining.
-			}
+        return $this; // Allow chaining.
+    }
 
-			/**
-			 * {@inheritDoc}
-			 */
-			public function clearToken($service)
-			{
-				$service = trim(strtolower((string)$service));
+    /**
+     * {@inheritDoc}
+     */
+    public function clearAllTokens()
+    {
+        unset($this->data['tokens']);
+        set_transient($this->transient, $this->data, $this->ttl);
 
-				unset($this->data['tokens'][$service]);
-				set_transient($this->transient, $this->data, $this->ttl);
+        return $this; // Allow chaining.
+    }
 
-				return $this; // Allow chaining.
-			}
+    /*
+     * Authorization states.
+     */
 
-			/**
-			 * {@inheritDoc}
-			 */
-			public function clearAllTokens()
-			{
-				unset($this->data['tokens']);
-				set_transient($this->transient, $this->data, $this->ttl);
+    /**
+     * {@inheritDoc}
+     */
+    public function hasAuthorizationState($service)
+    {
+        $service = trim(strtolower((string)$service));
 
-				return $this; // Allow chaining.
-			}
+        return !empty($this->data['states'][$service]);
+    }
 
-			/*
-			 * Authorization states.
-			 */
+    /**
+     * {@inheritDoc}
+     */
+    public function retrieveAuthorizationState($service)
+    {
+        $service = trim(strtolower((string)$service));
 
-			/**
-			 * {@inheritDoc}
-			 */
-			public function hasAuthorizationState($service)
-			{
-				$service = trim(strtolower((string)$service));
+        if ($this->hasAuthorizationState($service)) {
+            return unserialize($this->data['states'][$service]);
+        }
+        throw new AuthorizationStateNotFoundException(__('State not found.', $this->plugin->text_domain));
+    }
 
-				return !empty($this->data['states'][$service]);
-			}
+    /**
+     * {@inheritDoc}
+     */
+    public function storeAuthorizationState($service, $state)
+    {
+        $service = trim(strtolower((string)$service));
 
-			/**
-			 * {@inheritDoc}
-			 */
-			public function retrieveAuthorizationState($service)
-			{
-				$service = trim(strtolower((string)$service));
+        $this->data['states'][$service] = serialize($state);
+        set_transient($this->transient, $this->data, $this->ttl);
 
-				if($this->hasAuthorizationState($service))
-					return unserialize($this->data['states'][$service]);
+        return $this; // Allow chaining.
+    }
 
-				throw new AuthorizationStateNotFoundException(__('State not found.', $this->plugin->text_domain));
-			}
+    /**
+     * {@inheritDoc}
+     */
+    public function clearAuthorizationState($service)
+    {
+        $service = trim(strtolower((string)$service));
 
-			/**
-			 * {@inheritDoc}
-			 */
-			public function storeAuthorizationState($service, $state)
-			{
-				$service = trim(strtolower((string)$service));
+        unset($this->data['states'][$service]);
+        set_transient($this->transient, $this->data, $this->ttl);
 
-				$this->data['states'][$service] = serialize($state);
-				set_transient($this->transient, $this->data, $this->ttl);
+        return $this; // Allow chaining.
+    }
 
-				return $this; // Allow chaining.
-			}
+    /**
+     * {@inheritDoc}
+     */
+    public function clearAllAuthorizationStates()
+    {
+        unset($this->data['states']);
+        set_transient($this->transient, $this->data, $this->ttl);
 
-			/**
-			 * {@inheritDoc}
-			 */
-			public function clearAuthorizationState($service)
-			{
-				$service = trim(strtolower((string)$service));
+        return $this; // Allow chaining.
+    }
 
-				unset($this->data['states'][$service]);
-				set_transient($this->transient, $this->data, $this->ttl);
+    /*
+     * Extras; custom implementation.
+     */
 
-				return $this; // Allow chaining.
-			}
+    /**
+     * {@inheritDoc}
+     */
+    public function hasExtra($service)
+    {
+        $service = trim(strtolower((string)$service));
 
-			/**
-			 * {@inheritDoc}
-			 */
-			public function clearAllAuthorizationStates()
-			{
-				unset($this->data['states']);
-				set_transient($this->transient, $this->data, $this->ttl);
+        return !empty($this->data['extras'][$service]);
+    }
 
-				return $this; // Allow chaining.
-			}
+    /**
+     * {@inheritDoc}
+     */
+    public function retrieveExtra($service)
+    {
+        $service = trim(strtolower((string)$service));
 
-			/*
-			 * Extras; custom implementation.
-			 */
+        if ($this->hasExtra($service)) {
+            return unserialize($this->data['extras'][$service]);
+        }
+        throw new \Exception(__('Extra data not found.', $this->plugin->text_domain));
+    }
 
-			/**
-			 * {@inheritDoc}
-			 */
-			public function hasExtra($service)
-			{
-				$service = trim(strtolower((string)$service));
+    /**
+     * {@inheritDoc}
+     */
+    public function storeExtra($service, $extra)
+    {
+        $service = trim(strtolower((string)$service));
 
-				return !empty($this->data['extras'][$service]);
-			}
+        $this->data['extras'][$service] = serialize($extra);
+        set_transient($this->transient, $this->data, $this->ttl);
 
-			/**
-			 * {@inheritDoc}
-			 */
-			public function retrieveExtra($service)
-			{
-				$service = trim(strtolower((string)$service));
+        return $this; // Allow chaining.
+    }
 
-				if($this->hasExtra($service))
-					return unserialize($this->data['extras'][$service]);
+    /**
+     * {@inheritDoc}
+     */
+    public function clearExtra($service)
+    {
+        $service = trim(strtolower((string)$service));
 
-				throw new \Exception(__('Extra data not found.', $this->plugin->text_domain));
-			}
+        unset($this->data['extras'][$service]);
+        set_transient($this->transient, $this->data, $this->ttl);
 
-			/**
-			 * {@inheritDoc}
-			 */
-			public function storeExtra($service, $extra)
-			{
-				$service = trim(strtolower((string)$service));
+        return $this; // Allow chaining.
+    }
 
-				$this->data['extras'][$service] = serialize($extra);
-				set_transient($this->transient, $this->data, $this->ttl);
+    /**
+     * {@inheritDoc}
+     */
+    public function clearAllExtras()
+    {
+        unset($this->data['extras']);
+        set_transient($this->transient, $this->data, $this->ttl);
 
-				return $this; // Allow chaining.
-			}
-
-			/**
-			 * {@inheritDoc}
-			 */
-			public function clearExtra($service)
-			{
-				$service = trim(strtolower((string)$service));
-
-				unset($this->data['extras'][$service]);
-				set_transient($this->transient, $this->data, $this->ttl);
-
-				return $this; // Allow chaining.
-			}
-
-			/**
-			 * {@inheritDoc}
-			 */
-			public function clearAllExtras()
-			{
-				unset($this->data['extras']);
-				set_transient($this->transient, $this->data, $this->ttl);
-
-				return $this; // Allow chaining.
-			}
-		}
+        return $this; // Allow chaining.
+    }
+}
 	
