@@ -1,15 +1,16 @@
 <?php
 /**
- * Menu Page Sub. Form Base
+ * Menu Page Sub. Form Base.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * Menu Page Sub. Form Base
+ * Menu Page Sub. Form Base.
  *
  * @since 141111 First documented version.
  */
@@ -20,21 +21,21 @@ class MenuPageSubFormBase extends AbsBase
      */
 
     /**
-     * @var boolean Editing?
+     * @type bool Editing?
      *
      * @since 141111 First documented version.
      */
     protected $is_edit;
 
     /**
-     * @var \stdClass|null Subscription.
+     * @type \stdClass|null Subscription.
      *
      * @since 141111 First documented version.
      */
     protected $sub;
 
     /**
-     * @var FormFields Class instance.
+     * @type FormFields Class instance.
      *
      * @since 141111 First documented version.
      */
@@ -45,7 +46,7 @@ class MenuPageSubFormBase extends AbsBase
      */
 
     /**
-     * @var array Form field config. args.
+     * @type array Form field config. args.
      *
      * @since 141111 First documented version.
      */
@@ -64,7 +65,7 @@ class MenuPageSubFormBase extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param integer $sub_id Subscription ID.
+     * @param int $sub_id Subscription ID.
      */
     public function __construct($sub_id = null)
     {
@@ -72,7 +73,7 @@ class MenuPageSubFormBase extends AbsBase
 
         if (isset($sub_id)) { // Editing?
             $this->is_edit = true; // Flag as `TRUE`.
-            $sub_id        = (integer)$sub_id; // Force integer.
+            $sub_id        = (integer) $sub_id; // Force integer.
             $this->sub     = $this->plugin->utils_sub->get($sub_id);
 
             if (!$this->sub) { // Unexpected scenario; fail w/ message.
@@ -117,10 +118,10 @@ class MenuPageSubFormBase extends AbsBase
         );
         echo $this->form_fields->selectRow(
             [
-                'placeholder'         => __('— N/A; no WP User ID —', $this->plugin->text_domain),
-                'label'               => __('<i class="fa fa-fw fa-user"></i> WP User ID #', $this->plugin->text_domain),
-                'name'                => 'user_id', 'required' => false, 'options' => '%%users%%', 'current_value' => $this->currentValueFor('user_id'),
-                'notes_after'         => __('Associates subscription w/ a WP User ID (if applicable) to improve statistical reporting.', $this->plugin->text_domain).
+                'placeholder' => __('— N/A; no WP User ID —', $this->plugin->text_domain),
+                'label'       => __('<i class="fa fa-fw fa-user"></i> WP User ID #', $this->plugin->text_domain),
+                'name'        => 'user_id', 'required' => false, 'options' => '%%users%%', 'current_value' => $this->currentValueFor('user_id'),
+                'notes_after' => __('Associates subscription w/ a WP User ID (if applicable) to improve statistical reporting.', $this->plugin->text_domain).
                                          ' '.__('If empty, the system will automatically try to find a matching user ID for the email address.', $this->plugin->text_domain),
                 'input_fallback_args' => ['type' => 'number', 'maxlength' => 20, 'other_attrs' => 'min="1" max="18446744073709551615"', 'current_value_empty_on_0' => true],
             ]
@@ -235,14 +236,14 @@ class MenuPageSubFormBase extends AbsBase
      */
     protected function currentValueFor($key_prop)
     {
-        if (!($key_prop = (string)$key_prop)) {
+        if (!($key_prop = (string) $key_prop)) {
             return null; // Not possible.
         }
         if (isset($_REQUEST[GLOBAL_NS]['sub_form'][$key_prop])) {
-            return trim(stripslashes((string)$_REQUEST[GLOBAL_NS]['sub_form'][$key_prop]));
+            return trim(stripslashes((string) $_REQUEST[GLOBAL_NS]['sub_form'][$key_prop]));
         }
         if ($this->is_edit && isset($this->sub->{$key_prop})) {
-            return trim((string)$this->sub->{$key_prop});
+            return trim((string) $this->sub->{$key_prop});
         }
         return null; // Default value.
     }
@@ -256,10 +257,10 @@ class MenuPageSubFormBase extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param integer $post_id A post ID.
+     * @param int $post_id A post ID.
      *
      * @return string HTML markup for this select field row.
-     *    If no options (or too many options; this returns an input field instead.
+     *                If no options (or too many options; this returns an input field instead.
      *
      * @see   MenuPageActions::subFormCommentIdRowViaAjax()
      */
@@ -272,7 +273,7 @@ class MenuPageSubFormBase extends AbsBase
                 return ''; // Unauthenticated; ignore.
             }
         }
-        $post_id     = (integer)$post_id;
+        $post_id     = (integer) $post_id;
         $form_fields = new FormFields(static::$form_field_args);
 
         return $form_fields->selectRow(
@@ -290,7 +291,7 @@ class MenuPageSubFormBase extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param integer $user_id A WP user ID.
+     * @param int $user_id A WP user ID.
      *
      * @return string JSON data object w/ user info.
      *
@@ -300,7 +301,7 @@ class MenuPageSubFormBase extends AbsBase
     {
         $plugin = plugin();
 
-        $default_info      = [
+        $default_info = [
             'email' => '',
             'fname' => '',
             'lname' => '',
@@ -319,7 +320,7 @@ class MenuPageSubFormBase extends AbsBase
         if (!current_user_can('list_users')) {
             return $default_info_json;
         }
-        $user_id = (integer)$user_id;
+        $user_id = (integer) $user_id;
         $user    = new \WP_User($user_id);
 
         if (!$user->ID) { // Has no ID?
@@ -342,7 +343,7 @@ class MenuPageSubFormBase extends AbsBase
         $info = array_merge($default_info, $info);
         $info = array_intersect_key($info, $default_info);
 
-        return ($info_json = json_encode($info));
+        return $info_json = json_encode($info);
     }
 
     /**
@@ -371,14 +372,14 @@ class MenuPageSubFormBase extends AbsBase
             $sub_updater = new SubUpdater($request_args, $args); // Run updater.
 
             if ($sub_updater->didUpdate()) { // Updated successfully?
-                $plugin->enqueueUserNotice( // Queue notice.
+                $plugin->enqueueUserNotice(// Queue notice.
                     sprintf(__('Subscription ID #<code>%1$s</code> updated successfully.', $plugin->text_domain), esc_html($request_args['ID'])),
                     ['transient' => true, 'for_page' => $plugin->utils_env->currentMenuPage()]
                 );
 
                 $redirect_to = $plugin->utils_url->pageTableNavVarsOnly();
             } else { // There were errors; display those errors to the current user.
-                $plugin->enqueueUserError( // Queue error notice.
+                $plugin->enqueueUserError(// Queue error notice.
                     sprintf(__('Failed to update subscription ID #<code>%1$s</code>. Please review the following error(s):', $plugin->text_domain), esc_html($request_args['ID'])).
                     '<ul class="pmp-list-items"><li>'.implode('</li><li>', $sub_updater->errorsHtml()).'</li></ul>',
                     ['transient' => true, 'for_page' => $plugin->utils_env->currentMenuPage()]
@@ -388,13 +389,13 @@ class MenuPageSubFormBase extends AbsBase
             $sub_inserter = new SubInserter($request_args, $args); // Run inserter.
 
             if ($sub_inserter->didInsert()) { // Inserted successfully?
-                $plugin->enqueueUserNotice( // Queue notice.
+                $plugin->enqueueUserNotice(// Queue notice.
                     sprintf(__('Subscription ID #<code>%1$s</code> created successfully.', $plugin->text_domain), esc_html($sub_inserter->insertId())),
                     ['transient' => true, 'for_page' => $plugin->utils_env->currentMenuPage()]
                 );
                 $redirect_to = $plugin->utils_url->pageTableNavVarsOnly();
             } else { // There were errors; display those errors to the current user.
-                $plugin->enqueueUserError( // Queue error notice.
+                $plugin->enqueueUserError(// Queue error notice.
                     __('Failed to create new subscription. Please review the following error(s):', $plugin->text_domain).
                     '<ul class="pmp-list-items"><li>'.implode('</li><li>', $sub_inserter->errorsHtml()).'</li></ul>',
                     ['transient' => true, 'for_page' => $plugin->utils_env->currentMenuPage()]
