@@ -1,19 +1,16 @@
 <?php
 /**
- * Menu Page Table Base
+ * Menu Page Table Base.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
-if (!class_exists('WP_List_Table')) {
-    require_once ABSPATH.'wp-admin/includes/class-wp-list-table.php';
-}
-
 /**
- * Menu Page Table Base
+ * Menu Page Table Base.
  *
  * @since 141111 First documented version.
  */
@@ -24,98 +21,98 @@ abstract class MenuPageTableBase extends \WP_List_Table
      */
 
     /**
-     * @var Plugin Plugin reference.
+     * @type Plugin Plugin reference.
      *
      * @since 141111 First documented version.
      */
     protected $plugin;
 
     /**
-     * @var string Singular item name.
+     * @type string Singular item name.
      *
      * @since 141111 First documented version.
      */
     protected $singular_name;
 
     /**
-     * @var string Singular item label.
+     * @type string Singular item label.
      *
      * @since 141111 First documented version.
      */
     protected $singular_label;
 
     /**
-     * @var string Plural item name.
+     * @type string Plural item name.
      *
      * @since 141111 First documented version.
      */
     protected $plural_name;
 
     /**
-     * @var string Plural item label.
+     * @type string Plural item label.
      *
      * @since 141111 First documented version.
      */
     protected $plural_label;
 
     /**
-     * @var string Regex for sub IDs.
+     * @type string Regex for sub IDs.
      *
      * @since 141111 First documented version.
      */
     protected $sub_ids_regex;
 
     /**
-     * @var string Regex for sub emails.
+     * @type string Regex for sub emails.
      *
      * @since 150527 Bug fix; missing property.
      */
     protected $sub_emails_regex;
 
     /**
-     * @var string Regex for user IDs.
+     * @type string Regex for user IDs.
      *
      * @since 141111 First documented version.
      */
     protected $user_ids_regex;
 
     /**
-     * @var string Regex for post IDs.
+     * @type string Regex for post IDs.
      *
      * @since 141111 First documented version.
      */
     protected $post_ids_regex;
 
     /**
-     * @var string Regex for comment IDs.
+     * @type string Regex for comment IDs.
      *
      * @since 141111 First documented version.
      */
     protected $comment_ids_regex;
 
     /**
-     * @var string Regex for `AND`.
+     * @type string Regex for `AND`.
      *
      * @since 141111 First documented version.
      */
     protected $and_regex;
 
     /**
-     * @var string Regex for statuses.
+     * @type string Regex for statuses.
      *
      * @since 141111 First documented version.
      */
     protected $statuses_regex;
 
     /**
-     * @var string Regex for events.
+     * @type string Regex for events.
      *
      * @since 141111 First documented version.
      */
     protected $events_regex;
 
     /**
-     * @var array Merged result sets.
+     * @type array Merged result sets.
      *
      * @since 141111 First documented version.
      */
@@ -137,20 +134,20 @@ abstract class MenuPageTableBase extends \WP_List_Table
         $this->plugin = plugin();
 
         $this->singular_name = !empty($args['singular_name'])
-            ? (string)$args['singular_name'] : 'item';
+            ? (string) $args['singular_name'] : 'item';
 
         $this->singular_label = !empty($args['singular_label'])
-            ? (string)$args['singular_label'] : 'item';
+            ? (string) $args['singular_label'] : 'item';
 
         $this->plural_name = !empty($args['plural_name'])
-            ? (string)$args['plural_name'] : 'items';
+            ? (string) $args['plural_name'] : 'items';
 
         $this->plural_label = !empty($args['plural_label'])
-            ? (string)$args['plural_label'] : 'items';
+            ? (string) $args['plural_label'] : 'items';
 
         $args = [
             'singular' => $this->singular_name, 'plural' => $this->plural_name,
-            'screen'   => !empty($args['screen']) ? (string)$args['screen']
+            'screen'   => !empty($args['screen']) ? (string) $args['screen']
                 : $this->plugin->menu_page_hooks[GLOBAL_NS.'_'.$this->plural_name],
         ];
         parent::__construct($args); // Parent constructor.
@@ -180,6 +177,8 @@ abstract class MenuPageTableBase extends \WP_List_Table
      * Public column-related methods.
      */
 
+    // @codingStandardsIgnoreStart
+    // camelCase not possible. This is an extender.
     /**
      * Table columns.
      *
@@ -188,7 +187,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
      * @return array An array of all table columns.
      */
     public function get_columns()
-    {
+    { // @codingStandardsIgnoreEnd
         return static::getTheColumns();
     }
 
@@ -313,6 +312,8 @@ abstract class MenuPageTableBase extends \WP_List_Table
         return [];
     }
 
+    // @codingStandardsIgnoreStart
+    // camelCase not possible. This is an extender.
     /**
      * Sortable table columns.
      *
@@ -321,7 +322,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
      * @return array An array of all sortable table columns.
      */
     public function get_sortable_columns()
-    {
+    { // @codingStandardsIgnoreEnd
         return static::getTheSortableColumns();
     }
 
@@ -383,6 +384,8 @@ abstract class MenuPageTableBase extends \WP_List_Table
      * Protected column-related methods.
      */
 
+    // @codingStandardsIgnoreStart
+    // camelCase not possible. This is an extender.
     /**
      * Table column handler.
      *
@@ -393,10 +396,12 @@ abstract class MenuPageTableBase extends \WP_List_Table
      * @return string HTML markup for this table column.
      */
     protected function column_cb($item)
-    {
+    { // @codingStandardsIgnoreEnd
         return '<input type="checkbox" name="'.esc_attr($this->plural_name).'[]" value="'.esc_attr($item->ID).'" />';
     }
 
+    // @codingStandardsIgnoreStart
+    // camelCase not possible. This is an extender.
     /**
      * Table column handler.
      *
@@ -409,16 +414,18 @@ abstract class MenuPageTableBase extends \WP_List_Table
      * @return string HTML markup for this table column.
      */
     protected function column_key(\stdClass $item, $prefix = '', $key = 'key')
-    {
+    { // @codingStandardsIgnoreEnd
         if (!isset($item->{$key})) {
             return '—'; // Not possible.
         }
         if (!$item->{$key}) {
             return '—'; // Not possible.
         }
-        return '<code>'.esc_html((string)$item->{$key}).'</code>';
+        return '<code>'.esc_html((string) $item->{$key}).'</code>';
     }
 
+    // @codingStandardsIgnoreStart
+    // camelCase not possible. This is an extender.
     /**
      * Table column handler.
      *
@@ -429,10 +436,12 @@ abstract class MenuPageTableBase extends \WP_List_Table
      * @return string HTML markup for this table column.
      */
     protected function column_key_before(\stdClass $item)
-    {
+    { // @codingStandardsIgnoreEnd
         return $this->column_key($item, '', 'key_before');
     }
 
+    // @codingStandardsIgnoreStart
+    // camelCase not possible. This is an extender.
     /**
      * Table column handler.
      *
@@ -445,7 +454,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
      * @return string HTML markup for this table column.
      */
     protected function column_sub_id(\stdClass $item, $prefix = 'sub_', $key = 'sub_id')
-    {
+    { // @codingStandardsIgnoreEnd
         if (!isset($item->{$key})) {
             return '—'; // Not possible.
         }
@@ -464,8 +473,8 @@ abstract class MenuPageTableBase extends \WP_List_Table
             'name_style'  => 'font-weight:bold;',
             'email_style' => 'font-weight:normal;',
         ];
-        $name            = $item->{$prefix.'fname'}.' '.$item->{$prefix.'lname'};
-        $sub_info        = '<i class="'.esc_attr('si si-'.$this->plugin->slug.'-one').'"></i>'.
+        $name     = $item->{$prefix.'fname'}.' '.$item->{$prefix.'lname'};
+        $sub_info = '<i class="'.esc_attr('si si-'.$this->plugin->slug.'-one').'"></i>'.
                            ' '.$this->plugin->utils_markup->nameEmail($name, $item->{$prefix.'email'}, $name_email_args);
 
         $edit_url = $this->plugin->utils_url->editSubShort($item->{$key});
@@ -476,6 +485,8 @@ abstract class MenuPageTableBase extends \WP_List_Table
         return $sub_info.$this->row_actions($row_actions);
     }
 
+    // @codingStandardsIgnoreStart
+    // camelCase not possible. This is an extender.
     /**
      * Table column handler.
      *
@@ -486,10 +497,12 @@ abstract class MenuPageTableBase extends \WP_List_Table
      * @return string HTML markup for this table column.
      */
     protected function column_sub_id_before(\stdClass $item)
-    {
+    { // @codingStandardsIgnoreEnd
         return $this->column_sub_id($item, 'sub_before_', 'sub_id_before');
     }
 
+    // @codingStandardsIgnoreStart
+    // camelCase not possible. This is an extender.
     /**
      * Table column handler.
      *
@@ -504,6 +517,8 @@ abstract class MenuPageTableBase extends \WP_List_Table
         return $this->column_sub_id($item, 'oby_sub_', 'oby_sub_id');
     }
 
+    // @codingStandardsIgnoreStart
+    // camelCase not possible. This is an extender.
     /**
      * Table column handler.
      *
@@ -514,10 +529,12 @@ abstract class MenuPageTableBase extends \WP_List_Table
      * @return string HTML markup for this table column.
      */
     protected function column_oby_sub_id_before(\stdClass $item)
-    {
+    { // @codingStandardsIgnoreEnd
         return $this->column_sub_id($item, 'oby_sub_before_', 'oby_sub_id_before');
     }
 
+    // @codingStandardsIgnoreStart
+    // camelCase not possible. This is an extender.
     /**
      * Table column handler.
      *
@@ -530,14 +547,14 @@ abstract class MenuPageTableBase extends \WP_List_Table
      * @return string HTML markup for this table column.
      */
     protected function column_user_id(\stdClass $item, $prefix = 'user_', $key = 'user_id')
-    {
+    { // @codingStandardsIgnoreEnd
         if (!isset($item->{$key})) {
             return '—'; // Not possible.
         }
         if (!$item->{$key}) {
             return '—'; // Not possible.
         }
-        $id_only = '<i class="fa fa-user"></i>'. // If it's all we can do.
+        $id_only = '<i class="fa fa-user"></i>'.// If it's all we can do.
                    ' <span style="font-weight:bold;">ID #'.esc_html($item->{$key}).'</span>';
 
         if (empty($this->merged_result_sets['users'][$item->{$key}])) {
@@ -549,7 +566,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
             'name_style'  => 'font-weight:normal;',
             'email_style' => 'font-weight:normal;',
         ];
-        $user_info       = '<i class="fa fa-user"></i>'. // e.g. ♙ "Name" <email>
+        $user_info = '<i class="fa fa-user"></i>'.// e.g. ♙ "Name" <email>
                            ' '.$this->plugin->utils_markup->nameEmail($item->{$prefix.'display_name'}, $item->{$prefix.'email'}, $name_email_args);
 
         $edit_url = $this->plugin->utils_url->editUserShort($item->{$key});
@@ -560,6 +577,8 @@ abstract class MenuPageTableBase extends \WP_List_Table
         return $user_info.$this->row_actions($row_actions);
     }
 
+    // @codingStandardsIgnoreStart
+    // camelCase not possible. This is an extender.
     /**
      * Table column handler.
      *
@@ -570,10 +589,12 @@ abstract class MenuPageTableBase extends \WP_List_Table
      * @return string HTML markup for this table column.
      */
     protected function column_user_id_before(\stdClass $item)
-    {
+    { // @codingStandardsIgnoreEnd
         return $this->column_user_id($item, 'user_before_', 'user_id_before');
     }
 
+    // @codingStandardsIgnoreStart
+    // camelCase not possible. This is an extender.
     /**
      * Table column handler.
      *
@@ -586,14 +607,14 @@ abstract class MenuPageTableBase extends \WP_List_Table
      * @return string HTML markup for this table column.
      */
     protected function column_post_id(\stdClass $item, $prefix = 'post_', $key = 'post_id')
-    {
+    { // @codingStandardsIgnoreEnd
         if (!isset($item->{$key})) {
             return '—'; // Not possible.
         }
         if (!$item->{$key}) {
             return '—'; // Not possible.
         }
-        $id_only = '<i class="fa fa-thumb-tack"></i>'. // If it's all we can do.
+        $id_only = '<i class="fa fa-thumb-tack"></i>'.// If it's all we can do.
                    ' <span style="font-weight:bold;">ID #'.esc_html($item->{$key}).'</span>';
 
         if (empty($this->merged_result_sets['posts'][$item->{$key}])) {
@@ -612,11 +633,11 @@ abstract class MenuPageTableBase extends \WP_List_Table
         $post_comments_status   = $this->plugin->utils_i18n->statusLabel($this->plugin->utils_db->postCommentStatusI18n($item->{$prefix.'comment_status'}), 'ucwords');
         $post_edit_comments_url = $this->plugin->utils_url->postEditCommentsShort($item->{$key});
         $post_total_subs        = $this->plugin->utils_sub->queryTotal($item->{$key});
-        $post_total_comments    = (integer)$item->{$prefix.'comment_count'};
+        $post_total_comments    = (integer) $item->{$prefix.'comment_count'};
 
         $post_info = $this->plugin->utils_markup->subsCount($item->{$key}, $post_total_subs).
                      $this->plugin->utils_markup->commentCount($item->{$key}, $post_total_comments).
-                     '<i class="fa fa-thumb-tack"></i>'. // Start w/ a thumb tack icon; works w/ any post type.
+                     '<i class="fa fa-thumb-tack"></i>'.// Start w/ a thumb tack icon; works w/ any post type.
                      ' '.'<span title="'.esc_attr($post_date).'">'.esc_html($post_title_clip).'</span>';
 
         $post_view_url    = $this->plugin->utils_url->postShort($item->{$key});
@@ -628,6 +649,8 @@ abstract class MenuPageTableBase extends \WP_List_Table
         return $post_info.$this->row_actions($post_row_actions);
     }
 
+    // @codingStandardsIgnoreStart
+    // camelCase not possible. This is an extender.
     /**
      * Table column handler.
      *
@@ -638,10 +661,12 @@ abstract class MenuPageTableBase extends \WP_List_Table
      * @return string HTML markup for this table column.
      */
     protected function column_post_id_before(\stdClass $item)
-    {
+    { // @codingStandardsIgnoreEnd
         return $this->column_post_id($item, 'post_before_', 'post_id_before');
     }
 
+    // @codingStandardsIgnoreStart
+    // camelCase not possible. This is an extender.
     /**
      * Table column handler.
      *
@@ -654,7 +679,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
      * @return string HTML markup for this table column.
      */
     protected function column_comment_id(\stdClass $item, $prefix = 'comment_', $key = 'comment_id')
-    {
+    { // @codingStandardsIgnoreEnd
         if (!isset($item->{$key})) {
             return '—'; // Not possible.
         }
@@ -664,13 +689,13 @@ abstract class MenuPageTableBase extends \WP_List_Table
         if (!$item->{$key}) {
             return '—'; // Not possible.
         }
-        $id_only = '<i class="fa fa-comment"></i>'. // If it's all we can do.
+        $id_only = '<i class="fa fa-comment"></i>'.// If it's all we can do.
                    ' <span style="font-weight:bold;">ID #'.esc_html($item->{$key}).'</span>';
 
         if (empty($this->merged_result_sets['comments'][$item->{$key}])) {
             return $id_only; // All we can do.
         }
-        $name_email_args   = [
+        $name_email_args = [
             'anchor_to'   => 'search',
             'name_style'  => 'font-weight:bold;',
             'email_style' => 'font-weight:normal;',
@@ -679,7 +704,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
         $comment_time_ago  = $this->plugin->utils_date->approxTimeDifference(strtotime($item->{$prefix.'date_gmt'}));
         $comment_status    = $this->plugin->utils_i18n->statusLabel($this->plugin->utils_db->commentStatusI18n($item->{$prefix.'approved'}), 'ucwords');
 
-        $comment_info = '<i class="fa fa-comment"></i>'. // Start w/ a comment bubble icon.
+        $comment_info = '<i class="fa fa-comment"></i>'.// Start w/ a comment bubble icon.
                         ' '.$this->plugin->utils_markup->nameEmail($item->{$prefix.'author'}, $item->{$prefix.'author_email'}, $name_email_args);
 
         $comment_view_url    = $this->plugin->utils_url->commentShort($item->{$key});
@@ -691,6 +716,8 @@ abstract class MenuPageTableBase extends \WP_List_Table
         return $comment_info.$this->row_actions($comment_row_actions);
     }
 
+    // @codingStandardsIgnoreStart
+    // camelCase not possible. This is an extender.
     /**
      * Table column handler.
      *
@@ -701,10 +728,12 @@ abstract class MenuPageTableBase extends \WP_List_Table
      * @return string HTML markup for this table column.
      */
     protected function column_comment_id_before(\stdClass $item)
-    {
+    { // @codingStandardsIgnoreEnd
         return $this->column_comment_id($item, 'comment_before_', 'comment_id_before');
     }
 
+    // @codingStandardsIgnoreStart
+    // camelCase not possible. This is an extender.
     /**
      * Table column handler.
      *
@@ -715,10 +744,12 @@ abstract class MenuPageTableBase extends \WP_List_Table
      * @return string HTML markup for this table column.
      */
     protected function column_comment_parent_id(\stdClass $item)
-    {
+    { // @codingStandardsIgnoreEnd
         return $this->column_comment_id($item, 'comment_parent_', 'comment_parent_id');
     }
 
+    // @codingStandardsIgnoreStart
+    // camelCase not possible. This is an extender.
     /**
      * Table column handler.
      *
@@ -729,10 +760,12 @@ abstract class MenuPageTableBase extends \WP_List_Table
      * @return string HTML markup for this table column.
      */
     protected function column_comment_parent_id_before(\stdClass $item)
-    {
+    { // @codingStandardsIgnoreEnd
         return $this->column_comment_id($item, 'comment_parent_before_', 'comment_parent_id_before');
     }
 
+    // @codingStandardsIgnoreStart
+    // camelCase not possible. This is an extender.
     /**
      * Table column handler.
      *
@@ -745,7 +778,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
      * @return string HTML markup for this table column.
      */
     protected function column_email(\stdClass $item, $prefix = '', $key = 'email')
-    {
+    { // @codingStandardsIgnoreEnd
         if (!isset($item->{$key})) {
             return '—'; // Not possible.
         }
@@ -759,6 +792,8 @@ abstract class MenuPageTableBase extends \WP_List_Table
         return $this->plugin->utils_markup->nameEmail('', $item->{$key}, $name_email_args);
     }
 
+    // @codingStandardsIgnoreStart
+    // camelCase not possible. This is an extender.
     /**
      * Table column handler.
      *
@@ -769,10 +804,12 @@ abstract class MenuPageTableBase extends \WP_List_Table
      * @return string HTML markup for this table column.
      */
     protected function column_email_before(\stdClass $item)
-    {
+    { // @codingStandardsIgnoreEnd
         return $this->column_email($item, '', 'email_before');
     }
 
+    // @codingStandardsIgnoreStart
+    // camelCase not possible. This is an extender.
     /**
      * Table column handler.
      *
@@ -785,7 +822,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
      * @return string HTML markup for this table column.
      */
     protected function column_status(\stdClass $item, $prefix = '', $key = 'status')
-    {
+    { // @codingStandardsIgnoreEnd
         if (!isset($item->{$key})) {
             return '—'; // Not possible.
         }
@@ -795,6 +832,8 @@ abstract class MenuPageTableBase extends \WP_List_Table
         return esc_html($this->plugin->utils_i18n->statusLabel($item->{$key}));
     }
 
+    // @codingStandardsIgnoreStart
+    // camelCase not possible. This is an extender.
     /**
      * Table column handler.
      *
@@ -805,10 +844,12 @@ abstract class MenuPageTableBase extends \WP_List_Table
      * @return string HTML markup for this table column.
      */
     protected function column_status_before(\stdClass $item)
-    {
+    { // @codingStandardsIgnoreEnd
         return $this->column_status($item, '', 'status_before');
     }
 
+    // @codingStandardsIgnoreStart
+    // camelCase not possible. This is an extender.
     /**
      * Table column handler.
      *
@@ -821,7 +862,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
      * @return string HTML markup for this table column.
      */
     protected function column_deliver(\stdClass $item, $prefix = '', $key = 'deliver')
-    {
+    { // @codingStandardsIgnoreEnd
         if (!isset($item->{$key})) {
             return '—'; // Not possible.
         }
@@ -831,6 +872,8 @@ abstract class MenuPageTableBase extends \WP_List_Table
         return esc_html($this->plugin->utils_i18n->deliverLabel($item->{$key}));
     }
 
+    // @codingStandardsIgnoreStart
+    // camelCase not possible. This is an extender.
     /**
      * Table column handler.
      *
@@ -841,10 +884,12 @@ abstract class MenuPageTableBase extends \WP_List_Table
      * @return string HTML markup for this table column.
      */
     protected function column_deliver_before(\stdClass $item)
-    {
+    { // @codingStandardsIgnoreEnd
         return $this->column_deliver($item, '', 'deliver_before');
     }
 
+    // @codingStandardsIgnoreStart
+    // camelCase not possible. This is an extender.
     /**
      * Table column handler.
      *
@@ -857,13 +902,15 @@ abstract class MenuPageTableBase extends \WP_List_Table
      * @return string HTML markup for this table column.
      */
     protected function column_user_initiated(\stdClass $item, $prefix = '', $key = 'user_initiated')
-    {
+    { // @codingStandardsIgnoreEnd
         if (!isset($item->{$key})) {
             return '—'; // Not possible.
         }
         return esc_html($item->{$key} ? 'yes' : 'no');
     }
 
+    // @codingStandardsIgnoreStart
+    // camelCase not possible. This is an extender.
     /**
      * Table column handler.
      *
@@ -874,10 +921,12 @@ abstract class MenuPageTableBase extends \WP_List_Table
      * @return string HTML markup for this table column.
      */
     protected function column_user_initiated_before(\stdClass $item)
-    {
+    { // @codingStandardsIgnoreEnd
         return $this->column_user_initiated($item, '', 'user_initiated_before');
     }
 
+    // @codingStandardsIgnoreStart
+    // camelCase not possible. This is an extender.
     /**
      * Table column handler.
      *
@@ -890,7 +939,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
      * @return string HTML markup for this table column.
      */
     protected function column_hold_until_time(\stdClass $item, $prefix = '', $key = 'hold_until_time')
-    {
+    { // @codingStandardsIgnoreEnd
         if (!isset($item->{$key})) {
             return '—'; // Not possible.
         }
@@ -902,6 +951,8 @@ abstract class MenuPageTableBase extends \WP_List_Table
                ' '.__('~ part of a digest', $this->plugin->text_domain);
     }
 
+    // @codingStandardsIgnoreStart
+    // camelCase not possible. This is an extender.
     /**
      * Table column handler.
      *
@@ -912,10 +963,12 @@ abstract class MenuPageTableBase extends \WP_List_Table
      * @return string HTML markup for this table column.
      */
     protected function column_hold_until_time_before(\stdClass $item)
-    {
+    { // @codingStandardsIgnoreEnd
         return $this->column_hold_until_time($item, '', 'hold_until_time_before');
     }
 
+    // @codingStandardsIgnoreStart
+    // camelCase not possible. This is an extender.
     /**
      * Table column handler.
      *
@@ -927,8 +980,8 @@ abstract class MenuPageTableBase extends \WP_List_Table
      * @return string HTML markup for this table column.
      */
     protected function column_default($item, $property)
-    {
-        if (!($property = trim((string)$property))) {
+    { // @codingStandardsIgnoreEnd
+        if (!($property = trim((string) $property))) {
             return '—'; // Not applicable.
         }
         $value = isset($item->{$property}) ? $item->{$property} : '';
@@ -938,10 +991,10 @@ abstract class MenuPageTableBase extends \WP_List_Table
                 ? '—' // Use a default value of `—` in this case.
                 : esc_html($this->plugin->utils_date->i18n('M j, Y g:i a', $value)).'<br />'.
                   '<span style="font-style:italic;">('.esc_html($this->plugin->utils_date->approxTimeDifference($value)).')</span>';
-        } else if (($property === 'ID' || substr($property, -3) === '_id') && is_integer($value)) {
-            $value = $value <= 0 ? '—' : esc_html((string)$value);
+        } elseif (($property === 'ID' || substr($property, -3) === '_id') && is_integer($value)) {
+            $value = $value <= 0 ? '—' : esc_html((string) $value);
         } else {
-            $value = esc_html($this->plugin->utils_string->midClip((string)$value));
+            $value = esc_html($this->plugin->utils_string->midClip((string) $value));
         }
         return isset($value[0]) ? $value : '—'; // Allow for `0`.
     }
@@ -960,7 +1013,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
     protected function getRawSearchQuery()
     {
         $s = !empty($_REQUEST['s'])
-            ? trim(stripslashes((string)$_REQUEST['s']))
+            ? trim(stripslashes((string) $_REQUEST['s']))
             : ''; // Not searching.
 
         if (!isset($s[0])) {
@@ -1002,7 +1055,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
      *
      * @since 141111 First documented version.
      *
-     * @return boolean `TRUE` if a clean `$_POST['search-submit']`.
+     * @return bool `TRUE` if a clean `$_POST['search-submit']`.
      */
     protected function isCleanSearchSubmitPost()
     {
@@ -1023,7 +1076,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
 
         if ($s && preg_match_all($this->sub_ids_regex, $s, $_m)) {
             foreach (preg_split('/[|;,]+/', implode(',', $_m['sub_ids']), null, PREG_SPLIT_NO_EMPTY) as $_sub_id) {
-                if (($_sub_id = (integer)$_sub_id) > 0) {
+                if (($_sub_id = (integer) $_sub_id) > 0) {
                     $sub_ids[$_sub_id] = $_sub_id;
                 }
             }
@@ -1071,7 +1124,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
 
         if ($s && preg_match_all($this->user_ids_regex, $s, $_m)) {
             foreach (preg_split('/[|;,]+/', implode(',', $_m['user_ids']), null, PREG_SPLIT_NO_EMPTY) as $_user_id) {
-                if (($_user_id = (integer)$_user_id) > 0) {
+                if (($_user_id = (integer) $_user_id) > 0) {
                     $user_ids[$_user_id] = $_user_id;
                 }
             }
@@ -1095,7 +1148,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
 
         if ($s && preg_match_all($this->post_ids_regex, $s, $_m)) {
             foreach (preg_split('/[|;,]+/', implode(',', $_m['post_ids']), null, PREG_SPLIT_NO_EMPTY) as $_post_id) {
-                if (($_post_id = (integer)$_post_id) > 0) {
+                if (($_post_id = (integer) $_post_id) > 0) {
                     $post_ids[$_post_id] = $_post_id;
                 }
             }
@@ -1119,7 +1172,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
 
         if ($s && preg_match_all($this->comment_ids_regex, $s, $_m)) {
             foreach (preg_split('/[|;,]+/', implode(',', $_m['comment_ids']), null, PREG_SPLIT_NO_EMPTY) as $_comment_id) {
-                if (($_comment_id = (integer)$_comment_id) > 0) {
+                if (($_comment_id = (integer) $_comment_id) > 0) {
                     $comment_ids[$_comment_id] = $_comment_id;
                 }
             }
@@ -1182,7 +1235,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
      *
      * @since 141111 First documented version.
      *
-     * @return boolean `TRUE` if it's an `AND` search.
+     * @return bool `TRUE` if it's an `AND` search.
      */
     protected function isAndSearchQuery()
     {
@@ -1201,7 +1254,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
     protected function getOrderby()
     {
         $orderby = !empty($_REQUEST['orderby'])
-            ? strtolower(trim(stripslashes((string)$_REQUEST['orderby'])))
+            ? strtolower(trim(stripslashes((string) $_REQUEST['orderby'])))
             : ''; // Not specified explicitly by site owner.
 
         if (!$orderby || !in_array($orderby, array_keys($this->get_columns()), true)) {
@@ -1243,7 +1296,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
     protected function getOrder()
     {
         $order = !empty($_REQUEST['order'])
-            ? strtolower(trim(stripslashes((string)$_REQUEST['order'])))
+            ? strtolower(trim(stripslashes((string) $_REQUEST['order'])))
             : ''; // Not specified explicitly by site owner.
 
         if (!$order || !in_array($order, ['asc', 'desc'], true)) {
@@ -1279,6 +1332,8 @@ abstract class MenuPageTableBase extends \WP_List_Table
      * Public query-related methods.
      */
 
+    // @codingStandardsIgnoreStart
+    // camelCase not possible. This is an extender.
     /**
      * Runs DB query; sets pagination args.
      *
@@ -1286,8 +1341,8 @@ abstract class MenuPageTableBase extends \WP_List_Table
      *
      * @extenders Extenders should ALWAYS override this.
      */
-    public function prepare_items() // The heart of this class.
-    {
+    public function prepare_items()
+    { // @codingStandardsIgnoreEnd
         /*
          * This is just a simple example showing
          * only the most useful getters/setters/helpers.
@@ -1307,7 +1362,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
         $order                       = $this->getOrder();
 
         $this->setItems([]); // `$this->items` = an array of \stdClass objects.
-        $this->setTotalItemsAvailable((integer)$this->plugin->utils_db->wp->get_var("SELECT FOUND_ROWS()"));
+        $this->setTotalItemsAvailable((integer) $this->plugin->utils_db->wp->get_var('SELECT FOUND_ROWS()'));
 
         $this->prepareItemsMergeSubProperties();
         $this->prepareItemsMergeUserProperties();
@@ -1337,12 +1392,12 @@ abstract class MenuPageTableBase extends \WP_List_Table
         $esc_clean_search_query      = esc_sql($clean_search_query);
         $esc_like_clean_search_query = esc_sql($this->plugin->utils_db->wp->esc_like($clean_search_query));
 
-        if (!($template = trim(str_replace(["'", '"'], '', (string)$template)))) {
+        if (!($template = trim(str_replace(["'", '"'], '', (string) $template)))) {
             $template = '= %1$s'; // Use the default template.
         }
         foreach ($this->getSearchableColumns() as $_column) {
-            $search_like_cols .= " OR `".esc_sql($_column)."`". // Using the template.
-                                 " ".sprintf($template, "'".$esc_clean_search_query."'", "'".$esc_like_clean_search_query."'");
+            $search_like_cols .= ' OR `'.esc_sql($_column).'`'.// Using the template.
+                                 ' '.sprintf($template, "'".$esc_clean_search_query."'", "'".$esc_like_clean_search_query."'");
         }
         unset($_column); // Housekeeping.
 
@@ -1358,12 +1413,12 @@ abstract class MenuPageTableBase extends \WP_List_Table
      *
      * @since 141111 First documented version.
      *
-     * @return integer Configured items per page.
+     * @return int Configured items per page.
      */
     protected function getPerPage()
     {
         $max_limit       = $this->plugin->utils_user->screenOption($this->screen, 'per_page');
-        $upper_max_limit = (integer)apply_filters(get_class($this).'_upper_max_limit', 1000);
+        $upper_max_limit = (integer) apply_filters(get_class($this).'_upper_max_limit', 1000);
 
         $max_limit = $max_limit < 1 ? 1 : $max_limit;
         $max_limit = $max_limit > $upper_max_limit ? 100 : $max_limit;
@@ -1376,11 +1431,11 @@ abstract class MenuPageTableBase extends \WP_List_Table
      *
      * @since 141111 First documented version.
      *
-     * @return integer Current page number.
+     * @return int Current page number.
      */
     protected function getCurrentPage()
     {
-        return ($current_page = $this->get_pagenum());
+        return $current_page = $this->get_pagenum();
     }
 
     /**
@@ -1388,11 +1443,11 @@ abstract class MenuPageTableBase extends \WP_List_Table
      *
      * @since 141111 First documented version.
      *
-     * @return integer Current SQL offset value.
+     * @return int Current SQL offset value.
      */
     protected function getCurrentOffset()
     {
-        return ($current_offset = ($this->getCurrentPage() - 1) * $this->getPerPage());
+        return $current_offset = ($this->getCurrentPage() - 1) * $this->getPerPage();
     }
 
     /**
@@ -1406,7 +1461,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
      */
     protected function setItems($items)
     {
-        return ($this->items = $items);
+        return $this->items = $items;
     }
 
     /**
@@ -1414,14 +1469,14 @@ abstract class MenuPageTableBase extends \WP_List_Table
      *
      * @since 141111 First documented version.
      *
-     * @param integer $calc_found_rows Total found rows using `SQL_CALC_FOUND_ROWS`.
+     * @param int $calc_found_rows Total found rows using `SQL_CALC_FOUND_ROWS`.
      *
-     * @return integer Total items available; i.e. number of found rows.
+     * @return int Total items available; i.e. number of found rows.
      */
     protected function setTotalItemsAvailable($calc_found_rows)
     {
         $per_page    = $this->getPerPage();
-        $total_items = (integer)$calc_found_rows;
+        $total_items = (integer) $calc_found_rows;
         $total_pages = ceil($total_items / $per_page);
         $this->set_pagination_args(compact('per_page', 'total_items', 'total_pages'));
 
@@ -1462,7 +1517,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
         }
         unset($_prefix, $_key, $_item); // Housekeeping.
 
-        $sql_columns      = [
+        $sql_columns = [
             'ID',
             'key',
 
@@ -1491,8 +1546,8 @@ abstract class MenuPageTableBase extends \WP_List_Table
         $sql_item_columns = $sql_columns;
         unset($sql_item_columns[0]); // Exclude `ID`.
 
-        $sql = "SELECT `".implode('`,`', array_map('esc_sql', $sql_columns))."`".
-               " FROM `".esc_sql($this->plugin->utils_db->prefix().'subs')."`".
+        $sql = 'SELECT `'.implode('`,`', array_map('esc_sql', $sql_columns)).'`'.
+               ' FROM `'.esc_sql($this->plugin->utils_db->prefix().'subs').'`'.
                " WHERE `ID` IN('".implode("','", array_map('esc_sql', $sub_ids))."')";
 
         if ($sub_ids && ($results = $this->plugin->utils_db->wp->get_results($sql, OBJECT_K))) {
@@ -1525,7 +1580,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
         foreach ($alts as $_prefix => $_key) {
             foreach ($this->items as $_item) {
                 foreach ($sql_item_columns as $_sql_item_column) {
-                    $_item->{$_prefix. // Prefix each of these.
+                    $_item->{$_prefix.// Prefix each of these.
                              preg_replace('/^sub_/i', '', $_sql_item_column)} = null;
                 }
                 if (!isset($_item->{$_key})) {
@@ -1535,7 +1590,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
                     continue; // Not possible.
                 }
                 foreach ($sql_item_columns as $_sql_item_column) {
-                    $_item->{$_prefix. // Prefix each of these.
+                    $_item->{$_prefix.// Prefix each of these.
                              preg_replace('/^sub_/i', '', $_sql_item_column)}
                         = $results[$_item->{$_key}]->{$_sql_item_column};
                 }
@@ -1574,7 +1629,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
         }
         unset($_prefix, $_key, $_item); // Housekeeping.
 
-        $sql_columns      = [
+        $sql_columns = [
             'ID',
             'user_login',
             'user_nicename',
@@ -1588,8 +1643,8 @@ abstract class MenuPageTableBase extends \WP_List_Table
         $sql_item_columns = $sql_columns;
         unset($sql_item_columns[0]); // Exclude `ID`.
 
-        $sql = "SELECT `".implode('`,`', array_map('esc_sql', $sql_columns))."`".
-               " FROM `".esc_sql($this->plugin->utils_db->wp->users)."`".
+        $sql = 'SELECT `'.implode('`,`', array_map('esc_sql', $sql_columns)).'`'.
+               ' FROM `'.esc_sql($this->plugin->utils_db->wp->users).'`'.
                " WHERE `ID` IN('".implode("','", array_map('esc_sql', $user_ids))."')";
 
         if ($user_ids && ($results = $this->plugin->utils_db->wp->get_results($sql, OBJECT_K))) {
@@ -1622,7 +1677,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
         foreach ($alts as $_prefix => $_key) {
             foreach ($this->items as $_item) {
                 foreach ($sql_item_columns as $_sql_item_column) {
-                    $_item->{$_prefix. // Prefix each of these.
+                    $_item->{$_prefix.// Prefix each of these.
                              preg_replace('/^user_/i', '', $_sql_item_column)} = null;
                 }
                 if (!isset($_item->{$_key})) {
@@ -1632,7 +1687,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
                     continue; // Not possible.
                 }
                 foreach ($sql_item_columns as $_sql_item_column) {
-                    $_item->{$_prefix. // Prefix each of these.
+                    $_item->{$_prefix.// Prefix each of these.
                              preg_replace('/^user_/i', '', $_sql_item_column)}
                         = $results[$_item->{$_key}]->{$_sql_item_column};
                 }
@@ -1671,7 +1726,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
         }
         unset($_prefix, $_key, $_item); // Housekeeping.
 
-        $sql_columns      = [
+        $sql_columns = [
             'ID',
             'post_title',
             'post_status',
@@ -1683,8 +1738,8 @@ abstract class MenuPageTableBase extends \WP_List_Table
         $sql_item_columns = $sql_columns;
         unset($sql_item_columns[0]); // Exclude `ID`.
 
-        $sql = "SELECT `".implode('`,`', array_map('esc_sql', $sql_columns))."`".
-               " FROM `".esc_sql($this->plugin->utils_db->wp->posts)."`".
+        $sql = 'SELECT `'.implode('`,`', array_map('esc_sql', $sql_columns)).'`'.
+               ' FROM `'.esc_sql($this->plugin->utils_db->wp->posts).'`'.
                " WHERE `ID` IN('".implode("','", array_map('esc_sql', $post_ids))."')";
 
         if ($post_ids && ($results = $this->plugin->utils_db->wp->get_results($sql, OBJECT_K))) {
@@ -1717,7 +1772,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
         foreach ($alts as $_prefix => $_key) {
             foreach ($this->items as $_item) {
                 foreach ($sql_item_columns as $_sql_item_column) {
-                    $_item->{$_prefix. // Prefix each of these.
+                    $_item->{$_prefix.// Prefix each of these.
                              preg_replace('/^post_/i', '', $_sql_item_column)} = null;
                 }
                 if (!isset($_item->{$_key})) {
@@ -1727,7 +1782,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
                     continue; // Not possible.
                 }
                 foreach ($sql_item_columns as $_sql_item_column) {
-                    $_item->{$_prefix. // Prefix each of these.
+                    $_item->{$_prefix.// Prefix each of these.
                              preg_replace('/^post_/i', '', $_sql_item_column)}
                         = $results[$_item->{$_key}]->{$_sql_item_column};
                 }
@@ -1768,7 +1823,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
         }
         unset($_prefix, $_key, $_item); // Housekeeping.
 
-        $sql_columns      = [
+        $sql_columns = [
             'comment_ID',
             'comment_author',
             'comment_author_email',
@@ -1780,8 +1835,8 @@ abstract class MenuPageTableBase extends \WP_List_Table
         $sql_item_columns = $sql_columns;
         unset($sql_item_columns[0]); // Exclude `comment_ID`.
 
-        $sql = "SELECT `".implode('`,`', array_map('esc_sql', $sql_columns))."`".
-               " FROM `".esc_sql($this->plugin->utils_db->wp->comments)."`".
+        $sql = 'SELECT `'.implode('`,`', array_map('esc_sql', $sql_columns)).'`'.
+               ' FROM `'.esc_sql($this->plugin->utils_db->wp->comments).'`'.
                " WHERE `comment_ID` IN('".implode("','", array_map('esc_sql', $comment_ids))."')";
 
         if ($comment_ids && ($results = $this->plugin->utils_db->wp->get_results($sql, OBJECT_K))) {
@@ -1814,7 +1869,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
         foreach ($alts as $_prefix => $_key) {
             foreach ($this->items as $_item) {
                 foreach ($sql_item_columns as $_sql_item_column) {
-                    $_item->{$_prefix. // Prefix each of these.
+                    $_item->{$_prefix.// Prefix each of these.
                              preg_replace('/^comment_/i', '', $_sql_item_column)} = null;
                 }
                 if (!isset($_item->{$_key})) {
@@ -1824,7 +1879,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
                     continue; // Not possible.
                 }
                 foreach ($sql_item_columns as $_sql_item_column) {
-                    $_item->{$_prefix. // Prefix each of these.
+                    $_item->{$_prefix.// Prefix each of these.
                              preg_replace('/^comment_/i', '', $_sql_item_column)}
                         = $results[$_item->{$_key}]->{$_sql_item_column};
                 }
@@ -1839,6 +1894,8 @@ abstract class MenuPageTableBase extends \WP_List_Table
      * Protected action-related methods.
      */
 
+    // @codingStandardsIgnoreStart
+    // camelCase not possible. This is an extender.
     /**
      * Bulk actions for this table.
      *
@@ -1849,7 +1906,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
      * @extenders Extenders should normally override this.
      */
     protected function get_bulk_actions()
-    {
+    { // @codingStandardsIgnoreEnd
         return [];
     }
 
@@ -1860,7 +1917,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
      */
     protected function maybeProcessBulkAction()
     {
-        if (!($bulk_action = stripslashes((string)$this->current_action()))) {
+        if (!($bulk_action = stripslashes((string) $this->current_action()))) {
             return; // Nothing to do; no action requested here.
         }
         if (!$this->plugin->utils_url->hasValidNonce('bulk-'.$this->plural_name)) {
@@ -1911,19 +1968,21 @@ abstract class MenuPageTableBase extends \WP_List_Table
      * @param string $bulk_action The bulk action to process.
      * @param array  $ids         The bulk action IDs to process.
      *
-     * @return integer Number of actions processed successfully.
+     * @return int Number of actions processed successfully.
      *
      * @extenders Extenders should normally override this.
      */
     protected function processBulkAction($bulk_action, array $ids)
     {
-        return !empty($counter) ? (integer)$counter : 0;
+        return !empty($counter) ? (integer) $counter : 0;
     }
 
     /*
      * Public display-related methods.
      */
 
+    // @codingStandardsIgnoreStart
+    // camelCase not possible. This is an extender.
     /**
      * Display search box.
      *
@@ -1931,7 +1990,6 @@ abstract class MenuPageTableBase extends \WP_List_Table
      *
      * @param string $text     The search button `value=""`.
      *                         This will default to a value of `Search`.
-     *
      * @param string $input_id The search input `id=""` attribute.
      *                         This parameter is always forced to an id-compatible value.
      *                         This will default to a value of `get_class($this).'::'.__FUNCTION__`.
@@ -1939,15 +1997,15 @@ abstract class MenuPageTableBase extends \WP_List_Table
      * @throws \exception If unable to do `name="search-submit"` replacement.
      */
     public function search_box($text = '', $input_id = '')
-    {
+    { // @codingStandardsIgnoreEnd
         if (!$this->getFtSearchableColumns()
             && !$this->getSearchableColumns()
             && !$this->getNavigableFilters()
         ) {
             return; // Not applicable.
         }
-        $text     = (string)$text;
-        $input_id = (string)$input_id;
+        $text     = (string) $text;
+        $input_id = (string) $input_id;
         $text     = !$text ? __('Search', $this->plugin->text_domain) : esc_html($text);
         $input_id = !$input_id ? get_class($this).'::'.__FUNCTION__ : $input_id;
         $input_id = trim(preg_replace('/[^a-z0-9\-]/i', '-', $input_id), '-');
@@ -1990,7 +2048,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
         if (!$query_contains_filters && !$navigable_filters_exist) {
             return; // Nothing to do here.
         }
-        $subs    = $users = $posts = $comments = []; // Array of bject references.
+        $subs    = $users    = $posts    = $comments    = []; // Array of bject references.
         $sub_lis = $sub_email_lis = $user_lis = $post_lis = $comment_lis = $navigable_filter_lis = $unknown_lis = [];
 
         foreach ($sub_ids as $_sub_id) {
@@ -2022,8 +2080,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
         unset($_comment_id, $_comment); // Housekeeping.
 
         foreach ($subs as $_sub) { // `\stdClass` objects.
-            /** @var $_sub \stdClass Reference for IDEs. */
-
+            /** @type $_sub \stdClass Reference for IDEs. */
             if (isset($sub_lis[$_sub->ID])) {
                 continue; // Duplicate.
             }
@@ -2032,10 +2089,10 @@ abstract class MenuPageTableBase extends \WP_List_Table
                 'name_style'  => 'font-weight:bold;',
                 'email_style' => 'font-weight:normal;',
             ];
-            $_sub_name        = $_sub->fname.' '.$_sub->lname; // Concatenate.
-            $_sub_edit_link   = $this->plugin->utils_url->editSubShort($_sub->ID);
+            $_sub_name      = $_sub->fname.' '.$_sub->lname; // Concatenate.
+            $_sub_edit_link = $this->plugin->utils_url->editSubShort($_sub->ID);
 
-            $sub_lis[$_sub->ID] = '<li>'. // [icon] ID "Name" <email> [edit].
+            $sub_lis[$_sub->ID] = '<li>'.// [icon] ID "Name" <email> [edit].
                                   '<i class="'.esc_attr('si si-'.$this->plugin->slug).'"></i>'.
                                   ' '.$this->plugin->utils_markup->nameEmail($_sub_name, $_sub->email, $_name_email_args).
                                   ($_sub_edit_link // Only if they can edit the subscription ID; else this will be empty.
@@ -2050,12 +2107,12 @@ abstract class MenuPageTableBase extends \WP_List_Table
             if (isset($sub_email_lis[$_sub_email])) {
                 continue; // Duplicate.
             }
-            $_name_email_args           = [
+            $_name_email_args = [
                 'anchor_to'   => 'search',
                 'email_style' => 'font-weight:bold;',
             ];
-            $sub_email_lis[$_sub_email] = '<li>'. // [icon] <email>.
-                                          '<i class="fa fa-envelope"></i>'. // e.g. [icon] <email>.
+            $sub_email_lis[$_sub_email] = '<li>'.// [icon] <email>.
+                                          '<i class="fa fa-envelope"></i>'.// e.g. [icon] <email>.
                                           ' <span style="font-weight:bold;" title="'.esc_attr($_sub_email).'">'.__('Email:', $this->plugin->text_domain).'</span>'.
                                           ' '.$this->plugin->utils_markup->nameEmail('', $_sub_email, $_name_email_args).
                                           '</li>';
@@ -2063,8 +2120,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
         unset($_sub_email, $_name_email_args); // Housekeeping.
 
         foreach ($users as $_user) { // `\WP_User` objects.
-            /** @var $_user \WP_User Reference for IDEs. */
-
+            /** @type $_user \WP_User Reference for IDEs. */
             if (isset($user_lis[$_user->ID])) {
                 continue; // Duplicate.
             }
@@ -2073,10 +2129,10 @@ abstract class MenuPageTableBase extends \WP_List_Table
                 'name_style'  => 'font-weight:bold;',
                 'email_style' => 'font-weight:normal;',
             ];
-            $_user_edit_link  = get_edit_user_link($_user->ID);
+            $_user_edit_link = get_edit_user_link($_user->ID);
 
-            $user_lis[$_user->ID] = '<li>'. // [icon] ID "Name" <email> [edit].
-                                    '<i class="fa fa-user"></i>'. // e.g. [icon] "Name" <email>
+            $user_lis[$_user->ID] = '<li>'.// [icon] ID "Name" <email> [edit].
+                                    '<i class="fa fa-user"></i>'.// e.g. [icon] "Name" <email>
                                     ' '.$this->plugin->utils_markup->nameEmail($_user->display_name, $_user->user_email, $_name_email_args).
                                     ($_user_edit_link // Only if they can edit the user ID; else this will be empty.
                                         ? ' [<a href="'.esc_attr($_user_edit_link).'">'.__('edit', $this->plugin->text_domain).'</a>]' : '').
@@ -2085,8 +2141,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
         unset($_user, $_name_email_args, $_user_edit_link); // Housekeeping.
 
         foreach ($posts as $_post) { // `\WP_Post` objects.
-            /** @var $_post \WP_Post Reference for IDEs. */
-
+            /** @type $_post \WP_Post Reference for IDEs. */
             if (isset($post_lis[$_post->ID])) {
                 continue; // Duplicate.
             }
@@ -2098,7 +2153,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
             $_post_title_clip = $this->plugin->utils_string->midClip($_post->post_title);
             $_post_type_label = $_post_type->labels->singular_name;
 
-            $post_lis[$_post->ID] = '<li>'. // <title> [edit].
+            $post_lis[$_post->ID] = '<li>'.// <title> [edit].
                                     '  "<a href="'.esc_attr($_post_permalink).'">'.esc_html($_post_title_clip).'</a>"'.
                                     ($_post_edit_link // Only if they can edit the post ID; else this will be empty.
                                         ? ' [<a href="'.esc_attr($_post_edit_link).'">'.__('edit', $this->plugin->text_domain).'</a>]' : '').
@@ -2106,10 +2161,11 @@ abstract class MenuPageTableBase extends \WP_List_Table
         }
         unset($_post, $_post_type, $_post_permalink, $_post_edit_link, $_post_title_clip, $_post_type_label); // Housekeeping.
 
-        foreach ($comments as $_comment) // `\stdClass` objects.
-        {
-            /** @var $_comment \stdClass Reference for IDEs. */
-            /** @var $_post \WP_Post Reference for IDEs. */
+        foreach ($comments as $_comment) {
+            // `\stdClass` objects.
+
+            /** @type $_comment \stdClass Reference for IDEs. */
+            /* @var $_post \WP_Post Reference for IDEs. */
 
             if (isset($comment_lis[$_comment->comment_ID])) {
                 continue; // Duplicate.
@@ -2134,13 +2190,13 @@ abstract class MenuPageTableBase extends \WP_List_Table
             $_comment_edit_link    = get_edit_comment_link($_comment->comment_ID);
             $_comment_content_clip = $this->plugin->utils_string->clip($_comment->comment_content, 100);
 
-            $comment_lis[$_comment->comment_ID] = '<li>'. // <title> [edit].
+            $comment_lis[$_comment->comment_ID] = '<li>'.// <title> [edit].
                                                   '   "<a href="'.esc_attr($_post_permalink).'">'.esc_html($_post_title_clip).'</a>"'.
                                                   ($_post_edit_link // Only if they can edit the post ID; else this will be empty.
                                                       ? ' [<a href="'.esc_attr($_post_edit_link).'">'.__('edit', $this->plugin->text_domain).'</a>]' : '').
 
-                                                  '   <ul>'. // Nest comment under post.
-                                                  '      <li>'. // Comment ID: <author> [edit] ... followed by a content clip.
+                                                  '   <ul>'.// Nest comment under post.
+                                                  '      <li>'.// Comment ID: <author> [edit] ... followed by a content clip.
                                                   '         <span style="font-weight:bold;">'.__('Comment', $this->plugin->text_domain).'</span>'.
                                                   '         <span style="font-weight:bold;">ID <a href="'.esc_attr($_comment_permalink).'" target="_blank">#'.esc_html($_comment->comment_ID).'</a>:</span>'.
                                                   '         '.$this->plugin->utils_markup->nameEmail($_comment->comment_author, $_comment->comment_author_email, $_name_email_args).
@@ -2155,14 +2211,14 @@ abstract class MenuPageTableBase extends \WP_List_Table
 
         foreach ($navigable_filters as $_navigable_filter_s => $_navigable_filter_label) {
             if (!$navigable_filter_lis) { // `all` first; i.e. a way to remove all navigable filters.
-                $navigable_filter_lis[] = '<li>'. // List item for special navigable filter `all`.
+                $navigable_filter_lis[] = '<li>'.// List item for special navigable filter `all`.
                                           '   <a href="'.esc_attr($this->plugin->utils_url->tableSearchFilter('::')).'"'.
                                           (!$query_contains_navigable_filters ? ' class="pmp-active"' : '').'>'.
                                           '      '.__('all', $this->plugin->text_domain).
                                           '   </a>'.
                                           '</li>';
             }
-            $navigable_filter_lis[] = '<li>'. // List item for a navigable filter in this table.
+            $navigable_filter_lis[] = '<li>'.// List item for a navigable filter in this table.
                                       '   <a href="'.esc_attr($this->plugin->utils_url->tableSearchFilter($_navigable_filter_s)).'"'.
                                       (stripos($raw_search_query, $_navigable_filter_s) !== false ? ' class="pmp-active"' : '').'>'.
                                       '      <span style="'.esc_attr($_navigable_filter_s === 'status::trashed' ? 'font-style:italic;' : '').'">'.
@@ -2178,12 +2234,12 @@ abstract class MenuPageTableBase extends \WP_List_Table
         if ($query_contains_filters) { // If query contains non-navigable filters.
             if (!$filter_lis_exist) { // Unable to build list items for search filter(s)?
                 $unknown_lis[] = '<li>'.sprintf(
-                        __('Unknown filter(s). Unable to build list items for: <code>%1$s</code>', $this->plugin->text_domain),
-                        esc_html($this->getRawSearchQuery())
-                    ).'</li>';
+                    __('Unknown filter(s). Unable to build list items for: <code>%1$s</code>', $this->plugin->text_domain),
+                    esc_html($this->getRawSearchQuery())
+                ).'</li>';
             }
-            echo '<h3>'. // Display.
-                 '   <i class="fa fa-filter"></i>'. // Filter icon.
+            echo '<h3>'.// Display.
+                 '   <i class="fa fa-filter"></i>'.// Filter icon.
                  '   '.sprintf(__('<strong>Search Filters Applied</strong> :: only showing %1$s for:', $this->plugin->text_domain), esc_html($this->plural_label)).
                  '</h3>';
             if ($sub_lis) {
@@ -2213,15 +2269,17 @@ abstract class MenuPageTableBase extends \WP_List_Table
         }
     }
 
+    // @codingStandardsIgnoreStart
+    // camelCase not possible. This is an extender.
     /**
      * Prints column headers.
      *
      * @since 141111 First documented version.
      *
-     * @param boolean $with_id Add an `id=""` attribute?
+     * @param bool $with_id Add an `id=""` attribute?
      */
     public function print_column_headers($with_id = true)
-    {
+    { // @codingStandardsIgnoreEnd
         ob_start(); // Open an output buffer.
         parent::print_column_headers($with_id);
         $column_headers = ob_get_clean();
@@ -2243,13 +2301,15 @@ abstract class MenuPageTableBase extends \WP_List_Table
         echo $column_headers; // Display.
     }
 
+    // @codingStandardsIgnoreStart
+    // camelCase not possible. This is an extender.
     /**
      * Prints no items message.
      *
      * @since 141111 First documented version.
      */
     public function no_items()
-    {
+    { // @codingStandardsIgnoreEnd
         echo esc_html(sprintf(__('No %1$s to display.', $this->plugin->text_domain), $this->plural_label));
     }
 
