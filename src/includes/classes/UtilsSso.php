@@ -123,7 +123,7 @@ namespace WebSharks\CommentMail\Pro;
 				$display_name = $fname; // Data from above.
 
 				$user_email = $email; // Data from above.
-				$user_login = strtolower('sso'.$this->plugin->utils_enc->uunnci_key_20_max());
+				$user_login = strtolower('sso'.$this->plugin->utils_enc->uunnciKey20Max());
 				$user_pass  = wp_generate_password();
 
 				if(is_multisite()) // On networks, there are other considerations.

@@ -69,9 +69,9 @@ class SsoStorage implements \OAuth\Common\Storage\TokenStorageInterface
 
         $this->ttl = apply_filters(__CLASS__.'_ttl', 31556926);
 
-        if (!($this->key = $this->plugin->utils_enc->get_cookie(GLOBAL_NS.'_sso_key'))) {
-            $this->key = $this->plugin->utils_enc->uunnci_key_20_max();
-            $this->plugin->utils_enc->set_cookie(GLOBAL_NS.'_sso_key', $this->key, $this->ttl);
+        if (!($this->key = $this->plugin->utils_enc->getCookie(GLOBAL_NS.'_sso_key'))) {
+            $this->key = $this->plugin->utils_enc->uunnciKey20Max();
+            $this->plugin->utils_enc->setCookie(GLOBAL_NS.'_sso_key', $this->key, $this->ttl);
         }
         $this->key       = preg_replace('/[^a-z0-9]/i', '', $this->key);
         $this->key       = substr($this->key, 0, 20); // 20 chars max.

@@ -1143,7 +1143,7 @@ namespace WebSharks\CommentMail\Pro;
 				// Cookie is ONLY set for subscribers that received a secret `key` in one way or another.
 				// A subscriber only receives a secret key if we can confirm they own the email associated w/ it.
 				// ~ Note also that this cookie is encrypted via `MCRYPT_RIJNDAEL_256` w/ a unique salt.
-				$this->plugin->utils_enc->set_cookie(GLOBAL_NS.'_sub_email', $sub_email);
+				$this->plugin->utils_enc->setCookie(GLOBAL_NS.'_sub_email', $sub_email);
 			}
 
 			/**
@@ -1162,7 +1162,7 @@ namespace WebSharks\CommentMail\Pro;
 				// Cookie is ONLY set for subscribers that received a secret `key` in one way or another.
 				// A subscriber only receives a secret key if we can confirm they own the email associated w/ it.
 				// ~ Note also that this cookie is encrypted via `MCRYPT_RIJNDAEL_256` w/ a unique salt.
-				if(($sub_email = $this->plugin->utils_enc->get_cookie(GLOBAL_NS.'_sub_email')))
+				if(($sub_email = $this->plugin->utils_enc->getCookie(GLOBAL_NS.'_sub_email')))
 					return trim(strtolower((string)$sub_email));
 
 				return ''; // Not possible.

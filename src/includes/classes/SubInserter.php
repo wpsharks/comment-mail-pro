@@ -1120,7 +1120,7 @@ class SubInserter extends AbsBase
                         $_value = (string)$_value;
                     }
                     if ($this->is_insert) { // Force a unique key.
-                        $_value = $this->plugin->utils_enc->uunnci_key_20_max();
+                        $_value = $this->plugin->utils_enc->uunnciKey20Max();
                     }
                     if (isset($_value) && (!$_value || strlen($_value) > 20)) {
                         $this->errors['invalid_sub_key'] = sprintf(__('Invalid key: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
@@ -1139,7 +1139,7 @@ class SubInserter extends AbsBase
                         if (strcasecmp((string)$this->data['email'], $this->sub->email) !== 0) { // Email changing?
                             // Actions that change email should also change/nullify the existing key.
                             $this->email_key_changed = true; // Flag for API calls.
-                            $_value                  = $this->plugin->utils_enc->uunnci_key_20_max();
+                            $_value                  = $this->plugin->utils_enc->uunnciKey20Max();
                         }
                     }
                     if (empty($this->errors['invalid_sub_key'])) {

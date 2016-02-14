@@ -2009,7 +2009,7 @@ class Plugin extends AbsBase
             $args['type'] = 'notice'; // Use default type.
         }
         ksort($args); // Sort args (by key) for key generation.
-        $key = $this->utils_enc->hmac_sha256_sign(serialize($args));
+        $key = $this->utils_enc->hmacSha256Sign(serialize($args));
 
         if (!is_array($notices = get_option(GLOBAL_NS.'_notices'))) {
             $notices = []; // Force an array of notices.
