@@ -1362,7 +1362,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
      */
     protected function getPerPage()
     {
-        $max_limit       = $this->plugin->utils_user->screen_option($this->screen, 'per_page');
+        $max_limit       = $this->plugin->utils_user->screenOption($this->screen, 'per_page');
         $upper_max_limit = (integer)apply_filters(get_class($this).'_upper_max_limit', 1000);
 
         $max_limit = $max_limit < 1 ? 1 : $max_limit;

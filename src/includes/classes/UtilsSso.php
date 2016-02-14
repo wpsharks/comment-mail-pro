@@ -111,7 +111,7 @@ class UtilsSso extends AbsBase
         $no_cache = (boolean)$args['no_cache']; // Fresh check(s)?
 
         if (!$fname || !$email || !is_email($email)
-            || $this->plugin->utils_user->email_exists_on_blog($email, $no_cache)
+            || $this->plugin->utils_user->emailExistsOnBlog($email, $no_cache)
         ) {
             return false; // Invalid; or email exists on this blog already.
         }
@@ -300,7 +300,7 @@ class UtilsSso extends AbsBase
                 $error_codes[] = 'missing_email';
             } else if (!is_email($email)) { // Invalid email?
                 $error_codes[] = 'invalid_email';
-            } else if ($this->plugin->utils_user->email_exists_on_blog($email)) {
+            } else if ($this->plugin->utils_user->emailExistsOnBlog($email)) {
                 $error_codes[] = 'email_exists'; // Exists on this blog already.
             }
         } else if ($action === 'callback') { // Handle duplicate email on callback.
@@ -310,7 +310,7 @@ class UtilsSso extends AbsBase
             //if(!$this->plugin->utils_user->can_register())
             //	$error_codes[] = 'users_cannot_register';
 
-            if ($email && $this->plugin->utils_user->email_exists_on_blog($email)) {
+            if ($email && $this->plugin->utils_user->emailExistsOnBlog($email)) {
                 $error_codes[] = 'email_exists'; // Exists on this blog already.
             }
         }

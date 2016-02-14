@@ -462,7 +462,7 @@ class SubInserter extends AbsBase
             $this->is_current_user = true;
         } else {
             $this->is_current_user = // `$this->user` is current user?
-              $this->user && $this->plugin->utils_user->is_current($this->user, $this->user_allow_0);
+              $this->user && $this->plugin->utils_user->isCurrent($this->user, $this->user_allow_0);
         }
         /* Related to duplicates. */
 

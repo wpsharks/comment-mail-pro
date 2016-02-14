@@ -262,7 +262,7 @@ abstract class SsoServiceBase extends AbsBase
 
                     || !$fname || !$email || !is_email($email)
 
-                    || $this->plugin->utils_user->email_exists_on_blog($email)
+                    || $this->plugin->utils_user->emailExistsOnBlog($email)
 
                 ) { // Something is missing or invalid; request manual completion by user.
                     $request_completion_args = compact('sso_id', 'fname', 'lname', 'email');
