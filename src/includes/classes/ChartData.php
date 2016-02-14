@@ -1,50 +1,51 @@
 <?php
 /**
- * Chart Data; for Stats
+ * Chart Data; for Stats.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * Chart Data; for Stats
+ * Chart Data; for Stats.
  *
  * @since 141111 First documented version.
  */
 class ChartData extends AbsBase
 {
     /**
-     * @var string Input view.
+     * @type string Input view.
      *
      * @since 141111 First documented version.
      */
     protected $input_view;
 
     /**
-     * @var string Current view.
+     * @type string Current view.
      *
      * @since 141111 First documented version.
      */
     protected $view;
 
     /**
-     * @var \stdClass Chart specs.
+     * @type \stdClass Chart specs.
      *
      * @since 141111 First documented version.
      */
     protected $chart;
 
     /**
-     * @var array Any errors.
+     * @type array Any errors.
      *
      * @since 141111 First documented version.
      */
     protected $errors;
 
     /**
-     * @var array Chart colors.
+     * @type array Chart colors.
      *
      * @since 141111 First documented version.
      */
@@ -56,7 +57,7 @@ class ChartData extends AbsBase
     ];
 
     /**
-     * @var array Primary chart colors.
+     * @type array Primary chart colors.
      *
      * @since 141111 First documented version.
      */
@@ -68,7 +69,7 @@ class ChartData extends AbsBase
     ];
 
     /**
-     * @var array Secondary chart colors.
+     * @type array Secondary chart colors.
      *
      * @since 141111 First documented version.
      */
@@ -80,7 +81,7 @@ class ChartData extends AbsBase
     ];
 
     /**
-     * @var array Gradient chart colors.
+     * @type array Gradient chart colors.
      *
      * @since 141111 First documented version.
      */
@@ -114,10 +115,10 @@ class ChartData extends AbsBase
 
             'by' => '',
         ];
-        $request_args         = array_merge($default_request_args, $request_args);
-        $request_args         = array_intersect_key($request_args, $default_request_args);
+        $request_args = array_merge($default_request_args, $request_args);
+        $request_args = array_intersect_key($request_args, $default_request_args);
 
-        $this->input_view = $this->view = trim(strtolower((string)$request_args['view']));
+        $this->input_view = $this->view = trim(strtolower((string) $request_args['view']));
 
         if ($this->input_view === 'subs_overview_by_post_id') {
             $this->view = 'subs_overview'; // Same handler.
@@ -125,26 +126,30 @@ class ChartData extends AbsBase
         if ($this->input_view === 'queued_notifications_overview_by_post_id') {
             $this->view = 'queued_notifications_overview'; // Same handler.
         }
-        $ClassCase  = function ($string) {
-            $string = strtolower((string)$string);
-            return ucfirst(preg_replace_callback('/_(.)/', function ($m) { return strtoupper($m[1]); }, $string));
+        $ClassCase = function ($string) {
+            $string = strtolower((string) $string);
+            return ucfirst(preg_replace_callback('/_(.)/', function ($m) {
+                return strtoupper($m[1]);
+            }, $string));
         };
         $methodCase = function ($string) {
-            $string = strtolower((string)$string);
-            return lcfirst(preg_replace_callback('/_(.)/', function ($m) { return strtoupper($m[1]); }, $string));
+            $string = strtolower((string) $string);
+            return lcfirst(preg_replace_callback('/_(.)/', function ($m) {
+                return strtoupper($m[1]);
+            }, $string));
         };
         $this->view = $ClassCase($this->view); // Force ClassCase.
 
-        $this->chart = new \stdClass; // Object properties.
+        $this->chart = new \stdClass(); // Object properties.
 
-        $this->chart->type    = $methodCase(trim((string)$request_args['type']));
-        $this->chart->post_id = abs((integer)$request_args['post_id']);
-        $this->chart->exclude = (array)$request_args['exclude'];
+        $this->chart->type    = $methodCase(trim((string) $request_args['type']));
+        $this->chart->post_id = abs((integer) $request_args['post_id']);
+        $this->chart->exclude = (array) $request_args['exclude'];
 
-        $this->chart->from_time = $this->plugin->utils_string->trim((string)$request_args['from'], '', ',;');
-        $this->chart->to_time   = $this->plugin->utils_string->trim((string)$request_args['to'], '', ',;');
+        $this->chart->from_time = $this->plugin->utils_string->trim((string) $request_args['from'], '', ',;');
+        $this->chart->to_time   = $this->plugin->utils_string->trim((string) $request_args['to'], '', ',;');
 
-        $this->chart->by = trim(strtolower((string)$request_args['by']));
+        $this->chart->by = trim(strtolower((string) $request_args['by']));
 
         $this->errors = []; // Initialize.
 
@@ -164,8 +169,8 @@ class ChartData extends AbsBase
             }
         }
         if ($this->chartIsValid() && !$this->errors) {
-            echo json_encode($this->{$this->view.'®'}());
-        } else if ($this->errors) { // Return `errors` property w/ markup.
+            echo json_encode($this->{$this->view.'X'}());
+        } elseif ($this->errors) { // Return `errors` property w/ markup.
             echo json_encode(['errors' => $this->errorsMarkup()]);
         }
     }
@@ -177,7 +182,7 @@ class ChartData extends AbsBase
      *
      * @return array An array of all chart data.
      */
-    protected function subsOverview®()
+    protected function subsOverviewX()
     {
         return $this->{__FUNCTION__.$this->chart->type}();
     }
@@ -189,7 +194,7 @@ class ChartData extends AbsBase
      *
      * @return array An array of all chart data; for ChartJS.
      */
-    protected function subsOverview®EventSubscribedTotals()
+    protected function subsOverviewXEventSubscribedTotals()
     {
         return $this->subsOverviewEventSubscribedTotals();
     }
@@ -201,7 +206,7 @@ class ChartData extends AbsBase
      *
      * @return array An array of all chart data; for ChartJS.
      */
-    protected function subsOverview®EventSubscribedMostPopularPosts()
+    protected function subsOverviewXEventSubscribedMostPopularPosts()
     {
         return $this->subsOverviewEventSubscribedPostPopularity('most');
     }
@@ -213,7 +218,7 @@ class ChartData extends AbsBase
      *
      * @return array An array of all chart data; for ChartJS.
      */
-    protected function subsOverview®EventSubscribedLeastPopularPosts()
+    protected function subsOverviewXEventSubscribedLeastPopularPosts()
     {
         return $this->subsOverviewEventSubscribedPostPopularity('least');
     }
@@ -225,7 +230,7 @@ class ChartData extends AbsBase
      *
      * @return array An array of all chart data; for Google Visualization.
      */
-    protected function subsOverview®EventSubscribedAudienceByGeoCountry()
+    protected function subsOverviewXEventSubscribedAudienceByGeoCountry()
     {
         return $this->subsOverviewEventSubscribedAudienceByGeoCountry();
     }
@@ -237,7 +242,7 @@ class ChartData extends AbsBase
      *
      * @return array An array of all chart data; for Google Visualization.
      */
-    protected function subsOverview®EventSubscribedAudienceByGeoUsRegion()
+    protected function subsOverviewXEventSubscribedAudienceByGeoUsRegion()
     {
         return $this->subsOverviewEventSubscribedAudienceByGeoRegion('US');
     }
@@ -249,7 +254,7 @@ class ChartData extends AbsBase
      *
      * @return array An array of all chart data; for Google Visualization.
      */
-    protected function subsOverview®EventSubscribedAudienceByGeoCaRegion()
+    protected function subsOverviewXEventSubscribedAudienceByGeoCaRegion()
     {
         return $this->subsOverviewEventSubscribedAudienceByGeoRegion('CA');
     }
@@ -261,7 +266,7 @@ class ChartData extends AbsBase
      *
      * @return array An array of all chart data; for ChartJS.
      */
-    protected function subsOverview®EventConfirmationPercentages()
+    protected function subsOverviewXEventConfirmationPercentages()
     {
         return $this->subsOverviewEventStatusPercentages(['subscribed'], __('Confirmed', $this->plugin->text_domain));
     }
@@ -273,7 +278,7 @@ class ChartData extends AbsBase
      *
      * @return array An array of all chart data; for ChartJS.
      */
-    protected function subsOverview®EventSuspensionPercentages()
+    protected function subsOverviewXEventSuspensionPercentages()
     {
         return $this->subsOverviewEventStatusPercentages(['suspended'], __('Suspended', $this->plugin->text_domain));
     }
@@ -285,7 +290,7 @@ class ChartData extends AbsBase
      *
      * @return array An array of all chart data; for ChartJS.
      */
-    protected function subsOverview®EventUnsubscribePercentages()
+    protected function subsOverviewXEventUnsubscribePercentages()
     {
         return $this->subsOverviewEventStatusPercentages(['trashed', 'deleted'], __('Unsubscribed', $this->plugin->text_domain));
     }
@@ -295,9 +300,9 @@ class ChartData extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @return array An array of all chart data; for ChartJS.
-     *
      * @throws \exception If there is a query failure.
+     *
+     * @return array An array of all chart data; for ChartJS.
      */
     protected function subsOverviewEventSubscribedTotals()
     {
@@ -311,34 +316,35 @@ class ChartData extends AbsBase
         foreach ($this->chart->time_periods as $_time_period) {
             $_new_sub_ids_sql = $this->newSubIdsSql($_time_period['from_time'], $_time_period['to_time']);
 
-            $_sql = "SELECT SQL_CALC_FOUND_ROWS `sub_id`". // Calc enable.
-                    " FROM `".esc_sql($this->plugin->utils_db->prefix().'sub_event_log')."`".
+            $_sql = 'SELECT SQL_CALC_FOUND_ROWS `sub_id`'.// Calc enable.
+                    ' FROM `'.esc_sql($this->plugin->utils_db->prefix().'sub_event_log').'`'.
 
-                    " WHERE 1=1". // Initialize where clause.
+                    ' WHERE 1=1'.// Initialize where clause.
 
-                    " AND `sub_id` IN(".$_new_sub_ids_sql.")".
+                    ' AND `sub_id` IN('.$_new_sub_ids_sql.')'.
                     " AND `status` IN('subscribed')".
 
                     (in_array('systematics', $this->chart->exclude, true)
-                        ? " AND `user_initiated` > '0'" : ''). // User-initiated only.
+                        ? " AND `user_initiated` > '0'" : '').// User-initiated only.
 
-                    " GROUP BY `sub_id`". // Unique subs only.
+                    ' GROUP BY `sub_id`'.// Unique subs only.
 
-                    " LIMIT 1"; // Only need one to check.
+                    ' LIMIT 1'; // Only need one to check.
 
             if ($this->plugin->utils_db->wp->query($_sql) === false) {
                 throw new \exception(__('Query failure.', $this->plugin->text_domain));
             }
-            $data[] = (integer)$this->plugin->utils_db->wp->get_var("SELECT FOUND_ROWS()");
+            $data[] = (integer) $this->plugin->utils_db->wp->get_var('SELECT FOUND_ROWS()');
         }
         unset($_time_period, $_oby_sub_ids, $_sql); // Housekeeping.
 
         return [
-            'data'    => [
+            'data' => [
                 'labels'   => $labels,
                 'datasets' => [
                     array_merge(
-                        $this->colors, [
+                        $this->colors,
+                        [
                             'label' => __('Total Subscriptions', $this->plugin->text_domain),
                             'data'  => $data,
                         ]
@@ -360,13 +366,13 @@ class ChartData extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @return array An array of all chart data; for Google Visualization `geochart` map.
-     *
      * @throws \exception If there is a query failure.
+     *
+     * @return array An array of all chart data; for Google Visualization `geochart` map.
      */
     public function subsOverviewEventSubscribedAudienceByGeoCountry()
     {
-        $data            = [
+        $data = [
             [ // Initialize column headers.
               __('Country', $this->plugin->text_domain),
               __('Total Subscriptions', $this->plugin->text_domain),
@@ -378,27 +384,27 @@ class ChartData extends AbsBase
 
         $sql  // Counts country totals by distinct `sub_id`; ordered by popularity.
 
-            = "SELECT `country`, `sub_id`, COUNT(DISTINCT(`sub_id`)) AS `total_subs`".
-              " FROM `".esc_sql($this->plugin->utils_db->prefix().'sub_event_log')."`".
+            = 'SELECT `country`, `sub_id`, COUNT(DISTINCT(`sub_id`)) AS `total_subs`'.
+              ' FROM `'.esc_sql($this->plugin->utils_db->prefix().'sub_event_log').'`'.
 
-              " WHERE 1=1". // Initialize where clause.
+              ' WHERE 1=1'.// Initialize where clause.
 
-              " AND `sub_id` IN(".$new_sub_ids_sql.")".
+              ' AND `sub_id` IN('.$new_sub_ids_sql.')'.
               " AND `status` IN('subscribed')".
               " AND `country` != ''".
 
               (in_array('systematics', $this->chart->exclude, true)
-                  ? " AND `user_initiated` > '0'" : ''). // User-initiated only.
+                  ? " AND `user_initiated` > '0'" : '').// User-initiated only.
 
-              " GROUP BY `country`". // Unique countries only.
+              ' GROUP BY `country`'.// Unique countries only.
 
-              " ORDER BY `total_subs` DESC".
+              ' ORDER BY `total_subs` DESC'.
 
-              " LIMIT 400"; // 400 max allowed by Google; should be plenty.
+              ' LIMIT 400'; // 400 max allowed by Google; should be plenty.
 
         if (($results = $this->plugin->utils_db->wp->get_results($sql))) {
             foreach (($results = $this->plugin->utils_db->typifyDeep($results)) as $_result) {
-                $_result->total_subs = (integer)$_result->total_subs;
+                $_result->total_subs = (integer) $_result->total_subs;
                 $data[]              = [ // Adds a new data row for the table we are building.
                                          [
                                              'v' => strtoupper($_result->country), // Value and full name.
@@ -412,7 +418,7 @@ class ChartData extends AbsBase
         unset($_result, $_percent_of_total_subs); // Housekeeping.
 
         foreach ($data as $_key => &$_dataset) { // Add total & percentages into tooltips.
-            $_dataset[2] = $this->plugin->utils_i18n->subscriptions($_dataset[1]). // e.g. X subscription(s).
+            $_dataset[2] = $this->plugin->utils_i18n->subscriptions($_dataset[1]).// e.g. X subscription(s).
                            ' ('.$this->plugin->utils_math->percent($_dataset[1], $grand_total, 0, true).')';
         }
         unset($_key, $_dataset); // Housekeeping.
@@ -435,20 +441,20 @@ class ChartData extends AbsBase
      *
      * @param string $country Regions in which country?
      *
-     * @return array An array of all chart data; for Google Visualization `geochart` map.
-     *
      * @throws \exception If there is a query failure.
+     *
+     * @return array An array of all chart data; for Google Visualization `geochart` map.
      */
     public function subsOverviewEventSubscribedAudienceByGeoRegion($country)
     {
-        $country = trim(strtoupper((string)$country));
+        $country = trim(strtoupper((string) $country));
 
         if (!in_array($country, ['US', 'CA'], true)) {
             $country = 'US'; // Force a valid country.
         }
         $country_lc = strtolower($country);
 
-        $data            = [
+        $data = [
             [ // Initialize column headers.
               __('Region', $this->plugin->text_domain),
               __('Total Subscriptions', $this->plugin->text_domain),
@@ -461,29 +467,29 @@ class ChartData extends AbsBase
 
         $sql  // Counts country totals by distinct `sub_id`; ordered by popularity.
 
-            = "SELECT `country`, `region`, `sub_id`, COUNT(DISTINCT(`sub_id`)) AS `total_subs`".
-              " FROM `".esc_sql($this->plugin->utils_db->prefix().'sub_event_log')."`".
+            = 'SELECT `country`, `region`, `sub_id`, COUNT(DISTINCT(`sub_id`)) AS `total_subs`'.
+              ' FROM `'.esc_sql($this->plugin->utils_db->prefix().'sub_event_log').'`'.
 
-              " WHERE 1=1". // Initialize where clause.
+              ' WHERE 1=1'.// Initialize where clause.
 
-              " AND `sub_id` IN(".$new_sub_ids_sql.")".
+              ' AND `sub_id` IN('.$new_sub_ids_sql.')'.
               " AND `status` IN('subscribed')".
 
               " AND `region` IN('".implode("','", array_map('esc_sql', $region_codes))."')".
               " AND `country` = '".esc_sql($country)."'".
 
               (in_array('systematics', $this->chart->exclude, true)
-                  ? " AND `user_initiated` > '0'" : ''). // User-initiated only.
+                  ? " AND `user_initiated` > '0'" : '').// User-initiated only.
 
-              " GROUP BY `country`, `region`". // Unique regions.
+              ' GROUP BY `country`, `region`'.// Unique regions.
 
-              " ORDER BY `total_subs` DESC".
+              ' ORDER BY `total_subs` DESC'.
 
-              " LIMIT 400"; // 400 max allowed by Google; should be plenty.
+              ' LIMIT 400'; // 400 max allowed by Google; should be plenty.
 
         if (($results = $this->plugin->utils_db->wp->get_results($sql))) {
             foreach (($results = $this->plugin->utils_db->typifyDeep($results)) as $_result) {
-                $_result->total_subs = (integer)$_result->total_subs;
+                $_result->total_subs = (integer) $_result->total_subs;
                 $data[]              = [ // Adds a new data row for the table we are building.
                                          [
                                              'v' => strtoupper($_result->country.'-'.$_result->region), // Value and full name.
@@ -497,7 +503,7 @@ class ChartData extends AbsBase
         unset($_result, $_percent_of_total_subs); // Housekeeping.
 
         foreach ($data as $_key => &$_dataset) { // Add total & percentages into tooltips.
-            $_dataset[2] = $this->plugin->utils_i18n->subscriptions($_dataset[1]). // e.g. X subscription(s).
+            $_dataset[2] = $this->plugin->utils_i18n->subscriptions($_dataset[1]).// e.g. X subscription(s).
                            ' ('.$this->plugin->utils_math->percent($_dataset[1], $grand_total, 0, true).')';
         }
         unset($_key, $_dataset); // Housekeeping.
@@ -522,9 +528,9 @@ class ChartData extends AbsBase
      * @param array  $status Status (or statuses) we are looking for.
      * @param string $label  Label for this change percentage.
      *
-     * @return array An array of all chart data; for ChartJS.
-     *
      * @throws \exception If there is a query failure.
+     *
+     * @return array An array of all chart data; for ChartJS.
      */
     protected function subsOverviewEventStatusPercentages(array $status, $label)
     {
@@ -540,30 +546,30 @@ class ChartData extends AbsBase
 
             $_new_sub_ids_sql2 = $this->newSubIdsSql($_time_period['from_time'], $_time_period['to_time']);
 
-            $_sql2 = "SELECT SQL_CALC_FOUND_ROWS `sub_id`". // Calc enable.
-                     " FROM `".esc_sql($this->plugin->utils_db->prefix().'sub_event_log')."`".
+            $_sql2 = 'SELECT SQL_CALC_FOUND_ROWS `sub_id`'.// Calc enable.
+                     ' FROM `'.esc_sql($this->plugin->utils_db->prefix().'sub_event_log').'`'.
 
-                     " WHERE 1=1". // Initialize where clause.
+                     ' WHERE 1=1'.// Initialize where clause.
 
-                     " AND `sub_id` IN(".$_new_sub_ids_sql2.")".
+                     ' AND `sub_id` IN('.$_new_sub_ids_sql2.')'.
                      " AND `status` IN('".implode("','", array_map('esc_sql', $status))."')".
 
                      (in_array('systematics', $this->chart->exclude, true)
-                         ? " AND `user_initiated` > '0'" : ''). // User-initiated only.
+                         ? " AND `user_initiated` > '0'" : '').// User-initiated only.
 
-                     " GROUP BY `sub_id`". // Unique subs only.
+                     ' GROUP BY `sub_id`'.// Unique subs only.
 
-                     " LIMIT 1"; // Only need one to check.
+                     ' LIMIT 1'; // Only need one to check.
 
             if ($this->plugin->utils_db->wp->query($_sql1) === false) {
                 throw new \exception(__('Query failure.', $this->plugin->text_domain));
             }
-            $data1[] = (integer)$this->plugin->utils_db->wp->get_var("SELECT FOUND_ROWS()");
+            $data1[] = (integer) $this->plugin->utils_db->wp->get_var('SELECT FOUND_ROWS()');
 
             if ($this->plugin->utils_db->wp->query($_sql2) === false) {
                 throw new \exception(__('Query failure.', $this->plugin->text_domain));
             }
-            $data2[] = (integer)$this->plugin->utils_db->wp->get_var("SELECT FOUND_ROWS()");
+            $data2[] = (integer) $this->plugin->utils_db->wp->get_var('SELECT FOUND_ROWS()');
         }
         unset($_time_period, $_sql1, $_new_sub_ids_sql2, $_sql2); // Housekeeping.
 
@@ -573,17 +579,19 @@ class ChartData extends AbsBase
         unset($_key); // Housekeeping.
 
         return [
-            'data'    => [
+            'data' => [
                 'labels'   => $labels,
                 'datasets' => [
                     array_merge(
-                        $this->secondary_colors, [
+                        $this->secondary_colors,
+                        [
                             'label' => __('New Subscriptions', $this->plugin->text_domain),
                             'data'  => $data1,
                         ]
                     ),
                     array_merge(
-                        $this->primary_colors, [
+                        $this->primary_colors,
+                        [
                             'label' => sprintf(__('Total %1$s', $this->plugin->text_domain), $label),
                             'data'  => $data2, 'percent' => $percent,
                         ]
@@ -606,9 +614,9 @@ class ChartData extends AbsBase
      *
      * @param string $popularity Popularity type; e.g. `most` or `least`.
      *
-     * @return array An array of all chart data; for ChartJS.
-     *
      * @throws \exception If there is a query failure.
+     *
+     * @return array An array of all chart data; for ChartJS.
      */
     protected function subsOverviewEventSubscribedPostPopularity($popularity)
     {
@@ -618,23 +626,23 @@ class ChartData extends AbsBase
 
         $sql // Counts post totals by distinct `sub_id`; ordered by popularity.
 
-            = "SELECT `post_id`, `sub_id`, COUNT(DISTINCT(`sub_id`)) AS `total_subs`".
-              " FROM `".esc_sql($this->plugin->utils_db->prefix().'sub_event_log')."`".
+            = 'SELECT `post_id`, `sub_id`, COUNT(DISTINCT(`sub_id`)) AS `total_subs`'.
+              ' FROM `'.esc_sql($this->plugin->utils_db->prefix().'sub_event_log').'`'.
 
-              " WHERE 1=1". // Initialize where clause.
+              ' WHERE 1=1'.// Initialize where clause.
 
-              " AND `sub_id` IN(".$new_sub_ids_sql.")".
+              ' AND `sub_id` IN('.$new_sub_ids_sql.')'.
               " AND `status` IN('subscribed')".
 
               (in_array('systematics', $this->chart->exclude, true)
-                  ? " AND `user_initiated` > '0'" : ''). // User-initiated only.
+                  ? " AND `user_initiated` > '0'" : '').// User-initiated only.
 
-              " GROUP BY `post_id`". // Unique posts only.
+              ' GROUP BY `post_id`'.// Unique posts only.
 
-              " ORDER BY `total_subs` ". // Most or least?
+              ' ORDER BY `total_subs` '.// Most or least?
               ($popularity === 'least' ? 'ASC' : 'DESC').
 
-              " LIMIT 25"; // 25 max.
+              ' LIMIT 25'; // 25 max.
 
         if (($results = $this->plugin->utils_db->wp->get_results($sql))) {
             foreach (($results = $this->plugin->utils_db->typifyDeep($results)) as $_result) {
@@ -644,7 +652,7 @@ class ChartData extends AbsBase
                 $_post_title_clip = $_post && $_post->post_title ? ' — '.$this->plugin->utils_string->clip($_post->post_title, 20) : '';
 
                 $labels[] = sprintf(__('%1$s ID #%2$s%3$s', $this->plugin->text_domain), $_post_type, $_result->post_id, $_post_title_clip);
-                $data[]   = (integer)$_result->total_subs; // Total subscriptions.
+                $data[]   = (integer) $_result->total_subs; // Total subscriptions.
             }
         }
         unset($_result, $_post, $_post_type, $_post_title_clip); // Housekeeping.
@@ -656,11 +664,12 @@ class ChartData extends AbsBase
             $data[] = 0; // Must have something.
         }
         return [
-            'data'    => [
+            'data' => [
                 'labels'   => $labels,
                 'datasets' => [
                     array_merge(
-                        $this->colors, [
+                        $this->colors,
+                        [
                             'label' => __('Total Subscriptions', $this->plugin->text_domain),
                             'data'  => $data,
                         ]
@@ -682,16 +691,16 @@ class ChartData extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param integer $from_time Time period from; UNIX timestamp.
-     * @param integer $to_time   Time period to; UNIX timestamp.
-     * @param array   $args      Any additional behavioral args.
+     * @param int   $from_time Time period from; UNIX timestamp.
+     * @param int   $to_time   Time period to; UNIX timestamp.
+     * @param array $args      Any additional behavioral args.
      *
      * @return string Sub-select SQL to acquire new sub IDs.
      */
     protected function newSubIdsSql($from_time, $to_time, array $args = [])
     {
-        $from_time = (integer)$from_time;
-        $to_time   = (integer)$to_time;
+        $from_time = (integer) $from_time;
+        $to_time   = (integer) $to_time;
 
         $default_args = [
             'calc_enable'         => false,
@@ -699,13 +708,13 @@ class ChartData extends AbsBase
             'check_exclusions'    => true,
             'sub_select_optimize' => true,
         ];
-        $args         = array_merge($default_args, $args);
-        $args         = array_intersect_key($args, $default_args);
+        $args = array_merge($default_args, $args);
+        $args = array_intersect_key($args, $default_args);
 
-        $calc_enable         = (boolean)$args['calc_enable'];
-        $check_post_id       = (boolean)$args['check_post_id'];
-        $check_exclusions    = (boolean)$args['check_exclusions'];
-        $sub_select_optimize = (boolean)$args['sub_select_optimize'];
+        $calc_enable         = (boolean) $args['calc_enable'];
+        $check_post_id       = (boolean) $args['check_post_id'];
+        $check_exclusions    = (boolean) $args['check_exclusions'];
+        $sub_select_optimize = (boolean) $args['sub_select_optimize'];
 
         if ($calc_enable) {
             $sub_select_optimize = false; // Incompatible.
@@ -715,34 +724,34 @@ class ChartData extends AbsBase
         return // Sub IDs that were inserted during this timeframe.
 
             ($sub_select_optimize // Optimize?
-                ? "SELECT `sub_id` FROM (" : "").
+                ? 'SELECT `sub_id` FROM (' : '').
             // ↑ See: <http://jas.xyz/1I52mVE>
 
-            "SELECT".($calc_enable ? " SQL_CALC_FOUND_ROWS" : '')." `sub_id`".
-            " FROM `".esc_sql($this->plugin->utils_db->prefix().'sub_event_log')."`".
+            'SELECT'.($calc_enable ? ' SQL_CALC_FOUND_ROWS' : '').' `sub_id`'.
+            ' FROM `'.esc_sql($this->plugin->utils_db->prefix().'sub_event_log').'`'.
 
-            " WHERE 1=1". // Initialize where clause.
+            ' WHERE 1=1'.// Initialize where clause.
 
             ($check_post_id && $this->chart->post_id // Specific post ID?
                 ? " AND `post_id` = '".esc_sql($this->chart->post_id)."'" : '').
 
-            " AND `event` IN('inserted')". // New insertions only.
+            " AND `event` IN('inserted')".// New insertions only.
 
             ($check_exclusions && in_array('systematics', $this->chart->exclude, true)
-                ? " AND `user_initiated` > '0'" : ''). // User-initiated only.
+                ? " AND `user_initiated` > '0'" : '').// User-initiated only.
 
             " AND `time` BETWEEN '".esc_sql($from_time)."' AND '".esc_sql($to_time)."'".
 
-            " AND `sub_id` NOT IN(".$oby_sub_ids_sql.")". // Exclude these.
+            ' AND `sub_id` NOT IN('.$oby_sub_ids_sql.')'.// Exclude these.
             // See notes below regarding these overwritten exclusions.
 
-            " GROUP BY `sub_id`". // Unique subs only (always).
+            ' GROUP BY `sub_id`'.// Unique subs only (always).
 
             ($calc_enable  // Only need one to check?
-                ? " LIMIT 1" : '').
+                ? ' LIMIT 1' : '').
 
             ($sub_select_optimize // Optimizing?
-                ? ") AS `sub_id`" : "");
+                ? ') AS `sub_id`' : '');
     }
 
     /**
@@ -750,9 +759,9 @@ class ChartData extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param integer $from_time Time period from; UNIX timestamp.
-     * @param integer $to_time   Time period to; UNIX timestamp.
-     * @param array   $args      Any additional behavioral args.
+     * @param int   $from_time Time period from; UNIX timestamp.
+     * @param int   $to_time   Time period to; UNIX timestamp.
+     * @param array $args      Any additional behavioral args.
      *
      * @return string Sub-select SQL to acquire overwritten sub IDs.
      *
@@ -770,36 +779,36 @@ class ChartData extends AbsBase
      */
     protected function obySubIdsSql($from_time, $to_time, array $args = [])
     {
-        $from_time = (integer)$from_time;
-        $to_time   = (integer)$to_time;
+        $from_time = (integer) $from_time;
+        $to_time   = (integer) $to_time;
 
         $default_args = [ // Default arguments.
                           'sub_select_optimize' => true,
         ];
-        $args         = array_merge($default_args, $args);
-        $args         = array_intersect_key($args, $default_args);
+        $args = array_merge($default_args, $args);
+        $args = array_intersect_key($args, $default_args);
 
-        $sub_select_optimize = (boolean)$args['sub_select_optimize'];
+        $sub_select_optimize = (boolean) $args['sub_select_optimize'];
 
         return // Sub IDs that were overwritten during this timeframe.
 
             ($sub_select_optimize // Optimize?
-                ? "SELECT `sub_id` FROM (" : "").
+                ? 'SELECT `sub_id` FROM (' : '').
             // ↑ See: <http://jas.xyz/1I52mVE>
 
-            "SELECT `sub_id`". // Need the sub IDs for sub-queries.
-            " FROM `".esc_sql($this->plugin->utils_db->prefix().'sub_event_log')."`".
+            'SELECT `sub_id`'.// Need the sub IDs for sub-queries.
+            ' FROM `'.esc_sql($this->plugin->utils_db->prefix().'sub_event_log').'`'.
 
-            " WHERE 1=1". // Initialize where clause.
+            ' WHERE 1=1'.// Initialize where clause.
 
             " AND `event` = 'overwritten' AND `oby_sub_id` > '0'".
 
             " AND `time` BETWEEN '".esc_sql($from_time)."' AND '".esc_sql($to_time)."'".
 
-            " GROUP BY `sub_id`". // Unique subs only (always).
+            ' GROUP BY `sub_id`'.// Unique subs only (always).
 
             ($sub_select_optimize // Optimizing?
-                ? ") AS `sub_id`" : "");
+                ? ') AS `sub_id`' : '');
     }
 
     /**
@@ -809,7 +818,7 @@ class ChartData extends AbsBase
      *
      * @return array An array of all chart data.
      */
-    protected function queuedNotificationsOverview®()
+    protected function queuedNotificationsOverviewX()
     {
         return $this->{__FUNCTION__.$this->chart->type}();
     }
@@ -821,7 +830,7 @@ class ChartData extends AbsBase
      *
      * @return array An array of all chart data; for ChartJS.
      */
-    protected function queuedNotificationsOverview®EventProcessedTotals()
+    protected function queuedNotificationsOverviewXEventProcessedTotals()
     {
         return $this->queuedNotificationsOverviewEventProcessedTotals();
     }
@@ -833,7 +842,7 @@ class ChartData extends AbsBase
      *
      * @return array An array of all chart data; for ChartJS.
      */
-    protected function queuedNotificationsOverview®EventProcessedPercentages()
+    protected function queuedNotificationsOverviewXEventProcessedPercentages()
     {
         return $this->queuedNotificationsOverviewEventPercentages(['invalidated', 'notified'], 'Processed');
     }
@@ -845,7 +854,7 @@ class ChartData extends AbsBase
      *
      * @return array An array of all chart data; for ChartJS.
      */
-    protected function queuedNotificationsOverview®EventNotifiedPercentages()
+    protected function queuedNotificationsOverviewXEventNotifiedPercentages()
     {
         return $this->queuedNotificationsOverviewEventPercentages(['notified'], 'Notified');
     }
@@ -857,7 +866,7 @@ class ChartData extends AbsBase
      *
      * @return array An array of all chart data; for ChartJS.
      */
-    protected function queuedNotificationsOverview®EventInvalidatedPercentages()
+    protected function queuedNotificationsOverviewXEventInvalidatedPercentages()
     {
         return $this->queuedNotificationsOverviewEventPercentages(['invalidated'], 'Invalidated');
     }
@@ -867,9 +876,9 @@ class ChartData extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @return array An array of all chart data; for ChartJS.
-     *
      * @throws \exception If there is a query failure.
+     *
+     * @return array An array of all chart data; for ChartJS.
      */
     protected function queuedNotificationsOverviewEventProcessedTotals()
     {
@@ -883,31 +892,32 @@ class ChartData extends AbsBase
         foreach ($this->chart->time_periods as $_time_period) {
             $_new_queue_ids_sql = $this->newQueueIdsSql($_time_period['from_time'], $_time_period['to_time']);
 
-            $_sql = "SELECT SQL_CALC_FOUND_ROWS `queue_id`". // Calc enable.
-                    " FROM `".esc_sql($this->plugin->utils_db->prefix().'queue_event_log')."`".
+            $_sql = 'SELECT SQL_CALC_FOUND_ROWS `queue_id`'.// Calc enable.
+                    ' FROM `'.esc_sql($this->plugin->utils_db->prefix().'queue_event_log').'`'.
 
-                    " WHERE 1=1". // Initialize where clause.
+                    ' WHERE 1=1'.// Initialize where clause.
 
-                    " AND `queue_id` IN(".$_new_queue_ids_sql.")".
+                    ' AND `queue_id` IN('.$_new_queue_ids_sql.')'.
                     " AND `event` IN('invalidated','notified')".
 
-                    " GROUP BY `queue_id`". // Unique entries only.
+                    ' GROUP BY `queue_id`'.// Unique entries only.
 
-                    " LIMIT 1"; // Only need one to check.
+                    ' LIMIT 1'; // Only need one to check.
 
             if ($this->plugin->utils_db->wp->query($_sql) === false) {
                 throw new \exception(__('Query failure.', $this->plugin->text_domain));
             }
-            $data[] = (integer)$this->plugin->utils_db->wp->get_var("SELECT FOUND_ROWS()");
+            $data[] = (integer) $this->plugin->utils_db->wp->get_var('SELECT FOUND_ROWS()');
         }
         unset($_time_period, $_oby_sub_ids, $_sql); // Housekeeping.
 
         return [
-            'data'    => [
+            'data' => [
                 'labels'   => $labels,
                 'datasets' => [
                     array_merge(
-                        $this->colors, [
+                        $this->colors,
+                        [
                             'label' => __('Total Processed Notifications', $this->plugin->text_domain),
                             'data'  => $data,
                         ]
@@ -932,9 +942,9 @@ class ChartData extends AbsBase
      * @param array  $event Event (or events) we are looking for.
      * @param string $label Label for this processing percentage.
      *
-     * @return array An array of all chart data; for ChartJS.
-     *
      * @throws \exception If there is a query failure.
+     *
+     * @return array An array of all chart data; for ChartJS.
      */
     protected function queuedNotificationsOverviewEventPercentages(array $event, $label)
     {
@@ -950,27 +960,27 @@ class ChartData extends AbsBase
 
             $_new_queue_ids_sql2 = $this->newQueueIdsSql($_time_period['from_time'], $_time_period['to_time']);
 
-            $_sql2 = "SELECT SQL_CALC_FOUND_ROWS `queue_id`". // Calc enable.
-                     " FROM `".esc_sql($this->plugin->utils_db->prefix().'queue_event_log')."`".
+            $_sql2 = 'SELECT SQL_CALC_FOUND_ROWS `queue_id`'.// Calc enable.
+                     ' FROM `'.esc_sql($this->plugin->utils_db->prefix().'queue_event_log').'`'.
 
-                     " WHERE 1=1". // Initialize where clause.
+                     ' WHERE 1=1'.// Initialize where clause.
 
-                     " AND `queue_id` IN(".$_new_queue_ids_sql2.")".
+                     ' AND `queue_id` IN('.$_new_queue_ids_sql2.')'.
                      " AND `event` IN('".implode("','", array_map('esc_sql', $event))."')".
 
-                     " GROUP BY `queue_id`". // Unique entries only.
+                     ' GROUP BY `queue_id`'.// Unique entries only.
 
-                     " LIMIT 1"; // Only need one to check.
+                     ' LIMIT 1'; // Only need one to check.
 
             if ($this->plugin->utils_db->wp->query($_sql1) === false) {
                 throw new \exception(__('Query failure.', $this->plugin->text_domain));
             }
-            $data1[] = (integer)$this->plugin->utils_db->wp->get_var("SELECT FOUND_ROWS()");
+            $data1[] = (integer) $this->plugin->utils_db->wp->get_var('SELECT FOUND_ROWS()');
 
             if ($this->plugin->utils_db->wp->query($_sql2) === false) {
                 throw new \exception(__('Query failure.', $this->plugin->text_domain));
             }
-            $data2[] = (integer)$this->plugin->utils_db->wp->get_var("SELECT FOUND_ROWS()");
+            $data2[] = (integer) $this->plugin->utils_db->wp->get_var('SELECT FOUND_ROWS()');
         }
         unset($_time_period, $_sql1, $_new_queue_ids_sql2, $_sql2); // Housekeeping.
 
@@ -980,17 +990,19 @@ class ChartData extends AbsBase
         unset($_key); // Housekeeping.
 
         return [
-            'data'    => [
+            'data' => [
                 'labels'   => $labels,
                 'datasets' => [
                     array_merge(
-                        $this->secondary_colors, [
+                        $this->secondary_colors,
+                        [
                             'label' => __('Queued Notifications', $this->plugin->text_domain),
                             'data'  => $data1,
                         ]
                     ),
                     array_merge(
-                        $this->primary_colors, [
+                        $this->primary_colors,
+                        [
                             'label' => sprintf(__('Total %1$s', $this->plugin->text_domain), $label),
                             'data'  => $data2, 'percent' => $percent,
                         ]
@@ -1011,16 +1023,16 @@ class ChartData extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param integer $from_time Time period from; UNIX timestamp.
-     * @param integer $to_time   Time period to; UNIX timestamp.
-     * @param array   $args      Any additional behavioral args.
+     * @param int   $from_time Time period from; UNIX timestamp.
+     * @param int   $to_time   Time period to; UNIX timestamp.
+     * @param array $args      Any additional behavioral args.
      *
      * @return string Sub-select SQL to acquire new queue IDs.
      */
     protected function newQueueIdsSql($from_time, $to_time, array $args = [])
     {
-        $from_time = (integer)$from_time;
-        $to_time   = (integer)$to_time;
+        $from_time = (integer) $from_time;
+        $to_time   = (integer) $to_time;
 
         $default_args = [
             'calc_enable'         => false,
@@ -1028,13 +1040,13 @@ class ChartData extends AbsBase
             'check_exclusions'    => true,
             'sub_select_optimize' => true,
         ];
-        $args         = array_merge($default_args, $args);
-        $args         = array_intersect_key($args, $default_args);
+        $args = array_merge($default_args, $args);
+        $args = array_intersect_key($args, $default_args);
 
-        $calc_enable         = (boolean)$args['calc_enable'];
-        $check_post_id       = (boolean)$args['check_post_id'];
-        $check_exclusions    = (boolean)$args['check_exclusions'];
-        $sub_select_optimize = (boolean)$args['sub_select_optimize'];
+        $calc_enable         = (boolean) $args['calc_enable'];
+        $check_post_id       = (boolean) $args['check_post_id'];
+        $check_exclusions    = (boolean) $args['check_exclusions'];
+        $sub_select_optimize = (boolean) $args['sub_select_optimize'];
 
         if ($calc_enable) {
             $sub_select_optimize = false; // Incompatible.
@@ -1044,29 +1056,29 @@ class ChartData extends AbsBase
         return // Queue IDs that were processed during this timeframe.
 
             ($sub_select_optimize // Optimize?
-                ? "SELECT `queue_id` FROM (" : "").
+                ? 'SELECT `queue_id` FROM (' : '').
             // ↑ See: <http://jas.xyz/1I52mVE>
 
-            "SELECT".($calc_enable ? " SQL_CALC_FOUND_ROWS" : '')." `queue_id`".
-            " FROM `".esc_sql($this->plugin->utils_db->prefix().'queue_event_log')."`".
+            'SELECT'.($calc_enable ? ' SQL_CALC_FOUND_ROWS' : '').' `queue_id`'.
+            ' FROM `'.esc_sql($this->plugin->utils_db->prefix().'queue_event_log').'`'.
 
-            " WHERE 1=1". // Initialize where clause.
+            ' WHERE 1=1'.// Initialize where clause.
 
             ($check_post_id && $this->chart->post_id // Specific post ID?
                 ? " AND `post_id` = '".esc_sql($this->chart->post_id)."'" : '').
 
             " AND `time` BETWEEN '".esc_sql($from_time)."' AND '".esc_sql($to_time)."'".
 
-            " AND `queue_id` NOT IN(".$dby_queue_ids_sql.")". // Exclude these.
+            ' AND `queue_id` NOT IN('.$dby_queue_ids_sql.')'.// Exclude these.
             // See notes below regarding these overwritten exclusions.
 
-            " GROUP BY `queue_id`". // Unique entries only (always).
+            ' GROUP BY `queue_id`'.// Unique entries only (always).
 
             ($calc_enable  // Only need one to check?
-                ? " LIMIT 1" : '').
+                ? ' LIMIT 1' : '').
 
             ($sub_select_optimize // Optimizing?
-                ? ") AS `queue_id`" : "");
+                ? ') AS `queue_id`' : '');
     }
 
     /**
@@ -1074,9 +1086,9 @@ class ChartData extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param integer $from_time Time period from; UNIX timestamp.
-     * @param integer $to_time   Time period to; UNIX timestamp.
-     * @param array   $args      Any additional behavioral args.
+     * @param int   $from_time Time period from; UNIX timestamp.
+     * @param int   $to_time   Time period to; UNIX timestamp.
+     * @param array $args      Any additional behavioral args.
      *
      * @return string Sub-select SQL to acquire queue IDs digested by others.
      *
@@ -1094,36 +1106,36 @@ class ChartData extends AbsBase
      */
     protected function dbyQueueIdsSql($from_time, $to_time, array $args = [])
     {
-        $from_time = (integer)$from_time;
-        $to_time   = (integer)$to_time;
+        $from_time = (integer) $from_time;
+        $to_time   = (integer) $to_time;
 
         $default_args = [ // Default arguments.
                           'sub_select_optimize' => true,
         ];
-        $args         = array_merge($default_args, $args);
-        $args         = array_intersect_key($args, $default_args);
+        $args = array_merge($default_args, $args);
+        $args = array_intersect_key($args, $default_args);
 
-        $sub_select_optimize = (boolean)$args['sub_select_optimize'];
+        $sub_select_optimize = (boolean) $args['sub_select_optimize'];
 
         return // Queue IDs that were digested by others during this timeframe.
 
             ($sub_select_optimize // Optimize?
-                ? "SELECT `queue_id` FROM (" : "").
+                ? 'SELECT `queue_id` FROM (' : '').
             // ↑ See: <http://jas.xyz/1I52mVE>
 
-            "SELECT `queue_id`". // Need the queue IDs for sub-queries.
-            " FROM `".esc_sql($this->plugin->utils_db->prefix().'queue_event_log')."`".
+            'SELECT `queue_id`'.// Need the queue IDs for sub-queries.
+            ' FROM `'.esc_sql($this->plugin->utils_db->prefix().'queue_event_log').'`'.
 
-            " WHERE 1=1". // Initialize where clause.
+            ' WHERE 1=1'.// Initialize where clause.
 
-            " AND `dby_queue_id` > '0'". // Digested by another.
+            " AND `dby_queue_id` > '0'".// Digested by another.
 
             " AND `time` BETWEEN '".esc_sql($from_time)."' AND '".esc_sql($to_time)."'".
 
-            " GROUP BY `queue_id`". // Unique queue entries only (always).
+            ' GROUP BY `queue_id`'.// Unique queue entries only (always).
 
             ($sub_select_optimize // Optimizing?
-                ? ") AS `queue_id`" : "");
+                ? ') AS `queue_id`' : '');
     }
 
     /**
@@ -1131,14 +1143,14 @@ class ChartData extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @return boolean `TRUE` if chart data validates.
+     * @return bool `TRUE` if chart data validates.
      */
     protected function chartIsValid()
     {
-        if (!$this->view || !method_exists($this, $this->view.'®')) {
+        if (!$this->view || !method_exists($this, $this->view.'X')) {
             $this->errors[] = __('Invalid Chart View. Please try again.', $this->plugin->text_domain);
         }
-        if (!method_exists($this, $this->view.'®'.$this->chart->type)) {
+        if (!method_exists($this, $this->view.'X'.$this->chart->type)) {
             $this->errors[] = __('Missing or invalid Chart Type. Please try again.', $this->plugin->text_domain);
         }
         if (preg_match('/(?:^geo|[a-z0-9]Geo)(?:[A-Z0-9]|$)/', $this->chart->type) && !$this->plugin->options['geo_location_tracking_enable']) {
@@ -1156,15 +1168,16 @@ class ChartData extends AbsBase
         if (!$this->errors) {
             $this->parseTimesSetupPeriods(); // Times/periods.
         }
-        if (!$this->errors) // If no errors thus far, let's do one last on the times.
-        {
+        if (!$this->errors) {
+            // If no errors thus far, let's do one last on the times.
+
             if (!$this->chart->from_time || !$this->chart->to_time) {
                 $this->errors[] = __('Missing or invalid Date(s). Please try again.', $this->plugin->text_domain);
-            } else if ($this->chart->from_time >= $this->chart->to_time) {
+            } elseif ($this->chart->from_time >= $this->chart->to_time) {
                 $this->errors[] = __('From Date >= To Date. Please try again.', $this->plugin->text_domain);
-            } else if (empty($this->chart->time_periods)) {
+            } elseif (empty($this->chart->time_periods)) {
                 $this->errors[] = __('Not enough data for that time period and/or Breakdown. Please try again.', $this->plugin->text_domain);
-            } else if (count($this->chart->time_periods) > ($time_periods_max_limit = apply_filters(__CLASS__.'_time_periods_max_limit', 100))) {
+            } elseif (count($this->chart->time_periods) > ($time_periods_max_limit = apply_filters(__CLASS__.'_time_periods_max_limit', 100))) {
                 $this->errors[] = sprintf(__('Too many time periods needed. Please try again. Based on your configuration of this chart, there would need to be more than `%1$s` bars to represent the data that you want. This would require _many_ DB queries, and it would be very difficult to read the chart. Please broaden your Breakdown or reduce the difference between From Date and To Date.', $this->plugin->text_domain), $time_periods_max_limit);
             }
         }
@@ -1184,7 +1197,7 @@ class ChartData extends AbsBase
             time() + (get_option('gmt_offset') * 3600);
 
         $this->chart->from_time = // Convert to timestamp; i.e. parse string.
-            (integer)strtotime($this->chart->from_time, $local_relative_from_time_base);
+            (integer) strtotime($this->chart->from_time, $local_relative_from_time_base);
 
         # Parse "to" time as a local timestamp.
 
@@ -1192,7 +1205,7 @@ class ChartData extends AbsBase
             $local_relative_to_time_base = // GMT offset base; with one exception for the word `now`.
                 preg_match('/^now$/', $this->chart->to_time) ? time() + (get_option('gmt_offset') * 3600)
                     : $this->chart->from_time; // Else use current local "from" time as the base.
-            $this->chart->to_time        = (integer)strtotime($this->chart->to_time, $local_relative_to_time_base);
+            $this->chart->to_time = (integer) strtotime($this->chart->to_time, $local_relative_to_time_base);
         } else {
             $this->chart->to_time = 0; // Cannot use this if the "from" time is incorrect.
         }
@@ -1200,7 +1213,7 @@ class ChartData extends AbsBase
 
         if (!$this->chart->from_time || !$this->chart->to_time) {
             $this->errors[] = __('Missing or invalid Date(s). Please try again.', $this->plugin->text_domain);
-        } else if ($this->chart->from_time >= $this->chart->to_time) {
+        } elseif ($this->chart->from_time >= $this->chart->to_time) {
             $this->errors[] = __('From Date >= To Date. Please try again.', $this->plugin->text_domain);
         }
         if ($this->errors) {
@@ -1309,7 +1322,7 @@ class ChartData extends AbsBase
 
         if (!$this->chart->from_time || !$this->chart->to_time) {
             $this->errors[] = __('Missing or invalid Date(s). Please try again.', $this->plugin->text_domain);
-        } else if ($this->chart->from_time >= $this->chart->to_time) {
+        } elseif ($this->chart->from_time >= $this->chart->to_time) {
             $this->errors[] = __('From Date >= To Date. Please try again.', $this->plugin->text_domain);
         }
         if ($this->errors) {
@@ -1333,11 +1346,9 @@ class ChartData extends AbsBase
 
             return $cal_days_in_current_month * 86400;
         };
-        for (
-            $_period = 0, $_time_offset = 0;
+        for ($_period = 0, $_time_offset = 0;
             $this->chart->from_time + $_time_offset + $time_offset_bump($_time_offset) <= $this->chart->to_time;
-            $_period++, $_time_offset += $time_offset_bump($_time_offset)
-        ) {
+            $_period++, $_time_offset += $time_offset_bump($_time_offset)) {
             $this->chart->time_periods[$_period] = [
                 'from_time'  => $this->chart->from_time + $_time_offset,
                 'from_label' => $this->plugin->utils_date->i18n($by_format, $this->chart->from_time + $_time_offset),
@@ -1374,4 +1385,3 @@ class ChartData extends AbsBase
                '</div>';
     }
 }
-	
