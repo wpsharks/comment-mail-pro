@@ -295,7 +295,7 @@ class MenuPageQueueTable extends MenuPageTableBase
         switch ($bulk_action) // Bulk action handler.
         {
             case 'delete': // Deleting queued notifications?
-                $counter = $this->plugin->utils_queue->bulk_delete($ids);
+                $counter = $this->plugin->utils_queue->bulkDelete($ids);
                 break; // Break switch handler.
         }
         return !empty($counter) ? (integer)$counter : 0;
