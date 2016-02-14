@@ -736,7 +736,7 @@ namespace WebSharks\CommentMail\Pro;
 							'user_initiated'      => $this->user_initiated,
 						)); // With behavioral args.
 
-						if($this->sub_confirmer->sent_email_successfully())
+						if($this->sub_confirmer->sentEmailSuccessfully())
 							$this->successes['sent_confirmation_email_successfully'] // Success entry!
 								= __('Request for email confirmation sent successfully.', $this->plugin->text_domain);
 					}
@@ -794,7 +794,7 @@ namespace WebSharks\CommentMail\Pro;
 							'user_initiated' => $this->user_initiated,
 						)); // With behavioral args.
 
-						if($this->sub_confirmer->sent_email_successfully())
+						if($this->sub_confirmer->sentEmailSuccessfully())
 							$this->successes['sent_confirmation_email_successfully'] // Success entry!
 								= __('Request for email confirmation sent successfully.', $this->plugin->text_domain);
 					}

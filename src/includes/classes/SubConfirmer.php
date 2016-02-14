@@ -2,233 +2,233 @@
 /**
  * Sub Confirmer
  *
- * @since 141111 First documented version.
+ * @since     141111 First documented version.
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
- * @license GNU General Public License, version 3
+ * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
+/**
+ * Sub Confirmer
+ *
+ * @since 141111 First documented version.
+ */
+class SubConfirmer extends AbsBase
+{
+    /**
+     * @var \stdClass|null Subscription.
+     *
+     * @since 141111 First documented version.
+     */
+    protected $sub;
 
+    /**
+     * @var null|boolean Auto-confirm?
+     *
+     * @since 141111 First documented version.
+     */
+    protected $auto_confirm;
 
-		/**
-		 * Sub Confirmer
-		 *
-		 * @since 141111 First documented version.
-		 */
-	class SubConfirmer extends AbsBase
-		{
-			/**
-			 * @var \stdClass|null Subscription.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected $sub;
+    /**
+     * @var boolean Process events?
+     *
+     * @since 141111 First documented version.
+     */
+    protected $process_events;
 
-			/**
-			 * @var null|boolean Auto-confirm?
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected $auto_confirm;
+    /**
+     * @var boolean Proces list server?
+     *
+     * @since 150922 Adding list server.
+     */
+    protected $process_list_server;
 
-			/**
-			 * @var boolean Process events?
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected $process_events;
+    /**
+     * @var boolean User initiated?
+     *
+     * @since 141111 First documented version.
+     */
+    protected $user_initiated;
 
-			/**
-			 * @var boolean Proces list server?
-			 *
-			 * @since 150922 Adding list server.
-			 */
-			protected $process_list_server;
+    /**
+     * @var boolean Auto confirmed?
+     *
+     * @since 141111 First documented version.
+     */
+    protected $auto_confirmed;
 
-			/**
-			 * @var boolean User initiated?
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected $user_initiated;
+    /**
+     * @var boolean Confirming via email?
+     *
+     * @since 141111 First documented version.
+     */
+    protected $confirming_via_email;
 
-			/**
-			 * @var boolean Auto confirmed?
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected $auto_confirmed;
+    /**
+     * @var boolean Sent an email?
+     *
+     * @since 141111 First documented version.
+     */
+    protected $sent_email_successfully;
 
-			/**
-			 * @var boolean Confirming via email?
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected $confirming_via_email;
+    /**
+     * Class constructor.
+     *
+     * @since 141111 First documented version.
+     *
+     * @param integer $sub_id Subscriber ID.
+     *
+     * @param array   $args   Any additional behavioral args.
+     */
+    public function __construct($sub_id, array $args = [])
+    {
+        parent::__construct();
 
-			/**
-			 * @var boolean Sent an email?
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected $sent_email_successfully;
+        $sub_id    = (integer)$sub_id;
+        $this->sub = $this->plugin->utils_sub->get($sub_id);
 
-			/**
-			 * Class constructor.
-			 *
-			 * @since 141111 First documented version.
-			 *
-			 * @param integer $sub_id Subscriber ID.
-			 *
-			 * @param array   $args Any additional behavioral args.
-			 */
-			public function __construct($sub_id, array $args = array())
-			{
-				parent::__construct();
+        $defaults_args = [
+          'auto_confirm' => null,
 
-				$sub_id    = (integer)$sub_id;
-				$this->sub = $this->plugin->utils_sub->get($sub_id);
+          'process_events'      => true,
+          'process_list_server' => false,
 
-				$defaults_args = array(
-					'auto_confirm'        => NULL,
+          'user_initiated' => false,
+        ];
+        $args          = array_merge($defaults_args, $args);
+        $args          = array_intersect_key($args, $defaults_args);
 
-					'process_events'      => TRUE,
-					'process_list_server' => FALSE,
+        if (isset($args['auto_confirm'])) {
+            $this->auto_confirm = (boolean)$args['auto_confirm'];
+        }
+        $this->process_events      = (boolean)$args['process_events'];
+        $this->process_list_server = (boolean)$args['process_list_server'];
 
-					'user_initiated'      => FALSE,
-				);
-				$args          = array_merge($defaults_args, $args);
-				$args          = array_intersect_key($args, $defaults_args);
+        $this->user_initiated          = (boolean)$args['user_initiated'];
+        $this->user_initiated          = $this->plugin->utils_sub->check_user_initiated_by_admin(
+          $this->sub ? $this->sub->email : '', $this->user_initiated
+        );
+        $this->auto_confirmed          = false; // Initialize.
+        $this->confirming_via_email    = false; // Initialize.
+        $this->sent_email_successfully = false; // Initialize.
 
-				if(isset($args['auto_confirm']))
-					$this->auto_confirm = (boolean)$args['auto_confirm'];
+        $this->maybeSendConfirmationRequest();
+    }
 
-				$this->process_events          = (boolean)$args['process_events'];
-				$this->process_list_server     = (boolean)$args['process_list_server'];
+    /**
+     * Auto-confirmed?
+     *
+     * @since 141111 First documented version.
+     *
+     * @return boolean `TRUE` if auto-confirmed.
+     */
+    public function autoConfirmed()
+    {
+        return $this->auto_confirmed;
+    }
 
-				$this->user_initiated          = (boolean)$args['user_initiated'];
-				$this->user_initiated          = $this->plugin->utils_sub->check_user_initiated_by_admin(
-					$this->sub ? $this->sub->email : '', $this->user_initiated
-				);
-				$this->auto_confirmed          = FALSE; // Initialize.
-				$this->confirming_via_email    = FALSE; // Initialize.
-				$this->sent_email_successfully = FALSE; // Initialize.
+    /**
+     * Confirming via email?
+     *
+     * @since 141111 First documented version.
+     *
+     * @return boolean `TRUE` if confirming via email.
+     */
+    public function confirmingViaEmail()
+    {
+        return $this->confirming_via_email;
+    }
 
-				$this->maybe_send_confirmation_request();
-			}
+    /**
+     * Sent email successfully?
+     *
+     * @since 141111 First documented version.
+     *
+     * @return boolean `TRUE` if sent email successfully.
+     */
+    public function sentEmailSuccessfully()
+    {
+        return $this->sent_email_successfully;
+    }
 
-			/**
-			 * Auto-confirmed?
-			 *
-			 * @since 141111 First documented version.
-			 *
-			 * @return boolean `TRUE` if auto-confirmed.
-			 */
-			public function auto_confirmed()
-			{
-				return $this->auto_confirmed;
-			}
+    /**
+     * Send confirmation request.
+     *
+     * @since 141111 First documented version.
+     */
+    protected function maybeSendConfirmationRequest()
+    {
+        if (!$this->sub) {
+            return; // Not possible.
+        }
+        if (!$this->sub->email) {
+            return; // Not possible.
+        }
+        if ($this->sub->status === 'subscribed') {
+            return; // Nothing to do.
+        }
+        if ($this->maybeAutoConfirm()) {
+            return; // Nothing more to do.
+        }
+        $sub                 = $this->sub;
+        $sub_post            = $sub_comment = null;
+        $process_list_server = $this->process_list_server;
 
-			/**
-			 * Confirming via email?
-			 *
-			 * @since 141111 First documented version.
-			 *
-			 * @return boolean `TRUE` if confirming via email.
-			 */
-			public function confirming_via_email()
-			{
-				return $this->confirming_via_email;
-			}
+        if (!($sub_post = get_post($this->sub->post_id))) {
+            return; // Post no longer exists.
+        }
+        if ($this->sub->comment_id && !($sub_comment = get_comment($this->sub->comment_id))) {
+            return; // Comment no longer exists.
+        }
+        $template_vars = get_defined_vars(); // Everything above.
 
-			/**
-			 * Sent email successfully?
-			 *
-			 * @since 141111 First documented version.
-			 *
-			 * @return boolean `TRUE` if sent email successfully.
-			 */
-			public function sent_email_successfully()
-			{
-				return $this->sent_email_successfully;
-			}
+        $subject_template = new Template('email/sub-confirmation/subject.php');
+        $message_template = new Template('email/sub-confirmation/message.php');
 
-			/**
-			 * Send confirmation request.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected function maybe_send_confirmation_request()
-			{
-				if(!$this->sub)
-					return; // Not possible.
+        $subject = trim(preg_replace('/\s+/', ' ', $subject_template->parse($template_vars)));
+        $message = $message_template->parse($template_vars); // With confirmation link.
 
-				if(!$this->sub->email)
-					return; // Not possible.
+        if (!$subject || !$message) { // Missing one of these?
+            return; // One or more corrupted/empty template files.
+        }
+        $this->confirming_via_email    = true; // Flag this scenario.
+        $this->sent_email_successfully = $this->plugin->utils_mail->send(
+          $this->sub->email, $subject, $message
+        );
+    }
 
-				if($this->sub->status === 'subscribed')
-					return; // Nothing to do.
+    /**
+     * Auto-confirm, if possible.
+     *
+     * @since 141111 First documented version.
+     *
+     * @return boolean TRUE if auto-confirmed in some way.
+     */
+    protected function maybeAutoConfirm()
+    {
+        $can_auto_confirm_args = [
+          'post_id' => $this->sub->post_id,
 
-				if($this->maybe_auto_confirm())
-					return; // Nothing more to do.
+          'sub_user_id' => $this->sub->user_id,
+          'sub_email'   => $this->sub->email,
+          'sub_last_ip' => $this->sub->last_ip,
 
-				$sub                 = $this->sub;
-				$sub_post            = $sub_comment = NULL;
-				$process_list_server = $this->process_list_server;
+          'user_initiated' => $this->user_initiated,
+          'auto_confirm'   => $this->auto_confirm,
+        ];
+        $can_auto_confirm      = $this->plugin->utils_sub->can_auto_confirm($can_auto_confirm_args);
 
-				if(!($sub_post = get_post($this->sub->post_id)))
-					return; // Post no longer exists.
+        if ($can_auto_confirm) { // Possible to auto-confirm?
+            $this->plugin->utils_sub->confirm(
+              $this->sub->ID,
+              [
+                'process_events' => $this->process_events,
+                'user_initiated' => $this->user_initiated,
+              ]
+            ); // With behavioral args.
 
-				if($this->sub->comment_id && !($sub_comment = get_comment($this->sub->comment_id)))
-					return; // Comment no longer exists.
-
-				$template_vars = get_defined_vars(); // Everything above.
-
-				$subject_template = new Template('email/sub-confirmation/subject.php');
-				$message_template = new Template('email/sub-confirmation/message.php');
-
-				$subject = trim(preg_replace('/\s+/', ' ', $subject_template->parse($template_vars)));
-				$message = $message_template->parse($template_vars); // With confirmation link.
-
-				if(!$subject || !$message) // Missing one of these?
-					return; // One or more corrupted/empty template files.
-
-				$this->confirming_via_email    = TRUE; // Flag this scenario.
-				$this->sent_email_successfully = $this->plugin->utils_mail->send(
-					$this->sub->email, $subject, $message
-				);
-			}
-
-			/**
-			 * Auto-confirm, if possible.
-			 *
-			 * @since 141111 First documented version.
-			 *
-			 * @return boolean TRUE if auto-confirmed in some way.
-			 */
-			protected function maybe_auto_confirm()
-			{
-				$can_auto_confirm_args = array(
-					'post_id'        => $this->sub->post_id,
-
-					'sub_user_id'    => $this->sub->user_id,
-					'sub_email'      => $this->sub->email,
-					'sub_last_ip'    => $this->sub->last_ip,
-
-					'user_initiated' => $this->user_initiated,
-					'auto_confirm'   => $this->auto_confirm,
-				);
-				$can_auto_confirm      = $this->plugin->utils_sub->can_auto_confirm($can_auto_confirm_args);
-
-				if($can_auto_confirm) // Possible to auto-confirm?
-				{
-					$this->plugin->utils_sub->confirm($this->sub->ID, array(
-						'process_events' => $this->process_events,
-						'user_initiated' => $this->user_initiated,
-					)); // With behavioral args.
-
-					return ($this->auto_confirmed = TRUE);
-				}
-				return ($this->auto_confirmed = FALSE);
-			}
-		}
+            return ($this->auto_confirmed = true);
+        }
+        return ($this->auto_confirmed = false);
+    }
+}
