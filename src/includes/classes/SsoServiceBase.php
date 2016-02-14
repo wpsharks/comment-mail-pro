@@ -247,7 +247,7 @@ abstract class SsoServiceBase extends AbsBase
             $email = trim((string)$args['email']);
 
             $user_exists = // Do they exist already? i.e. just logging in?
-              $sso_id && $this->plugin->utils_sso->user_exists($this->service, $sso_id);
+              $sso_id && $this->plugin->utils_sso->userExists($this->service, $sso_id);
 
             if (!$sso_id || !$user_exists) {
                 // If the user exists, we can skip this validation entirely;
@@ -266,16 +266,16 @@ abstract class SsoServiceBase extends AbsBase
 
                 ) { // Something is missing or invalid; request manual completion by user.
                     $request_completion_args = compact('sso_id', 'fname', 'lname', 'email');
-                    exit($this->plugin->utils_sso->request_completion($this->request_args, $request_completion_args));
+                    exit($this->plugin->utils_sso->requestCompletion($this->request_args, $request_completion_args));
                 }
             }
             if ($user_exists) { // This user already exists?
-                if (!$this->plugin->utils_sso->auto_login($this->service, $sso_id, $args)) {
+                if (!$this->plugin->utils_sso->autoLogin($this->service, $sso_id, $args)) {
                     throw new \exception(__('Auto login failure.', $this->plugin->text_domain));
                 }
                 goto redirect; // Perform redirection, the user is now logged-in.
             }
-            if (!$this->plugin->utils_sso->auto_register_login($this->service, $sso_id, $args)) {
+            if (!$this->plugin->utils_sso->autoRegisterLogin($this->service, $sso_id, $args)) {
                 throw new \exception(__('Auto register/login failure.', $this->plugin->text_domain));
             }
             redirect: // Target point; perform redirection.
