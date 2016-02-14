@@ -1,15 +1,16 @@
 <?php
 /**
- * Menu Page Sub. New Form
+ * Menu Page Sub. New Form.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * Menu Page Sub. New Form
+ * Menu Page Sub. New Form.
  *
  * @since 141111 First documented version.
  */
