@@ -466,7 +466,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
         ];
         $name            = $item->{$prefix.'fname'}.' '.$item->{$prefix.'lname'};
         $sub_info        = '<i class="'.esc_attr('si si-'.$this->plugin->slug.'-one').'"></i>'.
-                           ' '.$this->plugin->utils_markup->name_email($name, $item->{$prefix.'email'}, $name_email_args);
+                           ' '.$this->plugin->utils_markup->nameEmail($name, $item->{$prefix.'email'}, $name_email_args);
 
         $edit_url = $this->plugin->utils_url->edit_sub_short($item->{$key});
 
@@ -550,7 +550,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
           'email_style' => 'font-weight:normal;',
         ];
         $user_info       = '<i class="fa fa-user"></i>'. // e.g. ♙ "Name" <email>
-                           ' '.$this->plugin->utils_markup->name_email($item->{$prefix.'display_name'}, $item->{$prefix.'email'}, $name_email_args);
+                           ' '.$this->plugin->utils_markup->nameEmail($item->{$prefix.'display_name'}, $item->{$prefix.'email'}, $name_email_args);
 
         $edit_url = $this->plugin->utils_url->edit_user_short($item->{$key});
 
@@ -614,8 +614,8 @@ abstract class MenuPageTableBase extends \WP_List_Table
         $post_total_subs        = $this->plugin->utils_sub->query_total($item->{$key});
         $post_total_comments    = (integer)$item->{$prefix.'comment_count'};
 
-        $post_info = $this->plugin->utils_markup->subs_count($item->{$key}, $post_total_subs).
-                     $this->plugin->utils_markup->comment_count($item->{$key}, $post_total_comments).
+        $post_info = $this->plugin->utils_markup->subsCount($item->{$key}, $post_total_subs).
+                     $this->plugin->utils_markup->commentCount($item->{$key}, $post_total_comments).
                      '<i class="fa fa-thumb-tack"></i>'. // Start w/ a thumb tack icon; works w/ any post type.
                      ' '.'<span title="'.esc_attr($post_date).'">'.esc_html($post_title_clip).'</span>';
 
@@ -680,7 +680,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
         $comment_status    = $this->plugin->utils_i18n->statusLabel($this->plugin->utils_db->commentStatusI18n($item->{$prefix.'approved'}), 'ucwords');
 
         $comment_info = '<i class="fa fa-comment"></i>'. // Start w/ a comment bubble icon.
-                        ' '.$this->plugin->utils_markup->name_email($item->{$prefix.'author'}, $item->{$prefix.'author_email'}, $name_email_args);
+                        ' '.$this->plugin->utils_markup->nameEmail($item->{$prefix.'author'}, $item->{$prefix.'author_email'}, $name_email_args);
 
         $comment_view_url    = $this->plugin->utils_url->comment_short($item->{$key});
         $comment_edit_url    = $this->plugin->utils_url->comment_edit_short($item->{$key});
@@ -756,7 +756,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
           'anchor_to'   => 'search',
           'email_style' => 'font-weight:normal;',
         ];
-        return $this->plugin->utils_markup->name_email('', $item->{$key}, $name_email_args);
+        return $this->plugin->utils_markup->nameEmail('', $item->{$key}, $name_email_args);
     }
 
     /**
@@ -2037,7 +2037,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
 
             $sub_lis[$_sub->ID] = '<li>'. // [icon] ID "Name" <email> [edit].
                                   '<i class="'.esc_attr('si si-'.$this->plugin->slug).'"></i>'.
-                                  ' '.$this->plugin->utils_markup->name_email($_sub_name, $_sub->email, $_name_email_args).
+                                  ' '.$this->plugin->utils_markup->nameEmail($_sub_name, $_sub->email, $_name_email_args).
                                   ($_sub_edit_link // Only if they can edit the subscription ID; else this will be empty.
                                     ? ' [<a href="'.esc_attr($_sub_edit_link).'">'.__('edit', $this->plugin->text_domain).'</a>]' : '').
                                   '</li>';
@@ -2057,7 +2057,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
             $sub_email_lis[$_sub_email] = '<li>'. // [icon] <email>.
                                           '<i class="fa fa-envelope"></i>'. // e.g. [icon] <email>.
                                           ' <span style="font-weight:bold;" title="'.esc_attr($_sub_email).'">'.__('Email:', $this->plugin->text_domain).'</span>'.
-                                          ' '.$this->plugin->utils_markup->name_email('', $_sub_email, $_name_email_args).
+                                          ' '.$this->plugin->utils_markup->nameEmail('', $_sub_email, $_name_email_args).
                                           '</li>';
         }
         unset($_sub_email, $_name_email_args); // Housekeeping.
@@ -2077,7 +2077,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
 
             $user_lis[$_user->ID] = '<li>'. // [icon] ID "Name" <email> [edit].
                                     '<i class="fa fa-user"></i>'. // e.g. [icon] "Name" <email>
-                                    ' '.$this->plugin->utils_markup->name_email($_user->display_name, $_user->user_email, $_name_email_args).
+                                    ' '.$this->plugin->utils_markup->nameEmail($_user->display_name, $_user->user_email, $_name_email_args).
                                     ($_user_edit_link // Only if they can edit the user ID; else this will be empty.
                                       ? ' [<a href="'.esc_attr($_user_edit_link).'">'.__('edit', $this->plugin->text_domain).'</a>]' : '').
                                     '</li>';
@@ -2143,7 +2143,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
                                                   '      <li>'. // Comment ID: <author> [edit] ... followed by a content clip.
                                                   '         <span style="font-weight:bold;">'.__('Comment', $this->plugin->text_domain).'</span>'.
                                                   '         <span style="font-weight:bold;">ID <a href="'.esc_attr($_comment_permalink).'" target="_blank">#'.esc_html($_comment->comment_ID).'</a>:</span>'.
-                                                  '         '.$this->plugin->utils_markup->name_email($_comment->comment_author, $_comment->comment_author_email, $_name_email_args).
+                                                  '         '.$this->plugin->utils_markup->nameEmail($_comment->comment_author, $_comment->comment_author_email, $_name_email_args).
                                                   ($_comment_edit_link // Only if they can edit the comment ID; else this will be empty.
                                                     ? '     [<a href="'.esc_attr($_comment_edit_link).'">'.__('edit', $this->plugin->text_domain).'</a>]' : '').
                                                   '         <blockquote>'.esc_html($_comment_content_clip).'</blockquote>'.

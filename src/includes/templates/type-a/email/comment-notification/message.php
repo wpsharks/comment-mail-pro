@@ -47,7 +47,7 @@ $sub_comment_url = $sub_comment ? get_comment_link($sub_comment->comment_ID) : '
 $subscribed_to_own_comment = $sub_comment && strcasecmp($sub_comment->comment_author_email, $sub->email) === 0;
 
 // Subscriber's `"name" <email>` w/ HTML markup enhancements.
-$sub_name_email_markup = $plugin->utils_markup->name_email($sub->fname.' '.$sub->lname, $sub->email);
+$sub_name_email_markup = $plugin->utils_markup->nameEmail($sub->fname.' '.$sub->lname, $sub->email);
 
 // Subscriber's last known IP address.
 $sub_last_ip = $sub->last_ip ? $sub->last_ip : __('unknown', $plugin->text_domain);
@@ -103,7 +103,7 @@ $replies_via_email_enable = $sub_post_comments_open && $plugin->options['replies
 		$_comment_parent_url = $_comment_parent ? get_comment_link($_comment_parent->comment_ID) : '';
 
 		// A shorter clip of the full parent comment message body; in plain text.
-		$_comment_parent_clip = $_comment_parent ? $plugin->utils_markup->comment_content_clip($_comment_parent, 'notification_parent') : '';
+		$_comment_parent_clip = $_comment_parent ? $plugin->utils_markup->commentContentClip($_comment_parent, 'notification_parent') : '';
 
 		// A reply to their own comment?
 		$_comment_reply_to_own_comment = $_comment_parent && strcasecmp($_comment_parent->comment_author_email, $sub->email) === 0;
@@ -118,7 +118,7 @@ $replies_via_email_enable = $sub_post_comments_open && $plugin->options['replies
 		$_comment_time_ago = $plugin->utils_date->approxTimeDifference(strtotime($_comment->comment_date_gmt));
 
 		// A shorter clip of the full comment message body; in plain text.
-		$_comment_clip = $plugin->utils_markup->comment_content_clip($_comment, 'notification', false);
+		$_comment_clip = $plugin->utils_markup->commentContentClip($_comment, 'notification', false);
 
 		// Reply via email marker; if applicable. Only needed for digests, and only if replies via email are enabled currently.
 		// ~ Note: This marker is not necessary for single comment notifications. A `Reply-To:` header already handles single-comment notifications.

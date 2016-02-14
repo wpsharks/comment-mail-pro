@@ -255,7 +255,7 @@ str_replace('%%title%%', __('My Comment Subscriptions', $plugin->text_domain), $
 
 									$_sub_name_email_args = array('anchor_to' => $_sub_edit_url);
 									// This is the subscriber's `"name" <email>` w/ HTML markup enhancements.
-									$_sub_name_email_markup = $plugin->utils_markup->name_email($_sub->fname.' '.$_sub->lname, $_sub->email, $_sub_name_email_args);
+									$_sub_name_email_markup = $plugin->utils_markup->nameEmail($_sub->fname.' '.$_sub->lname, $_sub->email, $_sub_name_email_args);
 
 									// Subscribed to their own comment?
 									$_subscribed_to_own_comment = $_sub_comment && in_array(strtolower($_sub_comment->comment_author_email), $sub_emails, TRUE);

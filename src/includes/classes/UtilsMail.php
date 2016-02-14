@@ -310,9 +310,9 @@ class UtilsMail extends AbsBase
         $debug_output_markup = $this->plugin->utils_string->trim_html($debug_output_markup);
 
         if ($via === 'wp_mail') { // Convert this to HTML markup.
-            $via_markup = $this->plugin->utils_markup->x_anchor('https://developer.wordpress.org/reference/functions/wp_mail/', 'wp_mail()');
+            $via_markup = $this->plugin->utils_markup->xAnchor('https://developer.wordpress.org/reference/functions/wp_mail/', 'wp_mail()');
         } else if ($via === 'smtp') { // Convert this to HTML markup.
-            $via_markup = $this->plugin->utils_markup->x_anchor('http://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol', 'SMTP');
+            $via_markup = $this->plugin->utils_markup->xAnchor('http://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol', 'SMTP');
         } else {
             $via_markup = esc_html($via); // Convert this to HTML markup.
         }

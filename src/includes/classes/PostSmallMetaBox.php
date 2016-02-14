@@ -49,7 +49,7 @@ class PostSmallMetaBox extends AbsBase
           = $this->plugin->utils_db->postCommentStatusI18n($this->post->comment_status);
 
         $total_subs        = $this->plugin->utils_sub->query_total($this->post->ID);
-        $total_subs_bubble = $this->plugin->utils_markup->subs_count(
+        $total_subs_bubble = $this->plugin->utils_markup->subsCount(
           $this->post->ID, $total_subs,
           [
             'subscriptions' => true,
@@ -61,7 +61,7 @@ class PostSmallMetaBox extends AbsBase
              '  '.$total_subs_bubble. // In block format; i.e. 100% width.
 
              '   <h4 style="margin:1em 0 .25em 0;">'.__('Most Recent Subscriptions', $this->plugin->text_domain).'</h4>'.
-             '   '.$this->plugin->utils_markup->last_x_subs(5, $this->post->ID, ['group_by_email' => true]).
+             '   '.$this->plugin->utils_markup->lastXSubs(5, $this->post->ID, ['group_by_email' => true]).
 
              '</div>';
 

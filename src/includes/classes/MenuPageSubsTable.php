@@ -232,7 +232,7 @@ class MenuPageSubsTable extends MenuPageTableBase
         ];
         $name            = $item->fname.' '.$item->lname; // Concatenate.
         $email_info      = '<i class="'.esc_attr('si si-'.$this->plugin->slug.'-one').'"></i>'.
-                           ' '.$this->plugin->utils_markup->name_email($name, $item->email, $name_email_args);
+                           ' '.$this->plugin->utils_markup->nameEmail($name, $item->email, $name_email_args);
 
         $edit_url      = $this->plugin->utils_url->edit_sub_short($item->ID);
         $reconfirm_url = $this->plugin->utils_url->table_bulk_action($this->plural_name, [$item->ID], 'reconfirm');

@@ -397,20 +397,20 @@ class FormFields extends AbsBase
         unset($input_fallback_args['input_fallback_args']); // Unset self reference.
 
         if ($options === '%%users%%') {
-            $options = $this->plugin->utils_markup->user_select_options($current_value, $select_options_args);
+            $options = $this->plugin->utils_markup->userSelectOptions($current_value, $select_options_args);
         } else if ($options === '%%posts%%') {
-            $options = $this->plugin->utils_markup->post_select_options($current_value, array_merge($select_options_args, ['for_comments_only' => true]));
+            $options = $this->plugin->utils_markup->postSelectOptions($current_value, array_merge($select_options_args, ['for_comments_only' => true]));
         } else if ($options === '%%comments%%') {
-            $options = $this->plugin->utils_markup->comment_select_options($post_id, $current_value, $select_options_args);
+            $options = $this->plugin->utils_markup->commentSelectOptions($post_id, $current_value, $select_options_args);
             if ($options) {
                 $placeholder = '';
             }
         } else if ($options === '%%deliver%%') {
-            $options = $this->plugin->utils_markup->deliver_select_options($current_value, $select_options_args);
+            $options = $this->plugin->utils_markup->deliverSelectOptions($current_value, $select_options_args);
         } else if ($options === '%%status%%') {
-            $options = $this->plugin->utils_markup->status_select_options($current_value, $select_options_args);
+            $options = $this->plugin->utils_markup->statusSelectOptions($current_value, $select_options_args);
         } else if (is_array($options)) {
-            $options = $this->plugin->utils_markup->select_options($options, $current_value, $select_options_args);
+            $options = $this->plugin->utils_markup->selectOptions($options, $current_value, $select_options_args);
         }
         if (!($options = trim((string)$options)) && $allow_empty && $allow_arbitrary) {
             return $this->inputRow($input_fallback_args);

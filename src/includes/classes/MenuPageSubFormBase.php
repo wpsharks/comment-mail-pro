@@ -164,14 +164,14 @@ class MenuPageSubFormBase extends AbsBase
               [
                 'label'       => __('<i class="fa fa-fw fa-map-marker"></i> IP Region Code', $this->plugin->text_domain),
                 'name'        => 'insertion_region', 'required' => false, 'maxlength' => 2, 'current_value' => $this->currentValueFor('insertion_region'),
-                'notes_after' => sprintf(__('If empty, this is filled automatically when a subscriber confirms or updates their subscription. Here is a map of all %1$s; found in the second column of the CSV file.', $this->plugin->text_domain), $this->plugin->utils_markup->x_anchor('http://www.maxmind.com/download/geoip/misc/region_codes.csv', __('Region Codes', $this->plugin->text_domain))),
+                'notes_after' => sprintf(__('If empty, this is filled automatically when a subscriber confirms or updates their subscription. Here is a map of all %1$s; found in the second column of the CSV file.', $this->plugin->text_domain), $this->plugin->utils_markup->xAnchor('http://www.maxmind.com/download/geoip/misc/region_codes.csv', __('Region Codes', $this->plugin->text_domain))),
               ]
             );
             echo $this->form_fields->inputRow(
               [
                 'label'       => __('<i class="fa fa-fw fa-globe"></i> IP Country Code', $this->plugin->text_domain),
                 'name'        => 'insertion_country', 'required' => false, 'maxlength' => 2, 'current_value' => $this->currentValueFor('insertion_country'),
-                'notes_after' => sprintf(__('If empty, this is filled automatically when a subscriber confirms or updates their subscription. Here is a map of all %1$s; found in the first column of the CSV file.', $this->plugin->text_domain), $this->plugin->utils_markup->x_anchor('http://www.maxmind.com/download/geoip/misc/region_codes.csv', __('Country Codes', $this->plugin->text_domain))),
+                'notes_after' => sprintf(__('If empty, this is filled automatically when a subscriber confirms or updates their subscription. Here is a map of all %1$s; found in the first column of the CSV file.', $this->plugin->text_domain), $this->plugin->utils_markup->xAnchor('http://www.maxmind.com/download/geoip/misc/region_codes.csv', __('Country Codes', $this->plugin->text_domain))),
               ]
             );
         }

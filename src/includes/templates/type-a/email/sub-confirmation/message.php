@@ -50,7 +50,7 @@ $subscribed_to_own_comment = $sub_comment && strcasecmp($sub_comment->comment_au
 $sub_confirm_url = $plugin->utils_url->sub_confirm_url($sub->key, $process_list_server);
 
 // Subscriber's `"name" <email>` w/ HTML markup enhancements.
-$sub_name_email_markup = $plugin->utils_markup->name_email($sub->fname.' '.$sub->lname, $sub->email);
+$sub_name_email_markup = $plugin->utils_markup->nameEmail($sub->fname.' '.$sub->lname, $sub->email);
 
 // Subscriber's last known IP address.
 $sub_last_ip = $sub->last_ip ? $sub->last_ip : __('unknown', $plugin->text_domain);

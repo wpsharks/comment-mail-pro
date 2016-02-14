@@ -67,7 +67,7 @@ $can_spam_privacy_policy_url = $plugin->options['can_spam_privacy_policy_url'];
 
 		<div class="col-md-6 text-right">
 			<?php if($plugin->options['site_footer_powered_by_enable']): ?>
-				<?php echo $plugin->utils_markup->powered_by(); ?>
+				<?php echo $plugin->utils_markup->poweredBy(); ?>
 			<?php endif; ?>
 		</div>
 

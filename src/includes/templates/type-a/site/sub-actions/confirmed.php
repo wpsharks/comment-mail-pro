@@ -94,7 +94,7 @@ echo str_replace('%%title%%', __('Confirmation', $plugin->text_domain), $site_he
 			$sub_deliver_label = $plugin->utils_i18n->deliverLabel($sub->deliver);
 
 			// Subscriber's `"name" <email>` w/ HTML markup enhancements.
-			$sub_name_email_markup = $plugin->utils_markup->name_email($sub->fname.' '.$sub->lname, $sub->email);
+			$sub_name_email_markup = $plugin->utils_markup->nameEmail($sub->fname.' '.$sub->lname, $sub->email);
 
 			// Subscriber's last known IP address.
 			$sub_last_ip = $sub->last_ip ? $sub->last_ip : __('unknown', $plugin->text_domain);

@@ -1223,7 +1223,7 @@ class Plugin extends AbsBase
         }
         // Menu page icon uses an SVG graphic.
         $icon = $this->utils_fs->inlineIconSvg();
-        $icon = $this->utils_markup->color_svg_menu_icon($icon);
+        $icon = $this->utils_markup->colorSvgMenuIcon($icon);
 
         $divider = // Dividing line used by various menu items below.
           '<span style="display:block; padding:0; margin:0 0 12px 0; height:1px; line-height:1px; background:#CCCCCC; opacity:0.1;"></span>';

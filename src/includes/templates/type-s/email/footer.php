@@ -102,7 +102,7 @@ $can_spam_privacy_policy_url = $plugin->options['can_spam_privacy_policy_url'];
 
 <?php if($plugin->options['email_footer_powered_by_enable']): ?>
 	<hr /><p style="color:#888888;">
-		<?php echo $plugin->utils_markup->powered_by(); ?>
+		<?php echo $plugin->utils_markup->poweredBy(); ?>
 	</p>
 <?php endif; ?>
 

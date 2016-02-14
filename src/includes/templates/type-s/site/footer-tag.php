@@ -41,9 +41,9 @@ $can_spam_privacy_policy_url = $plugin->options['can_spam_privacy_policy_url'];
 
 <?php echo $template->snippet(
 	'footer-tag.php', array(
-		'[home_url]'                    => esc_attr($home_url),
-		'[blog_name_clip]'              => esc_html($blog_name_clip),
-		'[can_spam_privacy_policy_url]' => esc_attr($can_spam_privacy_policy_url),
-		'[sub_summary_return_url]'      => $parent_template->file() !== 'site/sub-actions/manage-summary.php' ? esc_attr($sub_summary_return_url) : '',
-		'[powered_by]'                  => $plugin->options['site_footer_powered_by_enable'] ? $plugin->utils_markup->powered_by() : '',
+  '[home_url]'                    => esc_attr($home_url),
+  '[blog_name_clip]'              => esc_html($blog_name_clip),
+  '[can_spam_privacy_policy_url]' => esc_attr($can_spam_privacy_policy_url),
+  '[sub_summary_return_url]'      => $parent_template->file() !== 'site/sub-actions/manage-summary.php' ? esc_attr($sub_summary_return_url) : '',
+  '[powered_by]'                  => $plugin->options['site_footer_powered_by_enable'] ? $plugin->utils_markup->poweredBy() : '',
 	)); ?>

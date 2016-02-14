@@ -252,7 +252,7 @@ class MenuPageQueueEventLogTable extends MenuPageTableBase
                   'email_style' => 'font-weight:normal;',
                 ];
                 return esc_html($event_label).' '.$this->plugin->utils_event->queueNotifiedQLink($item).'<br />'.
-                       $this->plugin->utils_markup->name_email('', $item->email, $name_email_args);
+                       $this->plugin->utils_markup->nameEmail('', $item->email, $name_email_args);
 
             case 'invalidated': // Queue entry was invalidated in this case.
 
