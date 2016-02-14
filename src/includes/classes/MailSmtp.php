@@ -190,8 +190,7 @@ class MailSmtp extends AbsBase
         if (!$this->from_email || !$this->recipients || !$this->subject || !$this->message_html || !$this->message_text) {
             return false; // Not possible. Missing vital argument value(s).
         }
-        try // PHPMailer (catch exceptions).
-        {
+        try { // PHPMailer (catch exceptions).
             if ($this->debug) {
                 ob_start();
                 $this->mailer->SMTPDebug   = 2;
