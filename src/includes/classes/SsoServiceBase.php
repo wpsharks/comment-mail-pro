@@ -326,7 +326,7 @@ abstract class SsoServiceBase extends AbsBase
      */
     protected function processException(\exception $exception)
     {
-        $this->plugin->utils_log->maybe_debug($exception);
+        $this->plugin->utils_log->maybeDebug($exception);
 
         exit(__('An unexpected error ocurred. Please start over and try again. Sorry!', $this->plugin->text_domain));
     }

@@ -514,7 +514,7 @@ namespace WebSharks\CommentMail\Pro;
 					),
 				));
 				if(is_wp_error($response)) // Log for possible debugging later.
-					$this->plugin->utils_log->maybe_debug($response);
+					$this->plugin->utils_log->maybeDebug($response);
 			}
 
 			/**
