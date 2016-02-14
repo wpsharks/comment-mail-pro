@@ -1350,13 +1350,13 @@ class SubInserter extends AbsBase
                         $_value = ''; // Use a default value.
                     }
                     if ($this->is_insert && !$_value && $this->is_current_user) {
-                        $_value = $this->plugin->utils_ip->current_region();
+                        $_value = $this->plugin->utils_ip->currentRegion();
                     }
                     if ($this->is_insert && !$_value && ($this->data['insertion_ip'] || $this->data['last_ip'])) {
                         $_value = $this->plugin->utils_ip->region($this->coalesce($this->data['insertion_ip'], $this->data['last_ip']));
                     }
                     if ($this->is_update && $this->sub && !$this->sub->insertion_region && !$_value && $this->is_current_user) {
-                        $_value = $this->plugin->utils_ip->current_region(); // Auto-fill on update.
+                        $_value = $this->plugin->utils_ip->currentRegion(); // Auto-fill on update.
                     }
                     if ($this->is_update && $this->sub && !$this->sub->insertion_region && !$_value) {
                         $_value = $this->plugin->utils_ip->region($this->coalesce($this->sub->insertion_ip, $this->sub->last_ip));
@@ -1388,13 +1388,13 @@ class SubInserter extends AbsBase
                         $_value = ''; // Use a default value.
                     }
                     if ($this->is_insert && !$_value && $this->is_current_user) {
-                        $_value = $this->plugin->utils_ip->current_country();
+                        $_value = $this->plugin->utils_ip->currentCountry();
                     }
                     if ($this->is_insert && !$_value && ($this->data['insertion_ip'] || $this->data['last_ip'])) {
                         $_value = $this->plugin->utils_ip->country($this->coalesce($this->data['insertion_ip'], $this->data['last_ip']));
                     }
                     if ($this->is_update && $this->sub && !$this->sub->insertion_country && !$_value && $this->is_current_user) {
-                        $_value = $this->plugin->utils_ip->current_country(); // Auto-fill on update.
+                        $_value = $this->plugin->utils_ip->currentCountry(); // Auto-fill on update.
                     }
                     if ($this->is_update && $this->sub && !$this->sub->insertion_country && !$_value) {
                         $_value = $this->plugin->utils_ip->country($this->coalesce($this->sub->insertion_ip, $this->sub->last_ip));
@@ -1458,7 +1458,7 @@ class SubInserter extends AbsBase
                         $_value = ''; // Use a default value.
                     }
                     if (!$_value && $this->is_current_user) {
-                        $_value = $this->plugin->utils_ip->current_region();
+                        $_value = $this->plugin->utils_ip->currentRegion();
                     }
                     if ($this->is_insert && !$_value && ($this->data['last_ip'] || $this->data['insertion_ip'])) {
                         $_value = $this->plugin->utils_ip->region($this->coalesce($this->data['last_ip'], $this->data['insertion_ip']));
@@ -1490,7 +1490,7 @@ class SubInserter extends AbsBase
                         $_value = ''; // Use a default value.
                     }
                     if (!$_value && $this->is_current_user) {
-                        $_value = $this->plugin->utils_ip->current_country();
+                        $_value = $this->plugin->utils_ip->currentCountry();
                     }
                     if ($this->is_insert && !$_value && ($this->data['last_ip'] || $this->data['insertion_ip'])) {
                         $_value = $this->plugin->utils_ip->country($this->coalesce($this->data['last_ip'], $this->data['insertion_ip']));
