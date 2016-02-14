@@ -489,7 +489,7 @@ namespace WebSharks\CommentMail\Pro;
 
 				$deleter = new SubDeleter($sub->ID, $args);
 
-				return $deleter->did_delete();
+				return $deleter->didDelete();
 			}
 
 			/**

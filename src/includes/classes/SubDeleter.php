@@ -2,247 +2,256 @@
 /**
  * Sub Deleter
  *
- * @since 141111 First documented version.
+ * @since     141111 First documented version.
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
- * @license GNU General Public License, version 3
+ * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
+/**
+ * Sub Deleter
+ *
+ * @since 141111 First documented version.
+ */
+class SubDeleter extends AbsBase
+{
+    /**
+     * @var \stdClass|null Subscription.
+     *
+     * @since 141111 First documented version.
+     */
+    protected $sub;
 
+    /**
+     * @var string Last known IP.
+     *
+     * @since 141111 First documented version.
+     */
+    protected $last_ip;
 
-		/**
-		 * Sub Deleter
-		 *
-		 * @since 141111 First documented version.
-		 */
-	class SubDeleter extends AbsBase
-		{
-			/**
-			 * @var \stdClass|null Subscription.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected $sub; // Subscr. data.
+    /**
+     * @var string Last known region.
+     *
+     * @since 141111 First documented version.
+     */
+    protected $last_region;
 
-			/**
-			 * @var string Last known IP.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected $last_ip;
+    /**
+     * @var string Last known country.
+     *
+     * @since 141111 First documented version.
+     */
+    protected $last_country;
 
-			/**
-			 * @var string Last known region.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected $last_region;
+    /**
+     * @var integer Overwritten by subscription ID.
+     *
+     * @since 141111 First documented version.
+     */
+    protected $oby_sub_id;
 
-			/**
-			 * @var string Last known country.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected $last_country;
+    /**
+     * @var integer Sub ID that did an overwrite; did a replace?
+     *
+     * @since 141111 First documented version.
+     */
+    protected $oby_sub_id_did_replace;
 
-			/**
-			 * @var integer Overwritten by subscription ID.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected $oby_sub_id;
+    /**
+     * @var boolean Purging?
+     *
+     * @since 141111 First documented version.
+     */
+    protected $purging;
 
-			/**
-			 * @var integer Sub ID that did an overwrite; did a replace?
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected $oby_sub_id_did_replace;
+    /**
+     * @var boolean Cleaning?
+     *
+     * @since 141111 First documented version.
+     */
+    protected $cleaning;
 
-			/**
-			 * @var boolean Purging?
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected $purging;
+    /**
+     * @var boolean Process events?
+     *
+     * @since 141111 First documented version.
+     */
+    protected $process_events;
 
-			/**
-			 * @var boolean Cleaning?
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected $cleaning;
+    /**
+     * @var boolean User initiated?
+     *
+     * @since 141111 First documented version.
+     */
+    protected $user_initiated;
 
-			/**
-			 * @var boolean Process events?
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected $process_events;
+    /**
+     * @var string Event taking place.
+     *
+     * @since 141111 First documented version.
+     */
+    protected $event;
 
-			/**
-			 * @var boolean User initiated?
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected $user_initiated;
+    /**
+     * @var boolean Deleted?
+     *
+     * @since 141111 First documented version.
+     */
+    protected $deleted;
 
-			/**
-			 * @var string Event taking place.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected $event;
+    /**
+     * Class constructor.
+     *
+     * @param integer $sub_id Subscription ID.
+     * @param array   $args   Any additional behavior args.
+     *
+     * @since 141111 First documented version.
+     */
+    public function __construct($sub_id, array $args = [])
+    {
+        parent::__construct();
 
-			/**
-			 * @var boolean Deleted?
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected $deleted;
+        $sub_id    = (integer)$sub_id;
+        $this->sub = $this->plugin->utils_sub->get($sub_id);
 
-			/**
-			 * Class constructor.
-			 *
-			 * @param integer $sub_id Subscription ID.
-			 * @param array   $args Any additional behavior args.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			public function __construct($sub_id, array $args = array())
-			{
-				parent::__construct();
+        $defaults_args = [
+          'last_ip'      => '',
+          'last_region'  => '',
+          'last_country' => '',
 
-				$sub_id    = (integer)$sub_id;
-				$this->sub = $this->plugin->utils_sub->get($sub_id);
+          'oby_sub_id'             => 0,
+          'oby_sub_id_did_replace' => false,
+          'purging'                => false,
+          'cleaning'               => false,
 
-				$defaults_args = array(
-					'last_ip'                => '',
-					'last_region'            => '',
-					'last_country'           => '',
+          'process_events' => true,
 
-					'oby_sub_id'             => 0,
-					'oby_sub_id_did_replace' => FALSE,
-					'purging'                => FALSE,
-					'cleaning'               => FALSE,
+          'user_initiated' => false,
+        ];
+        $args          = array_merge($defaults_args, $args);
+        $args          = array_intersect_key($args, $defaults_args);
 
-					'process_events'         => TRUE,
+        $this->last_ip      = trim((string)$args['last_ip']);
+        $this->last_region  = trim((string)$args['last_region']);
+        $this->last_country = trim((string)$args['last_country']);
 
-					'user_initiated'         => FALSE,
-				);
-				$args          = array_merge($defaults_args, $args);
-				$args          = array_intersect_key($args, $defaults_args);
+        $this->oby_sub_id             = (integer)$args['oby_sub_id'];
+        $this->oby_sub_id_did_replace = (boolean)$args['oby_sub_id_did_replace'];
+        $this->purging                = (boolean)$args['purging'];
+        $this->cleaning               = (boolean)$args['cleaning'];
 
-				$this->last_ip      = trim((string)$args['last_ip']);
-				$this->last_region  = trim((string)$args['last_region']);
-				$this->last_country = trim((string)$args['last_country']);
+        $this->process_events = (boolean)$args['process_events'];
 
-				$this->oby_sub_id             = (integer)$args['oby_sub_id'];
-				$this->oby_sub_id_did_replace = (boolean)$args['oby_sub_id_did_replace'];
-				$this->purging                = (boolean)$args['purging'];
-				$this->cleaning               = (boolean)$args['cleaning'];
+        $this->user_initiated = (boolean)$args['user_initiated'];
+        $this->user_initiated = $this->plugin->utils_sub->check_user_initiated_by_admin(
+          $this->sub ? $this->sub->email : '', $this->user_initiated
+        );
+        # Auto-fill last IP, region, country if it's the current user.
 
-				$this->process_events = (boolean)$args['process_events'];
+        if ($this->user_initiated && !$this->last_ip) {
+            $this->last_ip = $this->plugin->utils_ip->current();
+        }
+        if ($this->user_initiated && !$this->last_region) {
+            $this->last_region = $this->plugin->utils_ip->current_region();
+        }
+        if ($this->user_initiated && !$this->last_country) {
+            $this->last_country = $this->plugin->utils_ip->current_country();
+        }
+        # Auto-resolve conflicts between deletion event types.
 
-				$this->user_initiated = (boolean)$args['user_initiated'];
-				$this->user_initiated = $this->plugin->utils_sub->check_user_initiated_by_admin(
-					$this->sub ? $this->sub->email : '', $this->user_initiated
-				);
-				# Auto-fill last IP, region, country if it's the current user.
+        if ($this->oby_sub_id) {
+            $this->purging = $this->cleaning = false;
+        }
+        if ($this->purging) {
+            $this->cleaning = false;
+        }
+        if ($this->cleaning) {
+            $this->purging = false;
+        }
+        if ($this->purging || $this->cleaning) {
+            $this->oby_sub_id             = 0;
+            $this->oby_sub_id_did_replace = false;
+        }
+        # Define the event type based on args.
 
-				if($this->user_initiated && !$this->last_ip)
-					$this->last_ip = $this->plugin->utils_ip->current();
+        if ($this->oby_sub_id) {
+            $this->event = 'overwritten';
+        } else if ($this->purging) {
+            $this->event = 'purged';
+        } else if ($this->cleaning) {
+            $this->event = 'cleaned';
+        } else {
+            $this->event = 'deleted';
+        }
+        # Perform deletion event type.
 
-				if($this->user_initiated && !$this->last_region)
-					$this->last_region = $this->plugin->utils_ip->current_region();
+        $this->deleted = false; // Initialize.
 
-				if($this->user_initiated && !$this->last_country)
-					$this->last_country = $this->plugin->utils_ip->current_country();
+        $this->maybeDelete();
+    }
 
-				# Auto-resolve conflicts between deletion event types.
+    /**
+     * Public access to deleted property.
+     *
+     * @since 141111 First documented version.
+     */
+    public function didDelete()
+    {
+        return $this->deleted;
+    }
 
-				if($this->oby_sub_id)
-					$this->purging = $this->cleaning = FALSE;
+    /**
+     * Deletes subscription.
+     *
+     * @since 141111 First documented version.
+     */
+    protected function maybeDelete()
+    {
+        if (!$this->sub) {
+            return; // Deleted already.
+        }
+        if ($this->sub->status === 'deleted') {
+            return; // Deleted already.
+        }
+        $sub_before = (array)$this->sub; // For event logging.
 
-				if($this->purging)
-					$this->cleaning = FALSE;
+        $sql = "DELETE FROM `".esc_sql($this->plugin->utils_db->prefix().'subs')."`".
+               " WHERE `ID` = '".esc_sql($this->sub->ID)."'";
 
-				if($this->cleaning)
-					$this->purging = FALSE;
+        if (($this->deleted = $this->plugin->utils_db->wp->query($sql)) === false) {
+            throw new \exception(__('Deletion failure.', $this->plugin->text_domain));
+        }
+        $this->deleted = (boolean)$this->deleted; // Convert to boolean now.
 
-				if($this->purging || $this->cleaning)
-				{
-					$this->oby_sub_id             = 0;
-					$this->oby_sub_id_did_replace = FALSE;
-				}
-				# Define the event type based on args.
+        $this->sub->status = 'deleted'; // Obj. properties.
 
-				if($this->oby_sub_id)
-					$this->event = 'overwritten';
+        if ($this->last_ip) {
+            $this->sub->last_ip = $this->last_ip;
+        }
+        if ($this->last_region) {
+            $this->sub->last_region = $this->last_region;
+        }
+        if ($this->last_country) {
+            $this->sub->last_country = $this->last_country;
+        }
+        $this->sub->last_update_time = time(); // Updating now by deleting.
 
-				else if($this->purging)
-					$this->event = 'purged';
+        $this->plugin->utils_sub->nullify_cache([$this->sub->ID, $this->sub->key]);
 
-				else if($this->cleaning)
-					$this->event = 'cleaned';
-
-				else $this->event = 'deleted';
-
-				# Perform deletion event type.
-
-				$this->deleted = FALSE; // Initialize.
-
-				$this->maybe_delete();
-			}
-
-			/**
-			 * Public access to deleted property.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			public function did_delete()
-			{
-				return $this->deleted;
-			}
-
-			/**
-			 * Deletes subscription.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected function maybe_delete()
-			{
-				if(!$this->sub)
-					return; // Deleted already.
-
-				if($this->sub->status === 'deleted')
-					return; // Deleted already.
-
-				$sub_before = (array)$this->sub; // For event logging.
-
-				$sql = "DELETE FROM `".esc_sql($this->plugin->utils_db->prefix().'subs')."`".
-				       " WHERE `ID` = '".esc_sql($this->sub->ID)."'";
-
-				if(($this->deleted = $this->plugin->utils_db->wp->query($sql)) === FALSE)
-					throw new \exception(__('Deletion failure.', $this->plugin->text_domain));
-				$this->deleted = (boolean)$this->deleted; // Convert to boolean now.
-
-				$this->sub->status = 'deleted'; // Obj. properties.
-				if($this->last_ip) $this->sub->last_ip = $this->last_ip;
-				if($this->last_region) $this->sub->last_region = $this->last_region;
-				if($this->last_country) $this->sub->last_country = $this->last_country;
-				$this->sub->last_update_time = time(); // Updating now by deleting.
-
-				$this->plugin->utils_sub->nullify_cache(array($this->sub->ID, $this->sub->key));
-
-				if($this->process_events) // Processing events?
-					if($this->deleted || ($this->event === 'overwritten' && $this->oby_sub_id && $this->oby_sub_id_did_replace))
-					{
-						new SubEventLogInserter(array_merge((array)$this->sub, array(
-							'event'          => $this->event,
-							'oby_sub_id'     => $this->oby_sub_id,
-							'user_initiated' => $this->user_initiated,
-						)), $sub_before); // Log event data.
-					}
-			}
-		}
+        if ($this->process_events) { // Processing events?
+            if ($this->deleted || ($this->event === 'overwritten' && $this->oby_sub_id && $this->oby_sub_id_did_replace)) {
+                new SubEventLogInserter(
+                  array_merge(
+                    (array)$this->sub,
+                    [
+                      'event'          => $this->event,
+                      'oby_sub_id'     => $this->oby_sub_id,
+                      'user_initiated' => $this->user_initiated,
+                    ]
+                  ),
+                  $sub_before
+                ); // Log event data.
+            }
+        }
+    }
+}
