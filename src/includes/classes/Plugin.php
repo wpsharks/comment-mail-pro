@@ -1831,10 +1831,10 @@ class Plugin extends AbsBase
      */
     public function manageUsersCustomColumn($value, $column, $user_id)
     {
-        if (!($user_columns = &$this->staticKey('manage_users_columns'))) {
+        if (!($user_columns = &$this->staticKey('manageUsersColumns'))) {
             return $value; // Not possible to fill; no class instance.
         }
-        return $user_columns->maybe_fill($value, $column, $user_id);
+        return $user_columns->maybeFill($value, $column, $user_id);
     }
 
     /*

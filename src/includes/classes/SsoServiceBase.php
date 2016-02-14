@@ -255,7 +255,7 @@ abstract class SsoServiceBase extends AbsBase
 
                 if (!$sso_id // Hmm, the SSO ID is missing?
 
-                    // || !$this->plugin->utils_user->can_register()
+                    // || !$this->plugin->utils_user->canRegister()
 
                     || ($this->request_args['action'] !== 'callback'
                         && !wp_verify_nonce($_wpnonce, GLOBAL_NS.'_sso_complete'))

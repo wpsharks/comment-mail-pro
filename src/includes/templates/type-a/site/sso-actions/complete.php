@@ -92,18 +92,18 @@ echo str_replace('%%title%%', __('Complete Registration', $plugin->text_domain),
 		<form method="post" enctype="multipart/form-data" novalidate="novalidate" class="table-form">
 			<table>
 				<tbody>
-				<?php echo $form_fields->input_row(
+				<?php echo $form_fields->inputRow(
 					array(
 						'type'  => 'email', // For `<input>` type.
 						'label' => __('<i class="fa fa-fw fa-envelope-o"></i> Email Address', $plugin->text_domain),
 						'name'  => 'email', 'required' => TRUE, 'maxlength' => 100, 'current_value' => $email,
 					)); ?>
-				<?php echo $form_fields->input_row(
+				<?php echo $form_fields->inputRow(
 					array(
 						'label' => __('<i class="fa fa-fw fa-pencil-square-o"></i> First Name', $plugin->text_domain),
 						'name'  => 'fname', 'required' => TRUE, 'maxlength' => 50, 'current_value' => $fname,
 					)); ?>
-				<?php echo $form_fields->input_row(
+				<?php echo $form_fields->inputRow(
 					array(
 						'label' => __('<i class="fa fa-fw fa-level-up fa-rotate-90"></i> Last Name', $plugin->text_domain),
 						'name'  => 'lname', 'required' => FALSE, 'maxlength' => 100, 'current_value' => $lname,

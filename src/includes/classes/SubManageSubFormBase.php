@@ -418,7 +418,7 @@ class SubManageSubFormBase extends AbsBase
         static::$processing = true; // Flag as `TRUE`; along w/ other statics below.
 
         if (isset($request_args['key'])) { // Key sanitizer; for added security.
-            $request_args['key'] = $sub_key = $plugin->utils_sub->sanitize_key($request_args['key']);
+            $request_args['key'] = $sub_key = $plugin->utils_sub->sanitizeKey($request_args['key']);
         }
         if (isset($request_args['ID'])) { // Updating an existing subscription via ID?
             $sub_updater = new SubUpdater($request_args, $args); // Run updater.

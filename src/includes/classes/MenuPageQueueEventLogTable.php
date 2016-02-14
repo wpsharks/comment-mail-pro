@@ -194,8 +194,8 @@ class MenuPageQueueEventLogTable extends MenuPageTableBase
         $plugin = plugin(); // Needed for translations.
 
         return [
-          'event::invalidated' => $plugin->utils_i18n->event_label('invalidated', 'ucwords'),
-          'event::notified'    => $plugin->utils_i18n->event_label('notified', 'ucwords'),
+          'event::invalidated' => $plugin->utils_i18n->eventLabel('invalidated', 'ucwords'),
+          'event::notified'    => $plugin->utils_i18n->eventLabel('notified', 'ucwords'),
         ];
     }
 

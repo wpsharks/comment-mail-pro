@@ -56,7 +56,7 @@ class RveMandrill extends AbsBase
     {
         $plugin = plugin();
         $class  = get_called_class();
-        return $plugin->utils_enc->hmac_sha256_sign($class);
+        return $plugin->utils_enc->hmacSha256Sign($class);
     }
 
     /**

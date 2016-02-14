@@ -200,10 +200,10 @@ class MenuPageSubsTable extends MenuPageTableBase
         $plugin = plugin(); // Needed for translations.
 
         return [
-          'status::unconfirmed' => $plugin->utils_i18n->status_label('unconfirmed', 'ucwords'),
-          'status::subscribed'  => $plugin->utils_i18n->status_label('subscribed', 'ucwords'),
-          'status::suspended'   => $plugin->utils_i18n->status_label('suspended', 'ucwords'),
-          'status::trashed'     => $plugin->utils_i18n->status_label('trashed', 'ucwords'),
+          'status::unconfirmed' => $plugin->utils_i18n->statusLabel('unconfirmed', 'ucwords'),
+          'status::subscribed'  => $plugin->utils_i18n->statusLabel('subscribed', 'ucwords'),
+          'status::suspended'   => $plugin->utils_i18n->statusLabel('suspended', 'ucwords'),
+          'status::trashed'     => $plugin->utils_i18n->statusLabel('trashed', 'ucwords'),
         ];
     }
 

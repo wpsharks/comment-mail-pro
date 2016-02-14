@@ -14,7 +14,7 @@ namespace WebSharks\CommentMail\Pro;
  *    you may also use any WordPress functions that you like.
  */
 ?>
-<?php echo $form_fields->select_row(
+<?php echo $form_fields->selectRow(
 	array(
 		'placeholder'         => __('— All Comments/Replies —', $plugin->text_domain),
 		'label'               => __('<i class="fa fa-fw fa-comment-o"></i> Comment', $plugin->text_domain),

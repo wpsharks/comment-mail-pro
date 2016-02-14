@@ -11,7 +11,7 @@ namespace WebSharks\CommentMail\Pro;
  *
  * @since 141111 First documented version.
  *
- * @return plugin Class instance.
+ * @return Plugin Class instance.
  */
 function plugin()
 {

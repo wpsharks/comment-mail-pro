@@ -188,7 +188,7 @@ echo str_replace('%%title%%', $is_edit ? __('Edit Subscription', $plugin->text_d
 					<tbody>
 
 					<?php if(!$is_edit): ?>
-						<?php echo $form_fields->select_row(
+						<?php echo $form_fields->selectRow(
 							array(
 								'placeholder'         => __('Select a Post...', $plugin->text_domain),
 								'label'               => __('<i class="fa fa-fw fa-thumb-tack"></i> Post', $plugin->text_domain),
@@ -196,7 +196,7 @@ echo str_replace('%%title%%', $is_edit ? __('Edit Subscription', $plugin->text_d
 								'notes_after'         => __('Required; the Post you\'re subscribing to.', $plugin->text_domain),
 								'input_fallback_args' => array('type' => 'number', 'maxlength' => 20, 'other_attrs' => 'min="1" max="18446744073709551615"', 'placeholder' => '', 'current_value_empty_on_0' => TRUE),
 							)); ?>
-						<?php echo $form_fields->select_row(
+						<?php echo $form_fields->selectRow(
 						// Note: if you change this row; also change the AJAX template variation.
 							array(
 								'placeholder'         => __('— All Comments/Replies —', $plugin->text_domain),
@@ -205,39 +205,39 @@ echo str_replace('%%title%%', $is_edit ? __('Edit Subscription', $plugin->text_d
 								'input_fallback_args' => array('type' => 'number', 'maxlength' => 20, 'other_attrs' => 'min="1" max="18446744073709551615"', 'current_value_empty_on_0' => TRUE),
 							)); ?>
 						<?php /* -------------------------------------------------------------------- */ ?>
-						<?php echo $form_fields->horizontal_line_row(/* -------------------------------------------------------------------- */); ?>
+						<?php echo $form_fields->horizontalLineRow(/* -------------------------------------------------------------------- */); ?>
 						<?php /* -------------------------------------------------------------------- */ ?>
 					<?php endif; ?>
 
-					<?php echo $form_fields->input_row(
+					<?php echo $form_fields->inputRow(
 						array(
 							'type'  => 'email', // For `<input>` type.
 							'label' => __('<i class="fa fa-fw fa-envelope-o"></i> Email', $plugin->text_domain),
 							'name'  => 'email', 'required' => TRUE, 'maxlength' => 100, 'current_value' => $current_value_for('email'),
 						)); ?>
-					<?php echo $form_fields->input_row(
+					<?php echo $form_fields->inputRow(
 						array(
 							'label' => __('<i class="fa fa-fw fa-pencil-square-o"></i> First Name', $plugin->text_domain),
 							'name'  => 'fname', 'required' => TRUE, 'maxlength' => 50, 'current_value' => $current_value_for('fname'),
 						)); ?>
-					<?php echo $form_fields->input_row(
+					<?php echo $form_fields->inputRow(
 						array(
 							'label' => __('<i class="fa fa-fw fa-level-up fa-rotate-90"></i> Last Name', $plugin->text_domain),
 							'name'  => 'lname', 'required' => FALSE, 'maxlength' => 100, 'current_value' => $current_value_for('lname'),
 						)); ?>
 					<?php /* -------------------------------------------------------------------- */ ?>
-					<?php echo $form_fields->horizontal_line_row(/* -------------------------------------------------------------------- */); ?>
+					<?php echo $form_fields->horizontalLineRow(/* -------------------------------------------------------------------- */); ?>
 					<?php /* -------------------------------------------------------------------- */ ?>
 
 					<?php if($is_edit) // Only for edits.
 						// New subscriptions always start w/ an `unconfirmed` status.
-						echo $form_fields->select_row(
+						echo $form_fields->selectRow(
 							array(
 								'placeholder' => __('Select a Status...', $plugin->text_domain),
 								'label'       => __('<i class="fa fa-fw fa-flag-o"></i> Status', $plugin->text_domain),
 								'name'        => 'status', 'required' => TRUE, 'options' => '%%status%%', 'current_value' => $current_value_for('status'),
 							)); ?>
-					<?php echo $form_fields->select_row(
+					<?php echo $form_fields->selectRow(
 						array(
 							'placeholder' => __('Select a Delivery Option...', $plugin->text_domain),
 							'label'       => __('<i class="fa fa-fw fa-paper-plane-o"></i> Deliver', $plugin->text_domain),

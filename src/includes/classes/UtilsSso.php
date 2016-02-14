@@ -99,7 +99,7 @@ class UtilsSso extends AbsBase
         if ($user_exists) { // If so, just log them in now.
             return $this->autoLogin($service, $sso_id, $args_no_cache_false);
         }
-        //if(!$this->plugin->utils_user->can_register())
+        //if(!$this->plugin->utils_user->canRegister())
         //	return FALSE; // Not possible.
 
         $fname = trim((string)$args['fname']);
@@ -283,7 +283,7 @@ class UtilsSso extends AbsBase
         $error_codes   = []; // Initialize error codes array.
 
         if ($action === 'complete') { // Processing completion?
-            //if(!$this->plugin->utils_user->can_register())
+            //if(!$this->plugin->utils_user->canRegister())
             //	$error_codes[] = 'users_cannot_register';
 
             if (!$service) { // Service is missing?
@@ -307,7 +307,7 @@ class UtilsSso extends AbsBase
             // Note: only occurs if an account exists w/ a different underlying SSO ID.
             // Otherwise, for existing accounts w/ a matching SSO ID, we automatically log them in.
 
-            //if(!$this->plugin->utils_user->can_register())
+            //if(!$this->plugin->utils_user->canRegister())
             //	$error_codes[] = 'users_cannot_register';
 
             if ($email && $this->plugin->utils_user->emailExistsOnBlog($email)) {
@@ -356,31 +356,31 @@ class UtilsSso extends AbsBase
 
         $hidden_inputs = ''; // Initialize.
 
-        $hidden_inputs .= $form_fields->hidden_input(
+        $hidden_inputs .= $form_fields->hiddenInput(
             [
               'name'          => 'service',
               'current_value' => $service,
             ]
           )."\n";
-        $hidden_inputs .= $form_fields->hidden_input(
+        $hidden_inputs .= $form_fields->hiddenInput(
             [
               'name'          => 'action',
               'current_value' => 'complete',
             ]
           )."\n";
-        $hidden_inputs .= $form_fields->hidden_input(
+        $hidden_inputs .= $form_fields->hiddenInput(
             [
               'name'          => 'redirect_to',
               'current_value' => $redirect_to,
             ]
           )."\n";
-        $hidden_inputs .= $form_fields->hidden_input(
+        $hidden_inputs .= $form_fields->hiddenInput(
             [
               'name'          => 'sso_id', // Encrypted for security.
               'current_value' => $this->plugin->utils_enc->encrypt($sso_id),
             ]
           )."\n";
-        $hidden_inputs .= $form_fields->hidden_input(
+        $hidden_inputs .= $form_fields->hiddenInput(
             [
               'name'          => '_wpnonce',
               'current_value' => wp_create_nonce(GLOBAL_NS.'_sso_complete'),
@@ -391,7 +391,7 @@ class UtilsSso extends AbsBase
 
         foreach ($sso_get_vars as $_sso_var_key => $_sso_var_value) {
             if (!in_array($_sso_var_key, ['action', 'service', 'redirect_to', 'sso_id', '_wpnonce'], true)) {
-                $hidden_inputs .= $form_fields->hidden_input(
+                $hidden_inputs .= $form_fields->hiddenInput(
                     [
                       'name'          => $_sso_var_key,
                       'current_value' => (string)$_sso_var_value,

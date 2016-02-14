@@ -340,7 +340,7 @@ class SubManageSummary extends AbsBase
 
         $errors = $successes = []; // Initialize.
 
-        $sub_key = $plugin->utils_sub->sanitize_key($sub_key);
+        $sub_key = $plugin->utils_sub->sanitizeKey($sub_key);
 
         $delete_args = ['user_initiated' => true];
         $deleted     = $plugin->utils_sub->delete($sub_key, $delete_args);

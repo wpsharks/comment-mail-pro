@@ -327,17 +327,17 @@ class MenuPageSubFormBase extends AbsBase
         }
         $info = [
           'email' => $user->user_email,
-          'fname' => $plugin->utils_string->first_name('', $user),
-          'lname' => $plugin->utils_string->last_name('', $user),
+          'fname' => $plugin->utils_string->firstName('', $user),
+          'lname' => $plugin->utils_string->lastName('', $user),
 
-          'ip' => $plugin->utils_user->is_current($user) ? $plugin->utils_ip->current()
-            : $plugin->utils_sub->email_last_ip($user->user_email),
+          'ip' => $plugin->utils_user->isCurrent($user) ? $plugin->utils_ip->current()
+            : $plugin->utils_sub->emailLastIp($user->user_email),
 
-          'region' => $plugin->utils_user->is_current($user) ? $plugin->utils_ip->current_region()
-            : $plugin->utils_sub->email_last_region($user->user_email),
+          'region' => $plugin->utils_user->isCurrent($user) ? $plugin->utils_ip->currentRegion()
+            : $plugin->utils_sub->emailLastRegion($user->user_email),
 
-          'country' => $plugin->utils_user->is_current($user) ? $plugin->utils_ip->current_country()
-            : $plugin->utils_sub->email_last_country($user->user_email),
+          'country' => $plugin->utils_user->isCurrent($user) ? $plugin->utils_ip->currentCountry()
+            : $plugin->utils_sub->emailLastCountry($user->user_email),
         ];
         $info = array_merge($default_info, $info);
         $info = array_intersect_key($info, $default_info);
@@ -371,33 +371,33 @@ class MenuPageSubFormBase extends AbsBase
             $sub_updater = new SubUpdater($request_args, $args); // Run updater.
 
             if ($sub_updater->didUpdate()) { // Updated successfully?
-                $plugin->enqueue_user_notice( // Queue notice.
+                $plugin->enqueueUserNotice( // Queue notice.
                   sprintf(__('Subscription ID #<code>%1$s</code> updated successfully.', $plugin->text_domain), esc_html($request_args['ID'])),
-                  ['transient' => true, 'for_page' => $plugin->utils_env->current_menu_page()]
+                  ['transient' => true, 'for_page' => $plugin->utils_env->currentMenuPage()]
                 );
 
-                $redirect_to = $plugin->utils_url->page_table_nav_vars_only();
+                $redirect_to = $plugin->utils_url->pageTableNavVarsOnly();
             } else { // There were errors; display those errors to the current user.
-                $plugin->enqueue_user_error( // Queue error notice.
+                $plugin->enqueueUserError( // Queue error notice.
                   sprintf(__('Failed to update subscription ID #<code>%1$s</code>. Please review the following error(s):', $plugin->text_domain), esc_html($request_args['ID'])).
                   '<ul class="pmp-list-items"><li>'.implode('</li><li>', $sub_updater->errorsHtml()).'</li></ul>',
-                  ['transient' => true, 'for_page' => $plugin->utils_env->current_menu_page()]
+                  ['transient' => true, 'for_page' => $plugin->utils_env->currentMenuPage()]
                 );
             }
         } else { // We are doing a new insertion; i.e. a new subscription is being added here.
             $sub_inserter = new SubInserter($request_args, $args); // Run inserter.
 
             if ($sub_inserter->didInsert()) { // Inserted successfully?
-                $plugin->enqueue_user_notice( // Queue notice.
+                $plugin->enqueueUserNotice( // Queue notice.
                   sprintf(__('Subscription ID #<code>%1$s</code> created successfully.', $plugin->text_domain), esc_html($sub_inserter->insertId())),
-                  ['transient' => true, 'for_page' => $plugin->utils_env->current_menu_page()]
+                  ['transient' => true, 'for_page' => $plugin->utils_env->currentMenuPage()]
                 );
-                $redirect_to = $plugin->utils_url->page_table_nav_vars_only();
+                $redirect_to = $plugin->utils_url->pageTableNavVarsOnly();
             } else { // There were errors; display those errors to the current user.
-                $plugin->enqueue_user_error( // Queue error notice.
+                $plugin->enqueueUserError( // Queue error notice.
                   __('Failed to create new subscription. Please review the following error(s):', $plugin->text_domain).
                   '<ul class="pmp-list-items"><li>'.implode('</li><li>', $sub_inserter->errorsHtml()).'</li></ul>',
-                  ['transient' => true, 'for_page' => $plugin->utils_env->current_menu_page()]
+                  ['transient' => true, 'for_page' => $plugin->utils_env->currentMenuPage()]
                 );
             }
         }
@@ -405,7 +405,7 @@ class MenuPageSubFormBase extends AbsBase
             if (headers_sent()) { // Output started already?
                 exit('      <script type="text/javascript">'.
                      "         document.getElementsByTagName('body')[0].style.display = 'none';".
-                     "         location.href = '".$plugin->utils_string->esc_js_sq($redirect_to)."';".
+                     "         location.href = '".$plugin->utils_string->escJsSq($redirect_to)."';".
                      '      </script>'.
                      '   </body>'.
                      '</html>');

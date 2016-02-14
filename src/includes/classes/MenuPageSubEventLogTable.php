@@ -238,12 +238,12 @@ class MenuPageSubEventLogTable extends MenuPageTableBase
         $plugin = plugin(); // Needed for translations.
 
         return [
-          'event::inserted'    => $plugin->utils_i18n->event_label('inserted', 'ucwords'),
-          'event::updated'     => $plugin->utils_i18n->event_label('updated', 'ucwords'),
-          'event::overwritten' => $plugin->utils_i18n->event_label('overwritten', 'ucwords'),
-          'event::purged'      => $plugin->utils_i18n->event_label('purged', 'ucwords'),
-          'event::cleaned'     => $plugin->utils_i18n->event_label('cleaned', 'ucwords'),
-          'event::deleted'     => $plugin->utils_i18n->event_label('deleted', 'ucwords'),
+          'event::inserted'    => $plugin->utils_i18n->eventLabel('inserted', 'ucwords'),
+          'event::updated'     => $plugin->utils_i18n->eventLabel('updated', 'ucwords'),
+          'event::overwritten' => $plugin->utils_i18n->eventLabel('overwritten', 'ucwords'),
+          'event::purged'      => $plugin->utils_i18n->eventLabel('purged', 'ucwords'),
+          'event::cleaned'     => $plugin->utils_i18n->eventLabel('cleaned', 'ucwords'),
+          'event::deleted'     => $plugin->utils_i18n->eventLabel('deleted', 'ucwords'),
         ];
     }
 

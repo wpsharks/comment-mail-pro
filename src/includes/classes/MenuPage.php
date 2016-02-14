@@ -967,7 +967,7 @@ class MenuPage extends AbsBase
                             /* This is currently forced to a value of `1`.
                           ' <table>'.
                           '  <tbody>'.
-                          $form_fields->select_row(
+                          $form_fields->selectRow(
                             array(
                               'label'           => __('Force <code>From:</code> &amp; <code>Return-Path:</code> Headers?', $this->plugin->text_domain),
                               'placeholder'     => __('Select an Option...', $this->plugin->text_domain),

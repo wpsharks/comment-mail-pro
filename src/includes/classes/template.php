@@ -438,8 +438,8 @@ class Template extends AbsBase
         $file = str_replace('__', '/', $file);
         $file = str_replace('_', '-', $file);
 
-        $file = $plugin->utils_string->trim_deep($file, '', '/');
-        $file = $plugin->utils_fs->n_seps($file);
+        $file = $plugin->utils_string->trimDeep($file, '', '/');
+        $file = $plugin->utils_fs->nSeps($file);
 
         return (object)compact('type', 'file');
     }
@@ -474,8 +474,8 @@ class Template extends AbsBase
         if (!empty($data->file)) { // In case it is empty.
             $file = trim(strtolower((string)$data->file));
         }
-        $file = $plugin->utils_string->trim_deep($file, '', '/');
-        $file = $plugin->utils_fs->n_seps($file);
+        $file = $plugin->utils_string->trimDeep($file, '', '/');
+        $file = $plugin->utils_fs->nSeps($file);
 
         $option_key = $file; // Initialize.
         $option_key = str_replace('.', '___', $option_key);
