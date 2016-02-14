@@ -251,12 +251,12 @@ class MenuPageQueueEventLogTable extends MenuPageTableBase
                   'anchor_to'   => 'search',
                   'email_style' => 'font-weight:normal;',
                 ];
-                return esc_html($event_label).' '.$this->plugin->utils_event->queue_notified_q_link($item).'<br />'.
+                return esc_html($event_label).' '.$this->plugin->utils_event->queueNotifiedQLink($item).'<br />'.
                        $this->plugin->utils_markup->name_email('', $item->email, $name_email_args);
 
             case 'invalidated': // Queue entry was invalidated in this case.
 
-                return esc_html($event_label).' '.$this->plugin->utils_event->queue_invalidated_q_link($item).'<br />'.
+                return esc_html($event_label).' '.$this->plugin->utils_event->queueInvalidatedQLink($item).'<br />'.
                        '<code style="font-size:90%;">'.esc_html($item->note_code).'</code>';
         }
         return esc_html($event_label); // Default case handler.

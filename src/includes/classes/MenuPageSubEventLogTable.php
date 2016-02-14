@@ -295,12 +295,12 @@ class MenuPageSubEventLogTable extends MenuPageTableBase
         {
             case 'inserted': // Subscription was inserted in this case.
 
-                return esc_html($event_label).' '.$this->plugin->utils_event->sub_inserted_q_link($item);
+                return esc_html($event_label).' '.$this->plugin->utils_event->subInsertedQLink($item);
 
             case 'updated': // Subscription was updated in this case.
 
-                return esc_html($event_label).' '.$this->plugin->utils_event->sub_updated_q_link($item).'<br />'.
-                       '<i class="pmp-child-branch"></i> '.$this->plugin->utils_event->sub_updated_summary($item);
+                return esc_html($event_label).' '.$this->plugin->utils_event->subUpdatedQLink($item).'<br />'.
+                       '<i class="pmp-child-branch"></i> '.$this->plugin->utils_event->subUpdatedSummary($item);
 
             case 'overwritten': // Overwritten by another?
 
@@ -312,20 +312,20 @@ class MenuPageSubEventLogTable extends MenuPageTableBase
                     $oby_sub_info = '<i class="'.esc_attr('si si-'.$this->plugin->slug.'-one').'"></i>'.
                                     ' <span>ID #'.esc_html($item->oby_sub_id).'</span>';
                 }
-                return esc_html($event_label).' '.$this->plugin->utils_event->sub_overwritten_q_link($item).'<br />'.
+                return esc_html($event_label).' '.$this->plugin->utils_event->subOverwrittenQLink($item).'<br />'.
                        '<i class="pmp-child-branch"></i> '.__('by', $this->plugin->text_domain).' '.$oby_sub_info;
 
             case 'purged': // Subscription was purged in this case.
 
-                return esc_html($event_label).' '.$this->plugin->utils_event->sub_purged_q_link($item);
+                return esc_html($event_label).' '.$this->plugin->utils_event->subPurgedQLink($item);
 
             case 'cleaned': // Subscription was cleaned in this case.
 
-                return esc_html($event_label).' '.$this->plugin->utils_event->sub_cleaned_q_link($item);
+                return esc_html($event_label).' '.$this->plugin->utils_event->subCleanedQLink($item);
 
             case 'deleted': // Subscription was deleted in this case.
 
-                return esc_html($event_label).' '.$this->plugin->utils_event->sub_deleted_q_link($item);
+                return esc_html($event_label).' '.$this->plugin->utils_event->subDeletedQLink($item);
         }
         return esc_html($event_label); // Default case handler.
     }
