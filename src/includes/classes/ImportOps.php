@@ -1,29 +1,30 @@
 <?php
 /**
- * Options Importer
+ * Options Importer.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * Options Importer
+ * Options Importer.
  *
  * @since 141111 First documented version.
  */
 class ImportOps extends AbsBase
 {
     /**
-     * @var string Input data.
+     * @type string Input data.
      *
      * @since 141111 First documented version.
      */
     protected $data;
 
     /**
-     * @var string Input data file.
+     * @type string Input data file.
      *
      * @since 141111 First documented version.
      */
@@ -47,11 +48,11 @@ class ImportOps extends AbsBase
             'data'      => '',
             'data_file' => '',
         ];
-        $request_args         = array_merge($default_request_args, $request_args);
-        $request_args         = array_intersect_key($request_args, $default_request_args);
+        $request_args = array_merge($default_request_args, $request_args);
+        $request_args = array_intersect_key($request_args, $default_request_args);
 
-        $this->data      = trim((string)$request_args['data']);
-        $this->data_file = trim((string)$request_args['data_file']);
+        $this->data      = trim((string) $request_args['data']);
+        $this->data_file = trim((string) $request_args['data_file']);
 
         if ($this->data_file) { // Run security flag checks on the path.
             $this->plugin->utils_fs->checkPathSecurity($this->data_file, true);
@@ -77,7 +78,7 @@ class ImportOps extends AbsBase
         } else {
             $options_to_import = json_decode($this->data, true);
         }
-        $options_to_import = (array)$options_to_import; // Force array.
+        $options_to_import = (array) $options_to_import; // Force array.
         unset($options_to_import['version'], $options_to_import['crons_setup']);
 
         $this->plugin->optionsSave($options_to_import);
@@ -100,4 +101,3 @@ class ImportOps extends AbsBase
         exit();
     }
 }
-	
