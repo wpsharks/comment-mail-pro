@@ -2,152 +2,150 @@
 /**
  * Sub. Event Log Inserter
  *
- * @since 141111 First documented version.
+ * @since     141111 First documented version.
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
- * @license GNU General Public License, version 3
+ * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
+/**
+ * Sub. Event Log Inserter
+ *
+ * @since 141111 First documented version.
+ */
+class SubEventLogInserter extends AbsBase
+{
+    /**
+     * @var array Log entry data.
+     *
+     * @since 141111 First documented version.
+     */
+    protected $entry;
 
+    /**
+     * Class constructor.
+     *
+     * @since 141111 First documented version.
+     *
+     * @param array $entry  Log entry data; w/ sub. now.
+     *
+     * @param array $before Log entry data; w/ sub. before.
+     *                      Not applicable w/ insertions.
+     *
+     * @throws \exception If `$entry` is missing required keys.
+     */
+    public function __construct(array $entry, array $before = [])
+    {
+        parent::__construct();
 
-		/**
-		 * Sub. Event Log Inserter
-		 *
-		 * @since 141111 First documented version.
-		 */
-	class SubEventLogInserter extends AbsBase
-		{
-			/**
-			 * @var array Log entry data.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected $entry;
+        $defaults = [
+          'sub_id' => 0,
+          'key'    => '',
 
-			/**
-			 * Class constructor.
-			 *
-			 * @since 141111 First documented version.
-			 *
-			 * @param array $entry Log entry data; w/ sub. now.
-			 *
-			 * @param array $before Log entry data; w/ sub. before.
-			 *    Not applicable w/ insertions.
-			 *
-			 * @throws \exception If `$entry` is missing required keys.
-			 */
-			public function __construct(array $entry, array $before = array())
-			{
-				parent::__construct();
+          'oby_sub_id' => 0,
 
-				$defaults = array(
-					'sub_id'            => 0,
-					'key'               => '',
+          'user_id'    => 0,
+          'post_id'    => 0,
+          'comment_id' => 0,
+          'deliver'    => '',
 
-					'oby_sub_id'        => 0,
+          'fname' => '',
+          'lname' => '',
+          'email' => '',
 
-					'user_id'           => 0,
-					'post_id'           => 0,
-					'comment_id'        => 0,
-					'deliver'           => '',
+          'ip'      => '',
+          'region'  => '',
+          'country' => '',
 
-					'fname'             => '',
-					'lname'             => '',
-					'email'             => '',
+          'status' => '',
 
-					'ip'                => '',
-					'region'            => '',
-					'country'           => '',
+          'event'          => '',
+          'user_initiated' => 0,
 
-					'status'            => '',
+          'time' => time(),
 
-					'event'             => '',
-					'user_initiated'    => 0,
+          /* ----------------- */
 
-					'time'              => time(),
+          'key_before' => '',
 
-					/* ----------------- */
+          'user_id_before'    => 0,
+          'post_id_before'    => 0,
+          'comment_id_before' => 0,
+          'deliver_before'    => '',
 
-					'key_before'        => '',
+          'fname_before' => '',
+          'lname_before' => '',
+          'email_before' => '',
 
-					'user_id_before'    => 0,
-					'post_id_before'    => 0,
-					'comment_id_before' => 0,
-					'deliver_before'    => '',
+          'ip_before'      => '',
+          'region_before'  => '',
+          'country_before' => '',
 
-					'fname_before'      => '',
-					'lname_before'      => '',
-					'email_before'      => '',
+          'status_before' => '',
+        ];
+        # Sub ID auto-fill from subscription data.
 
-					'ip_before'         => '',
-					'region_before'     => '',
-					'country_before'    => '',
+        if (empty($entry['sub_id']) && !empty($entry['ID'])) {
+            $entry['sub_id'] = $entry['ID'];
+        }
+        # IP, region, country; auto-fill from subscription data.
 
-					'status_before'     => '',
-				);
-				# Sub ID auto-fill from subscription data.
+        foreach (['ip', 'region', 'country'] as $_key) {
+            if (empty($entry[$_key])) { // Coalesce; giving precedence to the `last_` value.
+                $entry[$_key] = $this->notEmptyCoalesce($entry['last_'.$_key], $entry['insertion_'.$_key]);
+            }
+            if (empty($before[$_key])) { // Coalesce; giving precedence to the `last_` value.
+                $before[$_key] = $this->notEmptyCoalesce($before['last_'.$_key], $before['insertion_'.$_key]);
+            }
+        }
+        unset($_key); // Just a little housekeeping.
 
-				if(empty($entry['sub_id']) && !empty($entry['ID']))
-					$entry['sub_id'] = $entry['ID'];
+        # Auto-suffix subscription data from `_before`.
 
-				# IP, region, country; auto-fill from subscription data.
+        foreach ($before as $_key => $_value) {
+            $before[$_key.'_before'] = $_value;
+            unset($before[$_key]); // Unset.
+        }
+        unset($_key, $_value); // Housekeeping.
 
-				foreach(array('ip', 'region', 'country') as $_key)
-				{
-					if(empty($entry[$_key])) // Coalesce; giving precedence to the `last_` value.
-						$entry[$_key] = $this->notEmptyCoalesce($entry['last_'.$_key], $entry['insertion_'.$_key]);
+        $this->entry = array_merge($defaults, $entry, $before);
+        $this->entry = array_intersect_key($this->entry, $defaults);
+        $this->entry = $this->plugin->utils_db->typify_deep($this->entry);
 
-					if(empty($before[$_key])) // Coalesce; giving precedence to the `last_` value.
-						$before[$_key] = $this->notEmptyCoalesce($before['last_'.$_key], $before['insertion_'.$_key]);
-				}
-				unset($_key); // Just a little housekeeping.
+        $this->maybeInsert(); // Record event; if applicable.
+    }
 
-				# Auto-suffix subscription data from `_before`.
-
-				foreach($before as $_key => $_value)
-				{
-					$before[$_key.'_before'] = $_value;
-					unset($before[$_key]); // Unset.
-				}
-				unset($_key, $_value); // Housekeeping.
-
-				$this->entry = array_merge($defaults, $entry, $before);
-				$this->entry = array_intersect_key($this->entry, $defaults);
-				$this->entry = $this->plugin->utils_db->typify_deep($this->entry);
-
-				$this->maybe_insert(); // Record event; if applicable.
-			}
-
-			/**
-			 * Record event; if applicable.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected function maybe_insert()
-			{
-				if(!$this->entry['sub_id'])
-					return; // Not applicable.
-
-				if(!$this->entry['post_id'])
-					return; // Not applicable.
-
-				if(!$this->entry['deliver'])
-					return; // Not applicable.
-
-				if(!$this->entry['email'])
-					return; // Not applicable.
-
-				if(!$this->entry['status'])
-					return; // Not applicable.
-
-				if(!$this->entry['event'])
-					return; // Not applicable.
-
-				if(!$this->entry['time'])
-					return; // Not applicable.
-
-				if(!$this->plugin->utils_db->wp->insert($this->plugin->utils_db->prefix().'sub_event_log', $this->entry))
-					throw new \exception(__('Insertion failure.', $this->plugin->text_domain));
-			}
-		}
+    /**
+     * Record event; if applicable.
+     *
+     * @since 141111 First documented version.
+     */
+    protected function maybeInsert()
+    {
+        if (!$this->entry['sub_id']) {
+            return; // Not applicable.
+        }
+        if (!$this->entry['post_id']) {
+            return; // Not applicable.
+        }
+        if (!$this->entry['deliver']) {
+            return; // Not applicable.
+        }
+        if (!$this->entry['email']) {
+            return; // Not applicable.
+        }
+        if (!$this->entry['status']) {
+            return; // Not applicable.
+        }
+        if (!$this->entry['event']) {
+            return; // Not applicable.
+        }
+        if (!$this->entry['time']) {
+            return; // Not applicable.
+        }
+        if (!$this->plugin->utils_db->wp->insert($this->plugin->utils_db->prefix().'sub_event_log', $this->entry)) {
+            throw new \exception(__('Insertion failure.', $this->plugin->text_domain));
+        }
+    }
+}
 	
