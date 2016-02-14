@@ -229,7 +229,7 @@ class MailSmtp extends AbsBase
               $this->mailer->normalizeBreaks($this->message_text);
 
             foreach ($this->headers as $_header => $_value) {
-                $this->mailer->AddCustomHeader($this->plugin->utils_mail->ucwords_header($_header), $_value);
+                $this->mailer->AddCustomHeader($this->plugin->utils_mail->ucwordsHeader($_header), $_value);
             }
             unset($_header, $_value); // Housekeeping.
 
@@ -287,7 +287,7 @@ class MailSmtp extends AbsBase
         $this->reply_to_email = $this->plugin->options['smtp_reply_to_email'];
 
         // Any `Cc:` or `Bcc:` headers will supplement this list below.
-        $this->recipients = $this->plugin->utils_mail->parse_addresses_deep($to, false, true);
+        $this->recipients = $this->plugin->utils_mail->parseAddressesDeep($to, false, true);
 
         // Establish subject line and raw input message body.
         $this->subject = (string)$subject; // Force string at all times.
@@ -311,11 +311,11 @@ class MailSmtp extends AbsBase
             $this->message_text = __('To view this email message, open it in a program that understands HTML!', $this->plugin->text_domain);
         }
         // Some of the above details may be overridden by headers parsed here; e.g. `from_name`, `from_email`, `reply_to_email`, or `recipients`.
-        $this->headers = $this->plugin->utils_mail->parse_headers_deep($headers, $this->from_name, $this->from_email, $this->reply_to_email, $this->recipients);
+        $this->headers = $this->plugin->utils_mail->parseHeadersDeep($headers, $this->from_name, $this->from_email, $this->reply_to_email, $this->recipients);
         unset($this->headers['content-type']); // Ignore this at all times. We always send multipart messages w/ UTF-8 encoding.
 
         // Parse any attachments that may or may not exist in the call to this method.
-        $this->attachments = $this->plugin->utils_mail->parse_attachments_deep($attachments);
+        $this->attachments = $this->plugin->utils_mail->parseAttachmentsDeep($attachments);
     }
 
     /**

@@ -167,7 +167,7 @@ class SubAutoInjector extends AbsBase
             return; // Not applicable.
         }
         $recipients = $this->plugin->options['auto_subscribe_recipients'];
-        $recipients = $this->plugin->utils_mail->parse_addresses_deep($recipients);
+        $recipients = $this->plugin->utils_mail->parseAddressesDeep($recipients);
 
         foreach ($recipients as $_recipient) {
             if (!$_recipient->email) {

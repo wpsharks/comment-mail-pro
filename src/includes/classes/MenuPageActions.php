@@ -106,7 +106,7 @@ class MenuPageActions extends AbsBase
             $this->plugin->enqueueUserNotice($mail_test->results_markup, ['transient' => true]);
         }
         if (!empty($request_args['mail_smtp_test']) && ($mail_smtp_test_to = trim((string)$request_args['mail_smtp_test']))) {
-            $mail_smtp_test = $this->plugin->utils_mail->smtp_test(
+            $mail_smtp_test = $this->plugin->utils_mail->smtpTest(
               $mail_smtp_test_to, // To the address specificed in the request args.
               sprintf(__('Test Email Message sent by %1$s™', $this->plugin->text_domain), $this->plugin->name),
               sprintf(__('Test email message sent by %1$s&trade; from: <code>%2$s</code>.', $this->plugin->text_domain), esc_html($this->plugin->name), esc_html($this->plugin->utils_url->current_host_path()))
