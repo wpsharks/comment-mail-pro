@@ -1,38 +1,39 @@
 <?php
 /**
- * Comment Status
+ * Comment Status.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * Comment Status
+ * Comment Status.
  *
  * @since 141111 First documented version.
  */
 class CommentStatus extends AbsBase
 {
     /**
-     * @var \stdClass|null Comment.
+     * @type \stdClass|null Comment.
      *
      * @since 141111 First documented version.
      */
     protected $comment;
 
     /**
-     * @var string New comment status applied now.
-     *    One of: `approve`, `hold`, `trash`, `spam`, `delete`.
+     * @type string New comment status applied now.
+     *             One of: `approve`, `hold`, `trash`, `spam`, `delete`.
      *
      * @since 141111 First documented version.
      */
     protected $new_comment_status;
 
     /**
-     * @var string Old comment status from before.
-     *    One of: `approve`, `hold`, `trash`, `spam`, `delete`.
+     * @type string Old comment status from before.
+     *             One of: `approve`, `hold`, `trash`, `spam`, `delete`.
      *
      * @since 141111 First documented version.
      */
@@ -43,21 +44,19 @@ class CommentStatus extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param integer|string   $new_comment_status New comment status.
+     * @param int|string $new_comment_status New comment status.
      *
      *    One of the following:
      *       - `0` (aka: ``, `hold`, `unapprove`, `unapproved`, `moderated`),
      *       - `1` (aka: `approve`, `approved`),
      *       - or `trash`, `post-trashed`, `spam`, `delete`.
-     *
-     * @param integer|string   $old_comment_status Old comment status.
+     * @param int|string $old_comment_status Old comment status.
      *
      *    One of the following:
      *       - `0` (aka: ``, `hold`, `unapprove`, `unapproved`, `moderated`),
      *       - `1` (aka: `approve`, `approved`),
      *       - or `trash`, `post-trashed`, `spam`, `delete`.
-     *
-     * @param \WP_Comment|null $comment            Comment object (now).
+     * @param \WP_Comment|null $comment Comment object (now).
      */
     public function __construct($new_comment_status, $old_comment_status, \WP_Comment $comment = null)
     {
