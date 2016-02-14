@@ -1,22 +1,23 @@
 <?php
 /**
- * Post Deletion Handler
+ * Post Deletion Handler.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * Post Deletion Handler
+ * Post Deletion Handler.
  *
  * @since 141111 First documented version.
  */
 class PostDelete extends AbsBase
 {
     /**
-     * @var integer Post ID.
+     * @type int Post ID.
      *
      * @since 141111 First documented version.
      */
@@ -27,13 +28,13 @@ class PostDelete extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param integer|string $post_id Post ID.
+     * @param int|string $post_id Post ID.
      */
     public function __construct($post_id)
     {
         parent::__construct();
 
-        $this->post_id = (integer)$post_id;
+        $this->post_id = (integer) $post_id;
 
         $this->maybePurgeSubs();
     }
