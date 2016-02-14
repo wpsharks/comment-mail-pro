@@ -1,36 +1,37 @@
 <?php
 /**
- * Form Fields
+ * Form Fields.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * Form Fields
+ * Form Fields.
  *
  * @since 141111 First documented version.
  */
 class FormFields extends AbsBase
 {
     /**
-     * @var string Namespaced ID suffix.
+     * @type string Namespaced ID suffix.
      *
      * @since 141111 First documented version.
      */
     protected $ns_id_suffix;
 
     /**
-     * @var string Namespaced name suffix.
+     * @type string Namespaced name suffix.
      *
      * @since 141111 First documented version.
      */
     protected $ns_name_suffix;
 
     /**
-     * @var string Class prefix.
+     * @type string Class prefix.
      *
      * @since 141111 First documented version.
      */
@@ -52,12 +53,12 @@ class FormFields extends AbsBase
             'ns_name_suffix' => '',
             'class_prefix'   => '',
         ];
-        $args         = array_merge($default_args, $args);
-        $args         = array_intersect_key($args, $default_args);
+        $args = array_merge($default_args, $args);
+        $args = array_intersect_key($args, $default_args);
 
-        $this->ns_id_suffix   = trim((string)$args['ns_id_suffix']);
-        $this->ns_name_suffix = trim((string)$args['ns_name_suffix']);
-        $this->class_prefix   = trim((string)$args['class_prefix']);
+        $this->ns_id_suffix   = trim((string) $args['ns_id_suffix']);
+        $this->ns_name_suffix = trim((string) $args['ns_name_suffix']);
+        $this->class_prefix   = trim((string) $args['class_prefix']);
     }
 
     /**
@@ -95,17 +96,17 @@ class FormFields extends AbsBase
             'other_attrs'          => '',
             'exclude_th'           => false,
         ];
-        $args         = array_merge($default_args, $args);
-        $args         = array_intersect_key($args, $default_args);
+        $args = array_merge($default_args, $args);
+        $args = array_intersect_key($args, $default_args);
 
-        $type           = trim((string)$args['type']);
-        $label          = trim((string)$args['label']);
-        $checkbox_label = trim((string)$args['checkbox_label']);
-        $radio_label    = trim((string)$args['radio_label']);
-        $placeholder    = trim((string)$args['placeholder']);
+        $type           = trim((string) $args['type']);
+        $label          = trim((string) $args['label']);
+        $checkbox_label = trim((string) $args['checkbox_label']);
+        $radio_label    = trim((string) $args['radio_label']);
+        $placeholder    = trim((string) $args['placeholder']);
 
-        $name      = trim((string)$args['name']);
-        $root_name = (boolean)$args['root_name'];
+        $name      = trim((string) $args['name']);
+        $root_name = (boolean) $args['root_name'];
 
         $slug = trim(preg_replace('/[^a-z0-9]/i', '-', $name), '-');
         $slug = $root_name ? 'root-'.$slug : $slug;
@@ -113,27 +114,28 @@ class FormFields extends AbsBase
         $id   = $this->plugin->slug.$this->ns_id_suffix.'-'.$slug;
         $name = $root_name ? $name : GLOBAL_NS.$this->ns_name_suffix.'['.$name.']';
 
-        $required                 = (boolean)$args['required'];
-        $maxlength                = (integer)$args['maxlength'];
+        $required                 = (boolean) $args['required'];
+        $maxlength                = (integer) $args['maxlength'];
         $current_value            = $this->issetOr($args['current_value'], null, 'string');
-        $current_value_empty_on_0 = (boolean)$args['current_value_empty_on_0'];
+        $current_value_empty_on_0 = (boolean) $args['current_value_empty_on_0'];
 
         if ($current_value_empty_on_0 && in_array($current_value, [0, '0'], true)) {
             $current_value = ''; // Empty value.
         }
-        $notes_before = trim((string)$args['notes_before']);
-        $notes_after  = trim((string)$args['notes_after']);
+        $notes_before = trim((string) $args['notes_before']);
+        $notes_after  = trim((string) $args['notes_after']);
 
         $post_id              = $this->issetOr($args['post_id'], null, 'integer');
-        $nested_checkbox_args = (array)$args['nested_checkbox_args'];
-        $field_class          = trim((string)$args['field_class']);
-        $other_attrs          = trim((string)$args['other_attrs']);
-        $exclude_th           = (boolean)$args['exclude_th'];
+        $nested_checkbox_args = (array) $args['nested_checkbox_args'];
+        $field_class          = trim((string) $args['field_class']);
+        $other_attrs          = trim((string) $args['other_attrs']);
+        $exclude_th           = (boolean) $args['exclude_th'];
 
         $row = '<tr class="'.esc_attr('form-field'.($required ? ' form-required' : '').' '.$this->class_prefix.$slug).'">';
 
-        if (!$exclude_th) // Only if not excluding the table header.
-        {
+        if (!$exclude_th) {
+            // Only if not excluding the table header.
+
             $row .= '<th scope="row">';
             $row .= '   <label for="'.esc_attr($id).'">'.
                     '      '.$label.($required ? // Change the short description based on this boolean.
@@ -156,14 +158,14 @@ class FormFields extends AbsBase
                     '     id="'.esc_attr($id).'" name="'.esc_attr($name).'"'.
 
                     '     aria-required="'.esc_attr($required ? 'true' : 'false').'"'.
-                    '     '.($required ? ' required="required"' : ''). // JS validation.
+                    '     '.($required ? ' required="required"' : '').// JS validation.
 
                     '     '.($maxlength ? ' maxlength="'.esc_attr($maxlength).'"' : '').
 
                     '     data-placeholder="'.esc_attr($placeholder).'"'.
                     '     placeholder="'.esc_attr($placeholder).'"'.
 
-                    '     value="'.esc_attr(trim((string)$current_value)).'"'.
+                    '     value="'.esc_attr(trim((string) $current_value)).'"'.
 
                     '     '.$other_attrs.' />'.
 
@@ -223,14 +225,14 @@ class FormFields extends AbsBase
             'other_attrs'          => '',
             'exclude_th'           => false,
         ];
-        $args         = array_merge($default_args, $args);
-        $args         = array_intersect_key($args, $default_args);
+        $args = array_merge($default_args, $args);
+        $args = array_intersect_key($args, $default_args);
 
-        $label       = trim((string)$args['label']);
-        $placeholder = trim((string)$args['placeholder']);
+        $label       = trim((string) $args['label']);
+        $placeholder = trim((string) $args['placeholder']);
 
-        $name      = trim((string)$args['name']);
-        $root_name = (boolean)$args['root_name'];
+        $name      = trim((string) $args['name']);
+        $root_name = (boolean) $args['root_name'];
 
         $slug = trim(preg_replace('/[^a-z0-9]/i', '-', $name), '-');
         $slug = $root_name ? 'root-'.$slug : $slug;
@@ -238,27 +240,27 @@ class FormFields extends AbsBase
         $id   = $this->plugin->slug.$this->ns_id_suffix.'-'.$slug;
         $name = $root_name ? $name : GLOBAL_NS.$this->ns_name_suffix.'['.$name.']';
 
-        $rows                     = (integer)$args['rows'];
-        $required                 = (boolean)$args['required'];
-        $maxlength                = (integer)$args['maxlength'];
+        $rows                     = (integer) $args['rows'];
+        $required                 = (boolean) $args['required'];
+        $maxlength                = (integer) $args['maxlength'];
         $current_value            = $this->issetOr($args['current_value'], null, 'string');
-        $current_value_empty_on_0 = (boolean)$args['current_value_empty_on_0'];
+        $current_value_empty_on_0 = (boolean) $args['current_value_empty_on_0'];
 
         if ($current_value_empty_on_0 && in_array($current_value, [0, '0'], true)) {
             $current_value = ''; // Empty value.
         }
-        $cm_mode    = trim((string)$args['cm_mode']);
-        $cm_height  = (integer)$args['cm_height'];
-        $cm_details = trim((string)$args['cm_details']);
+        $cm_mode    = trim((string) $args['cm_mode']);
+        $cm_height  = (integer) $args['cm_height'];
+        $cm_details = trim((string) $args['cm_details']);
 
-        $notes_before = trim((string)$args['notes_before']);
-        $notes_after  = trim((string)$args['notes_after']);
+        $notes_before = trim((string) $args['notes_before']);
+        $notes_after  = trim((string) $args['notes_after']);
 
         $post_id              = $this->issetOr($args['post_id'], null, 'integer');
-        $nested_checkbox_args = (array)$args['nested_checkbox_args'];
-        $field_class          = trim((string)$args['field_class']);
-        $other_attrs          = trim((string)$args['other_attrs']);
-        $exclude_th           = (boolean)$args['exclude_th'];
+        $nested_checkbox_args = (array) $args['nested_checkbox_args'];
+        $field_class          = trim((string) $args['field_class']);
+        $other_attrs          = trim((string) $args['other_attrs']);
+        $exclude_th           = (boolean) $args['exclude_th'];
 
         $row = '<tr class="'.esc_attr('form-field'.($required ? ' form-required' : '').' '.$this->class_prefix.$slug).'">';
 
@@ -282,26 +284,26 @@ class FormFields extends AbsBase
                 ($cm_mode ? // For a CodeMirror?
                     '<div data-cm-mode="'.esc_attr($cm_mode).'" data-cm-height="'.esc_attr($cm_height).'">' : '').
 
-                '    <textarea'. // Possibly wrapped by a div.
+                '    <textarea'.// Possibly wrapped by a div.
 
                 '     class="'.esc_attr('form-control '.$field_class).'"'.
 
                 '     id="'.esc_attr($id).'" name="'.esc_attr($name).'"'.
 
-                '     rows="'.esc_attr($rows).'"'. // Height of area.
+                '     rows="'.esc_attr($rows).'"'.// Height of area.
 
                 '     aria-required="'.esc_attr($required ? 'true' : 'false').'"'.
-                '     '.($required ? ' required="required"' : ''). // JS validation.
+                '     '.($required ? ' required="required"' : '').// JS validation.
 
                 '     '.($maxlength ? ' maxlength="'.esc_attr($maxlength).'"' : '').
 
                 '     data-placeholder="'.esc_attr($placeholder).'"'.
                 '     placeholder="'.esc_attr($placeholder).'"'.
 
-                '     '.$other_attrs.'>'.esc_textarea(trim((string)$current_value)).'</textarea>'.
+                '     '.$other_attrs.'>'.esc_textarea(trim((string) $current_value)).'</textarea>'.
 
                 ($cm_mode ? // For a CodeMirror?
-                    '</div>' : ''). // Close div wrapper in this case.
+                    '</div>' : '').// Close div wrapper in this case.
 
                 ($notes_after ? // Display notes after?
                     '<div class="notes notes-after">'.$notes_after.'</div>' : '').
@@ -324,7 +326,7 @@ class FormFields extends AbsBase
      * @param array $args Specs and behavorial args.
      *
      * @return string HTML markup for this select field row.
-     *    If no options (or too many options; this returns an input field instead.
+     *                If no options (or too many options; this returns an input field instead.
      */
     public function selectRow(array $args = [])
     {
@@ -355,15 +357,15 @@ class FormFields extends AbsBase
             'allow_arbitrary'     => true,
             'input_fallback_args' => [],
         ];
-        $args         = array_merge($default_args, $args);
-        $args         = array_intersect_key($args, $default_args);
+        $args = array_merge($default_args, $args);
+        $args = array_intersect_key($args, $default_args);
 
-        $type        = trim((string)$args['type']);
-        $label       = trim((string)$args['label']);
-        $placeholder = trim((string)$args['placeholder']);
+        $type        = trim((string) $args['type']);
+        $label       = trim((string) $args['label']);
+        $placeholder = trim((string) $args['placeholder']);
 
-        $name      = trim((string)$args['name']);
-        $root_name = (boolean)$args['root_name'];
+        $name      = trim((string) $args['name']);
+        $root_name = (boolean) $args['root_name'];
 
         $slug = trim(preg_replace('/[^a-z0-9]/i', '-', $name), '-');
         $slug = $root_name ? 'root-'.$slug : $slug;
@@ -371,48 +373,48 @@ class FormFields extends AbsBase
         $id   = $this->plugin->slug.$this->ns_id_suffix.'-'.$slug;
         $name = $root_name ? $name : GLOBAL_NS.$this->ns_name_suffix.'['.$name.']';
 
-        $required                 = (boolean)$args['required'];
-        $maxlength                = (integer)$args['maxlength'];
-        $options                  = !is_array($args['options']) ? trim((string)$args['options']) : $args['options'];
+        $required                 = (boolean) $args['required'];
+        $maxlength                = (integer) $args['maxlength'];
+        $options                  = !is_array($args['options']) ? trim((string) $args['options']) : $args['options'];
         $current_value            = $this->issetOr($args['current_value'], null, 'string');
-        $current_value_empty_on_0 = (boolean)$args['current_value_empty_on_0'];
+        $current_value_empty_on_0 = (boolean) $args['current_value_empty_on_0'];
 
         if ($current_value_empty_on_0 && in_array($current_value, [0, '0'], true)) {
             $current_value = ''; // Empty value.
         }
-        $notes_before = trim((string)$args['notes_before']);
-        $notes_after  = trim((string)$args['notes_after']);
+        $notes_before = trim((string) $args['notes_before']);
+        $notes_after  = trim((string) $args['notes_after']);
 
         $post_id              = $this->issetOr($args['post_id'], null, 'integer');
-        $nested_checkbox_args = (array)$args['nested_checkbox_args'];
-        $field_class          = trim((string)$args['field_class']);
-        $other_attrs          = trim((string)$args['other_attrs']);
-        $exclude_th           = (boolean)$args['exclude_th'];
+        $nested_checkbox_args = (array) $args['nested_checkbox_args'];
+        $field_class          = trim((string) $args['field_class']);
+        $other_attrs          = trim((string) $args['other_attrs']);
+        $exclude_th           = (boolean) $args['exclude_th'];
 
-        $allow_empty         = (boolean)$args['allow_empty'];
-        $allow_arbitrary     = (boolean)$args['allow_arbitrary'];
+        $allow_empty         = (boolean) $args['allow_empty'];
+        $allow_arbitrary     = (boolean) $args['allow_arbitrary'];
         $select_options_args = compact('allow_empty', 'allow_arbitrary');
 
-        $input_fallback_args = array_merge($args, (array)$args['input_fallback_args']);
+        $input_fallback_args = array_merge($args, (array) $args['input_fallback_args']);
         unset($input_fallback_args['input_fallback_args']); // Unset self reference.
 
         if ($options === '%%users%%') {
             $options = $this->plugin->utils_markup->userSelectOptions($current_value, $select_options_args);
-        } else if ($options === '%%posts%%') {
+        } elseif ($options === '%%posts%%') {
             $options = $this->plugin->utils_markup->postSelectOptions($current_value, array_merge($select_options_args, ['for_comments_only' => true]));
-        } else if ($options === '%%comments%%') {
+        } elseif ($options === '%%comments%%') {
             $options = $this->plugin->utils_markup->commentSelectOptions($post_id, $current_value, $select_options_args);
             if ($options) {
                 $placeholder = '';
             }
-        } else if ($options === '%%deliver%%') {
+        } elseif ($options === '%%deliver%%') {
             $options = $this->plugin->utils_markup->deliverSelectOptions($current_value, $select_options_args);
-        } else if ($options === '%%status%%') {
+        } elseif ($options === '%%status%%') {
             $options = $this->plugin->utils_markup->statusSelectOptions($current_value, $select_options_args);
-        } else if (is_array($options)) {
+        } elseif (is_array($options)) {
             $options = $this->plugin->utils_markup->selectOptions($options, $current_value, $select_options_args);
         }
-        if (!($options = trim((string)$options)) && $allow_empty && $allow_arbitrary) {
+        if (!($options = trim((string) $options)) && $allow_empty && $allow_arbitrary) {
             return $this->inputRow($input_fallback_args);
         }
         $row = '<tr class="'.esc_attr('form-field'.($required ? ' form-required' : '').' '.$this->class_prefix.$slug).'">';
@@ -430,14 +432,14 @@ class FormFields extends AbsBase
         $row .= ($notes_before ? // Display notes before?
                 '     <div class="notes notes-before">'.$notes_before.'</div>' : '').
 
-                '    <select'. // Select menu options.
+                '    <select'.// Select menu options.
 
                 '     class="'.esc_attr('form-control '.$field_class).'"'.
 
                 '     id="'.esc_attr($id).'" name="'.esc_attr($name).'"'.
 
                 '     aria-required="'.esc_attr($required ? 'true' : 'false').'"'.
-                '     '.($required ? ' required="required"' : ''). // JS validation.
+                '     '.($required ? ' required="required"' : '').// JS validation.
 
                 '     '.($maxlength ? ' maxlength="'.esc_attr($maxlength).'"' : '').
 
@@ -505,13 +507,13 @@ class FormFields extends AbsBase
             'field_class' => '',
             'other_attrs' => '',
         ];
-        $args         = array_merge($default_args, $args);
-        $args         = array_intersect_key($args, $default_args);
+        $args = array_merge($default_args, $args);
+        $args = array_intersect_key($args, $default_args);
 
-        $label = trim((string)$args['label']);
+        $label = trim((string) $args['label']);
 
-        $name      = trim((string)$args['name']);
-        $root_name = (boolean)$args['root_name'];
+        $name      = trim((string) $args['name']);
+        $root_name = (boolean) $args['root_name'];
 
         $slug = trim(preg_replace('/[^a-z0-9]/i', '-', $name), '-');
         $slug = $root_name ? 'root-'.$slug : $slug;
@@ -522,13 +524,13 @@ class FormFields extends AbsBase
         $current_value = $this->issetOr($args['current_value'], null, 'string');
         $checked       = $current_value ? ' checked="checked"' : '';
 
-        $field_class = trim((string)$args['field_class']);
-        $other_attrs = trim((string)$args['other_attrs']);
+        $field_class = trim((string) $args['field_class']);
+        $other_attrs = trim((string) $args['other_attrs']);
 
         return '<label for="'.esc_attr($id).'" style="margin-left:10px;">'.
 
                ' <i class="fa fa-level-up fa-rotate-90"></i>'.
-               ' &nbsp;'. // Double-space after icon.
+               ' &nbsp;'.// Double-space after icon.
 
                ' <input type="checkbox"'.
 
@@ -566,11 +568,11 @@ class FormFields extends AbsBase
             'field_class' => '',
             'other_attrs' => '',
         ];
-        $args         = array_merge($default_args, $args);
-        $args         = array_intersect_key($args, $default_args);
+        $args = array_merge($default_args, $args);
+        $args = array_intersect_key($args, $default_args);
 
-        $name      = trim((string)$args['name']);
-        $root_name = (boolean)$args['root_name'];
+        $name      = trim((string) $args['name']);
+        $root_name = (boolean) $args['root_name'];
 
         $slug = trim(preg_replace('/[^a-z0-9]/i', '-', $name), '-');
         $slug = $root_name ? 'root-'.$slug : $slug;
@@ -580,20 +582,19 @@ class FormFields extends AbsBase
 
         $current_value = $this->issetOr($args['current_value'], null, 'string');
 
-        $field_class = trim((string)$args['field_class']);
-        $other_attrs = trim((string)$args['other_attrs']);
+        $field_class = trim((string) $args['field_class']);
+        $other_attrs = trim((string) $args['other_attrs']);
 
-        $field = '<input type="hidden"'. // Hidden input var.
+        $field = '<input type="hidden"'.// Hidden input var.
 
                  ' class="'.esc_attr($field_class).'"'.
 
                  ' id="'.esc_attr($id).'" name="'.esc_attr($name).'"'.
 
-                 ' value="'.esc_attr(trim((string)$current_value)).'"'.
+                 ' value="'.esc_attr(trim((string) $current_value)).'"'.
 
                  ' '.$other_attrs.' />';
 
         return $field;
     }
 }
-	
