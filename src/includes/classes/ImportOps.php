@@ -96,7 +96,8 @@ class ImportOps extends AbsBase
 
         $this->plugin->enqueueUserNotice($notice_markup, ['transient' => true, 'for_page' => $this->plugin->utils_env->currentMenuPage()]);
 
-        wp_redirect($this->plugin->utils_url->pageOnly()).exit();
+        wp_redirect($this->plugin->utils_url->pageOnly());
+        exit();
     }
 }
 	
