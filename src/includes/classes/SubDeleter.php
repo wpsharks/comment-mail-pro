@@ -143,7 +143,7 @@ class SubDeleter extends AbsBase
         $this->process_events = (boolean)$args['process_events'];
 
         $this->user_initiated = (boolean)$args['user_initiated'];
-        $this->user_initiated = $this->plugin->utils_sub->check_user_initiated_by_admin(
+        $this->user_initiated = $this->plugin->utils_sub->checkUserInitiatedByAdmin(
           $this->sub ? $this->sub->email : '', $this->user_initiated
         );
         # Auto-fill last IP, region, country if it's the current user.
@@ -236,7 +236,7 @@ class SubDeleter extends AbsBase
         }
         $this->sub->last_update_time = time(); // Updating now by deleting.
 
-        $this->plugin->utils_sub->nullify_cache([$this->sub->ID, $this->sub->key]);
+        $this->plugin->utils_sub->nullifyCache([$this->sub->ID, $this->sub->key]);
 
         if ($this->process_events) { // Processing events?
             if ($this->deleted || ($this->event === 'overwritten' && $this->oby_sub_id && $this->oby_sub_id_did_replace)) {

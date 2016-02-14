@@ -419,27 +419,27 @@ class MenuPageSubsTable extends MenuPageTableBase
         switch ($bulk_action) // Bulk action handler.
         {
             case 'reconfirm': // Confirm via email?
-                $counter = $this->plugin->utils_sub->bulk_reconfirm($ids);
+                $counter = $this->plugin->utils_sub->bulkReconfirm($ids);
                 break; // Break switch handler.
 
             case 'confirm': // Confirm silently?
-                $counter = $this->plugin->utils_sub->bulk_confirm($ids);
+                $counter = $this->plugin->utils_sub->bulkConfirm($ids);
                 break; // Break switch handler.
 
             case 'unconfirm': // Unconfirm/unsubscribe?
-                $counter = $this->plugin->utils_sub->bulk_unconfirm($ids);
+                $counter = $this->plugin->utils_sub->bulkUnconfirm($ids);
                 break; // Break switch handler.
 
             case 'suspend': // Suspend/unsubscribe?
-                $counter = $this->plugin->utils_sub->bulk_suspend($ids);
+                $counter = $this->plugin->utils_sub->bulkSuspend($ids);
                 break; // Break switch handler.
 
             case 'trash': // Trashing/unsubscribe?
-                $counter = $this->plugin->utils_sub->bulk_trash($ids);
+                $counter = $this->plugin->utils_sub->bulkTrash($ids);
                 break; // Break switch handler.
 
             case 'delete': // Deleting/unsubscribe?
-                $counter = $this->plugin->utils_sub->bulk_delete($ids);
+                $counter = $this->plugin->utils_sub->bulkDelete($ids);
                 break; // Break switch handler.
         }
         return !empty($counter) ? (integer)$counter : 0;

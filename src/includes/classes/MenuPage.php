@@ -2172,7 +2172,7 @@ class MenuPage extends AbsBase
 
             $_panel_body = '<form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->page_nonce_only()).'" novalidate="novalidate">'."\n";
 
-            $_total_subs_in_db = $this->plugin->utils_sub->query_total(null, ['auto_discount_trash' => false]);
+            $_total_subs_in_db = $this->plugin->utils_sub->queryTotal(null, ['auto_discount_trash' => false]);
             $_panel_body .= ' <h3 style="margin-bottom:0;">'.sprintf(__('Export All of your %1$s&trade; Subscriptions', $this->plugin->text_domain), esc_html($this->plugin->name)).'</h3>';
             $_panel_body .= ' <p>'.sprintf(__('There are currently %1$s in the database. You can export these in sets of however many you like, as configured below.', $this->plugin->text_domain), esc_html($this->plugin->utils_i18n->subscriptions($_total_subs_in_db))).'</p>';
 

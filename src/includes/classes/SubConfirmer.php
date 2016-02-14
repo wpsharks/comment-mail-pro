@@ -105,7 +105,7 @@ class SubConfirmer extends AbsBase
         $this->process_list_server = (boolean)$args['process_list_server'];
 
         $this->user_initiated          = (boolean)$args['user_initiated'];
-        $this->user_initiated          = $this->plugin->utils_sub->check_user_initiated_by_admin(
+        $this->user_initiated          = $this->plugin->utils_sub->checkUserInitiatedByAdmin(
           $this->sub ? $this->sub->email : '', $this->user_initiated
         );
         $this->auto_confirmed          = false; // Initialize.
@@ -216,7 +216,7 @@ class SubConfirmer extends AbsBase
           'user_initiated' => $this->user_initiated,
           'auto_confirm'   => $this->auto_confirm,
         ];
-        $can_auto_confirm      = $this->plugin->utils_sub->can_auto_confirm($can_auto_confirm_args);
+        $can_auto_confirm      = $this->plugin->utils_sub->canAutoConfirm($can_auto_confirm_args);
 
         if ($can_auto_confirm) { // Possible to auto-confirm?
             $this->plugin->utils_sub->confirm(

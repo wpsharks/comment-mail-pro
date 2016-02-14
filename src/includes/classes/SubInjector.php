@@ -132,7 +132,7 @@ class SubInjector extends AbsBase
         $this->process_list_server = (boolean)$args['process_list_server'];
 
         $this->user_initiated = (boolean)$args['user_initiated'];
-        $this->user_initiated = $this->plugin->utils_sub->check_user_initiated_by_admin(
+        $this->user_initiated = $this->plugin->utils_sub->checkUserInitiatedByAdmin(
           $this->comment ? $this->comment->comment_author_email : '', $this->user_initiated
         );
         $this->keep_existing  = (boolean)$args['keep_existing'];

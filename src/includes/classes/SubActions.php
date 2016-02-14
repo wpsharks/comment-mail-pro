@@ -86,7 +86,7 @@ class SubActions extends AbsBase
             list($sub_key) = explode('.pls', $sub_key, 2);
             $process_list_server = true; // Processing.
         }
-        if (!($sub_key = $this->plugin->utils_sub->sanitize_key($sub_key))) {
+        if (!($sub_key = $this->plugin->utils_sub->sanitizeKey($sub_key))) {
             $error_codes[] = 'missing_sub_key';
         } else if (!($sub = $this->plugin->utils_sub->get($sub_key))) {
             $error_codes[] = 'invalid_sub_key';
@@ -96,7 +96,7 @@ class SubActions extends AbsBase
             $error_codes[] = 'sub_comment_id_missing';
         }
         if (!$error_codes) { // If no errors; set current email.
-            $this->plugin->utils_sub->set_current_email($sub_key, $sub->email);
+            $this->plugin->utils_sub->setCurrentEmail($sub_key, $sub->email);
         }
         if (!$error_codes && !($confirmed = $this->plugin->utils_sub->confirm($sub->ID, compact('user_initiated', 'process_list_server')))) {
             $error_codes[] = $confirmed === null ? 'invalid_sub_key' : 'sub_already_confirmed';
@@ -128,7 +128,7 @@ class SubActions extends AbsBase
 
         $error_codes = []; // Initialize.
 
-        if (!($sub_key = $this->plugin->utils_sub->sanitize_key($request_args))) {
+        if (!($sub_key = $this->plugin->utils_sub->sanitizeKey($request_args))) {
             $error_codes[] = 'missing_sub_key';
         } else if (!($sub = $this->plugin->utils_sub->get($sub_key))) {
             $error_codes[] = 'invalid_sub_key';
@@ -140,7 +140,7 @@ class SubActions extends AbsBase
             $sub_comment = get_comment($sub->comment_id);
         }
         if (!$error_codes) { // Note: this MUST come before deletion.
-            $this->plugin->utils_sub->set_current_email($sub_key, $sub->email);
+            $this->plugin->utils_sub->setCurrentEmail($sub_key, $sub->email);
         }
         if (!$error_codes && !($deleted = $this->plugin->utils_sub->delete($sub->ID, compact('user_initiated')))) {
             $error_codes[] = $deleted === null ? 'invalid_sub_key' : 'sub_already_unsubscribed';
@@ -172,7 +172,7 @@ class SubActions extends AbsBase
             $error_codes[] = 'missing_sub_email';
         }
         $delete_args = ['user_initiated' => true]; // Deletion args.
-        if (!$error_codes && !($deleted = $this->plugin->utils_sub->delete_email_user_all($sub_email, $delete_args))) {
+        if (!$error_codes && !($deleted = $this->plugin->utils_sub->deleteEmailUserAll($sub_email, $delete_args))) {
             $error_codes[] = 'sub_already_unsubscribed_all';
         }
         $template_vars = get_defined_vars(); // Everything above.
@@ -197,10 +197,10 @@ class SubActions extends AbsBase
         $sub_key = ''; // Initialize.
 
         if (is_string($request_args)) { // Key sanitizer.
-            $sub_key = $this->plugin->utils_sub->sanitize_key($request_args);
+            $sub_key = $this->plugin->utils_sub->sanitizeKey($request_args);
         }
         if ($sub_key && ($sub = $this->plugin->utils_sub->get($sub_key))) {
-            $this->plugin->utils_sub->set_current_email($sub_key, $sub->email);
+            $this->plugin->utils_sub->setCurrentEmail($sub_key, $sub->email);
         }
         if (!is_array($request_args)) { // If NOT a sub action, redirect to one.
             wp_redirect($this->plugin->utils_url->sub_manage_summary_url($sub_key));

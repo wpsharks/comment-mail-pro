@@ -155,20 +155,20 @@ class SubManageSummary extends AbsBase
         parent::__construct();
 
         if (($this->sub_key = trim((string)$sub_key))) {
-            $this->sub_email = $this->plugin->utils_sub->key_to_email($this->sub_key);
+            $this->sub_email = $this->plugin->utils_sub->keyToEmail($this->sub_key);
         }
         if (!$this->sub_email) { // Fallback on current email address.
             $this->sub_key   = ''; // Key empty/invalid in this case.
-            $this->sub_email = $this->plugin->utils_sub->current_email();
+            $this->sub_email = $this->plugin->utils_sub->currentEmail();
         }
         $this->sub_user_ids       = []; // Initialize.
         $this->sub_user_id_emails = []; // Initialize.
 
         if ($this->sub_email) { // Do we have an email address?
-            $this->sub_user_ids = $this->plugin->utils_sub->email_user_ids($this->sub_email);
+            $this->sub_user_ids = $this->plugin->utils_sub->emailUserIds($this->sub_email);
         }
         if ($this->sub_email) { // Do we have an email address?
-            $this->sub_user_id_emails = $this->plugin->utils_sub->email_user_id_emails($this->sub_email);
+            $this->sub_user_id_emails = $this->plugin->utils_sub->emailUserIdEmails($this->sub_email);
         }
         $default_request_args = static::$default_nav_vars;
         $request_args         = array_merge($default_request_args, $request_args);

@@ -611,7 +611,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
         $post_date_ago          = $this->plugin->utils_date->approxTimeDifference(strtotime($item->{$prefix.'date_gmt'}));
         $post_comments_status   = $this->plugin->utils_i18n->statusLabel($this->plugin->utils_db->postCommentStatusI18n($item->{$prefix.'comment_status'}), 'ucwords');
         $post_edit_comments_url = $this->plugin->utils_url->post_edit_comments_short($item->{$key});
-        $post_total_subs        = $this->plugin->utils_sub->query_total($item->{$key});
+        $post_total_subs        = $this->plugin->utils_sub->queryTotal($item->{$key});
         $post_total_comments    = (integer)$item->{$prefix.'comment_count'};
 
         $post_info = $this->plugin->utils_markup->subsCount($item->{$key}, $post_total_subs).

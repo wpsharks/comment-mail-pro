@@ -122,7 +122,7 @@ class SubCleaner extends AbsBase
                " WHERE `user_id` != '0' AND `user_id` NOT IN(".$user_ids.")";
 
         if (($ids = array_map('intval', $this->plugin->utils_db->wp->get_col($sql)))) {
-            $this->cleaned += $this->plugin->utils_sub->bulk_delete($ids, ['cleaning' => true]);
+            $this->cleaned += $this->plugin->utils_sub->bulkDelete($ids, ['cleaning' => true]);
         }
     }
 
@@ -148,7 +148,7 @@ class SubCleaner extends AbsBase
                " AND `last_update_time` < '".esc_sql($exp_time)."'";
 
         if (($ids = array_map('intval', $this->plugin->utils_db->wp->get_col($sql)))) {
-            $this->cleaned += $this->plugin->utils_sub->bulk_delete($ids, ['cleaning' => true]);
+            $this->cleaned += $this->plugin->utils_sub->bulkDelete($ids, ['cleaning' => true]);
         }
     }
 
@@ -174,7 +174,7 @@ class SubCleaner extends AbsBase
                " AND `last_update_time` < '".esc_sql($exp_time)."'";
 
         if (($ids = array_map('intval', $this->plugin->utils_db->wp->get_col($sql)))) {
-            $this->cleaned += $this->plugin->utils_sub->bulk_delete($ids, ['cleaning' => true]);
+            $this->cleaned += $this->plugin->utils_sub->bulkDelete($ids, ['cleaning' => true]);
         }
     }
 

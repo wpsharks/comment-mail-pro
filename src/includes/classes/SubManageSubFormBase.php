@@ -234,7 +234,7 @@ class SubManageSubFormBase extends AbsBase
             return trim((string)$this->sub->{$key_prop});
         }
         if (is_null($current_email_latest_info = &$this->cacheKey(__FUNCTION__, 'current_email_latest_info'))) {
-            $current_email_latest_info = $this->plugin->utils_sub->current_email_latest_info();
+            $current_email_latest_info = $this->plugin->utils_sub->currentEmailLatestInfo();
         }
         if (!$this->is_edit && !static::$processing && in_array($key_prop, ['fname', 'lname', 'email'], true)) {
             // We can try to autofill fname, lname, email for new subscriptions.

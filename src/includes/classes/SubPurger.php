@@ -104,7 +104,7 @@ class SubPurger extends AbsBase
                ($this->comment_id ? " AND `comment_id` = '".esc_sql($this->comment_id)."'" : '');
 
         if (($ids = array_map('intval', $this->plugin->utils_db->wp->get_col($sql)))) {
-            $this->purged += $this->plugin->utils_sub->bulk_delete($ids, ['purging' => true]);
+            $this->purged += $this->plugin->utils_sub->bulkDelete($ids, ['purging' => true]);
         }
     }
 
@@ -128,7 +128,7 @@ class SubPurger extends AbsBase
                ($user->user_email ? " OR `email` = '".esc_sql($user->user_email)."'" : '');
 
         if (($ids = array_map('intval', $this->plugin->utils_db->wp->get_col($sql)))) {
-            $this->purged += $this->plugin->utils_sub->bulk_delete($ids, ['purging' => true]);
+            $this->purged += $this->plugin->utils_sub->bulkDelete($ids, ['purging' => true]);
         }
     }
 }

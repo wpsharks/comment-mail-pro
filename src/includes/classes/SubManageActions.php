@@ -79,10 +79,10 @@ class SubManageActions extends AbsBase
         $sub_key = ''; // Initialize.
 
         if (is_string($request_args)) { // Key sanitizer.
-            $sub_key = $this->plugin->utils_sub->sanitize_key($request_args);
+            $sub_key = $this->plugin->utils_sub->sanitizeKey($request_args);
         }
         if ($sub_key && ($sub = $this->plugin->utils_sub->get($sub_key))) {
-            $this->plugin->utils_sub->set_current_email($sub_key, $sub->email);
+            $this->plugin->utils_sub->setCurrentEmail($sub_key, $sub->email);
         }
         $nav_vars = $this->plugin->utils_url->sub_manage_summary_nav_vars();
 
@@ -117,7 +117,7 @@ class SubManageActions extends AbsBase
             return; // Empty request args.
         }
         if (isset($request_args['key'])) { // Key sanitizer.
-            $request_args['key'] = $this->plugin->utils_sub->sanitize_key($request_args['key']);
+            $request_args['key'] = $this->plugin->utils_sub->sanitizeKey($request_args['key']);
         }
         SubManageSubFormBase::process($request_args);
         // Do NOT stop; allow `edit|new` action to run also.
@@ -171,10 +171,10 @@ class SubManageActions extends AbsBase
      */
     protected function subEdit($request_args)
     {
-        $sub_key = $this->plugin->utils_sub->sanitize_key($request_args);
+        $sub_key = $this->plugin->utils_sub->sanitizeKey($request_args);
 
         if ($sub_key && ($sub = $this->plugin->utils_sub->get($sub_key))) {
-            $this->plugin->utils_sub->set_current_email($sub_key, $sub->email);
+            $this->plugin->utils_sub->setCurrentEmail($sub_key, $sub->email);
         }
         new SubManageSubEditForm($sub_key);
 
@@ -190,10 +190,10 @@ class SubManageActions extends AbsBase
      */
     protected function subDelete($request_args)
     {
-        $sub_key = $this->plugin->utils_sub->sanitize_key($request_args);
+        $sub_key = $this->plugin->utils_sub->sanitizeKey($request_args);
 
         if ($sub_key && ($sub = $this->plugin->utils_sub->get($sub_key))) {
-            $this->plugin->utils_sub->set_current_email($sub_key, $sub->email);
+            $this->plugin->utils_sub->setCurrentEmail($sub_key, $sub->email);
         }
         SubManageSummary::delete($sub_key);
         // Do NOT stop; allow `summary` action to run also.

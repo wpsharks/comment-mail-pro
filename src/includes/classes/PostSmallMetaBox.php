@@ -48,7 +48,7 @@ class PostSmallMetaBox extends AbsBase
         $post_comment_status // Translate/standardize this.
           = $this->plugin->utils_db->postCommentStatusI18n($this->post->comment_status);
 
-        $total_subs        = $this->plugin->utils_sub->query_total($this->post->ID);
+        $total_subs        = $this->plugin->utils_sub->queryTotal($this->post->ID);
         $total_subs_bubble = $this->plugin->utils_markup->subsCount(
           $this->post->ID, $total_subs,
           [

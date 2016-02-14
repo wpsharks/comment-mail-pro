@@ -376,7 +376,7 @@ class SubInserter extends AbsBase
         $this->process_list_server  = (boolean)$args['process_list_server'];
 
         $this->user_initiated                = (boolean)$args['user_initiated'];
-        $this->user_initiated                = $this->plugin->utils_sub->check_user_initiated_by_admin(
+        $this->user_initiated                = $this->plugin->utils_sub->checkUserInitiatedByAdmin(
           $this->data['email'] ? $this->data['email'] // « On insert or update.
             : ($this->is_update && $this->sub ? $this->sub->email : ''), $this->user_initiated
         );
@@ -730,7 +730,7 @@ class SubInserter extends AbsBase
         }
         $this->overwriteDuplicateKeyIdsAfterInsert(); // Before nullifying cache.
 
-        $this->plugin->utils_sub->nullify_cache([$this->insert_id, $this->data['key']]);
+        $this->plugin->utils_sub->nullifyCache([$this->insert_id, $this->data['key']]);
 
         if (!($this->sub = $this->plugin->utils_sub->get($this->insert_id, true))) {
             throw new \exception(__('Sub after insert failure.', $this->plugin->text_domain));
@@ -791,7 +791,7 @@ class SubInserter extends AbsBase
         }
         $this->updated = true; // Flag as `TRUE` now; i.e. the update was a success.
 
-        $this->plugin->utils_sub->nullify_cache([$this->sub->ID, $this->sub->key]);
+        $this->plugin->utils_sub->nullifyCache([$this->sub->ID, $this->sub->key]);
 
         if (!($sub_after = $this->plugin->utils_sub->get($this->sub->ID, true))) {
             throw new \exception(__('Sub after update failure.', $this->plugin->text_domain));
@@ -913,7 +913,7 @@ class SubInserter extends AbsBase
           'user_initiated' => $this->user_initiated,
           'auto_confirm'   => $this->auto_confirm,
         ];
-        $this->auto_confirm    = $this->plugin->utils_sub->can_auto_confirm($can_auto_confirm_args);
+        $this->auto_confirm    = $this->plugin->utils_sub->canAutoConfirm($can_auto_confirm_args);
     }
 
     /*
@@ -961,7 +961,7 @@ class SubInserter extends AbsBase
         if (!$this->duplicate_key_ids) {
             return; // Not necessary.
         }
-        $this->plugin->utils_sub->bulk_delete(
+        $this->plugin->utils_sub->bulkDelete(
           $this->duplicate_key_ids,
           [
             'oby_sub_id'             => $this->insert_id,
@@ -1004,7 +1004,7 @@ class SubInserter extends AbsBase
                " AND `ID` != '".esc_sql($this->sub->ID)."'";
 
         if (($this->duplicate_key_ids = array_map('intval', $this->plugin->utils_db->wp->get_col($sql)))) {
-            $this->plugin->utils_sub->bulk_delete(
+            $this->plugin->utils_sub->bulkDelete(
               $this->duplicate_key_ids,
               [
                 'oby_sub_id'     => $this->sub->ID,
@@ -1040,7 +1040,7 @@ class SubInserter extends AbsBase
                " AND `ID` != '".esc_sql($this->sub->ID)."'";
 
         if (($this->other_duplicate_ids = array_map('intval', $this->plugin->utils_db->wp->get_col($sql)))) {
-            $this->plugin->utils_sub->bulk_delete(
+            $this->plugin->utils_sub->bulkDelete(
               $this->other_duplicate_ids,
               [
                 'oby_sub_id'     => $this->sub->ID,
@@ -1296,7 +1296,7 @@ class SubInserter extends AbsBase
                         $this->errors['invalid_sub_email'] = sprintf(__('Invalid email address: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
                     } else if ($this->is_insert && (!isset($_value) || !$_value || !is_email($_value) || strlen($_value) > 100)) {
                         $this->errors['invalid_sub_email'] = sprintf(__('Invalid email address: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
-                    } else if (isset($_value) && $this->check_blacklist && $this->plugin->utils_sub->email_is_blacklisted($_value)) {
+                    } else if (isset($_value) && $this->check_blacklist && $this->plugin->utils_sub->emailIsBlacklisted($_value)) {
                         $this->errors['blacklisted_sub_email'] = sprintf(__('Blacklisted email address: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
                     }
                     break; // Break switch handler.

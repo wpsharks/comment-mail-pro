@@ -81,7 +81,7 @@ class UtilsMarkup extends AbsBase
             $anchor_search_url = $this->plugin->utils_url->search_subs_short('sub_email:'.$email);
         }
         if ($anchor_to === 'summary' && !$anchor_summary_sub_key && $email) {
-            $anchor_summary_sub_key = $this->plugin->utils_sub->email_latest_key($email);
+            $anchor_summary_sub_key = $this->plugin->utils_sub->emailLatestKey($email);
         }
         if ($anchor_to === 'summary' && $anchor_summary_sub_key) { // Front-end summary?
             $summary_anchor_url = $this->plugin->utils_url->sub_manage_summary_url($anchor_summary_sub_key);
@@ -222,7 +222,7 @@ class UtilsMarkup extends AbsBase
         $name_email_args = (array)$args['name_email_args'];
         $list_style      = trim((string)$args['list_style']);
 
-        foreach ($this->plugin->utils_sub->last_x($x, $post_id, $args) as $_sub) {
+        foreach ($this->plugin->utils_sub->lastX($x, $post_id, $args) as $_sub) {
             $_name_maybe = ''; // Initialize.
 
             if ($show_fname) {
