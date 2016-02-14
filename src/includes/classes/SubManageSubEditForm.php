@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class sub_manage_sub_edit_form extends SubManageSubFormBase
+	class SubManageSubEditForm extends SubManageSubFormBase
 		{
 			/**
 			 * Class constructor.

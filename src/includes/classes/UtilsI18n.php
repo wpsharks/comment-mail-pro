@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class utils_i18n extends AbsBase
+	class UtilsI18n extends AbsBase
 		{
 			/**
 			 * Action past tense translation.

@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class sub_manage_summary extends AbsBase
+	class SubManageSummary extends AbsBase
 		{
 			/*
 			 * Instance-based properties.

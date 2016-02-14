@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class utils_queue_event_log extends AbsBase
+	class UtilsQueueEventLog extends AbsBase
 		{
 			/**
 			 * Class constructor.

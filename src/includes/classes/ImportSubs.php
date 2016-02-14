@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class import_subs extends AbsBase
+	class ImportSubs extends AbsBase
 		{
 			/**
 			 * @var string Input data.

@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class sub_updater extends SubInserter
+	class SubUpdater extends SubInserter
 		{
 			/**
 			 * Class constructor.

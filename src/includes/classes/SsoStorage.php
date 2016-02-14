@@ -19,7 +19,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class sso_storage implements \OAuth\Common\Storage\TokenStorageInterface
+	class SsoStorage implements \OAuth\Common\Storage\TokenStorageInterface
 		{
 			/**
 			 * @var plugin Plugin class reference.

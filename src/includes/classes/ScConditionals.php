@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class sc_conditionals extends AbsBase
+	class ScConditionals extends AbsBase
 		{
 			/**
 			 * @var string String we are working with.

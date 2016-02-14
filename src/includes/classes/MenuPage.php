@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
      *
      * @since 141111 First documented version.
      */
-    class menu_page extends AbsBase
+   class MenuPage extends AbsBase
     {
       /**
        * Class constructor.

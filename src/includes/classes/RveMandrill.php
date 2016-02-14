@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class rve_mandrill extends AbsBase
+	class RveMandrill extends AbsBase
 		{
 			/**
 			 * Key for this webhook.

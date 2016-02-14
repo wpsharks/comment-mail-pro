@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class sso_twitter extends SsoServiceBase
+	class SsoTwitter extends SsoServiceBase
 		{
 			/**
 			 * Class constructor.

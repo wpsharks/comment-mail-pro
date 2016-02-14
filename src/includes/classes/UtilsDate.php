@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class utils_date extends AbsBase
+	class UtilsDate extends AbsBase
 		{
 			/**
 			 * Date translations (in local time, as configured by WordPress®).

@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class utils_rve extends AbsBase
+	class UtilsRve extends AbsBase
 		{
 			/**
 			 * Key for this webhook.

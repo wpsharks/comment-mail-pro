@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class sub_inserter extends AbsBase
+	class SubInserter extends AbsBase
 		{
 			/* Related to the data. */
 

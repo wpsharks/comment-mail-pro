@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
          *
          * @since 151224 Adding list server integrations.
          */
-        class utils_list_server extends AbsBase
+       class UtilsListServer extends AbsBase
         {
             /**
              * Subscribe to list.

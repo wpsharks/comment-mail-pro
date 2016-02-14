@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
          *
          * @since 151224 Adding support for mailing lists.
          */
-        class list_server_mailchimp extends ListServerBase
+       class ListServerMailchimp extends ListServerBase
         {
             /**
              * Subscribe to list.

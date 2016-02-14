@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 150708 Adding stats pinger.
 		 */
-		class stats_pinger extends AbsBase
+	class StatsPinger extends AbsBase
 		{
 			/**
 			 * Class constructor.

@@ -9,7 +9,7 @@
  */
 namespace WebSharks\CommentMail\Pro;
 
-abstract class ApiBase extends AbsBase
+abstractclass ApiBase extends AbsBase
 {
     public static function subOps()
     {

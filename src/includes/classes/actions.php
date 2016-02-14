@@ -22,7 +22,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *    Front-end actions CAN have the same `[action]` name as a back-end action,
 		 *    since they're already called from completely different contexts on-site.
 		 */
-		class actions extends AbsBase
+	class Actions extends AbsBase
 		{
 			/**
 			 * Class constructor.

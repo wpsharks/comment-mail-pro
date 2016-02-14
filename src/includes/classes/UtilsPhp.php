@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class utils_php extends AbsBase
+	class UtilsPhp extends AbsBase
 		{
 			/**
 			 * PHP's language constructs.

@@ -14,7 +14,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		abstract class abs_base
+		abstractclass AbsBase
 		{
 			/**
 			 * @var plugin Plugin reference.

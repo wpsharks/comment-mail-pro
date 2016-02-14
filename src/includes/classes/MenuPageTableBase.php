@@ -18,7 +18,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		abstract class menu_page_table_base extends \WP_List_Table
+		abstractclass MenuPageTableBase extends \WP_List_Table
 		{
 			/*
 			 * Protected properties.

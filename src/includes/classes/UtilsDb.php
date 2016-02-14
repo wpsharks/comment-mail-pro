@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class utils_db extends AbsBase
+	class UtilsDb extends AbsBase
 		{
 			/**
 			 * @var \wpdb WP DB class reference.

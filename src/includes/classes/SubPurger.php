@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class sub_purger extends AbsBase
+	class SubPurger extends AbsBase
 		{
 			/**
 			 * @var integer Post ID.

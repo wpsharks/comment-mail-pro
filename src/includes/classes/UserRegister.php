@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class user_register extends AbsBase
+	class UserRegister extends AbsBase
 		{
 			/**
 			 * @var \WP_User|null

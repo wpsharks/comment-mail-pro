@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class menu_page_subs_table extends MenuPageTableBase
+	class MenuPageSubsTable extends MenuPageTableBase
 		{
 			/*
 			 * Class constructor.

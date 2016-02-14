@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class queue_injector extends AbsBase
+	class QueueInjector extends AbsBase
 		{
 			/**
 			 * @var \stdClass|null Comment object.

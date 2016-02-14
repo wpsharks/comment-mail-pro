@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class menu_page_sub_new_form extends MenuPageSubFormBase
+	class MenuPageSubNewForm extends MenuPageSubFormBase
 		{
 			/**
 			 * Class constructor.

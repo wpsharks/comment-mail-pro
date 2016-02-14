@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class sub_injector extends AbsBase
+	class SubInjector extends AbsBase
 		{
 			/**
 			 * @var \WP_User|null Subscription.

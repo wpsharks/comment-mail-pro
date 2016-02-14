@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class comment_form_after extends AbsBase
+	class CommentFormAfter extends AbsBase
 		{
 			/**
 			 * @var boolean Via API call?

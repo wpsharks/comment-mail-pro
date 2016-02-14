@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class sub_event_log_inserter extends AbsBase
+	class SubEventLogInserter extends AbsBase
 		{
 			/**
 			 * @var array Log entry data.

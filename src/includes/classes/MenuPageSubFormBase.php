@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class menu_page_sub_form_base extends AbsBase
+	class MenuPageSubFormBase extends AbsBase
 		{
 			/*
 			 * Instance-based properties.

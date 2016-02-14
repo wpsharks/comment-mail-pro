@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class uninstaller extends AbsBase
+	class Uninstaller extends AbsBase
 		{
 			/**
 			 * Class constructor.

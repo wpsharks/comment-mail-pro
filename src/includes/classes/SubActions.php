@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class sub_actions extends AbsBase
+	class SubActions extends AbsBase
 		{
 			/**
 			 * @var array Valid actions.

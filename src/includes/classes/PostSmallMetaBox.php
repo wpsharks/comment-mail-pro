@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class post_small_meta_box extends AbsBase
+	class PostSmallMetaBox extends AbsBase
 		{
 			/**
 			 * @var \WP_Post A WP post object.

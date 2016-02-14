@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class post_delete extends AbsBase
+	class PostDelete extends AbsBase
 		{
 			/**
 			 * @var integer Post ID.
