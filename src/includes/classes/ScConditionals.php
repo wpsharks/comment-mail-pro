@@ -2,265 +2,271 @@
 /**
  * Shortcode Conditionals
  *
- * @since 141111 First documented version.
+ * @since     141111 First documented version.
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
- * @license GNU General Public License, version 3
+ * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
+/**
+ * Shortcode Conditionals
+ *
+ * @since 141111 First documented version.
+ */
+class ScConditionals extends AbsBase
+{
+    /**
+     * @var string String we are working with.
+     *
+     * @since 141111 First documented version.
+     */
+    protected $string;
 
+    /**
+     * @var array Array of contextual vars.
+     *
+     * @since 141111 First documented version.
+     */
+    protected $vars;
 
-		/**
-		 * Shortcode Conditionals
-		 *
-		 * @since 141111 First documented version.
-		 */
-	class ScConditionals extends AbsBase
-		{
-			/**
-			 * @var string String we are working with.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			public $string; // Public for PHP v5.3 compat.
+    /**
+     * @var array Array of tokens.
+     *
+     * @since 141111 First documented version.
+     */
+    protected $tokens;
 
-			/**
-			 * @var array Array of contextual vars.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			public $vars; // Public for PHP v5.3 compat.
+    /**
+     * Class constructor.
+     *
+     * @since 141111 First documented version.
+     *
+     * @param string $string String to parse.
+     * @param array  $vars   Any contextual vars needed by expressions.
+     */
+    public function __construct($string, array $vars = [])
+    {
+        parent::__construct();
 
-			/**
-			 * @var array Array of tokens.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			public $tokens; // Public for PHP v5.3 compat.
+        $this->string = (string)$string;
+        $this->vars   = (array)$vars;
+        $this->tokens = [];
 
-			/**
-			 * Class constructor.
-			 *
-			 * @since 141111 First documented version.
-			 *
-			 * @param string $string String to parse.
-			 * @param array  $vars Any contextual vars needed by expressions.
-			 */
-			public function __construct($string, array $vars = array())
-			{
-				parent::__construct();
+        # Accept shortcode variable keys too.
 
-				$this->string = (string)$string;
-				$this->vars   = (array)$vars;
-				$this->tokens = array();
+        foreach ($this->vars as $_key => &$_value) {
+            $this->vars[trim($_key, '[]')] = &$_value;
+        }
+        unset($_key, $_value); // Housekeeping.
+    }
 
-				# Accept shortcode variable keys too.
+    /**
+     * String parser.
+     *
+     * @since 141111 First documented version.
+     *
+     * @return string Parsed string.
+     */
+    public function parse()
+    {
+        $this->tokenizeIfExpressions();
+        $this->tokenizeIfExpressionEnds();
 
-				foreach($this->vars as $_key => &$_value)
-					$this->vars[trim($_key, '[]')] = &$_value;
-				unset($_key, $_value); // Housekeeping.
-			}
+        $this->striPhpTags();
+        $this->untokenizeAll();
+        $this->evalExpressions();
 
-			/**
-			 * String parser.
-			 *
-			 * @since 141111 First documented version.
-			 *
-			 * @return string Parsed string.
-			 */
-			public function parse()
-			{
-				$this->tokenize_if_expressions();
-				$this->tokenize_if_expression_ends();
+        return $this->string;
+    }
 
-				$this->strip_php_tags();
-				$this->untokenize_all();
-				$this->eval_expressions();
+    /**
+     * Expression tokenizer.
+     *
+     * @since 141111 First documented version.
+     */
+    protected function tokenizeIfExpressions()
+    {
+        $_this = $this; // Reference for closure.
 
-				return $this->string;
-			}
+        $this->string = preg_replace_callback(
+          '/'. // Open regex; pattern delimiter.
 
-			/**
-			 * Expression tokenizer.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected function tokenize_if_expressions()
-			{
-				$_this = $this; // Reference for closure.
+          '\['. // Opening shortcode bracket.
 
-				$this->string = preg_replace_callback(
-					'/'. // Open regex; pattern delimiter.
+          '(?P<if>if|elseif)'. // Conditional statement.
+          '\s+'. // Followed by whitespace.
 
-					'\['. // Opening shortcode bracket.
+          '(?P<expression>[$\w \s !=<> \' &|]+)'. // Expression.
 
-					'(?P<if>if|elseif)'. // Conditional statement.
-					'\s+'. // Followed by whitespace.
+          '\]'. // Closing shortcode bracket.
 
-					'(?P<expression>[$\w \s !=<> \' &|]+)'. // Expression.
+          '/ix', // End of regex; pattern delimiter.
 
-					'\]'. // Closing shortcode bracket.
+          function ($m) use ($_this) {
+              $if         = $m['if'];
+              $expression = $m['expression'];
 
-					'/ix', // End of regex; pattern delimiter.
+              # Force `$` in var tests on the left side.
 
-					function ($m) use ($_this)
-					{
-						$if         = $m['if'];
-						$expression = $m['expression'];
+              $expression = preg_replace_callback(
+                '/'. // Open regex; pattern delimiter.
 
-						# Force `$` in var tests on the left side.
+                '(?<![!=<>])'. // Zero-length assertion; i.e. lookbehind.
+                // Not preceded by comparison operator; indicating left side.
 
-						$expression = preg_replace_callback(
-							'/'. // Open regex; pattern delimiter.
+                '(^|[\s&|]+)'. // Beg., whitespace, or logical operators.
+                '(\!?)'. // Possible negation symbol; i.e. `!`.
+                '([a-z_]\w*)'. // Var/constant name.
 
-							'(?<![!=<>])'. // Zero-length assertion; i.e. lookbehind.
-							// Not preceded by comparison operator; indicating left side.
+                '/ix', // End of regex; pattern delimiter.
 
-							'(^|[\s&|]+)'. // Beg., whitespace, or logical operators.
-							'(\!?)'. // Possible negation symbol; i.e. `!`.
-							'([a-z_]\w*)'. // Var/constant name.
+                function ($m) use ($_this) {
+                    if (!array_key_exists($m[3], $_this->vars)) {
+                        return $m[0];
+                    } // Var does not exist; assume constant.
+                    return $m[1].$m[2].'$'.$m[3]; // Force var; i.e. `$`.
 
-							'/ix', // End of regex; pattern delimiter.
+                }, $expression
+              ); // End force `$` on vars.
 
-							function ($m) use ($_this)
-							{
-								if(!array_key_exists($m[3], $_this->vars))
-									return $m[0]; // Var does not exist; assume constant.
-								return $m[1].$m[2].'$'.$m[3]; // Force var; i.e. `$`.
+              if (!preg_match(
+                '/'. // Open regex; pattern delimiter.
 
-							}, $expression); // End force `$` on vars.
+                '^'. // Beginning of the string.
 
-						if(!preg_match(
-							'/'. // Open regex; pattern delimiter.
+                '(?:'.
+                '  \!?'. // Possible negation.
+                '  \$?'. // Possible variable; i.e. `$`.
+                '  [a-z_]\w*'. // Variable or constant name.
+                '  \s*'. // Possible whitespace after var/constant.
 
-							'^'. // Beginning of the string.
+                '  (?:'. // Begin logical|comparison operators.
 
-							'(?:'.
-							'  \!?'. // Possible negation.
-							'  \$?'. // Possible variable; i.e. `$`.
-							'  [a-z_]\w*'. // Variable or constant name.
-							'  \s*'. // Possible whitespace after var/constant.
+                '     (?:'. // Begin logical operators.
+                '        [&|]{2}'. // `&&`, `||` operators.
+                '        \s*'. // Any trailing whitespace after.
+                '     )'. // End logical operators.
 
-							'  (?:'. // Begin logical|comparison operators.
+                '     |'. // Or, comparision operators.
 
-							'     (?:'. // Begin logical operators.
-							'        [&|]{2}'. // `&&`, `||` operators.
-							'        \s*'. // Any trailing whitespace after.
-							'     )'. // End logical operators.
+                '     (?:'. // Begin optional comparison.
+                '        [!=<>]{1,3}\s*'. // 1-3 operators + whitespace.
+                '        (?:TRUE|FALSE|NULL|[0-9.]|\'[^\']*?\')'. // Value.
+                '        \s*'. // Any trailing whitespace after.
 
-							'     |'. // Or, comparision operators.
+                # Also consider there could be `!= 1`; followed by `&&`, `||`.
 
-							'     (?:'. // Begin optional comparison.
-							'        [!=<>]{1,3}\s*'. // 1-3 operators + whitespace.
-							'        (?:TRUE|FALSE|NULL|[0-9.]|\'[^\']*?\')'. // Value.
-							'        \s*'. // Any trailing whitespace after.
+                '        (?:'. // Begin trailing logical operators.
+                '           [&|]{2}'. // `&&`, `||` operators.
+                '           \s*'. // Any trailing whitespace after.
+                '        )?'. // End trailing logical operators.
 
-							# Also consider there could be `!= 1`; followed by `&&`, `||`.
+                '     )'. // End comparision operators.
 
-							'        (?:'. // Begin trailing logical operators.
-							'           [&|]{2}'. // `&&`, `||` operators.
-							'           \s*'. // Any trailing whitespace after.
-							'        )?'. // End trailing logical operators.
+                '  )?'. // End logical|comparison operators.
 
-							'     )'. // End comparision operators.
+                ')+'. // One or more repetitions.
 
-							'  )?'. // End logical|comparison operators.
+                '$'. // End of the string.
 
-							')+'. // One or more repetitions.
+                '/ix', $expression
+              ) // End of regex; pattern delimiter.
 
-							'$'. // End of the string.
+              ) { // We only allow variables to be tested by shortcodes; against integers, floats, strings, booleans.
+                  throw new \exception(__('Invalid shortcode conditional expression.', $_this->plugin->text_domain));
+              }
+              $token                 = count($_this->tokens);
+              $_this->tokens[$token] = '<?php '.$if.'('.$expression.'): ?>';
 
-							'/ix', $expression) // End of regex; pattern delimiter.
+              return '{token:'.$token.'}'; # e.g. {token:123}
 
-						) // We only allow variables to be tested by shortcodes; against integers, floats, strings, booleans.
-							throw new \exception(__('Invalid shortcode conditional expression.', $_this->plugin->text_domain));
+          },
+          $this->string
+        );
+    }
 
-						$token                 = count($_this->tokens);
-						$_this->tokens[$token] = '<?php '.$if.'('.$expression.'): ?>';
+    /**
+     * Expression ends tokenizer.
+     *
+     * @since 141111 First documented version.
+     */
+    protected function tokenizeIfExpressionEnds()
+    {
+        $_this = $this; // Reference for closure.
 
-						return '{token:'.$token.'}'; # e.g. {token:123}
+        $this->string = preg_replace_callback(
+          '/'. // Open regex; pattern delimiter.
 
-					}, $this->string);
-			}
+          '\['. // Opening shortcode bracket.
 
-			/**
-			 * Expression ends tokenizer.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected function tokenize_if_expression_ends()
-			{
-				$_this = $this; // Reference for closure.
+          '(?P<end>else|endif|\/endif|\/if)'. // Ends.
 
-				$this->string = preg_replace_callback(
-					'/'. // Open regex; pattern delimiter.
+          '\]'. // Closing shortcode bracket.
 
-					'\['. // Opening shortcode bracket.
+          '/ix', // End of regex; pattern delimiter.
 
-					'(?P<end>else|endif|\/endif|\/if)'. // Ends.
+          function ($m) use ($_this) {
+              switch (($end = strtolower($m['end']))) {
+                  case 'else':
+                      $end = 'else:';
+                      break; // Break switch.
 
-					'\]'. // Closing shortcode bracket.
+                  case 'endif':
+                  case '/endif';
+                  case '/if';
+                      $end = 'endif;';
+                      break; // Break switch.
+              }
+              $token                 = count($_this->tokens);
+              $_this->tokens[$token] = '<?php '.$end.' ?>';
 
-					'/ix', // End of regex; pattern delimiter.
+              return '{token:'.$token.'}'; # e.g. {token:456}
 
-					function ($m) use ($_this)
-					{
-						switch(($end = strtolower($m['end'])))
-						{
-							case 'else':
-								$end = 'else:';
-								break; // Break switch.
+          },
+          $this->string
+        );
+    }
 
-							case 'endif':
-							case '/endif';
-							case '/if';
-								$end = 'endif;';
-								break; // Break switch.
-						}
-						$token                 = count($_this->tokens);
-						$_this->tokens[$token] = '<?php '.$end.' ?>';
+    /**
+     * Strips PHP tags.
+     *
+     * @since 141111 First documented version.
+     */
+    protected function striPhpTags()
+    {
+        $this->string = $this->plugin->utils_string->strip_php_tags($this->string);
+    }
 
-						return '{token:'.$token.'}'; # e.g. {token:456}
+    /**
+     * Untokenize all previously generated tokens.
+     *
+     * @since 141111 First documented version.
+     */
+    protected function untokenizeAll()
+    {
+        $_this = $this; // Reference for closure.
 
-					}, $this->string);
-			}
+        $this->string = preg_replace_callback(
+          '/\{token\:(?P<token>[0-9]+)\}/i',
+          function ($m) use ($_this) {
+              if (isset($_this->tokens[$m['token']])) {
+                  return (string)$_this->tokens[$m['token']];
+              }
+              return ''; // Default return value.
 
-			/**
-			 * Strips PHP tags.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected function strip_php_tags()
-			{
-				$this->string = $this->plugin->utils_string->strip_php_tags($this->string);
-			}
+          },
+          $this->string
+        );
+    }
 
-			/**
-			 * Untokenize all previously generated tokens.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected function untokenize_all()
-			{
-				$_this = $this; // Reference for closure.
-
-				$this->string = preg_replace_callback('/\{token\:(?P<token>[0-9]+)\}/i', function ($m) use ($_this)
-				{
-					if(isset($_this->tokens[$m['token']]))
-						return (string)$_this->tokens[$m['token']];
-					return ''; // Default return value.
-
-				}, $this->string);
-			}
-
-			/**
-			 * Evaluate PHP generated by shortcodes.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected function eval_expressions()
-			{
-				$this->string = @$this->plugin->utils_php->evaluate($this->string, $this->vars);
-			}
-		}
+    /**
+     * Evaluate PHP generated by shortcodes.
+     *
+     * @since 141111 First documented version.
+     */
+    protected function evalExpressions()
+    {
+        $this->string = @$this->plugin->utils_php->evaluate($this->string, $this->vars);
+    }
+}
 	
