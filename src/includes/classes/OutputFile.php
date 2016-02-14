@@ -1,57 +1,58 @@
 <?php
 /**
- * File Output Handler
+ * File Output Handler.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * File Output Handler
+ * File Output Handler.
  *
  * @since 141111 First documented version.
  */
 class OutputFile extends AbsBase
 {
     /**
-     * @var string Data to output.
+     * @type string Data to output.
      *
      * @since 141111 First documented version.
      */
     protected $data;
 
     /**
-     * @var string Data file to output.
+     * @type string Data file to output.
      *
      * @since 141111 First documented version.
      */
     protected $data_file;
 
     /**
-     * @var string File name to output.
+     * @type string File name to output.
      *
      * @since 141111 First documented version.
      */
     protected $file_name;
 
     /**
-     * @var string Content type.
+     * @type string Content type.
      *
      * @since 141111 First documented version.
      */
     protected $content_type;
 
     /**
-     * @var string Content disposition.
+     * @type string Content disposition.
      *
      * @since 141111 First documented version.
      */
     protected $content_disposition;
 
     /**
-     * @var integer Chunk size.
+     * @type int Chunk size.
      *
      * @since 141111 First documented version.
      */
@@ -78,11 +79,11 @@ class OutputFile extends AbsBase
             'content_disposition' => 'attachment',
             'chunk_size'          => 2097152,
         ];
-        $args         = array_merge($default_args, $args);
-        $args         = array_intersect_key($args, $default_args);
+        $args = array_merge($default_args, $args);
+        $args = array_intersect_key($args, $default_args);
 
-        $this->data      = (string)$args['data'];
-        $this->data_file = (string)$args['data_file'];
+        $this->data      = (string) $args['data'];
+        $this->data_file = (string) $args['data_file'];
 
         if ($this->data_file) { // Run security flag checks on the path.
             $this->plugin->utils_fs->checkPathSecurity($this->data_file);
@@ -90,11 +91,11 @@ class OutputFile extends AbsBase
         if ($this->data_file && is_file($this->data_file) && is_readable($this->data_file)) {
             $this->data = ''; // Favor the data file over raw data.
         }
-        $this->file_name           = (string)$args['file_name'];
-        $this->content_type        = (string)$args['content_type'];
-        $this->content_disposition = (string)$args['content_disposition'];
+        $this->file_name           = (string) $args['file_name'];
+        $this->content_type        = (string) $args['content_type'];
+        $this->content_disposition = (string) $args['content_disposition'];
 
-        $this->chunk_size = (integer)$args['chunk_size'];
+        $this->chunk_size = (integer) $args['chunk_size'];
         $this->chunk_size = $this->chunk_size < 1 ? 1 : $this->chunk_size;
 
         $this->maybeOutput();
@@ -162,9 +163,9 @@ class OutputFile extends AbsBase
             return $content_length; // Already cached this.
         }
         if ($this->data_file) { // File has precedence.
-            return ($content_length = filesize($this->data_file));
+            return $content_length = filesize($this->data_file);
         }
-        return ($content_length = strlen($this->data));
+        return $content_length = strlen($this->data);
     }
 
     /**
@@ -226,4 +227,3 @@ class OutputFile extends AbsBase
         fclose($resource); // Close resource handle.
     }
 }
-	
