@@ -2,54 +2,52 @@
 /**
  * Post Deletion Handler
  *
- * @since 141111 First documented version.
+ * @since     141111 First documented version.
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
- * @license GNU General Public License, version 3
+ * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
+/**
+ * Post Deletion Handler
+ *
+ * @since 141111 First documented version.
+ */
+class PostDelete extends AbsBase
+{
+    /**
+     * @var integer Post ID.
+     *
+     * @since 141111 First documented version.
+     */
+    protected $post_id;
 
+    /**
+     * Class constructor.
+     *
+     * @since 141111 First documented version.
+     *
+     * @param integer|string $post_id Post ID.
+     */
+    public function __construct($post_id)
+    {
+        parent::__construct();
 
-		/**
-		 * Post Deletion Handler
-		 *
-		 * @since 141111 First documented version.
-		 */
-	class PostDelete extends AbsBase
-		{
-			/**
-			 * @var integer Post ID.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected $post_id;
+        $this->post_id = (integer)$post_id;
 
-			/**
-			 * Class constructor.
-			 *
-			 * @since 141111 First documented version.
-			 *
-			 * @param integer|string $post_id Post ID.
-			 */
-			public function __construct($post_id)
-			{
-				parent::__construct();
+        $this->maybePurgeSubs();
+    }
 
-				$this->post_id = (integer)$post_id;
-
-				$this->maybe_purge_subs();
-			}
-
-			/**
-			 * Purges subscriptions.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected function maybe_purge_subs()
-			{
-				if(!$this->post_id)
-					return; // Nothing to do.
-
-				new SubPurger($this->post_id);
-			}
-		}
+    /**
+     * Purges subscriptions.
+     *
+     * @since 141111 First documented version.
+     */
+    protected function maybePurgeSubs()
+    {
+        if (!$this->post_id) {
+            return; // Nothing to do.
+        }
+        new SubPurger($this->post_id);
+    }
+}
