@@ -833,7 +833,7 @@ class SubInserter extends AbsBase
                   = __('Request for email confirmation sent successfully.', $this->plugin->text_domain);
             }
         } else if ($this->sub->status === 'subscribed' && $this->process_list_server) {
-            $this->plugin->utils_list_server->maybe_subscribe(
+            $this->plugin->utils_list_server->maybeSubscribe(
               [
                 'double_optin' => false,
                 'email'        => $this->sub->email,
