@@ -1,57 +1,58 @@
 <?php
 /**
- * Sub Importer
+ * Sub Importer.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * Sub Importer
+ * Sub Importer.
  *
  * @since 141111 First documented version.
  */
 class ImportSubs extends AbsBase
 {
     /**
-     * @var string Input data.
+     * @type string Input data.
      *
      * @since 141111 First documented version.
      */
     protected $data;
 
     /**
-     * @var string Input data file.
+     * @type string Input data file.
      *
      * @since 141111 First documented version.
      */
     protected $data_file;
 
     /**
-     * @var boolean Process confirmations?
+     * @type bool Process confirmations?
      *
      * @since 141111 First documented version.
      */
     protected $process_confirmations;
 
     /**
-     * @var integer SQL max limit.
+     * @type int SQL max limit.
      *
      * @since 141111 First documented version.
      */
     protected $max_limit;
 
     /**
-     * @var integer Total imported subs.
+     * @type int Total imported subs.
      *
      * @since 141111 First documented version.
      */
     protected $total_imported_subs;
 
     /**
-     * @var array An array of any/all errors.
+     * @type array An array of any/all errors.
      *
      * @since 141111 First documented version.
      */
@@ -77,11 +78,11 @@ class ImportSubs extends AbsBase
             'process_confirmations' => false,
             'max_limit'             => 5000,
         ];
-        $request_args         = array_merge($default_request_args, $request_args);
-        $request_args         = array_intersect_key($request_args, $default_request_args);
+        $request_args = array_merge($default_request_args, $request_args);
+        $request_args = array_intersect_key($request_args, $default_request_args);
 
-        $this->data      = trim((string)$request_args['data']);
-        $this->data_file = trim((string)$request_args['data_file']);
+        $this->data      = trim((string) $request_args['data']);
+        $this->data_file = trim((string) $request_args['data_file']);
 
         if ($this->data_file) { // Run security flag checks on the path.
             $this->plugin->utils_fs->checkPathSecurity($this->data_file, true);
@@ -89,14 +90,14 @@ class ImportSubs extends AbsBase
         if ($this->data_file) {
             $this->data = ''; // Favor file over raw data.
         }
-        $this->process_confirmations = (boolean)$request_args['process_confirmations'];
+        $this->process_confirmations = (boolean) $request_args['process_confirmations'];
 
-        $this->max_limit = (integer)$request_args['max_limit'];
+        $this->max_limit = (integer) $request_args['max_limit'];
 
         if ($this->max_limit < 1) {
             $this->max_limit = 1; // At least one.
         }
-        $upper_max_limit = (integer)apply_filters(__CLASS__.'_upper_max_limit', 5000);
+        $upper_max_limit = (integer) apply_filters(__CLASS__.'_upper_max_limit', 5000);
         if ($this->max_limit > $upper_max_limit) {
             $this->max_limit = $upper_max_limit;
         }
@@ -123,18 +124,18 @@ class ImportSubs extends AbsBase
             return; // Not possible; i.e. no resource.
         }
         while (($_csv_line = fgetcsv($csv_resource_file, 0, ',', '"', '"')) !== false) {
-            $current_csv_line_number++; // Increment line counter.
-            $current_csv_line_index++; // Increment line index also.
+            ++$current_csv_line_number; // Increment line counter.
+            ++$current_csv_line_index; // Increment line index also.
 
             $_csv_line = $this->plugin->utils_string->trimDeep($_csv_line);
 
             if ($current_csv_line_index === 1 && !empty($_csv_line[0])) {
                 foreach ($_csv_line as $_csv_header) {
-                    $csv_headers[] = (string)$_csv_header;
+                    $csv_headers[] = (string) $_csv_header;
                 }
                 unset($_csv_header); // Housekeeping.
 
-                $current_csv_line_number--;
+                --$current_csv_line_number;
                 continue; // Skip this line.
             }
             if ($current_csv_line_index >= 1 && !$csv_headers) {
@@ -180,8 +181,8 @@ class ImportSubs extends AbsBase
             $_sub_inserter = new SubInserter($_import, ['process_confirmation' => $this->process_confirmations]);
 
             if ($_sub_inserter->didInsertUpdate()) { // Have insert|update success?
-                $this->total_imported_subs++; // Increment counter; this was a success.
-            } else if ($_sub_inserter->hasErrors()) { // If the inserter has errors for this line; report those.
+                ++$this->total_imported_subs; // Increment counter; this was a success.
+            } elseif ($_sub_inserter->hasErrors()) { // If the inserter has errors for this line; report those.
                 $_sub_inserter_errors       = array_values($_sub_inserter->errors()); // Values only; discard keys.
                 $_sub_inserter_error_prefix = sprintf(__('_Line #%1$s:_', $this->plugin->text_domain), esc_html($current_csv_line_number));
 
@@ -190,8 +191,8 @@ class ImportSubs extends AbsBase
                 }
                 $this->errors = array_merge($this->errors, $_sub_inserter_errors);
             }
-            unset($_sub_inserter, $_sub_inserter_errors, // Housekeeping.
-                $_sub_inserter_error, $_sub_inserter_error_prefix);
+            unset($_sub_inserter, $_sub_inserter_errors); // Housekeeping.
+            unset($_sub_inserter_error, $_sub_inserter_error_prefix);
 
             if ($current_csv_line_number + 1 > $this->max_limit) {
                 break; // Reached the max limit.
@@ -216,11 +217,11 @@ class ImportSubs extends AbsBase
      */
     protected function csvLineColumnValueFor($csv_column, array $csv_headers, array $csv_line)
     {
-        $key = array_search($csv_column, $csv_headers);
+        $key = array_search($csv_column, $csv_headers, true);
 
         return $key !== false && isset($csv_line[$key])
                && is_string($csv_line[$key]) && isset($csv_line[$key][0])
-            ? (string)$csv_line[$key] : null;
+            ? (string) $csv_line[$key] : null;
     }
 
     /**
@@ -234,7 +235,8 @@ class ImportSubs extends AbsBase
         $subs_i18n     = $this->plugin->utils_i18n->subscriptions($this->total_imported_subs); // e.g. `X subscription(s)`.
         $notice_markup = sprintf(__('<strong>Imported %1$s successfully.</strong>', $this->plugin->text_domain), esc_html($subs_i18n));
 
-        if ($this->errors) {// Do we have errors to report also? If so, present these as individual list items.
+        if ($this->errors) {
+            // Do we have errors to report also? If so, present these as individual list items.
             $error_markup = __('<strong>The following errors were encountered during importation:</strong>', $this->plugin->text_domain);
             $error_markup .= '<ul class="pmp-list-items"><li>'.implode('</li><li>', $this->errorsHtml()).'</li></ul>';
         }
@@ -253,7 +255,7 @@ class ImportSubs extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @return resource|boolean Resource on success.
+     * @return resource|bool Resource on success.
      */
     protected function csvResourceFile()
     {
