@@ -2,76 +2,76 @@
 /**
  * Webhook Actions
  *
- * @since 141111 First documented version.
+ * @since     141111 First documented version.
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
- * @license GNU General Public License, version 3
+ * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
+/**
+ * Webhook Actions
+ *
+ * @since 141111 First documented version.
+ */
+class WebhookActions extends AbsBase
+{
+    /**
+     * @var array Valid actions.
+     *
+     * @since 141111 First documented version.
+     */
+    protected $valid_actions;
 
+    /**
+     * Class constructor.
+     *
+     * @since 141111 First documented version.
+     */
+    public function __construct()
+    {
+        parent::__construct();
 
-		/**
-		 * Webhook Actions
-		 *
-		 * @since 141111 First documented version.
-		 */
-	class WebhookActions extends AbsBase
-		{
-			/**
-			 * @var array Valid actions.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected $valid_actions;
+        $this->valid_actions = [
+          'rve_mandrill',
+        ];
+        $this->maybeHandle();
+    }
 
-			/**
-			 * Class constructor.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			public function __construct()
-			{
-				parent::__construct();
+    /**
+     * Action handler.
+     *
+     * @since 141111 First documented version.
+     */
+    protected function maybeHandle()
+    {
+        if (is_admin()) {
+            return; // Not applicable.
+        }
+        if (empty($_REQUEST[GLOBAL_NS])) {
+            return; // Not applicable.
+        }
+        foreach ((array)$_REQUEST[GLOBAL_NS] as $_action => $_request_args) {
+            if ($_action && in_array($_action, $this->valid_actions, true)) {
+                $_method = preg_replace_callback('/_(.)/', function ($m) { return strtoupper($m[1]); }, strtolower($_action));
+                $this->{$_method}($this->plugin->utils_string->trim_strip_deep($_request_args));
+            }
+        }
+        unset($_action, $_method, $_request_args); // Housekeeping.
+    }
 
-				$this->valid_actions
-					= array(
-					'rve_mandrill',
-				);
-				$this->maybe_handle();
-			}
+    /**
+     * RVE Webhook for Mandrill.
+     *
+     * @since 141111 First documented version.
+     *
+     * @param mixed $request_args Input argument(s).
+     */
+    protected function rveMandrill($request_args)
+    {
+        $key = trim((string)$request_args);
 
-			/**
-			 * Action handler.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected function maybe_handle()
-			{
-				if(is_admin())
-					return; // Not applicable.
+        new RveMandrill($key);
 
-				if(empty($_REQUEST[GLOBAL_NS]))
-					return; // Not applicable.
-
-				foreach((array)$_REQUEST[GLOBAL_NS] as $_action => $_request_args)
-					if($_action && in_array($_action, $this->valid_actions, TRUE))
-						$this->{$_action}($this->plugin->utils_string->trim_strip_deep($_request_args));
-				unset($_action, $_request_args); // Housekeeping.
-			}
-
-			/**
-			 * RVE Webhook for Mandrill.
-			 *
-			 * @since 141111 First documented version.
-			 *
-			 * @param mixed $request_args Input argument(s).
-			 */
-			protected function rve_mandrill($request_args)
-			{
-				$key = trim((string)$request_args);
-
-				new RveMandrill($key);
-
-				exit(); // Stop; always.
-			}
-		}
+        exit(); // Stop; always.
+    }
+}
