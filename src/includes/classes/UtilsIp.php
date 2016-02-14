@@ -194,7 +194,7 @@ namespace WebSharks\CommentMail\Pro;
 
 				# Check the filesystem cache; i.e., tmp directory.
 
-				$tmp_dir    = $this->plugin->utils_fs->tmp_dir();
+				$tmp_dir    = $this->plugin->utils_fs->tmpDir();
 				$cache_dir  = $tmp_dir.'/'.$this->plugin->slug.'/ip-geo-data';
 				$cache_file = $cache_dir.'/'.sha1($ip).'.json';
 
@@ -228,7 +228,7 @@ namespace WebSharks\CommentMail\Pro;
 
 				# Cache validated response from geoPlugin service; i.e., the object cache.
 
-				if(strcasecmp($tmp_dir, $this->plugin->utils_fs->n_seps(WP_CONTENT_DIR)) !== 0)
+				if(strcasecmp($tmp_dir, $this->plugin->utils_fs->nSeps(WP_CONTENT_DIR)) !== 0)
 				{
 					if(!is_dir($cache_dir) && !mkdir($cache_dir, 0777, TRUE))
 						throw new \exception('Unable to create `ip-geo-data` cache directory.');

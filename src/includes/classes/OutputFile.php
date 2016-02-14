@@ -85,7 +85,7 @@ class OutputFile extends AbsBase
         $this->data_file = (string)$args['data_file'];
 
         if ($this->data_file) { // Run security flag checks on the path.
-            $this->plugin->utils_fs->check_path_security($this->data_file);
+            $this->plugin->utils_fs->checkPathSecurity($this->data_file);
         }
         if ($this->data_file && is_file($this->data_file) && is_readable($this->data_file)) {
             $this->data = ''; // Favor the data file over raw data.

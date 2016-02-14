@@ -84,7 +84,7 @@ class ImportSubs extends AbsBase
         $this->data_file = trim((string)$request_args['data_file']);
 
         if ($this->data_file) { // Run security flag checks on the path.
-            $this->plugin->utils_fs->check_path_security($this->data_file, true);
+            $this->plugin->utils_fs->checkPathSecurity($this->data_file, true);
         }
         if ($this->data_file) {
             $this->data = ''; // Favor file over raw data.

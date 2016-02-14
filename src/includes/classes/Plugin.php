@@ -1030,7 +1030,7 @@ class Plugin extends AbsBase
             return; // Ignore; this post type excluded.
         }
         // Meta boxes use an SVG graphic.
-        $icon = $this->utils_fs->inline_icon_svg();
+        $icon = $this->utils_fs->inlineIconSvg();
 
         if (!$this->utils_env->isMenuPage('post-new.php')) {
             add_meta_box(GLOBAL_NS.'_small', $icon.' '.$this->name.'&trade;', [$this, 'postSmallMetaBox'], $post_type, 'normal', 'default');
@@ -1222,7 +1222,7 @@ class Plugin extends AbsBase
             }
         }
         // Menu page icon uses an SVG graphic.
-        $icon = $this->utils_fs->inline_icon_svg();
+        $icon = $this->utils_fs->inlineIconSvg();
         $icon = $this->utils_markup->color_svg_menu_icon($icon);
 
         $divider = // Dividing line used by various menu items below.

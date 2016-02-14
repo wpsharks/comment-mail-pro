@@ -86,7 +86,7 @@ class Template extends AbsBase
         }
         $this->file = (string)$file; // Initialize.
         $this->file = $this->plugin->utils_string->trim_deep($this->file, '', '/');
-        $this->file = $this->plugin->utils_fs->n_seps($this->file);
+        $this->file = $this->plugin->utils_fs->nSeps($this->file);
 
         if (!$this->file) { // Empty file property?
             throw new \exception(__('Empty file.', $this->plugin->text_domain));
@@ -164,7 +164,7 @@ class Template extends AbsBase
     {
         $file = (string)$file; // Force string.
         $file = $this->plugin->utils_string->trim_deep($file, '', '/');
-        $file = $this->plugin->utils_fs->n_seps($file);
+        $file = $this->plugin->utils_fs->nSeps($file);
 
         $shortcodes_vars = // Merge w/ current vars.
           array_merge($this->current_vars, $shortcodes_vars);

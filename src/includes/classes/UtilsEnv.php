@@ -176,13 +176,13 @@ class UtilsEnv extends AbsBase
         $limits = [PHP_INT_MAX]; // Initialize.
 
         if (($max_upload_size = ini_get('upload_max_filesize'))) {
-            $limits[] = $this->plugin->utils_fs->abbr_bytes($max_upload_size);
+            $limits[] = $this->plugin->utils_fs->abbrBytes($max_upload_size);
         }
         if (($post_max_size = ini_get('post_max_size'))) {
-            $limits[] = $this->plugin->utils_fs->abbr_bytes($post_max_size);
+            $limits[] = $this->plugin->utils_fs->abbrBytes($post_max_size);
         }
         if (($memory_limit = ini_get('memory_limit'))) {
-            $limits[] = $this->plugin->utils_fs->abbr_bytes($memory_limit);
+            $limits[] = $this->plugin->utils_fs->abbrBytes($memory_limit);
         }
         return ($max = min($limits));
     }

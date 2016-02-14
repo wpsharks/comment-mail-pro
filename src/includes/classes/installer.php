@@ -70,7 +70,7 @@ class Installer extends AbsBase
         if (get_option(GLOBAL_NS.'_install_time')) {
             return; // Not applicable.
         }
-        $notice_markup = $this->plugin->utils_fs->inline_icon_svg().
+        $notice_markup = $this->plugin->utils_fs->inlineIconSvg().
                          ' '.sprintf(
                            __('%1$s&trade; installed successfully! Please <a href="%2$s"><strong>click here to configure</strong></a> basic options.', $this->plugin->text_domain),
                            esc_html($this->plugin->name), esc_attr($this->plugin->utils_url->main_menu_page_only())

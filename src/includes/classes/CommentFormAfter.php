@@ -94,7 +94,7 @@ class CommentFormAfter extends AbsBase
 
         $sub_summary_url = $this->plugin->utils_url->sub_manage_summary_url();
         $sub_new_url     = $this->plugin->utils_url->sub_manage_sub_new_url(null, null, compact('post_id'));
-        $inline_icon_svg = $this->plugin->utils_fs->inline_icon_svg();
+        $inline_icon_svg = $this->plugin->utils_fs->inlineIconSvg();
 
         $template_vars = get_defined_vars(); // Everything above.
         $template      = new Template('site/comment-form/sub-ops.php');
