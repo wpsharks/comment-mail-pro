@@ -2357,7 +2357,7 @@ class Plugin extends AbsBase
      */
     public function commentFormFilterPrepend($value)
     {
-        if (!is_null($fired = &$this->staticKey('comment_form'))) {
+        if (!is_null($fired = &$this->staticKey('commentForm'))) {
             return $value; // We only handle this for a single hook.
         }
         // The first hook to fire this will win automatically.
@@ -2384,7 +2384,7 @@ class Plugin extends AbsBase
      */
     public function commentFormFilterAppend($value)
     {
-        if (!is_null($fired = &$this->staticKey('comment_form'))) {
+        if (!is_null($fired = &$this->staticKey('commentForm'))) {
             return $value; // We only handle this for a single hook.
         }
         // The first hook to fire this will win automatically.
