@@ -2,230 +2,228 @@
 /**
  * File Output Handler
  *
- * @since 141111 First documented version.
+ * @since     141111 First documented version.
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
- * @license GNU General Public License, version 3
+ * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
+/**
+ * File Output Handler
+ *
+ * @since 141111 First documented version.
+ */
+class OutputFile extends AbsBase
+{
+    /**
+     * @var string Data to output.
+     *
+     * @since 141111 First documented version.
+     */
+    protected $data;
 
+    /**
+     * @var string Data file to output.
+     *
+     * @since 141111 First documented version.
+     */
+    protected $data_file;
 
-		/**
-		 * File Output Handler
-		 *
-		 * @since 141111 First documented version.
-		 */
-	class OutputFile extends AbsBase
-		{
-			/**
-			 * @var string Data to output.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected $data;
+    /**
+     * @var string File name to output.
+     *
+     * @since 141111 First documented version.
+     */
+    protected $file_name;
 
-			/**
-			 * @var string Data file to output.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected $data_file;
+    /**
+     * @var string Content type.
+     *
+     * @since 141111 First documented version.
+     */
+    protected $content_type;
 
-			/**
-			 * @var string File name to output.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected $file_name;
+    /**
+     * @var string Content disposition.
+     *
+     * @since 141111 First documented version.
+     */
+    protected $content_disposition;
 
-			/**
-			 * @var string Content type.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected $content_type;
+    /**
+     * @var integer Chunk size.
+     *
+     * @since 141111 First documented version.
+     */
+    protected $chunk_size;
 
-			/**
-			 * @var string Content disposition.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected $content_disposition;
+    /**
+     * Class constructor.
+     *
+     * @since 141111 First documented version.
+     *
+     * @param array $args Configuration arguments.
+     *
+     * @throws \exception If a security flag is triggered on `$this->data_file`.
+     */
+    public function __construct(array $args)
+    {
+        parent::__construct();
 
-			/**
-			 * @var integer Chunk size.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected $chunk_size;
+        $default_args = [
+          'data'                => '',
+          'data_file'           => '',
+          'file_name'           => '',
+          'content_type'        => '',
+          'content_disposition' => 'attachment',
+          'chunk_size'          => 2097152,
+        ];
+        $args         = array_merge($default_args, $args);
+        $args         = array_intersect_key($args, $default_args);
 
-			/**
-			 * Class constructor.
-			 *
-			 * @since 141111 First documented version.
-			 *
-			 * @param array $args Configuration arguments.
-			 *
-			 * @throws \exception If a security flag is triggered on `$this->data_file`.
-			 */
-			public function __construct(array $args)
-			{
-				parent::__construct();
+        $this->data      = (string)$args['data'];
+        $this->data_file = (string)$args['data_file'];
 
-				$default_args = array(
-					'data'                => '',
-					'data_file'           => '',
-					'file_name'           => '',
-					'content_type'        => '',
-					'content_disposition' => 'attachment',
-					'chunk_size'          => 2097152,
-				);
-				$args         = array_merge($default_args, $args);
-				$args         = array_intersect_key($args, $default_args);
+        if ($this->data_file) { // Run security flag checks on the path.
+            $this->plugin->utils_fs->check_path_security($this->data_file);
+        }
+        if ($this->data_file && is_file($this->data_file) && is_readable($this->data_file)) {
+            $this->data = ''; // Favor the data file over raw data.
+        }
+        $this->file_name           = (string)$args['file_name'];
+        $this->content_type        = (string)$args['content_type'];
+        $this->content_disposition = (string)$args['content_disposition'];
 
-				$this->data      = (string)$args['data'];
-				$this->data_file = (string)$args['data_file'];
+        $this->chunk_size = (integer)$args['chunk_size'];
+        $this->chunk_size = $this->chunk_size < 1 ? 1 : $this->chunk_size;
 
-				if($this->data_file) // Run security flag checks on the path.
-					$this->plugin->utils_fs->check_path_security($this->data_file);
+        $this->maybeOutput();
+    }
 
-				if($this->data_file && is_file($this->data_file) && is_readable($this->data_file))
-					$this->data = ''; // Favor the data file over raw data.
+    /**
+     * Sends output file.
+     *
+     * @since 141111 First documented version.
+     */
+    protected function maybeOutput()
+    {
+        $this->prepare();
+        $this->sendHeaders();
+        $this->maybeSendData();
+        $this->maybeSendDataFile();
+        exit(); // Stop here.
+    }
 
-				$this->file_name           = (string)$args['file_name'];
-				$this->content_type        = (string)$args['content_type'];
-				$this->content_disposition = (string)$args['content_disposition'];
+    /**
+     * Prepare environment.
+     *
+     * @since 141111 First documented version.
+     */
+    protected function prepare()
+    {
+        $this->plugin->utils_env->prep_for_large_output();
+    }
 
-				$this->chunk_size = (integer)$args['chunk_size'];
-				$this->chunk_size = $this->chunk_size < 1 ? 1 : $this->chunk_size;
+    /**
+     * Send headers; always.
+     *
+     * @since 141111 First documented version.
+     */
+    protected function sendHeaders()
+    {
+        status_header(200);
 
-				$this->maybe_output();
-			}
+        header('Accept-Ranges: none');
 
-			/**
-			 * Sends output file.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected function maybe_output()
-			{
-				$this->prepare();
-				$this->send_headers();
-				$this->maybe_send_data();
-				$this->maybe_send_data_file();
-				exit(); // Stop here.
-			}
+        header('Content-Encoding: none');
+        header('Content-Type: '.$this->content_type);
+        header('Content-Length: '.$this->contentLength());
 
-			/**
-			 * Prepare environment.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected function prepare()
-			{
-				$this->plugin->utils_env->prep_for_large_output();
-			}
+        nocache_headers(); // No browser cache.
+        header('Cache-Control: no-cache, must-revalidate, max-age=0');
+        header('Cache-Control: post-check=0, pre-check=0', false);
 
-			/**
-			 * Send headers; always.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected function send_headers()
-			{
-				status_header(200);
+        header(
+          'Content-Disposition:'.
+          ' '.$this->content_disposition.';'.
+          ' filename="'.$this->plugin->utils_string->esc_dq($this->file_name).'";'.
+          ' filename*=UTF-8\'\''.rawurlencode($this->file_name)
+        );
+    }
 
-				header('Accept-Ranges: none');
+    /**
+     * Determine content length.
+     *
+     * @since 141111 First documented version.
+     */
+    protected function contentLength()
+    {
+        if (!is_null($content_length = &$this->cacheKey(__FUNCTION__))) {
+            return $content_length; // Already cached this.
+        }
+        if ($this->data_file) { // File has precedence.
+            return ($content_length = filesize($this->data_file));
+        }
+        return ($content_length = strlen($this->data));
+    }
 
-				header('Content-Encoding: none');
-				header('Content-Type: '.$this->content_type);
-				header('Content-Length: '.$this->content_length());
+    /**
+     * Send data; if applicable.
+     *
+     * @since 141111 First documented version.
+     */
+    protected function maybeSendData()
+    {
+        if ($this->data_file) {
+            return; // Nothing to do here.
+        }
+        $content_length = // Initialize.
+        $_bytes_to_read = $this->contentLength();
 
-				nocache_headers(); // No browser cache.
-				header('Cache-Control: no-cache, must-revalidate, max-age=0');
-				header('Cache-Control: post-check=0, pre-check=0', FALSE);
+        while ($_bytes_to_read > 0) { // While we have bytes.
+            $_reading_from = $content_length - $_bytes_to_read;
+            $_reading      = $_bytes_to_read > $this->chunk_size
+              ? $this->chunk_size : $_bytes_to_read;
 
-				header('Content-Disposition:'.
-				       ' '.$this->content_disposition.';'.
-				       ' filename="'.$this->plugin->utils_string->esc_dq($this->file_name).'";'.
-				       ' filename*=UTF-8\'\''.rawurlencode($this->file_name));
-			}
+            echo substr($this->data, $_reading_from, $_reading);
 
-			/**
-			 * Determine content length.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected function content_length()
-			{
-				if(!is_null($content_length = &$this->cacheKey(__FUNCTION__)))
-					return $content_length; // Already cached this.
+            $_bytes_to_read -= $_reading;
 
-				if($this->data_file) // File has precedence.
-					return ($content_length = filesize($this->data_file));
+            flush(); // Flush to browser.
+        }
+        unset($_bytes_to_read, $_reading_from, $_reading);
+    }
 
-				return ($content_length = strlen($this->data));
-			}
+    /**
+     * Send data file; if applicable.
+     *
+     * @since 141111 First documented version.
+     */
+    protected function maybeSendDataFile()
+    {
+        if (!$this->data_file) {
+            return; // Nothing to do here.
+        }
+        if (!($resource = fopen($this->data_file, 'rb'))) {
+            return; // Not applicable.
+        }
+        $content_length = // Initialize.
+        $_bytes_to_read = $this->contentLength();
 
-			/**
-			 * Send data; if applicable.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected function maybe_send_data()
-			{
-				if($this->data_file)
-					return; // Nothing to do here.
+        while ($_bytes_to_read > 0) { // While we have bytes.
+            $_reading_from = $content_length - $_bytes_to_read;
+            $_reading      = $_bytes_to_read > $this->chunk_size
+              ? $this->chunk_size : $_bytes_to_read;
 
-				$content_length = // Initialize.
-				$_bytes_to_read = $this->content_length();
+            echo fread($resource, $_reading);
 
-				while($_bytes_to_read > 0) // While we have bytes.
-				{
-					$_reading_from = $content_length - $_bytes_to_read;
-					$_reading      = $_bytes_to_read > $this->chunk_size
-						? $this->chunk_size : $_bytes_to_read;
+            $_bytes_to_read -= $_reading;
 
-					echo substr($this->data, $_reading_from, $_reading);
+            flush(); // Flush to browser.
+        }
+        unset($_bytes_to_read, $_reading_from, $_reading);
 
-					$_bytes_to_read -= $_reading;
-
-					flush(); // Flush to browser.
-				}
-				unset($_bytes_to_read, $_reading_from, $_reading);
-			}
-
-			/**
-			 * Send data file; if applicable.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected function maybe_send_data_file()
-			{
-				if(!$this->data_file)
-					return; // Nothing to do here.
-
-				if(!($resource = fopen($this->data_file, 'rb')))
-					return; // Not applicable.
-
-				$content_length = // Initialize.
-				$_bytes_to_read = $this->content_length();
-
-				while($_bytes_to_read > 0) // While we have bytes.
-				{
-					$_reading_from = $content_length - $_bytes_to_read;
-					$_reading      = $_bytes_to_read > $this->chunk_size
-						? $this->chunk_size : $_bytes_to_read;
-
-					echo fread($resource, $_reading);
-
-					$_bytes_to_read -= $_reading;
-
-					flush(); // Flush to browser.
-				}
-				unset($_bytes_to_read, $_reading_from, $_reading);
-
-				fclose($resource); // Close resource handle.
-			}
-		}
+        fclose($resource); // Close resource handle.
+    }
+}
 	
