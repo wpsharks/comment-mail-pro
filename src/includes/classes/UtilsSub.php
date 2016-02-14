@@ -38,7 +38,7 @@ class UtilsSub extends AbsBase
      *    may be able to accept either a key or an ID. Thus, all user-facing action handlers MUST always
      *    sanitize keys they're working with; in order to be sure keys are NOT numeric.
      *
-     * @see   utils_enc::uunnci_key_20_max()
+     * @see   UtilsEnc::uunnciKey20Max()
      */
     public function sanitizeKey($sub_key)
     {
@@ -59,7 +59,7 @@ class UtilsSub extends AbsBase
      *
      * @return boolean `TRUE` if the input value is in key format.
      *
-     * @see   utils_enc::uunnci_key_20_max()
+     * @see   UtilsEnc::uunnciKey20Max()
      */
     public function hasUunnciKey20MaxFormat($sub_key)
     {
@@ -813,7 +813,7 @@ class UtilsSub extends AbsBase
      *
      * @return array An array of unique user IDs.
      *
-     * @see   sub_manage_summary::prepare_subs()
+     * @see   SubManageSummary::prepareSubs()
      */
     public function emailUserIds($sub_email, $no_cache = false)
     {
@@ -846,7 +846,7 @@ class UtilsSub extends AbsBase
      * @return array An array of unique user ID-based emails (including `$sub_email`).
      *    Note that all of these emails will be in lowercase format.
      *
-     * @see   sub_manage_summary::prepare_subs()
+     * @see   SubManageSummary::prepareSubs()
      * @note  See `assets/sma-diagram.png` for further details on this.
      */
     public function emailUserIdEmails($sub_email, $no_cache = false)

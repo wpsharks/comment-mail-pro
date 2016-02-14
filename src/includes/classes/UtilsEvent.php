@@ -83,7 +83,7 @@ class UtilsEvent extends AbsBase
      *
      * @return string Full description for the code; else an empty string.
      *
-     * @see   queue_processor::log_entry()
+     * @see   QueueProcessor::logEntry()
      */
     public function queueNoteCodeDesc($note_code)
     {

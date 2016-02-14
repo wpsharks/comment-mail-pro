@@ -1389,7 +1389,7 @@ class Plugin extends AbsBase
      * @attaches-to `'load-'.$this->menu_page_hooks[GLOBAL_NS.'_subs']` action.
      *
      * @see         addMenuPages()
-     * @see         subs_table::get_hidden_columns()
+     * @see         MenuPageSubsTable::getTheHiddenColumns()
      */
     public function menuPageSubsScreen()
     {
@@ -1444,7 +1444,7 @@ class Plugin extends AbsBase
      * @attaches-to `'load-'.$this->menu_page_hooks[GLOBAL_NS.'_subs']` action.
      *
      * @see         addMenuPages()
-     * @see         subs_table::get_hidden_columns()
+     * @see         MenuPageSubEventLogTable::getTheHiddenColumns()
      */
     public function menuPageSubEventLogScreen()
     {

@@ -383,7 +383,7 @@ class SubManageSubFormBase extends AbsBase
      * @return string HTML markup for this select field row.
      *    If no options (or too many options; this returns an input field instead.
      *
-     * @see   sub_manage_actions::sub_form_comment_id_row_via_ajax()
+     * @see   SubManageActions::subFormCommentIdRowViaAjax()
      */
     public static function commentIdRowViaAjax($post_id)
     {
@@ -403,7 +403,7 @@ class SubManageSubFormBase extends AbsBase
      *
      * @param array $request_args Incoming action request args.
      *
-     * @see   sub_manage_actions::sub_form()
+     * @see   SubManageActions::subForm()
      */
     public static function process(array $request_args)
     {

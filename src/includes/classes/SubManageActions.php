@@ -130,7 +130,7 @@ class SubManageActions extends AbsBase
      *
      * @param mixed $request_args Input argument(s).
      *
-     * @see   sub_manage_form_base::comment_id_row_via_ajax()
+     * @see   SubManageSubFormBase::commentIdRowViaAjax()
      */
     protected function subFormCommentIdRowViaAjax($request_args)
     {

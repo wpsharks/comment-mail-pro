@@ -399,7 +399,7 @@ class QueueProcessor extends AbsBase
      *    - `dby_queue_id` digested?
      *    - `logged` logged?
      *
-     * @see   utils_event::queue_note_code_desc()
+     * @see   UtilsEvent::queueNoteCodeDesc()
      */
     protected function validatedEntryProps(\stdClass $entry)
     {
@@ -499,7 +499,7 @@ class QueueProcessor extends AbsBase
      * @since 141111 First documented version.
      *
      * @param string         $event        Event type; `invalidated` or `notified`.
-     * @param string         $note_code    See {@link utils_event::queue_note_code()}.
+     * @param string         $note_code    See {@link UtilsEvent::queueNoteCode()}.
      *
      * @param \stdClass      $entry        Queue entry.
      *
@@ -540,7 +540,7 @@ class QueueProcessor extends AbsBase
      *    - `dby_queue_id` digested?
      *    - `logged` logged?
      *
-     * @see   utils_event::queue_note_code_desc()
+     * @see   UtilsEvent::queueNoteCodeDesc()
      */
     protected function entryProps(
       $event = '',

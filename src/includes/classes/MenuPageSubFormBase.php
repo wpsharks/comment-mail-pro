@@ -261,7 +261,7 @@ class MenuPageSubFormBase extends AbsBase
      * @return string HTML markup for this select field row.
      *    If no options (or too many options; this returns an input field instead.
      *
-     * @see   menu_page_actions::sub_form_comment_id_row_via_ajax()
+     * @see   MenuPageActions::subFormCommentIdRowViaAjax()
      */
     public static function commentIdRowViaAjax($post_id)
     {
@@ -294,7 +294,7 @@ class MenuPageSubFormBase extends AbsBase
      *
      * @return string JSON data object w/ user info.
      *
-     * @see   menu_page_actions::sub_form_user_id_info_via_ajax()
+     * @see   MenuPageActions::subFormUserIdInfoViaAjax()
      */
     public static function userIdInfoViaAjax($user_id)
     {
@@ -352,7 +352,7 @@ class MenuPageSubFormBase extends AbsBase
      *
      * @param array $request_args Incoming action request args.
      *
-     * @see   menu_page_actions::sub_form()
+     * @see   MenuPageActions::subForm()
      */
     public static function process(array $request_args)
     {

@@ -192,7 +192,7 @@ class UtilsMarkup extends AbsBase
      *
      * @return string Markup for last X subscriptions w/ a given status.
      *
-     * @see   utils_sub::last_x()
+     * @see   UtilsSub::lastX()
      */
     public function lastXSubs($x = 0, $post_id = null, array $args = [])
     {
@@ -262,7 +262,7 @@ class UtilsMarkup extends AbsBase
      *    This returns an empty string if there are no users (or too many users);
      *    i.e. an input field should be used instead of a select menu.
      *
-     * @see   utils_db::all_users()
+     * @see   UtilsDb::allUsers()
      */
     public function userSelectOptions($current_user_id = null, array $args = [])
     {
@@ -343,7 +343,7 @@ class UtilsMarkup extends AbsBase
      *    This returns an empty string if there are no posts (or too many posts);
      *    i.e. an input field should be used instead of a select menu.
      *
-     * @see   utils_db::all_posts()
+     * @see   UtilsDb::allPosts()
      */
     public function postSelectOptions($current_post_id = null, array $args = [])
     {
@@ -451,7 +451,7 @@ class UtilsMarkup extends AbsBase
      *    This returns an empty string if there are no comments (or too many comments);
      *    i.e. an input field should be used instead of a select menu.
      *
-     * @see   utils_db::all_comments()
+     * @see   UtilsDb::allComments()
      */
     public function commentSelectOptions($post_id, $current_comment_id = null, array $args = [])
     {
@@ -558,7 +558,7 @@ class UtilsMarkup extends AbsBase
      *
      * @return string Markup for deliver select menu options.
      *
-     * @see   utils_i18n::deliver_label()
+     * @see   UtilsI18n::deliverLabel()
      */
     public function deliverSelectOptions($current_deliver = null, array $args = [])
     {
@@ -621,7 +621,7 @@ class UtilsMarkup extends AbsBase
      *
      * @return string Markup for status select menu options.
      *
-     * @see   utils_i18n::status_label()
+     * @see   UtilsI18n::statusLabel()
      */
     public function statusSelectOptions($current_status = null, array $args = [])
     {
