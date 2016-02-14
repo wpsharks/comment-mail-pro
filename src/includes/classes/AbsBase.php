@@ -103,7 +103,6 @@ abstract class AbsBase
         if (is_object($this->___overload) && property_exists($this->___overload, $property)) {
             return $this->___overload->{$property};
         }
-
         throw new \exception(sprintf(__('Undefined overload property: `%1$s`.', $this->plugin->text_domain), $property));
     }
 
@@ -165,8 +164,7 @@ abstract class AbsBase
     protected function issetOr(&$var, $or = null, $type = '')
     {
         if (isset($var)) {
-            if ($type) // Set type?
-            {
+            if ($type) {
                 settype($var, $type);
             }
             return $var;
@@ -228,8 +226,7 @@ abstract class AbsBase
     protected function notEmptyOr(&$var, $or = null, $type = '')
     {
         if (!empty($var)) {
-            if ($type) // Set type?
-            {
+            if ($type) {
                 settype($var, $type);
             }
             return $var;
