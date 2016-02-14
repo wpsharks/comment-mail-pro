@@ -2,133 +2,134 @@
 /**
  * Sub Purger
  *
- * @since 141111 First documented version.
+ * @since     141111 First documented version.
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
- * @license GNU General Public License, version 3
+ * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
+/**
+ * Sub Purger
+ *
+ * @since 141111 First documented version.
+ */
+class SubPurger extends AbsBase
+{
+    /**
+     * @var integer Post ID.
+     *
+     * @since 141111 First documented version.
+     */
+    protected $post_id;
 
+    /**
+     * @var integer Comment ID.
+     *
+     * @since 141111 First documented version.
+     */
+    protected $comment_id;
 
-		/**
-		 * Sub Purger
-		 *
-		 * @since 141111 First documented version.
-		 */
-	class SubPurger extends AbsBase
-		{
-			/**
-			 * @var integer Post ID.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected $post_id;
+    /**
+     * @var integer User ID.
+     *
+     * @since 141111 First documented version.
+     */
+    protected $user_id;
 
-			/**
-			 * @var integer Comment ID.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected $comment_id;
+    /**
+     * @var integer Total subs purged.
+     *
+     * @since 141111 First documented version.
+     */
+    protected $purged;
 
-			/**
-			 * @var integer User ID.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected $user_id;
+    /**
+     * Class constructor.
+     *
+     * @param integer|string $post_id    Post ID.
+     *
+     * @param integer|string $comment_id Comment ID.
+     *
+     * @param integer|string $user_id    User ID.
+     *
+     * @since 141111 First documented version.
+     */
+    public function __construct($post_id, $comment_id = 0, $user_id = 0)
+    {
+        parent::__construct();
 
-			/**
-			 * @var integer Total subs purged.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected $purged;
+        $this->post_id    = (integer)$post_id;
+        $this->comment_id = (integer)$comment_id;
+        $this->user_id    = (integer)$user_id;
 
-			/**
-			 * Class constructor.
-			 *
-			 * @param integer|string $post_id Post ID.
-			 *
-			 * @param integer|string $comment_id Comment ID.
-			 *
-			 * @param integer|string $user_id User ID.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			public function __construct($post_id, $comment_id = 0, $user_id = 0)
-			{
-				parent::__construct();
+        $this->purged = 0; // Initialize.
 
-				$this->post_id    = (integer)$post_id;
-				$this->comment_id = (integer)$comment_id;
-				$this->user_id    = (integer)$user_id;
+        $this->maybePurge(); // If applicable.
+    }
 
-				$this->purged = 0; // Initialize.
+    /**
+     * Total subs purged.
+     *
+     * @since 141111 First documented version.
+     */
+    public function purged()
+    {
+        return $this->purged;
+    }
 
-				$this->maybe_purge(); // If applicable.
-			}
+    /**
+     * Purges subscriptions.
+     *
+     * @since 141111 First documented version.
+     */
+    protected function maybePurge()
+    {
+        $this->maybePurgePostComment();
+        $this->maybePurgeUser();
+    }
 
-			/**
-			 * Total subs purged.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			public function purged()
-			{
-				return $this->purged;
-			}
+    /**
+     * Purges subscriptions on post/comment deletions.
+     *
+     * @since 141111 First documented version.
+     */
+    protected function maybePurgePostComment()
+    {
+        if (!$this->post_id) {
+            return; // Not applicable.
+        }
+        $sql = "SELECT `ID` FROM `".esc_sql($this->plugin->utils_db->prefix().'subs')."`".
 
-			/**
-			 * Purges subscriptions.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected function maybe_purge()
-			{
-				$this->maybe_purge_post_comment();
-				$this->maybe_purge_user();
-			}
+               " WHERE `post_id` = '".esc_sql($this->post_id)."'".
+               ($this->comment_id ? " AND `comment_id` = '".esc_sql($this->comment_id)."'" : '');
 
-			/**
-			 * Purges subscriptions on post/comment deletions.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected function maybe_purge_post_comment()
-			{
-				if(!$this->post_id)
-					return; // Not applicable.
+        if (($ids = array_map('intval', $this->plugin->utils_db->wp->get_col($sql)))) {
+            $this->purged += $this->plugin->utils_sub->bulk_delete($ids, ['purging' => true]);
+        }
+    }
 
-				$sql = "SELECT `ID` FROM `".esc_sql($this->plugin->utils_db->prefix().'subs')."`".
+    /**
+     * Purges subscriptions on user deletions.
+     *
+     * @since 141111 First documented version.
+     */
+    protected function maybePurgeUser()
+    {
+        if (!$this->user_id) {
+            return; // Not applicable.
+        }
+        $user = new \WP_User($this->user_id);
+        if (!$user->ID) {
+            return; // Not possible.
+        }
+        $sql = "SELECT `ID` FROM `".esc_sql($this->plugin->utils_db->prefix().'subs')."`".
 
-				       " WHERE `post_id` = '".esc_sql($this->post_id)."'".
-				       ($this->comment_id ? " AND `comment_id` = '".esc_sql($this->comment_id)."'" : '');
+               " WHERE `user_id` = '".esc_sql($user->ID)."'".
+               ($user->user_email ? " OR `email` = '".esc_sql($user->user_email)."'" : '');
 
-				if(($ids = array_map('intval', $this->plugin->utils_db->wp->get_col($sql))))
-					$this->purged += $this->plugin->utils_sub->bulk_delete($ids, array('purging' => TRUE));
-			}
-
-			/**
-			 * Purges subscriptions on user deletions.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected function maybe_purge_user()
-			{
-				if(!$this->user_id)
-					return; // Not applicable.
-
-				$user = new \WP_User($this->user_id);
-				if(!$user->ID) return; // Not possible.
-
-				$sql = "SELECT `ID` FROM `".esc_sql($this->plugin->utils_db->prefix().'subs')."`".
-
-				       " WHERE `user_id` = '".esc_sql($user->ID)."'".
-				       ($user->user_email ? " OR `email` = '".esc_sql($user->user_email)."'" : '');
-
-				if(($ids = array_map('intval', $this->plugin->utils_db->wp->get_col($sql))))
-					$this->purged += $this->plugin->utils_sub->bulk_delete($ids, array('purging' => TRUE));
-			}
-		}
+        if (($ids = array_map('intval', $this->plugin->utils_db->wp->get_col($sql)))) {
+            $this->purged += $this->plugin->utils_sub->bulk_delete($ids, ['purging' => true]);
+        }
+    }
+}
 	
