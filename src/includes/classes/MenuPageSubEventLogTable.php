@@ -270,7 +270,7 @@ class MenuPageSubEventLogTable extends MenuPageTableBase
         $row_actions = [
           'delete' => '<a href="#"'.  // Depends on `menu-pages.js`.
                       ' data-pmp-action="'.esc_attr($delete_url).'"'. // The action URL.
-                      ' data-pmp-confirmation="'.esc_attr($this->plugin->utils_i18n->log_entry_js_deletion_confirmation_warning()).'"'.
+                      ' data-pmp-confirmation="'.esc_attr($this->plugin->utils_i18n->logEntryJsDeletionConfirmationWarning()).'"'.
                       ' title="'.esc_attr(__('Delete Sub. Event Log Entry', $this->plugin->text_domain)).'">'.
                       '  <i class="fa fa-times-circle"></i> '.__('Delete', $this->plugin->text_domain).
                       '</a>',
@@ -289,7 +289,7 @@ class MenuPageSubEventLogTable extends MenuPageTableBase
      */
     protected function column_event(\stdClass $item)
     {
-        $event_label = $this->plugin->utils_i18n->event_label($item->event);
+        $event_label = $this->plugin->utils_i18n->eventLabel($item->event);
 
         switch ($item->event) // Based on the type of event that took place.
         {

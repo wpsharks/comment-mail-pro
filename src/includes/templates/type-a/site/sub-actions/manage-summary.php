@@ -301,13 +301,13 @@ str_replace('%%title%%', __('My Comment Subscriptions', $plugin->text_domain), $
 									<?php endif; ?>
 								</td>
 								<td>
-									<?php echo esc_html($plugin->utils_i18n->sub_type_label($_sub_type)); ?>
+									<?php echo esc_html($plugin->utils_i18n->subTypeLabel($_sub_type)); ?>
 								</td>
 								<td>
-									<?php echo esc_html($plugin->utils_i18n->status_label($_sub->status)); ?>
+									<?php echo esc_html($plugin->utils_i18n->statusLabel($_sub->status)); ?>
 								</td>
 								<td>
-									<?php echo esc_html($plugin->utils_i18n->deliver_label($_sub->deliver)); ?>
+									<?php echo esc_html($plugin->utils_i18n->deliverLabel($_sub->deliver)); ?>
 								</td>
 							</tr>
 						<?php endforeach; ?>

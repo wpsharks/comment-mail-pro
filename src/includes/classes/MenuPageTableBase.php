@@ -609,7 +609,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
         $post_title_clip        = $this->plugin->utils_string->mid_clip($item->{$prefix.'title'});
         $post_date              = $this->plugin->utils_date->i18n('M j, Y', strtotime($item->{$prefix.'date_gmt'}));
         $post_date_ago          = $this->plugin->utils_date->approxTimeDifference(strtotime($item->{$prefix.'date_gmt'}));
-        $post_comments_status   = $this->plugin->utils_i18n->status_label($this->plugin->utils_db->postCommentStatusI18n($item->{$prefix.'comment_status'}), 'ucwords');
+        $post_comments_status   = $this->plugin->utils_i18n->statusLabel($this->plugin->utils_db->postCommentStatusI18n($item->{$prefix.'comment_status'}), 'ucwords');
         $post_edit_comments_url = $this->plugin->utils_url->post_edit_comments_short($item->{$key});
         $post_total_subs        = $this->plugin->utils_sub->query_total($item->{$key});
         $post_total_comments    = (integer)$item->{$prefix.'comment_count'};
@@ -677,7 +677,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
         ];
         $comment_date_time = $this->plugin->utils_date->i18n('M j, Y g:i a', strtotime($item->{$prefix.'date_gmt'}));
         $comment_time_ago  = $this->plugin->utils_date->approxTimeDifference(strtotime($item->{$prefix.'date_gmt'}));
-        $comment_status    = $this->plugin->utils_i18n->status_label($this->plugin->utils_db->commentStatusI18n($item->{$prefix.'approved'}), 'ucwords');
+        $comment_status    = $this->plugin->utils_i18n->statusLabel($this->plugin->utils_db->commentStatusI18n($item->{$prefix.'approved'}), 'ucwords');
 
         $comment_info = '<i class="fa fa-comment"></i>'. // Start w/ a comment bubble icon.
                         ' '.$this->plugin->utils_markup->name_email($item->{$prefix.'author'}, $item->{$prefix.'author_email'}, $name_email_args);
@@ -792,7 +792,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
         if (!$item->{$key}) {
             return '—'; // Not possible.
         }
-        return esc_html($this->plugin->utils_i18n->status_label($item->{$key}));
+        return esc_html($this->plugin->utils_i18n->statusLabel($item->{$key}));
     }
 
     /**
@@ -828,7 +828,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
         if (!$item->{$key}) {
             return '—'; // Not possible.
         }
-        return esc_html($this->plugin->utils_i18n->deliver_label($item->{$key}));
+        return esc_html($this->plugin->utils_i18n->deliverLabel($item->{$key}));
     }
 
     /**
@@ -1884,7 +1884,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
               sprintf(
                 __('Action complete. %1$s %2$s.', $this->plugin->text_domain),
                 esc_html($this->plugin->utils_i18n->{$this->plural_name}($counter)),
-                esc_html($this->plugin->utils_i18n->action_ed($bulk_action))
+                esc_html($this->plugin->utils_i18n->actionEd($bulk_action))
               ),
               ['transient' => true, 'for_page' => $this->plugin->utils_env->currentMenuPage()]
             );

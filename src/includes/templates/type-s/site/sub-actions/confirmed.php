@@ -91,7 +91,7 @@ echo str_replace('%%title%%', __('Confirmation', $plugin->text_domain), $site_he
 			$subscribed_to_own_comment = $sub_comment && strcasecmp($sub_comment->comment_author_email, $sub->email) === 0;
 
 			// Subscription delivery option label; i.e. a translated display of the option value.
-			$sub_deliver_label       = $plugin->utils_i18n->deliver_label($sub->deliver);
+			$sub_deliver_label       = $plugin->utils_i18n->deliverLabel($sub->deliver);
 			$sub_deliver_description = ''; // Iniitalize; determined below.
 
 			switch($sub->deliver) // Construct a brief description now also.

@@ -565,10 +565,10 @@ namespace WebSharks\CommentMail\Pro;
 				$allow_arbitrary = (boolean)$args['allow_arbitrary'];
 
 				$deliver_options_available = array(
-					'asap'   => $this->plugin->utils_i18n->deliver_label('asap'),
-					'hourly' => $this->plugin->utils_i18n->deliver_label('hourly'),
-					'daily'  => $this->plugin->utils_i18n->deliver_label('daily'),
-					'weekly' => $this->plugin->utils_i18n->deliver_label('weekly'),
+                  'asap'   => $this->plugin->utils_i18n->deliverLabel('asap'),
+                  'hourly' => $this->plugin->utils_i18n->deliverLabel('hourly'),
+                  'daily'  => $this->plugin->utils_i18n->deliverLabel('daily'),
+                  'weekly' => $this->plugin->utils_i18n->deliverLabel('weekly'),
 				); // These are hard-coded; i.e. not expected to change.
 
 				$options = ''; // Initialize.
@@ -629,10 +629,10 @@ namespace WebSharks\CommentMail\Pro;
 				$ui_protected_data_keys_enable = (boolean)$args['ui_protected_data_keys_enable'];
 
 				$status_options_available = array(
-					'unconfirmed' => $this->plugin->utils_i18n->status_label('unconfirmed'),
-					'subscribed'  => $this->plugin->utils_i18n->status_label('subscribed'),
-					'suspended'   => $this->plugin->utils_i18n->status_label('suspended'),
-					'trashed'     => $this->plugin->utils_i18n->status_label('trashed'),
+                  'unconfirmed' => $this->plugin->utils_i18n->statusLabel('unconfirmed'),
+                  'subscribed'  => $this->plugin->utils_i18n->statusLabel('subscribed'),
+                  'suspended'   => $this->plugin->utils_i18n->statusLabel('suspended'),
+                  'trashed'     => $this->plugin->utils_i18n->statusLabel('trashed'),
 				); // These are hard-coded; i.e. not expected to change.
 
 				if($ui_protected_data_keys_enable) // Front-end UI should limit choices.

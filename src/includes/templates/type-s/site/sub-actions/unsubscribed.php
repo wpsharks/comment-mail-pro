@@ -91,7 +91,7 @@ echo str_replace('%%title%%', __('Unsubscribe', $plugin->text_domain), $site_hea
 		$subscribed_to_own_comment = $sub_comment && strcasecmp($sub_comment->comment_author_email, $sub->email) === 0;
 
 		// Former subscription delivery option label; i.e. a translated display of the option value.
-		$sub_deliver_label = $plugin->utils_i18n->deliver_label($sub->deliver);
+		$sub_deliver_label = $plugin->utils_i18n->deliverLabel($sub->deliver);
 
 		// Subscriber's `"name" <email>` w/ HTML markup enhancements.
 		$sub_name_email_markup = $plugin->utils_markup->name_email($sub->fname.' '.$sub->lname, $sub->email);

@@ -1174,7 +1174,7 @@ class Plugin extends AbsBase
           [
             'bulkReconfirmConfirmation' => __('Resend email confirmation link? Are you sure?', $this->text_domain),
             'bulkDeleteConfirmation'    => $this->utils_env->isMenuPage('*_event_log')
-              ? $this->utils_i18n->log_entry_js_deletion_confirmation_warning()
+              ? $this->utils_i18n->logEntryJsDeletionConfirmationWarning()
               : __('Delete permanently? Are you sure?', $this->text_domain),
             'dateTimePickerI18n'        => [
               'en' => [
