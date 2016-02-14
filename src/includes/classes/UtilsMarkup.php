@@ -70,9 +70,9 @@ class UtilsMarkup extends AbsBase
         $anchor_target          = trim((string)$args['anchor_target']);
         $anchor_summary_sub_key = trim((string)$args['anchor_summary_sub_key']);
 
-        $name       = $name ? $this->plugin->utils_string->clean_name($name) : '';
-        $name_clip  = $name ? $this->plugin->utils_string->mid_clip($name) : '';
-        $email_clip = $email ? $this->plugin->utils_string->mid_clip($email) : '';
+        $name       = $name ? $this->plugin->utils_string->cleanName($name) : '';
+        $name_clip  = $name ? $this->plugin->utils_string->midClip($name) : '';
+        $email_clip = $email ? $this->plugin->utils_string->midClip($email) : '';
 
         $name_email_attr_value = ($name ? '"'.$name.'"' : '').($name && $email ? ' ' : '').($email ? '<'.$email.'>' : '');
         $name_span_tag         = $name ? '<span style="'.esc_attr($name_style).'">'.esc_html($name_clip).'</span>' : '';
@@ -817,7 +817,7 @@ class UtilsMarkup extends AbsBase
         }
         $max_length = (integer)$max_length;
         $markup     = $this->commentContent($comment);
-        $mid_clip   = $this->plugin->utils_string->mid_clip($markup, $max_length);
+        $mid_clip   = $this->plugin->utils_string->midClip($markup, $max_length);
 
         return trim($mid_clip); // After markup/filters and then mid-clipping.
     }

@@ -624,7 +624,7 @@ class SubInserter extends AbsBase
      */
     public function errorsHtml()
     {
-        return array_map([$this->plugin->utils_string, 'markdown_no_p'], $this->errors);
+        return array_map([$this->plugin->utils_string, 'markdownNoP'], $this->errors);
     }
 
     /**
@@ -672,7 +672,7 @@ class SubInserter extends AbsBase
      */
     public function successesHtml()
     {
-        return array_map([$this->plugin->utils_string, 'markdown_no_p'], $this->successes);
+        return array_map([$this->plugin->utils_string, 'markdownNoP'], $this->successes);
     }
 
     /*
@@ -1230,22 +1230,22 @@ class SubInserter extends AbsBase
                         $_value = ''; // Use a default value.
                     }
                     if ($this->is_insert && !$_value && $this->user) {
-                        $_value = $this->plugin->utils_string->first_name('', $this->user);
+                        $_value = $this->plugin->utils_string->firstName('', $this->user);
                     }
                     if ($this->is_insert && !$_value && $this->data['email']) {
-                        $_value = $this->plugin->utils_string->email_name((string)$this->data['email']);
+                        $_value = $this->plugin->utils_string->emailName((string)$this->data['email']);
                     }
                     if ($this->is_update && isset($_value) && !$_value && $this->user) {
-                        $_value = $this->plugin->utils_string->first_name('', $this->user);
+                        $_value = $this->plugin->utils_string->firstName('', $this->user);
                     }
                     if ($this->is_update && isset($_value) && !$_value && $this->data['email']) {
-                        $_value = $this->plugin->utils_string->email_name((string)$this->data['email']);
+                        $_value = $this->plugin->utils_string->emailName((string)$this->data['email']);
                     }
                     if ($this->is_update && isset($_value) && !$_value && $this->sub && $this->sub->email) {
-                        $_value = $this->plugin->utils_string->email_name($this->sub->email);
+                        $_value = $this->plugin->utils_string->emailName($this->sub->email);
                     }
                     if (isset($_value)) { // Clean the name.
-                        $_value = $this->plugin->utils_string->clean_name($_value);
+                        $_value = $this->plugin->utils_string->cleanName($_value);
                     }
                     if (isset($_value) && strlen($_value) > 50) {
                         $this->errors['invalid_sub_first_name'] = sprintf(__('Invalid first name: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
@@ -1263,13 +1263,13 @@ class SubInserter extends AbsBase
                         $_value = ''; // Use a default value.
                     }
                     if ($this->is_insert && !$_value && $this->user) {
-                        $_value = $this->plugin->utils_string->last_name('', $this->user);
+                        $_value = $this->plugin->utils_string->lastName('', $this->user);
                     }
                     if ($this->is_update && isset($_value) && !$_value && $this->user) {
-                        $_value = $this->plugin->utils_string->last_name('', $this->user);
+                        $_value = $this->plugin->utils_string->lastName('', $this->user);
                     }
                     if (isset($_value)) { // Clean the name.
-                        $_value = $this->plugin->utils_string->clean_name($_value);
+                        $_value = $this->plugin->utils_string->cleanName($_value);
                     }
                     if (isset($_value) && strlen($_value) > 100) {
                         $this->errors['invalid_sub_last_name'] = sprintf(__('Invalid last name: `%1$s`.', $this->plugin->text_domain), esc_html($_value));

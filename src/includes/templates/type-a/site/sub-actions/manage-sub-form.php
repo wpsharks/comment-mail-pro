@@ -272,11 +272,11 @@ echo str_replace('%%title%%', $is_edit ? __('Edit Subscription', $plugin->text_d
 
 					var plugin = {}, $window = $(window), $document = $(document),
 
-						namespace = '<?php echo $plugin->utils_string->esc_js_sq(GLOBAL_NS); ?>',
-						namespaceSlug = '<?php echo $plugin->utils_string->esc_js_sq(str_replace('_', '-', GLOBAL_NS)); ?>',
+						namespace = '<?php echo $plugin->utils_string->escJsSq(GLOBAL_NS); ?>',
+						namespaceSlug = '<?php echo $plugin->utils_string->escJsSq(str_replace('_', '-', GLOBAL_NS)); ?>',
 
-						ajaxEndpoint = '<?php echo $plugin->utils_string->esc_js_sq(home_url('/')); ?>',
-						pluginUrl = '<?php echo $plugin->utils_string->esc_js_sq(rtrim($plugin->utils_url->to('/'), '/')); ?>',
+						ajaxEndpoint = '<?php echo $plugin->utils_string->escJsSq(home_url('/')); ?>',
+						pluginUrl = '<?php echo $plugin->utils_string->escJsSq(rtrim($plugin->utils_url->to('/'), '/')); ?>',
 
 						chosenOps = {search_contains: true, disable_search_threshold: 10, allow_single_deselect: true};
 

@@ -606,7 +606,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
             return $id_only; // All we can do.
         }
         $post_type_label        = $post_type->labels->singular_name;
-        $post_title_clip        = $this->plugin->utils_string->mid_clip($item->{$prefix.'title'});
+        $post_title_clip        = $this->plugin->utils_string->midClip($item->{$prefix.'title'});
         $post_date              = $this->plugin->utils_date->i18n('M j, Y', strtotime($item->{$prefix.'date_gmt'}));
         $post_date_ago          = $this->plugin->utils_date->approxTimeDifference(strtotime($item->{$prefix.'date_gmt'}));
         $post_comments_status   = $this->plugin->utils_i18n->statusLabel($this->plugin->utils_db->postCommentStatusI18n($item->{$prefix.'comment_status'}), 'ucwords');
@@ -941,7 +941,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
         } else if (($property === 'ID' || substr($property, -3) === '_id') && is_integer($value)) {
             $value = $value <= 0 ? '—' : esc_html((string)$value);
         } else {
-            $value = esc_html($this->plugin->utils_string->mid_clip((string)$value));
+            $value = esc_html($this->plugin->utils_string->midClip((string)$value));
         }
         return isset($value[0]) ? $value : '—'; // Allow for `0`.
     }
@@ -1894,7 +1894,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
         if (headers_sent()) { // Output started already?
             exit('      <script type="text/javascript">'.
                  "         document.getElementsByTagName('body')[0].style.display = 'none';".
-                 "         location.href = '".$this->plugin->utils_string->esc_js_sq($redirect_to)."';".
+                 "         location.href = '".$this->plugin->utils_string->escJsSq($redirect_to)."';".
                  '      </script>'.
                  '   </body>'.
                  '</html>');
@@ -2095,7 +2095,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
             }
             $_post_permalink  = get_permalink($_post->ID);
             $_post_edit_link  = get_edit_post_link($_post->ID, '');
-            $_post_title_clip = $this->plugin->utils_string->mid_clip($_post->post_title);
+            $_post_title_clip = $this->plugin->utils_string->midClip($_post->post_title);
             $_post_type_label = $_post_type->labels->singular_name;
 
             $post_lis[$_post->ID] = '<li>'. // <title> [edit].
@@ -2127,7 +2127,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
             ];
             $_post_permalink  = get_permalink($_post->ID);
             $_post_edit_link  = get_edit_post_link($_post->ID, '');
-            $_post_title_clip = $this->plugin->utils_string->mid_clip($_post->post_title);
+            $_post_title_clip = $this->plugin->utils_string->midClip($_post->post_title);
             $_post_type_label = $_post_type->labels->singular_name;
 
             $_comment_permalink    = get_comment_link($_comment->comment_ID);

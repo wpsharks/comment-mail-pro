@@ -53,7 +53,7 @@ class WebhookActions extends AbsBase
         foreach ((array)$_REQUEST[GLOBAL_NS] as $_action => $_request_args) {
             if ($_action && in_array($_action, $this->valid_actions, true)) {
                 $_method = preg_replace_callback('/_(.)/', function ($m) { return strtoupper($m[1]); }, strtolower($_action));
-                $this->{$_method}($this->plugin->utils_string->trim_strip_deep($_request_args));
+                $this->{$_method}($this->plugin->utils_string->trimStripDeep($_request_args));
             }
         }
         unset($_action, $_method, $_request_args); // Housekeeping.

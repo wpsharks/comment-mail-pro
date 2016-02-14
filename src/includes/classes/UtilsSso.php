@@ -106,7 +106,7 @@ class UtilsSso extends AbsBase
         $lname = trim((string)$args['lname']);
         $email = trim((string)$args['email']);
 
-        $fname = $this->plugin->utils_string->first_name($fname, $email);
+        $fname = $this->plugin->utils_string->firstName($fname, $email);
 
         $no_cache = (boolean)$args['no_cache']; // Fresh check(s)?
 
@@ -387,7 +387,7 @@ class UtilsSso extends AbsBase
             ]
           )."\n";
         $sso_get_vars = !empty($_GET[GLOBAL_NS]['sso']) ? (array)$_GET[GLOBAL_NS]['sso'] : [];
-        $sso_get_vars = $this->plugin->utils_string->trim_strip_deep($sso_get_vars);
+        $sso_get_vars = $this->plugin->utils_string->trimStripDeep($sso_get_vars);
 
         foreach ($sso_get_vars as $_sso_var_key => $_sso_var_value) {
             if (!in_array($_sso_var_key, ['action', 'service', 'redirect_to', 'sso_id', '_wpnonce'], true)) {

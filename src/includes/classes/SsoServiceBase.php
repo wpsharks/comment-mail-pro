@@ -293,13 +293,13 @@ abstract class SsoServiceBase extends AbsBase
             echo '      <script type="text/javascript">';
 
             echo "         if(window.parent && window.parent !== window)".
-                 "            window.parent.location = '".$this->plugin->utils_string->esc_js_sq($redirect_to)."';".
+                 "            window.parent.location = '".$this->plugin->utils_string->escJsSq($redirect_to)."';".
 
                  "         else if(window.opener && window.opener !== window)". // Most common scenario.
-                 "            window.opener.location = '".$this->plugin->utils_string->esc_js_sq($redirect_to)."', window.close();".
+                 "            window.opener.location = '".$this->plugin->utils_string->escJsSq($redirect_to)."', window.close();".
 
                  "         else". // Redirect in the current window.
-                 "            window.location = '".$this->plugin->utils_string->esc_js_sq($redirect_to)."';";
+                 "            window.location = '".$this->plugin->utils_string->escJsSq($redirect_to)."';";
 
             echo '      </script>';
             echo '   </head>';

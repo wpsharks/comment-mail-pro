@@ -236,8 +236,8 @@ class RveMandrill extends AbsBase
         if (!$reply_to_email) { // Must have this.
             return; // Missing `Reply-To:` address.
         }
-        $text_body = $this->plugin->utils_string->html_to_text($text_body);
-        $html_body = $this->plugin->utils_string->html_to_rich_text($html_body);
+        $text_body = $this->plugin->utils_string->htmlToText($text_body);
+        $html_body = $this->plugin->utils_string->htmlToRichText($html_body);
 
         if (!($rich_text_body = $this->coalesce($html_body, $text_body))) {
             return; // Empty reply; nothing to do here.

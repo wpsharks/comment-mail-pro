@@ -63,7 +63,7 @@ class SsoActions extends AbsBase
             return; // Not applicable.
         }
         $cb_r_args = []; // Initialize callback request args.
-        $_r        = $this->plugin->utils_string->trim_strip_deep($_REQUEST);
+        $_r        = $this->plugin->utils_string->trimStripDeep($_REQUEST);
 
         foreach (['oauth_token', 'oauth_verifier', 'oauth_problem', 'code', 'state'] as $_cb_r_arg_key) {
             if (isset($_r[$_cb_r_arg_key])) {
@@ -75,7 +75,7 @@ class SsoActions extends AbsBase
         foreach ((array)$_REQUEST[GLOBAL_NS] as $_action => $_request_args) {
             if ($_action && in_array($_action, $this->valid_actions, true) && is_array($_request_args)) {
                 $_method = preg_replace_callback('/_(.)/', function ($m) { return strtoupper($m[1]); }, strtolower($_action));
-                $this->{$_method}(array_merge($cb_r_args, $this->plugin->utils_string->trim_strip_deep($_request_args)));
+                $this->{$_method}(array_merge($cb_r_args, $this->plugin->utils_string->trimStripDeep($_request_args)));
             }
         }
         unset($_action, $_method, $_request_args); // Housekeeping.

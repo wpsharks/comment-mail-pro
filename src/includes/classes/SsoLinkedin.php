@@ -96,7 +96,7 @@ class SsoLinkedin extends SsoServiceBase
             unset($_prop); // Just a little housekeeping.
 
             if (!($fname = $this->request_args['fname'])) {
-                $fname = $this->plugin->utils_string->first_name(
+                $fname = $this->plugin->utils_string->firstName(
                   $this->coalesce($service_user->firstName, $service_user->formattedName),
                   $this->coalesce($this->request_args['email'], $service_user->emailAddress)
                 );
@@ -105,7 +105,7 @@ class SsoLinkedin extends SsoServiceBase
                 $lname = $service_user->lastName; // Try this next; obviously.
             }
             if (!$lname) {
-                $lname = $this->plugin->utils_string->last_name($service_user->formattedName);
+                $lname = $this->plugin->utils_string->lastName($service_user->formattedName);
             }
             $email = $this->coalesce($this->request_args['email'], $service_user->emailAddress);
 

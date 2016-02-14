@@ -94,16 +94,16 @@ class SsoTwitter extends SsoServiceBase
             unset($_prop); // Just a little housekeeping.
 
             if (!($fname = $this->request_args['fname'])) {
-                $fname = $this->plugin->utils_string->first_name(
+                $fname = $this->plugin->utils_string->firstName(
                   $this->coalesce($service_user->name, $service_user->screen_name),
                   $this->request_args['email'] // Twitter does not provide this.
                 );
             }
             if (!($lname = $this->request_args['lname'])) {
-                $lname = $this->plugin->utils_string->last_name($service_user->name);
+                $lname = $this->plugin->utils_string->lastName($service_user->name);
             }
             if (!$lname) {
-                $lname = $this->plugin->utils_string->last_name($service_user->screen_name);
+                $lname = $this->plugin->utils_string->lastName($service_user->screen_name);
             }
             $email = $this->request_args['email']; // From request args only.
 

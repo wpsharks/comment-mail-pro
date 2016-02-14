@@ -182,8 +182,8 @@ class SubInjector extends AbsBase
           'comment_id' => $this->type === 'comments' ? 0 : $this->comment->comment_ID,
           'deliver'    => $this->deliver, // Delivery option.
 
-          'fname' => $this->plugin->utils_string->first_name($this->comment->comment_author, $this->comment->comment_author_email),
-          'lname' => $this->plugin->utils_string->last_name($this->comment->comment_author),
+          'fname' => $this->plugin->utils_string->firstName($this->comment->comment_author, $this->comment->comment_author_email),
+          'lname' => $this->plugin->utils_string->lastName($this->comment->comment_author),
           'email' => $this->comment->comment_author_email,
         ];
         $this->sub_inserter = new SubInserter(

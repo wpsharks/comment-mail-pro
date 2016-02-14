@@ -1891,7 +1891,7 @@ class Plugin extends AbsBase
         if (!is_admin() || $GLOBALS['pagenow'] !== 'update.php') {
             return $transient; // Nothing to do.
         }
-        $_r = $this->utils_string->trim_strip_deep($_REQUEST);
+        $_r = $this->utils_string->trimStripDeep($_REQUEST);
 
         if (empty($_r['action']) || $_r['action'] !== 'upgrade-plugin') {
             return $transient; // Nothing to do.
@@ -1939,7 +1939,7 @@ class Plugin extends AbsBase
         if (!is_admin() || $GLOBALS['pagenow'] !== 'update.php') {
             return $types; // Nothing to do here.
         }
-        $_r = $this->utils_string->trim_strip_deep($_REQUEST);
+        $_r = $this->utils_string->trimStripDeep($_REQUEST);
 
         if (empty($_r['action']) || $_r['action'] !== 'upgrade-plugin') {
             return $types; // Nothing to do here.
@@ -2182,7 +2182,7 @@ class Plugin extends AbsBase
                 }
                 $_full_markup = // Put together the full markup; including other pieces.
                   '<div class="'.esc_attr($_classes).' style="clear: both;">'. // clear:both needed to fix StCR options page clash; see http://bit.ly/1V83vQl
-                  '  '.$this->utils_string->p_wrap($_args['markup'], $_dismiss).
+                  '  '.$this->utils_string->pWrap($_args['markup'], $_dismiss).
                   '</div>';
 
                 echo apply_filters(__METHOD__.'_notice', $_full_markup, get_defined_vars());

@@ -792,7 +792,7 @@ namespace WebSharks\CommentMail\Pro;
 				wp_parse_str($query, $query_vars);
 				$url = $this->no_query($url);
 
-				$_r = $this->plugin->utils_string->trim_strip_deep($_REQUEST);
+				$_r = $this->plugin->utils_string->trimStripDeep($_REQUEST);
 
 				$also_keep = array_map('strval', $also_keep);
 				$keepers   = array('page', 'orderby', 'order', 's');
@@ -1380,7 +1380,7 @@ namespace WebSharks\CommentMail\Pro;
 						$query_nav_vars = (array)$query_vars[GLOBAL_NS]['manage']['summary_nav'];
 
 					if($_REQUEST && !empty($_REQUEST[GLOBAL_NS]['manage']['summary_nav']))
-						$_r_nav_vars = $this->plugin->utils_string->trim_strip_deep((array)$_REQUEST[GLOBAL_NS]['manage']['summary_nav']);
+						$_r_nav_vars = $this->plugin->utils_string->trimStripDeep((array)$_REQUEST[GLOBAL_NS]['manage']['summary_nav']);
 
 					foreach(array_keys(sub_manage_summary::$default_nav_vars) as $_nav_var_key)
 					{

@@ -158,7 +158,7 @@ class UtilsMail extends AbsBase
         $headers[] = 'Content-Type: text/html; charset=UTF-8'; // Force this, always.
 
         if ($this->plugin->options['from_email'] && !$this->headerExists('From', $headers)) {
-            $headers[] = 'From: "'.$this->plugin->utils_string->esc_dq($this->plugin->options['from_name']).'"'.
+            $headers[] = 'From: "'.$this->plugin->utils_string->escDq($this->plugin->options['from_name']).'"'.
                          ' <'.$this->plugin->options['from_email'].'>';
         }
         if ($this->plugin->options['reply_to_email'] && !$this->headerExists('Reply-To', $headers)) {
@@ -226,7 +226,7 @@ class UtilsMail extends AbsBase
         $headers[] = 'Content-Type: text/html; charset=UTF-8'; // Force this, always.
 
         if ($this->plugin->options['from_email'] && !$this->headerExists('From', $headers)) {
-            $headers[] = 'From: "'.$this->plugin->utils_string->esc_dq($this->plugin->options['from_name']).'"'.
+            $headers[] = 'From: "'.$this->plugin->utils_string->escDq($this->plugin->options['from_name']).'"'.
                          ' <'.$this->plugin->options['from_email'].'>';
         }
         if ($this->plugin->options['reply_to_email'] && !$this->headerExists('Reply-To', $headers)) {
@@ -238,7 +238,7 @@ class UtilsMail extends AbsBase
         }
         unset($phpmailer); // Unset so WordPress will recreate if it needs it again in this process.
 
-        $debug_output_markup = $this->plugin->utils_string->trim_html(ob_get_clean());
+        $debug_output_markup = $this->plugin->utils_string->trimHtml(ob_get_clean());
         $results_markup      = $this->testResultsMarkup($to, $via, $sent, $debug_output_markup);
 
         return (object)compact('to', 'via', 'sent', 'debug_output_markup', 'results_markup');
@@ -276,7 +276,7 @@ class UtilsMail extends AbsBase
         if ($this->isSmtpEnabled()) { // Can use SMTP; i.e. enabled?
             $mail_smtp           = new MailSmtp(true); // Single instance w/ debugging.
             $sent                = $mail_smtp->send($to, $subject, $message, $headers, $attachments);
-            $debug_output_markup = $this->plugin->utils_string->trim_html($mail_smtp->debugOutputMarkup());
+            $debug_output_markup = $this->plugin->utils_string->trimHtml($mail_smtp->debugOutputMarkup());
         } else {
             $debug_output_markup = __('Complete failure; configuration incomplete.', $this->plugin->text_domain);
         }
@@ -307,7 +307,7 @@ class UtilsMail extends AbsBase
         $via                 = (string)$via;
         $sent                = (boolean)$sent;
         $debug_output_markup = (string)$debug_output_markup;
-        $debug_output_markup = $this->plugin->utils_string->trim_html($debug_output_markup);
+        $debug_output_markup = $this->plugin->utils_string->trimHtml($debug_output_markup);
 
         if ($via === 'wp_mail') { // Convert this to HTML markup.
             $via_markup = $this->plugin->utils_markup->xAnchor('https://developer.wordpress.org/reference/functions/wp_mail/', 'wp_mail()');
@@ -379,7 +379,7 @@ class UtilsMail extends AbsBase
         $regex_delimitation_splitter = '/'.preg_quote($delimiter, '/').'+/';
 
         $possible_addresses = preg_split($regex_delimitation_splitter, $value, null, PREG_SPLIT_NO_EMPTY);
-        $possible_addresses = $this->plugin->utils_string->trim_deep($possible_addresses);
+        $possible_addresses = $this->plugin->utils_string->trimDeep($possible_addresses);
 
         foreach ($possible_addresses as $_address) { // Iterate all possible addresses.
             if (strpos($_address, '@') === false) {
@@ -389,15 +389,15 @@ class UtilsMail extends AbsBase
                 if ($_m['email'] && strpos($_m['email'], '@', 1) !== false && (!$strict || is_email($_m['email']))) {
                     $_email             = strtolower($_m['email']);
                     $_name              = !empty($_m['name']) ? $_m['name'] : '';
-                    $_fname             = $this->plugin->utils_string->first_name($_name, $_email);
-                    $_lname             = $this->plugin->utils_string->last_name($_name);
+                    $_fname             = $this->plugin->utils_string->firstName($_name, $_email);
+                    $_lname             = $this->plugin->utils_string->lastName($_name);
                     $addresses[$_email] = (object)['fname' => $_fname, 'lname' => $_lname, 'email' => $_email];
                     continue; // Inside brackets; all done here.
                 }
             }
             if ($_address && strpos($_address, '@', 1) !== false && (!$strict || is_email($_address))) {
                 $_email             = strtolower($_address);
-                $_fname             = $this->plugin->utils_string->first_name('', $_email);
+                $_fname             = $this->plugin->utils_string->firstName('', $_email);
                 $_lname             = ''; // Not possible in this case.
                 $addresses[$_email] = (object)['fname' => $_fname, 'lname' => $_lname, 'email' => $_email];
             }

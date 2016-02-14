@@ -76,7 +76,7 @@ class CommentPost extends AbsBase
             return; // Not applicable.
         }
         $sub_type = (string)$_POST[GLOBAL_NS.'_sub_type'];
-        if (!($sub_type = $this->plugin->utils_string->trim_strip($sub_type))) {
+        if (!($sub_type = $this->plugin->utils_string->trimStrip($sub_type))) {
             return; // Not applicable.
         }
         $sub_deliver = !empty($_POST[GLOBAL_NS.'_sub_deliver'])

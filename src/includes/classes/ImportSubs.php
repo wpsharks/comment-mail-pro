@@ -126,7 +126,7 @@ class ImportSubs extends AbsBase
             $current_csv_line_number++; // Increment line counter.
             $current_csv_line_index++; // Increment line index also.
 
-            $_csv_line = $this->plugin->utils_string->trim_deep($_csv_line);
+            $_csv_line = $this->plugin->utils_string->trimDeep($_csv_line);
 
             if ($current_csv_line_index === 1 && !empty($_csv_line[0])) {
                 foreach ($_csv_line as $_csv_header) {
@@ -276,6 +276,6 @@ class ImportSubs extends AbsBase
      */
     protected function errorsHtml()
     {
-        return array_map([$this->plugin->utils_string, 'markdown_no_p'], $this->errors);
+        return array_map([$this->plugin->utils_string, 'markdownNoP'], $this->errors);
     }
 }

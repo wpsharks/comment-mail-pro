@@ -146,7 +146,7 @@ class OutputFile extends AbsBase
         header(
           'Content-Disposition:'.
           ' '.$this->content_disposition.';'.
-          ' filename="'.$this->plugin->utils_string->esc_dq($this->file_name).'";'.
+          ' filename="'.$this->plugin->utils_string->escDq($this->file_name).'";'.
           ' filename*=UTF-8\'\''.rawurlencode($this->file_name)
         );
     }

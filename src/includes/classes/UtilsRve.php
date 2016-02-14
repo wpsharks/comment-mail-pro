@@ -203,7 +203,7 @@ class UtilsRve extends AbsBase
         $reply_to_email  = trim((string)$reply_to_email);
         $subject         = trim((string)$subject);
         $rich_text_body  = trim((string)$rich_text_body);
-        $plain_text_body = $this->plugin->utils_string->html_to_text($rich_text_body);
+        $plain_text_body = $this->plugin->utils_string->htmlToText($rich_text_body);
 
         $regex_irt_suffix_frag = $this->regexFragFor('irt_suffix');
         $regex_irt_marker_frag = $this->regexFragFor('irt_marker');
@@ -408,16 +408,16 @@ class UtilsRve extends AbsBase
             $force_moderation = false; // Found end divider, no need to moderate.
             list($sanitized_rich_text_body) = preg_split($regex_manual_end_divider, $rich_text_body, 2);
             $sanitized_rich_text_body = $this->stripWroteByLine($sanitized_rich_text_body);
-            $sanitized_rich_text_body = $this->plugin->utils_string->trim_html($sanitized_rich_text_body);
+            $sanitized_rich_text_body = $this->plugin->utils_string->trimHtml($sanitized_rich_text_body);
         } else if (preg_match($regex_end_divider, $rich_text_body)) {
             $force_moderation = false; // Found end divider, no need to moderate.
             list($sanitized_rich_text_body) = preg_split($regex_end_divider, $rich_text_body, 2);
             $sanitized_rich_text_body = $this->stripWroteByLine($sanitized_rich_text_body);
-            $sanitized_rich_text_body = $this->plugin->utils_string->trim_html($sanitized_rich_text_body);
+            $sanitized_rich_text_body = $this->plugin->utils_string->trimHtml($sanitized_rich_text_body);
         } else { // If unable to find a valid end divider; force moderation on this reply.
             $force_moderation         = true; // Force moderation in this case.
             $sanitized_rich_text_body = $rich_text_body; // Initialize sanitized form.
-            $sanitized_rich_text_body = $this->plugin->utils_string->trim_html($sanitized_rich_text_body);
+            $sanitized_rich_text_body = $this->plugin->utils_string->trimHtml($sanitized_rich_text_body);
         }
         return (object)compact('force_moderation', 'sanitized_rich_text_body');
     }
@@ -487,7 +487,7 @@ class UtilsRve extends AbsBase
         if (!$from_email && $sub && $sub->email) { // Can autofill?
             $from_email = $sub->email; // Email address already on file.
         }
-        $from_name = $this->plugin->utils_string->clean_name($from_name);
+        $from_name = $this->plugin->utils_string->cleanName($from_name);
         $from_ip   = $sub ? $sub->last_ip : ''; // Use last known IP if possible.
 
         # Basic validation before attempting to post the comment below.

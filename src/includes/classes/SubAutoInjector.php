@@ -142,8 +142,8 @@ class SubAutoInjector extends AbsBase
           'comment_id' => 0, // Subscribe to all comments.
           'deliver'    => $this->plugin->options['auto_subscribe_deliver'],
 
-          'fname' => $this->plugin->utils_string->first_name('', $this->post_author),
-          'lname' => $this->plugin->utils_string->last_name('', $this->post_author),
+          'fname' => $this->plugin->utils_string->firstName('', $this->post_author),
+          'lname' => $this->plugin->utils_string->lastName('', $this->post_author),
           'email' => $this->post_author->user_email,
 
           'status' => 'subscribed',

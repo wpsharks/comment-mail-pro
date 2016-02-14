@@ -356,7 +356,7 @@ class ImportStcr extends AbsBase
                 // Give precedence to any subscription that chose to receive "Replies Only".
                 // See: <https://github.com/websharks/comment-mail/issues/7#issuecomment-57252200>
                 $subs[$_email] = (object)[
-                  'fname' => $this->plugin->utils_string->first_name('', $_email),
+                  'fname' => $this->plugin->utils_string->firstName('', $_email),
                   'email' => $_email, 'time' => $_time, 'status' => $_status,
                 ];
             }

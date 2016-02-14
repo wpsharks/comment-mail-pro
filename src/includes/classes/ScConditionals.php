@@ -234,7 +234,7 @@ class ScConditionals extends AbsBase
      */
     protected function striPhpTags()
     {
-        $this->string = $this->plugin->utils_string->strip_php_tags($this->string);
+        $this->string = $this->plugin->utils_string->stripPhpTags($this->string);
     }
 
     /**

@@ -60,7 +60,7 @@ class UtilsEvent extends AbsBase
     public function queueInvalidatedQLink(\stdClass $row)
     {
         $note = $this->plugin->utils_event->queueNoteCodeDesc($row->note_code);
-        $note = $this->plugin->utils_string->markdown_no_p($note);
+        $note = $this->plugin->utils_string->markdownNoP($note);
 
         $details = '<h3 style="margin-top:0;">'.sprintf(__('Queue Entry ID #%1$s was invalidated %2$s', $this->plugin->text_domain), esc_html($row->queue_id), esc_html($this->plugin->utils_date->i18n('M j, Y g:i a', $row->time))).'</h3>'.
 

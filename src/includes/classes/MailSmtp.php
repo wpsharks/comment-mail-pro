@@ -294,16 +294,16 @@ class MailSmtp extends AbsBase
         $this->message = (string)$message; // Force string at all times.
 
         // Detect raw message body type for analysis below.
-        $is_message_html = $this->plugin->utils_string->is_html($this->message);
+        $is_message_html = $this->plugin->utils_string->isHtml($this->message);
         $is_message_text = !$is_message_html; // The exact opposite of course.
 
         if (!$is_message_html) { // Create an HTML message part.
-            $this->message_html = $this->plugin->utils_string->text_to_html($this->message);
+            $this->message_html = $this->plugin->utils_string->textToHtml($this->message);
         } else { // Already HTML markup.
             $this->message_html = $this->message;
         }
         if (!$is_message_text) { // Create a plain text message part.
-            $this->message_text = $this->plugin->utils_string->html_to_text($this->message);
+            $this->message_text = $this->plugin->utils_string->htmlToText($this->message);
         } else { // Already text format.
             $this->message_text = $this->message;
         }

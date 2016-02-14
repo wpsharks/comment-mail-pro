@@ -249,13 +249,13 @@ class SubManageSubFormBase extends AbsBase
             switch ($key_prop) {
                 case 'fname':
                     if (!empty($current['comment_author'])) {
-                        return $this->plugin->utils_string->first_name((string)$current['comment_author']);
+                        return $this->plugin->utils_string->firstName((string)$current['comment_author']);
                     }
                     break;
 
                 case 'lname':
                     if (!empty($current['comment_author'])) {
-                        return $this->plugin->utils_string->last_name((string)$current['comment_author']);
+                        return $this->plugin->utils_string->lastName((string)$current['comment_author']);
                     }
                     break;
 
@@ -273,13 +273,13 @@ class SubManageSubFormBase extends AbsBase
             switch ($key_prop) {
                 case 'fname':
                     if (!empty($current->first_name)) {
-                        return $this->plugin->utils_string->first_name((string)$current->first_name);
+                        return $this->plugin->utils_string->firstName((string)$current->first_name);
                     }
                     break;
 
                 case 'lname':
                     if (!empty($current->last_name)) {
-                        return $this->plugin->utils_string->last_name('- '.(string)$current->last_name);
+                        return $this->plugin->utils_string->lastName('- '.(string)$current->last_name);
                     }
                     break;
 

@@ -1359,7 +1359,7 @@ class ChartData extends AbsBase
     protected function errorsMarkup()
     {
         $errors_html = // Convert all errors to HTML markup.
-          array_map([$this->plugin->utils_string, 'markdown_no_p'], $this->errors);
+          array_map([$this->plugin->utils_string, 'markdownNoP'], $this->errors);
 
         return '<div class="pmp-note pmp-error" style="margin:1em 0 0 0;">'.
 

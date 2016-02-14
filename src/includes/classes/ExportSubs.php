@@ -129,7 +129,7 @@ class ExportSubs extends AbsBase
     protected function formatCsvLine(\stdClass $row, $headers = false)
     {
         $row            = $headers ? array_keys((array)$row) : (array)$row;
-        $escaped_values = array_map([$this->plugin->utils_string, 'esc_csv_dq'], $row);
+        $escaped_values = array_map([$this->plugin->utils_string, 'escCsvDq'], $row);
 
         return $escaped_values ? '"'.implode('","', $escaped_values).'"'."\n" : '';
     }

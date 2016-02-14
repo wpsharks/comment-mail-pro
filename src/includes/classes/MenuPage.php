@@ -3956,7 +3956,7 @@ class MenuPage extends AbsBase
           __('As expected, relative dates like: -30 days; are based on your current local time when used in the From Date; i.e., your current local time -30 days.', $this->plugin->text_domain)."\n\n".
           __('However, relative dates used in the To Date are slightly different. With the exception of the phrase "now", relative To Date phrases are relative to the From Date you\'ve given.', $this->plugin->text_domain)."\n\n".
           __('Typing (or selecting) a specific date in either field will behave as expected; i.e., you get data from (or to) that specific date. Only relative dates (i.e., phrases) are impacted by the above.', $this->plugin->text_domain);
-        $date_info_anchor = '<a href="#" onclick="alert(\''.esc_attr($this->plugin->utils_string->esc_js_sq($date_info)).'\'); return false;" style="text-decoration:none;">'.__('[?]', $this->plugin->text_domain).'</a>';
+        $date_info_anchor = '<a href="#" onclick="alert(\''.esc_attr($this->plugin->utils_string->escJsSq($date_info)).'\'); return false;" style="text-decoration:none;">'.__('[?]', $this->plugin->text_domain).'</a>';
 
         /* ----------------------------------------------------------------------------------------- */
 

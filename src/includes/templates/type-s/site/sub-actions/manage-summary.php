@@ -372,11 +372,11 @@ str_replace('%%title%%', __('My Comment Subscriptions', $plugin->text_domain), $
 
 					var plugin = {}, $window = $(window), $document = $(document),
 
-						namespace = '<?php echo $plugin->utils_string->esc_js_sq(GLOBAL_NS); ?>',
-						namespaceSlug = '<?php echo $plugin->utils_string->esc_js_sq(str_replace('_', '-', GLOBAL_NS)); ?>',
+						namespace = '<?php echo $plugin->utils_string->escJsSq(GLOBAL_NS); ?>',
+						namespaceSlug = '<?php echo $plugin->utils_string->escJsSq(str_replace('_', '-', GLOBAL_NS)); ?>',
 
-						ajaxEndpoint = '<?php echo $plugin->utils_string->esc_js_sq(home_url('/')); ?>',
-						pluginUrl = '<?php echo $plugin->utils_string->esc_js_sq(rtrim($plugin->utils_url->to('/'), '/')); ?>';
+						ajaxEndpoint = '<?php echo $plugin->utils_string->escJsSq(home_url('/')); ?>',
+						pluginUrl = '<?php echo $plugin->utils_string->escJsSq(rtrim($plugin->utils_url->to('/'), '/')); ?>';
 
 					/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
