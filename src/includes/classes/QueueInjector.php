@@ -98,7 +98,7 @@ class QueueInjector extends AbsBase
                " AND `status` = 'subscribed'"; // Only those that are `subscribed` currently.
 
         if (($sub_results = $this->plugin->utils_db->wp->get_results($sql, OBJECT_K))) {
-            $sub_results = $this->plugin->utils_db->typify_deep($sub_results);
+            $sub_results = $this->plugin->utils_db->typifyDeep($sub_results);
         } else {
             $sub_results = []; // Default; empty array.
         }

@@ -289,7 +289,7 @@ namespace WebSharks\CommentMail\Pro;
 				if(!$this->plugin->options['user_select_options_enable'])
 					return ''; // Use input field instead of options.
 
-				if(!($users = $this->plugin->utils_db->all_users($args)))
+				if(!($users = $this->plugin->utils_db->allUsers($args)))
 					return ''; // Use input field instead of options.
 
 				$options = ''; // Initialize.
@@ -380,7 +380,7 @@ namespace WebSharks\CommentMail\Pro;
 				if(!$this->plugin->options['post_select_options_enable'])
 					return ''; // Use input field instead of options.
 
-				if(!($posts = $this->plugin->utils_db->all_posts($args)))
+				if(!($posts = $this->plugin->utils_db->allPosts($args)))
 					return ''; // Use input field instead of options.
 
 				$options = ''; // Initialize.
@@ -493,7 +493,7 @@ namespace WebSharks\CommentMail\Pro;
 				if(!$this->plugin->options['comment_select_options_enable'])
 					return ''; // Use input field instead of options.
 
-				if(!($comments = $this->plugin->utils_db->all_comments($post_id, $args)))
+				if(!($comments = $this->plugin->utils_db->allComments($post_id, $args)))
 					return ''; // Use input field instead of options.
 
 				$options = ''; // Initialize.

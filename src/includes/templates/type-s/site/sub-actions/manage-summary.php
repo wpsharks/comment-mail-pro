@@ -337,7 +337,7 @@ str_replace('%%title%%', __('My Comment Subscriptions', $plugin->text_domain), $
 								<?php // Individual page links now.
 								$_max_page_links           = 5; // Max individual page links to show on each page.
 								$_page_links_start_at_page = // This is a mildly complex calculation that we can do w/ help from the plugin class.
-									$plugin->utils_db->pagination_links_start_page($pagination_vars->current_page, $pagination_vars->total_pages, $_max_page_links);
+									$plugin->utils_db->paginationLinksStartPage($pagination_vars->current_page, $pagination_vars->total_pages, $_max_page_links);
 
 								for($_i = 1, $_page = $_page_links_start_at_page;
 								    $_i <= $_max_page_links && $_page <= $pagination_vars->total_pages; $_i++ && $_page++):

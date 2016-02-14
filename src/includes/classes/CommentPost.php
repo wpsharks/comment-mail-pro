@@ -49,7 +49,7 @@ class CommentPost extends AbsBase
         parent::__construct();
 
         $this->comment_id     = (integer)$comment_id;
-        $this->comment_status = $this->plugin->utils_db->comment_status__($comment_status);
+        $this->comment_status = $this->plugin->utils_db->commentStatusI18n($comment_status);
 
         $this->maybeInjectSub();
         $this->maybeInjectQueue();
@@ -87,7 +87,8 @@ class CommentPost extends AbsBase
 
         new SubInjector(
           wp_get_current_user(),
-          $this->comment_id, [
+          $this->comment_id,
+          [
             'type'                => $sub_type,
             'deliver'             => $sub_deliver,
             'process_list_server' => $sub_list,

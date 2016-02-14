@@ -397,7 +397,7 @@ class ChartData extends AbsBase
             " LIMIT 400"; // 400 max allowed by Google; should be plenty.
 
         if (($results = $this->plugin->utils_db->wp->get_results($sql))) {
-            foreach (($results = $this->plugin->utils_db->typify_deep($results)) as $_result) {
+            foreach (($results = $this->plugin->utils_db->typifyDeep($results)) as $_result) {
                 $_result->total_subs = (integer)$_result->total_subs;
                 $data[]              = [ // Adds a new data row for the table we are building.
                                          [
@@ -482,7 +482,7 @@ class ChartData extends AbsBase
             " LIMIT 400"; // 400 max allowed by Google; should be plenty.
 
         if (($results = $this->plugin->utils_db->wp->get_results($sql))) {
-            foreach (($results = $this->plugin->utils_db->typify_deep($results)) as $_result) {
+            foreach (($results = $this->plugin->utils_db->typifyDeep($results)) as $_result) {
                 $_result->total_subs = (integer)$_result->total_subs;
                 $data[]              = [ // Adds a new data row for the table we are building.
                                          [
@@ -637,7 +637,7 @@ class ChartData extends AbsBase
             " LIMIT 25"; // 25 max.
 
         if (($results = $this->plugin->utils_db->wp->get_results($sql))) {
-            foreach (($results = $this->plugin->utils_db->typify_deep($results)) as $_result) {
+            foreach (($results = $this->plugin->utils_db->typifyDeep($results)) as $_result) {
                 $_post            = get_post($_result->post_id);
                 $_post_type       = $_post ? get_post_type_object($_post->post_type) : null;
                 $_post_type       = $_post_type ? $_post_type->labels->singular_name : __('Post', $this->plugin->text_domain);

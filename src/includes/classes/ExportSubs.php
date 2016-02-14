@@ -150,7 +150,7 @@ class ExportSubs extends AbsBase
                " LIMIT ".esc_sql($this->start_from - 1).", ".esc_sql($this->max_limit);
 
         if (($results = $this->plugin->utils_db->wp->get_results($sql))) {
-            $results = $this->plugin->utils_db->typify_deep($results);
+            $results = $this->plugin->utils_db->typifyDeep($results);
         }
         return $results ? $results : [];
     }

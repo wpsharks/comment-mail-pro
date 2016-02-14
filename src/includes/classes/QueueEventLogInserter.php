@@ -72,7 +72,7 @@ class QueueEventLogInserter extends AbsBase
 
         $this->entry = array_merge($defaults, $entry);
         $this->entry = array_intersect_key($this->entry, $defaults);
-        $this->entry = $this->plugin->utils_db->typify_deep($this->entry);
+        $this->entry = $this->plugin->utils_db->typifyDeep($this->entry);
 
         $this->maybeInsert(); // Record event; if applicable.
     }

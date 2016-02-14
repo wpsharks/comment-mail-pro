@@ -348,7 +348,7 @@ class MenuPageSubsTable extends MenuPageTableBase
                " LIMIT ".esc_sql($current_offset).",".esc_sql($per_page);
 
         if (($results = $this->plugin->utils_db->wp->get_results($sql))) {
-            $this->setItems($results = $this->plugin->utils_db->typify_deep($results));
+            $this->setItems($results = $this->plugin->utils_db->typifyDeep($results));
             $this->setTotalItemsAvailable((integer)$this->plugin->utils_db->wp->get_var("SELECT FOUND_ROWS()"));
 
             $this->prepareItemsMergeUserProperties(); // Merge additional properties.

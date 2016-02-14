@@ -605,7 +605,7 @@ namespace WebSharks\CommentMail\Pro;
 				$rve_key             = trim(stripslashes((string)$_REQUEST[GLOBAL_NS.'_rve_key']));
 				$sub_key             = trim(stripslashes($this->issetOr($_REQUEST[GLOBAL_NS.'_rve_sub_key'], '', 'string')));
 				$force_status        = trim(stripslashes($this->issetOr($_REQUEST[GLOBAL_NS.'_rve_force_status'], '', 'string')));
-				$current_hard_status = $this->plugin->utils_db->comment_status__($comment_status);
+				$current_hard_status = $this->plugin->utils_db->commentStatusI18n($comment_status);
 
 				if($force_status === '0') $force_status = 0;
 				if(!in_array($force_status, array(0, 'spam'), TRUE))

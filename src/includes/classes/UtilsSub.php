@@ -188,7 +188,7 @@ namespace WebSharks\CommentMail\Pro;
 					       " WHERE `ID` = '".esc_sql((integer)$sub_id_or_key)."' LIMIT 1";
 				}
 				if(!empty($sql) && ($row = $this->plugin->utils_db->wp->get_row($sql)))
-					return ($cache[(integer)$row->ID] = $cache[(string)$row->key] = $row = $this->plugin->utils_db->typify_deep($row));
+					return ($cache[(integer)$row->ID] = $cache[(string)$row->key] = $row = $this->plugin->utils_db->typifyDeep($row));
 
 				return ($cache[$sub_id_or_key] = NULL);
 			}
@@ -713,7 +713,7 @@ namespace WebSharks\CommentMail\Pro;
 				       " LIMIT ".esc_sql($offset).",".esc_sql($x);
 
 				if(($results = $this->plugin->utils_db->wp->get_results($sql, OBJECT_K)))
-					return ($last_x = $results = $this->plugin->utils_db->typify_deep($results));
+					return ($last_x = $results = $this->plugin->utils_db->typifyDeep($results));
 
 				return ($last_x = array()); // Default value.
 			}
@@ -1253,7 +1253,7 @@ namespace WebSharks\CommentMail\Pro;
 
 				if(($results = $this->plugin->utils_db->wp->get_results($sql)))
 				{
-					$results    = $this->plugin->utils_db->typify_deep($results);
+					$results    = $this->plugin->utils_db->typifyDeep($results);
 					$info       = $results[0]; // Expecting one result only here.
 					$info->type = $info->comment_id <= 0 ? 'comments' : 'comment';
 

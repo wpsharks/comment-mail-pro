@@ -285,7 +285,7 @@ class SubManageSummary extends AbsBase
                " LIMIT ".esc_sql($current_offset).",".esc_sql($max_limit);
 
         if (($results = $this->plugin->utils_db->wp->get_results($sql))) {
-            $this->subs      = $results = $this->plugin->utils_db->typify_deep($results);
+            $this->subs      = $results = $this->plugin->utils_db->typifyDeep($results);
             $calc_found_rows = (integer)$this->plugin->utils_db->wp->get_var("SELECT FOUND_ROWS()");
         }
         $this->setPaginationVars($calc_found_rows);

@@ -46,7 +46,7 @@ class PostLargeMetaBox extends AbsBase
     protected function display()
     {
         $post_comment_status // Translate/standardize this.
-          = $this->plugin->utils_db->post_comment_status__($this->post->comment_status);
+          = $this->plugin->utils_db->postCommentStatusI18n($this->post->comment_status);
 
         echo '<div class="'.esc_attr($this->plugin->slug.'-menu-page-area').'">'."\n";
         echo __('Coming soon...', $this->plugin->text_domain);

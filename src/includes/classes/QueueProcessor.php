@@ -449,7 +449,7 @@ class QueueProcessor extends AbsBase
             $invalidated_entry_props = $this->entryProps('invalidated', 'sub_comment_type_not_comment', $entry, $sub, $sub_post, $sub_comment);
         } else if ($sub_comment && !$sub_comment->comment_content) {
             $invalidated_entry_props = $this->entryProps('invalidated', 'sub_comment_content_empty', $entry, $sub, $sub_post, $sub_comment);
-        } else if ($sub_comment && $this->plugin->utils_db->comment_status__($sub_comment->comment_approved) !== 'approve') {
+        } else if ($sub_comment && $this->plugin->utils_db->commentStatusI18n($sub_comment->comment_approved) !== 'approve') {
             $invalidated_entry_props = $this->entryProps('invalidated', 'sub_comment_status_not_approve', $entry, $sub, $sub_post, $sub_comment);
         } /*
 		 * Make sure the comment we are notifying about still exists; and check validity.
@@ -460,7 +460,7 @@ class QueueProcessor extends AbsBase
             $invalidated_entry_props = $this->entryProps('invalidated', 'comment_type_not_comment', $entry, $sub, $sub_post, $sub_comment, null, $comment);
         } else if (!$comment->comment_content) {
             $invalidated_entry_props = $this->entryProps('invalidated', 'comment_content_empty', $entry, $sub, $sub_post, $sub_comment, null, $comment);
-        } else if ($this->plugin->utils_db->comment_status__($comment->comment_approved) !== 'approve') {
+        } else if ($this->plugin->utils_db->commentStatusI18n($comment->comment_approved) !== 'approve') {
             $invalidated_entry_props = $this->entryProps('invalidated', 'comment_status_not_approve', $entry, $sub, $sub_post, $sub_comment, null, $comment);
         } /*
 		 * Make sure the post containing the comment we are notifying about still exists; and check validity.
@@ -769,7 +769,7 @@ class QueueProcessor extends AbsBase
                " ORDER BY `insertion_time` ASC"; // In chronological order.
 
         if (($entry_digestable_entries = $this->plugin->utils_db->wp->get_results($sql, OBJECT_K))) {
-            $entry_digestable_entries = $this->plugin->utils_db->typify_deep($entry_digestable_entries);
+            $entry_digestable_entries = $this->plugin->utils_db->typifyDeep($entry_digestable_entries);
         } else {
             $entry_digestable_entries = []; // Default; empty array.
         }
@@ -804,7 +804,7 @@ class QueueProcessor extends AbsBase
                " LIMIT ".$this->max_limit; // Max limit for this class instance.
 
         if (($entries = $this->plugin->utils_db->wp->get_results($sql, OBJECT_K))) {
-            $entries = $this->plugin->utils_db->typify_deep($entries);
+            $entries = $this->plugin->utils_db->typifyDeep($entries);
         } else {
             $entries = []; // Default; empty array.
         }

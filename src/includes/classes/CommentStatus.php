@@ -64,8 +64,8 @@ class CommentStatus extends AbsBase
         parent::__construct();
 
         $this->comment            = $comment; // \WP_Comment|null.
-        $this->new_comment_status = $this->plugin->utils_db->comment_status__($new_comment_status);
-        $this->old_comment_status = $this->plugin->utils_db->comment_status__($old_comment_status);
+        $this->new_comment_status = $this->plugin->utils_db->commentStatusI18n($new_comment_status);
+        $this->old_comment_status = $this->plugin->utils_db->commentStatusI18n($old_comment_status);
 
         $this->maybeInjectQueue();
         $this->maybePurgeSubs();

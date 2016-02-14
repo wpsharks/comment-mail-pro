@@ -609,7 +609,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
         $post_title_clip        = $this->plugin->utils_string->mid_clip($item->{$prefix.'title'});
         $post_date              = $this->plugin->utils_date->i18n('M j, Y', strtotime($item->{$prefix.'date_gmt'}));
         $post_date_ago          = $this->plugin->utils_date->approxTimeDifference(strtotime($item->{$prefix.'date_gmt'}));
-        $post_comments_status   = $this->plugin->utils_i18n->status_label($this->plugin->utils_db->post_comment_status__($item->{$prefix.'comment_status'}), 'ucwords');
+        $post_comments_status   = $this->plugin->utils_i18n->status_label($this->plugin->utils_db->postCommentStatusI18n($item->{$prefix.'comment_status'}), 'ucwords');
         $post_edit_comments_url = $this->plugin->utils_url->post_edit_comments_short($item->{$key});
         $post_total_subs        = $this->plugin->utils_sub->query_total($item->{$key});
         $post_total_comments    = (integer)$item->{$prefix.'comment_count'};
@@ -677,7 +677,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
         ];
         $comment_date_time = $this->plugin->utils_date->i18n('M j, Y g:i a', strtotime($item->{$prefix.'date_gmt'}));
         $comment_time_ago  = $this->plugin->utils_date->approxTimeDifference(strtotime($item->{$prefix.'date_gmt'}));
-        $comment_status    = $this->plugin->utils_i18n->status_label($this->plugin->utils_db->comment_status__($item->{$prefix.'approved'}), 'ucwords');
+        $comment_status    = $this->plugin->utils_i18n->status_label($this->plugin->utils_db->commentStatusI18n($item->{$prefix.'approved'}), 'ucwords');
 
         $comment_info = '<i class="fa fa-comment"></i>'. // Start w/ a comment bubble icon.
                         ' '.$this->plugin->utils_markup->name_email($item->{$prefix.'author'}, $item->{$prefix.'author_email'}, $name_email_args);
@@ -1496,7 +1496,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
                " WHERE `ID` IN('".implode("','", array_map('esc_sql', $sub_ids))."')";
 
         if ($sub_ids && ($results = $this->plugin->utils_db->wp->get_results($sql, OBJECT_K))) {
-            $this->merged_result_sets['subs'] = $results = $this->plugin->utils_db->typify_deep($results);
+            $this->merged_result_sets['subs'] = $results = $this->plugin->utils_db->typifyDeep($results);
         }
         foreach ($this->items as $_item) {
             foreach ($sql_item_columns as $_sql_item_column) {
@@ -1543,7 +1543,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
         }
         unset($_prefix, $_key, $_item, $_sql_item_column); // Housekeeping.
 
-        $this->items = $this->plugin->utils_db->typify_deep($this->items);
+        $this->items = $this->plugin->utils_db->typifyDeep($this->items);
     }
 
     /**
@@ -1593,7 +1593,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
                " WHERE `ID` IN('".implode("','", array_map('esc_sql', $user_ids))."')";
 
         if ($user_ids && ($results = $this->plugin->utils_db->wp->get_results($sql, OBJECT_K))) {
-            $this->merged_result_sets['users'] = $results = $this->plugin->utils_db->typify_deep($results);
+            $this->merged_result_sets['users'] = $results = $this->plugin->utils_db->typifyDeep($results);
         }
         foreach ($this->items as $_item) {
             foreach ($sql_item_columns as $_sql_item_column) {
@@ -1640,7 +1640,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
         }
         unset($_prefix, $_key, $_item, $_sql_item_column); // Housekeeping.
 
-        $this->items = $this->plugin->utils_db->typify_deep($this->items);
+        $this->items = $this->plugin->utils_db->typifyDeep($this->items);
     }
 
     /**
@@ -1688,7 +1688,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
                " WHERE `ID` IN('".implode("','", array_map('esc_sql', $post_ids))."')";
 
         if ($post_ids && ($results = $this->plugin->utils_db->wp->get_results($sql, OBJECT_K))) {
-            $this->merged_result_sets['posts'] = $results = $this->plugin->utils_db->typify_deep($results);
+            $this->merged_result_sets['posts'] = $results = $this->plugin->utils_db->typifyDeep($results);
         }
         foreach ($this->items as $_item) {
             foreach ($sql_item_columns as $_sql_item_column) {
@@ -1735,7 +1735,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
         }
         unset($_prefix, $_key, $_item, $_sql_item_column); // Housekeeping.
 
-        $this->items = $this->plugin->utils_db->typify_deep($this->items);
+        $this->items = $this->plugin->utils_db->typifyDeep($this->items);
     }
 
     /**
@@ -1785,7 +1785,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
                " WHERE `comment_ID` IN('".implode("','", array_map('esc_sql', $comment_ids))."')";
 
         if ($comment_ids && ($results = $this->plugin->utils_db->wp->get_results($sql, OBJECT_K))) {
-            $this->merged_result_sets['comments'] = $results = $this->plugin->utils_db->typify_deep($results);
+            $this->merged_result_sets['comments'] = $results = $this->plugin->utils_db->typifyDeep($results);
         }
         foreach ($this->items as $_item) {
             foreach ($sql_item_columns as $_sql_item_column) {
@@ -1832,7 +1832,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
         }
         unset($_prefix, $_key, $_item, $_sql_item_column); // Housekeeping.
 
-        $this->items = $this->plugin->utils_db->typify_deep($this->items);
+        $this->items = $this->plugin->utils_db->typifyDeep($this->items);
     }
 
     /*
