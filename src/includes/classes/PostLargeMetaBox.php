@@ -2,60 +2,59 @@
 /**
  * Post Large Meta Box
  *
- * @since 141111 First documented version.
+ * @since     141111 First documented version.
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
- * @license GNU General Public License, version 3
+ * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
+/**
+ * Post Large Meta Box
+ *
+ * @since 141111 First documented version.
+ */
+class PostLargeMetaBox extends AbsBase
+{
+    /**
+     * @var \WP_Post A WP post object.
+     *
+     * @since 141111 First documented version.
+     */
+    protected $post;
 
+    /**
+     * Class constructor.
+     *
+     * @since 141111 First documented version.
+     *
+     * @param \WP_Post $post A WP post object reference.
+     */
+    public function __construct(\WP_Post $post)
+    {
+        parent::__construct();
 
-		/**
-		 * Post Large Meta Box
-		 *
-		 * @since 141111 First documented version.
-		 */
-	class PostLargeMetaBox extends AbsBase
-		{
-			/**
-			 * @var \WP_Post A WP post object.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected $post;
+        $this->post = $post;
 
-			/**
-			 * Class constructor.
-			 *
-			 * @since 141111 First documented version.
-			 *
-			 * @param \WP_Post $post A WP post object reference.
-			 */
-			public function __construct(\WP_Post $post)
-			{
-				parent::__construct();
+        $this->display();
+    }
 
-				$this->post = $post;
+    /**
+     * Display meta box. @TODO
+     *
+     * @since 141111 First documented version.
+     */
+    protected function display()
+    {
+        $post_comment_status // Translate/standardize this.
+          = $this->plugin->utils_db->post_comment_status__($this->post->comment_status);
 
-				$this->display();
-			}
+        echo '<div class="'.esc_attr($this->plugin->slug.'-menu-page-area').'">'."\n";
+        echo __('Coming soon...', $this->plugin->text_domain);
+        echo '</div>';
 
-			/**
-			 * Display meta box. @TODO
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected function display()
-			{
-				$post_comment_status // Translate/standardize this.
-					= $this->plugin->utils_db->post_comment_status__($this->post->comment_status);
-
-				echo '<div class="'.esc_attr($this->plugin->slug.'-menu-page-area').'">'."\n";
-				echo __('Coming soon...', $this->plugin->text_domain);
-				echo '</div>';
-
-				if($post_comment_status !== 'open' && !$this->post->comment_count)
-					return; // For future implementation.
-			}
-		}
+        if ($post_comment_status !== 'open' && !$this->post->comment_count) {
+            return; // For future implementation.
+        }
+    }
+}
 	
