@@ -33,10 +33,10 @@ namespace WebSharks\CommentMail\Pro;
 			{
 				parent::__construct();
 
-				$this->maybe_do_sso_actions();
-				$this->maybe_do_sub_actions();
-				$this->maybe_do_webhook_actions();
-				$this->maybe_do_menu_page_actions();
+				$this->maybeDoSsoActions();
+				$this->maybeDoSubActions();
+				$this->maybeDoWebhookActions();
+				$this->maybeDoMenuPageActions();
 			}
 
 			/**
@@ -44,7 +44,7 @@ namespace WebSharks\CommentMail\Pro;
 			 *
 			 * @since 141111 First documented version.
 			 */
-			protected function maybe_do_sso_actions()
+			protected function maybeDoSsoActions()
 			{
 				if(is_admin())
 					return; // Not applicable.
@@ -60,7 +60,7 @@ namespace WebSharks\CommentMail\Pro;
 			 *
 			 * @since 141111 First documented version.
 			 */
-			protected function maybe_do_sub_actions()
+			protected function maybeDoSubActions()
 			{
 				if(is_admin())
 					return; // Not applicable.
@@ -76,7 +76,7 @@ namespace WebSharks\CommentMail\Pro;
 			 *
 			 * @since 141111 First documented version.
 			 */
-			protected function maybe_do_webhook_actions()
+			protected function maybeDoWebhookActions()
 			{
 				if(is_admin())
 					return; // Not applicable.
@@ -92,7 +92,7 @@ namespace WebSharks\CommentMail\Pro;
 			 *
 			 * @since 141111 First documented version.
 			 */
-			protected function maybe_do_menu_page_actions()
+			protected function maybeDoMenuPageActions()
 			{
 				if(!is_admin())
 					return; // Not applicable.
