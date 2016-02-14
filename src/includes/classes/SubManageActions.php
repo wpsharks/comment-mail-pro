@@ -31,8 +31,7 @@ class SubManageActions extends AbsBase
     {
         parent::__construct();
 
-        $this->valid_actions
-          = [
+        $this->valid_actions = [
           'summary',
           'summary_nav',
 

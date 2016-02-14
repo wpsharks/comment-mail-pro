@@ -86,7 +86,8 @@ class CommentPost extends AbsBase
         $sub_list = (boolean)@$_POST[GLOBAL_NS.'_sub_list'];
 
         new SubInjector(
-          wp_get_current_user(), $this->comment_id, [
+          wp_get_current_user(),
+          $this->comment_id, [
             'type'                => $sub_type,
             'deliver'             => $sub_deliver,
             'process_list_server' => $sub_list,
