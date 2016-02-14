@@ -314,31 +314,31 @@ namespace WebSharks\CommentMail\Pro;
 				/* Important for this to come first!
 				 * We want form processing to take place first.
 				 * i.e. Array keys need to be submitted in a specific order. */
-				$hidden_inputs = $this->form_fields->hidden_input(array('name' => '_'))."\n";
+				$hidden_inputs = $this->form_fields->hiddenInput(array('name' => '_'))."\n";
 
 				if($this->is_edit && $this->sub)
 				{
-					$hidden_inputs .= $this->form_fields->hidden_input(
+					$hidden_inputs .= $this->form_fields->hiddenInput(
 							array(
 								'name'          => 'ID',
 								'current_value' => $this->sub->ID,
 							))."\n";
-					$hidden_inputs .= $this->form_fields->hidden_input(
+					$hidden_inputs .= $this->form_fields->hiddenInput(
 							array(
 								'name'          => 'key',
 								'current_value' => $this->sub->key,
 							))."\n";
-					$hidden_inputs .= $this->form_fields->hidden_input(
+					$hidden_inputs .= $this->form_fields->hiddenInput(
 							array(
 								'name'          => 'post_id',
 								'current_value' => $this->sub->post_id,
 							))."\n";
-					$hidden_inputs .= $this->form_fields->hidden_input(
+					$hidden_inputs .= $this->form_fields->hiddenInput(
 							array(
 								'name'          => 'comment_id',
 								'current_value' => $this->sub->comment_id,
 							))."\n";
-					$hidden_inputs .= $this->form_fields->hidden_input(
+					$hidden_inputs .= $this->form_fields->hiddenInput(
 							array(
 								'root_name'     => TRUE,
 								'name'          => GLOBAL_NS.'[manage][sub_edit]',
@@ -347,7 +347,7 @@ namespace WebSharks\CommentMail\Pro;
 				}
 				else // Adding a new subscription in this default case.
 				{
-					$hidden_inputs .= $this->form_fields->hidden_input(
+					$hidden_inputs .= $this->form_fields->hiddenInput(
 							array(
 								'root_name'     => TRUE,
 								'name'          => GLOBAL_NS.'[manage][sub_new]',
@@ -360,7 +360,7 @@ namespace WebSharks\CommentMail\Pro;
 				foreach(array_keys(sub_manage_summary::$default_nav_vars) as $_summary_nav_var_key)
 					if(isset($current_summary_nav_vars[$_summary_nav_var_key]))
 					{
-						$hidden_inputs .= $this->form_fields->hidden_input(
+						$hidden_inputs .= $this->form_fields->hiddenInput(
 								array(
 									'root_name'     => TRUE,
 									'name'          => GLOBAL_NS.'[manage][summary_nav]['.$_summary_nav_var_key.']',

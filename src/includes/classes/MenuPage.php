@@ -99,7 +99,7 @@ namespace WebSharks\CommentMail\Pro;
 
         $_panel_body = '<table style="margin:0;">'.
                        ' <tbody>'.
-                       $form_fields->select_row(
+                       $form_fields->selectRow(
                          array(
                            'label'           => sprintf(__('Enable %1$s&trade; Functionality?', $this->plugin->text_domain), esc_html($this->plugin->name)),
                            'placeholder'     => __('Select an Option...', $this->plugin->text_domain),
@@ -126,7 +126,7 @@ namespace WebSharks\CommentMail\Pro;
         $_panel_body .= '<div class="pmp-if-enabled-show"><hr />'.
                         ' <table>'.
                         '    <tbody>'.
-                        $form_fields->select_row(
+                        $form_fields->selectRow(
                           array(
                             'label'           => __('Allow New Subsciptions?', $this->plugin->text_domain),
                             'placeholder'     => __('Select an Option...', $this->plugin->text_domain),
@@ -144,7 +144,7 @@ namespace WebSharks\CommentMail\Pro;
 
                         ' <table>'.
                         '    <tbody>'.
-                        $form_fields->select_row(
+                        $form_fields->selectRow(
                           array(
                             'label'           => __('Enable Mail Queue Processing?', $this->plugin->text_domain),
                             'placeholder'     => __('Select an Option...', $this->plugin->text_domain),
@@ -162,7 +162,7 @@ namespace WebSharks\CommentMail\Pro;
                                 ' <hr />'.
                                 ' <table>'.
                                 '    <tbody>'.
-                                $form_fields->input_row(
+                                $form_fields->inputRow(
                                   array(
                                     'label'           => __('Enabled for Post Types', $this->plugin->text_domain),
                                     'placeholder'     => __('e.g., post,page,article', $this->plugin->text_domain),
@@ -182,7 +182,7 @@ namespace WebSharks\CommentMail\Pro;
 
         $_panel_body = '<table>'.
                        '  <tbody>'.
-                       $form_fields->select_row(
+                       $form_fields->selectRow(
                          array(
                            'label'           => __('Uninstall on Plugin Deletion, or Safeguard Data?', $this->plugin->text_domain),
                            'placeholder'     => __('Select an Option...', $this->plugin->text_domain),
@@ -206,7 +206,7 @@ namespace WebSharks\CommentMail\Pro;
 
         $_panel_body = '<table>'.
                        '  <tbody>'.
-                       $form_fields->input_row(
+                       $form_fields->inputRow(
                          array(
                            'label'         => __('<code>From</code> Name:', $this->plugin->text_domain),
                            'placeholder'   => __('e.g., MySite.com', $this->plugin->text_domain),
@@ -219,7 +219,7 @@ namespace WebSharks\CommentMail\Pro;
 
         $_panel_body .= '<table>'.
                         '  <tbody>'.
-                        $form_fields->input_row(
+                        $form_fields->inputRow(
                           array(
                             'type'          => 'email',
                             'label'         => __('<code>From</code> Email Address:', $this->plugin->text_domain),
@@ -235,7 +235,7 @@ namespace WebSharks\CommentMail\Pro;
 
         $_panel_body .= '<table>'.
                         '  <tbody>'.
-                        $form_fields->input_row(
+                        $form_fields->inputRow(
                           array(
                             'type'          => 'email',
                             'label'         => __('<code>Reply-To</code> Email Address:', $this->plugin->text_domain),
@@ -252,7 +252,7 @@ namespace WebSharks\CommentMail\Pro;
 
         $_panel_body .= ' <table>'.
                         '  <tbody>'.
-                        $form_fields->input_row(
+                        $form_fields->inputRow(
                           array(
                             'type'        => 'email',
                             'label'       => __('Test Mail Settings?', $this->plugin->text_domain),
@@ -271,7 +271,7 @@ namespace WebSharks\CommentMail\Pro;
 
         $_panel_body = '<table>'.
                        '  <tbody>'.
-                       $form_fields->input_row(
+                       $form_fields->inputRow(
                          array(
                            'type'          => 'email',
                            'label'         => __('Postmaster Email Address', $this->plugin->text_domain),
@@ -285,7 +285,7 @@ namespace WebSharks\CommentMail\Pro;
 
         $_panel_body .= '<table>'.
                         '  <tbody>'.
-                        $form_fields->textarea_row(
+                        $form_fields->textareaRow(
                           array(
                             'label'         => __('Mailing Address', $this->plugin->text_domain),
                             'placeholder'   => __('e.g., 123 Somewhere Street; Somewhere, USA 99999', $this->plugin->text_domain),
@@ -300,7 +300,7 @@ namespace WebSharks\CommentMail\Pro;
 
         $_panel_body .= '<table>'.
                         '  <tbody>'.
-                        $form_fields->input_row(
+                        $form_fields->inputRow(
                           array(
                             'type'          => 'url',
                             'label'         => __('Privacy Policy URL (Optional)', $this->plugin->text_domain),
@@ -320,7 +320,7 @@ namespace WebSharks\CommentMail\Pro;
 
         $_panel_body = '<table>'.
                        '  <tbody>'.
-                       $form_fields->select_row(
+                       $form_fields->selectRow(
                          array(
                            'label'           => sprintf(__('Enable "<small><code>Powered by %1$s&trade;</code></small>" in Email Footer?', $this->plugin->text_domain), esc_html($this->plugin->name)),
                            'placeholder'     => __('Select an Option...', $this->plugin->text_domain),
@@ -337,7 +337,7 @@ namespace WebSharks\CommentMail\Pro;
 
         $_panel_body .= '<table>'.
                         '  <tbody>'.
-                        $form_fields->select_row(
+                        $form_fields->selectRow(
                           array(
                             'label'           => sprintf(__('Enable "<small><code>Powered by %1$s&trade;</code></small>" in Site Footer?', $this->plugin->text_domain), esc_html($this->plugin->name)),
                             'placeholder'     => __('Select an Option...', $this->plugin->text_domain),
@@ -367,7 +367,7 @@ namespace WebSharks\CommentMail\Pro;
 
         $_panel_body = '<table>'.
                        '  <tbody>'.
-                       $form_fields->select_row(
+                       $form_fields->selectRow(
                          array(
                            'label'           => __('Enable Comment Form Subscr. Options Template?', $this->plugin->text_domain),
                            'placeholder'     => __('Select an Option...', $this->plugin->text_domain),
@@ -387,7 +387,7 @@ namespace WebSharks\CommentMail\Pro;
         $_panel_body .= '<div class="pmp-if-disabled-show">'.
                         '  <table>'.
                         '     <tbody>'.
-                        $form_fields->select_row(
+                        $form_fields->selectRow(
                           array(
                             'label'           => __('Also Disable Scripts Associated w/ Comment Form Subscr. Options?', $this->plugin->text_domain),
                             'placeholder'     => __('Select an Option...', $this->plugin->text_domain),
@@ -408,7 +408,7 @@ namespace WebSharks\CommentMail\Pro;
                         '  <table>'.
                         '     <tbody>'.
                         ($this->plugin->options['template_type'] === 'a'
-                          ? $form_fields->textarea_row( // Advanced PHP-based template.
+                          ? $form_fields->textareaRow( // Advanced PHP-based template.
                             array(
                               'label'         => __('Comment Form Subscr. Options Template', $this->plugin->text_domain),
                               'placeholder'   => __('Template Content...', $this->plugin->text_domain),
@@ -420,7 +420,7 @@ namespace WebSharks\CommentMail\Pro;
                                                  sprintf(__('This template is connected to one of two hooks that are expected to exist in all themes following WordPress standards. If the <code>%1$s</code> hook/filter exists, we use it (ideal). Otherwise, we use the <code>%2$s</code> action hook (most common). This is how the template is integrated into your comment form automatically. If both of these hooks are missing from your WP theme (e.g., subscr. options are not showing up no matter what you do), you will need to seek assistance from a theme developer.', $this->plugin->text_domain), $this->plugin->utils_markup->x_anchor('https://developer.wordpress.org/reference/hooks/comment_form_field_comment/', 'comment_form_field_comment'), $this->plugin->utils_markup->x_anchor('https://developer.wordpress.org/reference/hooks/comment_form/', 'comment_form')).'</p>'.
                                                  '<p class="pmp-note pmp-info pmp-max-width">'.__('<strong>Tip:</strong> If you mess up your template by accident; empty the field completely and save your options. This reverts you back to the default template file automatically.', $this->plugin->text_domain).'</p>',
                             ))
-                          : $form_fields->textarea_row( // Simple snippet-based template.
+                          : $form_fields->textareaRow( // Simple snippet-based template.
                             array(
                               'label'         => __('Comment Form Subscr. Options Template', $this->plugin->text_domain),
                               'placeholder'   => __('Template Content...', $this->plugin->text_domain),
@@ -449,7 +449,7 @@ namespace WebSharks\CommentMail\Pro;
 
                         '  <table>'.
                         '     <tbody>'.
-                        $form_fields->select_row(
+                        $form_fields->selectRow(
                           array(
                             'label'           => __('Default Subscription Option Selected for Commenters:', $this->plugin->text_domain),
                             'placeholder'     => __('Select an Option...', $this->plugin->text_domain),
@@ -470,7 +470,7 @@ namespace WebSharks\CommentMail\Pro;
 
                         '  <table>'.
                         '     <tbody>'.
-                        $form_fields->select_row(
+                        $form_fields->selectRow(
                           array(
                             'label'           => __('Default Subscription Delivery Option Selected for Commenters:', $this->plugin->text_domain),
                             'placeholder'     => __('Select an Option...', $this->plugin->text_domain),
@@ -495,7 +495,7 @@ namespace WebSharks\CommentMail\Pro;
 
         $_panel_body = '<table style="margin:0;">'.
                        ' <tbody>'.
-                       $form_fields->select_row(
+                       $form_fields->selectRow(
                          array(
                            'label'           => __('Enable Auto-Subscribe?', $this->plugin->text_domain),
                            'placeholder'     => __('Select an Option...', $this->plugin->text_domain),
@@ -522,7 +522,7 @@ namespace WebSharks\CommentMail\Pro;
         $_panel_body .= '<div class="pmp-if-enabled-show"><hr />'.
                         ' <table>'.
                         '    <tbody>'.
-                        $form_fields->select_row(
+                        $form_fields->selectRow(
                           array(
                             'label'           => __('Auto-Subscribe Post Authors?', $this->plugin->text_domain),
                             'placeholder'     => __('Select an Option...', $this->plugin->text_domain),
@@ -538,7 +538,7 @@ namespace WebSharks\CommentMail\Pro;
                         ' </table>'.
                         ' <table>'.
                         '    <tbody>'.
-                        $form_fields->input_row(
+                        $form_fields->inputRow(
                           array(
                             'label'         => __('Auto-Subscribe the Following WordPress Roles:', $this->plugin->text_domain),
                             'placeholder'   => __('e.g., administrator,editor,author,contributor', $this->plugin->text_domain),
@@ -551,7 +551,7 @@ namespace WebSharks\CommentMail\Pro;
 
                         ' <table>'.
                         '    <tbody>'.
-                        $form_fields->input_row(
+                        $form_fields->inputRow(
                           array(
                             'label'         => __('Auto-Subscribe the Following Email Addresses:', $this->plugin->text_domain),
                             'placeholder'   => __('"John" <john@example.com>; jane@example.com; "Susan Smith" <susan@example.com>', $this->plugin->text_domain),
@@ -564,7 +564,7 @@ namespace WebSharks\CommentMail\Pro;
 
                         ' <table>'.
                         '    <tbody>'.
-                        $form_fields->select_row(
+                        $form_fields->selectRow(
                           array(
                             'label'           => __('Auto-Subscribe Delivery Option:', $this->plugin->text_domain),
                             'placeholder'     => __('Select an Option...', $this->plugin->text_domain),
@@ -582,7 +582,7 @@ namespace WebSharks\CommentMail\Pro;
 
                         ' <table>'.
                         '    <tbody>'.
-                        $form_fields->input_row(
+                        $form_fields->inputRow(
                           array(
                             'label'         => __('Auto-Subscribe Post Types (Comma-Delimited):', $this->plugin->text_domain),
                             'placeholder'   => __('e.g., post,page,portfolio,gallery', $this->plugin->text_domain),
@@ -602,7 +602,7 @@ namespace WebSharks\CommentMail\Pro;
 
         $_panel_body = '<table style="margin:0;">'.
                        ' <tbody>'.
-                       $form_fields->select_row(
+                       $form_fields->selectRow(
                          array(
                            'label'           => __('Auto-Confirm Everyone?', $this->plugin->text_domain),
                            'placeholder'     => __('Select an Option...', $this->plugin->text_domain),
@@ -633,7 +633,7 @@ namespace WebSharks\CommentMail\Pro;
         $_panel_body .= '<div class="pmp-if-disabled-show"><hr />'.
                         ' <table>'.
                         '  <tbody>'.
-                        $form_fields->select_row(
+                        $form_fields->selectRow(
                           array(
                             'label'           => __('Auto-Confirm if Already Subscribed w/ the Same IP Address?', $this->plugin->text_domain),
                             'placeholder'     => __('Select an Option...', $this->plugin->text_domain),
@@ -653,7 +653,7 @@ namespace WebSharks\CommentMail\Pro;
         $_panel_body .= '<div class="pmp-if-enabled-show"><hr />'.
                         ' <table>'.
                         '    <tbody>'.
-                        $form_fields->select_row(
+                        $form_fields->selectRow(
                           array(
                             'label'           => __('<i class="fa fa-wordpress"></i> <i class="fa fa-users"></i>'.
                                                     ' All WordPress Users Confirm their Email Address?', $this->plugin->text_domain),
@@ -685,7 +685,7 @@ namespace WebSharks\CommentMail\Pro;
         {
           $_panel_body = '<table style="margin:0;">'.
                          ' <tbody>'.
-                         $form_fields->select_row(
+                         $form_fields->selectRow(
                            array(
                              'label'           => __('Enable IP Region/Country Tracking?', $this->plugin->text_domain),
                              'placeholder'     => __('Select an Option...', $this->plugin->text_domain),
@@ -705,7 +705,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body .= '<table>'.
                           ' <tbody>'.
-                          $form_fields->select_row(
+                          $form_fields->selectRow(
                             array(
                               'label'           => __('Give Precedence to <code>$_SERVER[REMOTE_ADDR]</code>?', $this->plugin->text_domain),
                               'placeholder'     => __('Select an Option...', $this->plugin->text_domain),
@@ -731,7 +731,7 @@ namespace WebSharks\CommentMail\Pro;
         {
           $_panel_body = '<table>'.
                          '  <tbody>'.
-                         $form_fields->input_row(
+                         $form_fields->inputRow(
                            array(
                              'type'          => 'number',
                              'label'         => __('Maximum Chars in Parent Comment Clips:', $this->plugin->text_domain),
@@ -746,7 +746,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body .= '<table>'.
                           '  <tbody>'.
-                          $form_fields->input_row(
+                          $form_fields->inputRow(
                             array(
                               'type'          => 'number',
                               'label'         => __('Maximum Chars in Other Comment/Reply Clips:', $this->plugin->text_domain),
@@ -769,7 +769,7 @@ namespace WebSharks\CommentMail\Pro;
         {
           $_panel_body = '<table style="margin:0;">'.
                          ' <tbody>'.
-                         $form_fields->select_row(
+                         $form_fields->selectRow(
                            array(
                              'label'           => __('Enable SMTP Integration?', $this->plugin->text_domain),
                              'placeholder'     => __('Select an Option...', $this->plugin->text_domain),
@@ -801,7 +801,7 @@ namespace WebSharks\CommentMail\Pro;
 
                           ' <table style="width:auto;">'.
                           '  <tbody>'.
-                          $form_fields->input_row(
+                          $form_fields->inputRow(
                             array(
                               'label'         => __('SMTP Host Name:', $this->plugin->text_domain),
                               'placeholder'   => __('e.g., email-smtp.us-east-1.amazonaws.com', $this->plugin->text_domain),
@@ -814,7 +814,7 @@ namespace WebSharks\CommentMail\Pro;
 
                           ' <table style="width:auto;">'.
                           '  <tbody>'.
-                          $form_fields->input_row(
+                          $form_fields->inputRow(
                             array(
                               'type'          => 'number',
                               'label'         => __('SMTP Port Number:', $this->plugin->text_domain),
@@ -828,7 +828,7 @@ namespace WebSharks\CommentMail\Pro;
 
                           ' <table style="width:auto;">'.
                           '  <tbody>'.
-                          $form_fields->select_row(
+                          $form_fields->selectRow(
                             array(
                               'label'           => __('SMTP Authentication Type:', $this->plugin->text_domain),
                               'placeholder'     => __('Select an Option...', $this->plugin->text_domain),
@@ -849,7 +849,7 @@ namespace WebSharks\CommentMail\Pro;
 
                           ' <table>'.
                           '  <tbody>'.
-                          $form_fields->input_row(
+                          $form_fields->inputRow(
                             array(
                               'label'         => __('SMTP Username:', $this->plugin->text_domain),
                               'placeholder'   => __('e.g., AKIAJSA57DDLS5I6GCA; e.g., me@example.com', $this->plugin->text_domain),
@@ -862,7 +862,7 @@ namespace WebSharks\CommentMail\Pro;
 
                           ' <table>'.
                           '  <tbody>'.
-                          $form_fields->input_row(
+                          $form_fields->inputRow(
                             array(
                               'type'          => 'password',
                               'label'         => __('SMTP Password:', $this->plugin->text_domain),
@@ -878,7 +878,7 @@ namespace WebSharks\CommentMail\Pro;
 
                           ' <table>'.
                           '  <tbody>'.
-                          $form_fields->input_row(
+                          $form_fields->inputRow(
                             array(
                               'label'         => __('SMTP <code>From</code> and <code>Return-Path</code> Name:', $this->plugin->text_domain),
                               'placeholder'   => __('e.g., MySite.com', $this->plugin->text_domain),
@@ -891,7 +891,7 @@ namespace WebSharks\CommentMail\Pro;
 
                           ' <table>'.
                           '  <tbody>'.
-                          $form_fields->input_row(
+                          $form_fields->inputRow(
                             array(
                               'type'          => 'email',
                               'label'         => __('SMTP <code>From</code> and <code>Return-Path</code> Email Address:', $this->plugin->text_domain),
@@ -908,7 +908,7 @@ namespace WebSharks\CommentMail\Pro;
 
                           ' <table>'.
                           '  <tbody>'.
-                          $form_fields->input_row(
+                          $form_fields->inputRow(
                             array(
                               'type'          => 'email',
                               'label'         => __('SMTP <code>Reply-To</code> Email Address:', $this->plugin->text_domain),
@@ -943,7 +943,7 @@ namespace WebSharks\CommentMail\Pro;
 
                           ' <table>'.
                           '  <tbody>'.
-                          $form_fields->input_row(
+                          $form_fields->inputRow(
                             array(
                               'type'        => 'email',
                               'label'       => __('Test SMTP Server Settings?', $this->plugin->text_domain),
@@ -965,7 +965,7 @@ namespace WebSharks\CommentMail\Pro;
         {
           $_panel_body = '<table style="margin:0;">'.
                          ' <tbody>'.
-                         $form_fields->select_row(
+                         $form_fields->selectRow(
                            array(
                              'label'           => __('Enable RVE (Replies via Email)?', $this->plugin->text_domain),
                              'placeholder'     => __('Select an Option...', $this->plugin->text_domain),
@@ -1004,7 +1004,7 @@ namespace WebSharks\CommentMail\Pro;
 
                           ' <table style="width:auto; margin-bottom:0;">'.
                           '    <tbody>'.
-                          $form_fields->select_row(
+                          $form_fields->selectRow(
                             array(
                               'label'           => __('Choose an RVE Handler:', $this->plugin->text_domain),
                               'placeholder'     => __('Select an Option...', $this->plugin->text_domain),
@@ -1024,7 +1024,7 @@ namespace WebSharks\CommentMail\Pro;
                           ' <div class="pmp-if-enabled-show pmp-if-value-mandrill pmp-in-if-nest"><hr />'.
                           '    <table>'.
                           '       <tbody>'.
-                          $form_fields->input_row(
+                          $form_fields->inputRow(
                             array(
                               'type'          => 'email',
                               'label'         => __('Mandrill <code>Reply-To</code> Address:', $this->plugin->text_domain),
@@ -1041,7 +1041,7 @@ namespace WebSharks\CommentMail\Pro;
 
                           '    <table>'.
                           '       <tbody>'.
-                          $form_fields->input_row(
+                          $form_fields->inputRow(
                             array(
                               'type'          => 'number',
                               'label'         => __('Mandrill Max Overall Spam Score Allowed:', $this->plugin->text_domain),
@@ -1055,7 +1055,7 @@ namespace WebSharks\CommentMail\Pro;
 
                           '    <table>'.
                           '       <tbody>'.
-                          $form_fields->select_row(
+                          $form_fields->selectRow(
                             array(
                               'label'           => __('Mandrill SPF Rejection Policy:', $this->plugin->text_domain),
                               'placeholder'     => __('Select an Option...', $this->plugin->text_domain),
@@ -1076,7 +1076,7 @@ namespace WebSharks\CommentMail\Pro;
 
                           '    <table>'.
                           '       <tbody>'.
-                          $form_fields->select_row(
+                          $form_fields->selectRow(
                             array(
                               'label'           => __('Mandrill DKIM Rejection Policy:', $this->plugin->text_domain),
                               'placeholder'     => __('Select an Option...', $this->plugin->text_domain),
@@ -1105,7 +1105,7 @@ namespace WebSharks\CommentMail\Pro;
         {
           $_panel_body = '<table style="margin-bottom:0;">'.
                          '  <tbody>'.
-                         $form_fields->select_row(
+                         $form_fields->selectRow(
                            array(
                              'label'           => __('Enable Single Sign-on (SSO)?', $this->plugin->text_domain),
                              'placeholder'     => __('Select an Option...', $this->plugin->text_domain),
@@ -1139,7 +1139,7 @@ namespace WebSharks\CommentMail\Pro;
                           '    <div class="pmp-tab-pane-twitter pmp-active">'.
                           '       <table style="margin-bottom:0;">'.
                           '          <tbody>'.
-                          $form_fields->input_row(
+                          $form_fields->inputRow(
                             array(
                               'label'         => sprintf(__('Twitter oAuth Consumer Key: &nbsp;&nbsp; <small><em>[%1$s]</em></small>', $this->plugin->text_domain), $this->plugin->utils_markup->x_anchor('http://comment-mail.com/kb-article/sso-integration/#-twitter', __('instructions', $this->plugin->text_domain))),
                               'placeholder'   => __('e.g., kyczbsh6nnwtzrkm882kh7jf8', $this->plugin->text_domain),
@@ -1152,7 +1152,7 @@ namespace WebSharks\CommentMail\Pro;
 
                           '       <table style="margin-top:0;">'.
                           '          <tbody>'.
-                          $form_fields->input_row(
+                          $form_fields->inputRow(
                             array(
                               'type'          => 'password',
                               'label'         => __('Twitter oAuth Consumer Secret:', $this->plugin->text_domain),
@@ -1167,7 +1167,7 @@ namespace WebSharks\CommentMail\Pro;
                           '    <div class="pmp-tab-pane-facebook">'.
                           '       <table style="margin-bottom:0;">'.
                           '          <tbody>'.
-                          $form_fields->input_row(
+                          $form_fields->inputRow(
                             array(
                               'label'         => sprintf(__('Facebook oAuth App ID: &nbsp;&nbsp; <small><em>[%1$s]</em></small>', $this->plugin->text_domain), $this->plugin->utils_markup->x_anchor('http://comment-mail.com/kb-article/sso-integration/#-facebook', __('instructions', $this->plugin->text_domain))),
                               'placeholder'   => __('e.g., 87df9vcu8njzrrnrgy2u2k2cj', $this->plugin->text_domain),
@@ -1180,7 +1180,7 @@ namespace WebSharks\CommentMail\Pro;
 
                           '       <table style="margin-top:0;">'.
                           '          <tbody>'.
-                          $form_fields->input_row(
+                          $form_fields->inputRow(
                             array(
                               'type'          => 'password',
                               'label'         => __('Facebook oAuth App Secret:', $this->plugin->text_domain),
@@ -1195,7 +1195,7 @@ namespace WebSharks\CommentMail\Pro;
                           '    <div class="pmp-tab-pane-google">'.
                           '       <table style="margin-bottom:0;">'.
                           '          <tbody>'.
-                          $form_fields->input_row(
+                          $form_fields->inputRow(
                             array(
                               'label'         => sprintf(__('Google oAuth Client ID: &nbsp;&nbsp; <small><em>[%1$s]</em></small>', $this->plugin->text_domain), $this->plugin->utils_markup->x_anchor('http://comment-mail.com/kb-article/sso-integration/#-google', __('instructions', $this->plugin->text_domain))),
                               'placeholder'   => __('e.g., qda788ac23s4m4utvqgkauwhf.apps.googleusercontent.com', $this->plugin->text_domain),
@@ -1208,7 +1208,7 @@ namespace WebSharks\CommentMail\Pro;
 
                           '       <table style="margin-top:0;">'.
                           '          <tbody>'.
-                          $form_fields->input_row(
+                          $form_fields->inputRow(
                             array(
                               'type'          => 'password',
                               'label'         => __('Google oAuth Client Secret:', $this->plugin->text_domain),
@@ -1223,7 +1223,7 @@ namespace WebSharks\CommentMail\Pro;
                           '    <div class="pmp-tab-pane-linkedin">'.
                           '       <table style="margin-bottom:0;">'.
                           '          <tbody>'.
-                          $form_fields->input_row(
+                          $form_fields->inputRow(
                             array(
                               'label'         => sprintf(__('LinkedIn oAuth API/Consumer Key: &nbsp;&nbsp; <small><em>[%1$s]</em></small>', $this->plugin->text_domain), $this->plugin->utils_markup->x_anchor('http://comment-mail.com/kb-article/sso-integration/#-linkedin', __('instructions', $this->plugin->text_domain))),
                               'placeholder'   => __('e.g., swf73zuj2puaug9e5a4ytpcg7', $this->plugin->text_domain),
@@ -1236,7 +1236,7 @@ namespace WebSharks\CommentMail\Pro;
 
                           '       <table style="margin-top:0;">'.
                           '          <tbody>'.
-                          $form_fields->input_row(
+                          $form_fields->inputRow(
                             array(
                               'type'          => 'password',
                               'label'         => __('LinkedIn oAuth API/Consumer Secret:', $this->plugin->text_domain),
@@ -1264,7 +1264,7 @@ namespace WebSharks\CommentMail\Pro;
 
                           '       <table style="margin-bottom:0;">'.
                           '          <tbody>'.
-                          $form_fields->select_row(
+                          $form_fields->selectRow(
                             array(
                               'label'           => __('Enable Comment Form SSO Options Template?', $this->plugin->text_domain),
                               'placeholder'     => __('Select an Option...', $this->plugin->text_domain),
@@ -1284,7 +1284,7 @@ namespace WebSharks\CommentMail\Pro;
                           '       <div class="pmp-if-disabled-show pmp-if-in-nest">'.
                           '          <table style="margin-bottom:0;">'.
                           '             <tbody>'.
-                          $form_fields->select_row(
+                          $form_fields->selectRow(
                             array(
                               'label'           => __('Also Disable Scripts Associated w/ Comment Form SSO Options?', $this->plugin->text_domain),
                               'placeholder'     => __('Select an Option...', $this->plugin->text_domain),
@@ -1305,7 +1305,7 @@ namespace WebSharks\CommentMail\Pro;
                           '          <table>'.
                           '             <tbody>'.
                           ($this->plugin->options['template_type'] === 'a'
-                            ? $form_fields->textarea_row( // Advanced PHP-based template.
+                            ? $form_fields->textareaRow( // Advanced PHP-based template.
                               array(
                                 'label'         => __('Comment Form SSO Options Template', $this->plugin->text_domain),
                                 'placeholder'   => __('Template Content...', $this->plugin->text_domain),
@@ -1317,7 +1317,7 @@ namespace WebSharks\CommentMail\Pro;
                                                    sprintf(__('This template is connected to one of two hooks that are expected to exist in all themes following WordPress standards. If the <code>%1$s</code> hook/filter exists, we use it (ideal). Otherwise, we use the <code>%2$s</code> action hook as a fallback. This is how the template is integrated into your comment form automatically. If both of these hooks are missing from your WP theme (e.g., SSO options are not showing up no matter what you do), you will need to seek assistance from a theme developer.', $this->plugin->text_domain), $this->plugin->utils_markup->x_anchor('https://developer.wordpress.org/reference/hooks/comment_form_must_log_in_after/', 'comment_form_must_log_in_after'), $this->plugin->utils_markup->x_anchor('https://developer.wordpress.org/reference/hooks/comment_form_top/', 'comment_form_top')).'</p>'.
                                                    '<p class="pmp-note pmp-info pmp-max-width">'.__('<strong>Tip:</strong> If you mess up your template by accident; empty the field completely and save your options. This reverts you back to the default template file automatically.', $this->plugin->text_domain).'</p>',
                               ))
-                            : $form_fields->textarea_row( // Simple snippet-based template.
+                            : $form_fields->textareaRow( // Simple snippet-based template.
                               array(
                                 'label'         => __('Comment Form SSO Options Template', $this->plugin->text_domain),
                                 'placeholder'   => __('Template Content...', $this->plugin->text_domain),
@@ -1343,7 +1343,7 @@ namespace WebSharks\CommentMail\Pro;
                           '    <div class="pmp-if-nest">'.
                           '       <table style="margin-bottom:0;">'.
                           '          <tbody>'.
-                          $form_fields->select_row(
+                          $form_fields->selectRow(
                             array(
                               'label'           => __('Enable Login Form SSO Options Template?', $this->plugin->text_domain),
                               'placeholder'     => __('Select an Option...', $this->plugin->text_domain),
@@ -1363,7 +1363,7 @@ namespace WebSharks\CommentMail\Pro;
                           '       <div class="pmp-if-disabled-show pmp-if-in-nest">'.
                           '          <table style="margin-bottom:0;">'.
                           '             <tbody>'.
-                          $form_fields->select_row(
+                          $form_fields->selectRow(
                             array(
                               'label'           => __('Also Disable Scripts Associated w/ Login Form SSO Options?', $this->plugin->text_domain),
                               'placeholder'     => __('Select an Option...', $this->plugin->text_domain),
@@ -1384,7 +1384,7 @@ namespace WebSharks\CommentMail\Pro;
                           '          <table>'.
                           '             <tbody>'.
                           ($this->plugin->options['template_type'] === 'a'
-                            ? $form_fields->textarea_row( // Advanced PHP-based template.
+                            ? $form_fields->textareaRow( // Advanced PHP-based template.
                               array(
                                 'label'         => __('Login Form SSO Options Template', $this->plugin->text_domain),
                                 'placeholder'   => __('Template Content...', $this->plugin->text_domain),
@@ -1396,7 +1396,7 @@ namespace WebSharks\CommentMail\Pro;
                                                    sprintf(__('This template is connected to one of two hooks that are expected to exist in all themes following WordPress standards. If the <code>%1$s</code> hook/filter exists, we use it (ideal). Otherwise, we use the <code>%2$s</code> action hook as a fallback. This is how the template is integrated into your login form automatically. If both of these hooks are missing from your WP theme (e.g., SSO options are not showing up no matter what you do), you will need to seek assistance from a theme developer.', $this->plugin->text_domain), $this->plugin->utils_markup->x_anchor('https://developer.wordpress.org/reference/hooks/login_form/', 'login_form'), $this->plugin->utils_markup->x_anchor('https://developer.wordpress.org/reference/hooks/login_footer/', 'login_footer')).'</p>'.
                                                    '<p class="pmp-note pmp-info pmp-max-width">'.__('<strong>Tip:</strong> If you mess up your template by accident; empty the field completely and save your options. This reverts you back to the default template file automatically.', $this->plugin->text_domain).'</p>',
                               ))
-                            : $form_fields->textarea_row( // Simple snippet-based template.
+                            : $form_fields->textareaRow( // Simple snippet-based template.
                               array(
                                 'label'         => __('Login Form SSO Options Template', $this->plugin->text_domain),
                                 'placeholder'   => __('Template Content...', $this->plugin->text_domain),
@@ -1432,7 +1432,7 @@ namespace WebSharks\CommentMail\Pro;
         {
           $_panel_body = '<table>'.
                          '  <tbody>'.
-                         $form_fields->textarea_row(
+                         $form_fields->textareaRow(
                            array(
                              'label'         => __('Email Blacklist Patterns (One Per Line)', $this->plugin->text_domain),
                              'placeholder'   => __('e.g., webmaster@*', $this->plugin->text_domain),
@@ -1457,7 +1457,7 @@ namespace WebSharks\CommentMail\Pro;
         {
           $_panel_body = '<table>'.
                          '  <tbody>'.
-                         $form_fields->input_row(
+                         $form_fields->inputRow(
                            array(
                              'type'          => 'number',
                              'label'         => __('Max Execution Time (In Seconds)', $this->plugin->text_domain),
@@ -1472,7 +1472,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body .= '<table>'.
                           '  <tbody>'.
-                          $form_fields->input_row(
+                          $form_fields->inputRow(
                             array(
                               'label'         => sprintf(__('Unconfirmed Expiration Time (<code>%1$s</code> Compatible)', $this->plugin->text_domain), $this->plugin->utils_markup->x_anchor('http://php.net/manual/en/function.strtotime.php', 'strtotime')),
                               'placeholder'   => __('e.g., 60 days', $this->plugin->text_domain),
@@ -1486,7 +1486,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body .= '<table>'.
                           '  <tbody>'.
-                          $form_fields->input_row(
+                          $form_fields->inputRow(
                             array(
                               'label'         => sprintf(__('Trash Expiration Time (<code>%1$s</code> Compatible)', $this->plugin->text_domain), $this->plugin->utils_markup->x_anchor('http://php.net/manual/en/function.strtotime.php', 'strtotime')),
                               'placeholder'   => __('e.g., 60 days', $this->plugin->text_domain),
@@ -1508,7 +1508,7 @@ namespace WebSharks\CommentMail\Pro;
         {
           $_panel_body = '<table>'.
                          '  <tbody>'.
-                         $form_fields->input_row(
+                         $form_fields->inputRow(
                            array(
                              'type'          => 'number',
                              'label'         => __('Max Execution Time (In Seconds)', $this->plugin->text_domain),
@@ -1523,7 +1523,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body .= '<table>'.
                           '  <tbody>'.
-                          $form_fields->input_row(
+                          $form_fields->inputRow(
                             array(
                               'label'         => sprintf(__('Sub. Event Log Expiration Time (<code>%1$s</code> Compatible)', $this->plugin->text_domain), $this->plugin->utils_markup->x_anchor('http://php.net/manual/en/function.strtotime.php', 'strtotime')),
                               'placeholder'   => __('e.g., 7 years', $this->plugin->text_domain),
@@ -1537,7 +1537,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body .= '<table>'.
                           '  <tbody>'.
-                          $form_fields->input_row(
+                          $form_fields->inputRow(
                             array(
                               'label'         => sprintf(__('Queue Event Log Expiration Time (<code>%1$s</code> Compatible)', $this->plugin->text_domain), $this->plugin->utils_markup->x_anchor('http://php.net/manual/en/function.strtotime.php', 'strtotime')),
                               'placeholder'   => __('e.g., 7 years', $this->plugin->text_domain),
@@ -1559,7 +1559,7 @@ namespace WebSharks\CommentMail\Pro;
         {
           $_panel_body = '<table>'.
                          '  <tbody>'.
-                         $form_fields->input_row(
+                         $form_fields->inputRow(
                            array(
                              'type'          => 'number',
                              'label'         => __('Max Execution Time (In Seconds)', $this->plugin->text_domain),
@@ -1574,7 +1574,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body .= '<table>'.
                           '  <tbody>'.
-                          $form_fields->input_row(
+                          $form_fields->inputRow(
                             array(
                               'type'          => 'number',
                               'label'         => __('Delay Time (In Milliseconds)', $this->plugin->text_domain),
@@ -1590,7 +1590,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body .= '<table>'.
                           '  <tbody>'.
-                          $form_fields->input_row(
+                          $form_fields->inputRow(
                             array(
                               'type'          => 'number',
                               'label'         => __('Max Email Notifications Per Process (Integer)', $this->plugin->text_domain),
@@ -1608,7 +1608,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body .= '<table>'.
                           '  <tbody>'.
-                          $form_fields->input_row(
+                          $form_fields->inputRow(
                             array(
                               'type'          => 'number',
                               'label'         => __('Real-Time Queue Processor; Max Email Notifications in Real-Time (Integer)', $this->plugin->text_domain),
@@ -1630,7 +1630,7 @@ namespace WebSharks\CommentMail\Pro;
 
         $_panel_body = '<table>'.
                        '  <tbody>'.
-                       $form_fields->input_row(
+                       $form_fields->inputRow(
                          array(
                            'label'         => __('WordPress Capability Required to Manage Subscriptions', $this->plugin->text_domain),
                            'placeholder'   => __('e.g., moderate_comments', $this->plugin->text_domain),
@@ -1649,7 +1649,7 @@ namespace WebSharks\CommentMail\Pro;
 
         $_panel_body = '<table>'.
                        '  <tbody>'.
-                       $form_fields->input_row(
+                       $form_fields->inputRow(
                          array(
                            'label'         => __('Don\'t Show Meta Boxes for these Post Types:', $this->plugin->text_domain),
                            'placeholder'   => __('e.g., link,comment,revision,attachment,nav_menu_item,snippet,redirect', $this->plugin->text_domain),
@@ -1670,7 +1670,7 @@ namespace WebSharks\CommentMail\Pro;
         {
           $_panel_body = '<table>'.
                          '  <tbody>'.
-                         $form_fields->select_row(
+                         $form_fields->selectRow(
                            array(
                              'label'           => sprintf(__('Simple Templates or Advanced PHP Templates?', $this->plugin->text_domain), esc_html($this->plugin->name)),
                              'placeholder'     => __('Select an Option...', $this->plugin->text_domain),
@@ -1688,7 +1688,7 @@ namespace WebSharks\CommentMail\Pro;
                          '</table>';
           $_panel_body .= '<table>'.
                           '  <tbody>'.
-                          $form_fields->select_row(
+                          $form_fields->selectRow(
                             array(
                               'label'           => sprintf(__('Syntax Highlighting Theme', $this->plugin->text_domain), esc_html($this->plugin->name)),
                               'placeholder'     => __('Select an Option...', $this->plugin->text_domain),
@@ -1757,7 +1757,7 @@ namespace WebSharks\CommentMail\Pro;
         {
           $_panel_body = '<table>'.
                          '  <tbody>'.
-                         $form_fields->input_row(
+                         $form_fields->inputRow(
                            array(
                              'type'          => 'number',
                              'label'         => __('"My Subscriptions" Summary; Max Subscriptions Per Page', $this->plugin->text_domain),
@@ -1774,7 +1774,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body .= '<table>'.
                           '  <tbody>'.
-                          $form_fields->select_row(
+                          $form_fields->selectRow(
                             array(
                               'label'           => __('Select Menu Options; List Posts?', $this->plugin->text_domain),
                               'placeholder'     => __('Select an Option...', $this->plugin->text_domain),
@@ -1792,7 +1792,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body .= '<table>'.
                           '  <tbody>'.
-                          $form_fields->select_row(
+                          $form_fields->selectRow(
                             array(
                               'label'           => __('Post Select Menu Options; Include Media?', $this->plugin->text_domain),
                               'placeholder'     => __('Select an Option...', $this->plugin->text_domain),
@@ -1812,7 +1812,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body .= '<table>'.
                           '  <tbody>'.
-                          $form_fields->select_row(
+                          $form_fields->selectRow(
                             array(
                               'label'           => __('Select Menu Options; List Comments?', $this->plugin->text_domain),
                               'placeholder'     => __('Select an Option...', $this->plugin->text_domain),
@@ -1832,7 +1832,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body .= '<table>'.
                           '  <tbody>'.
-                          $form_fields->select_row(
+                          $form_fields->selectRow(
                             array(
                               'label'           => __('Select Menu Options; List Users?', $this->plugin->text_domain),
                               'placeholder'     => __('Select an Option...', $this->plugin->text_domain),
@@ -1852,7 +1852,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body .= '<table>'.
                           '  <tbody>'.
-                          $form_fields->input_row(
+                          $form_fields->inputRow(
                             array(
                               'type'          => 'number',
                               'label'         => __('Maximum Select Menu Options Before Input Fallback:', $this->plugin->text_domain),
@@ -1869,7 +1869,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body .= '<table>'.
                           '  <tbody>'.
-                          $form_fields->select_row(
+                          $form_fields->selectRow(
                             array(
                               'label'           => sprintf(__('Display %1$s&trade; Logo in Admin Area?', $this->plugin->text_domain), esc_html($this->plugin->name)),
                               'placeholder'     => __('Select an Option...', $this->plugin->text_domain),
@@ -1944,7 +1944,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body .= ' <table>'.
                           '   <tbody>'.
-                          $_form_fields->textarea_row(
+                          $_form_fields->textareaRow(
                             array(
                               'label'         => __('Direct CSV Input Data:', $this->plugin->text_domain),
                               'placeholder'   => __('"email", "post_id", "status"'."\n".'"john@example.com", "1", "subscribed"', $this->plugin->text_domain),
@@ -1960,7 +1960,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body .= ' <table>'.
                           '   <tbody>'.
-                          $_form_fields->input_row(
+                          $_form_fields->inputRow(
                             array(
                               'type'         => 'file',
                               'label'        => __('Or, a Prepared CSV File Upload:', $this->plugin->text_domain),
@@ -1978,7 +1978,7 @@ namespace WebSharks\CommentMail\Pro;
 
             $_panel_body .= '  <table>'.
                             '    <tbody>'.
-                            $_form_fields->input_row(
+                            $_form_fields->inputRow(
                               array(
                                 'type'           => 'checkbox',
                                 'label'          => __('Process Email Confirmations?', $this->plugin->text_domain),
@@ -1993,7 +1993,7 @@ namespace WebSharks\CommentMail\Pro;
           $_panel_body .= ' <hr />';
 
           $_panel_body .= ' <div style="display:none;">'.
-                          '  '.$_form_fields->hidden_input(array('name' => 'type', 'current_value' => 'subs')).
+                          '  '.$_form_fields->hiddenInput(array('name' => 'type', 'current_value' => 'subs')).
                           ' </div>';
 
           $_panel_body .= ' <button type="submit" style="width:100%;">'.
@@ -2059,7 +2059,7 @@ namespace WebSharks\CommentMail\Pro;
           $_panel_body .= ' <hr />';
 
           $_panel_body .= ' <div style="display:none;">'.
-                          '  '.$_form_fields->hidden_input(array('name' => 'type', 'current_value' => 'stcr')).
+                          '  '.$_form_fields->hiddenInput(array('name' => 'type', 'current_value' => 'stcr')).
                           ' </div>';
 
           $_panel_body .= '</form>';
@@ -2087,7 +2087,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body .= ' <table>'.
                           '    <tbody>'.
-                          $_form_fields->input_row(
+                          $_form_fields->inputRow(
                             array(
                               'type'          => 'number',
                               'label'         => __('Start Position:', $this->plugin->text_domain),
@@ -2102,7 +2102,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body .= '  <table>'.
                           '    <tbody>'.
-                          $_form_fields->input_row(
+                          $_form_fields->inputRow(
                             array(
                               'type'          => 'number',
                               'label'         => __('Max Subscriptions in this Set:', $this->plugin->text_domain),
@@ -2120,7 +2120,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body .= '  <table>'.
                           '    <tbody>'.
-                          $_form_fields->input_row(
+                          $_form_fields->inputRow(
                             array(
                               'type'           => 'checkbox',
                               'label'          => __('Include UTF-8 BOM (Byte Order Marker)?', $this->plugin->text_domain),
@@ -2134,7 +2134,7 @@ namespace WebSharks\CommentMail\Pro;
           $_panel_body .= ' <hr />';
 
           $_panel_body .= ' <div style="display:none;">'.
-                          '  '.$_form_fields->hidden_input(array('name' => 'type', 'current_value' => 'subs')).
+                          '  '.$_form_fields->hiddenInput(array('name' => 'type', 'current_value' => 'subs')).
                           ' </div>';
 
           $_panel_body .= ' <button type="submit" style="width:100%;">'.
@@ -2173,7 +2173,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body .= ' <table>'.
                           '   <tbody>'.
-                          $_form_fields->input_row(
+                          $_form_fields->inputRow(
                             array(
                               'type'        => 'file',
                               'label'       => __('JSON Config. Options File:', $this->plugin->text_domain),
@@ -2184,7 +2184,7 @@ namespace WebSharks\CommentMail\Pro;
                           ' </table>';
 
           $_panel_body .= ' <div style="display:none;">'.
-                          '  '.$_form_fields->hidden_input(array('name' => 'type', 'current_value' => 'ops')).
+                          '  '.$_form_fields->hiddenInput(array('name' => 'type', 'current_value' => 'ops')).
                           ' </div>';
 
           $_panel_body .= ' <button type="submit" style="width:100%;">'.
@@ -2215,7 +2215,7 @@ namespace WebSharks\CommentMail\Pro;
           $_panel_body .= ' <p class="pmp-note pmp-info" style="font-size:90%;">'.__('<strong>Tip:</strong> Export your configuration on this site, and then import it into another WordPress installation to save time in the future.', $this->plugin->text_domain).'</p>';
 
           $_panel_body .= ' <div style="display:none;">'.
-                          '  '.$_form_fields->hidden_input(array('name' => 'type', 'current_value' => 'ops')).
+                          '  '.$_form_fields->hiddenInput(array('name' => 'type', 'current_value' => 'ops')).
                           ' </div>';
 
           $_panel_body .= ' <button type="submit" style="width:100%;">'.
@@ -2309,7 +2309,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body = '<table>'.
                          '  <tbody>'.
-                         $form_fields->textarea_row(
+                         $form_fields->textareaRow(
                            array(
                              'label'         => __('Email Header Tag Template', $this->plugin->text_domain),
                              'placeholder'   => __('Template Content...', $this->plugin->text_domain),
@@ -2337,7 +2337,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body = '<table>'.
                          '  <tbody>'.
-                         $form_fields->textarea_row(
+                         $form_fields->textareaRow(
                            array(
                              'label'         => __('Email Footer Tag Template', $this->plugin->text_domain),
                              'placeholder'   => __('Template Content...', $this->plugin->text_domain),
@@ -2367,7 +2367,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body = '<table>'.
                          '  <tbody>'.
-                         $form_fields->textarea_row(
+                         $form_fields->textareaRow(
                            array(
                              'label'         => __('Subscr. Confirmation Subject Line Template', $this->plugin->text_domain),
                              'placeholder'   => __('Template Content...', $this->plugin->text_domain),
@@ -2395,7 +2395,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body = '<table>'.
                          '  <tbody>'.
-                         $form_fields->textarea_row(
+                         $form_fields->textareaRow(
                            array(
                              'label'         => __('Subscr. Confirmation Message Body Template', $this->plugin->text_domain),
                              'placeholder'   => __('Template Content...', $this->plugin->text_domain),
@@ -2435,7 +2435,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body = '<table>'.
                          '  <tbody>'.
-                         $form_fields->textarea_row(
+                         $form_fields->textareaRow(
                            array(
                              'label'         => __('Comment Notification Subject Line Template', $this->plugin->text_domain),
                              'placeholder'   => __('Template Content...', $this->plugin->text_domain),
@@ -2464,7 +2464,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body = '<table>'.
                          '  <tbody>'.
-                         $form_fields->textarea_row(
+                         $form_fields->textareaRow(
                            array(
                              'label'         => __('Comment Notification Message Heading Template', $this->plugin->text_domain),
                              'placeholder'   => __('Template Content...', $this->plugin->text_domain),
@@ -2495,7 +2495,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body = '<table>'.
                          '  <tbody>'.
-                         $form_fields->textarea_row(
+                         $form_fields->textareaRow(
                            array(
                              'label'         => __('Comment Notification Message In-Response-To Template', $this->plugin->text_domain),
                              'placeholder'   => __('Template Content...', $this->plugin->text_domain),
@@ -2523,7 +2523,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body = '<table>'.
                          '  <tbody>'.
-                         $form_fields->textarea_row(
+                         $form_fields->textareaRow(
                            array(
                              'label'         => __('Comment Notification Message Reply-From Template', $this->plugin->text_domain),
                              'placeholder'   => __('Template Content...', $this->plugin->text_domain),
@@ -2552,7 +2552,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body = '<table>'.
                          '  <tbody>'.
-                         $form_fields->textarea_row(
+                         $form_fields->textareaRow(
                            array(
                              'label'         => __('Comment Notification Message Comment-From Template', $this->plugin->text_domain),
                              'placeholder'   => __('Template Content...', $this->plugin->text_domain),
@@ -2590,7 +2590,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body = '<table>'.
                          '  <tbody>'.
-                         $form_fields->textarea_row(
+                         $form_fields->textareaRow(
                            array(
                              'label'         => __('Email Header Template', $this->plugin->text_domain),
                              'placeholder'   => __('Template Content...', $this->plugin->text_domain),
@@ -2612,7 +2612,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body = '<table>'.
                          '  <tbody>'.
-                         $form_fields->textarea_row(
+                         $form_fields->textareaRow(
                            array(
                              'label'         => __('Email Header Styles Template', $this->plugin->text_domain),
                              'placeholder'   => __('Template Content...', $this->plugin->text_domain),
@@ -2634,7 +2634,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body = '<table>'.
                          '  <tbody>'.
-                         $form_fields->textarea_row(
+                         $form_fields->textareaRow(
                            array(
                              'label'         => __('Email Header Scripts Template', $this->plugin->text_domain),
                              'placeholder'   => __('Template Content...', $this->plugin->text_domain),
@@ -2656,7 +2656,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body = '<table>'.
                          '  <tbody>'.
-                         $form_fields->textarea_row(
+                         $form_fields->textareaRow(
                            array(
                              'label'         => __('Email Header Tag Template', $this->plugin->text_domain),
                              'placeholder'   => __('Template Content...', $this->plugin->text_domain),
@@ -2678,7 +2678,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body = '<table>'.
                          '  <tbody>'.
-                         $form_fields->textarea_row(
+                         $form_fields->textareaRow(
                            array(
                              'label'         => __('Email Footer Tag Template', $this->plugin->text_domain),
                              'placeholder'   => __('Template Content...', $this->plugin->text_domain),
@@ -2700,7 +2700,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body = '<table>'.
                          '  <tbody>'.
-                         $form_fields->textarea_row(
+                         $form_fields->textareaRow(
                            array(
                              'label'         => __('Email Footer Template', $this->plugin->text_domain),
                              'placeholder'   => __('Template Content...', $this->plugin->text_domain),
@@ -2729,7 +2729,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body = '<table>'.
                          '  <tbody>'.
-                         $form_fields->textarea_row(
+                         $form_fields->textareaRow(
                            array(
                              'label'         => __('Subscr. Confirmation Subject Line Template', $this->plugin->text_domain),
                              'placeholder'   => __('Template Content...', $this->plugin->text_domain),
@@ -2751,7 +2751,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body = '<table>'.
                          '  <tbody>'.
-                         $form_fields->textarea_row(
+                         $form_fields->textareaRow(
                            array(
                              'label'         => __('Subscr. Confirmation Message Body Template', $this->plugin->text_domain),
                              'placeholder'   => __('Template Content...', $this->plugin->text_domain),
@@ -2780,7 +2780,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body = '<table>'.
                          '  <tbody>'.
-                         $form_fields->textarea_row(
+                         $form_fields->textareaRow(
                            array(
                              'label'         => __('Comment Notification Subject Line Template', $this->plugin->text_domain),
                              'placeholder'   => __('Template Content...', $this->plugin->text_domain),
@@ -2802,7 +2802,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body = '<table>'.
                          '  <tbody>'.
-                         $form_fields->textarea_row(
+                         $form_fields->textareaRow(
                            array(
                              'label'         => __('Comment Notification Message Body Template', $this->plugin->text_domain),
                              'placeholder'   => __('Template Content...', $this->plugin->text_domain),
@@ -2906,7 +2906,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body = '<table>'.
                          '  <tbody>'.
-                         $form_fields->textarea_row(
+                         $form_fields->textareaRow(
                            array(
                              'label'         => __('Site Header Tag Template', $this->plugin->text_domain),
                              'placeholder'   => __('Template Content...', $this->plugin->text_domain),
@@ -2934,7 +2934,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body = '<table>'.
                          '  <tbody>'.
-                         $form_fields->textarea_row(
+                         $form_fields->textareaRow(
                            array(
                              'label'         => __('Site Footer Tag Template', $this->plugin->text_domain),
                              'placeholder'   => __('Template Content...', $this->plugin->text_domain),
@@ -2970,7 +2970,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body = '<table>'.
                          '  <tbody>'.
-                         $form_fields->textarea_row(
+                         $form_fields->textareaRow(
                            array(
                              'label'         => __('Subscr. Confirmed Template', $this->plugin->text_domain),
                              'placeholder'   => __('Template Content...', $this->plugin->text_domain),
@@ -3006,7 +3006,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body = '<table>'.
                          '  <tbody>'.
-                         $form_fields->textarea_row(
+                         $form_fields->textareaRow(
                            array(
                              'label'         => __('Unsubscribed Template', $this->plugin->text_domain),
                              'placeholder'   => __('Template Content...', $this->plugin->text_domain),
@@ -3042,7 +3042,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body = '<table>'.
                          '  <tbody>'.
-                         $form_fields->textarea_row(
+                         $form_fields->textareaRow(
                            array(
                              'label'         => __('Unsubscribed All Template', $this->plugin->text_domain),
                              'placeholder'   => __('Template Content...', $this->plugin->text_domain),
@@ -3075,7 +3075,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body = '<table>'.
                          '  <tbody>'.
-                         $form_fields->textarea_row(
+                         $form_fields->textareaRow(
                            array(
                              'label'         => __('Comment Form Subscr. Options Template', $this->plugin->text_domain),
                              'placeholder'   => __('Template Content...', $this->plugin->text_domain),
@@ -3117,7 +3117,7 @@ namespace WebSharks\CommentMail\Pro;
 
             $_panel_body = '<table>'.
                            '  <tbody>'.
-                           $form_fields->textarea_row(
+                           $form_fields->textareaRow(
                              array(
                                'label'         => __('Comment Form SSO Options Template', $this->plugin->text_domain),
                                'placeholder'   => __('Template Content...', $this->plugin->text_domain),
@@ -3144,7 +3144,7 @@ namespace WebSharks\CommentMail\Pro;
 
             $_panel_body = '<table>'.
                            '  <tbody>'.
-                           $form_fields->textarea_row(
+                           $form_fields->textareaRow(
                              array(
                                'label'         => __('Login Form SSO Options Template', $this->plugin->text_domain),
                                'placeholder'   => __('Template Content...', $this->plugin->text_domain),
@@ -3181,7 +3181,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body = '<table>'.
                          '  <tbody>'.
-                         $form_fields->textarea_row(
+                         $form_fields->textareaRow(
                            array(
                              'label'         => __('Site Header Template', $this->plugin->text_domain),
                              'placeholder'   => __('Template Content...', $this->plugin->text_domain),
@@ -3203,7 +3203,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body = '<table>'.
                          '  <tbody>'.
-                         $form_fields->textarea_row(
+                         $form_fields->textareaRow(
                            array(
                              'label'         => __('Site Header Styles Template', $this->plugin->text_domain),
                              'placeholder'   => __('Template Content...', $this->plugin->text_domain),
@@ -3225,7 +3225,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body = '<table>'.
                          '  <tbody>'.
-                         $form_fields->textarea_row(
+                         $form_fields->textareaRow(
                            array(
                              'label'         => __('Site Header Scripts Template', $this->plugin->text_domain),
                              'placeholder'   => __('Template Content...', $this->plugin->text_domain),
@@ -3247,7 +3247,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body = '<table>'.
                          '  <tbody>'.
-                         $form_fields->textarea_row(
+                         $form_fields->textareaRow(
                            array(
                              'label'         => __('Site Header Tag Template', $this->plugin->text_domain),
                              'placeholder'   => __('Template Content...', $this->plugin->text_domain),
@@ -3269,7 +3269,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body = '<table>'.
                          '  <tbody>'.
-                         $form_fields->textarea_row(
+                         $form_fields->textareaRow(
                            array(
                              'label'         => __('Site Footer Tag Template', $this->plugin->text_domain),
                              'placeholder'   => __('Template Content...', $this->plugin->text_domain),
@@ -3291,7 +3291,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body = '<table>'.
                          '  <tbody>'.
-                         $form_fields->textarea_row(
+                         $form_fields->textareaRow(
                            array(
                              'label'         => __('Site Footer Template', $this->plugin->text_domain),
                              'placeholder'   => __('Template Content...', $this->plugin->text_domain),
@@ -3320,7 +3320,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body = '<table>'.
                          '  <tbody>'.
-                         $form_fields->textarea_row(
+                         $form_fields->textareaRow(
                            array(
                              'label'         => __('Subscr. Confirmed Template', $this->plugin->text_domain),
                              'placeholder'   => __('Template Content...', $this->plugin->text_domain),
@@ -3342,7 +3342,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body = '<table>'.
                          '  <tbody>'.
-                         $form_fields->textarea_row(
+                         $form_fields->textareaRow(
                            array(
                              'label'         => __('Unsubscribed Template', $this->plugin->text_domain),
                              'placeholder'   => __('Template Content...', $this->plugin->text_domain),
@@ -3364,7 +3364,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body = '<table>'.
                          '  <tbody>'.
-                         $form_fields->textarea_row(
+                         $form_fields->textareaRow(
                            array(
                              'label'         => __('Unsubscribed All Template', $this->plugin->text_domain),
                              'placeholder'   => __('Template Content...', $this->plugin->text_domain),
@@ -3393,7 +3393,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body = '<table>'.
                          '  <tbody>'.
-                         $form_fields->textarea_row(
+                         $form_fields->textareaRow(
                            array(
                              'label'         => __('Summary Template', $this->plugin->text_domain),
                              'placeholder'   => __('Template Content...', $this->plugin->text_domain),
@@ -3415,7 +3415,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body = '<table>'.
                          '  <tbody>'.
-                         $form_fields->textarea_row(
+                         $form_fields->textareaRow(
                            array(
                              'label'         => __('Add/Edit Form Template', $this->plugin->text_domain),
                              'placeholder'   => __('Template Content...', $this->plugin->text_domain),
@@ -3437,7 +3437,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body = '<table>'.
                          '  <tbody>'.
-                         $form_fields->textarea_row(
+                         $form_fields->textareaRow(
                            array(
                              'label'         => __('Add/Edit Form Template (Comment ID Row via AJAX)', $this->plugin->text_domain),
                              'placeholder'   => __('Template Content...', $this->plugin->text_domain),
@@ -3466,7 +3466,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body = '<table>'.
                          '  <tbody>'.
-                         $form_fields->textarea_row(
+                         $form_fields->textareaRow(
                            array(
                              'label'         => __('Comment Form Subscr. Options Template', $this->plugin->text_domain),
                              'placeholder'   => __('Template Content...', $this->plugin->text_domain),
@@ -3489,7 +3489,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body = '<table>'.
                          '  <tbody>'.
-                         $form_fields->textarea_row(
+                         $form_fields->textareaRow(
                            array(
                              'label'         => __('Comment Form Scripts for Subscr. Options', $this->plugin->text_domain),
                              'placeholder'   => __('Template Content...', $this->plugin->text_domain),
@@ -3518,7 +3518,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body = '<table>'.
                          '  <tbody>'.
-                         $form_fields->textarea_row(
+                         $form_fields->textareaRow(
                            array(
                              'label'         => __('Comment Form SSO Options Template', $this->plugin->text_domain),
                              'placeholder'   => __('Template Content...', $this->plugin->text_domain),
@@ -3541,7 +3541,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body = '<table>'.
                          '  <tbody>'.
-                         $form_fields->textarea_row(
+                         $form_fields->textareaRow(
                            array(
                              'label'         => __('Comment Form Scripts for SSO Options', $this->plugin->text_domain),
                              'placeholder'   => __('Template Content...', $this->plugin->text_domain),
@@ -3563,7 +3563,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body = '<table>'.
                          '  <tbody>'.
-                         $form_fields->textarea_row(
+                         $form_fields->textareaRow(
                            array(
                              'label'         => __('Login Form SSO Options Template', $this->plugin->text_domain),
                              'placeholder'   => __('Template Content...', $this->plugin->text_domain),
@@ -3586,7 +3586,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body = '<table>'.
                          '  <tbody>'.
-                         $form_fields->textarea_row(
+                         $form_fields->textareaRow(
                            array(
                              'label'         => __('Login Form Scripts for SSO Options', $this->plugin->text_domain),
                              'placeholder'   => __('Template Content...', $this->plugin->text_domain),
@@ -3608,7 +3608,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body = '<table>'.
                          '  <tbody>'.
-                         $form_fields->textarea_row(
+                         $form_fields->textareaRow(
                            array(
                              'label'         => __('SSO Registration Completion Template', $this->plugin->text_domain),
                              'placeholder'   => __('Template Content...', $this->plugin->text_domain),
@@ -3847,12 +3847,12 @@ namespace WebSharks\CommentMail\Pro;
         $_postbox_body = $this->stats_view(
           $_postbox_view,
           array(
-            array('hidden_input' => $_form_fields->hidden_input(
+            array('hidden_input' => $_form_fields->hiddenInput(
               array(
                 'name'          => 'view',
                 'current_value' => $_postbox_view,
               ))),
-            $_form_fields->select_row(
+            $_form_fields->selectRow(
               array(
                 'label'           => __('Chart Type', $this->plugin->text_domain),
                 'placeholder'     => __('Select an Option...', $this->plugin->text_domain),
@@ -3861,7 +3861,7 @@ namespace WebSharks\CommentMail\Pro;
                 'allow_arbitrary' => FALSE,
                 'options'         => $_postbox_chart_type_options,
               )),
-            array('row'      => $_form_fields->select_row(
+            array('row'      => $_form_fields->selectRow(
               array(
                 'label'           => __('Exclude', $this->plugin->text_domain),
                 'placeholder'     => __('One or More...', $this->plugin->text_domain),
@@ -3873,7 +3873,7 @@ namespace WebSharks\CommentMail\Pro;
                   'systematics' => __('Systematics (i.e., Show User-Initiated Events Only)', $this->plugin->text_domain),
                 ),
               )), 'colspan' => 3, 'ends_row' => TRUE),
-            $_form_fields->input_row(
+            $_form_fields->inputRow(
               array(
                 'label'         => sprintf(__('From Date (%1$s) %2$s', $this->plugin->text_domain), esc_html($timezone), $date_info_anchor),
                 'placeholder'   => sprintf(__('e.g., 7 days ago; %1$s 00:00', $this->plugin->text_domain), esc_html($this->plugin->utils_date->i18n('M j, Y', strtotime('-7 days')))),
@@ -3881,7 +3881,7 @@ namespace WebSharks\CommentMail\Pro;
                 'other_attrs'   => 'data-toggle="date-time-picker"',
                 'current_value' => $this->coalesce($current_value_for('from'), '7 days ago'),
               )),
-            $_form_fields->input_row(
+            $_form_fields->inputRow(
               array(
                 'label'         => sprintf(__('To Date (%1$s) %2$s', $this->plugin->text_domain), esc_html($timezone), $date_info_anchor),
                 'placeholder'   => sprintf(__('e.g., now; %1$s 00:00', $this->plugin->text_domain), esc_html($this->plugin->utils_date->i18n('M j, Y'))),
@@ -3889,7 +3889,7 @@ namespace WebSharks\CommentMail\Pro;
                 'other_attrs'   => 'data-toggle="date-time-picker"',
                 'current_value' => $this->coalesce($current_value_for('to'), 'now'),
               )),
-            $_form_fields->select_row(
+            $_form_fields->selectRow(
               array(
                 'label'           => __('Breakdown By', $this->plugin->text_domain),
                 'placeholder'     => __('e.g., hours, days, weeks, months, years', $this->plugin->text_domain),
@@ -3950,12 +3950,12 @@ namespace WebSharks\CommentMail\Pro;
         $_postbox_body = $this->stats_view(
           $_postbox_view,
           array(
-            array('hidden_input' => $_form_fields->hidden_input(
+            array('hidden_input' => $_form_fields->hiddenInput(
               array(
                 'name'          => 'view',
                 'current_value' => $_postbox_view,
               ))),
-            $_form_fields->select_row(
+            $_form_fields->selectRow(
               array(
                 'label'           => __('Chart Type', $this->plugin->text_domain),
                 'placeholder'     => __('Select an Option...', $this->plugin->text_domain),
@@ -3964,7 +3964,7 @@ namespace WebSharks\CommentMail\Pro;
                 'allow_arbitrary' => FALSE,
                 'options'         => $_postbox_chart_type_options,
               )),
-            $_form_fields->select_row(
+            $_form_fields->selectRow(
               array(
                 'label'               => __('Post ID', $this->plugin->text_domain),
                 'placeholder'         => __('Select an Option...', $this->plugin->text_domain),
@@ -3979,7 +3979,7 @@ namespace WebSharks\CommentMail\Pro;
                   'other_attrs'              => 'min="1" max="18446744073709551615"',
                 ),
               )),
-            array('row'      => $_form_fields->select_row(
+            array('row'      => $_form_fields->selectRow(
               array(
                 'label'           => __('Exclude', $this->plugin->text_domain),
                 'placeholder'     => __('One or More...', $this->plugin->text_domain),
@@ -3991,7 +3991,7 @@ namespace WebSharks\CommentMail\Pro;
                   'systematics' => __('Systematics (i.e., Show User-Initiated Events Only)', $this->plugin->text_domain),
                 ),
               )), 'colspan' => 2, 'ends_row' => TRUE),
-            $_form_fields->input_row(
+            $_form_fields->inputRow(
               array(
                 'label'         => sprintf(__('From Date (%1$s) %2$s', $this->plugin->text_domain), esc_html($timezone), $date_info_anchor),
                 'placeholder'   => sprintf(__('e.g., 7 days ago; %1$s 00:00', $this->plugin->text_domain), esc_html($this->plugin->utils_date->i18n('M j, Y', strtotime('-7 days')))),
@@ -3999,7 +3999,7 @@ namespace WebSharks\CommentMail\Pro;
                 'other_attrs'   => 'data-toggle="date-time-picker"',
                 'current_value' => $this->coalesce($current_value_for('from'), '7 days ago'),
               )),
-            $_form_fields->input_row(
+            $_form_fields->inputRow(
               array(
                 'label'         => sprintf(__('To Date (%1$s) %2$s', $this->plugin->text_domain), esc_html($timezone), $date_info_anchor),
                 'placeholder'   => sprintf(__('e.g., now; %1$s 00:00', $this->plugin->text_domain), esc_html($this->plugin->utils_date->i18n('M j, Y'))),
@@ -4007,7 +4007,7 @@ namespace WebSharks\CommentMail\Pro;
                 'other_attrs'   => 'data-toggle="date-time-picker"',
                 'current_value' => $this->coalesce($current_value_for('to'), 'now'),
               )),
-            $_form_fields->select_row(
+            $_form_fields->selectRow(
               array(
                 'label'           => __('Breakdown By', $this->plugin->text_domain),
                 'placeholder'     => __('e.g., hours, days, weeks, months, years', $this->plugin->text_domain),
@@ -4059,12 +4059,12 @@ namespace WebSharks\CommentMail\Pro;
         $_postbox_body               = $this->stats_view(
           $_postbox_view,
           array(
-            array('hidden_input' => $_form_fields->hidden_input(
+            array('hidden_input' => $_form_fields->hiddenInput(
               array(
                 'name'          => 'view',
                 'current_value' => $_postbox_view,
               ))),
-            array('row'      => $_form_fields->select_row(
+            array('row'      => $_form_fields->selectRow(
               array(
                 'label'           => __('Chart Type', $this->plugin->text_domain),
                 'placeholder'     => __('Select an Option...', $this->plugin->text_domain),
@@ -4073,7 +4073,7 @@ namespace WebSharks\CommentMail\Pro;
                 'allow_arbitrary' => FALSE,
                 'options'         => $_postbox_chart_type_options,
               )), 'colspan' => 4, 'ends_row' => TRUE),
-            $_form_fields->input_row(
+            $_form_fields->inputRow(
               array(
                 'label'         => sprintf(__('From Date (%1$s) %2$s', $this->plugin->text_domain), esc_html($timezone), $date_info_anchor),
                 'placeholder'   => sprintf(__('e.g., 7 days ago; %1$s 00:00', $this->plugin->text_domain), esc_html($this->plugin->utils_date->i18n('M j, Y', strtotime('-7 days')))),
@@ -4081,7 +4081,7 @@ namespace WebSharks\CommentMail\Pro;
                 'other_attrs'   => 'data-toggle="date-time-picker"',
                 'current_value' => $this->coalesce($current_value_for('from'), '7 days ago'),
               )),
-            $_form_fields->input_row(
+            $_form_fields->inputRow(
               array(
                 'label'         => sprintf(__('To Date (%1$s) %2$s', $this->plugin->text_domain), esc_html($timezone), $date_info_anchor),
                 'placeholder'   => sprintf(__('e.g., now; %1$s 00:00', $this->plugin->text_domain), esc_html($this->plugin->utils_date->i18n('M j, Y'))),
@@ -4089,7 +4089,7 @@ namespace WebSharks\CommentMail\Pro;
                 'other_attrs'   => 'data-toggle="date-time-picker"',
                 'current_value' => $this->coalesce($current_value_for('to'), 'now'),
               )),
-            $_form_fields->select_row(
+            $_form_fields->selectRow(
               array(
                 'label'           => __('Breakdown By', $this->plugin->text_domain),
                 'placeholder'     => __('e.g., hours, days, weeks, months, years', $this->plugin->text_domain),
@@ -4137,12 +4137,12 @@ namespace WebSharks\CommentMail\Pro;
         $_postbox_body               = $this->stats_view(
           $_postbox_view,
           array(
-            array('hidden_input' => $_form_fields->hidden_input(
+            array('hidden_input' => $_form_fields->hiddenInput(
               array(
                 'name'          => 'view',
                 'current_value' => $_postbox_view,
               ))),
-            $_form_fields->select_row(
+            $_form_fields->selectRow(
               array(
                 'label'           => __('Chart Type', $this->plugin->text_domain),
                 'placeholder'     => __('Select an Option...', $this->plugin->text_domain),
@@ -4151,7 +4151,7 @@ namespace WebSharks\CommentMail\Pro;
                 'allow_arbitrary' => FALSE,
                 'options'         => $_postbox_chart_type_options,
               )),
-            array('row'      => $_form_fields->select_row(
+            array('row'      => $_form_fields->selectRow(
               array(
                 'label'               => __('Post ID', $this->plugin->text_domain),
                 'placeholder'         => __('Select an Option...', $this->plugin->text_domain),
@@ -4166,7 +4166,7 @@ namespace WebSharks\CommentMail\Pro;
                   'other_attrs'              => 'min="1" max="18446744073709551615"',
                 ),
               )), 'colspan' => 3, 'ends_row' => TRUE),
-            $_form_fields->input_row(
+            $_form_fields->inputRow(
               array(
                 'label'         => sprintf(__('From Date (%1$s) %2$s', $this->plugin->text_domain), esc_html($timezone), $date_info_anchor),
                 'placeholder'   => sprintf(__('e.g., 7 days ago; %1$s 00:00', $this->plugin->text_domain), esc_html($this->plugin->utils_date->i18n('M j, Y', strtotime('-7 days')))),
@@ -4174,7 +4174,7 @@ namespace WebSharks\CommentMail\Pro;
                 'other_attrs'   => 'data-toggle="date-time-picker"',
                 'current_value' => $this->coalesce($current_value_for('from'), '7 days ago'),
               )),
-            $_form_fields->input_row(
+            $_form_fields->inputRow(
               array(
                 'label'         => sprintf(__('To Date (%1$s) %2$s', $this->plugin->text_domain), esc_html($timezone), $date_info_anchor),
                 'placeholder'   => sprintf(__('e.g., now; %1$s 00:00', $this->plugin->text_domain), esc_html($this->plugin->utils_date->i18n('M j, Y'))),
@@ -4182,7 +4182,7 @@ namespace WebSharks\CommentMail\Pro;
                 'other_attrs'   => 'data-toggle="date-time-picker"',
                 'current_value' => $this->coalesce($current_value_for('to'), 'now'),
               )),
-            $_form_fields->select_row(
+            $_form_fields->selectRow(
               array(
                 'label'           => __('Breakdown By', $this->plugin->text_domain),
                 'placeholder'     => __('e.g., hours, days, weeks, months, years', $this->plugin->text_domain),
@@ -4261,7 +4261,7 @@ namespace WebSharks\CommentMail\Pro;
 
         $_panel_body .= ' <table>'.
                 '   <tbody>'.
-                $form_fields->input_row(
+                $form_fields->inputRow(
                   array(
                     'name'          => 'username',
                     'label'         => __('Customer Username', $this->plugin->text_domain),
@@ -4273,7 +4273,7 @@ namespace WebSharks\CommentMail\Pro;
 
         $_panel_body .= ' <table>'.
                 '   <tbody>'.
-                $form_fields->input_row(
+                $form_fields->inputRow(
                   array(
                     'type'          => 'password',
                     'name'          => 'password',
@@ -4291,7 +4291,7 @@ namespace WebSharks\CommentMail\Pro;
 
         $_panel_body = ' <table>'.
                 '   <tbody>'.
-                $form_fields->select_row(
+                $form_fields->selectRow(
                   array(
                     'name'            => 'check', 'label' => '',
                     'placeholder'     => __('Select an Option...', $this->plugin->text_domain),

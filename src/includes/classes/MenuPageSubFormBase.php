@@ -100,7 +100,7 @@ namespace WebSharks\CommentMail\Pro;
 				echo '<table class="form-table">';
 				echo '   <tbody>';
 
-				echo $this->form_fields->select_row(
+				echo $this->form_fields->selectRow(
 					array(
 						'placeholder'         => __('Select a Post ID...', $this->plugin->text_domain),
 						'label'               => __('<i class="fa fa-fw fa-thumb-tack"></i> Post ID #', $this->plugin->text_domain),
@@ -108,14 +108,14 @@ namespace WebSharks\CommentMail\Pro;
 						'notes_after'         => __('Required; the Post ID they are subscribed to.', $this->plugin->text_domain),
 						'input_fallback_args' => array('type' => 'number', 'maxlength' => 20, 'other_attrs' => 'min="1" max="18446744073709551615"', 'placeholder' => '', 'current_value_empty_on_0' => TRUE),
 					));
-				echo $this->form_fields->select_row(
+				echo $this->form_fields->selectRow(
 					array(
 						'placeholder'         => __('— All Comments/Replies —', $this->plugin->text_domain),
 						'label'               => __('<i class="fa fa-fw fa-comment-o"></i> Comment ID #', $this->plugin->text_domain),
 						'name'                => 'comment_id', 'required' => FALSE, 'options' => '%%comments%%', 'post_id' => $this->current_value_for('post_id'), 'current_value' => $this->current_value_for('comment_id'),
 						'input_fallback_args' => array('type' => 'number', 'maxlength' => 20, 'other_attrs' => 'min="1" max="18446744073709551615"', 'current_value_empty_on_0' => TRUE),
 					));
-				echo $this->form_fields->select_row(
+				echo $this->form_fields->selectRow(
 					array(
 						'placeholder'         => __('— N/A; no WP User ID —', $this->plugin->text_domain),
 						'label'               => __('<i class="fa fa-fw fa-user"></i> WP User ID #', $this->plugin->text_domain),
@@ -125,30 +125,30 @@ namespace WebSharks\CommentMail\Pro;
 						'input_fallback_args' => array('type' => 'number', 'maxlength' => 20, 'other_attrs' => 'min="1" max="18446744073709551615"', 'current_value_empty_on_0' => TRUE),
 					));
 				/* -------------------------------------------------------------------- */
-				echo $this->form_fields->horizontal_line_row(/* -------------------------------------------------------------------- */);
+				echo $this->form_fields->horizontalLineRow(/* -------------------------------------------------------------------- */);
 				/* -------------------------------------------------------------------- */
 
-				echo $this->form_fields->input_row(
+				echo $this->form_fields->inputRow(
 					array(
 						'type'  => 'email', // For `<input>` type.
 						'label' => __('<i class="fa fa-fw fa-envelope-o"></i> Email', $this->plugin->text_domain),
 						'name'  => 'email', 'required' => TRUE, 'maxlength' => 100, 'current_value' => $this->current_value_for('email'),
 					));
-				echo $this->form_fields->input_row(
+				echo $this->form_fields->inputRow(
 					array(
 						'label' => __('<i class="fa fa-fw fa-pencil-square-o"></i> First Name', $this->plugin->text_domain),
 						'name'  => 'fname', 'required' => TRUE, 'maxlength' => 50, 'current_value' => $this->current_value_for('fname'),
 					));
-				echo $this->form_fields->input_row(
+				echo $this->form_fields->inputRow(
 					array(
 						'label' => __('<i class="fa fa-fw fa-level-up fa-rotate-90" style="margin-left:1px;"></i> Last Name', $this->plugin->text_domain),
 						'name'  => 'lname', 'required' => FALSE, 'maxlength' => 100, 'current_value' => $this->current_value_for('lname'),
 					));
 				/* -------------------------------------------------------------------- */
-				echo $this->form_fields->horizontal_line_row(/* -------------------------------------------------------------------- */);
+				echo $this->form_fields->horizontalLineRow(/* -------------------------------------------------------------------- */);
 				/* -------------------------------------------------------------------- */
 
-				echo $this->form_fields->input_row(
+				echo $this->form_fields->inputRow(
 					array(
 						'label'       => __('<i class="fa fa-fw fa-bullseye"></i> IP Address', $this->plugin->text_domain),
 						'name'        => 'insertion_ip', 'required' => FALSE, 'maxlength' => 39, 'current_value' => $this->current_value_for('insertion_ip'),
@@ -156,13 +156,13 @@ namespace WebSharks\CommentMail\Pro;
 					));
 				if($this->plugin->options['geo_location_tracking_enable'])
 				{
-					echo $this->form_fields->input_row(
+					echo $this->form_fields->inputRow(
 						array(
 							'label'       => __('<i class="fa fa-fw fa-map-marker"></i> IP Region Code', $this->plugin->text_domain),
 							'name'        => 'insertion_region', 'required' => FALSE, 'maxlength' => 2, 'current_value' => $this->current_value_for('insertion_region'),
 							'notes_after' => sprintf(__('If empty, this is filled automatically when a subscriber confirms or updates their subscription. Here is a map of all %1$s; found in the second column of the CSV file.', $this->plugin->text_domain), $this->plugin->utils_markup->x_anchor('http://www.maxmind.com/download/geoip/misc/region_codes.csv', __('Region Codes', $this->plugin->text_domain))),
 						));
-					echo $this->form_fields->input_row(
+					echo $this->form_fields->inputRow(
 						array(
 							'label'       => __('<i class="fa fa-fw fa-globe"></i> IP Country Code', $this->plugin->text_domain),
 							'name'        => 'insertion_country', 'required' => FALSE, 'maxlength' => 2, 'current_value' => $this->current_value_for('insertion_country'),
@@ -170,10 +170,10 @@ namespace WebSharks\CommentMail\Pro;
 						));
 				}
 				/* -------------------------------------------------------------------- */
-				echo $this->form_fields->horizontal_line_row(/* -------------------------------------------------------------------- */);
+				echo $this->form_fields->horizontalLineRow(/* -------------------------------------------------------------------- */);
 				/* -------------------------------------------------------------------- */
 
-				echo $this->form_fields->select_row(
+				echo $this->form_fields->selectRow(
 					array(
 						'placeholder'          => __('Select a Status...', $this->plugin->text_domain),
 						'label'                => __('<i class="fa fa-fw fa-flag-o"></i> Status', $this->plugin->text_domain),
@@ -183,7 +183,7 @@ namespace WebSharks\CommentMail\Pro;
 						                                'label'         => __('Request confirmation via email', $this->plugin->text_domain).' <i class="fa fa-envelope-o"></i>',
 						                                'current_value' => $this->current_value_for('process_confirmation')),
 					));
-				echo $this->form_fields->select_row(
+				echo $this->form_fields->selectRow(
 					array(
 						'placeholder' => __('Select a Delivery Option...', $this->plugin->text_domain),
 						'label'       => __('<i class="fa fa-fw fa-paper-plane-o"></i> Deliver', $this->plugin->text_domain),
@@ -199,7 +199,7 @@ namespace WebSharks\CommentMail\Pro;
 				echo '<p class="submit">';
 
 				if($this->is_edit) // Include the ID and `subscription` we're updating.
-					echo $this->form_fields->hidden_input(array('name' => 'ID', 'current_value' => $this->sub->ID));
+					echo $this->form_fields->hiddenInput(array('name' => 'ID', 'current_value' => $this->sub->ID));
 
 				echo '   <input type="submit"'.
 				     ($this->is_edit  // Are we editing?
@@ -264,7 +264,7 @@ namespace WebSharks\CommentMail\Pro;
 				$post_id     = (integer)$post_id;
 				$form_fields = new FormFields(static::$form_field_args);
 
-				return $form_fields->select_row(
+				return $form_fields->selectRow(
 					array(
 						'placeholder'         => __('— All Comments/Replies —', $plugin->text_domain),
 						'label'               => __('<i class="fa fa-fw fa-comment-o"></i> Comment ID #', $plugin->text_domain),
