@@ -263,12 +263,6 @@ namespace WebSharks\CommentMail\Pro;
 				$this->file         = preg_replace('/\.inc\.php$/', '.php', __FILE__);
 
 				/*
-				 * Initialize autoloader.
-				 */
-				require_once dirname(__FILE__).'/includes/classes/autoloader.php';
-				new Autoloader(); // Register the plugin's autoloader.
-
-				/*
 				 * With or without hooks?
 				 */
 				if(!$this->enable_hooks) // Without hooks?
