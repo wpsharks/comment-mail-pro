@@ -289,7 +289,7 @@ echo str_replace('%%title%%', $is_edit ? __('Edit Subscription', $plugin->text_d
 						var subFormPostIdProps = { // Initialize.
 							$select : $('.manage-sub-form form tr.manage-sub-form-post-id select'),
 							$input  : $('.manage-sub-form form tr.manage-sub-form-post-id input'),
-							progress: '<img src="' + pluginUrl + '/client-s/images/tiny-progress-bar.gif" />'
+							progress: '<img src="' + pluginUrl + '/src/client-s/images/tiny-progress-bar.gif" />'
 						};
 						if(subFormPostIdProps.$select.length) // Have select options?
 							subFormPostIdProps.lastId = $.trim(subFormPostIdProps.$select.val());

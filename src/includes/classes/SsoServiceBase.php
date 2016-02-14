@@ -306,7 +306,7 @@ abstract class SsoServiceBase extends AbsBase
 
             echo '   <body style="margin:30px; background:#EEEEEE;>'.
                  '      <div style="text-align:center; margin:0 auto 0 auto;">'.
-                 '         <img src="'.esc_attr($this->plugin->utils_url->to('client-s/images/tiny-progress-bar.gif')).'" />'.
+                 '         <img src="'.esc_attr($this->plugin->utils_url->to('/src/client-s/images/tiny-progress-bar.gif')).'" />'.
                  '      </div>'.
                  '   </body>';
 

@@ -521,7 +521,7 @@ class ImportStcr extends AbsBase
         if ($this->has_more_posts_to_import) { // Import will continue w/ child processes?
             $status .= '   <div id="importing">'.
                        '      <strong>'.__('Importing StCR Subscribers', $this->plugin->text_domain).'</strong>'.
-                       '       &nbsp;&nbsp; <img src="'.esc_html($this->plugin->utils_url->to('/client-s/images/tiny-progress-bar.gif')).'"'.
+                       '       &nbsp;&nbsp; <img src="'.esc_html($this->plugin->utils_url->to('/src/client-s/images/tiny-progress-bar.gif')).'"'.
                        '                        style="width:16px; height:11px; border:0; vertical-align:middle;" />'.
                        '   </div>'."\n";
         }

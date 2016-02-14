@@ -266,7 +266,7 @@
     var subFormPostIdProps = {
       $select: $menuPageForm.find('> form tr.pmp-sub-form-post-id select'),
       $input: $menuPageForm.find('> form tr.pmp-sub-form-post-id input'),
-      progress: '<img src="' + vars.pluginUrl + '/client-s/images/tiny-progress-bar.gif" class="pmp-progress" />'
+      progress: '<img src="' + vars.pluginUrl + '/src/client-s/images/tiny-progress-bar.gif" class="pmp-progress" />'
     };
 
     if (subFormPostIdProps.$select.length) {
@@ -312,7 +312,7 @@
     var subFormUserIdProps = {
       $select: $menuPageForm.find('> form tr.pmp-sub-form-user-id select'),
       $input: $menuPageForm.find('> form tr.pmp-sub-form-user-id input'),
-      $progress: $('<img src="' + vars.pluginUrl + '/client-s/images/tiny-progress-bar.gif" class="pmp-progress" />')
+      $progress: $('<img src="' + vars.pluginUrl + '/src/client-s/images/tiny-progress-bar.gif" class="pmp-progress" />')
     };
 
     if (subFormUserIdProps.$select.length) {
@@ -455,7 +455,7 @@
       $selects: $menuPageStats.find('.pmp-stats-view select'),
       $buttons: $menuPageStats.find('.pmp-stats-view button'),
 
-      progress: '<img src="' + vars.pluginUrl + '/client-s/images/tiny-progress-bar.gif" class="pmp-progress" />',
+      progress: '<img src="' + vars.pluginUrl + '/src/client-s/images/tiny-progress-bar.gif" class="pmp-progress" />',
 
       chartOps: {
         responsive: true

@@ -80,6 +80,6 @@ namespace WebSharks\CommentMail\Pro;
 	}
 	<?php foreach($sso_services as $_sso_service): ?>
 	<?php echo '.login-sso-ops .lsso-link.lsso-'.esc_html($_sso_service).
-	' { background-image : url("'.esc_url($plugin->utils_url->to('/client-s/images/sso-'.$_sso_service.'.png')).'"); }'."\n"; ?>
+	' { background-image : url("'.esc_url($plugin->utils_url->to('/src/client-s/images/sso-'.$_sso_service.'.png')).'"); }'."\n"; ?>
 	<?php endforeach; ?>
 </style>

@@ -33,7 +33,7 @@ $blog_name_clip = $plugin->utils_string->clip(get_bloginfo('name'));
 $current_host_path = $plugin->utils_url->currentHostPath();
 
 // Icon URL; defaults to the plugin's icon image.
-$icon_bubbles_url = $plugin->utils_url->to('/client-s/images/icon-bubbles.png');
+$icon_bubbles_url = $plugin->utils_url->to('/src/client-s/images/icon-bubbles.png');
 ?>
 
 <header>
