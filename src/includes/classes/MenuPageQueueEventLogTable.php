@@ -1,15 +1,16 @@
 <?php
 /**
- * Menu Page Queue Event Log Table
+ * Menu Page Queue Event Log Table.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * Menu Page Queue Event Log Table
+ * Menu Page Queue Event Log Table.
  *
  * @since 141111 First documented version.
  */
@@ -203,6 +204,8 @@ class MenuPageQueueEventLogTable extends MenuPageTableBase
      * Protected column-related methods.
      */
 
+    // @codingStandardsIgnoreStart
+    // camelCase not possible. This is an extender.
     /**
      * Table column handler.
      *
@@ -213,15 +216,15 @@ class MenuPageQueueEventLogTable extends MenuPageTableBase
      * @return string HTML markup for this table column.
      */
     protected function column_ID(\stdClass $item)
-    {
-        $id_info = '<i class="fa fa-paper-plane"></i>'. // Entry icon w/ ID.
+    { // @codingStandardsIgnoreEnd
+        $id_info = '<i class="fa fa-paper-plane"></i>'.// Entry icon w/ ID.
                    ' <span style="font-weight:bold;">#'.esc_html($item->ID).'</span>';
 
         $delete_url = $this->plugin->utils_url->tableBulkAction($this->plural_name, [$item->ID], 'delete');
 
         $row_actions = [
-            'delete' => '<a href="#"'.  // Depends on `menu-pages.js`.
-                        ' data-pmp-action="'.esc_attr($delete_url).'"'. // The action URL.
+            'delete' => '<a href="#"'.// Depends on `menu-pages.js`.
+                        ' data-pmp-action="'.esc_attr($delete_url).'"'.// The action URL.
                         ' data-pmp-confirmation="'.esc_attr($this->plugin->utils_i18n->logEntryJsDeletionConfirmationWarning()).'"'.
                         ' title="'.esc_attr(__('Delete Queue Event Log Entry', $this->plugin->text_domain)).'">'.
                         '  <i class="fa fa-times-circle"></i> '.__('Delete', $this->plugin->text_domain).
@@ -230,6 +233,8 @@ class MenuPageQueueEventLogTable extends MenuPageTableBase
         return $id_info.$this->row_actions($row_actions);
     }
 
+    // @codingStandardsIgnoreStart
+    // camelCase not possible. This is an extender.
     /**
      * Table column handler.
      *
@@ -240,11 +245,11 @@ class MenuPageQueueEventLogTable extends MenuPageTableBase
      * @return string HTML markup for this table column.
      */
     protected function column_event(\stdClass $item)
-    {
+    { // @codingStandardsIgnoreEnd
         $event_label = $this->plugin->utils_i18n->eventLabel($item->event);
 
-        switch ($item->event) // Based on the type of event that took place.
-        {
+        switch ($item->event) {// Based on the type of event that took place.
+
             case 'notified': // Queue entry was notified in this case.
 
                 $name_email_args = [
@@ -266,13 +271,15 @@ class MenuPageQueueEventLogTable extends MenuPageTableBase
      * Public query-related methods.
      */
 
+    // @codingStandardsIgnoreStart
+    // camelCase not possible. This is an extender.
     /**
      * Runs DB query; sets pagination args.
      *
      * @since 141111 First documented version.
      */
-    public function prepare_items() // The heart of this class.
-    {
+    public function prepare_items()
+    { // @codingStandardsIgnoreEnd
         $per_page                    = $this->getPerPage();
         $current_offset              = $this->getCurrentOffset();
         $clean_search_query          = $this->getCleanSearchQuery();
@@ -289,31 +296,33 @@ class MenuPageQueueEventLogTable extends MenuPageTableBase
 
         $and_or = $is_and_search_query ? 'AND' : 'OR';
 
-        $sql = "SELECT SQL_CALC_FOUND_ROWS *". // w/ calc enabled.
+        $sql = 'SELECT SQL_CALC_FOUND_ROWS *'.// w/ calc enabled.
 
                ($clean_search_query && $orderby === 'relevance' // Fulltext search?
-                   ? ", MATCH(`".implode('`,`', array_map('esc_sql', $this->getFtSearchableColumns()))."`)".
+                   ? ', MATCH(`'.implode('`,`', array_map('esc_sql', $this->getFtSearchableColumns())).'`)'.
                      "  AGAINST('".esc_sql($clean_search_query)."' IN BOOLEAN MODE) AS `relevance`"
-                   : ''). // Otherwise, we can simply exclude this.
+                   : '').// Otherwise, we can simply exclude this.
 
-               " FROM `".esc_sql($this->plugin->utils_db->prefix().'queue_event_log')."`".
+               ' FROM `'.esc_sql($this->plugin->utils_db->prefix().'queue_event_log').'`'.
 
-               " WHERE 1=1". // Default where clause.
+               ' WHERE 1=1'.// Default where clause.
 
                ($sub_ids_in_search_query || $sub_emails_in_search_query || $user_ids_in_search_query || $post_ids_in_search_query || $comment_ids_in_search_query
-                   ? " AND (".$this->plugin->utils_string->trim( // Trim the following...
-
-                       ($sub_ids_in_search_query ? " ".$and_or." `sub_id` IN('".implode("','", array_map('esc_sql', $sub_ids_in_search_query))."')" : '').
-                       ($sub_emails_in_search_query ? " ".$and_or." `email` IN('".implode("','", array_map('esc_sql', $sub_emails_in_search_query))."')" : '').
-                       ($user_ids_in_search_query ? " ".$and_or." `user_id` IN('".implode("','", array_map('esc_sql', $user_ids_in_search_query))."')" : '').
-                       ($post_ids_in_search_query ? " ".$and_or." `post_id` IN('".implode("','", array_map('esc_sql', $post_ids_in_search_query))."')" : '').
-
+                   ? ' AND ('.$this->plugin->utils_string->trim(// Trim the following...
+                       //
+                       ($sub_ids_in_search_query ? ' '.$and_or." `sub_id` IN('".implode("','", array_map('esc_sql', $sub_ids_in_search_query))."')" : '').
+                       ($sub_emails_in_search_query ? ' '.$and_or." `email` IN('".implode("','", array_map('esc_sql', $sub_emails_in_search_query))."')" : '').
+                       ($user_ids_in_search_query ? ' '.$and_or." `user_id` IN('".implode("','", array_map('esc_sql', $user_ids_in_search_query))."')" : '').
+                       ($post_ids_in_search_query ? ' '.$and_or." `post_id` IN('".implode("','", array_map('esc_sql', $post_ids_in_search_query))."')" : '').
+                       //
                        ($comment_ids_in_search_query // Search both fields here.
-                           ? " ".$and_or." (`comment_id` IN('".implode("','", array_map('esc_sql', $comment_ids_in_search_query))."')".
-                             "              OR `comment_parent_id` IN('".implode("','", array_map('esc_sql', $comment_ids_in_search_query))."'))" : '')
-
-                       , '', 'AND OR'
-                   ).")" : ''). // Trims `AND OR` leftover after concatenation occurs.
+                           ? ' '.$and_or." (`comment_id` IN('".implode("','", array_map('esc_sql', $comment_ids_in_search_query))."')".
+                             "              OR `comment_parent_id` IN('".implode("','", array_map('esc_sql', $comment_ids_in_search_query))."'))" : ''),
+                       //
+                       // Remaining arguments to trim function...
+                       '',
+                       'AND OR'
+                   ).')' : '').// Trims `AND OR` leftover after concatenation occurs.
 
                ($statuses_in_search_query // Specific statuses?
                    ? " AND `status` IN('".implode("','", array_map('esc_sql', $statuses_in_search_query))."')" : '').
@@ -322,26 +331,29 @@ class MenuPageQueueEventLogTable extends MenuPageTableBase
                    ? " AND `event` IN('".implode("','", array_map('esc_sql', $events_in_search_query))."')" : '').
 
                ($clean_search_query // A fulltext search?
-                   ? " AND (MATCH(`".implode('`,`', array_map('esc_sql', $this->getFtSearchableColumns()))."`)".
+                   ? ' AND (MATCH(`'.implode('`,`', array_map('esc_sql', $this->getFtSearchableColumns())).'`)'.
                      "     AGAINST('".esc_sql($clean_search_query)."' IN BOOLEAN MODE)".
-                     "     ".$this->prepareSearchableOrCols().")"
-                   : ''). // Otherwise, we can simply exclude this.
+                     '     '.$this->prepareSearchableOrCols().')'
+                   : '').// Otherwise, we can simply exclude this.
 
                ($orderby // Ordering by a specific column, or relevance?
-                   ? " ORDER BY `".esc_sql($orderby)."`".($order ? " ".esc_sql($order) : '')
-                   : ''). // Otherwise, we can simply exclude this.
+                   ? ' ORDER BY `'.esc_sql($orderby).'`'.($order ? ' '.esc_sql($order) : '')
+                   : '').// Otherwise, we can simply exclude this.
 
-               " LIMIT ".esc_sql($current_offset).",".esc_sql($per_page);
+               ' LIMIT '.esc_sql($current_offset).','.esc_sql($per_page);
 
+        // @codingStandardsIgnoreStart
+        // PHPCS chokes on indentation here for some reason.
         if (($results = $this->plugin->utils_db->wp->get_results($sql))) {
             $this->setItems($results = $this->plugin->utils_db->typifyDeep($results));
-            $this->setTotalItemsAvailable((integer)$this->plugin->utils_db->wp->get_var("SELECT FOUND_ROWS()"));
+            $this->setTotalItemsAvailable((integer) $this->plugin->utils_db->wp->get_var('SELECT FOUND_ROWS()'));
 
             $this->prepareItemsMergeSubProperties(); // Merge additional properties.
             $this->prepareItemsMergeUserProperties(); // Merge additional properties.
             $this->prepareItemsMergePostProperties(); // Merge additional properties.
             $this->prepareItemsMergeCommentProperties(); // Merge additional properties.
         }
+        // @codingStandardsIgnoreEnd
     }
 
     /**
@@ -372,6 +384,8 @@ class MenuPageQueueEventLogTable extends MenuPageTableBase
      * Protected action-related methods.
      */
 
+    // @codingStandardsIgnoreStart
+    // camelCase not possible. This is an extender.
     /**
      * Bulk actions for this table.
      *
@@ -380,7 +394,7 @@ class MenuPageQueueEventLogTable extends MenuPageTableBase
      * @return array An array of all bulk actions.
      */
     protected function get_bulk_actions()
-    {
+    { // @codingStandardsIgnoreEnd
         return [
             'delete' => __('Delete', $this->plugin->text_domain),
         ];
@@ -394,16 +408,16 @@ class MenuPageQueueEventLogTable extends MenuPageTableBase
      * @param string $bulk_action The bulk action to process.
      * @param array  $ids         The bulk action IDs to process.
      *
-     * @return integer Number of actions processed successfully.
+     * @return int Number of actions processed successfully.
      */
     protected function processBulkAction($bulk_action, array $ids)
     {
-        switch ($bulk_action) // Bulk action handler.
-        {
+        switch ($bulk_action) {// Bulk action handler.
+
             case 'delete': // Deleting log entries?
                 $counter = $this->plugin->utils_queue_event_log->bulkDelete($ids);
                 break; // Break switch handler.
         }
-        return !empty($counter) ? (integer)$counter : 0;
+        return !empty($counter) ? (integer) $counter : 0;
     }
 }
