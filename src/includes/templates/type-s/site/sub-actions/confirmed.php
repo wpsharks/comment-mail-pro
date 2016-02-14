@@ -113,7 +113,7 @@ echo str_replace('%%title%%', __('Confirmation', $plugin->text_domain), $site_he
 			$sub_last_ip = $sub->last_ip ? $sub->last_ip : __('unknown', $plugin->text_domain);
 
 			// Subscription last update time "ago"; e.g. `X [seconds/minutes/days/weeks/years] ago`.
-			$sub_last_update_time_ago = $plugin->utils_date->i18n_utc('M jS, Y @ g:i a T', $sub->last_update_time);
+			$sub_last_update_time_ago = $plugin->utils_date->i18nUtc('M jS, Y @ g:i a T', $sub->last_update_time);
 
 			// Subscription edit URL; i.e. so they can make any last-minute changes.
 			$sub_edit_url = $plugin->utils_url->sub_manage_sub_edit_url($sub->key);

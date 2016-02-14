@@ -242,9 +242,9 @@ str_replace('%%title%%', __('My Comment Subscriptions', $plugin->text_domain), $
 									//    in case you deleted this comment since they subscribed to it.
 									$_sub_comment            = $_sub->comment_id ? get_comment($_sub->comment_id) : NULL;
 									$_sub_comment_url        = $_sub_comment ? get_comment_link($_sub_comment->comment_ID) : '';
-									$_sub_comment_date_utc   = $_sub_comment ? $plugin->utils_date->i18n_utc('M jS, Y @ g:i a T', strtotime($_sub_comment->comment_date_gmt)) : '';
+									$_sub_comment_date_utc   = $_sub_comment ? $plugin->utils_date->i18nUtc('M jS, Y @ g:i a T', strtotime($_sub_comment->comment_date_gmt)) : '';
 									$_sub_comment_date_local = $_sub_comment ? $plugin->utils_date->i18n('M jS, Y @ g:i a T', strtotime($_sub_comment->comment_date_gmt)) : '';
-									$_sub_comment_time_ago   = $_sub_comment ? $plugin->utils_date->approx_time_difference(strtotime($_sub_comment->comment_date_gmt)) : '';
+									$_sub_comment_time_ago   = $_sub_comment ? $plugin->utils_date->approxTimeDifference(strtotime($_sub_comment->comment_date_gmt)) : '';
 
 									// URLs that allow for actions to be performed against the subscription.
 									$_sub_edit_url   = $plugin->utils_url->sub_manage_sub_edit_url($_sub->key, NULL, TRUE);

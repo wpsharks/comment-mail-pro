@@ -100,7 +100,7 @@ echo str_replace('%%title%%', __('Unsubscribe', $plugin->text_domain), $site_hea
 		$sub_last_ip = $sub->last_ip ? $sub->last_ip : __('unknown', $plugin->text_domain);
 
 		// Subscription last update time "ago"; e.g. `X [seconds/minutes/days/weeks/years] ago`.
-		$sub_last_update_time_ago = $plugin->utils_date->i18n_utc('M jS, Y @ g:i a T', $sub->last_update_time);
+		$sub_last_update_time_ago = $plugin->utils_date->i18nUtc('M jS, Y @ g:i a T', $sub->last_update_time);
 
 		// Unsubscribes (deletes) ALL subscriptions associated w/ their email address.
 		$sub_unsubscribe_all_url = $plugin->utils_url->sub_unsubscribe_all_url($sub->email);

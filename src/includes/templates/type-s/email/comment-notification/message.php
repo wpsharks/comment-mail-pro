@@ -53,7 +53,7 @@ $sub_name_email_markup = $plugin->utils_markup->name_email($sub->fname.' '.$sub-
 $sub_last_ip = $sub->last_ip ? $sub->last_ip : __('unknown', $plugin->text_domain);
 
 // Subscription last update time "ago"; e.g. `X [seconds/minutes/days/weeks/years] ago`.
-$sub_last_update_time_ago = $plugin->utils_date->i18n_utc('M jS, Y @ g:i a T', $sub->last_update_time);
+$sub_last_update_time_ago = $plugin->utils_date->i18nUtc('M jS, Y @ g:i a T', $sub->last_update_time);
 
 // A notification may contain one (or more) comments. Is this a digest?
 $is_digest = count($comments) > 1; // `TRUE`, if more than one comment in the notification.
@@ -96,7 +96,7 @@ $replies_via_email_enable = $sub_post_comments_open && $plugin->options['replies
 		$_comment_reply_url = get_permalink($_comment->comment_post_ID).'?replytocom='.$_comment->comment_ID.'#respond';
 
 		// How long ago the comment was posted on the site (human readable).
-		$_comment_time_ago = $plugin->utils_date->approx_time_difference(strtotime($_comment->comment_date_gmt));
+		$_comment_time_ago = $plugin->utils_date->approxTimeDifference(strtotime($_comment->comment_date_gmt));
 
 		// A shorter clip of the full comment message body; in plain text.
 		$_comment_clip = $plugin->utils_markup->comment_content_clip($_comment, 'notification', false);

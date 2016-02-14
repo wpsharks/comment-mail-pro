@@ -56,7 +56,7 @@ $sub_name_email_markup = $plugin->utils_markup->name_email($sub->fname.' '.$sub-
 $sub_last_ip = $sub->last_ip ? $sub->last_ip : __('unknown', $plugin->text_domain);
 
 // Subscription last update time "ago"; e.g. `X [seconds/minutes/days/weeks/years] ago`.
-$sub_last_update_time_ago = $plugin->utils_date->i18n_utc('M jS, Y @ g:i a T', $sub->last_update_time);
+$sub_last_update_time_ago = $plugin->utils_date->i18nUtc('M jS, Y @ g:i a T', $sub->last_update_time);
 ?>
 
 	<?php echo $template->snippet(

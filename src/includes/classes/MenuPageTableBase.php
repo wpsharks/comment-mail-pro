@@ -608,7 +608,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
         $post_type_label        = $post_type->labels->singular_name;
         $post_title_clip        = $this->plugin->utils_string->mid_clip($item->{$prefix.'title'});
         $post_date              = $this->plugin->utils_date->i18n('M j, Y', strtotime($item->{$prefix.'date_gmt'}));
-        $post_date_ago          = $this->plugin->utils_date->approx_time_difference(strtotime($item->{$prefix.'date_gmt'}));
+        $post_date_ago          = $this->plugin->utils_date->approxTimeDifference(strtotime($item->{$prefix.'date_gmt'}));
         $post_comments_status   = $this->plugin->utils_i18n->status_label($this->plugin->utils_db->post_comment_status__($item->{$prefix.'comment_status'}), 'ucwords');
         $post_edit_comments_url = $this->plugin->utils_url->post_edit_comments_short($item->{$key});
         $post_total_subs        = $this->plugin->utils_sub->query_total($item->{$key});
@@ -676,7 +676,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
           'email_style' => 'font-weight:normal;',
         ];
         $comment_date_time = $this->plugin->utils_date->i18n('M j, Y g:i a', strtotime($item->{$prefix.'date_gmt'}));
-        $comment_time_ago  = $this->plugin->utils_date->approx_time_difference(strtotime($item->{$prefix.'date_gmt'}));
+        $comment_time_ago  = $this->plugin->utils_date->approxTimeDifference(strtotime($item->{$prefix.'date_gmt'}));
         $comment_status    = $this->plugin->utils_i18n->status_label($this->plugin->utils_db->comment_status__($item->{$prefix.'approved'}), 'ucwords');
 
         $comment_info = '<i class="fa fa-comment"></i>'. // Start w/ a comment bubble icon.
@@ -898,7 +898,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
             return __('n/a; awaiting processing', $this->plugin->text_domain);
         }
         return esc_html($this->plugin->utils_date->i18n('M j, Y g:i a', $item->{$key})).'<br />'.
-               '<span style="font-style:italic;">('.esc_html($this->plugin->utils_date->approx_time_difference(time(), $item->{$key}, '')).')</span>'.
+               '<span style="font-style:italic;">('.esc_html($this->plugin->utils_date->approxTimeDifference(time(), $item->{$key}, '')).')</span>'.
                ' '.__('~ part of a digest', $this->plugin->text_domain);
     }
 
@@ -937,7 +937,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
             $value = $value <= 0
               ? '—' // Use a default value of `—` in this case.
               : esc_html($this->plugin->utils_date->i18n('M j, Y g:i a', $value)).'<br />'.
-                '<span style="font-style:italic;">('.esc_html($this->plugin->utils_date->approx_time_difference($value)).')</span>';
+                '<span style="font-style:italic;">('.esc_html($this->plugin->utils_date->approxTimeDifference($value)).')</span>';
         } else if (($property === 'ID' || substr($property, -3) === '_id') && is_integer($value)) {
             $value = $value <= 0 ? '—' : esc_html((string)$value);
         } else {
