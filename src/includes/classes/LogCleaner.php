@@ -1,36 +1,37 @@
 <?php
 /**
- * Log Cleaner
+ * Log Cleaner.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * Log Cleaner
+ * Log Cleaner.
  *
  * @since 141111 First documented version.
  */
 class LogCleaner extends AbsBase
 {
     /**
-     * @var integer Start time.
+     * @type int Start time.
      *
      * @since 141111 First documented version.
      */
     protected $start_time;
 
     /**
-     * @var integer Max execution time.
+     * @type int Max execution time.
      *
      * @since 141111 First documented version.
      */
     protected $max_time;
 
     /**
-     * @var integer Total cleaned entries.
+     * @type int Total cleaned entries.
      *
      * @since 141111 First documented version.
      */
@@ -41,7 +42,7 @@ class LogCleaner extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param integer|null $max_time Max time (in seconds).
+     * @param int|null $max_time Max time (in seconds).
      *
      *    This cannot be less than `10` seconds.
      *    This cannot be greater than `3600` seconds.
@@ -53,9 +54,9 @@ class LogCleaner extends AbsBase
         $this->start_time = time();
 
         if (isset($max_time)) {
-            $this->max_time = (integer)$max_time;
+            $this->max_time = (integer) $max_time;
         } else {
-            $this->max_time = (integer)$this->plugin->options['log_cleaner_max_time'];
+            $this->max_time = (integer) $this->plugin->options['log_cleaner_max_time'];
         }
         if ($this->max_time < 10) {
             $this->max_time = 10;
@@ -113,7 +114,7 @@ class LogCleaner extends AbsBase
         if (!($exp_time = strtotime('-'.$this->plugin->options['sub_event_log_expiration_time']))) {
             return; // Invalid time. Not compatible with `strtotime()`.
         }
-        $sql = "DELETE FROM `".esc_sql($this->plugin->utils_db->prefix().'sub_event_log')."`".
+        $sql = 'DELETE FROM `'.esc_sql($this->plugin->utils_db->prefix().'sub_event_log').'`'.
                " WHERE `time` < '".esc_sql($exp_time)."'";
 
         if ($this->plugin->utils_db->wp->query($sql) === false) {
@@ -137,7 +138,7 @@ class LogCleaner extends AbsBase
         if (!($exp_time = strtotime('-'.$this->plugin->options['queue_event_log_expiration_time']))) {
             return; // Invalid time. Not compatible with `strtotime()`.
         }
-        $sql = "DELETE FROM `".esc_sql($this->plugin->utils_db->prefix().'queue_event_log')."`".
+        $sql = 'DELETE FROM `'.esc_sql($this->plugin->utils_db->prefix().'queue_event_log').'`'.
                " WHERE `time` < '".esc_sql($exp_time)."'";
 
         if ($this->plugin->utils_db->wp->query($sql) === false) {
@@ -150,7 +151,7 @@ class LogCleaner extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @return boolean TRUE if out of time.
+     * @return bool TRUE if out of time.
      */
     protected function isOutOfTime()
     {
@@ -160,4 +161,3 @@ class LogCleaner extends AbsBase
         return false; // Let's keep cleaning!
     }
 }
-	
