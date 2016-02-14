@@ -2,103 +2,102 @@
 /**
  * Queue Event Log Inserter
  *
- * @since 141111 First documented version.
+ * @since     141111 First documented version.
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
- * @license GNU General Public License, version 3
+ * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
+/**
+ * Queue Event Log Inserter
+ *
+ * @since 141111 First documented version.
+ */
+class QueueEventLogInserter extends AbsBase
+{
+    /**
+     * @var array Log entry data.
+     *
+     * @since 141111 First documented version.
+     */
+    protected $entry;
 
+    /**
+     * Class constructor.
+     *
+     * @since 141111 First documented version.
+     *
+     * @param array $entry Log entry data.
+     *
+     * @throws \exception If `$entry` is missing required keys.
+     */
+    public function __construct(array $entry)
+    {
+        parent::__construct();
 
-		/**
-		 * Queue Event Log Inserter
-		 *
-		 * @since 141111 First documented version.
-		 */
-	class QueueEventLogInserter extends AbsBase
-		{
-			/**
-			 * @var array Log entry data.
-			 *
-			 * @since 141111 First documented version.
-			 */
-			protected $entry;
+        $defaults = [
+          'queue_id'     => 0,
+          'dby_queue_id' => 0,
 
-			/**
-			 * Class constructor.
-			 *
-			 * @since 141111 First documented version.
-			 *
-			 * @param array $entry Log entry data.
-			 *
-			 * @throws \exception If `$entry` is missing required keys.
-			 */
-			public function __construct(array $entry)
-			{
-				parent::__construct();
+          'sub_id' => 0,
 
-				$defaults = array(
-					'queue_id'          => 0,
-					'dby_queue_id'      => 0,
+          'user_id'           => 0,
+          'post_id'           => 0,
+          'comment_parent_id' => 0,
+          'comment_id'        => 0,
 
-					'sub_id'            => 0,
+          'fname' => '',
+          'lname' => '',
+          'email' => '',
 
-					'user_id'           => 0,
-					'post_id'           => 0,
-					'comment_parent_id' => 0,
-					'comment_id'        => 0,
+          'ip'      => '',
+          'region'  => '',
+          'country' => '',
 
-					'fname'             => '',
-					'lname'             => '',
-					'email'             => '',
+          'status' => '',
 
-					'ip'                => '',
-					'region'            => '',
-					'country'           => '',
+          'event'     => '',
+          'note_code' => '',
 
-					'status'            => '',
+          'time' => time(),
+        ];
+        # IP, region, country; auto-fill from subscription data.
 
-					'event'             => '',
-					'note_code'         => '',
+        foreach (['ip', 'region', 'country'] as $_key) {
+            if (empty($entry[$_key])) { // Coalesce; giving precedence to the `last_` value.
+                $entry[$_key] = $this->notEmptyCoalesce($entry['last_'.$_key], $entry['insertion_'.$_key]);
+            }
+        }
+        unset($_key); // Just a little housekeeping.
 
-					'time'              => time(),
-				);
-				# IP, region, country; auto-fill from subscription data.
+        $this->entry = array_merge($defaults, $entry);
+        $this->entry = array_intersect_key($this->entry, $defaults);
+        $this->entry = $this->plugin->utils_db->typify_deep($this->entry);
 
-				foreach(array('ip', 'region', 'country') as $_key)
-				{
-					if(empty($entry[$_key])) // Coalesce; giving precedence to the `last_` value.
-						$entry[$_key] = $this->notEmptyCoalesce($entry['last_'.$_key], $entry['insertion_'.$_key]);
-				}
-				unset($_key); // Just a little housekeeping.
+        $this->maybeInsert(); // Record event; if applicable.
+    }
 
-				$this->entry = array_merge($defaults, $entry);
-				$this->entry = array_intersect_key($this->entry, $defaults);
-				$this->entry = $this->plugin->utils_db->typify_deep($this->entry);
-
-				$this->maybe_insert(); // Record event; if applicable.
-			}
-
-			/**
-			 * Record event; if applicable.
-			 *
-			 * @since 141111 First documented version.
-			 *
-			 * @throws \exception If an insertion failure occurs.
-			 */
-			protected function maybe_insert()
-			{
-				if(!$this->entry['queue_id'])
-					return; // Not applicable.
-
-				if(!$this->entry['event'])
-					return; // Not applicable.
-
-				if(!$this->entry['time'])
-					return; // Not applicable.
-
-				if(!$this->plugin->utils_db->wp->insert($this->plugin->utils_db->prefix().'queue_event_log', $this->entry))
-					throw new \exception(__('Insertion failure.', $this->plugin->text_domain));
-			}
-		}
+    /**
+     * Record event; if applicable.
+     *
+     * @since 141111 First documented version.
+     *
+     * @throws \exception If an insertion failure occurs.
+     */
+    protected function maybeInsert()
+    {
+        if (!$this->entry['queue_id']) {
+            return; // Not applicable.
+        }
+        if (!$this->entry['event']) {
+            return; // Not applicable.
+        }
+        if (!$this->entry['time']) {
+            return; // Not applicable.
+        }
+        if (!$this->plugin->utils_db->wp->insert($this->plugin->utils_db->prefix().'queue_event_log', $this->entry)) {
+            throw new \exception(__('Insertion failure.', $this->plugin->text_domain));
+        }
+    }
+}
 	
