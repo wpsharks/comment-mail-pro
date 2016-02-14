@@ -1,22 +1,23 @@
 <?php
 /**
- * Queue Injector
+ * Queue Injector.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * Queue Injector
+ * Queue Injector.
  *
  * @since 141111 First documented version.
  */
 class QueueInjector extends AbsBase
 {
     /**
-     * @var \stdClass|null Comment object.
+     * @type \stdClass|null Comment object.
      *
      * @since 141111 First documented version.
      */
@@ -25,7 +26,7 @@ class QueueInjector extends AbsBase
     /**
      * Class constructor.
      *
-     * @param integer|string $comment_id Comment ID.
+     * @param int|string $comment_id Comment ID.
      *
      * @since 141111 First documented version.
      */
@@ -33,7 +34,7 @@ class QueueInjector extends AbsBase
     {
         parent::__construct();
 
-        $comment_id = (integer)$comment_id;
+        $comment_id = (integer) $comment_id;
 
         if ($comment_id) { // If possible.
             $this->comment = get_comment($comment_id);
@@ -63,8 +64,8 @@ class QueueInjector extends AbsBase
             return; // No subscriptions.
         }
         $time = time(); // Current timestamp.
-        $sql  = "INSERT INTO `".esc_sql($this->plugin->utils_db->prefix().'queue')."`".
-                " (`sub_id`, `user_id`, `post_id`, `comment_parent_id`, `comment_id`, `insertion_time`, `last_update_time`, `hold_until_time`) VALUES";
+        $sql  = 'INSERT INTO `'.esc_sql($this->plugin->utils_db->prefix().'queue').'`'.
+                ' (`sub_id`, `user_id`, `post_id`, `comment_parent_id`, `comment_id`, `insertion_time`, `last_update_time`, `hold_until_time`) VALUES';
 
         foreach ($subscribed_subs as $_sub_id_key => $_sub) {
             $sql .= "('".esc_sql($_sub->ID)."', '".esc_sql($_sub->user_id)."', '".esc_sql($this->comment->comment_post_ID)."',".
@@ -91,7 +92,7 @@ class QueueInjector extends AbsBase
     {
         $sub_emails = $subs = []; // Initialize.
 
-        $sql = "SELECT * FROM `".esc_sql($this->plugin->utils_db->prefix().'subs')."`".
+        $sql = 'SELECT * FROM `'.esc_sql($this->plugin->utils_db->prefix().'subs').'`'.
 
                " WHERE `post_id` = '".esc_sql($this->comment->comment_post_ID)."'".
                " AND (`comment_id` = '0' OR `comment_id` = '".esc_sql($this->comment->comment_parent)."')".
@@ -122,4 +123,3 @@ class QueueInjector extends AbsBase
         return $subs; // All valid/unique subscriptions.
     }
 }
-	
