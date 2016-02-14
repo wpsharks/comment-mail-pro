@@ -1,14 +1,14 @@
 <?php
 namespace WebSharks\CommentMail\Pro;
 /**
- * @var plugin    $plugin Plugin class.
- * @var template  $template Template class.
+ * @var Plugin    $plugin Plugin class.
+ * @var Template  $template Template class.
  *
  * Other variables made available in this template file:
  *
  * @var integer   $post_id Current post ID; where this is being displayed.
  *
- * @var ßcurrent An object w/ `sub_email`, `sub_type`, and `sub_deliver`.
+ * @var \stdClass $current An object w/ `sub_email`, `sub_type`, and `sub_deliver`.
  *    These properties are also provided as variables below; same thing.
  *
  * @var string    $sub_email The current subscriber's email address; if available.

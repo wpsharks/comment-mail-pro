@@ -1,12 +1,12 @@
 <?php
 namespace WebSharks\CommentMail\Pro;
 /**
- * @var plugin   $plugin Plugin class.
- * @var template $template Template class.
+ * @var Plugin   $plugin Plugin class.
+ * @var Template $template Template class.
  *
  * Other variables made available in this template file:
  *
- * @var template $parent_template Parent template class reference.
+ * @var Template $parent_template Parent template class reference.
  *
  * @note This file is automatically included as a child of other templates.
  *    Therefore, this template will ALSO receive any variable(s) passed to the parent template file,

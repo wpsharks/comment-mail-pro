@@ -1,8 +1,8 @@
 <?php
 namespace WebSharks\CommentMail\Pro;
 /**
- * @var plugin         $plugin Plugin class.
- * @var template       $template Template class.
+ * @var Plugin         $plugin Plugin class.
+ * @var Template       $template Template class.
  *
  * Other variables made available in this template file:
  *
@@ -13,7 +13,7 @@ namespace WebSharks\CommentMail\Pro;
  * @var string         $sub_key Current subscription key; if editing.
  * @var \stdClass|null $sub Subscription object data; if editing.
  *
- * @var form_fields    $form_fields Form fields class instance.
+ * @var FormFields    $form_fields Form fields class instance.
  * @var callable       $current_value_for Current value for a form field.
  * @var callable       $hidden_inputs Hidden input fields needed by form.
  *

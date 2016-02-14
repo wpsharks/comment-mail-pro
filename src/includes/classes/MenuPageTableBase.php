@@ -24,7 +24,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
      */
 
     /**
-     * @var plugin Plugin reference.
+     * @var Plugin Plugin reference.
      *
      * @since 141111 First documented version.
      */

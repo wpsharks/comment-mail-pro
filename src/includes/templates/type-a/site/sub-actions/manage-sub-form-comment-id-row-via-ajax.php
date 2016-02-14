@@ -1,13 +1,13 @@
 <?php
 namespace WebSharks\CommentMail\Pro;
 /**
- * @var plugin      $plugin Plugin class.
- * @var template    $template Template class.
+ * @var Plugin      $plugin Plugin class.
+ * @var Template    $template Template class.
  *
  * Other variables made available in this template file:
  *
  * @var integer     $post_id The post ID for which to obtain comments.
- * @var form_fields $form_fields Form fields class.
+ * @var FormFields $form_fields Form fields class.
  *
  * -------------------------------------------------------------------
  * @note In addition to plugin-specific variables & functionality,

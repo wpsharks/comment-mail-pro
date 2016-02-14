@@ -1,8 +1,8 @@
 <?php
 namespace WebSharks\CommentMail\Pro;
 /**
- * @var plugin           $plugin       Plugin class.
- * @var template         $template     Template class.
+ * @var Plugin           $plugin       Plugin class.
+ * @var Template         $template     Template class.
  *
  * Other variables made available in this template file:
  *

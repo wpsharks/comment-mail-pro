@@ -41,7 +41,7 @@ class SubManageSubFormBase extends AbsBase
     protected $sub;
 
     /**
-     * @var form_fields Class instance.
+     * @var FormFields Class instance.
      *
      * @since 141111 First documented version.
      */

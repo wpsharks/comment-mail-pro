@@ -51,14 +51,14 @@ class QueueProcessor extends AbsBase
     protected $max_limit;
 
     /**
-     * @var template Subject template.
+     * @var Template Subject template.
      *
      * @since 141111 First documented version.
      */
     protected $subject_template;
 
     /**
-     * @var template Message template.
+     * @var Template Message template.
      *
      * @since 141111 First documented version.
      */

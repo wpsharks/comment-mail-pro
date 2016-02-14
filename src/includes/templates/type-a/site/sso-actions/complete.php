@@ -1,15 +1,15 @@
 <?php
 namespace WebSharks\CommentMail\Pro;
 /**
- * @var plugin      $plugin Plugin class.
- * @var template    $template Template class.
+ * @var Plugin      $plugin Plugin class.
+ * @var Template    $template Template class.
  *
  * Other variables made available in this template file:
  *
  * @var string      $site_header Parsed site header template.
  * @var string      $site_footer Parsed site footer template.
  *
- * @var form_fields $form_fields Form fields class instance.
+ * @var FormFields $form_fields Form fields class instance.
  * @var callable    $hidden_inputs Hidden input fields needed by form.
  *
  * @var string      $service The SSO service that we are dealing with here.

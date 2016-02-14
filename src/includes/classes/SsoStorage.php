@@ -20,7 +20,7 @@ use OAuth\Common\Storage\Exception\AuthorizationStateNotFoundException;
 class SsoStorage implements \OAuth\Common\Storage\TokenStorageInterface
 {
     /**
-     * @var plugin Plugin class reference.
+     * @var Plugin Plugin class reference.
      *
      * @since 141111 First documented version.
      */
