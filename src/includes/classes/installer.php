@@ -42,7 +42,7 @@ class Installer extends AbsBase
      */
     protected function createDbTables()
     {
-        foreach (scandir($tables_dir = dirname(dirname(__FILE__)).'/tables') as $_sql_file) {
+        foreach (scandir($tables_dir = dirname(__DIR__).'/tables') as $_sql_file) {
             if (substr($_sql_file, -4) === '.sql' && is_file($tables_dir.'/'.$_sql_file)) {
                 $_sql_file_table = substr($_sql_file, 0, -4);
                 $_sql_file_table = str_replace('-', '_', $_sql_file_table);
@@ -90,4 +90,3 @@ class Installer extends AbsBase
         }
     }
 }
-	

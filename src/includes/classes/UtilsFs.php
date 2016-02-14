@@ -228,7 +228,6 @@ class UtilsFs extends AbsBase
         if (!is_null($icon = &$this->staticKey(__FUNCTION__))) {
             return $icon; // Already cached this.
         }
-        return ($icon = file_get_contents(dirname(dirname(dirname(__FILE__))).'/client-s/images/inline-icon.svg'));
+        return ($icon = file_get_contents(dirname(dirname(__DIR__)).'/client-s/images/inline-icon.svg'));
     }
 }
-	

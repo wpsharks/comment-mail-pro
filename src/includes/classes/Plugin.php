@@ -654,9 +654,6 @@ class Plugin extends AbsBase
         if (!$this->options['auto_confirm_force_enable']) {
             $this->options['all_wp_users_confirm_email'] = '0';
         }
-        require_once dirname(__FILE__).'/includes/api.php';
-        require_once dirname(__FILE__).'/includes/stcr.php';
-
         /*
          * With or without hooks?
          */

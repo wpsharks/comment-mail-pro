@@ -341,7 +341,7 @@ class Template extends AbsBase
 
         // Default template directory.
         $dirs   = []; // Initialize.
-        $dirs[] = dirname(dirname(__FILE__)).'/templates/type-'.$this->type;
+        $dirs[] = dirname(__DIR__).'/templates/type-'.$this->type;
 
         foreach ($dirs as $_dir /* In order of precedence. */) { // Note: don't check `filesize()` here; templates CAN be empty.
             if (is_file($_dir.'/'.$this->file) && is_readable($_dir.'/'.$this->file)) {
@@ -396,7 +396,7 @@ class Template extends AbsBase
 
         // Default snippet directory.
         $dirs   = []; // Initialize.
-        $dirs[] = dirname(dirname(__FILE__)).'/templates/type-'.$this->type.'/'.$this->snippet_sub_dir;
+        $dirs[] = dirname(__DIR__).'/templates/type-'.$this->type.'/'.$this->snippet_sub_dir;
 
         foreach ($dirs as $_dir /* In order of precedence. */) { // Note: don't check `filesize()` here; templates CAN be empty.
             if (is_file($_dir.'/'.$file) && is_readable($_dir.'/'.$file)) {

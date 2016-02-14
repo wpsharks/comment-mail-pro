@@ -89,7 +89,7 @@ class UtilsMap extends AbsBase
             return $iso; // Already cached this.
         }
         $iso          = []; // Initialize.
-        $iso_db       = file_get_contents(dirname(dirname(__FILE__)).'/databases/iso-3166-1.txt');
+        $iso_db       = file_get_contents(dirname(__DIR__).'/databases/iso-3166-1.txt');
         $iso_db_lines = preg_split('/['."\r\n\t".']+/', $iso_db, null, PREG_SPLIT_NO_EMPTY);
 
         foreach ($iso_db_lines as $_iso_db_line) {
@@ -114,7 +114,7 @@ class UtilsMap extends AbsBase
             return $iso; // Already cached this.
         }
         $iso          = []; // Initialize.
-        $iso_db       = file_get_contents(dirname(dirname(__FILE__)).'/databases/iso-3166-2-us.txt');
+        $iso_db       = file_get_contents(dirname(__DIR__).'/databases/iso-3166-2-us.txt');
         $iso_db_lines = preg_split('/['."\r\n\t".']+/', $iso_db, null, PREG_SPLIT_NO_EMPTY);
 
         foreach ($iso_db_lines as $_iso_db_line) {
@@ -139,7 +139,7 @@ class UtilsMap extends AbsBase
             return $iso; // Already cached this.
         }
         $iso          = []; // Initialize.
-        $iso_db       = file_get_contents(dirname(dirname(__FILE__)).'/databases/iso-3166-2-ca.txt');
+        $iso_db       = file_get_contents(dirname(__DIR__).'/databases/iso-3166-2-ca.txt');
         $iso_db_lines = preg_split('/['."\r\n\t".']+/', $iso_db, null, PREG_SPLIT_NO_EMPTY);
 
         foreach ($iso_db_lines as $_iso_db_line) {
@@ -151,4 +151,3 @@ class UtilsMap extends AbsBase
         return $iso; // Cached this now.
     }
 }
-	
