@@ -53,7 +53,7 @@ class MenuPage extends AbsBase
                 if ($_this->plugin->options[$key]) {
                     return $_this->plugin->options[$key];
                 }
-                $data             = template::optionKeyData($key);
+                $data             = Template::optionKeyData($key);
                 $default_template = new Template($data->file, $data->type, true);
 
                 return $default_template->fileContents();
@@ -2346,7 +2346,7 @@ class MenuPage extends AbsBase
                 if ($_this->plugin->options[$key]) {
                     return $_this->plugin->options[$key];
                 }
-                $data             = template::optionKeyData($key);
+                $data             = Template::optionKeyData($key);
                 $default_template = new Template($data->file, $data->type, true);
 
                 return $default_template->fileContents();
@@ -2973,7 +2973,7 @@ class MenuPage extends AbsBase
                 if ($_this->plugin->options[$key]) {
                     return $_this->plugin->options[$key];
                 }
-                $data             = template::optionKeyData($key);
+                $data             = Template::optionKeyData($key);
                 $default_template = new Template($data->file, $data->type, true);
 
                 return $default_template->fileContents();
@@ -4439,7 +4439,7 @@ class MenuPage extends AbsBase
                 if ($_this->plugin->options[$key]) {
                     return $_this->plugin->options[$key];
                 }
-                $data             = template::optionKeyData($key);
+                $data             = Template::optionKeyData($key);
                 $default_template = new Template($data->file, $data->type, true);
 
                 return $default_template->fileContents();

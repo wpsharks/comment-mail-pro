@@ -1515,7 +1515,7 @@ class UtilsUrl extends AbsBase
     public function rveMandrillWebhookUrl($scheme = null)
     {
         $url  = home_url('/', $scheme);
-        $key  = rve_mandrill::key(); // Webhook key.
+        $key  = RveMandrill::key(); // Webhook key.
         $args = [GLOBAL_NS => ['rve_mandrill' => $key]];
 
         return add_query_arg(urlencode_deep($args), $url);
