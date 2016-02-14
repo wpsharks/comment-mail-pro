@@ -1,15 +1,16 @@
 <?php
 /**
- * Pluginclass Plugin
+ * Pluginclass Plugin.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * Plugin Class
+ * Plugin Class.
  *
  * @property-read UtilsArray         $utils_array
  * @property-read UtilsDate          $utils_date
@@ -50,7 +51,7 @@ class Plugin extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @var boolean `TRUE` for pro version.
+     * @type bool `TRUE` for pro version.
      */
     public $is_pro = true;
 
@@ -59,7 +60,7 @@ class Plugin extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @var string Plugin name.
+     * @type string Plugin name.
      */
     public $name = 'Comment Mail';
 
@@ -68,7 +69,7 @@ class Plugin extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @var string Plugin name (abbreviated).
+     * @type string Plugin name (abbreviated).
      */
     public $short_name = 'CM';
 
@@ -77,7 +78,7 @@ class Plugin extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @var string 8-character transient prefix.
+     * @type string 8-character transient prefix.
      */
     public $transient_prefix = 'cmtmail_';
 
@@ -86,7 +87,7 @@ class Plugin extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @var string Query var prefix.
+     * @type string Query var prefix.
      */
     public $qv_prefix = 'cm_';
 
@@ -95,7 +96,7 @@ class Plugin extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @var string Site name.
+     * @type string Site name.
      */
     public $site_name = 'Comment-Mail.com';
 
@@ -104,7 +105,7 @@ class Plugin extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @var string Plugin product page URL.
+     * @type string Plugin product page URL.
      */
     public $product_url = 'http://comment-mail.com';
 
@@ -113,7 +114,7 @@ class Plugin extends AbsBase
      *
      * @since 141111 Adding uninstall handler.
      *
-     * @var boolean Defined by constructor.
+     * @type bool Defined by constructor.
      */
     public $enable_hooks;
 
@@ -122,7 +123,7 @@ class Plugin extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @var string Defined by class constructor; for translations.
+     * @type string Defined by class constructor; for translations.
      */
     public $text_domain;
 
@@ -131,7 +132,7 @@ class Plugin extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @var string Defined by constructor.
+     * @type string Defined by constructor.
      */
     public $slug;
 
@@ -140,7 +141,7 @@ class Plugin extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @var string Defined by class constructor.
+     * @type string Defined by class constructor.
      */
     public $file;
 
@@ -149,7 +150,7 @@ class Plugin extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @var string Current version of the software.
+     * @type string Current version of the software.
      */
     public $version = '151224'; //version//
 
@@ -162,7 +163,7 @@ class Plugin extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @var array Default options array.
+     * @type array Default options array.
      */
     public $default_options;
 
@@ -171,7 +172,7 @@ class Plugin extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @var array Options configured by site owner.
+     * @type array Options configured by site owner.
      */
     public $options;
 
@@ -180,9 +181,9 @@ class Plugin extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @var string Capability required to administer.
-     *    i.e. to use any aspect of the plugin, including the configuration
-     *    of any/all plugin options and/or advanced settings.
+     * @type string Capability required to administer.
+     *             i.e. to use any aspect of the plugin, including the configuration
+     *             of any/all plugin options and/or advanced settings.
      */
     public $cap; // Most important cap.
 
@@ -191,9 +192,9 @@ class Plugin extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @var string Capability required to manage.
-     *    i.e. to use/manage the plugin from the back-end,
-     *    but NOT to allow for any config. changes.
+     * @type string Capability required to manage.
+     *             i.e. to use/manage the plugin from the back-end,
+     *             but NOT to allow for any config. changes.
      */
     public $manage_cap;
 
@@ -202,9 +203,9 @@ class Plugin extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @var string Capability required to auto-recompile.
-     *    i.e. to see notices regarding automatic recompilations
-     *    following an upgrade the plugin files/version.
+     * @type string Capability required to auto-recompile.
+     *             i.e. to see notices regarding automatic recompilations
+     *             following an upgrade the plugin files/version.
      */
     public $auto_recompile_cap;
 
@@ -213,8 +214,8 @@ class Plugin extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @var string Capability required to upgrade.
-     *    i.e. the ability to run any sort of plugin upgrader.
+     * @type string Capability required to upgrade.
+     *             i.e. the ability to run any sort of plugin upgrader.
      */
     public $update_cap;
 
@@ -223,8 +224,8 @@ class Plugin extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @var string Capability required to uninstall.
-     *    i.e. the ability to deactivate and even delete the plugin.
+     * @type string Capability required to uninstall.
+     *             i.e. the ability to deactivate and even delete the plugin.
      */
     public $uninstall_cap;
 
@@ -241,8 +242,8 @@ class Plugin extends AbsBase
     /**
      * Plugin constructor.
      *
-     * @param boolean $enable_hooks Defaults to a TRUE value.
-     *                              If FALSE, setup runs but without adding any hooks.
+     * @param bool $enable_hooks Defaults to a TRUE value.
+     *                           If FALSE, setup runs but without adding any hooks.
      *
      * @since 141111 First documented version.
      */
@@ -257,9 +258,9 @@ class Plugin extends AbsBase
         /*
          * Initialize properties.
          */
-        $this->enable_hooks = (boolean)$enable_hooks;
-        $this->text_domain  = $this->slug = str_replace('_', '-', GLOBAL_NS);
-        $this->file         = preg_replace('/\.inc\.php$/', '.php', __FILE__);
+        $this->enable_hooks = (boolean) $enable_hooks;
+        $this->text_domain  = $this->slug  = str_replace('_', '-', GLOBAL_NS);
+        $this->file         = dirname(dirname(dirname(dirname(__DIR__)))).'/plugin.php';
 
         /*
          * With or without hooks?
@@ -342,7 +343,7 @@ class Plugin extends AbsBase
 
             # Related to the stats pinger.
 
-            'last_pro_stats_log'      => '0', // Timestamp.
+            'last_pro_stats_log' => '0', // Timestamp.
 
             /* Low-level switches to enable/disable certain functionalities.
              *
@@ -414,8 +415,8 @@ class Plugin extends AbsBase
 
             # Related to CAN-SPAM compliance.
 
-            'can_spam_postmaster'         => get_bloginfo('admin_email'),
-            'can_spam_mailing_address'    => get_bloginfo('name').'<br />'."\n".
+            'can_spam_postmaster'      => get_bloginfo('admin_email'),
+            'can_spam_mailing_address' => get_bloginfo('name').'<br />'."\n".
                                              '123 Somewhere Street<br />'."\n".
                                              'Attn: Comment Subscriptions<br />'."\n".
                                              'Somewhere, USA 99999 ~ Ph: 555-555-5555', // CAN-SPAM contact info.
@@ -423,12 +424,12 @@ class Plugin extends AbsBase
 
             # Related to auto-subscribe functionality.
 
-            'auto_subscribe_enable'                          => '1', // `0|1`; auto-subscribe enable?
-            'auto_subscribe_deliver'                         => 'asap', // `asap`, `hourly`, `daily`, `weekly`.
-            'auto_subscribe_post_types'                      => 'post', // Comma-delimited post types.
-            'auto_subscribe_post_author_enable'              => '1', // `0|1`; auto-subscribe post authors?
-            'auto_subscribe_recipients'                      => '', // Others `;|,` delimited emails.
-            'auto_subscribe_roles'                           => '', // Comma-delimited list of WP Roles.
+            'auto_subscribe_enable'             => '1', // `0|1`; auto-subscribe enable?
+            'auto_subscribe_deliver'            => 'asap', // `asap`, `hourly`, `daily`, `weekly`.
+            'auto_subscribe_post_types'         => 'post', // Comma-delimited post types.
+            'auto_subscribe_post_author_enable' => '1', // `0|1`; auto-subscribe post authors?
+            'auto_subscribe_recipients'         => '', // Others `;|,` delimited emails.
+            'auto_subscribe_roles'              => '', // Comma-delimited list of WP Roles.
 
             /* Auto-confirm functionality and security issues related to this.
 
@@ -721,7 +722,7 @@ class Plugin extends AbsBase
          */
         add_filter('cron_schedules', [$this, 'extendCronSchedules'], 10, 1);
 
-        if ((integer)$this->options['crons_setup'] < 1382523750) {
+        if ((integer) $this->options['crons_setup'] < 1382523750) {
             wp_clear_scheduled_hook('_cron_'.GLOBAL_NS.'_queue_processor');
             wp_schedule_event(time() + 60, 'every5m', '_cron_'.GLOBAL_NS.'_queue_processor');
 
@@ -731,7 +732,7 @@ class Plugin extends AbsBase
             wp_clear_scheduled_hook('_cron_'.GLOBAL_NS.'_log_cleaner');
             wp_schedule_event(time() + 60, 'hourly', '_cron_'.GLOBAL_NS.'_log_cleaner');
 
-            $this->options['crons_setup'] = (string)time();
+            $this->options['crons_setup'] = (string) time();
             update_option(GLOBAL_NS.'_options', $this->options);
         }
         add_action('_cron_'.GLOBAL_NS.'_queue_processor', [$this, 'queueProcessor'], 10);
@@ -754,32 +755,32 @@ class Plugin extends AbsBase
      *
      * @param string $property Property to get.
      *
-     * @return mixed The value of `$this->___overload->{$property}`.
-     *
      * @throws \exception If the `$___overload` property is undefined.
+     *
+     * @return mixed The value of `$this->___overload->{$property}`.
      *
      * @see http://php.net/manual/en/language.oop5.overloading.php
      */
     public function __get($property)
     {
-        $property = (string)$property;
+        $property = (string) $property;
 
         // This loads utilities.
         if (strpos($property, 'utils_') === 0) {
-            $class_property    = ucfirst(
-              preg_replace_callback(
-                '/_(.)/',
-                function ($m) {
-                    return strtoupper($m[1]);
-                },
-                $property
-              )
+            $class_property = ucfirst(
+                preg_replace_callback(
+                    '/_(.)/',
+                    function ($m) {
+                        return strtoupper($m[1]);
+                    },
+                    $property
+                )
             );
             $ns_class_property = '\\'.__NAMESPACE__.'\\'.$class_property;
 
             if (class_exists($ns_class_property)) {
                 if (!isset($this->___overload->{$property})) {
-                    $this->___overload->{$property} = new $ns_class_property;
+                    $this->___overload->{$property} = new $ns_class_property();
                 }
             }
         }
@@ -795,11 +796,11 @@ class Plugin extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @return integer UNIX timestamp.
+     * @return int UNIX timestamp.
      */
     public function installTime()
     {
-        return (integer)get_option(GLOBAL_NS.'_install_time');
+        return (integer) get_option(GLOBAL_NS.'_install_time');
     }
 
     /**
@@ -1012,7 +1013,7 @@ class Plugin extends AbsBase
                 return; // Do not add meta boxes.
             }
         }
-        $post_type = strtolower((string)$post_type);
+        $post_type = strtolower((string) $post_type);
 
         $enabled_post_types = strtolower($this->options['enabled_post_types']);
         $enabled_post_types = preg_split('/[\s;,]+/', $enabled_post_types, null, PREG_SPLIT_NO_EMPTY);
@@ -1157,50 +1158,50 @@ class Plugin extends AbsBase
         wp_enqueue_script(GLOBAL_NS, $this->utils_url->to('/src/client-s/js/menu-pages.min.js'), $deps, $this->version, true);
 
         wp_localize_script(
-          GLOBAL_NS,
-          GLOBAL_NS.'_vars',
-          [
-            'pluginUrl'           => rtrim($this->utils_url->to('/'), '/'),
-            'ajaxEndpoint'        => rtrim($this->utils_url->pageNonceOnly(), '/'),
-            'templateSyntaxTheme' => $this->options['template_syntax_theme'],
-          ]
+            GLOBAL_NS,
+            GLOBAL_NS.'_vars',
+            [
+                'pluginUrl'           => rtrim($this->utils_url->to('/'), '/'),
+                'ajaxEndpoint'        => rtrim($this->utils_url->pageNonceOnly(), '/'),
+                'templateSyntaxTheme' => $this->options['template_syntax_theme'],
+            ]
         );
         wp_localize_script(
-          GLOBAL_NS,
-          GLOBAL_NS.'_i18n',
-          [
-            'bulkReconfirmConfirmation' => __('Resend email confirmation link? Are you sure?', $this->text_domain),
-            'bulkDeleteConfirmation'    => $this->utils_env->isMenuPage('*_event_log')
-              ? $this->utils_i18n->logEntryJsDeletionConfirmationWarning()
-              : __('Delete permanently? Are you sure?', $this->text_domain),
-            'dateTimePickerI18n'        => [
-              'en' => [
-                'months'    => [
-                  __('January', $this->text_domain),
-                  __('February', $this->text_domain),
-                  __('March', $this->text_domain),
-                  __('April', $this->text_domain),
-                  __('May', $this->text_domain),
-                  __('June', $this->text_domain),
-                  __('July', $this->text_domain),
-                  __('August', $this->text_domain),
-                  __('September', $this->text_domain),
-                  __('October', $this->text_domain),
-                  __('November', $this->text_domain),
-                  __('December', $this->text_domain),
+            GLOBAL_NS,
+            GLOBAL_NS.'_i18n',
+            [
+                'bulkReconfirmConfirmation' => __('Resend email confirmation link? Are you sure?', $this->text_domain),
+                'bulkDeleteConfirmation'    => $this->utils_env->isMenuPage('*_event_log')
+                    ? $this->utils_i18n->logEntryJsDeletionConfirmationWarning()
+                    : __('Delete permanently? Are you sure?', $this->text_domain),
+                'dateTimePickerI18n' => [
+                    'en' => [
+                        'months' => [
+                            __('January', $this->text_domain),
+                            __('February', $this->text_domain),
+                            __('March', $this->text_domain),
+                            __('April', $this->text_domain),
+                            __('May', $this->text_domain),
+                            __('June', $this->text_domain),
+                            __('July', $this->text_domain),
+                            __('August', $this->text_domain),
+                            __('September', $this->text_domain),
+                            __('October', $this->text_domain),
+                            __('November', $this->text_domain),
+                            __('December', $this->text_domain),
+                        ],
+                        'dayOfWeek' => [
+                            __('Sun', $this->text_domain),
+                            __('Mon', $this->text_domain),
+                            __('Tue', $this->text_domain),
+                            __('Wed', $this->text_domain),
+                            __('Thu', $this->text_domain),
+                            __('Fri', $this->text_domain),
+                            __('Sat', $this->text_domain),
+                        ],
+                    ],
                 ],
-                'dayOfWeek' => [
-                  __('Sun', $this->text_domain),
-                  __('Mon', $this->text_domain),
-                  __('Tue', $this->text_domain),
-                  __('Wed', $this->text_domain),
-                  __('Thu', $this->text_domain),
-                  __('Fri', $this->text_domain),
-                  __('Sat', $this->text_domain),
-                ],
-              ],
-            ],
-          ]
+            ]
         );
     }
 
@@ -1223,10 +1224,10 @@ class Plugin extends AbsBase
         $icon = $this->utils_markup->colorSvgMenuIcon($icon);
 
         $divider = // Dividing line used by various menu items below.
-          '<span style="display:block; padding:0; margin:0 0 12px 0; height:1px; line-height:1px; background:#CCCCCC; opacity:0.1;"></span>';
+            '<span style="display:block; padding:0; margin:0 0 12px 0; height:1px; line-height:1px; background:#CCCCCC; opacity:0.1;"></span>';
 
         $child_branch_indent = // Each child branch uses the following UTF-8 char `꜖`; <http://unicode-table.com/en/A716/>.
-          '<span style="display:inline-block; margin-left:.5em; position:relative; top:-.2em; left:-.2em; font-weight:normal; opacity:0.2;">&#42774;</span> ';
+            '<span style="display:inline-block; margin-left:.5em; position:relative; top:-.2em; left:-.2em; font-weight:normal; opacity:0.2;">&#42774;</span> ';
 
         $current_menu_page = $this->utils_env->currentMenuPage(); // Current menu page slug.
 
@@ -1249,21 +1250,21 @@ class Plugin extends AbsBase
         add_submenu_page(GLOBAL_NS, $_page_title, $_menu_title, $this->cap, GLOBAL_NS, [$this, 'menuPageOptions']);
 
         $_menu_title = // Visible on-demand only.
-          '<small><em>'.$child_branch_indent.__('Import/Export', $this->text_domain).'</em></small>';
+            '<small><em>'.$child_branch_indent.__('Import/Export', $this->text_domain).'</em></small>';
         $_page_title = $this->name.'&trade; &#10609; '.__('Import/Export', $this->text_domain);
         //$_menu_parent                                          = $current_menu_page === GLOBAL_NS.'_import_export' ? GLOBAL_NS : NULL;
         $this->menu_page_hooks[GLOBAL_NS.'_import_export'] = add_submenu_page(GLOBAL_NS, $_page_title, $_menu_title, $this->cap, GLOBAL_NS.'_import_export', [$this, 'menuPageImportExport']);
         add_action('load-'.$this->menu_page_hooks[GLOBAL_NS.'_import_export'], [$this, 'menuPageImportExportScreen']);
 
         $_menu_title = // Visible on-demand only.
-          '<small><em>'.$child_branch_indent.__('Email Templates', $this->text_domain).'</em></small>';
+            '<small><em>'.$child_branch_indent.__('Email Templates', $this->text_domain).'</em></small>';
         $_page_title = $this->name.'&trade; &#10609; '.__('Email Templates', $this->text_domain);
         //$_menu_parent                                            = $current_menu_page === GLOBAL_NS.'_email_templates' ? GLOBAL_NS : NULL;
         $this->menu_page_hooks[GLOBAL_NS.'_email_templates'] = add_submenu_page(GLOBAL_NS, $_page_title, $_menu_title, $this->cap, GLOBAL_NS.'_email_templates', [$this, 'menuPageEmailTemplates']);
         add_action('load-'.$this->menu_page_hooks[GLOBAL_NS.'_email_templates'], [$this, 'menuPageEmailTemplatesScreen']);
 
         $_menu_title = // Visible on-demand only.
-          '<small><em>'.$child_branch_indent.__('Site Templates', $this->text_domain).'</em></small>';
+            '<small><em>'.$child_branch_indent.__('Site Templates', $this->text_domain).'</em></small>';
         $_page_title = $this->name.'&trade; &#10609; '.__('Site Templates', $this->text_domain);
         //$_menu_parent                                           = $current_menu_page === GLOBAL_NS.'_site_templates' ? GLOBAL_NS : NULL;
         $this->menu_page_hooks[GLOBAL_NS.'_site_templates'] = add_submenu_page(GLOBAL_NS, $_page_title, $_menu_title, $this->cap, GLOBAL_NS.'_site_templates', [$this, 'menuPageSiteTemplates']);
@@ -1325,15 +1326,13 @@ class Plugin extends AbsBase
      *
      * @attaches-to `set-screen-option` filter.
      *
-     * @param mixed|boolean $what_wp_says `FALSE` if not saving (default).
-     *                                    If we set this to any value besides `FALSE`, the option will be saved by WP.
+     * @param mixed|bool $what_wp_says `FALSE` if not saving (default).
+     *                                 If we set this to any value besides `FALSE`, the option will be saved by WP.
+     * @param string     $option       The option being checked; i.e. should we save this option?
+     * @param mixed      $value        The current value for this option.
      *
-     * @param string        $option       The option being checked; i.e. should we save this option?
-     *
-     * @param mixed         $value        The current value for this option.
-     *
-     * @return mixed|boolean Returns `$value` for plugin-related options.
-     *    Other we simply return `$what_wp_says`.
+     * @return mixed|bool Returns `$value` for plugin-related options.
+     *                    Other we simply return `$what_wp_says`.
      */
     public function setScreenOption($what_wp_says, $option, $value)
     {
@@ -1370,7 +1369,6 @@ class Plugin extends AbsBase
      * Menu page for options.
      *
      * @since 141111 First documented version.
-     *
      * @see   addMenuPages()
      */
     public function menuPageOptions()
@@ -1400,24 +1398,24 @@ class Plugin extends AbsBase
             return; // Not applicable.
         }
         add_screen_option(
-          'per_page',
-          [
-            'default' => '20', // Default items per page.
-            'label'   => __('Per Page', $this->text_domain),
-            'option'  => GLOBAL_NS.'_subs_per_page',
-          ]
+            'per_page',
+            [
+                'default' => '20', // Default items per page.
+                'label'   => __('Per Page', $this->text_domain),
+                'option'  => GLOBAL_NS.'_subs_per_page',
+            ]
         );
         add_filter(
-          'manage_'.$screen->id.'_columns',
-          function () {
-              return MenuPageSubsTable::getTheColumns();
-          }
+            'manage_'.$screen->id.'_columns',
+            function () {
+                return MenuPageSubsTable::getTheColumns();
+            }
         );
         add_filter(
-          'get_user_option_manage'.$screen->id.'columnshidden',
-          function ($value) {
-              return is_array($value) ? $value : MenuPageSubsTable::getTheHiddenColumns();
-          }
+            'get_user_option_manage'.$screen->id.'columnshidden',
+            function ($value) {
+                return is_array($value) ? $value : MenuPageSubsTable::getTheHiddenColumns();
+            }
         );
     }
 
@@ -1425,7 +1423,6 @@ class Plugin extends AbsBase
      * Menu page for subscriptions.
      *
      * @since 141111 First documented version.
-     *
      * @see   addMenuPages()
      */
     public function menuPageSubs()
@@ -1455,24 +1452,24 @@ class Plugin extends AbsBase
             return; // Not applicable.
         }
         add_screen_option(
-          'per_page',
-          [
-            'default' => '20', // Default items per page.
-            'label'   => __('Per Page', $this->text_domain),
-            'option'  => GLOBAL_NS.'_sub_event_log_entries_per_page',
-          ]
+            'per_page',
+            [
+                'default' => '20', // Default items per page.
+                'label'   => __('Per Page', $this->text_domain),
+                'option'  => GLOBAL_NS.'_sub_event_log_entries_per_page',
+            ]
         );
         add_filter(
-          'manage_'.$screen->id.'_columns',
-          function () {
-              return MenuPageSubEventLogTable::getTheColumns();
-          }
+            'manage_'.$screen->id.'_columns',
+            function () {
+                return MenuPageSubEventLogTable::getTheColumns();
+            }
         );
         add_filter(
-          'get_user_option_manage'.$screen->id.'columnshidden',
-          function ($value) {
-              return is_array($value) ? $value : MenuPageSubEventLogTable::getTheHiddenColumns();
-          }
+            'get_user_option_manage'.$screen->id.'columnshidden',
+            function ($value) {
+                return is_array($value) ? $value : MenuPageSubEventLogTable::getTheHiddenColumns();
+            }
         );
     }
 
@@ -1480,7 +1477,6 @@ class Plugin extends AbsBase
      * Menu page for sub. event log.
      *
      * @since 141111 First documented version.
-     *
      * @see   addMenuPages()
      */
     public function menuPageSubEventLog()
@@ -1509,24 +1505,24 @@ class Plugin extends AbsBase
             return; // Not applicable.
         }
         add_screen_option(
-          'per_page',
-          [
-            'default' => '20', // Default items per page.
-            'label'   => __('Per Page', $this->text_domain),
-            'option'  => GLOBAL_NS.'_queued_notifications_per_page',
-          ]
+            'per_page',
+            [
+                'default' => '20', // Default items per page.
+                'label'   => __('Per Page', $this->text_domain),
+                'option'  => GLOBAL_NS.'_queued_notifications_per_page',
+            ]
         );
         add_filter(
-          'manage_'.$screen->id.'_columns',
-          function () {
-              return MenuPageQueueTable::getTheColumns();
-          }
+            'manage_'.$screen->id.'_columns',
+            function () {
+                return MenuPageQueueTable::getTheColumns();
+            }
         );
         add_filter(
-          'get_user_option_manage'.$screen->id.'columnshidden',
-          function ($value) {
-              return is_array($value) ? $value : MenuPageQueueTable::getTheHiddenColumns();
-          }
+            'get_user_option_manage'.$screen->id.'columnshidden',
+            function ($value) {
+                return is_array($value) ? $value : MenuPageQueueTable::getTheHiddenColumns();
+            }
         );
     }
 
@@ -1534,7 +1530,6 @@ class Plugin extends AbsBase
      * Menu page for mail queue.
      *
      * @since 141111 First documented version.
-     *
      * @see   addMenuPages()
      */
     public function menuPageQueue()
@@ -1563,24 +1558,24 @@ class Plugin extends AbsBase
             return; // Not applicable.
         }
         add_screen_option(
-          'per_page',
-          [
-            'default' => '20', // Default items per page.
-            'label'   => __('Per Page', $this->text_domain),
-            'option'  => GLOBAL_NS.'_queue_event_log_entries_per_page',
-          ]
+            'per_page',
+            [
+                'default' => '20', // Default items per page.
+                'label'   => __('Per Page', $this->text_domain),
+                'option'  => GLOBAL_NS.'_queue_event_log_entries_per_page',
+            ]
         );
         add_filter(
-          'manage_'.$screen->id.'_columns',
-          function () {
-              return MenuPageQueueEventLogTable::getTheColumns();
-          }
+            'manage_'.$screen->id.'_columns',
+            function () {
+                return MenuPageQueueEventLogTable::getTheColumns();
+            }
         );
         add_filter(
-          'get_user_option_manage'.$screen->id.'columnshidden',
-          function ($value) {
-              return is_array($value) ? $value : MenuPageQueueEventLogTable::getTheHiddenColumns();
-          }
+            'get_user_option_manage'.$screen->id.'columnshidden',
+            function ($value) {
+                return is_array($value) ? $value : MenuPageQueueEventLogTable::getTheHiddenColumns();
+            }
         );
     }
 
@@ -1588,7 +1583,6 @@ class Plugin extends AbsBase
      * Menu page for mail queue event log.
      *
      * @since 141111 First documented version.
-     *
      * @see   addMenuPages()
      */
     public function menuPageQueueEventLog()
@@ -1623,7 +1617,6 @@ class Plugin extends AbsBase
      * Menu page for stats.
      *
      * @since 141111 First documented version.
-     *
      * @see   addMenuPages()
      */
     public function menuPageStats()
@@ -1658,7 +1651,6 @@ class Plugin extends AbsBase
      * Menu page for pro updater.
      *
      * @since 141111 First documented version.
-     *
      * @see   addMenuPages()
      */
     public function menuPageProUpdater()
@@ -1693,7 +1685,6 @@ class Plugin extends AbsBase
      * Menu page for import/export.
      *
      * @since 141111 First documented version.
-     *
      * @see   addMenuPages()
      */
     public function menuPageImportExport()
@@ -1728,7 +1719,6 @@ class Plugin extends AbsBase
      * Menu page for email templates.
      *
      * @since 141111 First documented version.
-     *
      * @see   addMenuPages()
      */
     public function menuPageEmailTemplates()
@@ -1763,7 +1753,6 @@ class Plugin extends AbsBase
      * Menu page for site templates.
      *
      * @since 141111 First documented version.
-     *
      * @see   addMenuPages()
      */
     public function menuPageSiteTemplates()
@@ -1858,7 +1847,7 @@ class Plugin extends AbsBase
         if ($this->options['last_pro_update_check'] >= strtotime('-1 hour')) {
             return; // No reason to keep checking on this.
         }
-        $this->optionsQuickSave(['last_pro_update_check' => (string)time()]);
+        $this->optionsQuickSave(['last_pro_update_check' => (string) time()]);
 
         $product_api_url        = $this->utils_url->productPage('https');
         $product_api_input_vars = ['product_api' => ['action' => 'latest_pro_version']];
@@ -1896,13 +1885,13 @@ class Plugin extends AbsBase
         if (!current_user_can($this->update_cap)) {
             return $transient; // Nothing to do.
         }
-        if (empty($_r['_wpnonce']) || !wp_verify_nonce((string)$_r['_wpnonce'], 'upgrade-plugin_'.plugin_basename($this->file))) {
+        if (empty($_r['_wpnonce']) || !wp_verify_nonce((string) $_r['_wpnonce'], 'upgrade-plugin_'.plugin_basename($this->file))) {
             return $transient; // Nothing to doe.
         }
-        if (empty($_r[GLOBAL_NS.'_update_pro_version']) || !($update_pro_version = (string)$_r[GLOBAL_NS.'_update_pro_version'])) {
+        if (empty($_r[GLOBAL_NS.'_update_pro_version']) || !($update_pro_version = (string) $_r[GLOBAL_NS.'_update_pro_version'])) {
             return $transient; // Nothing to do.
         }
-        if (empty($_r[GLOBAL_NS.'_update_pro_zip']) || !($update_pro_zip = base64_decode((string)$_r[GLOBAL_NS.'_update_pro_zip'], true))) {
+        if (empty($_r[GLOBAL_NS.'_update_pro_zip']) || !($update_pro_zip = base64_decode((string) $_r[GLOBAL_NS.'_update_pro_zip'], true))) {
             return $transient; // Nothing to do.
         }
         if (!is_object($transient)) {
@@ -1910,12 +1899,12 @@ class Plugin extends AbsBase
         }
         $transient->last_checked                           = time();
         $transient->checked[plugin_basename($this->file)]  = $this->version;
-        $transient->response[plugin_basename($this->file)] = (object)[
-          'id'          => 0, // It has no ID in this case.
-          'slug'        => $this->slug.'-pro',
-          'url'         => $this->utils_url->proUpdaterMenuPageOnly(),
-          'new_version' => $update_pro_version,
-          'package'     => $update_pro_zip,
+        $transient->response[plugin_basename($this->file)] = (object) [
+            'id'          => 0, // It has no ID in this case.
+            'slug'        => $this->slug.'-pro',
+            'url'         => $this->utils_url->proUpdaterMenuPageOnly(),
+            'new_version' => $update_pro_version,
+            'package'     => $update_pro_zip,
         ];
         return $transient; // Nodified now.
     }
@@ -1941,10 +1930,10 @@ class Plugin extends AbsBase
         if (empty($_r['action']) || $_r['action'] !== 'upgrade-plugin') {
             return $types; // Nothing to do here.
         }
-        if (empty($_r[GLOBAL_NS.'_update_pro_version']) || !($update_pro_version = (string)$_r[GLOBAL_NS.'_update_pro_version'])) {
+        if (empty($_r[GLOBAL_NS.'_update_pro_version']) || !($update_pro_version = (string) $_r[GLOBAL_NS.'_update_pro_version'])) {
             return $types; // Nothing to do here.
         }
-        if (empty($_r[GLOBAL_NS.'_update_pro_zip']) || !($update_pro_zip = (string)$_r[GLOBAL_NS.'_update_pro_zip'])) {
+        if (empty($_r[GLOBAL_NS.'_update_pro_zip']) || !($update_pro_zip = (string) $_r[GLOBAL_NS.'_update_pro_zip'])) {
             return $types; // Nothing to do here.
         }
         echo '<script type="text/javascript">';
@@ -1972,35 +1961,35 @@ class Plugin extends AbsBase
      */
     public function enqueueNotice($markup, array $args = [])
     {
-        if (!($markup = trim((string)$markup))) {
+        if (!($markup = trim((string) $markup))) {
             return; // Nothing to do here.
         }
-        $default_args   = [
-          'markup'        => '',
-          'requires_cap'  => '',
-          'for_user_id'   => 0,
-          'for_page'      => '',
-          'persistent'    => false,
-          'persistent_id' => '',
-          'transient'     => false,
-          'push_to_top'   => false,
-          'type'          => 'notice',
+        $default_args = [
+            'markup'        => '',
+            'requires_cap'  => '',
+            'for_user_id'   => 0,
+            'for_page'      => '',
+            'persistent'    => false,
+            'persistent_id' => '',
+            'transient'     => false,
+            'push_to_top'   => false,
+            'type'          => 'notice',
         ];
-        $args['markup'] = (string)$markup; // + markup.
+        $args['markup'] = (string) $markup; // + markup.
         $args           = array_merge($default_args, $args);
         $args           = array_intersect_key($args, $default_args);
 
-        $args['requires_cap'] = trim((string)$args['requires_cap']);
+        $args['requires_cap'] = trim((string) $args['requires_cap']);
         $args['requires_cap'] = $args['requires_cap'] // Force valid format.
-          ? strtolower(preg_replace('/\W/', '_', $args['requires_cap'])) : '';
+            ? strtolower(preg_replace('/\W/', '_', $args['requires_cap'])) : '';
 
-        $args['for_user_id'] = (integer)$args['for_user_id'];
-        $args['for_page']    = trim((string)$args['for_page']);
+        $args['for_user_id'] = (integer) $args['for_user_id'];
+        $args['for_page']    = trim((string) $args['for_page']);
 
-        $args['persistent']    = (boolean)$args['persistent'];
-        $args['persistent_id'] = (string)$args['persistent_id'];
-        $args['transient']     = (boolean)$args['transient'];
-        $args['push_to_top']   = (boolean)$args['push_to_top'];
+        $args['persistent']    = (boolean) $args['persistent'];
+        $args['persistent_id'] = (string) $args['persistent_id'];
+        $args['transient']     = (boolean) $args['transient'];
+        $args['push_to_top']   = (boolean) $args['push_to_top'];
 
         if (!in_array($args['type'], ['notice', 'error', 'warning'], true)) {
             $args['type'] = 'notice'; // Use default type.
@@ -2095,39 +2084,38 @@ class Plugin extends AbsBase
         if (!$notices) {
             return; // Nothing more to do in this case.
         }
-        $user_can_view_notices // All notices require one of the following caps.
-          = current_user_can($this->manage_cap) || current_user_can($this->cap);
+        $user_can_view_notices = current_user_can($this->manage_cap) || current_user_can($this->cap);
 
         $original_notices = $notices; // Copy.
 
         foreach ($notices as $_key => $_args) {
             $default_args = [
-              'markup'        => '',
-              'requires_cap'  => '',
-              'for_user_id'   => 0,
-              'for_page'      => '',
-              'persistent'    => false,
-              'persistent_id' => '',
-              'transient'     => false,
-              'push_to_top'   => false,
-              'type'          => 'notice',
+                'markup'        => '',
+                'requires_cap'  => '',
+                'for_user_id'   => 0,
+                'for_page'      => '',
+                'persistent'    => false,
+                'persistent_id' => '',
+                'transient'     => false,
+                'push_to_top'   => false,
+                'type'          => 'notice',
             ];
-            $_args        = array_merge($default_args, $_args);
-            $_args        = array_intersect_key($_args, $default_args);
+            $_args = array_merge($default_args, $_args);
+            $_args = array_intersect_key($_args, $default_args);
 
-            $_args['markup'] = trim((string)$_args['markup']);
+            $_args['markup'] = trim((string) $_args['markup']);
 
-            $_args['requires_cap'] = trim((string)$_args['requires_cap']);
+            $_args['requires_cap'] = trim((string) $_args['requires_cap']);
             $_args['requires_cap'] = $_args['requires_cap'] // Force valid format.
-              ? strtolower(preg_replace('/\W/', '_', $_args['requires_cap'])) : '';
+                ? strtolower(preg_replace('/\W/', '_', $_args['requires_cap'])) : '';
 
-            $_args['for_user_id'] = (integer)$_args['for_user_id'];
-            $_args['for_page']    = trim((string)$_args['for_page']);
+            $_args['for_user_id'] = (integer) $_args['for_user_id'];
+            $_args['for_page']    = trim((string) $_args['for_page']);
 
-            $_args['persistent']    = (boolean)$_args['persistent'];
-            $_args['persistent_id'] = (string)$_args['persistent_id'];
-            $_args['transient']     = (boolean)$_args['transient'];
-            $_args['push_to_top']   = (boolean)$_args['push_to_top'];
+            $_args['persistent']    = (boolean) $_args['persistent'];
+            $_args['persistent_id'] = (string) $_args['persistent_id'];
+            $_args['transient']     = (boolean) $_args['transient'];
+            $_args['push_to_top']   = (boolean) $_args['push_to_top'];
 
             if (!in_array($_args['type'], ['notice', 'error', 'warning'], true)) {
                 $_args['type'] = 'notice'; // Use default type.
@@ -2154,8 +2142,8 @@ class Plugin extends AbsBase
                                       'display: inline-block;'.
                                       'text-decoration: none;'.
                                       'font-weight: bold;';
-                    $_dismiss_url   = $this->utils_url->dismissNotice($_key);
-                    $_dismiss       = '<a href="'.esc_attr($_dismiss_url).'"'.
+                    $_dismiss_url = $this->utils_url->dismissNotice($_key);
+                    $_dismiss     = '<a href="'.esc_attr($_dismiss_url).'"'.
                                       '  style="'.esc_attr($_dismiss_style).'">'.
                                       '  '.__('dismiss &times;', $this->text_domain).
                                       '</a>';
@@ -2178,9 +2166,9 @@ class Plugin extends AbsBase
                         $_classes .= ' updated'; // Green informational notice
                 }
                 $_full_markup = // Put together the full markup; including other pieces.
-                  '<div class="'.esc_attr($_classes).' style="clear: both;">'. // clear:both needed to fix StCR options page clash; see http://bit.ly/1V83vQl
-                  '  '.$this->utils_string->pWrap($_args['markup'], $_dismiss).
-                  '</div>';
+                    '<div class="'.esc_attr($_classes).' style="clear: both;">'.// clear:both needed to fix StCR options page clash; see http://bit.ly/1V83vQl
+                    '  '.$this->utils_string->pWrap($_args['markup'], $_dismiss).
+                    '</div>';
 
                 echo apply_filters(__METHOD__.'_notice', $_full_markup, get_defined_vars());
             }
@@ -2246,7 +2234,7 @@ class Plugin extends AbsBase
      *
      * @attaches-to `transition_post_status` action.
      *
-     * @param string        $new_post_status New post status.
+     * @param string $new_post_status New post status.
      *
      *    One of the following statuses:
      *    See: <http://codex.wordpress.org/Function_Reference/get_post_status>
@@ -2262,8 +2250,7 @@ class Plugin extends AbsBase
      *
      *    See also: {@link get_available_post_statuses()}
      *       Custom post types may have their own statuses.
-     *
-     * @param string        $old_post_status Old post status.
+     * @param string $old_post_status Old post status.
      *
      *    One of the following statuses:
      *    See: <http://codex.wordpress.org/Function_Reference/get_post_status>
@@ -2280,8 +2267,7 @@ class Plugin extends AbsBase
      *
      *    See also: {@link get_available_post_statuses()}
      *       Custom post types may have their own statuses.
-     *
-     * @param \WP_Post|null $post            Post object instance.
+     * @param \WP_Post|null $post Post object instance.
      */
     public function postStatus($new_post_status, $old_post_status, \WP_Post $post = null)
     {
@@ -2295,7 +2281,7 @@ class Plugin extends AbsBase
      *
      * @attaches-to `before_delete_post` action.
      *
-     * @param integer|string $post_id Post ID.
+     * @param int|string $post_id Post ID.
      */
     public function postDelete($post_id)
     {
@@ -2422,9 +2408,8 @@ class Plugin extends AbsBase
      *
      * @attaches-to `comment_post` action.
      *
-     * @param integer|string $comment_id     Comment ID.
-     *
-     * @param integer|string $comment_status Initial comment status.
+     * @param int|string $comment_id     Comment ID.
+     * @param int|string $comment_status Initial comment status.
      *
      *    One of the following:
      *       - `0` (aka: ``, `hold`, `unapprove`, `unapproved`, `moderated`),
@@ -2443,21 +2428,19 @@ class Plugin extends AbsBase
      *
      * @attaches-to `transition_comment_status` action.
      *
-     * @param integer|string   $new_comment_status New comment status.
+     * @param int|string $new_comment_status New comment status.
      *
      *    One of the following:
      *       - `0` (aka: ``, `hold`, `unapprove`, `unapproved`, `moderated`),
      *       - `1` (aka: `approve`, `approved`),
      *       - or `trash`, `post-trashed`, `spam`, `delete`.
-     *
-     * @param integer|string   $old_comment_status Old comment status.
+     * @param int|string $old_comment_status Old comment status.
      *
      *    One of the following:
      *       - `0` (aka: ``, `hold`, `unapprove`, `unapproved`, `moderated`),
      *       - `1` (aka: `approve`, `approved`),
      *       - or `trash`, `post-trashed`, `spam`, `delete`.
-     *
-     * @param \WP_Comment|null $comment            Comment object (now).
+     * @param \WP_Comment|null $comment Comment object (now).
      */
     public function commentStatus($new_comment_status, $old_comment_status, \WP_Comment $comment = null)
     {
@@ -2471,9 +2454,9 @@ class Plugin extends AbsBase
      *
      * @attaches-to `pre_option_comment_registration` filter.
      *
-     * @param integer|string|boolean $registration_required `FALSE` if not yet defined by another filter.
+     * @param int|string|bool $registration_required `FALSE` if not yet defined by another filter.
      *
-     * @return integer|string|boolean Filtered `$comment_registration` value.
+     * @return int|string|bool Filtered `$comment_registration` value.
      */
     public function preOptionCommentRegistration($registration_required)
     {
@@ -2490,16 +2473,15 @@ class Plugin extends AbsBase
      *
      * @attaches-to `pre_comment_approved` filter.
      *
-     * @param integer|string $comment_status New comment status.
+     * @param int|string $comment_status New comment status.
      *
      *    One of the following:
      *       - `0` (aka: ``, `hold`, `unapprove`, `unapproved`, `moderated`),
      *       - `1` (aka: `approve`, `approved`),
      *       - or `trash`, `post-trashed`, `spam`, `delete`.
+     * @param array $comment_data An array of all comment data associated w/ a new comment being created.
      *
-     * @param array          $comment_data   An array of all comment data associated w/ a new comment being created.
-     *
-     * @return integer|string Filtered `$comment_status` value.
+     * @return int|string Filtered `$comment_status` value.
      */
     public function preCommentApproved($comment_status, array $comment_data)
     {
@@ -2520,7 +2502,7 @@ class Plugin extends AbsBase
      *
      * @attaches-to `user_register` action.
      *
-     * @param integer|string $user_id User ID.
+     * @param int|string $user_id User ID.
      */
     public function userRegister($user_id)
     {
@@ -2536,8 +2518,8 @@ class Plugin extends AbsBase
      * @attaches-to `wpmu_delete_user` action.
      * @attaches-to `remove_user_from_blog` action.
      *
-     * @param integer|string $user_id User ID.
-     * @param integer|string $blog_id Blog ID. Defaults to `0` (current blog).
+     * @param int|string $user_id User ID.
+     * @param int|string $blog_id Blog ID. Defaults to `0` (current blog).
      */
     public function userDelete($user_id, $blog_id = 0)
     {
