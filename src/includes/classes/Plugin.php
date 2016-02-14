@@ -1095,11 +1095,11 @@ class Plugin extends AbsBase
         wp_enqueue_style('codemirror-fullscreen', set_url_scheme('//cdnjs.cloudflare.com/ajax/libs/codemirror/4.7.0/addon/display/fullscreen.min.css'), ['codemirror'], null, 'all');
         wp_enqueue_style('codemirror-'.$this->options['template_syntax_theme'].'-theme', set_url_scheme('//cdnjs.cloudflare.com/ajax/libs/codemirror/4.7.0/theme/'.urlencode($this->options['template_syntax_theme']).'.min.css'), ['codemirror'], null, 'all');
 
-        wp_enqueue_style('jquery-datetimepicker', $this->utils_url->to('/src/submodules/datetimepicker/jquery.datetimepicker.css'), [], null, 'all');
+        wp_enqueue_style('jquery-datetimepicker', $this->utils_url->to('/src/vendor/package/datetimepicker/jquery.datetimepicker.css'), [], null, 'all');
         wp_enqueue_style('chosen', set_url_scheme('//cdnjs.cloudflare.com/ajax/libs/chosen/1.1.0/chosen.min.css'), [], null, 'all');
 
         wp_enqueue_style('font-awesome', set_url_scheme('//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'), [], null, 'all');
-        wp_enqueue_style('sharkicons', $this->utils_url->to('/src/submodules/sharkicons/src/short-classes.min.css'), [], null, 'all');
+        wp_enqueue_style('sharkicons', $this->utils_url->to('/src/vendor/websharks/sharkicons/src/short-classes.min.css'), [], null, 'all');
 
         wp_enqueue_style(GLOBAL_NS, $this->utils_url->to('/src/client-s/css/menu-pages.min.css'), $deps, $this->version, 'all');
     }
@@ -1121,7 +1121,7 @@ class Plugin extends AbsBase
         $deps = ['font-awesome', 'sharkicons']; // Dependencies.
 
         wp_enqueue_style('font-awesome', set_url_scheme('//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'), [], null, 'all');
-        wp_enqueue_style('sharkicons', $this->utils_url->to('/src/submodules/sharkicons/src/short-classes.min.css'), [], null, 'all');
+        wp_enqueue_style('sharkicons', $this->utils_url->to('/src/vendor/websharks/sharkicons/src/short-classes.min.css'), [], null, 'all');
 
         wp_enqueue_style(GLOBAL_NS, $this->utils_url->to('/src/client-s/css/menu-pages.min.css'), $deps, $this->version, 'all');
     }
@@ -1154,7 +1154,7 @@ class Plugin extends AbsBase
         wp_enqueue_script('google-jsapi-modules', set_url_scheme('//www.google.com/jsapi?autoload='.urlencode($google_jsapi_modules)), [], null, true);
 
         wp_enqueue_script('chartjs', set_url_scheme('//cdn.jsdelivr.net/chart.js/1.0.1-beta.4/Chart.min.js'), [], null, true);
-        wp_enqueue_script('jquery-datetimepicker', $this->utils_url->to('/src/submodules/datetimepicker/jquery.datetimepicker.js'), ['jquery'], null, true);
+        wp_enqueue_script('jquery-datetimepicker', $this->utils_url->to('/src/vendor/package/datetimepicker/jquery.datetimepicker.js'), ['jquery'], null, true);
         wp_enqueue_script('chosen', set_url_scheme('//cdnjs.cloudflare.com/ajax/libs/chosen/1.1.0/chosen.jquery.min.js'), ['jquery'], null, true);
 
         wp_enqueue_script(GLOBAL_NS, $this->utils_url->to('/src/client-s/js/menu-pages.min.js'), $deps, $this->version, true);

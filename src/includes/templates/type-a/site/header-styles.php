@@ -25,7 +25,7 @@ namespace WebSharks\CommentMail\Pro;
 	@import url('<?php echo $plugin->utils_url->to('/src/client-s/css/bootstrap-chosen.min.css'); ?>');
 	/* --------------------------------------------------------------------------------- */
 	@import url('//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css');
-	@import url('<?php echo $plugin->utils_url->to('/src/submodules/sharkicons/src/short-classes.min.css'); ?>');
+	@import url('<?php echo $plugin->utils_url->to('/src/vendor/websharks/sharkicons/src/short-classes.min.css'); ?>');
 	/* --------------------------------------------------------------------------------- */
 	@import url('//fonts.googleapis.com/css?family=Bitter:400,400italic,700|Noto+Serif:400,400italic,700,700italic|Noto+Sans:400,400italic,700,700italic&amp;subset=latin');
 </style>
