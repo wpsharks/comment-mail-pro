@@ -12,35 +12,35 @@ namespace WebSharks\CommentMail\Pro;
 		/**
 		 * Plugin Class
 		 *
-		 * @property-read utils_array           $utils_array
-		 * @property-read utils_date            $utils_date
-		 * @property-read utils_db              $utils_db
-		 * @property-read utils_enc             $utils_enc
-		 * @property-read utils_env             $utils_env
-		 * @property-read utils_event           $utils_event
-		 * @property-read utils_fs              $utils_fs
-		 * @property-read utils_i18n            $utils_i18n
-		 * @property-read utils_ip              $utils_ip
-		 * @property-read utils_list_server     $utils_list_server
-		 * @property-read utils_log             $utils_log
-		 * @property-read utils_mail            $utils_mail
-		 * @property-read utils_map             $utils_map
-		 * @property-read utils_markup          $utils_markup
-		 * @property-read utils_math            $utils_math
-		 * @property-read utils_php             $utils_php
-		 * @property-read utils_queue           $utils_queue
-		 * @property-read utils_queue_event_log $utils_queue_event_log
-		 * @property-read utils_rve             $utils_rve
-		 * @property-read utils_sso             $utils_sso
-		 * @property-read utils_string          $utils_string
-		 * @property-read utils_sub             $utils_sub
-		 * @property-read utils_sub_event_log   $utils_sub_event_log
-		 * @property-read utils_url             $utils_url
-		 * @property-read utils_user            $utils_user
+		 * @property-read UtilsArray           $utils_array
+		 * @property-read UtilsDate            $utils_date
+		 * @property-read UtilsDb              $utils_db
+		 * @property-read UtilsEnc             $utils_enc
+		 * @property-read UtilsEnv             $utils_env
+		 * @property-read UtilsEvent           $utils_event
+		 * @property-read UtilsFs              $utils_fs
+		 * @property-read UtilsI18n            $utils_i18n
+		 * @property-read UtilsIp              $utils_ip
+		 * @property-read UtilsListServer     $utils_list_server
+		 * @property-read UtilsLog             $utils_log
+		 * @property-read UtilsMail            $utils_mail
+		 * @property-read UtilsMap             $utils_map
+		 * @property-read UtilsMarkup          $utils_markup
+		 * @property-read UtilsMath            $utils_math
+		 * @property-read UtilsPhp             $utils_php
+		 * @property-read UtilsQueue           $utils_queue
+		 * @property-read UtilsQueueEventLog $utils_queue_event_log
+		 * @property-read UtilsRve             $utils_rve
+		 * @property-read UtilsSso             $utils_sso
+		 * @property-read UtilsString          $utils_string
+		 * @property-read UtilsSub             $utils_sub
+		 * @property-read UtilsSubEventLog   $utils_sub_event_log
+		 * @property-read UtilsRrl             $utils_url
+		 * @property-read UtilsUser            $utils_user
 		 *
 		 * @since 141111 First documented version.
 		 */
-		class plugin extends AbsBase
+		class Plugin extends AbsBase
 		{
 			/*
 			 * Public Properties
@@ -773,7 +773,10 @@ namespace WebSharks\CommentMail\Pro;
 			public function __get($property)
 			{
 				$property          = (string)$property;
-				$ns_class_property = '\\'.__NAMESPACE__.'\\'.$property;
+				$class_property = ucfirst(preg_replace_callback('/_(.)/', function($m) {
+					return strtoupper($m[1]);
+				}, $property);
+				$ns_class_property = '\\'.__NAMESPACE__.'\\'.$class_property;
 
 				if(stripos($property, 'utils_') === 0 && class_exists($ns_class_property))
 					if(!isset($this->___overload->{$property})) // Not defined yet?
@@ -2533,5 +2536,3 @@ namespace WebSharks\CommentMail\Pro;
 				new log_cleaner();
 			}
 		}
-
-		
