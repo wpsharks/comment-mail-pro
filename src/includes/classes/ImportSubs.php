@@ -179,9 +179,9 @@ class ImportSubs extends AbsBase
 
             $_sub_inserter = new SubInserter($_import, ['process_confirmation' => $this->process_confirmations]);
 
-            if ($_sub_inserter->did_insert_update()) { // Have insert|update success?
+            if ($_sub_inserter->didInsertUpdate()) { // Have insert|update success?
                 $this->total_imported_subs++; // Increment counter; this was a success.
-            } else if ($_sub_inserter->has_errors()) { // If the inserter has errors for this line; report those.
+            } else if ($_sub_inserter->hasErrors()) { // If the inserter has errors for this line; report those.
                 $_sub_inserter_errors       = array_values($_sub_inserter->errors()); // Values only; discard keys.
                 $_sub_inserter_error_prefix = sprintf(__('_Line #%1$s:_', $this->plugin->text_domain), esc_html($current_csv_line_number));
 

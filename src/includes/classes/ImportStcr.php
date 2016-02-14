@@ -215,7 +215,7 @@ class ImportStcr extends AbsBase
             ];
             $sub_inserter    = new SubInserter($sub_insert_data);
 
-            if ($sub_inserter->did_insert()) {
+            if ($sub_inserter->didInsert()) {
                 $this->total_imported_subs++;
                 $this->total_created_subs++;
             } else {
@@ -250,7 +250,7 @@ class ImportStcr extends AbsBase
                       'insertion_time' => $sub->time,
                     ];
                     $_sub_inserter    = new SubInserter($_sub_insert_data);
-                    if ($_sub_inserter->did_insert()) {
+                    if ($_sub_inserter->didInsert()) {
                         $this->total_created_subs++;
                     } else {
                         $this->logFailure('Failed to import Replies Only (R) subscription', array_merge($_sub_insert_data, $_sub_inserter->errors()));

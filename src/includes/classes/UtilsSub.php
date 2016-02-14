@@ -227,7 +227,7 @@ namespace WebSharks\CommentMail\Pro;
 
 				$updater = new SubUpdater(array('ID' => $sub->ID, 'status' => 'unconfirmed'), $args);
 
-				return $updater->did_update();
+				return $updater->didUpdate();
 			}
 
 			/**
@@ -280,7 +280,7 @@ namespace WebSharks\CommentMail\Pro;
 
 				$updater = new SubUpdater(array('ID' => $sub->ID, 'status' => 'subscribed'), $args);
 
-				return $updater->did_update();
+				return $updater->didUpdate();
 			}
 
 			/**
@@ -333,7 +333,7 @@ namespace WebSharks\CommentMail\Pro;
 
 				$updater = new SubUpdater(array('ID' => $sub->ID, 'status' => 'unconfirmed'), $args);
 
-				return $updater->did_update();
+				return $updater->didUpdate();
 			}
 
 			/**
@@ -386,7 +386,7 @@ namespace WebSharks\CommentMail\Pro;
 
 				$updater = new SubUpdater(array('ID' => $sub->ID, 'status' => 'suspended'), $args);
 
-				return $updater->did_update();
+				return $updater->didUpdate();
 			}
 
 			/**
@@ -439,7 +439,7 @@ namespace WebSharks\CommentMail\Pro;
 
 				$updater = new SubUpdater(array('ID' => $sub->ID, 'status' => 'trashed'), $args);
 
-				return $updater->did_update();
+				return $updater->didUpdate();
 			}
 
 			/**

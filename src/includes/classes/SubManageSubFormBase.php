@@ -428,18 +428,18 @@ namespace WebSharks\CommentMail\Pro;
 				{
 					$sub_updater = new SubUpdater($request_args, $args); // Run updater.
 
-					if($sub_updater->has_errors()) // Updater has errors?
+					if($sub_updater->hasErrors()) // Updater has errors?
 					{
 						static::$processing_errors      = $sub_updater->errors();
-						static::$processing_error_codes = $sub_updater->error_codes();
-						static::$processing_errors_html = $sub_updater->errors_html();
+						static::$processing_error_codes = $sub_updater->errorCodes();
+						static::$processing_errors_html = $sub_updater->errorsHtml();
 					}
-					else if($sub_updater->did_update()) // Updated?
+					else if($sub_updater->didUpdate()) // Updated?
 					{
 						static::$processing_successes        = $sub_updater->successes();
-						static::$processing_success_codes    = $sub_updater->success_codes();
-						static::$processing_successes_html   = $sub_updater->successes_html();
-						static::$processing_email_key_change = $sub_updater->email_key_changed();
+						static::$processing_success_codes    = $sub_updater->successCodes();
+						static::$processing_successes_html   = $sub_updater->successesHtml();
+						static::$processing_email_key_change = $sub_updater->emailKeyChanged();
 					}
 				}
 				else if($plugin->options['enable'] && $plugin->options['new_subs_enable'])
@@ -447,17 +447,17 @@ namespace WebSharks\CommentMail\Pro;
 				{
 					$sub_inserter = new SubInserter($request_args, $args); // Run inserter.
 
-					if($sub_inserter->has_errors()) // Inserter has errors?
+					if($sub_inserter->hasErrors()) // Inserter has errors?
 					{
 						static::$processing_errors      = $sub_inserter->errors();
-						static::$processing_error_codes = $sub_inserter->error_codes();
-						static::$processing_errors_html = $sub_inserter->errors_html();
+						static::$processing_error_codes = $sub_inserter->errorCodes();
+						static::$processing_errors_html = $sub_inserter->errorsHtml();
 					}
-					else if($sub_inserter->did_insert()) // Inserted?
+					else if($sub_inserter->didInsert()) // Inserted?
 					{
 						static::$processing_successes      = $sub_inserter->successes();
-						static::$processing_success_codes  = $sub_inserter->success_codes();
-						static::$processing_successes_html = $sub_inserter->successes_html();
+						static::$processing_success_codes  = $sub_inserter->successCodes();
+						static::$processing_successes_html = $sub_inserter->successesHtml();
 					}
 				}
 			}

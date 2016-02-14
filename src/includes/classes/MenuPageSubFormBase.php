@@ -370,7 +370,7 @@ class MenuPageSubFormBase extends AbsBase
         if (isset($request_args['ID'])) { // Updating an existing subscription via ID?
             $sub_updater = new SubUpdater($request_args, $args); // Run updater.
 
-            if ($sub_updater->did_update()) { // Updated successfully?
+            if ($sub_updater->didUpdate()) { // Updated successfully?
                 $plugin->enqueue_user_notice( // Queue notice.
                   sprintf(__('Subscription ID #<code>%1$s</code> updated successfully.', $plugin->text_domain), esc_html($request_args['ID'])),
                   ['transient' => true, 'for_page' => $plugin->utils_env->current_menu_page()]
@@ -380,23 +380,23 @@ class MenuPageSubFormBase extends AbsBase
             } else { // There were errors; display those errors to the current user.
                 $plugin->enqueue_user_error( // Queue error notice.
                   sprintf(__('Failed to update subscription ID #<code>%1$s</code>. Please review the following error(s):', $plugin->text_domain), esc_html($request_args['ID'])).
-                  '<ul class="pmp-list-items"><li>'.implode('</li><li>', $sub_updater->errors_html()).'</li></ul>',
+                  '<ul class="pmp-list-items"><li>'.implode('</li><li>', $sub_updater->errorsHtml()).'</li></ul>',
                   ['transient' => true, 'for_page' => $plugin->utils_env->current_menu_page()]
                 );
             }
         } else { // We are doing a new insertion; i.e. a new subscription is being added here.
             $sub_inserter = new SubInserter($request_args, $args); // Run inserter.
 
-            if ($sub_inserter->did_insert()) { // Inserted successfully?
+            if ($sub_inserter->didInsert()) { // Inserted successfully?
                 $plugin->enqueue_user_notice( // Queue notice.
-                  sprintf(__('Subscription ID #<code>%1$s</code> created successfully.', $plugin->text_domain), esc_html($sub_inserter->insert_id())),
+                  sprintf(__('Subscription ID #<code>%1$s</code> created successfully.', $plugin->text_domain), esc_html($sub_inserter->insertId())),
                   ['transient' => true, 'for_page' => $plugin->utils_env->current_menu_page()]
                 );
                 $redirect_to = $plugin->utils_url->page_table_nav_vars_only();
             } else { // There were errors; display those errors to the current user.
                 $plugin->enqueue_user_error( // Queue error notice.
                   __('Failed to create new subscription. Please review the following error(s):', $plugin->text_domain).
-                  '<ul class="pmp-list-items"><li>'.implode('</li><li>', $sub_inserter->errors_html()).'</li></ul>',
+                  '<ul class="pmp-list-items"><li>'.implode('</li><li>', $sub_inserter->errorsHtml()).'</li></ul>',
                   ['transient' => true, 'for_page' => $plugin->utils_env->current_menu_page()]
                 );
             }
