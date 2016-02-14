@@ -1,15 +1,16 @@
 <?php
 /**
- * Menu Page Subs. Table
+ * Menu Page Subs. Table.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * Menu Page Subs. Table
+ * Menu Page Subs. Table.
  *
  * @since 141111 First documented version.
  */
@@ -211,6 +212,8 @@ class MenuPageSubsTable extends MenuPageTableBase
      * Protected column-related methods.
      */
 
+    // @codingStandardsIgnoreStart
+    // camelCase not possible. This is an extender.
     /**
      * Table column handler.
      *
@@ -223,15 +226,15 @@ class MenuPageSubsTable extends MenuPageTableBase
      * @return string HTML markup for this table column.
      */
     protected function column_email(\stdClass $item, $prefix = '', $key = 'email')
-    {
+    { // @codingStandardsIgnoreEnd
         $name_email_args = [
             'separator'   => '<br />',
             'anchor_to'   => 'search',
             'name_style'  => 'font-weight:bold;',
             'email_style' => 'font-weight:normal;',
         ];
-        $name            = $item->fname.' '.$item->lname; // Concatenate.
-        $email_info      = '<i class="'.esc_attr('si si-'.$this->plugin->slug.'-one').'"></i>'.
+        $name       = $item->fname.' '.$item->lname; // Concatenate.
+        $email_info = '<i class="'.esc_attr('si si-'.$this->plugin->slug.'-one').'"></i>'.
                            ' '.$this->plugin->utils_markup->nameEmail($name, $item->email, $name_email_args);
 
         $edit_url      = $this->plugin->utils_url->editSubShort($item->ID);
@@ -245,8 +248,8 @@ class MenuPageSubsTable extends MenuPageTableBase
         $row_actions = [
             'edit' => '<a href="'.esc_attr($edit_url).'">'.__('Edit Subscr.', $this->plugin->text_domain).'</a>',
 
-            'reconfirm' => '<a href="#"'.  // Depends on `menu-pages.js`.
-                           ' data-pmp-action="'.esc_attr($reconfirm_url).'"'. // The action URL.
+            'reconfirm' => '<a href="#"'.// Depends on `menu-pages.js`.
+                           ' data-pmp-action="'.esc_attr($reconfirm_url).'"'.// The action URL.
                            ' data-pmp-confirmation="'.esc_attr(__('Resend email confirmation link? Are you sure?', $this->plugin->text_domain)).'">'.
                            '  '.__('Reconfirm', $this->plugin->text_domain).
                            '</a>',
@@ -256,8 +259,8 @@ class MenuPageSubsTable extends MenuPageTableBase
             'suspend'   => '<a href="'.esc_attr($suspend_url).'">'.__('Suspend', $this->plugin->text_domain).'</a>',
             'trash'     => '<a href="'.esc_attr($trash_url).'" title="'.esc_attr(__('Trash', $this->plugin->text_domain)).'"><i class="fa fa-trash-o"></i></a>',
 
-            'delete' => '<a href="#"'.  // Depends on `menu-pages.js`.
-                        ' data-pmp-action="'.esc_attr($delete_url).'"'. // The action URL.
+            'delete' => '<a href="#"'.// Depends on `menu-pages.js`.
+                        ' data-pmp-action="'.esc_attr($delete_url).'"'.// The action URL.
                         ' data-pmp-confirmation="'.esc_attr(__('Delete permanently? Are you sure?', $this->plugin->text_domain)).'"'.
                         ' title="'.esc_attr(__('Delete', $this->plugin->text_domain)).'">'.
                         '  <i class="fa fa-times-circle"></i>'.
@@ -285,13 +288,15 @@ class MenuPageSubsTable extends MenuPageTableBase
      * Public query-related methods.
      */
 
+    // @codingStandardsIgnoreStart
+    // camelCase not possible. This is an extender.
     /**
      * Runs DB query; sets pagination args.
      *
      * @since 141111 First documented version.
      */
-    public function prepare_items() // The heart of this class.
-    {
+    public function prepare_items()
+    { // @codingStandardsIgnoreEnd
         $per_page                    = $this->getPerPage();
         $current_offset              = $this->getCurrentOffset();
         $clean_search_query          = $this->getCleanSearchQuery();
@@ -308,53 +313,58 @@ class MenuPageSubsTable extends MenuPageTableBase
 
         $and_or = $is_and_search_query ? 'AND' : 'OR';
 
-        $sql = "SELECT SQL_CALC_FOUND_ROWS *". // w/ calc enabled.
+        $sql = 'SELECT SQL_CALC_FOUND_ROWS *'.// w/ calc enabled.
 
                ($clean_search_query && $orderby === 'relevance' // Fulltext search?
-                   ? ", MATCH(`".implode('`,`', array_map('esc_sql', $this->getFtSearchableColumns()))."`)".
+                   ? ', MATCH(`'.implode('`,`', array_map('esc_sql', $this->getFtSearchableColumns())).'`)'.
                      "  AGAINST('".esc_sql($clean_search_query)."' IN BOOLEAN MODE) AS `relevance`"
-                   : ''). // Otherwise, we can simply exclude this.
+                   : '').// Otherwise, we can simply exclude this.
 
-               " FROM `".esc_sql($this->plugin->utils_db->prefix().'subs')."`".
+               ' FROM `'.esc_sql($this->plugin->utils_db->prefix().'subs').'`'.
 
-               " WHERE 1=1". // Default where clause.
+               ' WHERE 1=1'.// Default where clause.
 
                ($sub_ids_in_search_query || $sub_emails_in_search_query || $user_ids_in_search_query || $post_ids_in_search_query || $comment_ids_in_search_query
-                   ? " AND (".$this->plugin->utils_string->trim( // Trim the following...
-
-                       ($sub_ids_in_search_query ? " ".$and_or." `ID` IN('".implode("','", array_map('esc_sql', $sub_ids_in_search_query))."')" : '').
-                       ($sub_emails_in_search_query ? " ".$and_or." `email` IN('".implode("','", array_map('esc_sql', $sub_emails_in_search_query))."')" : '').
-                       ($user_ids_in_search_query ? " ".$and_or." `user_id` IN('".implode("','", array_map('esc_sql', $user_ids_in_search_query))."')" : '').
-                       ($post_ids_in_search_query ? " ".$and_or." `post_id` IN('".implode("','", array_map('esc_sql', $post_ids_in_search_query))."')" : '').
-                       ($comment_ids_in_search_query ? " ".$and_or." `comment_id` IN('".implode("','", array_map('esc_sql', $comment_ids_in_search_query))."')" : '')
-
-                       , '', 'AND OR'
-                   ).")" : ''). // Trims `AND OR` leftover after concatenation occurs.
+                   ? ' AND ('.$this->plugin->utils_string->trim(// Trim the following...
+                       //
+                       ($sub_ids_in_search_query ? ' '.$and_or." `ID` IN('".implode("','", array_map('esc_sql', $sub_ids_in_search_query))."')" : '').
+                       ($sub_emails_in_search_query ? ' '.$and_or." `email` IN('".implode("','", array_map('esc_sql', $sub_emails_in_search_query))."')" : '').
+                       ($user_ids_in_search_query ? ' '.$and_or." `user_id` IN('".implode("','", array_map('esc_sql', $user_ids_in_search_query))."')" : '').
+                       ($post_ids_in_search_query ? ' '.$and_or." `post_id` IN('".implode("','", array_map('esc_sql', $post_ids_in_search_query))."')" : '').
+                       ($comment_ids_in_search_query ? ' '.$and_or." `comment_id` IN('".implode("','", array_map('esc_sql', $comment_ids_in_search_query))."')" : ''),
+                       //
+                       // Remaining arguments to trim function...
+                       '',
+                       'AND OR'
+                   ).')' : '').// Trims `AND OR` leftover after concatenation occurs.
 
                ($statuses_in_search_query // Specific statuses?
                    ? " AND `status` IN('".implode("','", array_map('esc_sql', $statuses_in_search_query))."')"
                    : " AND `status` != '".esc_sql('trashed')."'").
 
                ($clean_search_query // A fulltext search?
-                   ? " AND (MATCH(`".implode('`,`', array_map('esc_sql', $this->getFtSearchableColumns()))."`)".
+                   ? ' AND (MATCH(`'.implode('`,`', array_map('esc_sql', $this->getFtSearchableColumns())).'`)'.
                      "     AGAINST('".esc_sql($clean_search_query)."' IN BOOLEAN MODE)".
-                     "     ".$this->prepareSearchableOrCols().")"
-                   : ''). // Otherwise, we can simply exclude this.
+                     '     '.$this->prepareSearchableOrCols().')'
+                   : '').// Otherwise, we can simply exclude this.
 
                ($orderby // Ordering by a specific column, or relevance?
-                   ? " ORDER BY `".esc_sql($orderby)."`".($order ? " ".esc_sql($order) : '')
-                   : ''). // Otherwise, we can simply exclude this.
+                   ? ' ORDER BY `'.esc_sql($orderby).'`'.($order ? ' '.esc_sql($order) : '')
+                   : '').// Otherwise, we can simply exclude this.
 
-               " LIMIT ".esc_sql($current_offset).",".esc_sql($per_page);
+               ' LIMIT '.esc_sql($current_offset).','.esc_sql($per_page);
 
+        // @codingStandardsIgnoreStart
+        // PHPCS chokes on indentation here for some reason.
         if (($results = $this->plugin->utils_db->wp->get_results($sql))) {
             $this->setItems($results = $this->plugin->utils_db->typifyDeep($results));
-            $this->setTotalItemsAvailable((integer)$this->plugin->utils_db->wp->get_var("SELECT FOUND_ROWS()"));
+            $this->setTotalItemsAvailable((integer) $this->plugin->utils_db->wp->get_var('SELECT FOUND_ROWS()'));
 
             $this->prepareItemsMergeUserProperties(); // Merge additional properties.
             $this->prepareItemsMergePostProperties(); // Merge additional properties.
             $this->prepareItemsMergeCommentProperties(); // Merge additional properties.
         }
+        // @codingStandardsIgnoreEnd
     }
 
     /**
@@ -385,6 +395,8 @@ class MenuPageSubsTable extends MenuPageTableBase
      * Protected action-related methods.
      */
 
+    // @codingStandardsIgnoreStart
+    // camelCase not possible. This is an extender.
     /**
      * Bulk actions for this table.
      *
@@ -393,7 +405,7 @@ class MenuPageSubsTable extends MenuPageTableBase
      * @return array An array of all bulk actions.
      */
     protected function get_bulk_actions()
-    {
+    { // @codingStandardsIgnoreEnd
         return [
             'reconfirm' => __('Reconfirm', $this->plugin->text_domain),
             'confirm'   => __('Confirm', $this->plugin->text_domain),
@@ -412,12 +424,12 @@ class MenuPageSubsTable extends MenuPageTableBase
      * @param string $bulk_action The bulk action to process.
      * @param array  $ids         The bulk action IDs to process.
      *
-     * @return integer Number of actions processed successfully.
+     * @return int Number of actions processed successfully.
      */
     protected function processBulkAction($bulk_action, array $ids)
     {
-        switch ($bulk_action) // Bulk action handler.
-        {
+        switch ($bulk_action) {// Bulk action handler.
+
             case 'reconfirm': // Confirm via email?
                 $counter = $this->plugin->utils_sub->bulkReconfirm($ids);
                 break; // Break switch handler.
@@ -442,6 +454,6 @@ class MenuPageSubsTable extends MenuPageTableBase
                 $counter = $this->plugin->utils_sub->bulkDelete($ids);
                 break; // Break switch handler.
         }
-        return !empty($counter) ? (integer)$counter : 0;
+        return !empty($counter) ? (integer) $counter : 0;
     }
 }
