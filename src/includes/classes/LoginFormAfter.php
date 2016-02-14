@@ -1,15 +1,16 @@
 <?php
 /**
- * Login Form After
+ * Login Form After.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * Login Form After
+ * Login Form After.
  *
  * @since 141111 First documented version.
  */
