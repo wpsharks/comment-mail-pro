@@ -714,7 +714,7 @@ class SubInserter extends AbsBase
         $this->collectDuplicateKeyIdsBeforeInsert();
 
         $table          = $this->plugin->utils_db->prefix().'subs';
-        $data_to_insert = $this->plugin->utils_array->remove_nulls($this->data);
+        $data_to_insert = $this->plugin->utils_array->removeNulls($this->data);
         unset($data_to_insert['ID']); // We never want to insert an ID.
 
         if (($insert_replace = $this->plugin->utils_db->wp->replace($table, $data_to_insert)) === false) {
@@ -783,7 +783,7 @@ class SubInserter extends AbsBase
         $sub_before = (array)$this->sub; // For event logging.
 
         $table          = $this->plugin->utils_db->prefix().'subs';
-        $data_to_update = $this->plugin->utils_array->remove_nulls($this->data);
+        $data_to_update = $this->plugin->utils_array->removeNulls($this->data);
         unset($data_to_update['ID']); // We don't need to update the `ID`.
 
         if ($this->plugin->utils_db->wp->update($table, $data_to_update, ['ID' => $this->sub->ID]) === false) {

@@ -174,7 +174,7 @@ namespace WebSharks\CommentMail\Pro;
 
 				if($cache && count($cache) > 2000) // Too large?
 				{
-					$this->plugin->utils_array->shuffle_assoc($cache);
+					$this->plugin->utils_array->shuffleAssoc($cache);
 					$cache = array_slice($cache, 0, 2000, TRUE);
 				}
 				if(is_string($sub_id_or_key) && $this->has_uunnci_key_20_max_format($sub_id_or_key))

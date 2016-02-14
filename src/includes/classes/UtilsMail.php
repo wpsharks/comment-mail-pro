@@ -419,7 +419,7 @@ namespace WebSharks\CommentMail\Pro;
 
 					return $address_emails ? array_unique($address_emails) : array();
 				}
-				return $addresses ? $this->plugin->utils_array->unique_deep($addresses) : array();
+				return $addresses ? $this->plugin->utils_array->uniqueDeep($addresses) : array();
 			}
 
 			/**

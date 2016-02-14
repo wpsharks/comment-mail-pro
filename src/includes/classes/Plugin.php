@@ -2015,7 +2015,7 @@ class Plugin extends AbsBase
             $notices = []; // Force an array of notices.
         }
         if ($args['push_to_top']) { // Push this notice to the top?
-            $this->utils_array->unshift_assoc($notices, $key, $args);
+            $this->utils_array->unshiftAssoc($notices, $key, $args);
         } else {
             $notices[$key] = $args; // Default behavior.
         }
