@@ -2,10 +2,10 @@
 /**
  * Uninstaller.
  *
- * @since 160212 PSR compliance.
+ * @since     160212 PSR compliance.
  *
  * @copyright WebSharks, Inc. <http://websharks-inc.com>
- * @license GNU General Public License, version 3
+ * @license   GNU General Public License, version 3
  */
 if (!defined('WPINC')) {
     exit('Do NOT access this file directly: '.basename(__FILE__));
