@@ -53,10 +53,10 @@ class MenuPage extends AbsBase
                 if ($_this->plugin->options[$key]) {
                     return $_this->plugin->options[$key];
                 }
-                $data             = template::option_key_data($key);
+                $data             = template::optionKeyData($key);
                 $default_template = new Template($data->file, $data->type, true);
 
-                return $default_template->file_contents();
+                return $default_template->fileContents();
             }
             return isset($_this->plugin->options[$key]) ? $_this->plugin->options[$key] : null;
         };
@@ -2346,10 +2346,10 @@ class MenuPage extends AbsBase
                 if ($_this->plugin->options[$key]) {
                     return $_this->plugin->options[$key];
                 }
-                $data             = template::option_key_data($key);
+                $data             = template::optionKeyData($key);
                 $default_template = new Template($data->file, $data->type, true);
 
-                return $default_template->file_contents();
+                return $default_template->fileContents();
             }
             return isset($_this->plugin->options[$key]) ? $_this->plugin->options[$key] : null;
         };
@@ -2973,10 +2973,10 @@ class MenuPage extends AbsBase
                 if ($_this->plugin->options[$key]) {
                     return $_this->plugin->options[$key];
                 }
-                $data             = template::option_key_data($key);
+                $data             = template::optionKeyData($key);
                 $default_template = new Template($data->file, $data->type, true);
 
-                return $default_template->file_contents();
+                return $default_template->fileContents();
             }
             return isset($_this->plugin->options[$key]) ? $_this->plugin->options[$key] : null;
         };
@@ -4439,10 +4439,10 @@ class MenuPage extends AbsBase
                 if ($_this->plugin->options[$key]) {
                     return $_this->plugin->options[$key];
                 }
-                $data             = template::option_key_data($key);
+                $data             = template::optionKeyData($key);
                 $default_template = new Template($data->file, $data->type, true);
 
-                return $default_template->file_contents();
+                return $default_template->fileContents();
             }
             return isset($_this->plugin->options[$key]) ? $_this->plugin->options[$key] : null;
         };

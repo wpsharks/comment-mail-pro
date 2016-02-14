@@ -979,9 +979,9 @@ class Plugin extends AbsBase
 
         foreach ($this->options as $_key => &$_value) {
             if (strpos($_key, 'template__') === 0) {
-                $_key_data             = template::option_key_data($_key);
+                $_key_data             = template::optionKeyData($_key);
                 $_default_template     = new Template($_key_data->file, $_key_data->type, true);
-                $_default_template_nws = preg_replace('/\s+/', '', $_default_template->file_contents());
+                $_default_template_nws = preg_replace('/\s+/', '', $_default_template->fileContents());
                 $_option_template_nws  = preg_replace('/\s+/', '', $_value);
 
                 if ($_option_template_nws === $_default_template_nws) {
