@@ -271,7 +271,7 @@ class RveMandrill extends AbsBase
 
           'force_status'
         );
-        $this->plugin->utils_rve->maybe_post_comment($post_comment_args);
+        $this->plugin->utils_rve->maybePostComment($post_comment_args);
     }
 }
 	

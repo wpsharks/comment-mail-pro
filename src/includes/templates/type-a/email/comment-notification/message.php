@@ -122,7 +122,7 @@ $replies_via_email_enable = $sub_post_comments_open && $plugin->options['replies
 
 		// Reply via email marker; if applicable. Only needed for digests, and only if replies via email are enabled currently.
 		// ~ Note: This marker is not necessary for single comment notifications. A `Reply-To:` header already handles single-comment notifications.
-		$_comment_rve_irt_marker = $plugin->utils_rve->irt_marker($_comment->comment_post_ID, $_comment->comment_ID); // e.g. `~rve#779-84`.
+		$_comment_rve_irt_marker = $plugin->utils_rve->irtMarker($_comment->comment_post_ID, $_comment->comment_ID); // e.g. `~rve#779-84`.
 		?>
 
 		<?php if($_comment_parent): // This is a reply to someone? ?>

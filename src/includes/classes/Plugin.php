@@ -2481,7 +2481,7 @@ class Plugin extends AbsBase
     public function preOptionCommentRegistration($registration_required)
     {
         if ($this->options['replies_via_email_enable']) {
-            $registration_required = $this->utils_rve->pre_option_comment_registration($registration_required);
+            $registration_required = $this->utils_rve->preOptionCommentRegistration($registration_required);
         }
         return $registration_required; // Pass through.
     }
@@ -2507,7 +2507,7 @@ class Plugin extends AbsBase
     public function preCommentApproved($comment_status, array $comment_data)
     {
         if ($this->options['replies_via_email_enable']) {
-            $comment_status = $this->utils_rve->pre_comment_approved($comment_status, $comment_data);
+            $comment_status = $this->utils_rve->preCommentApproved($comment_status, $comment_data);
         }
         return $comment_status; // Pass through.
     }

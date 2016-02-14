@@ -844,9 +844,9 @@ class QueueProcessor extends AbsBase
                     $rve_mandrill_reply_to_email = $this->plugin->options['rve_mandrill_reply_to_email'];
 
                     if ($is_digest) { // In digests, we only want a post ID and sub key. A comment ID will need to be given by the end-user.
-                        $rve_mandrill_reply_to_email = $this->plugin->utils_rve->irt_suffix($rve_mandrill_reply_to_email, $entry_props->post->ID, null, $entry_props->sub->key);
+                        $rve_mandrill_reply_to_email = $this->plugin->utils_rve->irtSuffix($rve_mandrill_reply_to_email, $entry_props->post->ID, null, $entry_props->sub->key);
                     } else {
-                        $rve_mandrill_reply_to_email = $this->plugin->utils_rve->irt_suffix($rve_mandrill_reply_to_email, $entry_props->post->ID, $entry_props->comment->comment_ID, $entry_props->sub->key);
+                        $rve_mandrill_reply_to_email = $this->plugin->utils_rve->irtSuffix($rve_mandrill_reply_to_email, $entry_props->post->ID, $entry_props->comment->comment_ID, $entry_props->sub->key);
                     }
                     $entry_headers[] = 'Reply-To: '.$rve_mandrill_reply_to_email;
                 }
@@ -886,7 +886,7 @@ class QueueProcessor extends AbsBase
 
         $email_rve_end_divider = null; // Initialize.
         if ($this->plugin->options['replies_via_email_enable']) {
-            $email_rve_end_divider = $this->plugin->utils_rve->end_divider();
+            $email_rve_end_divider = $this->plugin->utils_rve->endDivider();
         }
         $template_vars = array_merge($template_vars, compact('email_rve_end_divider'));
 
