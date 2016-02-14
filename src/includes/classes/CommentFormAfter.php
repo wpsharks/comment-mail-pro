@@ -1,22 +1,23 @@
 <?php
 /**
- * Comment Form After
+ * Comment Form After.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * Comment Form After
+ * Comment Form After.
  *
  * @since 141111 First documented version.
  */
 class CommentFormAfter extends AbsBase
 {
     /**
-     * @var boolean Via API call?
+     * @type bool Via API call?
      *
      * @since 141111 First documented version.
      */
@@ -27,13 +28,13 @@ class CommentFormAfter extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param boolean $via_api Defaults to a FALSE value.
+     * @param bool $via_api Defaults to a FALSE value.
      */
     public function __construct($via_api = false)
     {
         parent::__construct();
 
-        $this->via_api = (boolean)$via_api;
+        $this->via_api = (boolean) $via_api;
 
         $this->maybeDisplaySubOps();
     }
@@ -72,7 +73,7 @@ class CommentFormAfter extends AbsBase
                 ['post_id' => $post_id, 'comment_form_defaults' => true]
             );
         // @TODO What if they have a subscription, but not on this post?
-        $current = (object)[
+        $current = (object) [
             'sub_email'   => $current_info->email,
             'sub_type'    => $current_info->type,
             'sub_deliver' => $current_info->deliver,
