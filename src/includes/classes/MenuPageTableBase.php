@@ -1886,7 +1886,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
                 esc_html($this->plugin->utils_i18n->{$this->plural_name}($counter)),
                 esc_html($this->plugin->utils_i18n->action_ed($bulk_action))
               ),
-              ['transient' => true, 'for_page' => $this->plugin->utils_env->current_menu_page()]
+              ['transient' => true, 'for_page' => $this->plugin->utils_env->currentMenuPage()]
             );
         }
         $redirect_to = $this->plugin->utils_url->page_table_nav_vars_only();

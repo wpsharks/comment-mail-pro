@@ -441,7 +441,7 @@ class ImportStcr extends AbsBase
      */
     protected function outputStatus()
     {
-        $this->plugin->utils_env->prep_for_output();
+        $this->plugin->utils_env->prepForOutput();
 
         status_header(200); // OK status.
         nocache_headers(); // No browser cache.

@@ -121,7 +121,7 @@ class OutputFile extends AbsBase
      */
     protected function prepare()
     {
-        $this->plugin->utils_env->prep_for_large_output();
+        $this->plugin->utils_env->prepForLargeOutput();
     }
 
     /**

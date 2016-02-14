@@ -714,7 +714,7 @@ class MenuPage extends AbsBase
 
         /* ----------------------------------------------------------------------------------------- */
 
-        if ($this->plugin->is_pro || $this->plugin->utils_env->is_pro_preview()) {
+        if ($this->plugin->is_pro || $this->plugin->utils_env->isProPreview()) {
             $_panel_body = '<table style="margin:0;">'.
                            ' <tbody>'.
                            $form_fields->selectRow(
@@ -761,7 +761,7 @@ class MenuPage extends AbsBase
         }
         /* ----------------------------------------------------------------------------------------- */
 
-        if ($this->plugin->is_pro || $this->plugin->utils_env->is_pro_preview()) {
+        if ($this->plugin->is_pro || $this->plugin->utils_env->isProPreview()) {
             $_panel_body = '<table>'.
                            '  <tbody>'.
                            $form_fields->inputRow(
@@ -800,7 +800,7 @@ class MenuPage extends AbsBase
         }
         /* ----------------------------------------------------------------------------------------- */
 
-        if ($this->plugin->is_pro || $this->plugin->utils_env->is_pro_preview()) {
+        if ($this->plugin->is_pro || $this->plugin->utils_env->isProPreview()) {
             $_panel_body = '<table style="margin:0;">'.
                            ' <tbody>'.
                            $form_fields->selectRow(
@@ -1005,7 +1005,7 @@ class MenuPage extends AbsBase
         }
         /* ----------------------------------------------------------------------------------------- */
 
-        if ($this->plugin->is_pro || $this->plugin->utils_env->is_pro_preview()) {
+        if ($this->plugin->is_pro || $this->plugin->utils_env->isProPreview()) {
             $_panel_body = '<table style="margin:0;">'.
                            ' <tbody>'.
                            $form_fields->selectRow(
@@ -1150,7 +1150,7 @@ class MenuPage extends AbsBase
         }
         /* ----------------------------------------------------------------------------------------- */
 
-        if ($this->plugin->is_pro || $this->plugin->utils_env->is_pro_preview()) {
+        if ($this->plugin->is_pro || $this->plugin->utils_env->isProPreview()) {
             $_panel_body = '<table style="margin-bottom:0;">'.
                            '  <tbody>'.
                            $form_fields->selectRow(
@@ -1497,7 +1497,7 @@ class MenuPage extends AbsBase
         }
         /* ----------------------------------------------------------------------------------------- */
 
-        if ($this->plugin->is_pro || $this->plugin->utils_env->is_pro_preview()) {
+        if ($this->plugin->is_pro || $this->plugin->utils_env->isProPreview()) {
             $_panel_body = '<table>'.
                            '  <tbody>'.
                            $form_fields->textareaRow(
@@ -1522,7 +1522,7 @@ class MenuPage extends AbsBase
         }
         /* ----------------------------------------------------------------------------------------- */
 
-        if ($this->plugin->is_pro || $this->plugin->utils_env->is_pro_preview()) {
+        if ($this->plugin->is_pro || $this->plugin->utils_env->isProPreview()) {
             $_panel_body = '<table>'.
                            '  <tbody>'.
                            $form_fields->inputRow(
@@ -1579,7 +1579,7 @@ class MenuPage extends AbsBase
         }
         /* ----------------------------------------------------------------------------------------- */
 
-        if ($this->plugin->is_pro || $this->plugin->utils_env->is_pro_preview()) {
+        if ($this->plugin->is_pro || $this->plugin->utils_env->isProPreview()) {
             $_panel_body = '<table>'.
                            '  <tbody>'.
                            $form_fields->inputRow(
@@ -1636,7 +1636,7 @@ class MenuPage extends AbsBase
         }
         /* ----------------------------------------------------------------------------------------- */
 
-        if ($this->plugin->is_pro || $this->plugin->utils_env->is_pro_preview()) {
+        if ($this->plugin->is_pro || $this->plugin->utils_env->isProPreview()) {
             $_panel_body = '<table>'.
                            '  <tbody>'.
                            $form_fields->inputRow(
@@ -1752,7 +1752,7 @@ class MenuPage extends AbsBase
 
         /* ----------------------------------------------------------------------------------------- */
 
-        if ($this->plugin->is_pro || $this->plugin->utils_env->is_pro_preview()) {
+        if ($this->plugin->is_pro || $this->plugin->utils_env->isProPreview()) {
             $_panel_body = '<table>'.
                            '  <tbody>'.
                            $form_fields->selectRow(
@@ -1839,7 +1839,7 @@ class MenuPage extends AbsBase
         }
         /* ----------------------------------------------------------------------------------------- */
 
-        if ($this->plugin->is_pro || $this->plugin->utils_env->is_pro_preview()) {
+        if ($this->plugin->is_pro || $this->plugin->utils_env->isProPreview()) {
             $_panel_body = '<table>'.
                            '  <tbody>'.
                            $form_fields->inputRow(
@@ -2017,7 +2017,7 @@ class MenuPage extends AbsBase
 
         /* --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-        if ($this->plugin->is_pro || $this->plugin->utils_env->is_pro_preview()) {
+        if ($this->plugin->is_pro || $this->plugin->utils_env->isProPreview()) {
             $_form_field_args = [
               'ns_id_suffix'   => '-import-subs-form',
               'ns_name_suffix' => '[import]',
@@ -2031,7 +2031,7 @@ class MenuPage extends AbsBase
             $_panel_body .= ' <p>'.sprintf(__('The importation routine will accept direct CSV input in the textarea below, or you can choose to upload a prepared CSV file.', $this->plugin->text_domain), esc_html($this->plugin->name)).'</p>';
             $_panel_body .= ' <p class="pmp-note pmp-notice" style="font-size:90%;">'.sprintf(__('<strong>Note:</strong> The format required for importation is %2$s. For mass updates, an <code>"ID"</code> is the only column that is absolutely required. The <code>"ID"</code> column (if present) indicates that you want to update an existing subscription with a particular ID. However, for new subscriptions; please omit the <code>"ID"</code> column. When importing new subscriptions, your CSV file need only contain the <code>"email"</code> and <code>"post_id"</code> columns. There are %3$s w/ a full list of all possible import columns. In either case (direct input or file upload) the first line should be a list of columns you\'re importing; aka: headers.', $this->plugin->text_domain), esc_html($this->plugin->name), $this->plugin->utils_markup->x_anchor('http://en.wikipedia.org/wiki/Comma-separated_values', 'CSV (Comma Separated Values)'), $this->plugin->utils_markup->x_anchor('http://comment-mail.com/kb-article/csv-importexport-tools/', __('additional details here', $this->plugin->text_domain))).'</p>';
             $_panel_body .= ' <p class="pmp-note pmp-info" style="font-size:90%;">'.sprintf(__('<strong>Tip:</strong> If you\'re looking for more elaborate examples, you can simply use the "CSV Export" panel on this page. The easiest way to see how this works is by looking at a CSV export file generated by %1$s&trade; itself. That\'s the format you should follow please. In fact, you could even pull an export, make changes to the file, and then import that modified file to mass update existing subscriptions.', $this->plugin->text_domain), esc_html($this->plugin->name)).'</p>';
-            $_panel_body .= ' <p class="pmp-note pmp-warning" style="font-size:90%;">'.sprintf(__('<strong>Upper Limits:</strong> There is an upper limit of <code>5000</code> lines allowed per import; i.e., you must limit each import to this number of lines so as to avoid extremely long-running PHP processes. In addition, given your current web host (i.e., PHP configuration); if you choose to upload a prepared CSV file, the maximum allowed file upload size is currently: <code>%1$s</code>.', $this->plugin->text_domain), esc_html($this->plugin->utils_fs->bytes_abbr($this->plugin->utils_env->max_upload_size()))).'</p>';
+            $_panel_body .= ' <p class="pmp-note pmp-warning" style="font-size:90%;">'.sprintf(__('<strong>Upper Limits:</strong> There is an upper limit of <code>5000</code> lines allowed per import; i.e., you must limit each import to this number of lines so as to avoid extremely long-running PHP processes. In addition, given your current web host (i.e., PHP configuration); if you choose to upload a prepared CSV file, the maximum allowed file upload size is currently: <code>%1$s</code>.', $this->plugin->text_domain), esc_html($this->plugin->utils_fs->bytes_abbr($this->plugin->utils_env->maxUploadSize()))).'</p>';
 
             $_panel_body .= ' <table>'.
                             '   <tbody>'.
@@ -2156,13 +2156,13 @@ class MenuPage extends AbsBase
 
             $_panel_body .= '</form>';
 
-            echo $this->panel(__('Subscribe to Comments Reloaded (StCR)', $this->plugin->text_domain), $_panel_body, ['icon' => '<i class="fa fa-upload"></i>', 'open' => (!$this->plugin->is_pro && !$this->plugin->utils_env->is_pro_preview()) || !ImportStcr::everImported()]);
+            echo $this->panel(__('Subscribe to Comments Reloaded (StCR)', $this->plugin->text_domain), $_panel_body, ['icon' => '<i class="fa fa-upload"></i>', 'open' => (!$this->plugin->is_pro && !$this->plugin->utils_env->isProPreview()) || !ImportStcr::everImported()]);
 
             unset($_form_field_args, $_form_fields, $_panel_body); // Housekeeping.
         }
         /* ----------------------------------------------------------------------------------------- */
 
-        if ($this->plugin->is_pro || $this->plugin->utils_env->is_pro_preview()) {
+        if ($this->plugin->is_pro || $this->plugin->utils_env->isProPreview()) {
             $_form_field_args = [
               'ns_id_suffix'   => '-export-subs-form',
               'ns_name_suffix' => '[export]',
@@ -2243,7 +2243,7 @@ class MenuPage extends AbsBase
         }
         /* ----------------------------------------------------------------------------------------- */
 
-        if ($this->plugin->is_pro || $this->plugin->utils_env->is_pro_preview()) {
+        if ($this->plugin->is_pro || $this->plugin->utils_env->isProPreview()) {
             echo '      <h2 class="pmp-section-heading">'.
                  '         '.__('Import/Export Config. Options', $this->plugin->text_domain).
                  '         <small>'.sprintf(__('This allows you to import/export %1$s&trade; configuration options.', $this->plugin->text_domain), esc_html($this->plugin->name)).'</small>'.
@@ -2293,7 +2293,7 @@ class MenuPage extends AbsBase
         }
         /* ----------------------------------------------------------------------------------------- */
 
-        if ($this->plugin->is_pro || $this->plugin->utils_env->is_pro_preview()) {
+        if ($this->plugin->is_pro || $this->plugin->utils_env->isProPreview()) {
             $_form_field_args = [
               'ns_id_suffix'   => '-export-ops-form',
               'ns_name_suffix' => '[export]',
@@ -3244,7 +3244,7 @@ class MenuPage extends AbsBase
 
             /* ----------------------------------------------------------------------------------------- */
 
-            if ($this->plugin->is_pro || $this->plugin->utils_env->is_pro_preview()) {
+            if ($this->plugin->is_pro || $this->plugin->utils_env->isProPreview()) {
                 echo '         <h2 class="pmp-section-heading">'.
                      '            '.__('Single Sign-on Templates', $this->plugin->text_domain).
                      '            <small>'.__('Provides options that allow commenters to login w/ popular social network accounts.', $this->plugin->text_domain).'</small>'.
@@ -4561,37 +4561,37 @@ class MenuPage extends AbsBase
         $heading .= '  <div class="pmp-heading-links">'."\n";
 
         $heading .= '  <a href="'.esc_attr($this->plugin->utils_url->main_menu_page_only()).'"'.
-                    ($this->plugin->utils_env->is_menu_page(GLOBAL_NS) ? ' class="pmp-active"' : '').'>'.
+                    ($this->plugin->utils_env->isMenuPage(GLOBAL_NS) ? ' class="pmp-active"' : '').'>'.
                     '<i class="fa fa-gears"></i> '.__('Options', $this->plugin->text_domain).'</a>'."\n";
 
         if (!$this->plugin->is_pro) { // Display pro preview/upgrade related links?
             $heading .= '  <a href="'.esc_attr($this->plugin->utils_url->pro_preview()).'"'.
-                        ($this->plugin->utils_env->is_pro_preview() ? ' class="pmp-active"' : '').'>'.
+                        ($this->plugin->utils_env->isProPreview() ? ' class="pmp-active"' : '').'>'.
                         '<i class="fa fa-eye"></i> '.__('Preview Pro Features', $this->plugin->text_domain).'</a>'."\n";
 
             $heading .= '  <a href="'.esc_attr($this->plugin->utils_url->product_page()).'" target="_blank"><i class="fa fa-heart-o"></i> '.__('Pro Upgrade', $this->plugin->text_domain).'</a>'."\n";
         }
         if ($this->plugin->is_pro) { // Display import options for pro users.
             $heading .= '  <a href="'.esc_attr($this->plugin->utils_url->import_export_menu_page_only()).'"'.
-                        ($this->plugin->utils_env->is_menu_page(GLOBAL_NS.'_import_export') ? ' class="pmp-active"' : '').'>'.
+                        ($this->plugin->utils_env->isMenuPage(GLOBAL_NS.'_import_export') ? ' class="pmp-active"' : '').'>'.
                         '<i class="fa fa-upload"></i> '.__('Import/Export', $this->plugin->text_domain).
 
-                        ((!$this->plugin->utils_env->is_menu_page(GLOBAL_NS.'_import_export') && ImportStcr::dataExists() && !ImportStcr::everImported())
+                        ((!$this->plugin->utils_env->isMenuPage(GLOBAL_NS.'_import_export') && ImportStcr::dataExists() && !ImportStcr::everImported())
                           ? '<span class="pmp-blink">'.__('StCR Auto-Import', $this->plugin->text_domain).'</span>' : '').'</a>'."\n";
         } else if (ImportStcr::dataExists()) { // Lite version exposes import functionality for StCR users.
             $heading .= '  <a href="'.esc_attr($this->plugin->utils_url->import_export_menu_page_only()).'"'.
-                        ($this->plugin->utils_env->is_menu_page(GLOBAL_NS.'_import_export') ? ' class="pmp-active"' : '').'>'.
+                        ($this->plugin->utils_env->isMenuPage(GLOBAL_NS.'_import_export') ? ' class="pmp-active"' : '').'>'.
                         '<i class="fa fa-upload"></i> '.__('Import/Export', $this->plugin->text_domain).
 
-                        ((!$this->plugin->utils_env->is_menu_page(GLOBAL_NS.'_import_export') && ImportStcr::dataExists() && !ImportStcr::everImported())
+                        ((!$this->plugin->utils_env->isMenuPage(GLOBAL_NS.'_import_export') && ImportStcr::dataExists() && !ImportStcr::everImported())
                           ? '<span class="pmp-blink">'.__('StCR Auto-Import', $this->plugin->text_domain).'</span>' : '').'</a>'."\n";
         }
         $heading .= '  <a href="'.esc_attr($this->plugin->utils_url->email_templates_menu_page_only()).'"'.
-                    ($this->plugin->utils_env->is_menu_page(GLOBAL_NS.'_email_templates') ? ' class="pmp-active"' : '').'>'.
+                    ($this->plugin->utils_env->isMenuPage(GLOBAL_NS.'_email_templates') ? ' class="pmp-active"' : '').'>'.
                     '<i class="fa fa-code"></i> '.__('Email Templates', $this->plugin->text_domain).'</a>'."\n";
 
         $heading .= '  <a href="'.esc_attr($this->plugin->utils_url->site_templates_menu_page_only()).'"'.
-                    ($this->plugin->utils_env->is_menu_page(GLOBAL_NS.'_site_templates') ? ' class="pmp-active"' : '').'>'.
+                    ($this->plugin->utils_env->isMenuPage(GLOBAL_NS.'_site_templates') ? ' class="pmp-active"' : '').'>'.
                     '<i class="fa fa-code"></i> '.__('Site Templates', $this->plugin->text_domain).'</a>'."\n";
 
         $heading .= '  </div>'."\n";
@@ -4629,19 +4629,19 @@ class MenuPage extends AbsBase
     {
         $notes = ''; // Initialize notes.
 
-        if ($this->plugin->utils_env->is_pro_preview()) {
+        if ($this->plugin->utils_env->isProPreview()) {
             $notes .= '<div class="pmp-note pmp-notice">'."\n";
             $notes .= '  <a href="'.esc_attr($this->plugin->utils_url->page_only()).'" style="float:right; margin:0 0 15px 25px; font-variant:small-caps; text-decoration:none;">'.__('close', $this->plugin->text_domain).' <i class="fa fa-eye-slash"></i></a>'."\n";
             $notes .= '  <i class="fa fa-arrow-down"></i> '.sprintf(__('<strong>Pro Features (Preview)</strong> ~ New advanced option panels below. Please explore before <a href="%1$s" target="_blank">upgrading <i class="fa fa-heart-o"></i></a>.', $this->plugin->text_domain), esc_attr($this->plugin->utils_url->product_page())).'<br />'."\n";
             $notes .= '  '.sprintf(__('<small><strong>MORE:</strong> in addition to what you see below, the pro version also includes import/export functionality, stats/graphs, and advanced PHP-based template options. [<a href="%2$s" target="_blank">learn more</a>]</small>', $this->plugin->text_domain), esc_html($this->plugin->name), esc_attr($this->plugin->utils_url->product_page()))."\n";
             $notes .= '</div>'."\n";
         }
-        if ($this->plugin->installTime() > strtotime('-48 hours') && $this->plugin->utils_env->is_menu_page(GLOBAL_NS.'_*_templates')) {
+        if ($this->plugin->installTime() > strtotime('-48 hours') && $this->plugin->utils_env->isMenuPage(GLOBAL_NS.'_*_templates')) {
             $notes .= '<div class="pmp-note pmp-notice">'."\n";
             $notes .= '  '.__('All templates come preconfigured; customization is optional <i class="fa fa-smile-o"></i>', $this->plugin->text_domain)."\n";
             $notes .= '</div>'."\n";
         }
-        if ($this->plugin->utils_env->is_menu_page(GLOBAL_NS) && (get_option('comment_moderation') || get_option('comment_whitelist'))) {
+        if ($this->plugin->utils_env->isMenuPage(GLOBAL_NS) && (get_option('comment_moderation') || get_option('comment_whitelist'))) {
             $notes .= '<div class="pmp-note pmp-notice">'."\n";
             $notes .= '  '.sprintf(__('<strong>Note:</strong> Your <a href="%1$s">Discussion Settings</a> indicate that comment moderation is enabled. That\'s fine. However, please remember that no emails will be sent until a comment (or reply) is approved.', $this->plugin->text_domain), esc_attr(admin_url('/options-discussion.php')))."\n";
             $notes .= '</div>'."\n";
@@ -4777,7 +4777,7 @@ class MenuPage extends AbsBase
         $pro_preview_force = (boolean)$args['pro_preview_force'];
         $open              = (boolean)$args['open'];
 
-        if ($pro_only && !$this->plugin->is_pro && !$pro_preview_force && !$this->plugin->utils_env->is_pro_preview()) {
+        if ($pro_only && !$this->plugin->is_pro && !$pro_preview_force && !$this->plugin->utils_env->isProPreview()) {
             return ''; // Not applicable; not pro, or not a pro preview.
         }
         $panel = '<div class="pmp-panel'.esc_attr($pro_only && !$this->plugin->is_pro ? ' pmp-pro-preview' : '').'">'."\n";
@@ -4829,7 +4829,7 @@ class MenuPage extends AbsBase
 
         $id = 'pb-'.md5($title.$icon.$note); // Auto-generate.
 
-        if ($pro_only && !$this->plugin->is_pro && !$this->plugin->utils_env->is_pro_preview()) {
+        if ($pro_only && !$this->plugin->is_pro && !$this->plugin->utils_env->isProPreview()) {
             return ''; // Not applicable; not pro, or not a pro preview.
         }
         $postbox = '<div id="'.esc_attr($id).'"'. // Expected by `postbox.js` in WP core.

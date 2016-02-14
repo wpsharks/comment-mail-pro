@@ -934,7 +934,7 @@ namespace WebSharks\CommentMail\Pro;
 				$icon_colors         = $this->wp_admin_icon_colors[$color];
 				$use_icon_fill_color = $icon_colors['base']; // Default base.
 
-				if($this->plugin->utils_env->is_menu_page(GLOBAL_NS.'*'))
+				if($this->plugin->utils_env->isMenuPage(GLOBAL_NS.'*'))
 					$use_icon_fill_color = $icon_colors['current'];
 
 				return str_replace(' fill="currentColor"', ' fill="'.esc_attr($use_icon_fill_color).'"', $svg);

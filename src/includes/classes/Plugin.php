@@ -1032,7 +1032,7 @@ class Plugin extends AbsBase
         // Meta boxes use an SVG graphic.
         $icon = $this->utils_fs->inline_icon_svg();
 
-        if (!$this->utils_env->is_menu_page('post-new.php')) {
+        if (!$this->utils_env->isMenuPage('post-new.php')) {
             add_meta_box(GLOBAL_NS.'_small', $icon.' '.$this->name.'&trade;', [$this, 'postSmallMetaBox'], $post_type, 'normal', 'default');
         }
         // @TODO disabling this for now.
@@ -1081,12 +1081,12 @@ class Plugin extends AbsBase
      */
     public function enqueueAdminStyles()
     {
-        if ($this->utils_env->is_menu_page('post.php')
-            || $this->utils_env->is_menu_page('post-new.php')
+        if ($this->utils_env->isMenuPage('post.php')
+            || $this->utils_env->isMenuPage('post-new.php')
         ) {
             $this->enqueuePostAdminStyles();
         }
-        if (!$this->utils_env->is_menu_page(GLOBAL_NS.'*')) {
+        if (!$this->utils_env->isMenuPage(GLOBAL_NS.'*')) {
             return; // Nothing to do; not applicable.
         }
         $deps = ['codemirror', 'jquery-datetimepicker', 'chosen', 'font-awesome', 'sharkicons']; // Dependencies.
@@ -1113,8 +1113,8 @@ class Plugin extends AbsBase
      */
     public function enqueuePostAdminStyles()
     {
-        if (!$this->utils_env->is_menu_page('post.php')
-            && !$this->utils_env->is_menu_page('post-new.php')
+        if (!$this->utils_env->isMenuPage('post.php')
+            && !$this->utils_env->isMenuPage('post-new.php')
         ) {
             return; // Not applicable.
         }
@@ -1135,7 +1135,7 @@ class Plugin extends AbsBase
      */
     public function enqueueAdminScripts()
     {
-        if (!$this->utils_env->is_menu_page(GLOBAL_NS.'*')) {
+        if (!$this->utils_env->isMenuPage(GLOBAL_NS.'*')) {
             return; // Nothing to do; NOT a plugin menu page.
         }
         $deps = ['jquery', 'postbox', 'codemirror', 'google-jsapi-modules', 'chartjs', 'jquery-datetimepicker', 'chosen']; // Dependencies.
@@ -1173,7 +1173,7 @@ class Plugin extends AbsBase
           GLOBAL_NS.'_i18n',
           [
             'bulkReconfirmConfirmation' => __('Resend email confirmation link? Are you sure?', $this->text_domain),
-            'bulkDeleteConfirmation'    => $this->utils_env->is_menu_page('*_event_log')
+            'bulkDeleteConfirmation'    => $this->utils_env->isMenuPage('*_event_log')
               ? $this->utils_i18n->log_entry_js_deletion_confirmation_warning()
               : __('Delete permanently? Are you sure?', $this->text_domain),
             'dateTimePickerI18n'        => [
@@ -1231,7 +1231,7 @@ class Plugin extends AbsBase
         $child_branch_indent = // Each child branch uses the following UTF-8 char `꜖`; <http://unicode-table.com/en/A716/>.
           '<span style="display:inline-block; margin-left:.5em; position:relative; top:-.2em; left:-.2em; font-weight:normal; opacity:0.2;">&#42774;</span> ';
 
-        $current_menu_page = $this->utils_env->current_menu_page(); // Current menu page slug.
+        $current_menu_page = $this->utils_env->currentMenuPage(); // Current menu page slug.
 
         // Menu page titles use UTF-8 char: `⥱`; <http://unicode-table.com/en/2971/>.
 
@@ -2147,7 +2147,7 @@ class Plugin extends AbsBase
             if ($_args['for_user_id'] && get_current_user_id() !== $_args['for_user_id']) {
                 continue; // Don't display to this particular user ID.
             }
-            if ($_args['for_page'] && !$this->utils_env->is_menu_page($_args['for_page'])) {
+            if ($_args['for_page'] && !$this->utils_env->isMenuPage($_args['for_page'])) {
                 continue; // Don't display on this page; i.e. pattern match failure.
             }
             if ($_args['markup']) { // Only display non-empty notices.

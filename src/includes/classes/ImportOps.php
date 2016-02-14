@@ -94,7 +94,7 @@ class ImportOps extends AbsBase
     {
         $notice_markup = sprintf(__('<strong>Imported %1$s&trade; config. options successfully.</strong>', $this->plugin->text_domain), esc_html($this->plugin->name));
 
-        $this->plugin->enqueueUserNotice($notice_markup, ['transient' => true, 'for_page' => $this->plugin->utils_env->current_menu_page()]);
+        $this->plugin->enqueueUserNotice($notice_markup, ['transient' => true, 'for_page' => $this->plugin->utils_env->currentMenuPage()]);
 
         wp_redirect($this->plugin->utils_url->page_only()).exit();
     }
