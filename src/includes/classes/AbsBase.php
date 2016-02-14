@@ -1,54 +1,59 @@
 <?php
 /**
- * Base Abstraction
+ * Base Abstraction.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * Base Abstraction
+ * Base Abstraction.
  *
  * @since 141111 First documented version.
  */
 abstract class AbsBase
 {
     /**
-     * @var Plugin Plugin reference.
+     * @type Plugin Plugin reference.
      *
      * @since 141111 First documented version.
      */
     protected $plugin;
 
     /**
-     * @var array Instance cache.
+     * @type array Instance cache.
      *
      * @since 141111 First documented version.
      */
     protected $cache = [];
 
     /**
-     * @var array Global static cache ref.
+     * @type array Global static cache ref.
      *
      * @since 141111 First documented version.
      */
     protected $static = [];
 
+    // @codingStandardsIgnoreStart
     /**
-     * @var array Global static cache.
+     * @type array Global static cache.
      *
      * @since 141111 First documented version.
      */
     protected static $___static = [];
+    // @codingStandardsIgnoreEnd
 
+    // @codingStandardsIgnoreStart
     /**
-     * @var \stdClass Overload properties.
+     * @type \stdClass Overload properties.
      *
      * @since 141111 First documented version.
      */
     protected $___overload;
+    // @codingStandardsIgnoreEnd
 
     /**
      * Class constructor.
@@ -66,7 +71,7 @@ abstract class AbsBase
         }
         $this->static = &static::$___static[$class];
 
-        $this->___overload = new \stdClass;
+        $this->___overload = new \stdClass();
     }
 
     /**
@@ -74,13 +79,13 @@ abstract class AbsBase
      *
      * @param string $property Property to check.
      *
-     * @return boolean TRUE if `isset($this->___overload->{$property})`.
+     * @return bool TRUE if `isset($this->___overload->{$property})`.
      *
      * @see http://php.net/manual/en/language.oop5.overloading.php
      */
     public function __isset($property)
     {
-        $property = (string)$property; // Force string.
+        $property = (string) $property; // Force string.
 
         return is_object($this->___overload) && isset($this->___overload->{$property});
     }
@@ -90,15 +95,15 @@ abstract class AbsBase
      *
      * @param string $property Property to get.
      *
-     * @return mixed The value of `$this->___overload->{$property}`.
-     *
      * @throws \exception If the `$___overload` property is undefined.
+     *
+     * @return mixed The value of `$this->___overload->{$property}`.
      *
      * @see http://php.net/manual/en/language.oop5.overloading.php
      */
     public function __get($property)
     {
-        $property = (string)$property; // Force string.
+        $property = (string) $property; // Force string.
 
         if (is_object($this->___overload) && property_exists($this->___overload, $property)) {
             return $this->___overload->{$property};
@@ -113,13 +118,13 @@ abstract class AbsBase
      * @param mixed  $value    The value for this property.
      *
      * @throws \exception We do NOT allow magic/overload properties to be set.
-     *    Magic/overload properties in this class are read-only.
+     *                    Magic/overload properties in this class are read-only.
      *
      * @see http://php.net/manual/en/language.oop5.overloading.php
      */
     public function __set($property, $value)
     {
-        $property = (string)$property; // Force string.
+        $property = (string) $property; // Force string.
 
         throw new \exception(sprintf(__('Refused to set overload property: `%1$s`.', $this->plugin->text_domain), $property));
     }
@@ -130,13 +135,13 @@ abstract class AbsBase
      * @param string $property Property to unset.
      *
      * @throws \exception We do NOT allow magic/overload properties to be unset.
-     *    Magic/overload properties in this class are read-only.
+     *                    Magic/overload properties in this class are read-only.
      *
      * @see http://php.net/manual/en/language.oop5.overloading.php
      */
     public function __unset($property)
     {
-        $property = (string)$property; // Force string.
+        $property = (string) $property; // Force string.
 
         throw new \exception(sprintf(__('Refused to unset overload property: `%1$s`.', $this->plugin->text_domain), $property));
     }
@@ -300,45 +305,44 @@ abstract class AbsBase
      *
      * @param string      $function `__FUNCTION__` is suggested here.
      *                              i.e. the calling function name in the calling class.
-     *
      * @param mixed|array $args     The arguments to the calling function.
      *                              Using `func_get_args()` to the caller might suffice in some cases.
      *                              That said, it's generally a good idea to customize this a bit.
      *                              This should include the cachable arguments only.
-     *
      * @param string      $___prop  For internal use only. This defaults to `cache`.
      *                              See also: {@link static_key()} where a value of `static` is used instead.
      *
      * @return mixed|null Returns the current value for the cache key.
-     *    Or, this returns `NULL` if the key is not set yet.
+     *                    Or, this returns `NULL` if the key is not set yet.
      *
      * @note This function returns by reference. The use of `&` is highly recommended when calling this utility.
      *    See also: <http://php.net/manual/en/language.references.return.php>
      */
     protected function &cacheKey($function, $args = [], $___prop = 'cache')
     {
-        $function = (string)$function;
-        $args     = (array)$args;
+        $function = (string) $function;
+        $args     = (array) $args;
 
         if (!isset($this->{$___prop}[$function])) {
             $this->{$___prop}[$function] = null;
         }
         $cache_key = &$this->{$___prop}[$function];
 
-        foreach ($args as $_arg) // Use each arg as a key.
-        {
+        foreach ($args as $_arg) {
+            // Use each arg as a key.
+
             switch (gettype($_arg)) {
                 case 'integer':
-                    $_key = (integer)$_arg;
+                    $_key = (integer) $_arg;
                     break; // Break switch handler.
 
                 case 'double':
                 case 'float':
-                    $_key = (string)$_arg;
+                    $_key = (string) $_arg;
                     break; // Break switch handler.
 
                 case 'boolean':
-                    $_key = (integer)$_arg;
+                    $_key = (integer) $_arg;
                     break; // Break switch handler.
 
                 case 'array':
@@ -350,7 +354,7 @@ abstract class AbsBase
                 case 'resource':
                 case 'unknown type':
                 default: // Default case handler.
-                    $_key = "\0".(string)$_arg;
+                    $_key = "\0".(string) $_arg;
             }
             if (!isset($cache_key[$_key])) {
                 $cache_key[$_key] = null;
