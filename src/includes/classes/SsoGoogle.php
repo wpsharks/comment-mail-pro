@@ -39,7 +39,7 @@ class SsoGoogle extends SsoServiceBase
             $credentials     = new \OAuth\Common\Consumer\Credentials(
               $this->plugin->options['sso_'.$this->service.'_key'],
               $this->plugin->options['sso_'.$this->service.'_secret'],
-              $this->plugin->utils_url->sso_action_url($this->service, 'callback')
+              $this->plugin->utils_url->ssoActionUrl($this->service, 'callback')
             );
             /** @var $service \OAuth\OAuth2\Service\Google */
             $service = $service_factory->createService($this->service, $credentials, $this->storage, ['userinfo_email', 'userinfo_profile']);
@@ -65,7 +65,7 @@ class SsoGoogle extends SsoServiceBase
             $credentials     = new \OAuth\Common\Consumer\Credentials(
               $this->plugin->options['sso_'.$this->service.'_key'],
               $this->plugin->options['sso_'.$this->service.'_secret'],
-              $this->plugin->utils_url->sso_action_url($this->service, 'callback')
+              $this->plugin->utils_url->ssoActionUrl($this->service, 'callback')
             );
             /** @var $service \OAuth\OAuth2\Service\Google */
             $service = $service_factory->createService($this->service, $credentials, $this->storage, ['userinfo_email', 'userinfo_profile']);

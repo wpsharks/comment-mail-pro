@@ -244,7 +244,7 @@ class ImportSubs extends AbsBase
         if ($error_markup) { // Are there any specific error messages that we can report?
             $this->plugin->enqueueUserError($error_markup, ['transient' => true, 'for_page' => $this->plugin->utils_env->currentMenuPage()]);
         }
-        wp_redirect($this->plugin->utils_url->page_only());
+        wp_redirect($this->plugin->utils_url->pageOnly());
         exit();
     }
 

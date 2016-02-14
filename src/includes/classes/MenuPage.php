@@ -78,7 +78,7 @@ class MenuPage extends AbsBase
         /* ----------------------------------------------------------------------------------------- */
 
         echo '<div class="'.esc_attr($this->plugin->slug.'-menu-page '.$this->plugin->slug.'-menu-page-options '.$this->plugin->slug.'-menu-page-area').'">'."\n";
-        echo '   <form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->page_nonce_only()).'" novalidate="novalidate">'."\n";
+        echo '   <form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->pageNonceOnly()).'" novalidate="novalidate">'."\n";
 
         echo '      '.$this->heading(__('Plugin Options', $this->plugin->text_domain), 'logo.png').
              '      '.$this->notes(); // Heading/notifications.
@@ -1027,7 +1027,7 @@ class MenuPage extends AbsBase
                                                     '      <li>'.sprintf(__('Replies to comments via email will be functional for all types of notifications sent by %1$s (including digest notifications). However, there are a few things worth noting before you enable an RVE Handler. <a href="#" data-toggle="other" data-other=".pmp-rve-details">Click here to toggle important details</a>.', $this->plugin->text_domain), esc_html($this->plugin->name)).
                                                     '        <ul class="pmp-rve-details" style="display:none;">'.
                                                     '           <li>'.sprintf(__('All replies posted via email must be sent to the special <code>Reply-To</code> address that you configure below. Once you configure a <code>Reply-To</code> for an RVE Handler, %1$s will automatically set the <code>Reply-To:</code> header in all email notifications that it sends. This way when somebody replies to a comment notification, their email program will reply to the address required for replies via email to work properly.', $this->plugin->text_domain), esc_html($this->plugin->name)).'</li>'.
-                                                    '           <li>'.sprintf(__('The <code>Reply-To</code> address that you configure below, will serve as a base for %1$s to work from. For instance, let\'s say you choose: <code>rve@mandrill.%2$s</code>. This base address will be suffixed automatically (at runtime) with details specific to a particular notification that %1$s sends. Ultimately, <code>rve@mandrill.%2$s</code> will look like: <code>rve<strong>+332-96-kgjdgxr4ldqpdrgjdgxr</strong>@mandrill.%2$s</code>. In this example, the additional details (following the <code>+</code> sign) are there to help %1$s route the reply to the proper location, and to provide a means by which to identify the end-user that is posting a reply.', $this->plugin->text_domain), esc_html($this->plugin->name), esc_html($this->plugin->utils_url->current_host_base())).'</li>'.
+                                                    '           <li>'.sprintf(__('The <code>Reply-To</code> address that you configure below, will serve as a base for %1$s to work from. For instance, let\'s say you choose: <code>rve@mandrill.%2$s</code>. This base address will be suffixed automatically (at runtime) with details specific to a particular notification that %1$s sends. Ultimately, <code>rve@mandrill.%2$s</code> will look like: <code>rve<strong>+332-96-kgjdgxr4ldqpdrgjdgxr</strong>@mandrill.%2$s</code>. In this example, the additional details (following the <code>+</code> sign) are there to help %1$s route the reply to the proper location, and to provide a means by which to identify the end-user that is posting a reply.', $this->plugin->text_domain), esc_html($this->plugin->name), esc_html($this->plugin->utils_url->currentHostBase())).'</li>'.
                                                     '           <li>'.sprintf(__('For single-comment notifications; i.e., where a subscriber chooses delivery type <code>asap</code> (aka: instantly), there is just a single comment in each notification that a subscriber receives. This works best with replies via email, since the <code>Reply-To:</code> header (on its own) is enough for everything to work as expected. Someone replying via email need only hit the Reply button in their email program and start typing. Very simple.', $this->plugin->text_domain), esc_html($this->plugin->name)).'</li>'.
                                                     '           <li>'.sprintf(__('For multi-comment notifications; i.e., where a subscriber chooses a delivery type that is not <code>asap</code> (e.g., <code>hourly</code>, <code>daily</code>, etc.); there can be more than a single comment in each notification they receive. If there is more than one comment in the notification, instructions will be provided to the end-user explaining how to reply. The special <code>Reply-To</code> address is still used in this case. However, they also need to specify which comment they want to reply to. To do this, the end-user must start their reply with a special marker provided by %1$s. Again, if there is more than one comment in the notification, instructions will be provided to the end-user explaining how to reply.', $this->plugin->text_domain), esc_html($this->plugin->name)).'</li>'.
                                                     '           <li>'.sprintf(__('Comments posted via email are still piped through the same underlying WordPress handler that normal on-site comments go through (i.e., <code>/wp-comments-post.php</code>). This means that all of your existing WordPress Discussion Settings (and/or Akismet settings) will still apply to all comments, even if they are posted via email. <strong>With one exception.</strong> When an RVE Handler is enabled, any comments posted via email are allowed through without an end-user being logged-in. If your WordPress Discussion Settings require that users be logged-in to post comments, that will be overridden temporarily whenever a reply via email comes through. Please note that replies posted via email are generally from confirmed subscribers. Any reply via email that is not from a confirmed subscriber will be forced into moderation by %1$s anyway. Otherwise, whatever your current Discussion Settings are configured to allow, will be adhered to for replies via email also. For instance, if you require that all comments be moderated, that will continue to be the case for all replies via email. %1$s will never approve a comment on it\'s own. Approval of comments is always determined by your WP Discussion Settings.', $this->plugin->text_domain), esc_html($this->plugin->name)).'</li>'.
@@ -1073,11 +1073,11 @@ class MenuPage extends AbsBase
                               [
                                 'type'          => 'email',
                                 'label'         => __('Mandrill <code>Reply-To</code> Address:', $this->plugin->text_domain),
-                                'placeholder'   => sprintf(__('e.g., rve@mandrill.%1$s', $this->plugin->text_domain), $this->plugin->utils_url->current_host_base()),
+                                'placeholder'   => sprintf(__('e.g., rve@mandrill.%1$s', $this->plugin->text_domain), $this->plugin->utils_url->currentHostBase()),
                                 'name'          => 'rve_mandrill_reply_to_email',
                                 'current_value' => $current_value_for('rve_mandrill_reply_to_email'),
                                 'notes_after'   => '<p class="pmp-note pmp-info">'.sprintf(__('This is really all it takes to get Replies via Email working. However, it requires that you setup a Mandrill account (free) and then configure an Inbound Mailbox Route that will connect to the Webhook URL shown below. <span class="pmp-hilite">Please see %1$s for detailed instructions.</span>', $this->plugin->text_domain), $this->plugin->utils_markup->xAnchor('http://comment-mail.com/kb-article/mandrill-rve-handler/', __('this wiki article', $this->plugin->text_domain))).'</p>'.
-                                                   $this->selectAllField(__('<strong>Mandrill Webhook URL:</strong>', $this->plugin->text_domain), $this->plugin->is_pro ? $this->plugin->utils_url->rve_mandrill_webhook_url() : ''),
+                                                   $this->selectAllField(__('<strong>Mandrill Webhook URL:</strong>', $this->plugin->text_domain), $this->plugin->is_pro ? $this->plugin->utils_url->rveMandrillWebhookUrl() : ''),
                               ]
                             ).
                             '       </tbody>'.
@@ -1194,7 +1194,7 @@ class MenuPage extends AbsBase
                                 'placeholder'   => __('e.g., kyczbsh6nnwtzrkm882kh7jf8', $this->plugin->text_domain),
                                 'name'          => 'sso_twitter_key',
                                 'current_value' => $current_value_for('sso_twitter_key'),
-                                'notes_after'   => $this->selectAllField(__('<strong>oAuth 1.0a Redirect/Callback URL:</strong>', $this->plugin->text_domain), $this->plugin->is_pro ? $this->plugin->utils_url->sso_action_url('twitter', 'callback') : ''),
+                                'notes_after'   => $this->selectAllField(__('<strong>oAuth 1.0a Redirect/Callback URL:</strong>', $this->plugin->text_domain), $this->plugin->is_pro ? $this->plugin->utils_url->ssoActionUrl('twitter', 'callback') : ''),
                               ]
                             ).
                             '          </tbody>'.
@@ -1224,7 +1224,7 @@ class MenuPage extends AbsBase
                                 'placeholder'   => __('e.g., 87df9vcu8njzrrnrgy2u2k2cj', $this->plugin->text_domain),
                                 'name'          => 'sso_facebook_key',
                                 'current_value' => $current_value_for('sso_facebook_key'),
-                                'notes_after'   => $this->selectAllField(__('<strong>oAuth 2.0 Redirect/Callback URL:</strong>', $this->plugin->text_domain), $this->plugin->is_pro ? $this->plugin->utils_url->sso_action_url('facebook', 'callback') : ''),
+                                'notes_after'   => $this->selectAllField(__('<strong>oAuth 2.0 Redirect/Callback URL:</strong>', $this->plugin->text_domain), $this->plugin->is_pro ? $this->plugin->utils_url->ssoActionUrl('facebook', 'callback') : ''),
                               ]
                             ).
                             '          </tbody>'.
@@ -1254,7 +1254,7 @@ class MenuPage extends AbsBase
                                 'placeholder'   => __('e.g., qda788ac23s4m4utvqgkauwhf.apps.googleusercontent.com', $this->plugin->text_domain),
                                 'name'          => 'sso_google_key',
                                 'current_value' => $current_value_for('sso_google_key'),
-                                'notes_after'   => $this->selectAllField(__('<strong>oAuth 2.0 Redirect/Callback URL:</strong>', $this->plugin->text_domain), $this->plugin->is_pro ? $this->plugin->utils_url->sso_action_url('google', 'callback') : ''),
+                                'notes_after'   => $this->selectAllField(__('<strong>oAuth 2.0 Redirect/Callback URL:</strong>', $this->plugin->text_domain), $this->plugin->is_pro ? $this->plugin->utils_url->ssoActionUrl('google', 'callback') : ''),
                               ]
                             ).
                             '          </tbody>'.
@@ -1284,7 +1284,7 @@ class MenuPage extends AbsBase
                                 'placeholder'   => __('e.g., swf73zuj2puaug9e5a4ytpcg7', $this->plugin->text_domain),
                                 'name'          => 'sso_linkedin_key',
                                 'current_value' => $current_value_for('sso_linkedin_key'),
-                                'notes_after'   => $this->selectAllField(__('<strong>oAuth 2.0 Redirect/Callback URL:</strong>', $this->plugin->text_domain), $this->plugin->is_pro ? $this->plugin->utils_url->sso_action_url('linkedin', 'callback') : ''),
+                                'notes_after'   => $this->selectAllField(__('<strong>oAuth 2.0 Redirect/Callback URL:</strong>', $this->plugin->text_domain), $this->plugin->is_pro ? $this->plugin->utils_url->ssoActionUrl('linkedin', 'callback') : ''),
                               ]
                             ).
                             '          </tbody>'.
@@ -1767,7 +1767,7 @@ class MenuPage extends AbsBase
                                  'a' => __('Advanced PHP-based templates (for developers and advanced site owners)', $this->plugin->text_domain),
                                ],
                                'notes_after'     => '<p>'.__('<strong>Note:</strong> If you change this setting, any template customizations that you\'ve made in one mode, will need to be done again for the new mode that you select; i.e., when this setting is changed, a new set of templates is loaded for the mode you select. You can always switch back though, and any changes that you made in the previous mode will be restored automatically.', $this->plugin->text_domain).'</p>'.
-                                                    '<p class="pmp-note pmp-info">'.sprintf(__('<strong>Tip:</strong> You\'ll notice that by changing this setting, all of the customizable templates in %1$s will be impacted; i.e., when you select %2$s or %3$s from the menu at the top, a new set of templates will load-up; based on the mode that you choose here. You can also switch modes <em>while</em> you\'re editing templates (see: %2$s and/or %3$s). That will impact this setting in the exact same way. Change it here or change it there, no difference.', $this->plugin->text_domain), esc_html($this->plugin->name), $this->plugin->utils_markup->xAnchor($this->plugin->utils_url->email_templates_menu_page_only(), __('Email Templates', $this->plugin->text_domain)), $this->plugin->utils_markup->xAnchor($this->plugin->utils_url->site_templates_menu_page_only(), __('Site Templates', $this->plugin->text_domain))).'</p>',
+                                                    '<p class="pmp-note pmp-info">'.sprintf(__('<strong>Tip:</strong> You\'ll notice that by changing this setting, all of the customizable templates in %1$s will be impacted; i.e., when you select %2$s or %3$s from the menu at the top, a new set of templates will load-up; based on the mode that you choose here. You can also switch modes <em>while</em> you\'re editing templates (see: %2$s and/or %3$s). That will impact this setting in the exact same way. Change it here or change it there, no difference.', $this->plugin->text_domain), esc_html($this->plugin->name), $this->plugin->utils_markup->xAnchor($this->plugin->utils_url->emailTemplatesMenuPageOnly(), __('Email Templates', $this->plugin->text_domain)), $this->plugin->utils_markup->xAnchor($this->plugin->utils_url->siteTemplatesMenuPageOnly(), __('Site Templates', $this->plugin->text_domain))).'</p>',
                              ]
                            ).
                            '  </tbody>'.
@@ -2025,7 +2025,7 @@ class MenuPage extends AbsBase
             ];
             $_form_fields     = new FormFields($_form_field_args);
 
-            $_panel_body = '<form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->page_nonce_only()).'" novalidate="novalidate">'."\n";
+            $_panel_body = '<form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->pageNonceOnly()).'" novalidate="novalidate">'."\n";
 
             $_panel_body .= ' <h3 style="margin-bottom:0;">'.sprintf(__('Import New %1$s&trade; Subscriptions, or Update Existing Subscriptions', $this->plugin->text_domain), esc_html($this->plugin->name)).'</h3>';
             $_panel_body .= ' <p>'.sprintf(__('The importation routine will accept direct CSV input in the textarea below, or you can choose to upload a prepared CSV file.', $this->plugin->text_domain), esc_html($this->plugin->name)).'</p>';
@@ -2109,7 +2109,7 @@ class MenuPage extends AbsBase
             ];
             $_form_fields     = new FormFields($_form_field_args);
 
-            $_panel_body = '<form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->page_nonce_only()).'"'.
+            $_panel_body = '<form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->pageNonceOnly()).'"'.
                            ' target="'.esc_attr(GLOBAL_NS.'_import_stcr_iframe').'" novalidate="novalidate">'."\n";
 
             $_panel_body .= ' <table style="table-layout:auto;">'.
@@ -2136,12 +2136,12 @@ class MenuPage extends AbsBase
             $_panel_body .= ' <h1>'.sprintf(__('How to Import StCR Subscriptions into Comment Mail', $this->plugin->text_domain), esc_html($this->plugin->name)).'</h1>'."\n";
             $_panel_body .= ' <h3>'.sprintf(__('Step 1: Import StCR Subscriptions', $this->plugin->text_domain), esc_html($this->plugin->name)).'</h3>'."\n";
             $_panel_body .= ' <p>'.sprintf(__('Click the "Begin StCR Auto-Importation" button above to start the import process. %1$s will import all of your existing Subscribe to Comments Reloaded comment subscriptions. Your existing StCR comment subscriptions will remain intact—nothing will be deleted or removed. %1$s will simply copy the subscriptions from StCR into %1$s\'s database.', $this->plugin->text_domain), esc_html($this->plugin->name)).'</p>'."\n";
-            $_panel_body .= ' <p class="pmp-note pmp-info" style="font-size:90%;">'.sprintf(__('<strong>Note:</strong> This process may take several minutes. %1$s will work through each post in your database, collecting all of the StCR subscriptions that exist (just a few at a time to prevent any script timeouts). The status bar below may refresh several times during this process. When it\'s complete, you should see a message that reads "<strong>Import complete!</strong>", along with a few details regarding the importation. If the importation is interrupted for any reason, you may simply click the button again and %1$s will resume where it left off.', $this->plugin->text_domain), esc_html($this->plugin->name), esc_attr($this->plugin->utils_url->subs_menu_page_only())).'</p>';
+            $_panel_body .= ' <p class="pmp-note pmp-info" style="font-size:90%;">'.sprintf(__('<strong>Note:</strong> This process may take several minutes. %1$s will work through each post in your database, collecting all of the StCR subscriptions that exist (just a few at a time to prevent any script timeouts). The status bar below may refresh several times during this process. When it\'s complete, you should see a message that reads "<strong>Import complete!</strong>", along with a few details regarding the importation. If the importation is interrupted for any reason, you may simply click the button again and %1$s will resume where it left off.', $this->plugin->text_domain), esc_html($this->plugin->name), esc_attr($this->plugin->utils_url->subsMenuPageOnly())).'</p>';
 
             $_panel_body .= ' <hr />';
 
             $_panel_body .= ' <h3>'.sprintf(__('Step 2: Verify Subscriptions', $this->plugin->text_domain), esc_html($this->plugin->name)).'</h3>'."\n";
-            $_panel_body .= ' <p>'.sprintf(__('When you see a message below that says "<strong>Import Complete!</strong>", you can <a href="%2$s" target="_blank">click here</a> to view a list of all subscriptions; which will include any that were imported from StCR.', $this->plugin->text_domain), esc_html($this->plugin->name), esc_attr($this->plugin->utils_url->subs_menu_page_only())).'</p>'."\n";
+            $_panel_body .= ' <p>'.sprintf(__('When you see a message below that says "<strong>Import Complete!</strong>", you can <a href="%2$s" target="_blank">click here</a> to view a list of all subscriptions; which will include any that were imported from StCR.', $this->plugin->text_domain), esc_html($this->plugin->name), esc_attr($this->plugin->utils_url->subsMenuPageOnly())).'</p>'."\n";
 
             $_panel_body .= ' <hr />';
 
@@ -2170,7 +2170,7 @@ class MenuPage extends AbsBase
             ];
             $_form_fields     = new FormFields($_form_field_args);
 
-            $_panel_body = '<form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->page_nonce_only()).'" novalidate="novalidate">'."\n";
+            $_panel_body = '<form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->pageNonceOnly()).'" novalidate="novalidate">'."\n";
 
             $_total_subs_in_db = $this->plugin->utils_sub->queryTotal(null, ['auto_discount_trash' => false]);
             $_panel_body .= ' <h3 style="margin-bottom:0;">'.sprintf(__('Export All of your %1$s&trade; Subscriptions', $this->plugin->text_domain), esc_html($this->plugin->name)).'</h3>';
@@ -2258,7 +2258,7 @@ class MenuPage extends AbsBase
             ];
             $_form_fields     = new FormFields($_form_field_args);
 
-            $_panel_body = '<form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->page_nonce_only()).'" novalidate="novalidate">'."\n";
+            $_panel_body = '<form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->pageNonceOnly()).'" novalidate="novalidate">'."\n";
 
             $_panel_body .= ' <h3 style="margin-bottom:0;">'.sprintf(__('Import a New Set of %1$s&trade; Config. Options', $this->plugin->text_domain), esc_html($this->plugin->name)).'</h3>';
             $_panel_body .= ' <p>'.sprintf(__('Configuration options are imported using a JSON-encoded file obtained from another copy of %1$s&trade;.', $this->plugin->text_domain), esc_html($this->plugin->name)).'</p>';
@@ -2301,7 +2301,7 @@ class MenuPage extends AbsBase
             ];
             $_form_fields     = new FormFields($_form_field_args);
 
-            $_panel_body = '<form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->page_nonce_only()).'" novalidate="novalidate">'."\n";
+            $_panel_body = '<form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->pageNonceOnly()).'" novalidate="novalidate">'."\n";
 
             $_panel_body .= ' <h3 style="margin-bottom:0;">'.sprintf(__('Export All of your %1$s&trade; Config. Options', $this->plugin->text_domain), esc_html($this->plugin->name)).'</h3>';
             $_panel_body .= ' <p>'.__('Configuration options are downloaded as a JSON-encoded file.', $this->plugin->text_domain).'</p>';
@@ -2371,7 +2371,7 @@ class MenuPage extends AbsBase
         /* ----------------------------------------------------------------------------------------- */
 
         echo '<div class="'.esc_attr($this->plugin->slug.'-menu-page '.$this->plugin->slug.'-menu-page-email-templates '.$this->plugin->slug.'-menu-page-area').'">'."\n";
-        echo '   <form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->page_nonce_only()).'" novalidate="novalidate">'."\n";
+        echo '   <form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->pageNonceOnly()).'" novalidate="novalidate">'."\n";
 
         echo '      '.$this->heading(__('Email Templates', $this->plugin->text_domain), 'logo.png').
              '      '.$this->notes(); // Heading/notifications.
@@ -2383,8 +2383,8 @@ class MenuPage extends AbsBase
         if ($this->plugin->is_pro) { // Only possible in the pro version.
             echo '      <div class="pmp-template-types pmp-right">'.
                  '         <span>'.__('Template Mode:', $this->plugin->text_domain).'</span>'.
-                 '         <a href="'.esc_attr($this->plugin->utils_url->set_template_type('s')).'"'.($this->plugin->options['template_type'] === 's' ? ' class="pmp-active"' : '').'>'.__('simple', $this->plugin->text_domain).'</a>'.
-                 '         <a href="'.esc_attr($this->plugin->utils_url->set_template_type('a')).'"'.($this->plugin->options['template_type'] === 'a' ? ' class="pmp-active"' : '').'>'.__('advanced', $this->plugin->text_domain).'</a>'.
+                 '         <a href="'.esc_attr($this->plugin->utils_url->setTemplateType('s')).'"'.($this->plugin->options['template_type'] === 's' ? ' class="pmp-active"' : '').'>'.__('simple', $this->plugin->text_domain).'</a>'.
+                 '         <a href="'.esc_attr($this->plugin->utils_url->setTemplateType('a')).'"'.($this->plugin->options['template_type'] === 'a' ? ' class="pmp-active"' : '').'>'.__('advanced', $this->plugin->text_domain).'</a>'.
                  '      </div>';
         }
         /* ----------------------------------------------------------------------------------------- */
@@ -2998,7 +2998,7 @@ class MenuPage extends AbsBase
         /* ----------------------------------------------------------------------------------------- */
 
         echo '<div class="'.esc_attr($this->plugin->slug.'-menu-page '.$this->plugin->slug.'-menu-page-site-templates '.$this->plugin->slug.'-menu-page-area').'">'."\n";
-        echo '   <form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->page_nonce_only()).'" novalidate="novalidate">'."\n";
+        echo '   <form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->pageNonceOnly()).'" novalidate="novalidate">'."\n";
 
         echo '      '.$this->heading(__('Site Templates', $this->plugin->text_domain), 'logo.png').
              '      '.$this->notes(); // Heading/notifications.
@@ -3010,8 +3010,8 @@ class MenuPage extends AbsBase
         if ($this->plugin->is_pro) { // Only possible in the pro version.
             echo '      <div class="pmp-template-types pmp-right">'.
                  '         <span>'.__('Template Mode:', $this->plugin->text_domain).'</span>'.
-                 '         <a href="'.esc_attr($this->plugin->utils_url->set_template_type('s')).'"'.($this->plugin->options['template_type'] === 's' ? ' class="pmp-active"' : '').'>'.__('simple', $this->plugin->text_domain).'</a>'.
-                 '         <a href="'.esc_attr($this->plugin->utils_url->set_template_type('a')).'"'.($this->plugin->options['template_type'] === 'a' ? ' class="pmp-active"' : '').'>'.__('advanced', $this->plugin->text_domain).'</a>'.
+                 '         <a href="'.esc_attr($this->plugin->utils_url->setTemplateType('s')).'"'.($this->plugin->options['template_type'] === 's' ? ' class="pmp-active"' : '').'>'.__('simple', $this->plugin->text_domain).'</a>'.
+                 '         <a href="'.esc_attr($this->plugin->utils_url->setTemplateType('a')).'"'.($this->plugin->options['template_type'] === 'a' ? ' class="pmp-active"' : '').'>'.__('advanced', $this->plugin->text_domain).'</a>'.
                  '      </div>';
         }
         /* ----------------------------------------------------------------------------------------- */
@@ -3821,10 +3821,10 @@ class MenuPage extends AbsBase
             default: // Everything else is handled by subs. table.
 
                 echo '<div class="'.esc_attr($this->plugin->slug.'-menu-page-subs '.$this->plugin->slug.'-menu-page-table '.$this->plugin->slug.'-menu-page-area wrap').'">'."\n";
-                echo '   <form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->page_nonce_table_nav_vars_only()).'" novalidate="novalidate">'."\n";
+                echo '   <form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->pageNonceTableNavVarsOnly()).'" novalidate="novalidate">'."\n";
 
                 echo '      <h2>'.sprintf(__('%1$s&trade; &raquo; Subscriptions', $this->plugin->text_domain), esc_html($this->plugin->name)).' <i class="'.esc_attr('si si-'.$this->plugin->slug).'"></i>'.
-                     '       <a href="'.esc_attr($this->plugin->utils_url->new_sub_short()).'" class="add-new-h2">'.__('Add New', $this->plugin->text_domain).'</a></h2>'."\n";
+                     '       <a href="'.esc_attr($this->plugin->utils_url->newSubShort()).'" class="add-new-h2">'.__('Add New', $this->plugin->text_domain).'</a></h2>'."\n";
 
                 new MenuPageSubsTable(); // Displays table.
 
@@ -3841,7 +3841,7 @@ class MenuPage extends AbsBase
     protected function subNew()
     {
         echo '<div class="'.esc_attr($this->plugin->slug.'-menu-page-sub-new '.$this->plugin->slug.'-menu-page-form '.$this->plugin->slug.'-menu-page-area wrap').'">'."\n";
-        echo '   <form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->page_nonce_table_nav_vars_only(['action'])).'" novalidate="novalidate">'."\n";
+        echo '   <form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->pageNonceTableNavVarsOnly(['action'])).'" novalidate="novalidate">'."\n";
 
         echo '      <h2>'.sprintf(__('%1$s&trade; &raquo; New Subscription', $this->plugin->text_domain), esc_html($this->plugin->name)).' <i class="'.esc_attr('si si-'.$this->plugin->slug.'-one').'"></i></h2>'."\n";
 
@@ -3859,7 +3859,7 @@ class MenuPage extends AbsBase
     protected function subEdit()
     {
         echo '<div class="'.esc_attr($this->plugin->slug.'-menu-page-sub-edit '.$this->plugin->slug.'-menu-page-form '.$this->plugin->slug.'-menu-page-area wrap').'">'."\n";
-        echo '   <form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->page_nonce_table_nav_vars_only(['action', 'subscription'])).'" novalidate="novalidate">'."\n";
+        echo '   <form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->pageNonceTableNavVarsOnly(['action', 'subscription'])).'" novalidate="novalidate">'."\n";
 
         echo '      <h2>'.sprintf(__('%1$s&trade; &raquo; Edit Subscription', $this->plugin->text_domain), esc_html($this->plugin->name)).' <i class="'.esc_attr('si si-'.$this->plugin->slug.'-one').'"></i></h2>'."\n";
 
@@ -3877,7 +3877,7 @@ class MenuPage extends AbsBase
     protected function subEventLog®()
     {
         echo '<div class="'.esc_attr($this->plugin->slug.'-menu-page-sub-event-log '.$this->plugin->slug.'-menu-page-table '.$this->plugin->slug.'-menu-page-area wrap').'">'."\n";
-        echo '   <form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->page_nonce_table_nav_vars_only()).'" novalidate="novalidate">'."\n";
+        echo '   <form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->pageNonceTableNavVarsOnly()).'" novalidate="novalidate">'."\n";
 
         echo '      <h2>'.sprintf(__('%1$s&trade; &raquo; Subscriptions &raquo; Event Log', $this->plugin->text_domain), esc_html($this->plugin->name)).' <i class="fa fa-history"></i></h2>'."\n";
 
@@ -3895,7 +3895,7 @@ class MenuPage extends AbsBase
     protected function queue®()
     {
         echo '<div class="'.esc_attr($this->plugin->slug.'-menu-page-queue '.$this->plugin->slug.'-menu-page-table '.$this->plugin->slug.'-menu-page-area wrap').'">'."\n";
-        echo '   <form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->page_nonce_table_nav_vars_only()).'" novalidate="novalidate">'."\n";
+        echo '   <form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->pageNonceTableNavVarsOnly()).'" novalidate="novalidate">'."\n";
 
         echo '      <h2>'.sprintf(__('%1$s&trade; &raquo; Queued (Pending) Notifications', $this->plugin->text_domain), esc_html($this->plugin->name)).' <i class="fa fa-envelope-o"></i></h2>'."\n";
 
@@ -3913,7 +3913,7 @@ class MenuPage extends AbsBase
     protected function queueEventLog®()
     {
         echo '<div class="'.esc_attr($this->plugin->slug.'-menu-page-queue-event-log '.$this->plugin->slug.'-menu-page-table '.$this->plugin->slug.'-menu-page-area wrap').'">'."\n";
-        echo '   <form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->page_nonce_table_nav_vars_only()).'" novalidate="novalidate">'."\n";
+        echo '   <form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->pageNonceTableNavVarsOnly()).'" novalidate="novalidate">'."\n";
 
         echo '      <h2>'.sprintf(__('%1$s&trade; &raquo; Queue &raquo; Event Log', $this->plugin->text_domain), esc_html($this->plugin->name)).' <i class="fa fa-paper-plane"></i></h2>'."\n";
 
@@ -4447,7 +4447,7 @@ class MenuPage extends AbsBase
             return isset($_this->plugin->options[$key]) ? $_this->plugin->options[$key] : null;
         };
         echo '<div class="'.esc_attr($this->plugin->slug.'-menu-page '.$this->plugin->slug.'-menu-page-pro-updater '.$this->plugin->slug.'-menu-page-area').'">'."\n";
-        echo '   <form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->page_nonce_only()).'" novalidate="novalidate">'."\n";
+        echo '   <form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->pageNonceOnly()).'" novalidate="novalidate">'."\n";
 
         echo '     '.$this->heading(__('Pro Updater', $this->plugin->text_domain), 'logo.png').
              '     '.$this->notes(); // Heading/notifications.
@@ -4457,7 +4457,7 @@ class MenuPage extends AbsBase
         /* ----------------------------------------------------------------------------------------- */
 
         $_panel_body = '<i class="fa fa-user fa-4x" style="float:right; margin: 0 0 0 25px;"></i>'."\n";
-        $_panel_body .= '<p style="margin-top:0;">'.sprintf(__('From this page you can update to the latest version of %1$s Pro for WordPress. %1$s Pro is a premium product available for purchase @ <a href="%2$s" target="_blank">%3$s</a>. In order to connect with our update servers, we ask that you supply your account login details for <a href="%2$s" target="_blank">%3$s</a>. If you prefer not to provide your password, you can use your License Key in place of your password. Your License Key is located under "My Account" when you log in @ <a href="%2$s" target="_blank">%3$s</a>. This will authenticate your copy of %1$s Pro; providing you with access to the latest version. You only need to enter these credentials once. %1$s Pro will save them in your WordPress database.', $this->plugin->text_domain), esc_html($this->plugin->name), esc_attr($this->plugin->utils_url->product_page()), esc_html(parse_url($this->plugin->product_url, PHP_URL_HOST))).'</p>'."\n";
+        $_panel_body .= '<p style="margin-top:0;">'.sprintf(__('From this page you can update to the latest version of %1$s Pro for WordPress. %1$s Pro is a premium product available for purchase @ <a href="%2$s" target="_blank">%3$s</a>. In order to connect with our update servers, we ask that you supply your account login details for <a href="%2$s" target="_blank">%3$s</a>. If you prefer not to provide your password, you can use your License Key in place of your password. Your License Key is located under "My Account" when you log in @ <a href="%2$s" target="_blank">%3$s</a>. This will authenticate your copy of %1$s Pro; providing you with access to the latest version. You only need to enter these credentials once. %1$s Pro will save them in your WordPress database.', $this->plugin->text_domain), esc_html($this->plugin->name), esc_attr($this->plugin->utils_url->productPage()), esc_html(parse_url($this->plugin->product_url, PHP_URL_HOST))).'</p>'."\n";
 
         $_panel_body .= ' <table>'.
                         '   <tbody>'.
@@ -4543,12 +4543,12 @@ class MenuPage extends AbsBase
 
         $heading .= '<div class="pmp-heading">'."\n";
 
-        $heading .= '  <button type="button" class="plugin-menu-page-restore-defaults"'.'<a href="#" data-pmp-action="'.esc_attr($this->plugin->utils_url->restore_default_options()).'" data-pmp-confirmation="'.esc_attr(__('Restore default plugin options? You will lose all of your current settings! Are you absolutely sure?', $this->plugin->text_domain)).'"> '.__('Restore', $this->plugin->text_domain).' <i class="fa fa-ambulance"></i></button>'.'</a>'."\n";
+        $heading .= '  <button type="button" class="plugin-menu-page-restore-defaults"'.'<a href="#" data-pmp-action="'.esc_attr($this->plugin->utils_url->restoreDefaultOptions()).'" data-pmp-confirmation="'.esc_attr(__('Restore default plugin options? You will lose all of your current settings! Are you absolutely sure?', $this->plugin->text_domain)).'"> '.__('Restore', $this->plugin->text_domain).' <i class="fa fa-ambulance"></i></button>'.'</a>'."\n";
 
         $heading .= '  <div class="pmp-heading-options">'."\n";
-        $heading .= '     <a href="'.esc_attr($this->plugin->utils_url->pro_updater_menu_page_only()).'" ><i class="fa fa-magic"></i> '.__('Pro Updater', $this->plugin->text_domain).'</a>'."\n";
-        $heading .= '     <a href="'.esc_attr($this->plugin->utils_url->subscribe_page()).'" target="_blank"><i class="fa fa-envelope-o"></i> '.__('Newsletter (Subscribe)', $this->plugin->text_domain).'</a>'."\n";
-        $heading .= '     <a href="'.esc_attr($this->plugin->utils_url->tester_page()).'" target="_blank"><i class="fa fa-envelope-o"></i> '.__('Beta Testers', $this->plugin->text_domain).'</a>'."\n";
+        $heading .= '     <a href="'.esc_attr($this->plugin->utils_url->proUpdaterMenuPageOnly()).'" ><i class="fa fa-magic"></i> '.__('Pro Updater', $this->plugin->text_domain).'</a>'."\n";
+        $heading .= '     <a href="'.esc_attr($this->plugin->utils_url->subscribePage()).'" target="_blank"><i class="fa fa-envelope-o"></i> '.__('Newsletter (Subscribe)', $this->plugin->text_domain).'</a>'."\n";
+        $heading .= '     <a href="'.esc_attr($this->plugin->utils_url->testerPage()).'" target="_blank"><i class="fa fa-envelope-o"></i> '.__('Beta Testers', $this->plugin->text_domain).'</a>'."\n";
         $heading .= '  </div>'."\n";
 
         $heading .= '  <div class="pmp-version">'."\n";
@@ -4560,37 +4560,37 @@ class MenuPage extends AbsBase
         }
         $heading .= '  <div class="pmp-heading-links">'."\n";
 
-        $heading .= '  <a href="'.esc_attr($this->plugin->utils_url->main_menu_page_only()).'"'.
+        $heading .= '  <a href="'.esc_attr($this->plugin->utils_url->mainMenuPageOnly()).'"'.
                     ($this->plugin->utils_env->isMenuPage(GLOBAL_NS) ? ' class="pmp-active"' : '').'>'.
                     '<i class="fa fa-gears"></i> '.__('Options', $this->plugin->text_domain).'</a>'."\n";
 
         if (!$this->plugin->is_pro) { // Display pro preview/upgrade related links?
-            $heading .= '  <a href="'.esc_attr($this->plugin->utils_url->pro_preview()).'"'.
+            $heading .= '  <a href="'.esc_attr($this->plugin->utils_url->proPreview()).'"'.
                         ($this->plugin->utils_env->isProPreview() ? ' class="pmp-active"' : '').'>'.
                         '<i class="fa fa-eye"></i> '.__('Preview Pro Features', $this->plugin->text_domain).'</a>'."\n";
 
-            $heading .= '  <a href="'.esc_attr($this->plugin->utils_url->product_page()).'" target="_blank"><i class="fa fa-heart-o"></i> '.__('Pro Upgrade', $this->plugin->text_domain).'</a>'."\n";
+            $heading .= '  <a href="'.esc_attr($this->plugin->utils_url->productPage()).'" target="_blank"><i class="fa fa-heart-o"></i> '.__('Pro Upgrade', $this->plugin->text_domain).'</a>'."\n";
         }
         if ($this->plugin->is_pro) { // Display import options for pro users.
-            $heading .= '  <a href="'.esc_attr($this->plugin->utils_url->import_export_menu_page_only()).'"'.
+            $heading .= '  <a href="'.esc_attr($this->plugin->utils_url->importExportMenuPageOnly()).'"'.
                         ($this->plugin->utils_env->isMenuPage(GLOBAL_NS.'_import_export') ? ' class="pmp-active"' : '').'>'.
                         '<i class="fa fa-upload"></i> '.__('Import/Export', $this->plugin->text_domain).
 
                         ((!$this->plugin->utils_env->isMenuPage(GLOBAL_NS.'_import_export') && ImportStcr::dataExists() && !ImportStcr::everImported())
                           ? '<span class="pmp-blink">'.__('StCR Auto-Import', $this->plugin->text_domain).'</span>' : '').'</a>'."\n";
         } else if (ImportStcr::dataExists()) { // Lite version exposes import functionality for StCR users.
-            $heading .= '  <a href="'.esc_attr($this->plugin->utils_url->import_export_menu_page_only()).'"'.
+            $heading .= '  <a href="'.esc_attr($this->plugin->utils_url->importExportMenuPageOnly()).'"'.
                         ($this->plugin->utils_env->isMenuPage(GLOBAL_NS.'_import_export') ? ' class="pmp-active"' : '').'>'.
                         '<i class="fa fa-upload"></i> '.__('Import/Export', $this->plugin->text_domain).
 
                         ((!$this->plugin->utils_env->isMenuPage(GLOBAL_NS.'_import_export') && ImportStcr::dataExists() && !ImportStcr::everImported())
                           ? '<span class="pmp-blink">'.__('StCR Auto-Import', $this->plugin->text_domain).'</span>' : '').'</a>'."\n";
         }
-        $heading .= '  <a href="'.esc_attr($this->plugin->utils_url->email_templates_menu_page_only()).'"'.
+        $heading .= '  <a href="'.esc_attr($this->plugin->utils_url->emailTemplatesMenuPageOnly()).'"'.
                     ($this->plugin->utils_env->isMenuPage(GLOBAL_NS.'_email_templates') ? ' class="pmp-active"' : '').'>'.
                     '<i class="fa fa-code"></i> '.__('Email Templates', $this->plugin->text_domain).'</a>'."\n";
 
-        $heading .= '  <a href="'.esc_attr($this->plugin->utils_url->site_templates_menu_page_only()).'"'.
+        $heading .= '  <a href="'.esc_attr($this->plugin->utils_url->siteTemplatesMenuPageOnly()).'"'.
                     ($this->plugin->utils_env->isMenuPage(GLOBAL_NS.'_site_templates') ? ' class="pmp-active"' : '').'>'.
                     '<i class="fa fa-code"></i> '.__('Site Templates', $this->plugin->text_domain).'</a>'."\n";
 
@@ -4631,9 +4631,9 @@ class MenuPage extends AbsBase
 
         if ($this->plugin->utils_env->isProPreview()) {
             $notes .= '<div class="pmp-note pmp-notice">'."\n";
-            $notes .= '  <a href="'.esc_attr($this->plugin->utils_url->page_only()).'" style="float:right; margin:0 0 15px 25px; font-variant:small-caps; text-decoration:none;">'.__('close', $this->plugin->text_domain).' <i class="fa fa-eye-slash"></i></a>'."\n";
-            $notes .= '  <i class="fa fa-arrow-down"></i> '.sprintf(__('<strong>Pro Features (Preview)</strong> ~ New advanced option panels below. Please explore before <a href="%1$s" target="_blank">upgrading <i class="fa fa-heart-o"></i></a>.', $this->plugin->text_domain), esc_attr($this->plugin->utils_url->product_page())).'<br />'."\n";
-            $notes .= '  '.sprintf(__('<small><strong>MORE:</strong> in addition to what you see below, the pro version also includes import/export functionality, stats/graphs, and advanced PHP-based template options. [<a href="%2$s" target="_blank">learn more</a>]</small>', $this->plugin->text_domain), esc_html($this->plugin->name), esc_attr($this->plugin->utils_url->product_page()))."\n";
+            $notes .= '  <a href="'.esc_attr($this->plugin->utils_url->pageOnly()).'" style="float:right; margin:0 0 15px 25px; font-variant:small-caps; text-decoration:none;">'.__('close', $this->plugin->text_domain).' <i class="fa fa-eye-slash"></i></a>'."\n";
+            $notes .= '  <i class="fa fa-arrow-down"></i> '.sprintf(__('<strong>Pro Features (Preview)</strong> ~ New advanced option panels below. Please explore before <a href="%1$s" target="_blank">upgrading <i class="fa fa-heart-o"></i></a>.', $this->plugin->text_domain), esc_attr($this->plugin->utils_url->productPage())).'<br />'."\n";
+            $notes .= '  '.sprintf(__('<small><strong>MORE:</strong> in addition to what you see below, the pro version also includes import/export functionality, stats/graphs, and advanced PHP-based template options. [<a href="%2$s" target="_blank">learn more</a>]</small>', $this->plugin->text_domain), esc_html($this->plugin->name), esc_attr($this->plugin->utils_url->productPage()))."\n";
             $notes .= '</div>'."\n";
         }
         if ($this->plugin->installTime() > strtotime('-48 hours') && $this->plugin->utils_env->isMenuPage(GLOBAL_NS.'_*_templates')) {

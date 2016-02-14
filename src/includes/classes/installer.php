@@ -73,7 +73,7 @@ class Installer extends AbsBase
         $notice_markup = $this->plugin->utils_fs->inlineIconSvg().
                          ' '.sprintf(
                            __('%1$s&trade; installed successfully! Please <a href="%2$s"><strong>click here to configure</strong></a> basic options.', $this->plugin->text_domain),
-                           esc_html($this->plugin->name), esc_attr($this->plugin->utils_url->main_menu_page_only())
+                           esc_html($this->plugin->name), esc_attr($this->plugin->utils_url->mainMenuPageOnly())
                          );
         $this->plugin->enqueueUserNotice($notice_markup); // A quick reminder to configure options.
     }

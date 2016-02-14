@@ -92,8 +92,8 @@ class CommentFormAfter extends AbsBase
         $sub_list_id   = str_replace('_', '-', GLOBAL_NS.'_sub_list');
         $sub_list_name = GLOBAL_NS.'_sub_list';
 
-        $sub_summary_url = $this->plugin->utils_url->sub_manage_summary_url();
-        $sub_new_url     = $this->plugin->utils_url->sub_manage_sub_new_url(null, null, compact('post_id'));
+        $sub_summary_url = $this->plugin->utils_url->subManageSummaryUrl();
+        $sub_new_url     = $this->plugin->utils_url->subManageSubNewUrl(null, null, compact('post_id'));
         $inline_icon_svg = $this->plugin->utils_fs->inlineIconSvg();
 
         $template_vars = get_defined_vars(); // Everything above.

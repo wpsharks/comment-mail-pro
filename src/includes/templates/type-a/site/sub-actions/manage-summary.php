@@ -126,10 +126,10 @@ str_replace('%%title%%', __('My Comment Subscriptions', $plugin->text_domain), $
 			$home_url = home_url('/'); // Multisite compatible.
 
 			// Subscription creation URL; user may create a new subscription.
-			$sub_new_url = $plugin->utils_url->sub_manage_sub_new_url(NULL, TRUE);
+			$sub_new_url = $plugin->utils_url->subManageSubNewUrl(NULL, TRUE);
 
 			// Unsubscribes (deletes) ALL subscriptions in the summary, at the same time.
-			$sub_unsubscribe_all_url = $plugin->utils_url->sub_unsubscribe_all_url($sub_email);
+			$sub_unsubscribe_all_url = $plugin->utils_url->subUnsubscribeAllUrl($sub_email);
 			?>
 
 			<?php if ($processing && $processing_errors): // Any processing errors? ?>
@@ -247,8 +247,8 @@ str_replace('%%title%%', __('My Comment Subscriptions', $plugin->text_domain), $
 									$_sub_comment_time_ago   = $_sub_comment ? $plugin->utils_date->approxTimeDifference(strtotime($_sub_comment->comment_date_gmt)) : '';
 
 									// URLs that allow for actions to be performed against the subscription.
-									$_sub_edit_url   = $plugin->utils_url->sub_manage_sub_edit_url($_sub->key, NULL, TRUE);
-									$_sub_delete_url = $plugin->utils_url->sub_manage_sub_delete_url($_sub->key, NULL, TRUE);
+									$_sub_edit_url   = $plugin->utils_url->subManageSubEditUrl($_sub->key, NULL, TRUE);
+									$_sub_delete_url = $plugin->utils_url->subManageSubDeleteUrl($_sub->key, NULL, TRUE);
 
 									// Type of subscription; one of `comment` or `comments`.
 									$_sub_type = $_sub->comment_id ? 'comment' : 'comments';
@@ -328,7 +328,7 @@ str_replace('%%title%%', __('My Comment Subscriptions', $plugin->text_domain), $
 							<ul class="pagination" style="margin:0;">
 
 								<?php if($pagination_vars->current_page > 1): // Create a previous page link? ?>
-									<?php $_prev_page_url = $plugin->utils_url->sub_manage_summary_url($sub_key, NULL, array('page' => $pagination_vars->current_page - 1)); ?>
+									<?php $_prev_page_url = $plugin->utils_url->subManageSummaryUrl($sub_key, NULL, array('page' => $pagination_vars->current_page - 1)); ?>
 									<li><a href="<?php echo esc_attr($_prev_page_url); ?>">&laquo;</a></li>
 								<?php else: // Not possible; this is the first page. ?>
 									<li class="disabled"><a href="#">&laquo;</a></li>
@@ -341,7 +341,7 @@ str_replace('%%title%%', __('My Comment Subscriptions', $plugin->text_domain), $
 
 								for($_i = 1, $_page = $_page_links_start_at_page;
 								    $_i <= $_max_page_links && $_page <= $pagination_vars->total_pages; $_i++ && $_page++):
-									$_page_url = $plugin->utils_url->sub_manage_summary_url($sub_key, NULL, array('page' => $_page)); ?>
+									$_page_url = $plugin->utils_url->subManageSummaryUrl($sub_key, NULL, array('page' => $_page)); ?>
 
 									<li<?php if($_page === $pagination_vars->current_page): ?> class="active"<?php endif; ?>>
 										<a href="<?php echo esc_attr($_page_url); ?>"><?php echo esc_html($_page); ?></a>
@@ -349,7 +349,7 @@ str_replace('%%title%%', __('My Comment Subscriptions', $plugin->text_domain), $
 								<?php endfor; ?>
 
 								<?php if($pagination_vars->current_page < $pagination_vars->total_pages): // Create a next page link? ?>
-									<?php $_next_page_url = $plugin->utils_url->sub_manage_summary_url($sub_key, NULL, array('page' => $pagination_vars->current_page + 1)); ?>
+									<?php $_next_page_url = $plugin->utils_url->subManageSummaryUrl($sub_key, NULL, array('page' => $pagination_vars->current_page + 1)); ?>
 									<li><a href="<?php echo esc_attr($_next_page_url); ?>">&raquo;</a></li>
 								<?php else: // Not possible; this is the last page. ?>
 									<li class="disabled"><a href="#">&raquo;</a></li>

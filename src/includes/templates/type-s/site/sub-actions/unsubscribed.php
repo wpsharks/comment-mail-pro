@@ -103,10 +103,10 @@ echo str_replace('%%title%%', __('Unsubscribe', $plugin->text_domain), $site_hea
 		$sub_last_update_time_ago = $plugin->utils_date->i18nUtc('M jS, Y @ g:i a T', $sub->last_update_time);
 
 		// Unsubscribes (deletes) ALL subscriptions associated w/ their email address.
-		$sub_unsubscribe_all_url = $plugin->utils_url->sub_unsubscribe_all_url($sub->email);
+		$sub_unsubscribe_all_url = $plugin->utils_url->subUnsubscribeAllUrl($sub->email);
 
 		// Subscription creation URL; i.e. so they can add a new subscription if they like.
-		$sub_new_url = $plugin->utils_url->sub_manage_sub_new_url();
+		$sub_new_url = $plugin->utils_url->subManageSubNewUrl();
 		?>
 
 		<?php echo $template->snippet(

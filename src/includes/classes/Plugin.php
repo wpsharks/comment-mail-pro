@@ -1164,7 +1164,7 @@ class Plugin extends AbsBase
           GLOBAL_NS.'_vars',
           [
             'pluginUrl'           => rtrim($this->utils_url->to('/'), '/'),
-            'ajaxEndpoint'        => rtrim($this->utils_url->page_nonce_only(), '/'),
+            'ajaxEndpoint'        => rtrim($this->utils_url->pageNonceOnly(), '/'),
             'templateSyntaxTheme' => $this->options['template_syntax_theme'],
           ]
         );
@@ -1787,12 +1787,12 @@ class Plugin extends AbsBase
      */
     public function addSettingsLink(array $links)
     {
-        $links[] = '<a href="'.esc_attr($this->utils_url->main_menu_page_only()).'">'.__('Settings', $this->text_domain).'</a><br/>';
+        $links[] = '<a href="'.esc_attr($this->utils_url->mainMenuPageOnly()).'">'.__('Settings', $this->text_domain).'</a><br/>';
         if (!$this->is_pro) {
-            $links[] = '<a href="'.esc_attr($this->utils_url->pro_preview()).'">'.__('Preview Pro Features', $this->text_domain).'</a>';
+            $links[] = '<a href="'.esc_attr($this->utils_url->proPreview()).'">'.__('Preview Pro Features', $this->text_domain).'</a>';
         }
         if (!$this->is_pro) {
-            $links[] = '<a href="'.esc_attr($this->utils_url->product_page()).'" target="_blank">'.__('Upgrade', $this->text_domain).'</a>';
+            $links[] = '<a href="'.esc_attr($this->utils_url->productPage()).'" target="_blank">'.__('Upgrade', $this->text_domain).'</a>';
         }
         return apply_filters(__METHOD__, $links, get_defined_vars());
     }
@@ -1863,7 +1863,7 @@ class Plugin extends AbsBase
         }
         $this->optionsQuickSave(['last_pro_update_check' => (string)time()]);
 
-        $product_api_url        = $this->utils_url->product_page('https');
+        $product_api_url        = $this->utils_url->productPage('https');
         $product_api_input_vars = ['product_api' => ['action' => 'latest_pro_version']];
 
         $product_api_response = wp_remote_post($product_api_url, ['body' => $product_api_input_vars]);
@@ -1872,7 +1872,7 @@ class Plugin extends AbsBase
         if (!is_array($product_api_response) || empty($product_api_response['pro_version']) || version_compare($this->version, $product_api_response['pro_version'], '>=')) {
             return; // Current pro version is the latest stable version. Nothing more to do here.
         }
-        $this->enqueueNotice(sprintf(__('<strong>%1$s Pro:</strong> a new version is now available. Please <a href="%2$s">upgrade to v%3$s</a>.', $this->text_domain), esc_html($this->name), esc_attr($this->utils_url->pro_updater_menu_page_only()), esc_html($product_api_response['pro_version'])), ['persistent' => true, 'persistent_id' => 'new-pro-version-available', 'requires_cap' => $this->update_cap]);
+        $this->enqueueNotice(sprintf(__('<strong>%1$s Pro:</strong> a new version is now available. Please <a href="%2$s">upgrade to v%3$s</a>.', $this->text_domain), esc_html($this->name), esc_attr($this->utils_url->proUpdaterMenuPageOnly()), esc_html($product_api_response['pro_version'])), ['persistent' => true, 'persistent_id' => 'new-pro-version-available', 'requires_cap' => $this->update_cap]);
     }
 
     /**
@@ -1916,7 +1916,7 @@ class Plugin extends AbsBase
         $transient->response[plugin_basename($this->file)] = (object)[
           'id'          => 0, // It has no ID in this case.
           'slug'        => $this->slug.'-pro',
-          'url'         => $this->utils_url->pro_updater_menu_page_only(),
+          'url'         => $this->utils_url->proUpdaterMenuPageOnly(),
           'new_version' => $update_pro_version,
           'package'     => $update_pro_zip,
         ];
@@ -2090,7 +2090,7 @@ class Plugin extends AbsBase
     public function allAdminNotices()
     {
         if (!$this->options['enable']) {
-            $this->enqueueWarning(sprintf(__('<strong>%1$s is disabled. Please visit the <a href="%2$s">settings</a> and enable the plugin</strong>.', $this->text_domain), esc_html($this->name), esc_attr($this->utils_url->main_menu_page_only())));
+            $this->enqueueWarning(sprintf(__('<strong>%1$s is disabled. Please visit the <a href="%2$s">settings</a> and enable the plugin</strong>.', $this->text_domain), esc_html($this->name), esc_attr($this->utils_url->mainMenuPageOnly())));
         }
         if (!is_array($notices = get_option(GLOBAL_NS.'_notices'))) {
             update_option(GLOBAL_NS.'_notices', ($notices = []));
@@ -2157,7 +2157,7 @@ class Plugin extends AbsBase
                                       'display: inline-block;'.
                                       'text-decoration: none;'.
                                       'font-weight: bold;';
-                    $_dismiss_url   = $this->utils_url->dismiss_notice($_key);
+                    $_dismiss_url   = $this->utils_url->dismissNotice($_key);
                     $_dismiss       = '<a href="'.esc_attr($_dismiss_url).'"'.
                                       '  style="'.esc_attr($_dismiss_style).'">'.
                                       '  '.__('dismiss &times;', $this->text_domain).

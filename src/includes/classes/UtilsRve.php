@@ -564,7 +564,7 @@ class UtilsRve extends AbsBase
         if (empty($_REQUEST[GLOBAL_NS.'_rve'])) {
             return $requires_logged_in_user;
         }
-        if (!($current_uri = $this->plugin->utils_url->current_uri())) {
+        if (!($current_uri = $this->plugin->utils_url->currentUri())) {
             return $requires_logged_in_user;
         }
         if (!preg_match('/\/wp\-comments\-post\.php(?:[?#]|$)/', $current_uri)) {
@@ -613,7 +613,7 @@ class UtilsRve extends AbsBase
         if (empty($_REQUEST[GLOBAL_NS.'_rve'])) {
             return $comment_status;
         }
-        if (!($current_uri = $this->plugin->utils_url->current_uri())) {
+        if (!($current_uri = $this->plugin->utils_url->currentUri())) {
             return $comment_status;
         }
         if (!preg_match('/\/wp\-comments\-post\.php(?:[?#]|$)/', $current_uri)) {

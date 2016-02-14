@@ -47,7 +47,7 @@ $sub_comment_url = $sub_comment ? get_comment_link($sub_comment->comment_ID) : '
 $subscribed_to_own_comment = $sub_comment && strcasecmp($sub_comment->comment_author_email, $sub->email) === 0;
 
 // Confirmation URL; they need to click this.
-$sub_confirm_url = $plugin->utils_url->sub_confirm_url($sub->key, $process_list_server);
+$sub_confirm_url = $plugin->utils_url->subConfirmUrl($sub->key, $process_list_server);
 
 // Subscriber's `"name" <email>` w/ HTML markup enhancements.
 $sub_name_email_markup = $plugin->utils_markup->nameEmail($sub->fname.' '.$sub->lname, $sub->email);

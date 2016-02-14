@@ -234,13 +234,13 @@ class MenuPageSubsTable extends MenuPageTableBase
         $email_info      = '<i class="'.esc_attr('si si-'.$this->plugin->slug.'-one').'"></i>'.
                            ' '.$this->plugin->utils_markup->nameEmail($name, $item->email, $name_email_args);
 
-        $edit_url      = $this->plugin->utils_url->edit_sub_short($item->ID);
-        $reconfirm_url = $this->plugin->utils_url->table_bulk_action($this->plural_name, [$item->ID], 'reconfirm');
-        $confirm_url   = $this->plugin->utils_url->table_bulk_action($this->plural_name, [$item->ID], 'confirm');
-        $unconfirm_url = $this->plugin->utils_url->table_bulk_action($this->plural_name, [$item->ID], 'unconfirm');
-        $suspend_url   = $this->plugin->utils_url->table_bulk_action($this->plural_name, [$item->ID], 'suspend');
-        $trash_url     = $this->plugin->utils_url->table_bulk_action($this->plural_name, [$item->ID], 'trash');
-        $delete_url    = $this->plugin->utils_url->table_bulk_action($this->plural_name, [$item->ID], 'delete');
+        $edit_url      = $this->plugin->utils_url->editSubShort($item->ID);
+        $reconfirm_url = $this->plugin->utils_url->tableBulkAction($this->plural_name, [$item->ID], 'reconfirm');
+        $confirm_url   = $this->plugin->utils_url->tableBulkAction($this->plural_name, [$item->ID], 'confirm');
+        $unconfirm_url = $this->plugin->utils_url->tableBulkAction($this->plural_name, [$item->ID], 'unconfirm');
+        $suspend_url   = $this->plugin->utils_url->tableBulkAction($this->plural_name, [$item->ID], 'suspend');
+        $trash_url     = $this->plugin->utils_url->tableBulkAction($this->plural_name, [$item->ID], 'trash');
+        $delete_url    = $this->plugin->utils_url->tableBulkAction($this->plural_name, [$item->ID], 'delete');
 
         $row_actions = [
           'edit' => '<a href="'.esc_attr($edit_url).'">'.__('Edit Subscr.', $this->plugin->text_domain).'</a>',

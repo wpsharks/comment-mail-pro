@@ -65,7 +65,7 @@ class MenuPageActions extends AbsBase
         if (empty($_REQUEST[GLOBAL_NS])) {
             return; // Not applicable.
         }
-        if (!$this->plugin->utils_url->has_valid_nonce()) {
+        if (!$this->plugin->utils_url->hasValidNonce()) {
             return; // Unauthenticated; ignore.
         }
         foreach ((array)$_REQUEST[GLOBAL_NS] as $_action => $_request_args) {
@@ -101,7 +101,7 @@ class MenuPageActions extends AbsBase
             $mail_test = $this->plugin->utils_mail->test(
               $mail_test_to, // To the address specificed in the request args.
               sprintf(__('Test Email Message sent by %1$s™', $this->plugin->text_domain), $this->plugin->name),
-              sprintf(__('Test email message sent by %1$s&trade; from: <code>%2$s</code>.', $this->plugin->text_domain), esc_html($this->plugin->name), esc_html($this->plugin->utils_url->current_host_path()))
+              sprintf(__('Test email message sent by %1$s&trade; from: <code>%2$s</code>.', $this->plugin->text_domain), esc_html($this->plugin->name), esc_html($this->plugin->utils_url->currentHostPath()))
             );
             $this->plugin->enqueueUserNotice($mail_test->results_markup, ['transient' => true]);
         }
@@ -109,11 +109,11 @@ class MenuPageActions extends AbsBase
             $mail_smtp_test = $this->plugin->utils_mail->smtpTest(
               $mail_smtp_test_to, // To the address specificed in the request args.
               sprintf(__('Test Email Message sent by %1$s™', $this->plugin->text_domain), $this->plugin->name),
-              sprintf(__('Test email message sent by %1$s&trade; from: <code>%2$s</code>.', $this->plugin->text_domain), esc_html($this->plugin->name), esc_html($this->plugin->utils_url->current_host_path()))
+              sprintf(__('Test email message sent by %1$s&trade; from: <code>%2$s</code>.', $this->plugin->text_domain), esc_html($this->plugin->name), esc_html($this->plugin->utils_url->currentHostPath()))
             );
             $this->plugin->enqueueUserNotice($mail_smtp_test->results_markup, ['transient' => true]);
         }
-        wp_redirect($this->plugin->utils_url->options_updated());
+        wp_redirect($this->plugin->utils_url->optionsUpdated());
         exit();
     }
 
@@ -146,7 +146,7 @@ class MenuPageActions extends AbsBase
 
         $this->plugin->enqueueUserNotice($notice_markup, ['transient' => true]);
 
-        wp_redirect($this->plugin->utils_url->template_type_updated());
+        wp_redirect($this->plugin->utils_url->templateTypeUpdated());
         exit();
     }
 
@@ -173,7 +173,7 @@ class MenuPageActions extends AbsBase
           sprintf(__('%1$s&trade; default options restored successfully.', $this->plugin->text_domain), esc_html($this->plugin->name));
         $this->plugin->enqueueUserNotice($notice_markup, ['transient' => true]);
 
-        wp_redirect($this->plugin->utils_url->default_options_restored());
+        wp_redirect($this->plugin->utils_url->defaultOptionsRestored());
         exit();
     }
 
@@ -203,7 +203,7 @@ class MenuPageActions extends AbsBase
         unset($notices[$request_args['notice_key']]);
         update_option(GLOBAL_NS.'_notices', $notices);
 
-        wp_redirect($this->plugin->utils_url->notice_dismissed());
+        wp_redirect($this->plugin->utils_url->noticeDismissed());
         exit();
     }
 
@@ -388,7 +388,7 @@ class MenuPageActions extends AbsBase
         if (empty($args['password'])) {
             $args['password'] = $this->plugin->options['pro_update_password'];
         }
-        $product_api_url        = $this->plugin->utils_url->product_page('https');
+        $product_api_url        = $this->plugin->utils_url->productPage('https');
         $product_api_input_vars = [
           'product_api' => [
             'action'   => 'latest_pro_update',
@@ -409,7 +409,7 @@ class MenuPageActions extends AbsBase
             }
             $this->plugin->enqueueUserError($error); // For the current user only.
 
-            wp_redirect($this->plugin->utils_url->pro_updater_menu_page_only());
+            wp_redirect($this->plugin->utils_url->proUpdaterMenuPageOnly());
             exit();
         }
         $this->plugin->options['last_pro_update_check'] = (string)time();

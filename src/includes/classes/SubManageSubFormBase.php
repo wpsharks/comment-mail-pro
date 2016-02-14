@@ -351,7 +351,7 @@ class SubManageSubFormBase extends AbsBase
               )."\n";
         }
         $current_summary_nav_vars // Include these too.
-          = $this->plugin->utils_url->sub_manage_summary_nav_vars();
+          = $this->plugin->utils_url->subManageSummaryNavVars();
 
         foreach (array_keys(sub_manage_summary::$default_nav_vars) as $_summary_nav_var_key) {
             if (isset($current_summary_nav_vars[$_summary_nav_var_key])) {

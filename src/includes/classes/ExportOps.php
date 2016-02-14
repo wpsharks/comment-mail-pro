@@ -49,7 +49,7 @@ class ExportOps extends AbsBase
         $data = json_encode($options_to_export);
 
         $file_name = $this->plugin->slug.'-options';
-        $file_name .= '-'.$this->plugin->utils_url->current_host_path();
+        $file_name .= '-'.$this->plugin->utils_url->currentHostPath();
         $file_name = trim(preg_replace('/[^a-z0-9]/i', '-', strtolower($file_name)), '-');
         $file_name .= '.json'; // Use a JSON file extension.
 

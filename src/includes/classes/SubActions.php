@@ -203,7 +203,7 @@ class SubActions extends AbsBase
             $this->plugin->utils_sub->setCurrentEmail($sub_key, $sub->email);
         }
         if (!is_array($request_args)) { // If NOT a sub action, redirect to one.
-            wp_redirect($this->plugin->utils_url->sub_manage_summary_url($sub_key));
+            wp_redirect($this->plugin->utils_url->subManageSummaryUrl($sub_key));
             exit();
         }
         new SubManageActions(); // Handle sub. manage actions.

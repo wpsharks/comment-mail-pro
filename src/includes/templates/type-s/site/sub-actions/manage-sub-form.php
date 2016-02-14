@@ -79,7 +79,7 @@ echo str_replace('%%title%%', $is_edit ? __('Edit Subscription', $plugin->text_d
 					<?php endforeach; ?>
 				</ul>
 				<p style="margin-top:1em;">
-					<a href="<?php echo esc_attr($plugin->utils_url->sub_manage_summary_url($sub_key, NULL, TRUE)); ?>">
+					<a href="<?php echo esc_attr($plugin->utils_url->subManageSummaryUrl($sub_key, NULL, TRUE)); ?>">
 						<i class="fa fa-arrow-circle-left"></i> <?php echo __('Back to My Subscriptions', $plugin->text_domain); ?>
 					</a>
 				</p>
@@ -128,7 +128,7 @@ echo str_replace('%%title%%', $is_edit ? __('Edit Subscription', $plugin->text_d
 			$home_url = home_url('/'); // Multisite compatible.
 
 			// Summary return URL; w/ all summary navigation vars preserved.
-			$sub_summary_return_url = $plugin->utils_url->sub_manage_summary_url($sub_key, NULL, TRUE);
+			$sub_summary_return_url = $plugin->utils_url->subManageSummaryUrl($sub_key, NULL, TRUE);
 			?>
 
 			<?php if ($processing && $processing_errors): // Any processing errors? ?>

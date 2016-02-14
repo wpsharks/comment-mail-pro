@@ -265,7 +265,7 @@ class MenuPageSubEventLogTable extends MenuPageTableBase
         $id_info = '<i class="fa fa-clock-o"></i>'. // Entry icon w/ ID.
                    ' <span style="font-weight:bold;">#'.esc_html($item->ID).'</span>';
 
-        $delete_url = $this->plugin->utils_url->table_bulk_action($this->plural_name, [$item->ID], 'delete');
+        $delete_url = $this->plugin->utils_url->tableBulkAction($this->plural_name, [$item->ID], 'delete');
 
         $row_actions = [
           'delete' => '<a href="#"'.  // Depends on `menu-pages.js`.
@@ -305,7 +305,7 @@ class MenuPageSubEventLogTable extends MenuPageTableBase
             case 'overwritten': // Overwritten by another?
 
                 if ($item->oby_sub_id && !empty($this->merged_result_sets['subs'][$item->oby_sub_id])) {
-                    $edit_url     = $this->plugin->utils_url->edit_sub_short($item->oby_sub_id);
+                    $edit_url     = $this->plugin->utils_url->editSubShort($item->oby_sub_id);
                     $oby_sub_info = '<i class="'.esc_attr('si si-'.$this->plugin->slug.'-one').'"></i>'.
                                     ' <span>ID <a href="'.esc_attr($edit_url).'" title="'.esc_attr($item->oby_sub_key).'">#'.esc_html($item->oby_sub_id).'</a></span>';
                 } else {

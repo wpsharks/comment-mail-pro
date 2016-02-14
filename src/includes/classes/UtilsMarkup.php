@@ -78,13 +78,13 @@ class UtilsMarkup extends AbsBase
         $name_span_tag         = $name ? '<span style="'.esc_attr($name_style).'">'.esc_html($name_clip).'</span>' : '';
 
         if ($anchor_to === 'search' && $email) { // Back-end search?
-            $anchor_search_url = $this->plugin->utils_url->search_subs_short('sub_email:'.$email);
+            $anchor_search_url = $this->plugin->utils_url->searchSubsShort('sub_email:'.$email);
         }
         if ($anchor_to === 'summary' && !$anchor_summary_sub_key && $email) {
             $anchor_summary_sub_key = $this->plugin->utils_sub->emailLatestKey($email);
         }
         if ($anchor_to === 'summary' && $anchor_summary_sub_key) { // Front-end summary?
-            $summary_anchor_url = $this->plugin->utils_url->sub_manage_summary_url($anchor_summary_sub_key);
+            $summary_anchor_url = $this->plugin->utils_url->subManageSummaryUrl($anchor_summary_sub_key);
         }
         $mailto_anchor_tag  = $email ? '<a href="mailto:'.esc_attr(urlencode($email)).'" target="'.esc_attr($anchor_target).'" style="'.esc_attr($email_style).'">'.esc_html($email_clip).'</a>' : '';
         $search_anchor_tag  = $email && !empty($anchor_search_url) ? '<a href="'.esc_attr($anchor_search_url).'" target="'.esc_attr($anchor_target).'" style="'.esc_attr($email_style).'">'.esc_html($email_clip).'</a>' : '';
@@ -133,7 +133,7 @@ class UtilsMarkup extends AbsBase
         $style = (string)$args['style'];
 
         $post_total_comments_desc = sprintf(_n('%1$s Comment', '%1$s Comments', $post_total_comments, $this->plugin->text_domain), esc_html($post_total_comments));
-        $post_edit_comments_url   = $this->plugin->utils_url->post_edit_comments_short($post_id);
+        $post_edit_comments_url   = $this->plugin->utils_url->postEditCommentsShort($post_id);
 
         return '<a href="'.esc_attr($post_edit_comments_url).'" class="pmp-post-com-count post-com-count" style="'.esc_attr($style).'" title="'.esc_attr($post_total_comments_desc).'">'.
                '  <span class="pmp-com-count comment-count">'.esc_html($post_total_comments).'</span>'.
@@ -169,7 +169,7 @@ class UtilsMarkup extends AbsBase
           ? $this->plugin->utils_i18n->subscriptions($post_total_subs) : $post_total_subs;
 
         $post_total_subs_desc = sprintf(_n('%1$s Subscription', '%1$s Subscriptions', $post_total_subs, $this->plugin->text_domain), esc_html($post_total_subs));
-        $post_edit_subs_url   = $this->plugin->utils_url->post_edit_subs_short($post_id);
+        $post_edit_subs_url   = $this->plugin->utils_url->postEditSubsShort($post_id);
 
         return '<a href="'.esc_attr($post_edit_subs_url).'" class="pmp-post-sub-count" style="'.esc_attr($style).'" title="'.esc_attr($post_total_subs_desc).'">'.
                '  <span class="pmp-sub-count">'.esc_html($post_total_subs_label).'</span>'.
@@ -845,7 +845,7 @@ class UtilsMarkup extends AbsBase
         $args         = array_intersect_key($args, $default_args);
 
         $anchor_to = trim((string)$args['anchor_to']);
-        $anchor_to = !$anchor_to ? $this->plugin->utils_url->product_page() : $anchor_to;
+        $anchor_to = !$anchor_to ? $this->plugin->utils_url->productPage() : $anchor_to;
 
         $anchor_target        = trim((string)$args['anchor_target']);
         $anchor_style         = trim((string)$args['anchor_style']);

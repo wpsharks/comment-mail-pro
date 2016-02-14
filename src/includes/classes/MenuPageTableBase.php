@@ -468,7 +468,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
         $sub_info        = '<i class="'.esc_attr('si si-'.$this->plugin->slug.'-one').'"></i>'.
                            ' '.$this->plugin->utils_markup->nameEmail($name, $item->{$prefix.'email'}, $name_email_args);
 
-        $edit_url = $this->plugin->utils_url->edit_sub_short($item->{$key});
+        $edit_url = $this->plugin->utils_url->editSubShort($item->{$key});
 
         $row_actions = [
           'edit' => '<a href="'.esc_attr($edit_url).'">'.__('Edit Subscr.', $this->plugin->text_domain).'</a>',
@@ -552,7 +552,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
         $user_info       = '<i class="fa fa-user"></i>'. // e.g. ♙ "Name" <email>
                            ' '.$this->plugin->utils_markup->nameEmail($item->{$prefix.'display_name'}, $item->{$prefix.'email'}, $name_email_args);
 
-        $edit_url = $this->plugin->utils_url->edit_user_short($item->{$key});
+        $edit_url = $this->plugin->utils_url->editUserShort($item->{$key});
 
         $row_actions = [
           'edit' => '<a href="'.esc_attr($edit_url).'">'.__('Edit User', $this->plugin->text_domain).'</a>',
@@ -610,7 +610,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
         $post_date              = $this->plugin->utils_date->i18n('M j, Y', strtotime($item->{$prefix.'date_gmt'}));
         $post_date_ago          = $this->plugin->utils_date->approxTimeDifference(strtotime($item->{$prefix.'date_gmt'}));
         $post_comments_status   = $this->plugin->utils_i18n->statusLabel($this->plugin->utils_db->postCommentStatusI18n($item->{$prefix.'comment_status'}), 'ucwords');
-        $post_edit_comments_url = $this->plugin->utils_url->post_edit_comments_short($item->{$key});
+        $post_edit_comments_url = $this->plugin->utils_url->postEditCommentsShort($item->{$key});
         $post_total_subs        = $this->plugin->utils_sub->queryTotal($item->{$key});
         $post_total_comments    = (integer)$item->{$prefix.'comment_count'};
 
@@ -619,8 +619,8 @@ abstract class MenuPageTableBase extends \WP_List_Table
                      '<i class="fa fa-thumb-tack"></i>'. // Start w/ a thumb tack icon; works w/ any post type.
                      ' '.'<span title="'.esc_attr($post_date).'">'.esc_html($post_title_clip).'</span>';
 
-        $post_view_url    = $this->plugin->utils_url->post_short($item->{$key});
-        $post_edit_url    = $this->plugin->utils_url->post_edit_short($item->{$key});
+        $post_view_url    = $this->plugin->utils_url->postShort($item->{$key});
+        $post_edit_url    = $this->plugin->utils_url->postEditShort($item->{$key});
         $post_row_actions = [
           'edit' => '<a href="'.esc_attr($post_edit_url).'">'.sprintf(__('Edit %1$s', $this->plugin->text_domain), esc_html($post_type_label)).'</a>',
           'view' => '<a href="'.esc_attr($post_view_url).'">'.sprintf(__('View', $this->plugin->text_domain), esc_html($post_type_label)).'</a>',
@@ -682,8 +682,8 @@ abstract class MenuPageTableBase extends \WP_List_Table
         $comment_info = '<i class="fa fa-comment"></i>'. // Start w/ a comment bubble icon.
                         ' '.$this->plugin->utils_markup->nameEmail($item->{$prefix.'author'}, $item->{$prefix.'author_email'}, $name_email_args);
 
-        $comment_view_url    = $this->plugin->utils_url->comment_short($item->{$key});
-        $comment_edit_url    = $this->plugin->utils_url->comment_edit_short($item->{$key});
+        $comment_view_url    = $this->plugin->utils_url->commentShort($item->{$key});
+        $comment_edit_url    = $this->plugin->utils_url->commentEditShort($item->{$key});
         $comment_row_actions = [
           'edit' => '<a href="'.esc_attr($comment_edit_url).'">'.__('Edit Comment', $this->plugin->text_domain).'</a>',
           'view' => '<a href="'.esc_attr($comment_view_url).'">'.__('View', $this->plugin->text_domain).'</a>',
@@ -1863,7 +1863,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
         if (!($bulk_action = stripslashes((string)$this->current_action()))) {
             return; // Nothing to do; no action requested here.
         }
-        if (!$this->plugin->utils_url->has_valid_nonce('bulk-'.$this->plural_name)) {
+        if (!$this->plugin->utils_url->hasValidNonce('bulk-'.$this->plural_name)) {
             return; // Unauthenticated; ignore.
         }
         if (empty($_REQUEST[$this->plural_name]) || !is_array($_REQUEST[$this->plural_name])) {
@@ -1889,7 +1889,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
               ['transient' => true, 'for_page' => $this->plugin->utils_env->currentMenuPage()]
             );
         }
-        $redirect_to = $this->plugin->utils_url->page_table_nav_vars_only();
+        $redirect_to = $this->plugin->utils_url->pageTableNavVarsOnly();
 
         if (headers_sent()) { // Output started already?
             exit('      <script type="text/javascript">'.
@@ -2033,7 +2033,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
               'email_style' => 'font-weight:normal;',
             ];
             $_sub_name        = $_sub->fname.' '.$_sub->lname; // Concatenate.
-            $_sub_edit_link   = $this->plugin->utils_url->edit_sub_short($_sub->ID);
+            $_sub_edit_link   = $this->plugin->utils_url->editSubShort($_sub->ID);
 
             $sub_lis[$_sub->ID] = '<li>'. // [icon] ID "Name" <email> [edit].
                                   '<i class="'.esc_attr('si si-'.$this->plugin->slug).'"></i>'.
@@ -2156,14 +2156,14 @@ abstract class MenuPageTableBase extends \WP_List_Table
         foreach ($navigable_filters as $_navigable_filter_s => $_navigable_filter_label) {
             if (!$navigable_filter_lis) { // `all` first; i.e. a way to remove all navigable filters.
                 $navigable_filter_lis[] = '<li>'. // List item for special navigable filter `all`.
-                                          '   <a href="'.esc_attr($this->plugin->utils_url->table_search_filter('::')).'"'.
+                                          '   <a href="'.esc_attr($this->plugin->utils_url->tableSearchFilter('::')).'"'.
                                           (!$query_contains_navigable_filters ? ' class="pmp-active"' : '').'>'.
                                           '      '.__('all', $this->plugin->text_domain).
                                           '   </a>'.
                                           '</li>';
             }
             $navigable_filter_lis[] = '<li>'. // List item for a navigable filter in this table.
-                                      '   <a href="'.esc_attr($this->plugin->utils_url->table_search_filter($_navigable_filter_s)).'"'.
+                                      '   <a href="'.esc_attr($this->plugin->utils_url->tableSearchFilter($_navigable_filter_s)).'"'.
                                       (stripos($raw_search_query, $_navigable_filter_s) !== false ? ' class="pmp-active"' : '').'>'.
                                       '      <span style="'.esc_attr($_navigable_filter_s === 'status::trashed' ? 'font-style:italic;' : '').'">'.
                                       '         '.esc_html($_navigable_filter_label).'</span>'.

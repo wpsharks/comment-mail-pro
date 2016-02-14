@@ -61,7 +61,7 @@ echo str_replace('%%title%%', __('Unsubscribe All', $plugin->text_domain), $site
 			 * ~ as documented at the top of this file.
 			 */
 			// Subscription creation URL; i.e. so they can add a new subscription if they like.
-			$sub_new_url = $plugin->utils_url->sub_manage_sub_new_url();
+			$sub_new_url = $plugin->utils_url->subManageSubNewUrl();
 			?>
 
 			<div class="alert alert-success" style="margin:0;">

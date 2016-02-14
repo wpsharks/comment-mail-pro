@@ -76,7 +76,7 @@ namespace WebSharks\CommentMail\Pro;
 
 <?php ob_start(); ?>
 <?php foreach($sso_services as $_sso_service): ?>
-	<a href="<?php echo esc_attr($plugin->utils_url->sso_action_url($_sso_service)); ?>" class="<?php echo esc_attr('lsso-link lsso-'.$_sso_service); ?>"></a>
+	<a href="<?php echo esc_attr($plugin->utils_url->ssoActionUrl($_sso_service)); ?>" class="<?php echo esc_attr('lsso-link lsso-'.$_sso_service); ?>"></a>
 <?php endforeach; ?>
 <?php $service_links = ob_get_clean(); ?>
 

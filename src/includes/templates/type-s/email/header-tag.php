@@ -30,7 +30,7 @@ $home_url = home_url('/'); // Multisite compatible.
 $blog_name_clip = $plugin->utils_string->clip(get_bloginfo('name'));
 
 // Current `host[/path]` with support for multisite network child blogs.
-$current_host_path = $plugin->utils_url->current_host_path();
+$current_host_path = $plugin->utils_url->currentHostPath();
 
 // Icon URL; defaults to the plugin's icon image.
 $icon_bubbles_url = $plugin->utils_url->to('/client-s/images/icon-bubbles.png');

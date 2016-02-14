@@ -47,7 +47,7 @@ class FrontScripts extends AbsBase
                 return; // Nothing to do here.
             }
         }
-        if (!preg_match('/\/wp\-login\.php(?:[?&#]|$)/', $this->plugin->utils_url->current_uri())) {
+        if (!preg_match('/\/wp\-login\.php(?:[?&#]|$)/', $this->plugin->utils_url->currentUri())) {
             return; // Not applicable.
         }
         wp_enqueue_script('jquery'); // Need jQuery.

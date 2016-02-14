@@ -30,10 +30,10 @@ $home_url = home_url('/'); // Multisite compatible.
 $blog_name_clip = $plugin->utils_string->clip(get_bloginfo('name'));
 
 // Summary return URL; w/ all summary navigation vars preserved.
-$sub_summary_return_url = $plugin->utils_url->sub_manage_summary_url(!empty($sub_key) ? $sub_key : '', NULL, TRUE);
+$sub_summary_return_url = $plugin->utils_url->subManageSummaryUrl(!empty($sub_key) ? $sub_key : '', NULL, TRUE);
 
 // Current `host[/path]` with support for multisite network child blogs.
-$current_host_path = $plugin->utils_url->current_host_path();
+$current_host_path = $plugin->utils_url->currentHostPath();
 
 // Privacy policy URL; as configured in plugin options via the dashboard.
 $can_spam_privacy_policy_url = $plugin->options['can_spam_privacy_policy_url'];

@@ -84,7 +84,7 @@ class SubManageActions extends AbsBase
         if ($sub_key && ($sub = $this->plugin->utils_sub->get($sub_key))) {
             $this->plugin->utils_sub->setCurrentEmail($sub_key, $sub->email);
         }
-        $nav_vars = $this->plugin->utils_url->sub_manage_summary_nav_vars();
+        $nav_vars = $this->plugin->utils_url->subManageSummaryNavVars();
 
         new SubManageSummary($sub_key, $nav_vars);
 

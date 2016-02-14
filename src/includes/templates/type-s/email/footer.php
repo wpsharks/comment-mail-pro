@@ -38,16 +38,16 @@ namespace WebSharks\CommentMail\Pro;
      * ~ as documented at the top of this file.
      */
 	// Summary URL; i.e. comment subscription management area.
-	$sub_summary_url = $plugin->utils_url->sub_manage_summary_url($sub->key);
+	$sub_summary_url = $plugin->utils_url->subManageSummaryUrl($sub->key);
 
 	// Unsubscribes (deletes) the subscription this email is associated with.
-	$sub_unsubscribe_url = $plugin->utils_url->sub_unsubscribe_url($sub->key);
+	$sub_unsubscribe_url = $plugin->utils_url->subUnsubscribeUrl($sub->key);
 
 	// Unsubscribes (deletes) ALL subscriptions associated w/ their email at the same time.
-	$sub_unsubscribe_all_url = $plugin->utils_url->sub_unsubscribe_all_url($sub->email);
+	$sub_unsubscribe_all_url = $plugin->utils_url->subUnsubscribeAllUrl($sub->email);
 
 	// Subscription creation URL; user may create a new subscription.
-	$sub_new_url = $plugin->utils_url->sub_manage_sub_new_url();
+	$sub_new_url = $plugin->utils_url->subManageSubNewUrl();
 	?>
 
 	<p style="color:#888888;">
