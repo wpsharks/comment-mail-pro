@@ -1,15 +1,16 @@
 <?php
 /**
- * Install Routines
+ * Install Routines.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * Install Routines
+ * Install Routines.
  *
  * @since 141111 First documented version.
  */
@@ -73,7 +74,8 @@ class Installer extends AbsBase
         $notice_markup = $this->plugin->utils_fs->inlineIconSvg().
                          ' '.sprintf(
                              __('%1$s&trade; installed successfully! Please <a href="%2$s"><strong>click here to configure</strong></a> basic options.', $this->plugin->text_domain),
-                             esc_html($this->plugin->name), esc_attr($this->plugin->utils_url->mainMenuPageOnly())
+                             esc_html($this->plugin->name),
+                             esc_attr($this->plugin->utils_url->mainMenuPageOnly())
                          );
         $this->plugin->enqueueUserNotice($notice_markup); // A quick reminder to configure options.
     }
