@@ -165,7 +165,7 @@ namespace WebSharks\CommentMail\Pro;
 				delete_option(GLOBAL_NS.'_options');
 				$this->plugin->options = $this->plugin->default_options;
 
-				import_stcr::delete_post_meta_keys(); // Reset import tracking.
+                ImportStcr::deletePostMetaKeys(); // Reset import tracking.
 
 				$notice_markup = // Notice regarding options having been retored successfully.
 					sprintf(__('%1$s&trade; default options restored successfully.', $this->plugin->text_domain), esc_html($this->plugin->name));

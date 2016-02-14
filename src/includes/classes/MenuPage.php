@@ -2008,7 +2008,7 @@ namespace WebSharks\CommentMail\Pro;
         }
         /* ----------------------------------------------------------------------------------------- */
 
-        if(import_stcr::data_exists())
+        if(ImportStcr::dataExists())
         {
           $_form_field_args = array(
             'ns_id_suffix'   => '-import-stcr-form',
@@ -2064,7 +2064,7 @@ namespace WebSharks\CommentMail\Pro;
 
           $_panel_body .= '</form>';
 
-          echo $this->panel(__('Subscribe to Comments Reloaded (StCR)', $this->plugin->text_domain), $_panel_body, array('icon' => '<i class="fa fa-upload"></i>', 'open' => (!$this->plugin->is_pro && !$this->plugin->utils_env->is_pro_preview()) || !import_stcr::ever_imported()));
+          echo $this->panel(__('Subscribe to Comments Reloaded (StCR)', $this->plugin->text_domain), $_panel_body, array('icon' => '<i class="fa fa-upload"></i>', 'open' => (!$this->plugin->is_pro && !$this->plugin->utils_env->is_pro_preview()) || !ImportStcr::everImported()));
 
           unset($_form_field_args, $_form_fields, $_panel_body); // Housekeeping.
         }
@@ -4375,16 +4375,16 @@ namespace WebSharks\CommentMail\Pro;
                       ($this->plugin->utils_env->is_menu_page(GLOBAL_NS.'_import_export') ? ' class="pmp-active"' : '').'>'.
                       '<i class="fa fa-upload"></i> '.__('Import/Export', $this->plugin->text_domain).
 
-                      ((!$this->plugin->utils_env->is_menu_page(GLOBAL_NS.'_import_export') && import_stcr::data_exists() && !import_stcr::ever_imported())
+                      ((!$this->plugin->utils_env->is_menu_page(GLOBAL_NS.'_import_export') && ImportStcr::dataExists() && !ImportStcr::everImported())
                         ? '<span class="pmp-blink">'.__('StCR Auto-Import', $this->plugin->text_domain).'</span>' : '').'</a>'."\n";
         }
-        else if(import_stcr::data_exists()) // Lite version exposes import functionality for StCR users.
+        else if(ImportStcr::dataExists()) // Lite version exposes import functionality for StCR users.
         {
           $heading .= '  <a href="'.esc_attr($this->plugin->utils_url->import_export_menu_page_only()).'"'.
                       ($this->plugin->utils_env->is_menu_page(GLOBAL_NS.'_import_export') ? ' class="pmp-active"' : '').'>'.
                       '<i class="fa fa-upload"></i> '.__('Import/Export', $this->plugin->text_domain).
 
-                      ((!$this->plugin->utils_env->is_menu_page(GLOBAL_NS.'_import_export') && import_stcr::data_exists() && !import_stcr::ever_imported())
+                      ((!$this->plugin->utils_env->is_menu_page(GLOBAL_NS.'_import_export') && ImportStcr::dataExists() && !ImportStcr::everImported())
                         ? '<span class="pmp-blink">'.__('StCR Auto-Import', $this->plugin->text_domain).'</span>' : '').'</a>'."\n";
         }
         $heading .= '  <a href="'.esc_attr($this->plugin->utils_url->email_templates_menu_page_only()).'"'.
