@@ -1,22 +1,23 @@
 <?php
 /**
- * Menu Page Actions
+ * Menu Page Actions.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * Menu Page Actions
+ * Menu Page Actions.
  *
  * @since 141111 First documented version.
  */
 class MenuPageActions extends AbsBase
 {
     /**
-     * @var array Valid actions.
+     * @type array Valid actions.
      *
      * @since 141111 First documented version.
      */
@@ -68,9 +69,11 @@ class MenuPageActions extends AbsBase
         if (!$this->plugin->utils_url->hasValidNonce()) {
             return; // Unauthenticated; ignore.
         }
-        foreach ((array)$_REQUEST[GLOBAL_NS] as $_action => $_request_args) {
+        foreach ((array) $_REQUEST[GLOBAL_NS] as $_action => $_request_args) {
             if ($_action && in_array($_action, $this->valid_actions, true)) {
-                $_method = preg_replace_callback('/_(.)/', function ($m) { return strtoupper($m[1]); }, strtolower($_action));
+                $_method = preg_replace_callback('/_(.)/', function ($m) {
+                    return strtoupper($m[1]);
+                }, strtolower($_action));
                 $this->{$_method}($this->plugin->utils_string->trimStripDeep($_request_args));
             }
         }
@@ -86,7 +89,7 @@ class MenuPageActions extends AbsBase
      */
     protected function saveOptions($request_args)
     {
-        $request_args = (array)$request_args;
+        $request_args = (array) $request_args;
 
         if (!current_user_can($this->plugin->cap)) {
             return; // Unauthenticated; ignore.
@@ -97,7 +100,7 @@ class MenuPageActions extends AbsBase
             sprintf(__('%1$s&trade; options updated successfully.', $this->plugin->text_domain), esc_html($this->plugin->name));
         $this->plugin->enqueueUserNotice($notice_markup, ['transient' => true]);
 
-        if (!empty($request_args['mail_test']) && ($mail_test_to = trim((string)$request_args['mail_test']))) {
+        if (!empty($request_args['mail_test']) && ($mail_test_to = trim((string) $request_args['mail_test']))) {
             $mail_test = $this->plugin->utils_mail->test(
                 $mail_test_to, // To the address specificed in the request args.
                 sprintf(__('Test Email Message sent by %1$s™', $this->plugin->text_domain), $this->plugin->name),
@@ -105,7 +108,7 @@ class MenuPageActions extends AbsBase
             );
             $this->plugin->enqueueUserNotice($mail_test->results_markup, ['transient' => true]);
         }
-        if (!empty($request_args['mail_smtp_test']) && ($mail_smtp_test_to = trim((string)$request_args['mail_smtp_test']))) {
+        if (!empty($request_args['mail_smtp_test']) && ($mail_smtp_test_to = trim((string) $request_args['mail_smtp_test']))) {
             $mail_smtp_test = $this->plugin->utils_mail->smtpTest(
                 $mail_smtp_test_to, // To the address specificed in the request args.
                 sprintf(__('Test Email Message sent by %1$s™', $this->plugin->text_domain), $this->plugin->name),
@@ -126,7 +129,7 @@ class MenuPageActions extends AbsBase
      */
     protected function setTemplateType($request_args)
     {
-        $template_type = (string)$request_args;
+        $template_type = (string) $request_args;
 
         if (!current_user_can($this->plugin->cap)) {
             return; // Unauthenticated; ignore.
@@ -137,7 +140,8 @@ class MenuPageActions extends AbsBase
 
             sprintf(
                 __('Template mode updated to: <code>%2$s</code>.', $this->plugin->text_domain),
-                esc_html($this->plugin->name), $template_type === 'a' ? __('advanced', $this->plugin->text_domain) : __('simple', $this->plugin->text_domain)
+                esc_html($this->plugin->name),
+                $template_type === 'a' ? __('advanced', $this->plugin->text_domain) : __('simple', $this->plugin->text_domain)
             ).
 
             ' '.($template_type === 'a' // Provide an additional note; to help explain what just occured in this scenario.
@@ -186,7 +190,7 @@ class MenuPageActions extends AbsBase
      */
     protected function dismissNotice($request_args)
     {
-        $request_args = (array)$request_args;
+        $request_args = (array) $request_args;
 
         if (empty($request_args['notice_key'])) {
             return; // Not possible.
@@ -216,7 +220,7 @@ class MenuPageActions extends AbsBase
      */
     protected function import($request_args)
     {
-        $request_args = (array)$request_args;
+        $request_args = (array) $request_args;
 
         if (empty($request_args['type']) || !is_string($request_args['type'])) {
             return; // Missing and/or invalid import type.
@@ -245,7 +249,7 @@ class MenuPageActions extends AbsBase
      */
     protected function export($request_args)
     {
-        $request_args = (array)$request_args;
+        $request_args = (array) $request_args;
 
         if (empty($request_args['type']) || !is_string($request_args['type'])) {
             return; // Missing and/or invalid import type.
@@ -273,7 +277,7 @@ class MenuPageActions extends AbsBase
      */
     protected function subForm($request_args)
     {
-        if (!($request_args = (array)$request_args)) {
+        if (!($request_args = (array) $request_args)) {
             return; // Empty request args.
         }
         if (!current_user_can($this->plugin->manage_cap)) {
@@ -295,12 +299,12 @@ class MenuPageActions extends AbsBase
      */
     protected function subFormCommentIdRowViaAjax($request_args)
     {
-        $request_args = (array)$request_args;
+        $request_args = (array) $request_args;
 
         if (!isset($request_args['post_id'])) {
             exit; // Missing post ID.
         }
-        if (($post_id = (integer)$request_args['post_id']) < 0) {
+        if (($post_id = (integer) $request_args['post_id']) < 0) {
             exit; // Invalid post ID.
         }
         if (!current_user_can($this->plugin->manage_cap)) {
@@ -322,12 +326,12 @@ class MenuPageActions extends AbsBase
      */
     protected function subFormUserIdInfoViaAjax($request_args)
     {
-        $request_args = (array)$request_args;
+        $request_args = (array) $request_args;
 
         if (!isset($request_args['user_id'])) {
             exit; // Missing user ID.
         }
-        if (($user_id = (integer)$request_args['user_id']) < 0) {
+        if (($user_id = (integer) $request_args['user_id']) < 0) {
             exit; // Invalid user ID.
         }
         if (!current_user_can($this->plugin->manage_cap)) {
@@ -349,7 +353,7 @@ class MenuPageActions extends AbsBase
      */
     protected function statsChartDataViaAjax($request_args)
     {
-        $request_args = (array)$request_args;
+        $request_args = (array) $request_args;
 
         if (!current_user_can($this->plugin->manage_cap)) {
             if (!current_user_can($this->plugin->cap)) {
@@ -372,7 +376,7 @@ class MenuPageActions extends AbsBase
      */
     protected function proUpdate($request_args)
     {
-        $request_args = (array)$request_args;
+        $request_args = (array) $request_args;
 
         if (!current_user_can($this->plugin->update_cap)) {
             return; // Nothing to do.
@@ -396,14 +400,14 @@ class MenuPageActions extends AbsBase
                 'password' => $args['password'],
             ],
         ];
-        $product_api_response   = wp_remote_post($product_api_url, ['body' => $product_api_input_vars]);
-        $product_api_response   = json_decode(wp_remote_retrieve_body($product_api_response), true);
+        $product_api_response = wp_remote_post($product_api_url, ['body' => $product_api_input_vars]);
+        $product_api_response = json_decode(wp_remote_retrieve_body($product_api_response), true);
 
         if (!is_array($product_api_response) || !empty($product_api_response['error'])
             || empty($product_api_response['pro_version']) || empty($product_api_response['pro_zip'])
         ) {
             if (!empty($product_api_response['error'])) {
-                $error = (string)$product_api_response['error'];
+                $error = (string) $product_api_response['error'];
             } else {
                 $error = __('Unknown error. Please wait 15 minutes and try again.', $this->plugin->text_domain);
             }
@@ -412,10 +416,10 @@ class MenuPageActions extends AbsBase
             wp_redirect($this->plugin->utils_url->proUpdaterMenuPageOnly());
             exit();
         }
-        $this->plugin->options['last_pro_update_check'] = (string)time();
-        $this->plugin->options['pro_update_check']      = (string)$args['check'];
-        $this->plugin->options['pro_update_username']   = (string)$args['username'];
-        $this->plugin->options['pro_update_password']   = (string)$args['password'];
+        $this->plugin->options['last_pro_update_check'] = (string) time();
+        $this->plugin->options['pro_update_check']      = (string) $args['check'];
+        $this->plugin->options['pro_update_username']   = (string) $args['username'];
+        $this->plugin->options['pro_update_password']   = (string) $args['password'];
 
         $this->plugin->optionsQuickSave($this->plugin->options);
 
