@@ -1,43 +1,44 @@
 <?php
 /**
- * Sub Exporter
+ * Sub Exporter.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * Sub Exporter
+ * Sub Exporter.
  *
  * @since 141111 First documented version.
  */
 class ExportSubs extends AbsBase
 {
     /**
-     * @var integer Starting row.
+     * @type int Starting row.
      *
      * @since 141111 First documented version.
      */
     protected $start_from;
 
     /**
-     * @var integer SQL max limit.
+     * @type int SQL max limit.
      *
      * @since 141111 First documented version.
      */
     protected $max_limit;
 
     /**
-     * @var boolean Include UTF-8 byte order marker?
+     * @type bool Include UTF-8 byte order marker?
      *
      * @since 141111 First documented version.
      */
     protected $include_utf8_bom;
 
     /**
-     * @var string UTF-8 byte order marker.
+     * @type string UTF-8 byte order marker.
      *
      * @since 141111 First documented version.
      */
@@ -60,11 +61,11 @@ class ExportSubs extends AbsBase
             'max_limit'        => 1000,
             'include_utf8_bom' => false,
         ];
-        $request_args         = array_merge($default_request_args, $request_args);
-        $request_args         = array_intersect_key($request_args, $default_request_args);
+        $request_args = array_merge($default_request_args, $request_args);
+        $request_args = array_intersect_key($request_args, $default_request_args);
 
-        $this->start_from       = (integer)$request_args['start_from'];
-        $this->max_limit        = (integer)$request_args['max_limit'];
+        $this->start_from       = (integer) $request_args['start_from'];
+        $this->max_limit        = (integer) $request_args['max_limit'];
         $this->include_utf8_bom = filter_var($request_args['include_utf8_bom'], FILTER_VALIDATE_BOOLEAN);
 
         if ($this->start_from < 1) {
@@ -73,7 +74,7 @@ class ExportSubs extends AbsBase
         if ($this->max_limit < 1) {
             $this->max_limit = 1;
         }
-        $upper_max_limit = (integer)apply_filters(__CLASS__.'_upper_max_limit', 5000);
+        $upper_max_limit = (integer) apply_filters(__CLASS__.'_upper_max_limit', 5000);
         if ($this->max_limit > $upper_max_limit) {
             $this->max_limit = $upper_max_limit;
         }
@@ -121,14 +122,14 @@ class ExportSubs extends AbsBase
      * @since 141111 First documented version.
      *
      * @param \stdClass $row     A row object.
-     * @param boolean   $headers Defaults to a `FALSE` value.
+     * @param bool      $headers Defaults to a `FALSE` value.
      *                           Pass this as `TRUE` to create a line w/ headers.
      *
      * @return string A single line for a CSV file.
      */
     protected function formatCsvLine(\stdClass $row, $headers = false)
     {
-        $row            = $headers ? array_keys((array)$row) : (array)$row;
+        $row            = $headers ? array_keys((array) $row) : (array) $row;
         $escaped_values = array_map([$this->plugin->utils_string, 'escCsvDq'], $row);
 
         return $escaped_values ? '"'.implode('","', $escaped_values).'"'."\n" : '';
@@ -143,11 +144,11 @@ class ExportSubs extends AbsBase
      */
     protected function results()
     {
-        $sql = "SELECT * FROM `".esc_sql($this->plugin->utils_db->prefix().'subs')."`".
+        $sql = 'SELECT * FROM `'.esc_sql($this->plugin->utils_db->prefix().'subs').'`'.
 
-               " ORDER BY `ID` ASC". // Maintain a consistent order.
+               ' ORDER BY `ID` ASC'.// Maintain a consistent order.
 
-               " LIMIT ".esc_sql($this->start_from - 1).", ".esc_sql($this->max_limit);
+               ' LIMIT '.esc_sql($this->start_from - 1).', '.esc_sql($this->max_limit);
 
         if (($results = $this->plugin->utils_db->wp->get_results($sql))) {
             $results = $this->plugin->utils_db->typifyDeep($results);
