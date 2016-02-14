@@ -1,22 +1,23 @@
 <?php
 /**
- * Queue Event Log Inserter
+ * Queue Event Log Inserter.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * Queue Event Log Inserter
+ * Queue Event Log Inserter.
  *
  * @since 141111 First documented version.
  */
 class QueueEventLogInserter extends AbsBase
 {
     /**
-     * @var array Log entry data.
+     * @type array Log entry data.
      *
      * @since 141111 First documented version.
      */
@@ -100,4 +101,3 @@ class QueueEventLogInserter extends AbsBase
         }
     }
 }
-	
