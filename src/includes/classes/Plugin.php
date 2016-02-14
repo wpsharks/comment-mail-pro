@@ -2386,7 +2386,7 @@ namespace WebSharks\CommentMail\Pro;
 			 *
 			 * @param \WP_Comment|null $comment Comment object (now).
 			 */
-			public function comment_status($new_comment_status, $old_comment_status, /* \WP_Comment */ $comment = NULL)
+			public function comment_status($new_comment_status, $old_comment_status, \WP_Comment $comment = NULL)
 			{
 				new CommentStatus($new_comment_status, $old_comment_status, $comment);
 			}

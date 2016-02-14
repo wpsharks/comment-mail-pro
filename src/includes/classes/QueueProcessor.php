@@ -558,10 +558,10 @@ namespace WebSharks\CommentMail\Pro;
 
 			                               \stdClass $sub = NULL,
 			                               \WP_Post $sub_post = NULL,
-			                               /* \WP_Comment */ $sub_comment = NULL,
+			                               \WP_Comment $sub_comment = NULL,
 
 			                               \WP_Post $post = NULL,
-			                               /* \WP_Comment */ $comment = NULL,
+			                               \WP_Comment $comment = NULL,
 
 			                               array $props = array(),
 			                               array $comments = array(),
