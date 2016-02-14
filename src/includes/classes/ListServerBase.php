@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
          *
          * @since 151224 Adding support for mailing lists.
          */
-        abstractclass ListServerBase extends AbsBase
+        abstract class ListServerBase extends AbsBase
         {
             /**
              * Subscribe to list.

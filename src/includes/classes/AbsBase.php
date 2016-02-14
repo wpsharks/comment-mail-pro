@@ -14,7 +14,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		abstractclass AbsBase
+		abstract class AbsBase
 		{
 			/**
 			 * @var plugin Plugin reference.
@@ -404,4 +404,3 @@ namespace WebSharks\CommentMail\Pro;
 				unset($_key, $_value); // Housekeeping.
 			}
 		}
-	

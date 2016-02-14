@@ -15,7 +15,7 @@ namespace WebSharks\CommentMail\Pro;
 		 *
 		 * @since 141111 First documented version.
 		 */
-		abstractclass SsoServiceBase extends AbsBase
+		abstract class SsoServiceBase extends AbsBase
 		{
 			/*
 			 * Properties.
