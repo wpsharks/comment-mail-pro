@@ -1,43 +1,44 @@
 <?php
 /**
- * Sub Purger
+ * Sub Purger.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * Sub Purger
+ * Sub Purger.
  *
  * @since 141111 First documented version.
  */
 class SubPurger extends AbsBase
 {
     /**
-     * @var integer Post ID.
+     * @type int Post ID.
      *
      * @since 141111 First documented version.
      */
     protected $post_id;
 
     /**
-     * @var integer Comment ID.
+     * @type int Comment ID.
      *
      * @since 141111 First documented version.
      */
     protected $comment_id;
 
     /**
-     * @var integer User ID.
+     * @type int User ID.
      *
      * @since 141111 First documented version.
      */
     protected $user_id;
 
     /**
-     * @var integer Total subs purged.
+     * @type int Total subs purged.
      *
      * @since 141111 First documented version.
      */
@@ -46,11 +47,9 @@ class SubPurger extends AbsBase
     /**
      * Class constructor.
      *
-     * @param integer|string $post_id    Post ID.
-     *
-     * @param integer|string $comment_id Comment ID.
-     *
-     * @param integer|string $user_id    User ID.
+     * @param int|string $post_id    Post ID.
+     * @param int|string $comment_id Comment ID.
+     * @param int|string $user_id    User ID.
      *
      * @since 141111 First documented version.
      */
@@ -58,9 +57,9 @@ class SubPurger extends AbsBase
     {
         parent::__construct();
 
-        $this->post_id    = (integer)$post_id;
-        $this->comment_id = (integer)$comment_id;
-        $this->user_id    = (integer)$user_id;
+        $this->post_id    = (integer) $post_id;
+        $this->comment_id = (integer) $comment_id;
+        $this->user_id    = (integer) $user_id;
 
         $this->purged = 0; // Initialize.
 
@@ -98,7 +97,7 @@ class SubPurger extends AbsBase
         if (!$this->post_id) {
             return; // Not applicable.
         }
-        $sql = "SELECT `ID` FROM `".esc_sql($this->plugin->utils_db->prefix().'subs')."`".
+        $sql = 'SELECT `ID` FROM `'.esc_sql($this->plugin->utils_db->prefix().'subs').'`'.
 
                " WHERE `post_id` = '".esc_sql($this->post_id)."'".
                ($this->comment_id ? " AND `comment_id` = '".esc_sql($this->comment_id)."'" : '');
@@ -122,7 +121,7 @@ class SubPurger extends AbsBase
         if (!$user->ID) {
             return; // Not possible.
         }
-        $sql = "SELECT `ID` FROM `".esc_sql($this->plugin->utils_db->prefix().'subs')."`".
+        $sql = 'SELECT `ID` FROM `'.esc_sql($this->plugin->utils_db->prefix().'subs').'`'.
 
                " WHERE `user_id` = '".esc_sql($user->ID)."'".
                ($user->user_email ? " OR `email` = '".esc_sql($user->user_email)."'" : '');
@@ -132,4 +131,3 @@ class SubPurger extends AbsBase
         }
     }
 }
-	
