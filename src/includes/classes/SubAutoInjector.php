@@ -1,43 +1,44 @@
 <?php
 /**
- * Auto Sub Injector
+ * Auto Sub Injector.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * Auto Sub Injector
+ * Auto Sub Injector.
  *
  * @since 141111 First documented version.
  */
 class SubAutoInjector extends AbsBase
 {
     /**
-     * @var \stdClass|null Post object.
+     * @type \stdClass|null Post object.
      *
      * @since 141111 First documented version.
      */
     protected $post;
 
     /**
-     * @var \WP_User|null Post author.
+     * @type \WP_User|null Post author.
      *
      * @since 141111 First documented version.
      */
     protected $post_author;
 
     /**
-     * @var array Auto-subscribable post types.
+     * @type array Auto-subscribable post types.
      *
      * @since 141111 First documented version.
      */
     protected $post_types;
 
     /**
-     * @var boolean Process events?
+     * @type bool Process events?
      *
      * @since 141111 First documented version.
      */
@@ -48,14 +49,14 @@ class SubAutoInjector extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param integer|string $post_id Post ID.
-     * @param array          $args    Any additional behavioral args.
+     * @param int|string $post_id Post ID.
+     * @param array      $args    Any additional behavioral args.
      */
     public function __construct($post_id, array $args = [])
     {
         parent::__construct();
 
-        $post_id = (integer)$post_id;
+        $post_id = (integer) $post_id;
 
         if ($post_id) { // Need to have this.
             $this->post = get_post($post_id);
@@ -63,8 +64,8 @@ class SubAutoInjector extends AbsBase
         $defaults_args = [
             'process_events' => true,
         ];
-        $args          = array_merge($defaults_args, $args);
-        $args          = array_intersect_key($args, $defaults_args);
+        $args = array_merge($defaults_args, $args);
+        $args = array_intersect_key($args, $defaults_args);
 
         if ($this->post && $this->post->post_author) {
             if ($this->plugin->options['auto_subscribe_post_author_enable']) {
@@ -85,7 +86,7 @@ class SubAutoInjector extends AbsBase
             }
             unset($_key, $_post_type); // Housekeeping.
         }
-        $this->process_events = (boolean)$args['process_events'];
+        $this->process_events = (boolean) $args['process_events'];
 
         $this->maybeAutoInject();
     }
@@ -207,9 +208,10 @@ class SubAutoInjector extends AbsBase
         $roles = $this->plugin->options['auto_subscribe_roles'];
         $roles = preg_split('/[;,\s]+/', $roles, null, PREG_SPLIT_NO_EMPTY);
 
-        foreach ($roles as $_role) // All users w/ any of these roles.
-        {
-            foreach ((array)get_users('role='.$_role) as $_user) {
+        foreach ($roles as $_role) {
+            // All users w/ any of these roles.
+
+            foreach ((array) get_users('role='.$_role) as $_user) {
                 if (!($_user instanceof \WP_User) || !$_user->user_email) {
                     continue; // Not applicable/possible.
                 }
@@ -233,5 +235,4 @@ class SubAutoInjector extends AbsBase
         }
         unset($_role); // Housekeeping.
     }
-
 }
