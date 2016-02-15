@@ -1,15 +1,16 @@
 <?php
 /**
- * String Utilities
+ * String Utilities.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * String Utilities
+ * String Utilities.
  *
  * @since 141111 First documented version.
  */
@@ -36,7 +37,7 @@ class UtilsString extends AbsBase
      */
     public function strip($string)
     {
-        return $this->stripDeep((string)$string);
+        return $this->stripDeep((string) $string);
     }
 
     /**
@@ -59,7 +60,7 @@ class UtilsString extends AbsBase
 
             return $values; // Stripped deeply.
         }
-        $string = (string)$values;
+        $string = (string) $values;
 
         return stripslashes($string);
     }
@@ -77,7 +78,7 @@ class UtilsString extends AbsBase
      */
     public function trim($string, $chars = '', $extra_chars = '')
     {
-        return $this->trimDeep((string)$string, $chars, $extra_chars);
+        return $this->trimDeep((string) $string, $chars, $extra_chars);
     }
 
     /**
@@ -87,10 +88,8 @@ class UtilsString extends AbsBase
      *
      * @param mixed  $values      Any value can be converted into a trimmed string.
      *                            Actually, objects can't, but this recurses into objects.
-     *
      * @param string $chars       Specific chars to trim.
      *                            Defaults to PHP's trim: " \r\n\t\0\x0B". Use an empty string to bypass.
-     *
      * @param string $extra_chars Additional chars to trim.
      *
      * @return string|array|object Trimmed string, array, object.
@@ -105,9 +104,9 @@ class UtilsString extends AbsBase
 
             return $values; // Trimmed deeply.
         }
-        $string      = (string)$values;
-        $chars       = (string)$chars;
-        $extra_chars = (string)$extra_chars;
+        $string      = (string) $values;
+        $chars       = (string) $chars;
+        $extra_chars = (string) $extra_chars;
 
         $chars = isset($chars[0]) ? $chars : " \r\n\t\0\x0B";
         $chars = $chars.$extra_chars; // Concatenate.
@@ -128,7 +127,7 @@ class UtilsString extends AbsBase
      */
     public function trimStrip($string, $chars = '', $extra_chars = '')
     {
-        return $this->trimStripDeep((string)$string, $chars, $extra_chars);
+        return $this->trimStripDeep((string) $string, $chars, $extra_chars);
     }
 
     /**
@@ -138,10 +137,8 @@ class UtilsString extends AbsBase
      *
      * @param mixed  $values      Any value can be converted into a trimmed/stripped string.
      *                            Actually, objects can't, but this recurses into objects.
-     *
      * @param string $chars       Specific chars to trim.
      *                            Defaults to PHP's trim: " \r\n\t\0\x0B". Use an empty string to bypass.
-     *
      * @param string $extra_chars Additional chars to trim.
      *
      * @return string|array|object Trimmed/stripped string, array, object.
@@ -155,10 +152,8 @@ class UtilsString extends AbsBase
      * Trims HTML markup.
      *
      * @param string $string      A string value.
-     *
      * @param string $chars       Other specific chars to trim (HTML whitespace is always trimmed).
      *                            Defaults to PHP's trim: " \r\n\t\0\x0B". Use an empty string to bypass this argument and specify additional chars only.
-     *
      * @param string $extra_chars Additional specific chars to trim.
      *
      * @return string Trimmed string (HTML whitespace is always trimmed).
@@ -173,10 +168,8 @@ class UtilsString extends AbsBase
      *
      * @param mixed  $values      Any value can be converted into a trimmed string.
      *                            Actually, objects can't, but this recurses into objects.
-     *
      * @param string $chars       Other specific chars to trim (HTML whitespace is always trimmed).
      *                            Defaults to PHP's trim: " \r\n\t\0\x0B". Use an empty string to bypass this argument and specify additional chars only.
-     *
      * @param string $extra_chars Additional specific chars to trim.
      *
      * @return string|array|object Trimmed string, array, object (HTML whitespace is always trimmed).
@@ -191,7 +184,7 @@ class UtilsString extends AbsBase
 
             return $this->trimDeep($values, $chars, $extra_chars);
         }
-        $string = (string)$values;
+        $string = (string) $values;
 
         if (is_null($whitespace = &$this->staticKey(__FUNCTION__, 'whitespace'))) {
             $whitespace = implode('|', array_keys($this->html_whitespace));
@@ -206,23 +199,22 @@ class UtilsString extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param string  $string See {@link esc_sq_deep()}.
-     * @param integer $times  See {@link esc_sq_deep()}.
+     * @param string $string See {@link esc_sq_deep()}.
+     * @param int    $times  See {@link esc_sq_deep()}.
      *
      * @return string See {@link esc_sq_deep()}.
      */
     public function escSq($string, $times = 1)
     {
-        return $this->escSqDeep((string)$string, $times);
+        return $this->escSqDeep((string) $string, $times);
     }
 
     /**
      * Escapes single quotes deeply.
      *
-     * @param mixed   $values Any value can be converted into an escaped string.
-     *                        Actually, objects can't, but this recurses into objects.
-     *
-     * @param integer $times  Number of escapes. Defaults to `1`.
+     * @param mixed $values Any value can be converted into an escaped string.
+     *                      Actually, objects can't, but this recurses into objects.
+     * @param int   $times  Number of escapes. Defaults to `1`.
      *
      * @return string|array|object Escaped string, array, object.
      */
@@ -236,8 +228,8 @@ class UtilsString extends AbsBase
 
             return $values; // All done.
         }
-        $string = (string)$values;
-        $times  = abs((integer)$times);
+        $string = (string) $values;
+        $times  = abs((integer) $times);
 
         return str_replace("'", str_repeat('\\', $times)."'", $string);
     }
@@ -245,14 +237,14 @@ class UtilsString extends AbsBase
     /**
      * Escapes JS line breaks (removes "\r"); and escapes single quotes.
      *
-     * @param string  $string A string value.
-     * @param integer $times  Number of escapes. Defaults to `1`.
+     * @param string $string A string value.
+     * @param int    $times  Number of escapes. Defaults to `1`.
      *
      * @return string Escaped string, ready for JavaScript.
      */
     public function escJsSq($string, $times = 1)
     {
-        return $this->escJsSqDeep((string)$string, $times);
+        return $this->escJsSqDeep((string) $string, $times);
     }
 
     /**
@@ -262,10 +254,9 @@ class UtilsString extends AbsBase
      *    1. Special handling for line breaks: `\r\n` and `\r` are converted to `\n`.
      *    2. This does NOT escape double quotes; only single quotes.
      *
-     * @param mixed   $value Any value can be converted into an escaped string.
-     *                       Actually, objects can't, but this recurses into objects.
-     *
-     * @param integer $times Number of escapes. Defaults to `1`.
+     * @param mixed $value Any value can be converted into an escaped string.
+     *                     Actually, objects can't, but this recurses into objects.
+     * @param int   $times Number of escapes. Defaults to `1`.
      *
      * @return string|array|object Escaped string, array, object (ready for JavaScript).
      */
@@ -279,10 +270,10 @@ class UtilsString extends AbsBase
 
             return $value; // All done.
         }
-        $value = str_replace(["\r\n", "\r", '"'], ["\n", "\n", '%%!dq!%%'], (string)$value);
+        $value = str_replace(["\r\n", "\r", '"'], ["\n", "\n", '%%!dq!%%'], (string) $value);
         $value = str_replace(['%%!dq!%%', "'"], ['"', "\\'"], trim(json_encode($value), '"'));
 
-        return str_replace('\\', str_repeat('\\', abs((integer)$times) - 1).'\\', $value);
+        return str_replace('\\', str_repeat('\\', abs((integer) $times) - 1).'\\', $value);
     }
 
     /**
@@ -290,23 +281,22 @@ class UtilsString extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param string  $string See {@link esc_dq_deep()}.
-     * @param integer $times  See {@link esc_dq_deep()}.
+     * @param string $string See {@link esc_dq_deep()}.
+     * @param int    $times  See {@link esc_dq_deep()}.
      *
      * @return string See {@link esc_dq_deep()}.
      */
     public function escDq($string, $times = 1)
     {
-        return $this->escDqDeep((string)$string, $times);
+        return $this->escDqDeep((string) $string, $times);
     }
 
     /**
      * Escapes double quotes deeply.
      *
-     * @param mixed   $values Any value can be converted into an escaped string.
-     *                        Actually, objects can't, but this recurses into objects.
-     *
-     * @param integer $times  Number of escapes. Defaults to `1`.
+     * @param mixed $values Any value can be converted into an escaped string.
+     *                      Actually, objects can't, but this recurses into objects.
+     * @param int   $times  Number of escapes. Defaults to `1`.
      *
      * @return string|array|object Escaped string, array, object.
      */
@@ -320,8 +310,8 @@ class UtilsString extends AbsBase
 
             return $values; // All done.
         }
-        $string = (string)$values;
-        $times  = abs((integer)$times);
+        $string = (string) $values;
+        $times  = abs((integer) $times);
 
         return str_replace('"', str_repeat('\\', $times).'"', $string);
     }
@@ -331,23 +321,22 @@ class UtilsString extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param string  $string See {@link esc_csv_dq_deep()}.
-     * @param integer $times  See {@link esc_csv_dq_deep()}.
+     * @param string $string See {@link esc_csv_dq_deep()}.
+     * @param int    $times  See {@link esc_csv_dq_deep()}.
      *
      * @return string See {@link esc_csv_dq_deep()}.
      */
     public function escCsvDq($string, $times = 1)
     {
-        return $this->escCsvDqDeep((string)$string, $times);
+        return $this->escCsvDqDeep((string) $string, $times);
     }
 
     /**
      * Escapes double quotes deeply; for CSV.
      *
-     * @param mixed   $values Any value can be converted into an escaped string.
-     *                        Actually, objects can't, but this recurses into objects.
-     *
-     * @param integer $times  Number of escapes. Defaults to `1`.
+     * @param mixed $values Any value can be converted into an escaped string.
+     *                      Actually, objects can't, but this recurses into objects.
+     * @param int   $times  Number of escapes. Defaults to `1`.
      *
      * @return string|array|object Escaped string, array, object.
      */
@@ -361,8 +350,8 @@ class UtilsString extends AbsBase
 
             return $values; // All done.
         }
-        $string = (string)$values;
-        $times  = abs((integer)$times);
+        $string = (string) $values;
+        $times  = abs((integer) $times);
 
         return str_replace('"', str_repeat('"', $times).'"', $string);
     }
@@ -380,7 +369,7 @@ class UtilsString extends AbsBase
      */
     public function iReplaceOnce($needle, $replace, $string)
     {
-        return $this->replaceOnceDeep($needle, $replace, (string)$string, true);
+        return $this->replaceOnceDeep($needle, $replace, (string) $string, true);
     }
 
     /**
@@ -404,16 +393,16 @@ class UtilsString extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param string  $needle           See {@link str_replace_once_deep()}.
-     * @param string  $replace          See {@link str_replace_once_deep()}.
-     * @param string  $string           See {@link str_replace_once_deep()}.
-     * @param boolean $caSe_insensitive See {@link str_replace_once_deep()}.
+     * @param string $needle           See {@link str_replace_once_deep()}.
+     * @param string $replace          See {@link str_replace_once_deep()}.
+     * @param string $string           See {@link str_replace_once_deep()}.
+     * @param bool   $caSe_insensitive See {@link str_replace_once_deep()}.
      *
      * @return string See {@link str_replace_once_deep()}.
      */
     public function strReplaceOnce($needle, $replace, $string, $caSe_insensitive = false)
     {
-        return $this->replaceOnceDeep($needle, $replace, (string)$string, $caSe_insensitive);
+        return $this->replaceOnceDeep($needle, $replace, (string) $string, $caSe_insensitive);
     }
 
     /**
@@ -421,12 +410,11 @@ class UtilsString extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param string  $needle           A string to search/replace.
-     * @param string  $replace          What to replace `$needle` with.
-     * @param mixed   $values           The haystack(s) to search in.
-     *
-     * @param boolean $caSe_insensitive Defaults to a `FALSE` value.
-     *                                  Pass this as `TRUE` to a caSe-insensitive search/replace.
+     * @param string $needle           A string to search/replace.
+     * @param string $replace          What to replace `$needle` with.
+     * @param mixed  $values           The haystack(s) to search in.
+     * @param bool   $caSe_insensitive Defaults to a `FALSE` value.
+     *                                 Pass this as `TRUE` to a caSe-insensitive search/replace.
      *
      * @return string|array|object The `$haystacks`, with `$needle` replaced with `$replace` ONE time only.
      */
@@ -440,15 +428,15 @@ class UtilsString extends AbsBase
 
             return $values; // All done.
         }
-        $needle  = (string)$needle;
-        $replace = (string)$replace;
-        $string  = (string)$values;
+        $needle  = (string) $needle;
+        $replace = (string) $replace;
+        $string  = (string) $values;
 
         $caSe_strpos = $caSe_insensitive ? 'stripos' : 'strpos';
         if (($needle_strpos = $caSe_strpos($string, $needle)) === false) {
             return $string; // Nothing to replace.
         }
-        return (string)substr_replace($string, $replace, $needle_strpos, strlen($needle));
+        return (string) substr_replace($string, $replace, $needle_strpos, strlen($needle));
     }
 
     /**
@@ -471,7 +459,7 @@ class UtilsString extends AbsBase
 
             return $values; // All done.
         }
-        $string = (string)$values;
+        $string = (string) $values;
 
         return preg_quote($string, $delimiter);
     }
@@ -487,7 +475,7 @@ class UtilsString extends AbsBase
      */
     public function nEols($string)
     {
-        return $this->nEolsDeep((string)$string);
+        return $this->nEolsDeep((string) $string);
     }
 
     /**
@@ -510,7 +498,7 @@ class UtilsString extends AbsBase
 
             return $values; // All done.
         }
-        $string = (string)$values;
+        $string = (string) $values;
 
         $string = str_replace(["\r\n", "\r"], "\n", $string);
         $string = preg_replace('/'."\n".'{3,}/', "\n\n", $string);
@@ -529,7 +517,7 @@ class UtilsString extends AbsBase
      */
     public function nHtmlWhitespace($string)
     {
-        return $this->nHtmlWhitespaceDeep((string)$string);
+        return $this->nHtmlWhitespaceDeep((string) $string);
     }
 
     /**
@@ -552,7 +540,7 @@ class UtilsString extends AbsBase
 
             return $this->nEolsDeep($values); // All done.
         }
-        $string = (string)$values;
+        $string = (string) $values;
 
         if (is_null($whitespace = &$this->staticKey(__FUNCTION__, 'whitespace'))) {
             $whitespace = implode('|', array_keys($this->html_whitespace));
@@ -567,15 +555,15 @@ class UtilsString extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param string  $string         See {@link clip_deep()}.
-     * @param integer $max_length     See {@link clip_deep()}.
-     * @param boolean $force_ellipsis See {@link clip_deep()}.
+     * @param string $string         See {@link clip_deep()}.
+     * @param int    $max_length     See {@link clip_deep()}.
+     * @param bool   $force_ellipsis See {@link clip_deep()}.
      *
      * @return string See {@link clip_deep()}.
      */
     public function clip($string, $max_length = 45, $force_ellipsis = false)
     {
-        return $this->clipDeep((string)$string, $max_length, $force_ellipsis);
+        return $this->clipDeep((string) $string, $max_length, $force_ellipsis);
     }
 
     /**
@@ -583,9 +571,9 @@ class UtilsString extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param mixed   $values         Input string(s) to clip.
-     * @param integer $max_length     Defaults to a value of `45`.
-     * @param boolean $force_ellipsis Defaults to a value of `FALSE`.
+     * @param mixed $values         Input string(s) to clip.
+     * @param int   $max_length     Defaults to a value of `45`.
+     * @param bool  $force_ellipsis Defaults to a value of `FALSE`.
      *
      * @return string|array|object Clipped string(s).
      */
@@ -599,19 +587,19 @@ class UtilsString extends AbsBase
 
             return $values; // All done.
         }
-        if (!($string = (string)$values)) {
+        if (!($string = (string) $values)) {
             return $string; // Empty.
         }
-        $max_length = (integer)$max_length;
+        $max_length = (integer) $max_length;
         $max_length = $max_length < 6 ? 6 : $max_length;
 
         $string = $this->htmlToText($string, ['br2nl' => false]);
         $string = str_replace('"', "'", $string);
 
         if (strlen($string) > $max_length) {
-            $string = (string)substr($string, 0, $max_length - 5).'[...]';
-        } else if ($force_ellipsis && strlen($string) + 5 > $max_length) {
-            $string = (string)substr($string, 0, $max_length - 5).'[...]';
+            $string = (string) substr($string, 0, $max_length - 5).'[...]';
+        } elseif ($force_ellipsis && strlen($string) + 5 > $max_length) {
+            $string = (string) substr($string, 0, $max_length - 5).'[...]';
         } else {
             $string .= $force_ellipsis ? '[...]' : '';
         }
@@ -623,14 +611,14 @@ class UtilsString extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param string  $string     See {@link mid_clip_deep()}.
-     * @param integer $max_length See {@link mid_clip_deep()}
+     * @param string $string     See {@link mid_clip_deep()}.
+     * @param int    $max_length See {@link mid_clip_deep()}
      *
      * @return string See {@link mid_clip_deep()}
      */
     public function midClip($string, $max_length = 45)
     {
-        return $this->midClipDeep((string)$string, $max_length);
+        return $this->midClipDeep((string) $string, $max_length);
     }
 
     /**
@@ -638,8 +626,8 @@ class UtilsString extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param mixed   $values     Input string(s) to mid-clip.
-     * @param integer $max_length Defaults to a value of `45`.
+     * @param mixed $values     Input string(s) to mid-clip.
+     * @param int   $max_length Defaults to a value of `45`.
      *
      * @return string|array|object Mid-clipped string(s).
      */
@@ -653,10 +641,10 @@ class UtilsString extends AbsBase
 
             return $values; // All done.
         }
-        if (!($string = (string)$values)) {
+        if (!($string = (string) $values)) {
             return $string; // Empty.
         }
-        $max_length = (integer)$max_length;
+        $max_length = (integer) $max_length;
         $max_length = $max_length < 6 ? 6 : $max_length;
 
         $string = $this->htmlToText($string, ['br2nl' => false]);
@@ -687,7 +675,7 @@ class UtilsString extends AbsBase
      *
      * @param string $string Any input string to test here.
      *
-     * @return boolean TRUE if string is HTML.
+     * @return bool TRUE if string is HTML.
      */
     public function isHtml($string)
     {
@@ -702,14 +690,14 @@ class UtilsString extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param string  $string Any input string to encode.
-     * @param boolean $double Double encode existing HTML entities?
+     * @param string $string Any input string to encode.
+     * @param bool   $double Double encode existing HTML entities?
      *
      * @return string String w/ HTML entities encoded.
      */
     public function htmlEntitiesEncode($string, $double = false)
     {
-        if (!($string = trim((string)$string))) {
+        if (!($string = trim((string) $string))) {
             return $string; // Not possible.
         }
         $decode_flags = ENT_QUOTES;
@@ -719,7 +707,7 @@ class UtilsString extends AbsBase
         }
         $string = wp_check_invalid_utf8($string);
 
-        return htmlentities($string, $decode_flags, 'UTF-8', (boolean)$double);
+        return htmlentities($string, $decode_flags, 'UTF-8', (boolean) $double);
     }
 
     /**
@@ -733,7 +721,7 @@ class UtilsString extends AbsBase
      */
     public function htmlEntitiesDecode($string)
     {
-        if (!($string = trim((string)$string))) {
+        if (!($string = trim((string) $string))) {
             return $string; // Not possible.
         }
         $decode_flags = ENT_QUOTES;
@@ -757,7 +745,7 @@ class UtilsString extends AbsBase
      */
     public function textToHtml($string)
     {
-        if (!($string = trim((string)$string))) {
+        if (!($string = trim((string) $string))) {
             return $string; // Not possible.
         }
         $string = esc_html($string);
@@ -782,7 +770,7 @@ class UtilsString extends AbsBase
      */
     public function htmlToText($string, array $args = [])
     {
-        if (!($string = trim((string)$string))) {
+        if (!($string = trim((string) $string))) {
             return $string; // Not possible.
         }
         $default_args = [
@@ -791,15 +779,15 @@ class UtilsString extends AbsBase
             'strip_content_in_tags' => $this->invisible_tags,
             'inject_eol_after_tags' => $this->block_tags,
         ];
-        $args         = array_merge($default_args, $args);
-        $args         = array_intersect_key($args, $default_args);
+        $args = array_merge($default_args, $args);
+        $args = array_intersect_key($args, $default_args);
 
-        $br2nl = (boolean)$args['br2nl']; // Allow line breaks?
+        $br2nl = (boolean) $args['br2nl']; // Allow line breaks?
 
-        $strip_content_in_tags            = (array)$args['strip_content_in_tags'];
+        $strip_content_in_tags            = (array) $args['strip_content_in_tags'];
         $strip_content_in_tags_regex_frag = implode('|', $this->pregQuoteDeep($strip_content_in_tags));
 
-        $inject_eol_after_tags            = (array)$args['inject_eol_after_tags'];
+        $inject_eol_after_tags            = (array) $args['inject_eol_after_tags'];
         $inject_eol_after_tags_regex_frag = implode('|', $this->pregQuoteDeep($inject_eol_after_tags));
 
         $string = preg_replace('/\<('.$strip_content_in_tags_regex_frag.')(?:\>|\s[^>]*\>).*?\<\/\\1\>/is', '', $string);
@@ -834,13 +822,13 @@ class UtilsString extends AbsBase
      */
     public function htmlToRichText($string, array $args = [])
     {
-        if (!($string = trim((string)$string))) {
+        if (!($string = trim((string) $string))) {
             return $string; // Not possible.
         }
         $default_args = [
             'br2nl' => true,
 
-            'allowed_tags'       => [
+            'allowed_tags' => [
                 'a',
                 'strong', 'b',
                 'i', 'em',
@@ -855,24 +843,24 @@ class UtilsString extends AbsBase
             'strip_content_in_tags' => $this->invisible_tags,
             'inject_eol_after_tags' => $this->block_tags,
         ];
-        $args         = array_merge($default_args, $args);
-        $args         = array_intersect_key($args, $default_args);
+        $args = array_merge($default_args, $args);
+        $args = array_intersect_key($args, $default_args);
 
-        $br2nl = (boolean)$args['br2nl']; // Allow line breaks?
+        $br2nl = (boolean) $args['br2nl']; // Allow line breaks?
 
-        $allowed_tags = (array)$args['allowed_tags'];
+        $allowed_tags = (array) $args['allowed_tags'];
         if ($br2nl) {
             $allowed_tags[] = 'br'; // Allow `<br>` in this case.
         }
         $allowed_tags       = array_unique(array_map('strtolower', $allowed_tags));
-        $allowed_attributes = (array)$args['allowed_attributes'];
+        $allowed_attributes = (array) $args['allowed_attributes'];
 
-        $strip_content_in_tags            = (array)$args['strip_content_in_tags'];
+        $strip_content_in_tags            = (array) $args['strip_content_in_tags'];
         $strip_content_in_tags            = array_map('strtolower', $strip_content_in_tags);
         $strip_content_in_tags            = array_diff($strip_content_in_tags, $allowed_tags);
         $strip_content_in_tags_regex_frag = implode('|', $this->pregQuoteDeep($strip_content_in_tags));
 
-        $inject_eol_after_tags            = (array)$args['inject_eol_after_tags'];
+        $inject_eol_after_tags            = (array) $args['inject_eol_after_tags'];
         $inject_eol_after_tags            = array_map('strtolower', $inject_eol_after_tags);
         $inject_eol_after_tags            = array_diff($inject_eol_after_tags, $allowed_tags);
         $inject_eol_after_tags_regex_frag = implode('|', $this->pregQuoteDeep($inject_eol_after_tags));
@@ -912,11 +900,11 @@ class UtilsString extends AbsBase
         $default_args = [
             'allowed_attributes' => [],
         ];
-        $args         = array_merge($default_args, $args);
-        $args         = array_intersect_key($args, $default_args);
+        $args = array_merge($default_args, $args);
+        $args = array_intersect_key($args, $default_args);
 
         $allowed_attributes = // Force lowercase.
-            array_map('strtolower', (array)$args['allowed_attributes']);
+            array_map('strtolower', (array) $args['allowed_attributes']);
 
         $regex_tags  = '/(?P<open>\<[\w\-]+)(?P<attrs>[^>]+)(?P<close>\>)/i';
         $regex_attrs = '/\s+(?P<attr>[\w\-]+)(?:\s*\=\s*(["\']).*?\\2|\s*\=[^\s]*)?/is';
@@ -925,9 +913,11 @@ class UtilsString extends AbsBase
             $regex_tags,
             function ($m) use ($allowed_attributes, $regex_attrs) {
                 return $m['open'].preg_replace_callback(
-                    $regex_attrs, function ($m) use ($allowed_attributes) {
-                    return in_array(strtolower($m['attr']), $allowed_attributes, true) ? $m[0] : '';
-                }, $m['attrs']
+                    $regex_attrs,
+                    function ($m) use ($allowed_attributes) {
+                        return in_array(strtolower($m['attr']), $allowed_attributes, true) ? $m[0] : '';
+                    },
+                    $m['attrs']
                 ).$m['close']; // With modified attributes.
 
             },
@@ -947,9 +937,9 @@ class UtilsString extends AbsBase
     public function stripPhpTags($string)
     {
         return preg_replace(
-            '/'. // Open regex; pattern delimiter.
+            '/'.// Open regex; pattern delimiter.
 
-            '(?:'. // Any of these.
+            '(?:'.// Any of these.
 
             '\<\?php.*?\?\>'.
             '|'.
@@ -963,9 +953,11 @@ class UtilsString extends AbsBase
             '|'.
             '\<script\s+[^>]*?language\s*\=\s*php[^>]*\>.*?\<\s*\/\s*script\s*\>'.
 
-            ')'. // Close regex group.
+            ')'.// Close regex group.
 
-            '/is', '', (string)$string
+            '/is',
+            '',
+            (string) $string
         );
     }
 
@@ -981,7 +973,7 @@ class UtilsString extends AbsBase
      */
     public function markdown($string, array $args = [])
     {
-        if (!($string = trim((string)$string))) {
+        if (!($string = trim((string) $string))) {
             return $string; // Not possible.
         }
         $default_args = [
@@ -989,12 +981,12 @@ class UtilsString extends AbsBase
             'breaks' => true,
             'no_p'   => false,
         ];
-        $args         = array_merge($default_args, $args);
-        $args         = array_intersect_key($args, $default_args);
+        $args = array_merge($default_args, $args);
+        $args = array_intersect_key($args, $default_args);
 
-        $oembed = (boolean)$args['oembed'];
-        $breaks = (boolean)$args['breaks'];
-        $no_p   = (boolean)$args['no_p'];
+        $oembed = (boolean) $args['oembed'];
+        $breaks = (boolean) $args['breaks'];
+        $no_p   = (boolean) $args['no_p'];
 
         if ($oembed && strpos($string, '://') !== false) {
             $_spcsm           = $this->spcsmTokens($string, [], __FUNCTION__);
@@ -1007,7 +999,7 @@ class UtilsString extends AbsBase
                 },
                 $_spcsm['string']
             );
-            $string           = $this->spcsmRestore($_spcsm);
+            $string = $this->spcsmRestore($_spcsm);
 
             unset($_spcsm, $_oembed_args); // Housekeeping.
         }
@@ -1045,7 +1037,6 @@ class UtilsString extends AbsBase
      * @since 141111 First documented version.
      *
      * @param string $string Input markup to wrap.
-     *
      * @param string $leader `<[block]>$leader`.
      *                       If `$string` is NOT already wrapped, this comes after first opening `<p>` tag; the most common occurrence here.
      *                       If `$string` IS already wrapped, this is placed after the first block-level open tag (IF it's an inline container; e.g. `<p>`, `<div>`).
@@ -1055,16 +1046,16 @@ class UtilsString extends AbsBase
      *       If the first block-level open tag is NOT an inline container; a new `<p></p>` is prepended to hold the leader properly.
      *
      * @return string Inline markup (and optional leader) inside `<p></p>` (or existing block-level) tags.
-     *    If markup is already wrapped inside a block-level tag, we simply inject `$leader` and leave everything else as-is.
-     *    If markup contains any block-level elements, they'll be moved after `<p></p>` tags to prevent HTML nesting issues.
-     *    If markup is empty, this simply returns an empty string; indicating failure.
+     *                If markup is already wrapped inside a block-level tag, we simply inject `$leader` and leave everything else as-is.
+     *                If markup contains any block-level elements, they'll be moved after `<p></p>` tags to prevent HTML nesting issues.
+     *                If markup is empty, this simply returns an empty string; indicating failure.
      */
     public function pWrap($string, $leader = '')
     {
-        if (!($string = trim((string)$string))) {
+        if (!($string = trim((string) $string))) {
             return ''; // Not possible.
         }
-        $leader         = trim((string)$leader);
+        $leader         = trim((string) $leader);
         $string_is_html = $this->plugin->utils_string->isHtml($string);
 
         $block_tag_open_regex                   = '/(\<(?:'.implode('|', $this->pregQuoteDeep($this->block_tags)).')(?:\s[^>]*?)?\>)/i';
@@ -1106,7 +1097,7 @@ class UtilsString extends AbsBase
         $marker = str_replace('.', '', uniqid('', true)).
                   ($marker ? sha1($marker) : '');
 
-        if (!($string = trim((string)$string))) { // Nothing to tokenize.
+        if (!($string = trim((string) $string))) { // Nothing to tokenize.
             return ['string' => $string, 'tokens' => [], 'marker' => $marker];
         }
         $spcsm = // Convert string to an array w/ token details.
@@ -1139,10 +1130,10 @@ class UtilsString extends AbsBase
             goto code; // Nothing to tokenize here.
         }
         $pre = // HTML `<pre>` tags.
-            '/(?P<tag_open_bracket>\<)'. // Opening `<` bracket.
-            '(?P<tag_open_name>pre)'. // Tag name; e.g. a `pre` tag.
-            '(?P<tag_open_attrs_bracket>\>|\s+[^>]*\>)'. // Attributes & `>`.
-            '(?P<tag_contents>.*?)'. // Tag contents (multiline possible).
+            '/(?P<tag_open_bracket>\<)'.// Opening `<` bracket.
+            '(?P<tag_open_name>pre)'.// Tag name; e.g. a `pre` tag.
+            '(?P<tag_open_attrs_bracket>\>|\s+[^>]*\>)'.// Attributes & `>`.
+            '(?P<tag_contents>.*?)'.// Tag contents (multiline possible).
             '(?P<tag_close>\<\/\\2\>)/is'; // e.g. closing `</pre>` tag.
 
         $spcsm['string'] = preg_replace_callback(
@@ -1164,10 +1155,10 @@ class UtilsString extends AbsBase
             goto samp; // Nothing to tokenize here.
         }
         $code = // HTML `<code>` tags.
-            '/(?P<tag_open_bracket>\<)'. // Opening `<` bracket.
-            '(?P<tag_open_name>code)'. // Tag name; e.g. a `code` tag.
-            '(?P<tag_open_attrs_bracket>\>|\s+[^>]*\>)'. // Attributes & `>`.
-            '(?P<tag_contents>.*?)'. // Tag contents (multiline possible).
+            '/(?P<tag_open_bracket>\<)'.// Opening `<` bracket.
+            '(?P<tag_open_name>code)'.// Tag name; e.g. a `code` tag.
+            '(?P<tag_open_attrs_bracket>\>|\s+[^>]*\>)'.// Attributes & `>`.
+            '(?P<tag_contents>.*?)'.// Tag contents (multiline possible).
             '(?P<tag_close>\<\/\\2\>)/is'; // e.g. closing `</code>` tag.
 
         $spcsm['string'] = preg_replace_callback(
@@ -1189,10 +1180,10 @@ class UtilsString extends AbsBase
             goto md_fences; // Nothing to tokenize here.
         }
         $samp = // HTML `<samp>` tags.
-            '/(?P<tag_open_bracket>\<)'. // Opening `<` bracket.
-            '(?P<tag_open_name>samp)'. // Tag name; e.g. a `samp` tag.
-            '(?P<tag_open_attrs_bracket>\>|\s+[^>]*\>)'. // Attributes & `>`.
-            '(?P<tag_contents>.*?)'. // Tag contents (multiline possible).
+            '/(?P<tag_open_bracket>\<)'.// Opening `<` bracket.
+            '(?P<tag_open_name>samp)'.// Tag name; e.g. a `samp` tag.
+            '(?P<tag_open_attrs_bracket>\>|\s+[^>]*\>)'.// Attributes & `>`.
+            '(?P<tag_contents>.*?)'.// Tag contents (multiline possible).
             '(?P<tag_close>\<\/\\2\>)/is'; // e.g. closing `</samp>` tag.
 
         $spcsm['string'] = preg_replace_callback(
@@ -1214,8 +1205,8 @@ class UtilsString extends AbsBase
             goto md_links; // Nothing to tokenize here.
         }
         $md_fences = // Markdown pre/code fences.
-            '/(?P<fence_open>~{3,}|`{3,}|`)'. // Opening fence.
-            '(?P<fence_contents>.*?)'. // Contents (multiline possible).
+            '/(?P<fence_open>~{3,}|`{3,}|`)'.// Opening fence.
+            '(?P<fence_contents>.*?)'.// Contents (multiline possible).
             '(?P<fence_close>\\1)/is'; // Closing fence; ~~~, ```, `.
 
         $spcsm['string'] = preg_replace_callback(
@@ -1269,11 +1260,11 @@ class UtilsString extends AbsBase
         if (!isset($spcsm['string'])) {
             return ''; // Not possible.
         }
-        if (!($string = trim((string)$spcsm['string']))) {
+        if (!($string = trim((string) $spcsm['string']))) {
             return $string; // Nothing to restore.
         }
-        $tokens = isset($spcsm['tokens']) ? (array)$spcsm['tokens'] : [];
-        $marker = isset($spcsm['marker']) ? (string)$spcsm['marker'] : '';
+        $tokens = isset($spcsm['tokens']) ? (array) $spcsm['tokens'] : [];
+        $marker = isset($spcsm['marker']) ? (string) $spcsm['marker'] : '';
 
         if (!$tokens || !$marker || strpos($string, '%#%') === false) {
             return $string; // Nothing to restore in this case.
@@ -1292,26 +1283,24 @@ class UtilsString extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param string                       $name          The full name; or display name.
-     *
-     * @param \WP_User|integer|string|null $user_id_email A WP User object, WP user ID, or email address.
-     *                                                    If provided, we make every attempt to pull a name from this source.
-     *
-     * @param integer                      $max_length    The maximum length of the name.
+     * @param string                   $name          The full name; or display name.
+     * @param \WP_User|int|string|null $user_id_email A WP User object, WP user ID, or email address.
+     *                                                If provided, we make every attempt to pull a name from this source.
+     * @param int                      $max_length    The maximum length of the name.
      *
      * @return string First name, else full name; else whatever we can get from `$user_id_email`.
      */
     public function firstName($name = '', $user_id_email = null, $max_length = 50)
     {
         $name       = $this->cleanName($name);
-        $max_length = abs((integer)$max_length);
+        $max_length = abs((integer) $max_length);
 
         if ($name && strpos($name, ' ', 1) !== false) {
-            list($fname,) = explode(' ', $name, 2);
+            list($fname) = explode(' ', $name, 2);
         } else {
             $fname = $name; // One part in this case.
         }
-        if ($fname && ($fname = (string)substr(trim($fname), 0, $max_length))) {
+        if ($fname && ($fname = (string) substr(trim($fname), 0, $max_length))) {
             return $fname; // All set; nothing more to do here.
         }
         if (($user = $user_id_email) instanceof \WP_User
@@ -1323,7 +1312,7 @@ class UtilsString extends AbsBase
             if ($name || $email) { // Only if we got something.
                 return $this->firstName($name, $email, $max_length);
             }
-        } else if (is_string($user_id_email) && ($email = $user_id_email)) {
+        } elseif (is_string($user_id_email) && ($email = $user_id_email)) {
             return $this->emailName($email, $max_length);
         }
         return ''; // Default value; i.e. failure.
@@ -1334,19 +1323,19 @@ class UtilsString extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param string  $string     Input email address.
-     * @param integer $max_length The maximum length of the name.
+     * @param string $string     Input email address.
+     * @param int    $max_length The maximum length of the name.
      *
      * @return string Name from email address; else an empty string.
      */
     public function emailName($string, $max_length = 50)
     {
-        if (!($string = trim((string)$string))) {
+        if (!($string = trim((string) $string))) {
             return ''; // Not possible.
         }
-        $max_length = abs((integer)$max_length);
+        $max_length = abs((integer) $max_length);
 
-        return (string)ucfirst(substr(strstr($string, '@', true), 0, $max_length));
+        return (string) ucfirst(substr(strstr($string, '@', true), 0, $max_length));
     }
 
     /**
@@ -1354,33 +1343,31 @@ class UtilsString extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param string                $name       The full name; or display name.
-     *
-     * @param \WP_User|integer|null $user_id    A WP User object, or WP user ID.
-     *                                          If provided, we make every attempt to pull a name from this source.
-     *
-     * @param integer               $max_length The maximum length of the name.
+     * @param string            $name       The full name; or display name.
+     * @param \WP_User|int|null $user_id    A WP User object, or WP user ID.
+     *                                      If provided, we make every attempt to pull a name from this source.
+     * @param int               $max_length The maximum length of the name.
      *
      * @return string First name, else full name; else whatever we can get from `$user_id_email`.
      */
     public function lastName($name = '', $user_id = null, $max_length = 100)
     {
         $name       = $this->cleanName($name);
-        $max_length = abs((integer)$max_length);
+        $max_length = abs((integer) $max_length);
 
         if ($name && strpos($name, ' ', 1) !== false) {
             list(, $lname) = explode(' ', $name, 2);
         } else {
             $lname = ''; // One part in this case.
         }
-        if ($lname && ($lname = (string)substr(trim($lname), 0, $max_length))) {
+        if ($lname && ($lname = (string) substr(trim($lname), 0, $max_length))) {
             return $lname; // All set; nothing more to do here.
         }
         if (($user = $user_id) instanceof \WP_User
             || (is_integer($user_id) && ($user = new \WP_User($user_id)))
         ) { // Find first non-empty data values (in order of precedence).
             if (($lname = $user->last_name)) {
-                return ($lname = (string)substr(trim($lname), 0, $max_length));
+                return $lname = (string) substr(trim($lname), 0, $max_length);
             }
             if (($name = $this->coalesce($user->display_name))) {
                 return $this->lastName($name, null, $max_length);
@@ -1400,7 +1387,7 @@ class UtilsString extends AbsBase
      */
     public function cleanName($string)
     {
-        return $this->cleanNamesDeep((string)$string);
+        return $this->cleanNamesDeep((string) $string);
     }
 
     /**
@@ -1422,7 +1409,7 @@ class UtilsString extends AbsBase
 
             return $values; // All done.
         }
-        $string = trim((string)$values); // Trim string.
+        $string = trim((string) $values); // Trim string.
         $string = $string ? str_replace('"', '', $string) : '';
         $string = $string ? preg_replace('/^(?:Mr\.?|Mrs\.?|Ms\.?|Dr\.?)\s+/i', '', $string) : '';
         $string = $string ? preg_replace('/\s+(?:Sr\.?|Jr\.?|IV|I+)$/i', '', $string) : '';
@@ -1435,7 +1422,7 @@ class UtilsString extends AbsBase
     /**
      * HTML whitespace. Keys are actually regex patterns here.
      *
-     * @var array HTML whitespace. Keys are actually regex patterns here.
+     * @type array HTML whitespace. Keys are actually regex patterns here.
      */
     public $html_whitespace = [
         '\0'                      => "\0",
@@ -1451,7 +1438,7 @@ class UtilsString extends AbsBase
     /**
      * HTML5 invisible tags.
      *
-     * @var array HTML5 invisible tags.
+     * @type array HTML5 invisible tags.
      */
     public $invisible_tags = [
         'head',
@@ -1463,7 +1450,7 @@ class UtilsString extends AbsBase
     /**
      * HTML5 block-level tags.
      *
-     * @var array HTML5 block-level tags.
+     * @type array HTML5 block-level tags.
      */
     public $block_tags = [
         'address',
@@ -1502,8 +1489,8 @@ class UtilsString extends AbsBase
     ];
 
     /**
-     * @var array Block container tags.
-     *    i.e. block tags that serve as inline containers.
+     * @type array Block container tags.
+     *            i.e. block tags that serve as inline containers.
      *
      * @since 141111 First documented version.
      */
@@ -1512,4 +1499,3 @@ class UtilsString extends AbsBase
         'div',
     ];
 }
-	

@@ -1,15 +1,16 @@
 <?php
 /**
- * List Server Utilities
+ * List Server Utilities.
  *
  * @since     151224 Adding list server integrations.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * List Server Utilities
+ * List Server Utilities.
  *
  * @since 151224 Adding list server integrations.
  */
@@ -44,7 +45,7 @@ class UtilsListServer extends AbsBase
      *
      * @param array $args User ID, email address, IP, etc. Details needed by the list server.
      *
-     * @return boolean True if removed from the list. True if not on the list. False on failure.
+     * @return bool True if removed from the list. True if not on the list. False on failure.
      */
     public function maybeUnsubscribe(array $args)
     {

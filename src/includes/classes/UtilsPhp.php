@@ -1,15 +1,16 @@
 <?php
 /**
- * PHP Utilities
+ * PHP Utilities.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * PHP Utilities
+ * PHP Utilities.
  *
  * @since 141111 First documented version.
  */
@@ -18,8 +19,8 @@ class UtilsPhp extends AbsBase
     /**
      * PHP's language constructs.
      *
-     * @var array PHP's language constructs.
-     *    Keys are currently unimportant. Subject to change.
+     * @type array PHP's language constructs.
+     *            Keys are currently unimportant. Subject to change.
      *
      * @since 141111 First documented version.
      */
@@ -56,22 +57,20 @@ class UtilsPhp extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param string  $___string  String (possibly containing PHP tags).
-     *                            If `$___no_tags` is TRUE; this should NOT have PHP tags.
-     *
-     * @param array   $___vars    An array of variables to bring into the scope of evaluation.
-     *                            This is optional. It defaults to an empty array.
-     *
-     * @param boolean $___no_tags Defaults to a FALSE value.
-     *                            If this is TRUE, the input `$string` should NOT include PHP tags.
-     *
-     * @return string Output string after having been evaluated by PHP.
+     * @param string $___string  String (possibly containing PHP tags).
+     *                           If `$___no_tags` is TRUE; this should NOT have PHP tags.
+     * @param array  $___vars    An array of variables to bring into the scope of evaluation.
+     *                           This is optional. It defaults to an empty array.
+     * @param bool   $___no_tags Defaults to a FALSE value.
+     *                           If this is TRUE, the input `$string` should NOT include PHP tags.
      *
      * @throws \exception If unable to evaluate.
+     * @return string Output string after having been evaluated by PHP.
+     *
      */
     public function evaluate($___string, $___vars = [], $___no_tags = false)
     {
-        $___string = trim((string)$___string);
+        $___string = trim((string) $___string);
 
         if (!isset($___string[0])) {
             return ''; // Empty.
@@ -105,24 +104,23 @@ class UtilsPhp extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param string  $fsmlc    Function, static method, or a PHP language construct.
+     * @param string $fsmlc    Function, static method, or a PHP language construct.
+     * @param bool   $no_cache Defaults to a FALSE value.
+     *                         TRUE to avoid a potentially cached value.
      *
-     * @param boolean $no_cache Defaults to a FALSE value.
-     *                          TRUE to avoid a potentially cached value.
-     *
-     * @return boolean TRUE if (in `$this->constructs` || `is_callable()` || `function_exists()`).
-     *    Iff NOT disabled at runtime via `ini_get('disable_functions')` or with the Suhosin extension.
+     * @return bool TRUE if (in `$this->constructs` || `is_callable()` || `function_exists()`).
+     *              Iff NOT disabled at runtime via `ini_get('disable_functions')` or with the Suhosin extension.
      */
     public function isPossible($fsmlc, $no_cache = false)
     {
-        $fsmlc = ltrim(strtolower((string)$fsmlc), '\\');
+        $fsmlc = ltrim(strtolower((string) $fsmlc), '\\');
 
         if (!is_null($possible = &$this->staticKey(__FUNCTION__, $fsmlc)) && !$no_cache) {
             return $possible; // Cached this already.
         }
         if ($fsmlc // Do we even have something to check?
 
-            && ( // A language construct, or callable.
+            && (// A language construct, or callable.
                 in_array($fsmlc, $this->constructs, true)
                 || is_callable($fsmlc) || function_exists($fsmlc)
             )
@@ -130,9 +128,9 @@ class UtilsPhp extends AbsBase
             && !in_array($fsmlc, $this->disabledFunctions(), true)
 
         ) {
-            return ($possible = true);
+            return $possible = true;
         }
-        return ($possible = false);
+        return $possible = false;
     }
 
     /**
@@ -168,4 +166,3 @@ class UtilsPhp extends AbsBase
         return $disabled;
     }
 }
-	

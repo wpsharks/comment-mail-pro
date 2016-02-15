@@ -1,15 +1,16 @@
 <?php
 /**
- * Encryption Utilities
+ * Encryption Utilities.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * Encryption Utilities
+ * Encryption Utilities.
  *
  * @since 141111 First documented version.
  */
@@ -34,28 +35,26 @@ class UtilsEnc extends AbsBase
      */
     public function key($key = '')
     {
-        if (($key = trim((string)$key))) {
+        if (($key = trim((string) $key))) {
             return $key;
         }
-        return ($key = wp_salt());
+        return $key = wp_salt();
     }
 
     /**
      * Generates an HMAC-SHA256 signature.
      *
-     * @param string  $string Input string/data, to be signed by this routine.
-     *
-     * @param string  $key    Optional. Key used for encryption.
-     *                        Defaults to the one configured for the plugin.
-     *
-     * @param boolean $raw    Optional. Defaults to a FALSE value.
-     *                        If true, the signature is returned as raw binary data, as opposed to lowercase hexits.
+     * @param string $string Input string/data, to be signed by this routine.
+     * @param string $key    Optional. Key used for encryption.
+     *                       Defaults to the one configured for the plugin.
+     * @param bool   $raw    Optional. Defaults to a FALSE value.
+     *                       If true, the signature is returned as raw binary data, as opposed to lowercase hexits.
      *
      * @return string An HMAC-SHA256 signature string. Always 64 characters in length (URL safe).
      */
     public function hmacSha256Sign($string, $key = '', $raw = false)
     {
-        return hash_hmac('sha256', (string)$string, $this->key((string)$key), (boolean)$raw);
+        return hash_hmac('sha256', (string) $string, $this->key((string) $key), (boolean) $raw);
     }
 
     /**
@@ -103,25 +102,23 @@ class UtilsEnc extends AbsBase
      *    making them a better choice in certain scenarios. That is, XOR encrypted strings always offer the same representation
      *    of the original string; whereas RIJNDAEL 256 changes randomly, making it difficult to use comparison algorithms.
      *
-     * @param string  $string   A string of data to encrypt.
-     *
-     * @param string  $key      Optional. Key used for encryption.
-     *                          Defaults to the one configured for the plugin.
-     *
-     * @param boolean $w_md5_cs Optional. Defaults to TRUE (recommended).
-     *                          When TRUE, an MD5 checksum is used in the encrypted string.
-     *
-     * @return string Encrypted string.
+     * @param string $string   A string of data to encrypt.
+     * @param string $key      Optional. Key used for encryption.
+     *                         Defaults to the one configured for the plugin.
+     * @param bool   $w_md5_cs Optional. Defaults to TRUE (recommended).
+     *                         When TRUE, an MD5 checksum is used in the encrypted string.
      *
      * @throws \exception If string encryption fails.
+     * @return string Encrypted string.
+     *
      */
     public function encrypt($string, $key = '', $w_md5_cs = true)
     {
-        $string = (string)$string;
-        $key    = (string)$key;
+        $string = (string) $string;
+        $key    = (string) $key;
 
         if (!isset($string[0])) { // Nothing to encrypt?
-            return ($base64 = ''); // Nothing to do.
+            return $base64 = ''; // Nothing to do.
         }
         if (!extension_loaded('mcrypt')
             || !in_array('rijndael-256', mcrypt_list_algorithms(), true)
@@ -130,7 +127,7 @@ class UtilsEnc extends AbsBase
             return $this->xEncrypt($string, $key, $w_md5_cs);
         }
         $string = '~r2|'.$string; // A short `rijndael-256` identifier.
-        $key    = (string)substr($this->key($key), 0, mcrypt_get_key_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC));
+        $key    = (string) substr($this->key($key), 0, mcrypt_get_key_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC));
         $iv     = wp_generate_password(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC), false);
 
         if (!is_string($e = mcrypt_encrypt(MCRYPT_RIJNDAEL_256, $key, $string, MCRYPT_MODE_CBC, $iv)) || !isset($e[0])) {
@@ -138,7 +135,7 @@ class UtilsEnc extends AbsBase
         }
         $e = '~r2:'.$iv.($w_md5_cs ? ':'.md5($e) : '').'|'.$e; // Pack components.
 
-        return ($base64 = $this->base64UrlSafeEncode($e));
+        return $base64 = $this->base64UrlSafeEncode($e);
     }
 
     /**
@@ -153,23 +150,22 @@ class UtilsEnc extends AbsBase
      *
      * @param string $base64 A string of data to decrypt.
      *                       Should still be base64 encoded.
-     *
      * @param string $key    Optional. Key used originally for encryption.
      *                       Defaults to the one configured for the plugin.
      *
-     * @return string Decrypted string, or an empty string if validation fails.
-     *    Validation may fail due to an invalid checksum, or a missing component in the encrypted string.
-     *    For security purposes, this returns an empty string on validation failures.
-     *
      * @throws \exception If a validated RIJNDAEL 256 string decryption fails.
+     * @return string Decrypted string, or an empty string if validation fails.
+     *                Validation may fail due to an invalid checksum, or a missing component in the encrypted string.
+     *                For security purposes, this returns an empty string on validation failures.
+     *
      */
     public function decrypt($base64, $key = '')
     {
-        $base64 = (string)$base64;
-        $key    = (string)$key;
+        $base64 = (string) $base64;
+        $key    = (string) $key;
 
         if (!isset($base64[0])) { // Nothing to decrypt?
-            return ($string = ''); // Nothing to do.
+            return $string = ''; // Nothing to do.
         }
         if (!extension_loaded('mcrypt')
             || !in_array('rijndael-256', mcrypt_list_algorithms(), true)
@@ -180,20 +176,20 @@ class UtilsEnc extends AbsBase
             return $this->xDecrypt($base64, $key); // Try XOR decryption instead :-)
         }
         if (!isset($iv_md5_e['iv'][0], $iv_md5_e['e'][0])) {
-            return ($string = ''); // Components missing.
+            return $string = ''; // Components missing.
         }
         if (isset($iv_md5_e['md5'][0]) && $iv_md5_e['md5'] !== md5($iv_md5_e['e'])) {
-            return ($string = ''); // Invalid checksum; automatic failure.
+            return $string = ''; // Invalid checksum; automatic failure.
         }
-        $key = (string)substr($this->key($key), 0, mcrypt_get_key_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC));
+        $key = (string) substr($this->key($key), 0, mcrypt_get_key_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC));
 
         if (!is_string($string = mcrypt_decrypt(MCRYPT_RIJNDAEL_256, $key, $iv_md5_e['e'], MCRYPT_MODE_CBC, $iv_md5_e['iv'])) || !isset($string[0])) {
             throw new \exception(__('String decryption failed; `$string` is NOT a string, or it has no length.', $this->plugin->text_domain));
         }
         if (!strlen($string = preg_replace('/^~r2\|/', '', $string, 1, $r2)) || !$r2) {
-            return ($string = ''); // Missing packed components.
+            return $string = ''; // Missing packed components.
         }
-        return ($string = rtrim($string, "\0\4")); // See: <http://www.asciitable.com/>.
+        return $string = rtrim($string, "\0\4"); // See: <http://www.asciitable.com/>.
     }
 
     /**
@@ -204,29 +200,27 @@ class UtilsEnc extends AbsBase
      *    making them a better choice in certain scenarios. That is, XOR encrypted strings always offer the same representation
      *    of the original string; whereas RIJNDAEL 256 changes randomly, making it difficult to use comparison algorithms.
      *
-     * @param string  $string   A string of data to encrypt.
-     *
-     * @param string  $key      Optional. Key used for encryption.
-     *                          Defaults to the one configured for the plugin.
-     *
-     * @param boolean $w_md5_cs Optional. Defaults to TRUE (recommended).
-     *                          When TRUE, an MD5 checksum is used in the encrypted string.
-     *
-     * @return string Encrypted string.
+     * @param string $string   A string of data to encrypt.
+     * @param string $key      Optional. Key used for encryption.
+     *                         Defaults to the one configured for the plugin.
+     * @param bool   $w_md5_cs Optional. Defaults to TRUE (recommended).
+     *                         When TRUE, an MD5 checksum is used in the encrypted string.
      *
      * @throws \exception If string encryption fails.
+     * @return string Encrypted string.
+     *
      */
     public function xEncrypt($string, $key = '', $w_md5_cs = true)
     {
-        $string = (string)$string;
-        $key    = (string)$key;
+        $string = (string) $string;
+        $key    = (string) $key;
 
         if (!isset($string[0])) { // Nothing to encrypt?
-            return ($base64 = ''); // Nothing to do.
+            return $base64 = ''; // Nothing to do.
         }
-        for ($key = $this->key($key), $string = '~xe|'.$string, $_i = 1, $e = ''; $_i <= strlen($string); $_i++) {
-            $_char     = (string)substr($string, $_i - 1, 1);
-            $_key_char = (string)substr($key, ($_i % strlen($key)) - 1, 1);
+        for ($key = $this->key($key), $string = '~xe|'.$string, $_i = 1, $e = ''; $_i <= strlen($string); ++$_i) {
+            $_char     = (string) substr($string, $_i - 1, 1);
+            $_key_char = (string) substr($key, ($_i % strlen($key)) - 1, 1);
             $e .= chr(ord($_char) + ord($_key_char));
         }
         unset($_i, $_char, $_key_char); // Housekeeping.
@@ -236,7 +230,7 @@ class UtilsEnc extends AbsBase
         }
         $e = '~xe'.($w_md5_cs ? ':'.md5($e) : '').'|'.$e; // Pack components.
 
-        return ($base64 = $this->base64UrlSafeEncode($e));
+        return $base64 = $this->base64UrlSafeEncode($e);
     }
 
     /**
@@ -249,38 +243,37 @@ class UtilsEnc extends AbsBase
      *
      * @param string $base64 A string of data to decrypt.
      *                       Should still be base64 encoded.
-     *
      * @param string $key    Optional. Key used originally for encryption.
      *                       Defaults to the one configured for the plugin.
      *
-     * @return string Decrypted string, or an empty string if validation fails.
-     *    Validation may fail due to an invalid checksum, or a missing component in the encrypted string.
-     *    For security purposes, this returns an empty string on validation failures.
-     *
      * @throws \exception If a validated XOR string decryption fails.
+     * @return string Decrypted string, or an empty string if validation fails.
+     *                Validation may fail due to an invalid checksum, or a missing component in the encrypted string.
+     *                For security purposes, this returns an empty string on validation failures.
+     *
      */
     public function xDecrypt($base64, $key = '')
     {
-        $base64 = (string)$base64;
-        $key    = (string)$key;
+        $base64 = (string) $base64;
+        $key    = (string) $key;
 
         if (!isset($base64[0])) { // Nothing to decrypt?
-            return ($string = ''); // Nothing to do.
+            return $string = ''; // Nothing to do.
         }
         if (!strlen($e = $this->base64UrlSafeDecode($base64))
             || !preg_match('/^~xe(?:\:(?P<md5>[a-zA-Z0-9]+))?\|(?P<e>.*)$/s', $e, $md5_e)
         ) {
-            return ($string = ''); // Components missing.
+            return $string = ''; // Components missing.
         }
         if (!isset($md5_e['e'][0])) { // Totally empty?
-            return ($string = ''); // Components missing.
+            return $string = ''; // Components missing.
         }
         if (isset($md5_e['md5'][0]) && $md5_e['md5'] !== md5($md5_e['e'])) {
-            return ($string = ''); // Invalid checksum; automatic failure.
+            return $string = ''; // Invalid checksum; automatic failure.
         }
-        for ($key = $this->key($key), $_i = 1, $string = ''; $_i <= strlen($md5_e['e']); $_i++) {
-            $_char     = (string)substr($md5_e['e'], $_i - 1, 1);
-            $_key_char = (string)substr($key, ($_i % strlen($key)) - 1, 1);
+        for ($key = $this->key($key), $_i = 1, $string = ''; $_i <= strlen($md5_e['e']); ++$_i) {
+            $_char     = (string) substr($md5_e['e'], $_i - 1, 1);
+            $_key_char = (string) substr($key, ($_i % strlen($key)) - 1, 1);
             $string .= chr(ord($_char) - ord($_key_char));
         }
         unset($_i, $_char, $_key_char); // Housekeeping.
@@ -289,7 +282,7 @@ class UtilsEnc extends AbsBase
             throw new \exception(__('String decryption failed; `$string` has no length.', $this->plugin->text_domain));
         }
         if (!strlen($string = preg_replace('/^~xe\|/', '', $string, 1, $xe)) || !$xe) {
-            return ($string = ''); // Missing packed components.
+            return $string = ''; // Missing packed components.
         }
         return $string; // We can return the decrypted string now.
     }
@@ -298,27 +291,24 @@ class UtilsEnc extends AbsBase
      * Base64 URL-safe encoding.
      *
      * @param string $string             Input string to be base64 encoded.
-     *
      * @param array  $url_unsafe_chars   Optional array.
      *                                   An array of un-safe characters.
      *                                   Defaults to: `array('+', '/')`.
-     *
      * @param array  $url_safe_chars     Optional array.
      *                                   An array of safe character replacements.
      *                                   Defaults to: `array('-', '_')`.
-     *
      * @param string $trim_padding_chars Optional string.
      *                                   A string of padding chars to rtrim.
      *                                   Defaults to: `=`.
      *
+     * @throws \exception If the call to `base64_encode()` fails.
      * @return string The base64 URL-safe encoded string.
      *
-     * @throws \exception If the call to `base64_encode()` fails.
      */
     public function base64UrlSafeEncode($string, array $url_unsafe_chars = ['+', '/'], array $url_safe_chars = ['-', '_'], $trim_padding_chars = '=')
     {
-        $string             = (string)$string;
-        $trim_padding_chars = (string)$trim_padding_chars;
+        $string             = (string) $string;
+        $trim_padding_chars = (string) $trim_padding_chars;
 
         if (!is_string($base64_url_safe = base64_encode($string))) {
             throw new \exception(__('Base64 encoding failed (`$base64_url_safe` is NOT a string).', $this->plugin->text_domain));
@@ -333,28 +323,25 @@ class UtilsEnc extends AbsBase
      * Base64 URL-safe decoding.
      *
      * @param string $base64_url_safe    Input string to be base64 decoded.
-     *
      * @param array  $url_unsafe_chars   Optional array.
      *                                   An array of un-safe characters.
      *                                   Defaults to: `array('+', '/')`.
-     *
      * @param array  $url_safe_chars     Optional array.
      *                                   An array of safe character replacements.
      *                                   Defaults to: `array('-', '_')`.
-     *
      * @param string $trim_padding_chars Optional string.
      *                                   A string of padding chars to rtrim.
      *                                   Defaults to: `=`.
      *
-     * @return string The decoded string. Or, possibly the original string, if `$base64_url_safe`
-     *    was NOT base64 encoded to begin with. Helps prevent accidental data corruption.
-     *
      * @throws \exception If the call to `base64_decode()` fails.
+     * @return string The decoded string. Or, possibly the original string, if `$base64_url_safe`
+     *                was NOT base64 encoded to begin with. Helps prevent accidental data corruption.
+     *
      */
     public function base64UrlSafeDecode($base64_url_safe, array $url_unsafe_chars = ['+', '/'], array $url_safe_chars = ['-', '_'], $trim_padding_chars = '=')
     {
-        $base64_url_safe    = (string)$base64_url_safe;
-        $trim_padding_chars = (string)$trim_padding_chars;
+        $base64_url_safe    = (string) $base64_url_safe;
+        $trim_padding_chars = (string) $trim_padding_chars;
 
         $string = isset($trim_padding_chars[0]) ? rtrim($base64_url_safe, $trim_padding_chars) : $base64_url_safe;
         $string = isset($trim_padding_chars[0]) ? str_pad($string, strlen($string) % 4, '=', STR_PAD_RIGHT) : $string;
@@ -375,7 +362,7 @@ class UtilsEnc extends AbsBase
      */
     public function getCookie($name)
     {
-        if (!($name = trim((string)$name))) {
+        if (!($name = trim((string) $name))) {
             return ''; // Not possible.
         }
         if (isset($_COOKIE[$name][0]) && is_string($_COOKIE[$name])) {
@@ -387,21 +374,20 @@ class UtilsEnc extends AbsBase
     /**
      * Sets a cookie.
      *
-     * @param string  $name          Name of the cookie.
-     * @param string  $value         Value for this cookie.
-     *
-     * @param integer $expires_after Optional. Time (in seconds) this cookie should last for. Defaults to `31556926` (one year).
-     *                               If this is set to anything <= `0`, the cookie will expire automatically after the current browser session.
+     * @param string $name          Name of the cookie.
+     * @param string $value         Value for this cookie.
+     * @param int    $expires_after Optional. Time (in seconds) this cookie should last for. Defaults to `31556926` (one year).
+     *                              If this is set to anything <= `0`, the cookie will expire automatically after the current browser session.
      *
      * @throws \exception If headers have already been sent; i.e. if not possible.
      */
     public function setCookie($name, $value, $expires_after = 31556926)
     {
-        if (!($name = trim((string)$name))) {
+        if (!($name = trim((string) $name))) {
             return; // Not possible.
         }
-        $value         = (string)$value;
-        $expires_after = (integer)$expires_after;
+        $value         = (string) $value;
+        $expires_after = (integer) $expires_after;
 
         $value   = $this->encrypt($value);
         $expires = $expires_after > 0 ? time() + $expires_after : 0;
@@ -426,7 +412,7 @@ class UtilsEnc extends AbsBase
      */
     public function deleteCookie($name)
     {
-        if (!($name = trim((string)$name))) {
+        if (!($name = trim((string) $name))) {
             return; // Not possible.
         }
         if (headers_sent()) { // Headers sent already?
@@ -440,4 +426,3 @@ class UtilsEnc extends AbsBase
         }
     }
 }
-	

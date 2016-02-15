@@ -1,15 +1,16 @@
 <?php
 /**
- * Event Utilities
+ * Event Utilities.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * Event Utilities
+ * Event Utilities.
  *
  * @since 141111 First documented version.
  */
@@ -87,7 +88,7 @@ class UtilsEvent extends AbsBase
      */
     public function queueNoteCodeDesc($note_code)
     {
-        switch (strtolower(trim((string)$note_code))) {
+        switch (strtolower(trim((string) $note_code))) {
             /*
              * Check primary IDs for validity.
              */
@@ -289,7 +290,7 @@ class UtilsEvent extends AbsBase
         foreach ($keys as $_key => $_label) {
             if (isset($row->{$_key}, $row->{$_key.'_before'})) {
                 if ($row->{$_key} !== $row->{$_key.'_before'}) {
-                    $change_counter++;
+                    ++$change_counter;
                 }
             }
         }
@@ -334,7 +335,7 @@ class UtilsEvent extends AbsBase
         foreach ($keys as $_key => $_label) {
             if (isset($row->{$_key}, $row->{$_key.'_before'})) {
                 if ($row->{$_key} !== $row->{$_key.'_before'}) {
-                    $change_lis[] = '<li>'. // Details what was changed, and what it was changed to.
+                    $change_lis[] = '<li>'.// Details what was changed, and what it was changed to.
                                     ' '.sprintf(__('%1$s was changed from <code>%2$s</code> to: <code>%3$s</code>', $this->plugin->text_domain), esc_html($_label), esc_html($row->{$_key.'_before'}), esc_html($row->{$_key})).
                                     '</li>';
                 }
@@ -342,7 +343,7 @@ class UtilsEvent extends AbsBase
         }
         unset($_key, $_label); // Housekeeping.
 
-        $change_lis[] = '<li>'. // Show this to avoid an empty set of results in cases where nothing else changed at all.
+        $change_lis[] = '<li>'.// Show this to avoid an empty set of results in cases where nothing else changed at all.
                         ' '.sprintf(__('%1$s was changed to: <code>%2$s</code>', $this->plugin->text_domain), esc_html(__('Last Update Time', $this->plugin->text_domain)), esc_html($this->plugin->utils_date->i18n('M j, Y g:i a', $row->time))).
                         '</li>';
 
@@ -441,4 +442,3 @@ class UtilsEvent extends AbsBase
         return '<a href="#" class="pmp-q-link" data-toggle="alert" data-alert="'.esc_attr($details).'">'.__('[?]', $this->plugin->text_domain).'</a>';
     }
 }
-	

@@ -1,15 +1,16 @@
 <?php
 /**
- * Date Utilities
+ * Date Utilities.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * Date Utilities
+ * Date Utilities.
  *
  * @since 141111 First documented version.
  */
@@ -18,21 +19,20 @@ class UtilsDate extends AbsBase
     /**
      * Date translations (in local time, as configured by WordPress®).
      *
-     * @param string  $format Date format. Same formats allowed by PHP's `date()` function.
-     *                        This is optional. Defaults to: `get_option('date_format').' '.get_option('time_format')`.
+     * @param string $format Date format. Same formats allowed by PHP's `date()` function.
+     *                       This is optional. Defaults to: `get_option('date_format').' '.get_option('time_format')`.
      *
      * @note       There are several PHP constants that can be used here, making `$format` easier to deal with.
      *    Please see: {@link http://www.php.net/manual/en/class.datetime.php#datetime.constants.types}.
      *
-     * @param integer $time   Optional timestamp. A UNIX timestamp, based on UTC time.
-     *                        This defaults to the current time if NOT passed in explicitly.
-     *                        WARNING: Please make sure `$time` is based on UTC.
-     *
-     * @param boolean $utc    Defaults to FALSE (recommended).
-     *                        If this is TRUE the time will be returned in UTC time instead of local time.
+     * @param int  $time Optional timestamp. A UNIX timestamp, based on UTC time.
+     *                   This defaults to the current time if NOT passed in explicitly.
+     *                   WARNING: Please make sure `$time` is based on UTC.
+     * @param bool $utc  Defaults to FALSE (recommended).
+     *                   If this is TRUE the time will be returned in UTC time instead of local time.
      *
      * @return string Date translation (in local time, as configured by WordPress®).
-     *    Or, if `$utc` is TRUE the time will be returned in UTC time, instead of local time.
+     *                Or, if `$utc` is TRUE the time will be returned in UTC time, instead of local time.
      *
      * @note       This uses `date_i18n()` from WordPress®. We supplement this built-in WordPress® function,
      *    by forcing the `$time` argument value at all times. WordPress® has some issues with its default for `$time`,
@@ -61,8 +61,8 @@ class UtilsDate extends AbsBase
      */
     public function i18n($format = '', $time = 0, $utc = false)
     {
-        $format = (string)$format; // Force string.
-        $time   = (integer)$time; // Force integer.
+        $format = (string) $format; // Force string.
+        $time   = (integer) $time; // Force integer.
 
         $format = $format ? $format // A specific format?
             : get_option('date_format').' '.get_option('time_format');
@@ -81,15 +81,15 @@ class UtilsDate extends AbsBase
     /**
      * Date translations (in UTC time). See: {@link i18n()}.
      *
-     * @param string  $format Date format. Same formats allowed by PHP's `date()` function.
-     *                        This is optional. Defaults to: `get_option('date_format').' '.get_option('time_format')`.
+     * @param string $format Date format. Same formats allowed by PHP's `date()` function.
+     *                       This is optional. Defaults to: `get_option('date_format').' '.get_option('time_format')`.
      *
      * @note There are several PHP constants that can be used here, making `$format` easier to deal with.
      *    Please see: {@link http://www.php.net/manual/en/class.datetime.php#datetime.constants.types}.
      *
-     * @param integer $time   Optional timestamp. A UNIX timestamp, based on UTC time.
-     *                        This defaults to the current time if NOT passed in explicitly.
-     *                        WARNING: Please make sure `$time` is based on UTC.
+     * @param int $time Optional timestamp. A UNIX timestamp, based on UTC time.
+     *                  This defaults to the current time if NOT passed in explicitly.
+     *                  WARNING: Please make sure `$time` is based on UTC.
      *
      * @return string See: {@link i18n()}.
      */
@@ -103,11 +103,11 @@ class UtilsDate extends AbsBase
      *
      * @param string $string string to test here.
      *
-     * @return boolean `TRUE` if input string is a relative date.
+     * @return bool `TRUE` if input string is a relative date.
      */
     public function isRelative($string)
     {
-        if (!($string = trim((string)$string))) {
+        if (!($string = trim((string) $string))) {
             return false; // Nope.
         }
         $non_relative = strtotime($string);
@@ -119,13 +119,11 @@ class UtilsDate extends AbsBase
     /**
      * Calculates approx time different (in human readable format).
      *
-     * @param integer $from   A UTC timestamp to calculate from (i.e. start time).
-     *
-     * @param integer $to     A UTC timestamp to calculate to (i.e. the end time).
-     *                        If `NULL` (default value) this will default to the current time.
-     *
-     * @param string  $suffix Optional suffix chars.
-     *                        If `NULL` (default value) this will default to ` ago`.
+     * @param int    $from   A UTC timestamp to calculate from (i.e. start time).
+     * @param int    $to     A UTC timestamp to calculate to (i.e. the end time).
+     *                       If `NULL` (default value) this will default to the current time.
+     * @param string $suffix Optional suffix chars.
+     *                       If `NULL` (default value) this will default to ` ago`.
      *
      * @return string Approx. time different (in human readable format).
      */
@@ -137,44 +135,44 @@ class UtilsDate extends AbsBase
         if (!isset($suffix)) { // Use default value?
             $suffix = ' '.__('ago', $this->plugin->text_domain);
         }
-        $from   = (integer)$from; // Force integer.
-        $to     = (integer)$to; // Force integer.
-        $suffix = (string)$suffix; // Force string.
+        $from   = (integer) $from; // Force integer.
+        $to     = (integer) $to; // Force integer.
+        $suffix = (string) $suffix; // Force string.
 
         $difference = $to - $from >= 0 ? $to - $from : 0;
 
         if ($difference < 3600) { // Less than a minute?
-            $minutes = (integer)round($difference / 60);
+            $minutes = (integer) round($difference / 60);
 
             $since = sprintf(_n('%1$s minute', '%1$s minutes', $minutes, $this->plugin->text_domain), $minutes);
             $since = ($minutes < 1) ? __('less than a minute', $this->plugin->text_domain) : $since;
             $since = ($minutes >= 60) ? __('about 1 hour', $this->plugin->text_domain) : $since;
-        } else if ($difference >= 3600 && $difference < 86400) {
-            $hours = (integer)round($difference / 3600);
+        } elseif ($difference >= 3600 && $difference < 86400) {
+            $hours = (integer) round($difference / 3600);
 
             $since = sprintf(_n('%1$s hour', '%1$s hours', $hours, $this->plugin->text_domain), $hours);
             $since = ($hours >= 24) ? __('about 1 day', $this->plugin->text_domain) : $since;
-        } else if ($difference >= 86400 && $difference < 604800) {
-            $days = (integer)round($difference / 86400);
+        } elseif ($difference >= 86400 && $difference < 604800) {
+            $days = (integer) round($difference / 86400);
 
             $since = sprintf(_n('%1$s day', '%1$s days', $days, $this->plugin->text_domain), $days);
             $since = ($days >= 7) ? __('about 1 week', $this->plugin->text_domain) : $since;
-        } else if ($difference >= 604800 && $difference < 2592000) {
-            $weeks = (integer)round($difference / 604800);
+        } elseif ($difference >= 604800 && $difference < 2592000) {
+            $weeks = (integer) round($difference / 604800);
 
             $since = sprintf(_n('%1$s week', '%1$s weeks', $weeks, $this->plugin->text_domain), $weeks);
             $since = ($weeks >= 4) ? __('about 1 month', $this->plugin->text_domain) : $since;
-        } else if ($difference >= 2592000 && $difference < 31556926) {
-            $months = (integer)round($difference / 2592000);
+        } elseif ($difference >= 2592000 && $difference < 31556926) {
+            $months = (integer) round($difference / 2592000);
 
             $since = sprintf(_n('%1$s month', '%1$s months', $months, $this->plugin->text_domain), $months);
             $since = ($months >= 12) ? __('about 1 year', $this->plugin->text_domain) : $since;
-        } else // We use years here (default case handler).
-        {
-            $years = (integer)round($difference / 31556926);
+        } else {
+            // We use years here (default case handler).
+
+            $years = (integer) round($difference / 31556926);
             $since = sprintf(_n('%1$s year', '%1$s years', $years, $this->plugin->text_domain), $years);
         }
         return $since.$suffix; // Human readable time difference calculation.
     }
 }
-	

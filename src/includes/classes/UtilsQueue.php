@@ -1,15 +1,16 @@
 <?php
 /**
- * Queue Utilities
+ * Queue Utilities.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * Queue Utilities
+ * Queue Utilities.
  *
  * @since 141111 First documented version.
  */
@@ -39,8 +40,8 @@ class UtilsQueue extends AbsBase
         $unique_ids = []; // Initialize.
 
         foreach ($queue_ids as $_queue_id) {
-            if (is_numeric($_queue_id) && (integer)$_queue_id > 0) {
-                $unique_ids[] = (integer)$_queue_id;
+            if (is_numeric($_queue_id) && (integer) $_queue_id > 0) {
+                $unique_ids[] = (integer) $_queue_id;
             }
         }
         unset($_queue_id); // Housekeeping.
@@ -56,27 +57,27 @@ class UtilsQueue extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param integer|string $queue_id Queued notification ID.
-     * @param array          $args     Any additional behavioral args.
-     *
-     * @return boolean|null TRUE if queued notification is deleted successfully.
-     *    Or, FALSE if unable to delete (e.g. already deleted).
-     *    Or, NULL on complete failure (e.g. invalid ID).
+     * @param int|string $queue_id Queued notification ID.
+     * @param array      $args     Any additional behavioral args.
      *
      * @throws \exception If a deletion failure occurs.
+     * @return bool|null TRUE if queued notification is deleted successfully.
+     *                   Or, FALSE if unable to delete (e.g. already deleted).
+     *                   Or, NULL on complete failure (e.g. invalid ID).
+     *
      */
     public function delete($queue_id, array $args = [])
     {
-        if (!($queue_id = (integer)$queue_id)) {
+        if (!($queue_id = (integer) $queue_id)) {
             return null; // Not possible.
         }
-        $sql = "DELETE FROM `".esc_sql($this->plugin->utils_db->prefix().'queue')."`".
+        $sql = 'DELETE FROM `'.esc_sql($this->plugin->utils_db->prefix().'queue').'`'.
                " WHERE `ID` = '".esc_sql($queue_id)."'";
 
         if (($deleted = $this->plugin->utils_db->wp->query($sql)) === false) {
             throw new \exception(__('Deletion failure.', $this->plugin->text_domain));
         }
-        return (boolean)$deleted; // Convert to boolean value.
+        return (boolean) $deleted; // Convert to boolean value.
     }
 
     /**
@@ -87,7 +88,7 @@ class UtilsQueue extends AbsBase
      * @param array $queue_ids Queued notification IDs.
      * @param array $args      Any additional behavioral args.
      *
-     * @return integer Number of queued notifications deleted successfully.
+     * @return int Number of queued notifications deleted successfully.
      */
     public function bulkDelete(array $queue_ids, array $args = [])
     {
@@ -95,7 +96,7 @@ class UtilsQueue extends AbsBase
 
         foreach ($this->uniqueIds($queue_ids) as $_queue_id) {
             if ($this->delete($_queue_id, $args)) {
-                $counter++; // Bump counter.
+                ++$counter; // Bump counter.
             }
         }
         unset($_queue_id); // Housekeeping.
@@ -103,4 +104,3 @@ class UtilsQueue extends AbsBase
         return $counter;
     }
 }
-	

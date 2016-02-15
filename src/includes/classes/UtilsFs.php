@@ -1,15 +1,16 @@
 <?php
 /**
- * File System Utilities
+ * File System Utilities.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * File System Utilities
+ * File System Utilities.
  *
  * @since 141111 First documented version.
  */
@@ -30,9 +31,9 @@ class UtilsFs extends AbsBase
      *
      * @since 150329 Improving tmp directory detection.
      *
-     * @return string Writable tmp directory.
-     *
      * @throws \exception On any failure.
+     *
+     * @return string Writable tmp directory.
      */
     public function tmpDir()
     {
@@ -55,7 +56,7 @@ class UtilsFs extends AbsBase
      */
     public function tmpSuffix($path)
     {
-        $path = (string)$path; // Force string value.
+        $path = (string) $path; // Force string value.
         $path = rtrim($path, DIRECTORY_SEPARATOR.'\\/');
 
         return $path.'-'.str_replace('.', '', uniqid('', true)).'-tmp';
@@ -72,7 +73,7 @@ class UtilsFs extends AbsBase
      */
     public function extension($path)
     {
-        return strtolower(ltrim((string)strrchr(basename((string)$path), '.'), '.'));
+        return strtolower(ltrim((string) strrchr(basename((string) $path), '.'), '.'));
     }
 
     /**
@@ -80,16 +81,15 @@ class UtilsFs extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param mixed   $path                 Directory|file `/path`.
-     *
-     * @param boolean $allow_trailing_slash Defaults to FALSE.
-     *                                      If TRUE; and `$path` contains a trailing slash; we'll leave it there.
+     * @param mixed $path                 Directory|file `/path`.
+     * @param bool  $allow_trailing_slash Defaults to FALSE.
+     *                                    If TRUE; and `$path` contains a trailing slash; we'll leave it there.
      *
      * @return string Normalized directory|file `/path`.
      */
     public function nSeps($path, $allow_trailing_slash = false)
     {
-        $path = (string)$path; // Force string value.
+        $path = (string) $path; // Force string value.
 
         if (!isset($path[0])) {
             return ''; // Empty.
@@ -120,16 +120,15 @@ class UtilsFs extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param string  $path                  A file `/path` to check.
-     *                                       If it's an uploaded file, use the `tmp_name`.
-     *
-     * @param boolean $require_uploaded_file Defaults to a `FALSE` value.
+     * @param string $path                  A file `/path` to check.
+     *                                      If it's an uploaded file, use the `tmp_name`.
+     * @param bool   $require_uploaded_file Defaults to a `FALSE` value.
      *
      * @throws \exception If a security flag is triggered for any reason.
      */
     public function checkPathSecurity($path, $require_uploaded_file = false)
     {
-        $path = (string)$path; // Force string value.
+        $path = (string) $path; // Force string value.
 
         if (!isset($path[0])) {
             return; // Empty.
@@ -150,17 +149,16 @@ class UtilsFs extends AbsBase
     /**
      * Abbreviated byte notation for file sizes.
      *
-     * @param float   $bytes     File size in bytes. A (float) value.
-     *                           We need this converted to a (float), so it's possible to deal with numbers beyond that of an integer.
-     *
-     * @param integer $precision Number of decimals to use.
+     * @param float $bytes     File size in bytes. A (float) value.
+     *                         We need this converted to a (float), so it's possible to deal with numbers beyond that of an integer.
+     * @param int   $precision Number of decimals to use.
      *
      * @return string Byte notation.
      */
     public function bytesAbbr($bytes, $precision = 2)
     {
-        $bytes     = (float)$bytes;
-        $precision = (integer)$precision;
+        $bytes     = (float) $bytes;
+        $precision = (integer) $precision;
 
         $precision = $precision >= 0 ? $precision : 2;
         $units     = ['bytes', 'kbs', 'MB', 'GB', 'TB'];
@@ -171,9 +169,9 @@ class UtilsFs extends AbsBase
         $abbr_bytes = round($bytes / pow(1024, $power), $precision);
         $abbr       = $units[min($power, count($units) - 1)];
 
-        if ($abbr_bytes === (float)1 && $abbr === 'bytes') {
+        if ($abbr_bytes === (float) 1 && $abbr === 'bytes') {
             $abbr = 'byte'; // Quick fix here.
-        } else if ($abbr_bytes === (float)1 && $abbr === 'kbs') {
+        } elseif ($abbr_bytes === (float) 1 && $abbr === 'kbs') {
             $abbr = 'kb'; // Quick fix here.
         }
         return $abbr_bytes.' '.$abbr;
@@ -188,34 +186,40 @@ class UtilsFs extends AbsBase
      */
     public function abbrBytes($string)
     {
-        $string = trim((string)$string);
+        $string = trim((string) $string);
 
         $notation = '/^(?P<value>[0-9\.]+)\s*(?P<modifier>bytes|byte|kbs|kb|k|mb|m|gb|g|tb|t)$/i';
 
         if (!preg_match($notation, $string, $_op)) {
-            return (float)0;
+            return (float) 0;
         }
-        $value    = (float)$_op['value'];
+        $value    = (float) $_op['value'];
         $modifier = strtolower($_op['modifier']);
         unset($_op); // Housekeeping.
 
-        switch ($modifier) // Fall through based on modifier.
-        {
-            case 't': // Multiplied four times.
+        switch ($modifier) {// Fall through based on modifier.
+
+            case 't':
             case 'tb':
                 $value *= 1024;
-            case 'g': // Multiplied three times.
+            // else fall through...
+
+            case 'g':
             case 'gb':
                 $value *= 1024;
-            case 'm': // Multiple two times.
+            // else fall through...
+
+            case 'm':
             case 'mb':
                 $value *= 1024;
-            case 'k': // One time only.
+            // else fall through...
+
+            case 'k':
             case 'kb':
             case 'kbs':
                 $value *= 1024;
         }
-        return (float)$value;
+        return (float) $value;
     }
 
     /**
@@ -228,6 +232,6 @@ class UtilsFs extends AbsBase
         if (!is_null($icon = &$this->staticKey(__FUNCTION__))) {
             return $icon; // Already cached this.
         }
-        return ($icon = file_get_contents(dirname(dirname(__DIR__)).'/client-s/images/inline-icon.svg'));
+        return $icon = file_get_contents(dirname(dirname(__DIR__)).'/client-s/images/inline-icon.svg');
     }
 }

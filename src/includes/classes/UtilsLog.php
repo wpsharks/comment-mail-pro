@@ -1,15 +1,16 @@
 <?php
 /**
- * Logging Utilities
+ * Logging Utilities.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * Logging Utilities
+ * Logging Utilities.
  *
  * @since 141111 First documented version.
  */
@@ -43,4 +44,3 @@ class UtilsLog extends AbsBase
         error_log(print_r($data, true));
     }
 }
-	

@@ -1,15 +1,16 @@
 <?php
 /**
- * IP Utilities
+ * IP Utilities.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * IP Utilities
+ * IP Utilities.
  *
  * @since 141111 First documented version.
  */
@@ -41,7 +42,7 @@ class UtilsIp extends AbsBase
         }
         if (!empty($_SERVER['REMOTE_ADDR']) && $this->plugin->options['prioritize_remote_addr']) {
             if (($_valid_public_ip = $this->validPublic($_SERVER['REMOTE_ADDR']))) {
-                return ($ip = $_valid_public_ip);
+                return $ip = $_valid_public_ip;
             }
         }
         $sources = [
@@ -60,16 +61,16 @@ class UtilsIp extends AbsBase
         foreach ($sources as $_source) { // Try each of these; in order.
             if (!empty($_SERVER[$_source])) { // Does the source key exist at all?
                 if (($_valid_public_ip = $this->validPublic($_SERVER[$_source]))) {
-                    return ($ip = $_valid_public_ip);
+                    return $ip = $_valid_public_ip;
                 }
             }
         }
         unset($_source, $_valid_public_ip); // Housekeeping.
 
         if (!empty($_SERVER['REMOTE_ADDR']) && is_string($_SERVER['REMOTE_ADDR'])) {
-            return ($ip = strtolower($_SERVER['REMOTE_ADDR']));
+            return $ip = strtolower($_SERVER['REMOTE_ADDR']);
         }
-        return ($ip = 'unknown'); // Not possible.
+        return $ip = 'unknown'; // Not possible.
     }
 
     /**
@@ -172,16 +173,16 @@ class UtilsIp extends AbsBase
      *
      * @param string $ip An IP address to pull geographic data for.
      *
-     * @return \stdClass|boolean Geo location data from IP address.
-     *    This returns `FALSE` if not possible to obtain geo location data.
-     *
      * @throws \exception If unable to create cache directory.
+     * @return \stdClass|bool Geo location data from IP address.
+     *                        This returns `FALSE` if not possible to obtain geo location data.
+     *
      */
     public function geoData($ip)
     {
         # Valid the input IP address; do we have one?
 
-        if (!($ip = trim(strtolower((string)$ip)))) {
+        if (!($ip = trim(strtolower((string) $ip)))) {
             return false; // Not possible.
         }
         # Is geo-location tracking even enabled?
@@ -201,7 +202,7 @@ class UtilsIp extends AbsBase
         $cache_file = $cache_dir.'/'.sha1($ip).'.json';
 
         if (is_file($cache_file) && filemtime($cache_file) >= strtotime('-30 days')) {
-            return ($geo = json_decode(file_get_contents($cache_file)));
+            return $geo = json_decode(file_get_contents($cache_file));
         }
         # Initialize request-related variables.
 
@@ -212,19 +213,19 @@ class UtilsIp extends AbsBase
         if (is_wp_error($response = wp_remote_get('http://www.geoplugin.net/json.gp?ip='.urlencode($ip)))
             || !is_object($json = json_decode(wp_remote_retrieve_body($response))) // Unexpected response?
         ) {
-            return ($geo = false); // Connection failure; use object cache only in this case.
+            return $geo = false; // Connection failure; use object cache only in this case.
         }
         # Parse response from geoPlugin service.
 
         if (!empty($json->geoplugin_regionCode)) { // Have a region code?
-            $region = strtoupper(str_pad((string)$json->geoplugin_regionCode, 2, '0', STR_PAD_LEFT));
+            $region = strtoupper(str_pad((string) $json->geoplugin_regionCode, 2, '0', STR_PAD_LEFT));
         }
         if (!empty($json->geoplugin_countryCode)) { // Country code?
-            $country = strtoupper((string)$json->geoplugin_countryCode);
+            $country = strtoupper((string) $json->geoplugin_countryCode);
         }
         # Fill the object cache; based on data validation here.
 
-        $geo = (object)compact('region', 'country'); // Initialize.
+        $geo = (object) compact('region', 'country'); // Initialize.
 
         if (strlen($geo->region) !== 2 || strlen($geo->country) !== 2) {
             $geo = false; // Invalid (or insufficient) data.
@@ -242,4 +243,3 @@ class UtilsIp extends AbsBase
         return $geo; // An object; else `FALSE`.
     }
 }
-	

@@ -1,22 +1,23 @@
 <?php
 /**
- * Mail Utilities
+ * Mail Utilities.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * Mail Utilities
+ * Mail Utilities.
  *
  * @since 141111 First documented version.
  */
 class UtilsMail extends AbsBase
 {
     /**
-     * @var array Role-based blacklist patterns.
+     * @type array Role-based blacklist patterns.
      *
      * @since 141111 First documented version.
      */
@@ -75,7 +76,7 @@ class UtilsMail extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @return boolean `TRUE` if we can send mail via SMTP.
+     * @return bool `TRUE` if we can send mail via SMTP.
      */
     public function isSmtpEnabled()
     {
@@ -90,20 +91,19 @@ class UtilsMail extends AbsBase
      *
      * @param string $header  Header we are looking for.
      *                        e.g. `Reply-To`, without any `:` suffix or anything else.
-     *
      * @param array  $headers An array of existing headers to search through.
      *                        This array is expected to contain string elements with full headers.
      *                        e.g. `Reply-To: [value]` would be a single string header.
      *
-     * @return string[]|integer[]|boolean Array keys where the header exists.
-     *    This will return an array with all keys where the header currently exists.
-     *    ~ An empty array if it does NOT exist currently.
+     * @return string[]|int[]|bool Array keys where the header exists.
+     *                             This will return an array with all keys where the header currently exists.
+     *                             ~ An empty array if it does NOT exist currently.
      */
     public function headerExists($header, array $headers)
     {
         $existing_keys = []; // Initialize.
 
-        if (!($header = $this->plugin->utils_string->trim((string)$header, '', ':'))) {
+        if (!($header = $this->plugin->utils_string->trim((string) $header, '', ':'))) {
             return $existing_keys; // Not possible to look for nothing.
         }
         foreach ($headers as $_key => $_header) {
@@ -129,13 +129,12 @@ class UtilsMail extends AbsBase
      * @param string       $message     Message contents.
      * @param string|array $headers     Optional. Additional headers.
      * @param string|array $attachments Optional. Files to attach.
-     *
-     * @param boolean      $throw       Defaults to a `FALSE` value.
+     * @param bool         $throw       Defaults to a `FALSE` value.
      *                                  If `TRUE`, an exception might be thrown here.
      *
-     * @return boolean `TRUE` if the email was sent successfully.
-     *
      * @throws \exception If `$throw` is `TRUE` and an SMTP failure occurs.
+     *
+     * @return bool `TRUE` if the email was sent successfully.
      */
     public function send($to, $subject, $message, $headers = [], $attachments = [], $throw = false)
     {
@@ -146,7 +145,7 @@ class UtilsMail extends AbsBase
             return $mail_smtp->send($to, $subject, $message, $headers, $attachments, $throw);
         }
         if (!is_array($headers)) { // Force array.
-            $headers = explode("\r\n", (string)$headers);
+            $headers = explode("\r\n", (string) $headers);
         }
         if (($_content_type_keys = $this->headerExists('Content-Type', $headers))) {
             foreach ($_content_type_keys as $_content_type_key) {
@@ -194,7 +193,7 @@ class UtilsMail extends AbsBase
         if ($this->isSmtpEnabled()) { // Can use SMTP; i.e. enabled?
             return $this->smtpTest($to, $subject, $message, $headers, $attachments);
         }
-        $to = array_map('strval', (array)$to); // Force array.
+        $to = array_map('strval', (array) $to); // Force array.
 
         $via  = 'wp_mail'; // Via `wp_mail` in this case.
         $sent = false; // Initialize as `FALSE`.
@@ -214,7 +213,7 @@ class UtilsMail extends AbsBase
         // It's also possible that \PHPMailer is not using SMTP. That's OK too.
 
         if (!is_array($headers)) { // Force array.
-            $headers = explode("\r\n", (string)$headers);
+            $headers = explode("\r\n", (string) $headers);
         }
         if (($_content_type_keys = $this->headerExists('Content-Type', $headers))) {
             foreach ($_content_type_keys as $_content_type_key) {
@@ -241,7 +240,7 @@ class UtilsMail extends AbsBase
         $debug_output_markup = $this->plugin->utils_string->trimHtml(ob_get_clean());
         $results_markup      = $this->testResultsMarkup($to, $via, $sent, $debug_output_markup);
 
-        return (object)compact('to', 'via', 'sent', 'debug_output_markup', 'results_markup');
+        return (object) compact('to', 'via', 'sent', 'debug_output_markup', 'results_markup');
     }
 
     /**
@@ -268,7 +267,7 @@ class UtilsMail extends AbsBase
      */
     public function smtpTest($to, $subject, $message, $headers = [], $attachments = [])
     {
-        $to = array_map('strval', (array)$to); // Force array.
+        $to = array_map('strval', (array) $to); // Force array.
 
         $via  = 'smtp'; // Via SMTP in this case.
         $sent = false; // Initialize as `FALSE`.
@@ -282,7 +281,7 @@ class UtilsMail extends AbsBase
         }
         $results_markup = $this->testResultsMarkup($to, $via, $sent, $debug_output_markup);
 
-        return (object)compact('to', 'via', 'sent', 'debug_output_markup', 'results_markup');
+        return (object) compact('to', 'via', 'sent', 'debug_output_markup', 'results_markup');
     }
 
     /**
@@ -293,10 +292,10 @@ class UtilsMail extends AbsBase
      * @note  This method always (ALWAYS) sends email in HTML format;
      *    w/ a plain text alternative — generated automatically.
      *
-     * @param array   $to                  Addresses test was sent to.
-     * @param string  $via                 Transport layer used for the test.
-     * @param boolean $sent                Was the test sent succesfully?
-     * @param string  $debug_output_markup Any debug out; in HTML markup.
+     * @param array  $to                  Addresses test was sent to.
+     * @param string $via                 Transport layer used for the test.
+     * @param bool   $sent                Was the test sent succesfully?
+     * @param string $debug_output_markup Any debug out; in HTML markup.
      *
      * @return string Full HTML markup with test results; for back-end display.
      */
@@ -304,27 +303,28 @@ class UtilsMail extends AbsBase
     {
         $to = array_map('strval', $to);
 
-        $via                 = (string)$via;
-        $sent                = (boolean)$sent;
-        $debug_output_markup = (string)$debug_output_markup;
+        $via                 = (string) $via;
+        $sent                = (boolean) $sent;
+        $debug_output_markup = (string) $debug_output_markup;
         $debug_output_markup = $this->plugin->utils_string->trimHtml($debug_output_markup);
 
         if ($via === 'wp_mail') { // Convert this to HTML markup.
             $via_markup = $this->plugin->utils_markup->xAnchor('https://developer.wordpress.org/reference/functions/wp_mail/', 'wp_mail()');
-        } else if ($via === 'smtp') { // Convert this to HTML markup.
+        } elseif ($via === 'smtp') { // Convert this to HTML markup.
             $via_markup = $this->plugin->utils_markup->xAnchor('http://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol', 'SMTP');
         } else {
             $via_markup = esc_html($via); // Convert this to HTML markup.
         }
         if ($sent && !$debug_output_markup) { // There might not be any output in some cases; e.g. if SMTP is not in use.
             $debug_output_markup = '<em>'.esc_html(__('— please check your email to be sure you received the message —', $this->plugin->text_domain)).'</em>';
-        } else if (!$sent && !$debug_output_markup) { // There might not be any output in some cases; e.g., if SMTP is not in use.
+        } elseif (!$sent && !$debug_output_markup) { // There might not be any output in some cases; e.g., if SMTP is not in use.
             $debug_output_markup = '<em>'.esc_html(__('— please seek assistance from your hosting company —', $this->plugin->text_domain)).'</em>';
         }
         $results_markup = '<h4 style="margin:0 0 1em 0;">'.
                           '   '.sprintf(
                               __('%1$s&trade; sent a test email via %2$s to:', $this->plugin->text_domain),
-                              esc_html($this->plugin->name), $via_markup
+                              esc_html($this->plugin->name),
+                              $via_markup
                           ).'<br />'.
                           '   &lt;<code>'.esc_html(implode('; ', $to)).'</code>&gt;'.
                           '</h4>';
@@ -347,17 +347,15 @@ class UtilsMail extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param mixed   $value       Any input value w/ recipients.
-     *
-     * @param boolean $strict      Optional. Defaults to `FALSE` (faster). Parses all strings w/ `@` signs.
-     *                             If `TRUE`, we will validate each address; and we ONLY return 100% valid email addresses.
-     *
-     * @param boolean $emails_only Optional. Defaults to a `FALSE` value.
-     *                             If `TRUE`, this returns an array of email addresses only.
+     * @param mixed $value       Any input value w/ recipients.
+     * @param bool  $strict      Optional. Defaults to `FALSE` (faster). Parses all strings w/ `@` signs.
+     *                           If `TRUE`, we will validate each address; and we ONLY return 100% valid email addresses.
+     * @param bool  $emails_only Optional. Defaults to a `FALSE` value.
+     *                           If `TRUE`, this returns an array of email addresses only.
      *
      * @return \stdClass[]|string[] Unique/associative array of all addresses.
-     *    Each object in the array contains 3 properties: `fname`, `lname`, `email`.
-     *    If `$emails_only` is `TRUE`, each element is simply an email address.
+     *                              Each object in the array contains 3 properties: `fname`, `lname`, `email`.
+     *                              If `$emails_only` is `TRUE`, each element is simply an email address.
      *
      * @note  Array keys contain the email address for each address.
      *    This is true even when `$emails_only` are requested here.
@@ -374,7 +372,7 @@ class UtilsMail extends AbsBase
 
             goto finale; // Where `$emails_only` is dealt w/ separately.
         }
-        $value                       = trim((string)$value);
+        $value                       = trim((string) $value);
         $delimiter                   = (strpos($value, ';') !== false) ? ';' : ',';
         $regex_delimitation_splitter = '/'.preg_quote($delimiter, '/').'+/';
 
@@ -391,7 +389,7 @@ class UtilsMail extends AbsBase
                     $_name              = !empty($_m['name']) ? $_m['name'] : '';
                     $_fname             = $this->plugin->utils_string->firstName($_name, $_email);
                     $_lname             = $this->plugin->utils_string->lastName($_name);
-                    $addresses[$_email] = (object)['fname' => $_fname, 'lname' => $_lname, 'email' => $_email];
+                    $addresses[$_email] = (object) ['fname' => $_fname, 'lname' => $_lname, 'email' => $_email];
                     continue; // Inside brackets; all done here.
                 }
             }
@@ -399,7 +397,7 @@ class UtilsMail extends AbsBase
                 $_email             = strtolower($_address);
                 $_fname             = $this->plugin->utils_string->firstName('', $_email);
                 $_lname             = ''; // Not possible in this case.
-                $addresses[$_email] = (object)['fname' => $_fname, 'lname' => $_lname, 'email' => $_email];
+                $addresses[$_email] = (object) ['fname' => $_fname, 'lname' => $_lname, 'email' => $_email];
             }
         }
         unset($_address, $_m, $_email, $_name, $_fname, $_lname); // Housekeeping.
@@ -424,14 +422,13 @@ class UtilsMail extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param mixed   $value          Input value w/ headers.
-     * @param string  $from_name      From name; by reference.
-     * @param string  $from_email     From address; by reference.
-     * @param string  $reply_to_email Reply-to address; by reference.
-     * @param array   $recipients     Recipients; by reference.
-     *
-     * @param boolean $strict         Optional. Defaults to `FALSE` (faster).
-     *                                This is related to the parsing of `$recipients`. See {@link parse_recipients_deep()}.
+     * @param mixed  $value          Input value w/ headers.
+     * @param string $from_name      From name; by reference.
+     * @param string $from_email     From address; by reference.
+     * @param string $reply_to_email Reply-to address; by reference.
+     * @param array  $recipients     Recipients; by reference.
+     * @param bool   $strict         Optional. Defaults to `FALSE` (faster).
+     *                               This is related to the parsing of `$recipients`. See {@link parse_recipients_deep()}.
      *
      * @return array Unique/associative array of all parsed headers.
      */
@@ -451,7 +448,7 @@ class UtilsMail extends AbsBase
 
             goto finale; // Return handlers.
         }
-        $value = trim((string)$value); // Force string value.
+        $value = trim((string) $value); // Force string value.
 
         foreach (explode("\r\n", $value) as $_rn_delimited_header) {
             if (strpos($_rn_delimited_header, ':') === false) {
@@ -503,9 +500,7 @@ class UtilsMail extends AbsBase
                     break; // Break switch handler.
 
                 default: // Everything else becomes a header.
-
                     $headers[strtolower($_header)] = $_value;
-
                     break; // Break switch handler.
             }
         } // This ends the `foreach()` loop over each of the headers.
@@ -537,7 +532,7 @@ class UtilsMail extends AbsBase
 
             goto finale; // Return handlers.
         }
-        if (($value = trim((string)$value)) && is_file($value)) {
+        if (($value = trim((string) $value)) && is_file($value)) {
             $attachments[$value] = $value; // Only one here.
         }
         finale: // Target point; grand finale w/ return handlers.
@@ -556,7 +551,7 @@ class UtilsMail extends AbsBase
      */
     public function ucwordsHeader($header)
     {
-        if (!($header = trim((string)$header))) {
+        if (!($header = trim((string) $header))) {
             return $header; // Nothing.
         }
         $header = strtolower($header);

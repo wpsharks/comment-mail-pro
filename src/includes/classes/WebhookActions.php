@@ -1,22 +1,23 @@
 <?php
 /**
- * Webhook Actions
+ * Webhook Actions.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * Webhook Actions
+ * Webhook Actions.
  *
  * @since 141111 First documented version.
  */
 class WebhookActions extends AbsBase
 {
     /**
-     * @var array Valid actions.
+     * @type array Valid actions.
      *
      * @since 141111 First documented version.
      */
@@ -50,9 +51,11 @@ class WebhookActions extends AbsBase
         if (empty($_REQUEST[GLOBAL_NS])) {
             return; // Not applicable.
         }
-        foreach ((array)$_REQUEST[GLOBAL_NS] as $_action => $_request_args) {
+        foreach ((array) $_REQUEST[GLOBAL_NS] as $_action => $_request_args) {
             if ($_action && in_array($_action, $this->valid_actions, true)) {
-                $_method = preg_replace_callback('/_(.)/', function ($m) { return strtoupper($m[1]); }, strtolower($_action));
+                $_method = preg_replace_callback('/_(.)/', function ($m) {
+                    return strtoupper($m[1]);
+                }, strtolower($_action));
                 $this->{$_method}($this->plugin->utils_string->trimStripDeep($_request_args));
             }
         }
@@ -68,7 +71,7 @@ class WebhookActions extends AbsBase
      */
     protected function rveMandrill($request_args)
     {
-        $key = trim((string)$request_args);
+        $key = trim((string) $request_args);
 
         new RveMandrill($key);
 

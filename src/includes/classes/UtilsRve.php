@@ -1,15 +1,16 @@
 <?php
 /**
- * RVE Utilities
+ * RVE Utilities.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * RVE Utilities
+ * RVE Utilities.
  *
  * @since 141111 First documented version.
  */
@@ -32,39 +33,36 @@ class UtilsRve extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param string       $reply_to   Base `Reply-To:` email address.
-     *                                 e.g. `rve@mandrill.mysite.com` becomes `rve+779-84-kgjdgxr4ldqpdrgjdgxr@mandrill.mysite.com`.
-     *                                 An `Reply-To:` suffix always begins with a `+` sign to preserve the original mailbox name.
-     *
-     * @param integer      $post_id    A WP post ID.
-     *
-     * @param null|integer $comment_id A WP comment ID (optional).
-     *                                 To exclude the comment ID, use a `NULL` value; `0` has meaning.
-     *
-     * @param string       $sub_key    Subscription key (optional).
+     * @param string   $reply_to   Base `Reply-To:` email address.
+     *                             e.g. `rve@mandrill.mysite.com` becomes `rve+779-84-kgjdgxr4ldqpdrgjdgxr@mandrill.mysite.com`.
+     *                             An `Reply-To:` suffix always begins with a `+` sign to preserve the original mailbox name.
+     * @param int      $post_id    A WP post ID.
+     * @param null|int $comment_id A WP comment ID (optional).
+     *                             To exclude the comment ID, use a `NULL` value; `0` has meaning.
+     * @param string   $sub_key    Subscription key (optional).
      *
      * @return string Suffixed `Reply-To:` w/ IRT info; for replies via email.
      */
     public function irtSuffix($reply_to, $post_id, $comment_id = null, $sub_key = '')
     {
-        if (!($reply_to = trim((string)$reply_to))) {
+        if (!($reply_to = trim((string) $reply_to))) {
             return $reply_to; // Empty.
         }
         if (strpos($reply_to, '@', 1) === false) {
             return $reply_to; // Not possible.
         }
-        if (!($post_id = abs((integer)$post_id))) {
+        if (!($post_id = abs((integer) $post_id))) {
             return $reply_to; // Not possible.
         }
         if (isset($comment_id)) { // Only if set; `0` has meaning.
-            $comment_id = abs((integer)$comment_id);
+            $comment_id = abs((integer) $comment_id);
         }
-        $sub_key = trim((string)$sub_key);
+        $sub_key = trim((string) $sub_key);
 
         list($mailbox, $mailbox_host) = explode('@', $reply_to, 2);
-        $mailbox_irt_suffix = '+'.$post_id.(isset($comment_id) ? '-'.$comment_id : '').($sub_key ? '-'.$sub_key : '');
+        $mailbox_irt_suffix           = '+'.$post_id.(isset($comment_id) ? '-'.$comment_id : '').($sub_key ? '-'.$sub_key : '');
 
-        return ($reply_to = $mailbox.$mailbox_irt_suffix.'@'.$mailbox_host);
+        return $reply_to = $mailbox.$mailbox_irt_suffix.'@'.$mailbox_host;
     }
 
     /**
@@ -72,24 +70,22 @@ class UtilsRve extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param integer      $post_id    A WP post ID.
-     *
-     * @param null|integer $comment_id A WP comment ID (optional).
-     *                                 To exclude the comment ID, use a `NULL` value; `0` has meaning.
-     *
-     * @param string       $sub_key    Subscription key (optional).
+     * @param int      $post_id    A WP post ID.
+     * @param null|int $comment_id A WP comment ID (optional).
+     *                             To exclude the comment ID, use a `NULL` value; `0` has meaning.
+     * @param string   $sub_key    Subscription key (optional).
      *
      * @return string Reply via email IRT marker; for digests.
      */
     public function irtMarker($post_id, $comment_id = null, $sub_key = '')
     {
-        if (!($post_id = abs((integer)$post_id))) {
+        if (!($post_id = abs((integer) $post_id))) {
             return ''; // Not possible.
         }
         if (isset($comment_id)) { // Only if set; `0` has meaning.
-            $comment_id = abs((integer)$comment_id);
+            $comment_id = abs((integer) $comment_id);
         }
-        $sub_key = trim((string)$sub_key);
+        $sub_key = trim((string) $sub_key);
 
         return '~rve#'.$post_id.(isset($comment_id) ? '-'.$comment_id : '').($sub_key ? '-'.$sub_key : '');
     }
@@ -136,20 +132,20 @@ class UtilsRve extends AbsBase
      * @param string $pattern_name The type of match we're looking for.
      *                             One of: `irt_suffix`, `irt_marker`, `manual_end_divider`, `end_divider`, `wrote_by_line`.
      *
-     * @return string Regex fragment for various reply via email markers/dividers/etc.
-     *
      * @throws \exception If an invalid `$for` is passed to this routine.
+     *
+     * @return string Regex fragment for various reply via email markers/dividers/etc.
      */
     public function regexFragFor($pattern_name)
     {
-        $pattern_name = trim(strtolower((string)$pattern_name));
+        $pattern_name = trim(strtolower((string) $pattern_name));
 
         if (in_array($pattern_name, ['irt_suffix', 'irt_marker'], true)) {
             return ($pattern_name === 'irt_suffix' ? '\+' : '~rve#').
 
-                   '(?P<post_id>[1-9][0-9]*)'. // Required post ID; always.
+                   '(?P<post_id>[1-9][0-9]*)'.// Required post ID; always.
 
-                   '(?Ji:'. // Both of these additional values are optional completely.
+                   '(?Ji:'.// Both of these additional values are optional completely.
                    // We allow for multiple named sub-patterns under various conditions using the `J` modifier.
                    // CaSe-insensitive matching is enabled with the `i` modifier; for a possible sub. key.
 
@@ -158,11 +154,11 @@ class UtilsRve extends AbsBase
 
                    '\-(?P<comment_id>0|[1-9][0-9]*)\-(?P<sub_key>k[a-zA-Z0-9]+)'.
 
-                   '|'. // Or, a comment ID only.
+                   '|'.// Or, a comment ID only.
 
                    '\-(?P<comment_id>0|[1-9][0-9]*)'.
 
-                   '|'. // Or, a sub. key only.
+                   '|'.// Or, a sub. key only.
 
                    '\-(?P<sub_key>k[a-z0-9]+)'.
 
@@ -187,9 +183,7 @@ class UtilsRve extends AbsBase
      *
      * @param string $reply_to_email `Reply-To:` email address.
      *                               i.e. Email address the incoming reply was sent to.
-     *
      * @param string $subject        Subject line.
-     *
      * @param string $rich_text_body Rich text body.
      *
      * @return \stdClass|null An object with the following properties.
@@ -200,9 +194,9 @@ class UtilsRve extends AbsBase
      */
     public function inReplyTo($reply_to_email, $subject, $rich_text_body)
     {
-        $reply_to_email  = trim((string)$reply_to_email);
-        $subject         = trim((string)$subject);
-        $rich_text_body  = trim((string)$rich_text_body);
+        $reply_to_email  = trim((string) $reply_to_email);
+        $subject         = trim((string) $subject);
+        $rich_text_body  = trim((string) $rich_text_body);
         $plain_text_body = $this->plugin->utils_string->htmlToText($rich_text_body);
 
         $regex_irt_suffix_frag = $this->regexFragFor('irt_suffix');
@@ -236,10 +230,10 @@ class UtilsRve extends AbsBase
             if ($plain_text_body && preg_match_all('/^'.$regex_irt_marker_frag.'/', $plain_text_body, $m, PREG_SET_ORDER) === 1) {
                 //var_dump($m); // Found an IRT marker at the beginning of the text body.
                 if (!isset($post_id) && isset($m[0]['post_id'][0])) {
-                    $post_id = (integer)$m[0]['post_id'];
+                    $post_id = (integer) $m[0]['post_id'];
                 }
                 if (!isset($comment_id) && isset($m[0]['comment_id'][0])) {
-                    $comment_id = (integer)$m[0]['comment_id'];
+                    $comment_id = (integer) $m[0]['comment_id'];
                 }
                 if (!isset($sub_key) && isset($m[0]['sub_key'][0])) {
                     $sub_key = $m[0]['sub_key'];
@@ -250,10 +244,10 @@ class UtilsRve extends AbsBase
             if ($reply_to_email && preg_match_all('/'.$regex_irt_suffix_frag.'/', $reply_to_email, $m, PREG_SET_ORDER) === 1) {
                 // var_dump($m); // Found a single IRT suffix in the email address.
                 if (!isset($post_id) && isset($m[0]['post_id'][0])) {
-                    $post_id = (integer)$m[0]['post_id'];
+                    $post_id = (integer) $m[0]['post_id'];
                 }
                 if (!isset($comment_id) && isset($m[0]['comment_id'][0])) {
-                    $comment_id = (integer)$m[0]['comment_id'];
+                    $comment_id = (integer) $m[0]['comment_id'];
                 }
                 if (!isset($sub_key) && isset($m[0]['sub_key'][0])) {
                     $sub_key = $m[0]['sub_key'];
@@ -264,10 +258,10 @@ class UtilsRve extends AbsBase
             if ($subject && preg_match_all('/'.$regex_irt_marker_frag.'/', $subject, $m, PREG_SET_ORDER) === 1) {
                 //var_dump($m); // Found a single IRT marker in the subject line.
                 if (!isset($post_id) && isset($m[0]['post_id'][0])) {
-                    $post_id = (integer)$m[0]['post_id'];
+                    $post_id = (integer) $m[0]['post_id'];
                 }
                 if (!isset($comment_id) && isset($m[0]['comment_id'][0])) {
-                    $comment_id = (integer)$m[0]['comment_id'];
+                    $comment_id = (integer) $m[0]['comment_id'];
                 }
                 if (!isset($sub_key) && isset($m[0]['sub_key'][0])) {
                     $sub_key = $m[0]['sub_key'];
@@ -278,17 +272,17 @@ class UtilsRve extends AbsBase
             if ($plain_text_body && preg_match_all('/'.$regex_irt_marker_frag.'/', $plain_text_body, $m, PREG_SET_ORDER) === 1) {
                 //var_dump($m); // Found a single IRT marker in the text body.
                 if (!isset($post_id) && isset($m[0]['post_id'][0])) {
-                    $post_id = (integer)$m[0]['post_id'];
+                    $post_id = (integer) $m[0]['post_id'];
                 }
                 if (!isset($comment_id) && isset($m[0]['comment_id'][0])) {
-                    $comment_id = (integer)$m[0]['comment_id'];
+                    $comment_id = (integer) $m[0]['comment_id'];
                 }
                 if (!isset($sub_key) && isset($m[0]['sub_key'][0])) {
                     $sub_key = $m[0]['sub_key'];
                 }
             }
         }
-        return (object)compact('post_id', 'comment_id', 'sub_key'); // Possibly all NULL values.
+        return (object) compact('post_id', 'comment_id', 'sub_key'); // Possibly all NULL values.
     }
 
     /**
@@ -302,20 +296,20 @@ class UtilsRve extends AbsBase
      */
     public function stripIrtMarkers($rich_text_body)
     {
-        if (!($rich_text_body = trim((string)$rich_text_body))) {
+        if (!($rich_text_body = trim((string) $rich_text_body))) {
             return $rich_text_body; // Empty.
         }
         $regex_irt_marker_frag = $this->regexFragFor('irt_marker');
 
         $regex_irt_markers = // IRT markers in rich text body.
 
-            '/'. // Open regex; markers can appear anywhere.
+            '/'.// Open regex; markers can appear anywhere.
 
-            '(?:\s*\<[^\/<>]+\>\s*)*'. // Any HTML open tags wrapping the marker.
+            '(?:\s*\<[^\/<>]+\>\s*)*'.// Any HTML open tags wrapping the marker.
 
-            '\s*'.$regex_irt_marker_frag.'\s*'. // Including any surrounding whitespace.
+            '\s*'.$regex_irt_marker_frag.'\s*'.// Including any surrounding whitespace.
 
-            '(?:\s*\<\/[^<>]+\>\s*)*'. // Any closing tags wrapping the marker.
+            '(?:\s*\<\/[^<>]+\>\s*)*'.// Any closing tags wrapping the marker.
 
             '/';
         return preg_replace($regex_irt_markers, '', $rich_text_body);
@@ -332,20 +326,20 @@ class UtilsRve extends AbsBase
      */
     public function stripWroteByLine($rich_text_body)
     {
-        if (!($rich_text_body = trim((string)$rich_text_body))) {
+        if (!($rich_text_body = trim((string) $rich_text_body))) {
             return $rich_text_body; // Empty.
         }
         $regex_wrote_by_line_frag = $this->regexFragFor('wrote_by_line');
 
         $regex_wrote_by_line = // Last line w/ `wrote:` in rich text body.
 
-            '/'. // Open regex; let's find a trailing `wrote:` by line.
+            '/'.// Open regex; let's find a trailing `wrote:` by line.
 
-            '(?:\s*\<[^\/<>]+\>\s*)*'. // Any HTML open tags wrapping it up.
+            '(?:\s*\<[^\/<>]+\>\s*)*'.// Any HTML open tags wrapping it up.
 
-            '\s*'.$regex_wrote_by_line_frag.'\s*'. // Any surrounding whitespace.
+            '\s*'.$regex_wrote_by_line_frag.'\s*'.// Any surrounding whitespace.
 
-            '(?:\s*\<\/[^<>]+\>\s*)*'. // Any closing tags wrapping it up.
+            '(?:\s*\<\/[^<>]+\>\s*)*'.// Any closing tags wrapping it up.
 
             '$/'; // End of the string (very important in this case).
 
@@ -370,7 +364,7 @@ class UtilsRve extends AbsBase
      */
     public function sanitizeRichTextBody($rich_text_body)
     {
-        if (!($rich_text_body = trim((string)$rich_text_body))) {
+        if (!($rich_text_body = trim((string) $rich_text_body))) {
             return $rich_text_body; // Empty.
         }
         $regex_manual_end_divider_frag = $this->regexFragFor('manual_end_divider');
@@ -380,46 +374,46 @@ class UtilsRve extends AbsBase
 
         $regex_manual_end_divider = // Manual end divider.
 
-            '/'. // Open regex; this divider can appear anywhere.
+            '/'.// Open regex; this divider can appear anywhere.
 
-            '(?:\s*\<[^\/<>]+\>\s*)*'. // Any HTML open tags wrapping the divider.
+            '(?:\s*\<[^\/<>]+\>\s*)*'.// Any HTML open tags wrapping the divider.
 
-            '\s*'.$regex_manual_end_divider_frag.'\s*'. // Including any surrounding whitespace.
+            '\s*'.$regex_manual_end_divider_frag.'\s*'.// Including any surrounding whitespace.
 
-            '(?:\s*\<\/[^<>]+\>\s*)*'. // Any closing tags wrapping the divider.
+            '(?:\s*\<\/[^<>]+\>\s*)*'.// Any closing tags wrapping the divider.
 
             '/i'; // End of divider pattern.
 
         $regex_end_divider = // Auto-generated end divider.
 
-            '/'. // Open regex; this divider can appear anywhere.
+            '/'.// Open regex; this divider can appear anywhere.
 
-            '(?:\s*\<[^\/<>]+\>\s*)*'. // Any HTML open tags wrapping the divider.
+            '(?:\s*\<[^\/<>]+\>\s*)*'.// Any HTML open tags wrapping the divider.
 
-            '\s*'.$regex_end_divider_frag.'\s*'. // Including any surrounding whitespace.
+            '\s*'.$regex_end_divider_frag.'\s*'.// Including any surrounding whitespace.
 
-            '(?:\s*\<\/[^<>]+\>\s*)*'. // Any closing tags wrapping the divider.
+            '(?:\s*\<\/[^<>]+\>\s*)*'.// Any closing tags wrapping the divider.
 
             '/is'; // End of divider pattern.
 
         $rich_text_body = $this->stripIrtMarkers($rich_text_body);
 
         if (preg_match($regex_manual_end_divider, $rich_text_body)) {
-            $force_moderation = false; // Found end divider, no need to moderate.
+            $force_moderation               = false; // Found end divider, no need to moderate.
             list($sanitized_rich_text_body) = preg_split($regex_manual_end_divider, $rich_text_body, 2);
-            $sanitized_rich_text_body = $this->stripWroteByLine($sanitized_rich_text_body);
-            $sanitized_rich_text_body = $this->plugin->utils_string->trimHtml($sanitized_rich_text_body);
-        } else if (preg_match($regex_end_divider, $rich_text_body)) {
-            $force_moderation = false; // Found end divider, no need to moderate.
+            $sanitized_rich_text_body       = $this->stripWroteByLine($sanitized_rich_text_body);
+            $sanitized_rich_text_body       = $this->plugin->utils_string->trimHtml($sanitized_rich_text_body);
+        } elseif (preg_match($regex_end_divider, $rich_text_body)) {
+            $force_moderation               = false; // Found end divider, no need to moderate.
             list($sanitized_rich_text_body) = preg_split($regex_end_divider, $rich_text_body, 2);
-            $sanitized_rich_text_body = $this->stripWroteByLine($sanitized_rich_text_body);
-            $sanitized_rich_text_body = $this->plugin->utils_string->trimHtml($sanitized_rich_text_body);
+            $sanitized_rich_text_body       = $this->stripWroteByLine($sanitized_rich_text_body);
+            $sanitized_rich_text_body       = $this->plugin->utils_string->trimHtml($sanitized_rich_text_body);
         } else { // If unable to find a valid end divider; force moderation on this reply.
             $force_moderation         = true; // Force moderation in this case.
             $sanitized_rich_text_body = $rich_text_body; // Initialize sanitized form.
             $sanitized_rich_text_body = $this->plugin->utils_string->trimHtml($sanitized_rich_text_body);
         }
-        return (object)compact('force_moderation', 'sanitized_rich_text_body');
+        return (object) compact('force_moderation', 'sanitized_rich_text_body');
     }
 
     /**
@@ -443,19 +437,19 @@ class UtilsRve extends AbsBase
 
             'force_status' => '',
         ];
-        $args         = array_merge($default_args, $args);
-        $args         = array_intersect_key($args, $default_args);
+        $args = array_merge($default_args, $args);
+        $args = array_intersect_key($args, $default_args);
 
-        $reply_to_email = trim((string)$args['reply_to_email']);
+        $reply_to_email = trim((string) $args['reply_to_email']);
 
-        $from_name  = trim((string)$args['from_name']);
-        $from_email = trim((string)$args['from_email']);
+        $from_name  = trim((string) $args['from_name']);
+        $from_email = trim((string) $args['from_email']);
 
-        $subject = trim((string)$args['subject']);
+        $subject = trim((string) $args['subject']);
 
-        $rich_text_body = trim((string)$args['rich_text_body']);
+        $rich_text_body = trim((string) $args['rich_text_body']);
 
-        $force_status = trim((string)$args['force_status']);
+        $force_status = trim((string) $args['force_status']);
 
         if ($force_status === '0') {
             $force_status = 0;
@@ -465,18 +459,18 @@ class UtilsRve extends AbsBase
         }
         # Populate as many variables as we possibly can.
 
-        $sub         = $comment = null; // Initialize these; needed below.
+        $sub         = $comment         = null; // Initialize these; needed below.
         $in_reply_to = $this->inReplyTo($reply_to_email, $subject, $rich_text_body);
 
-        $post_id    = (integer)$in_reply_to->post_id; // In reply to post ID.
-        $comment_id = (integer)$in_reply_to->comment_id; // Comment ID.
-        $sub_key    = (string)$in_reply_to->sub_key; // By sub key.
+        $post_id    = (integer) $in_reply_to->post_id; // In reply to post ID.
+        $comment_id = (integer) $in_reply_to->comment_id; // Comment ID.
+        $sub_key    = (string) $in_reply_to->sub_key; // By sub key.
 
         if ($comment_id) { // In reply to a specific comment ID?
             $comment = get_comment($comment_id); // Try to acquire.
         }
         if (!$post_id && $comment) { // Use comment post ID?
-            $post_id = (integer)$comment->comment_post_ID;
+            $post_id = (integer) $comment->comment_post_ID;
         }
         if ($sub_key) { // If sub key is known, get subscription.
             $sub = $this->plugin->utils_sub->get($sub_key);
@@ -498,7 +492,7 @@ class UtilsRve extends AbsBase
         if ($comment_id && !$comment) {
             return; // Invalid comment ID.
         }
-        if ($post_id && $comment && $post_id !== (integer)$comment->comment_post_ID) {
+        if ($post_id && $comment && $post_id !== (integer) $comment->comment_post_ID) {
             return; // Post ID to comment ID mismatch in this case.
         }
         if ($sub_key && !$sub) {
@@ -519,9 +513,10 @@ class UtilsRve extends AbsBase
         # Attempt to post; remaining validation performed by WP core and our filters.
 
         $response = wp_remote_post(
-            site_url('/wp-comments-post.php'), [
-                'user-agent'  => $this->plugin->name.'/'.$this->plugin->version,
-                'headers'     => [
+            site_url('/wp-comments-post.php'),
+            [
+                'user-agent' => $this->plugin->name.'/'.$this->plugin->version,
+                'headers'    => [
                     'REMOTE_ADDR'          => $from_ip,
                     'HTTP_X_FORWARDED_FOR' => $from_ip,
                 ],
@@ -555,9 +550,9 @@ class UtilsRve extends AbsBase
      *
      * @attaches-to `pre_option_comment_registration` filter; indirectly.
      *
-     * @param integer|string|boolean $requires_logged_in_user `FALSE` if not yet defined by another filter.
+     * @param int|string|bool $requires_logged_in_user `FALSE` if not yet defined by another filter.
      *
-     * @return integer|string|boolean Filtered `$comment_registration` value.
+     * @return int|string|bool Filtered `$comment_registration` value.
      */
     public function preOptionCommentRegistration($requires_logged_in_user)
     {
@@ -579,13 +574,13 @@ class UtilsRve extends AbsBase
          *    Please see {@link pre_comment_approved()} for further details on this.
          */
         $valid_rve_key = static::key(); // Class identifier.
-        $rve_key       = trim(stripslashes((string)$_REQUEST[GLOBAL_NS.'_rve_key']));
+        $rve_key       = trim(stripslashes((string) $_REQUEST[GLOBAL_NS.'_rve_key']));
 
         if (!$requires_logged_in_user) { // Not required at all anyway?
             return $requires_logged_in_user;
         }
         if ($rve_key === $valid_rve_key) { // Registration not required in this case.
-            return ($requires_logged_in_user = 0);
+            return $requires_logged_in_user = 0;
         }
         return $requires_logged_in_user; // Do not filter; invalid key.
     }
@@ -597,16 +592,15 @@ class UtilsRve extends AbsBase
      *
      * @attaches-to `pre_comment_approved` filter.
      *
-     * @param integer|string $comment_status New comment status.
+     * @param int|string $comment_status New comment status.
      *
      *    One of the following:
      *       - `0` (aka: ``, `hold`, `unapprove`, `unapproved`, `moderated`),
      *       - `1` (aka: `approve`, `approved`),
      *       - or `trash`, `post-trashed`, `spam`, `delete`.
+     * @param array $comment_data An array of all comment data associated w/ a new comment being created.
      *
-     * @param array          $comment_data   An array of all comment data associated w/ a new comment being created.
-     *
-     * @return integer|string Filtered `$comment_status` value.
+     * @return int|string Filtered `$comment_status` value.
      */
     public function preCommentApproved($comment_status, array $comment_data)
     {
@@ -635,7 +629,7 @@ class UtilsRve extends AbsBase
          *    In short, any RVE that we are unable to verify, will be forced into moderation here.
          */
         $valid_rve_key       = static::key(); // Class identifier.
-        $rve_key             = trim(stripslashes((string)$_REQUEST[GLOBAL_NS.'_rve_key']));
+        $rve_key             = trim(stripslashes((string) $_REQUEST[GLOBAL_NS.'_rve_key']));
         $sub_key             = trim(stripslashes($this->issetOr($_REQUEST[GLOBAL_NS.'_rve_sub_key'], '', 'string')));
         $force_status        = trim(stripslashes($this->issetOr($_REQUEST[GLOBAL_NS.'_rve_force_status'], '', 'string')));
         $current_hard_status = $this->plugin->utils_db->commentStatusI18n($comment_status);
@@ -650,14 +644,14 @@ class UtilsRve extends AbsBase
          * What to do? Several checks here for various circumstances.
          */
         if ($rve_key === $valid_rve_key && isset($force_status)) { // RVE handler forcing a status?
-            return ($comment_status = $force_status); // Force a `0` or `spam` status in this case.
+            return $comment_status = $force_status; // Force a `0` or `spam` status in this case.
         }
         if ($rve_key === $valid_rve_key && $sub_key && ($sub = $this->plugin->utils_sub->get($sub_key))) {
             if ($current_hard_status !== 'approve') { // If unapproved, check sub key for authors/admins.
                 if (!empty($comment_data['comment_post_ID']) && ($post = get_post($comment_data['comment_post_ID']))) {
                     if (($user = \WP_User::get_data_by('email', $sub->email)) && ($user = new \WP_User($user->ID))) {
-                        if ($user->ID === (integer)$post->post_author || $user->has_cap($this->plugin->manage_cap) || $user->has_cap($this->plugin->cap)) {
-                            return ($comment_status = 1); // Auto-approve comment from author/admin.
+                        if ($user->ID === (integer) $post->post_author || $user->has_cap($this->plugin->manage_cap) || $user->has_cap($this->plugin->cap)) {
+                            return $comment_status = 1; // Auto-approve comment from author/admin.
                         }
                     }
                 }
@@ -667,7 +661,6 @@ class UtilsRve extends AbsBase
         if ($current_hard_status !== 'approve') { // It's not approved anyway?
             return $comment_status; // Stick w/ whatever WP says in this case.
         }
-        return ($comment_status = 0); // Disapprove by default; invalid RVE/sub keys.
+        return $comment_status = 0; // Disapprove by default; invalid RVE/sub keys.
     }
 }
-	

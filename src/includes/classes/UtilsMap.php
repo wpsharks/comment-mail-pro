@@ -1,15 +1,16 @@
 <?php
 /**
- * Map Utilities
+ * Map Utilities.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * Map Utilities
+ * Map Utilities.
  *
  * @since 141111 First documented version.
  */
@@ -36,7 +37,7 @@ class UtilsMap extends AbsBase
      */
     public function countryName($code)
     {
-        $code = trim(strtoupper((string)$code));
+        $code = trim(strtoupper((string) $code));
         $iso  = $this->iso31661();
 
         return $code && !empty($iso[$code]) ? $iso[$code] : $code;
@@ -53,7 +54,7 @@ class UtilsMap extends AbsBase
      */
     public function usRegionName($code)
     {
-        $code = trim(strtoupper((string)$code));
+        $code = trim(strtoupper((string) $code));
         $iso  = $this->iso31662Us();
 
         return $code && !empty($iso[$code]) ? $iso[$code] : $code;
@@ -70,7 +71,7 @@ class UtilsMap extends AbsBase
      */
     public function caRegionName($code)
     {
-        $code = trim(strtoupper((string)$code));
+        $code = trim(strtoupper((string) $code));
         $iso  = $this->iso31662Ca();
 
         return $code && !empty($iso[$code]) ? $iso[$code] : $code;
@@ -93,7 +94,7 @@ class UtilsMap extends AbsBase
         $iso_db_lines = preg_split('/['."\r\n\t".']+/', $iso_db, null, PREG_SPLIT_NO_EMPTY);
 
         foreach ($iso_db_lines as $_iso_db_line) {
-            list($_name, $_code) = explode(';', $_iso_db_line, 2);
+            list($_name, $_code)     = explode(';', $_iso_db_line, 2);
             $iso[strtoupper($_code)] = ucwords(strtolower($_name));
         }
         unset($_iso_db_line, $_name, $_code); // Housekeeping.
@@ -118,7 +119,7 @@ class UtilsMap extends AbsBase
         $iso_db_lines = preg_split('/['."\r\n\t".']+/', $iso_db, null, PREG_SPLIT_NO_EMPTY);
 
         foreach ($iso_db_lines as $_iso_db_line) {
-            list($_name, $_code) = explode(';', $_iso_db_line, 2);
+            list($_name, $_code)     = explode(';', $_iso_db_line, 2);
             $iso[strtoupper($_code)] = ucwords(strtolower($_name));
         }
         unset($_iso_db_line, $_name, $_code); // Housekeeping.
@@ -143,7 +144,7 @@ class UtilsMap extends AbsBase
         $iso_db_lines = preg_split('/['."\r\n\t".']+/', $iso_db, null, PREG_SPLIT_NO_EMPTY);
 
         foreach ($iso_db_lines as $_iso_db_line) {
-            list($_name, $_code) = explode(';', $_iso_db_line, 2);
+            list($_name, $_code)     = explode(';', $_iso_db_line, 2);
             $iso[strtoupper($_code)] = ucwords(strtolower($_name));
         }
         unset($_iso_db_line, $_name, $_code); // Housekeeping.

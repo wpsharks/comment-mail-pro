@@ -1,15 +1,16 @@
 <?php
 /**
- * i18n Utilities
+ * i18n Utilities.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * i18n Utilities
+ * i18n Utilities.
  *
  * @since 141111 First documented version.
  */
@@ -27,7 +28,7 @@ class UtilsI18n extends AbsBase
      */
     public function actionEd($action, $transform = 'lower')
     {
-        $action = $i18n = strtolower(trim((string)$action));
+        $action = $i18n = strtolower(trim((string) $action));
 
         switch ($action) {
             case 'reconfirm':
@@ -94,7 +95,7 @@ class UtilsI18n extends AbsBase
      */
     public function statusLabel($status, $transform = 'lower')
     {
-        $status = $i18n = strtolower(trim((string)$status));
+        $status = $i18n = strtolower(trim((string) $status));
 
         switch ($status) {
             case 'approve':
@@ -177,7 +178,7 @@ class UtilsI18n extends AbsBase
      */
     public function eventLabel($event, $transform = 'lower')
     {
-        $event = $i18n = strtolower(trim((string)$event));
+        $event = $i18n = strtolower(trim((string) $event));
 
         switch ($event) {
             case 'inserted':
@@ -248,7 +249,7 @@ class UtilsI18n extends AbsBase
      */
     public function deliverLabel($deliver, $transform = 'lower')
     {
-        $deliver = $i18n = strtolower(trim((string)$deliver));
+        $deliver = $i18n = strtolower(trim((string) $deliver));
 
         switch ($deliver) {
             case 'asap':
@@ -303,7 +304,7 @@ class UtilsI18n extends AbsBase
      */
     public function subTypeLabel($sub_type, $transform = 'lower')
     {
-        $sub_type = $i18n = strtolower(trim((string)$sub_type));
+        $sub_type = $i18n = strtolower(trim((string) $sub_type));
 
         switch ($sub_type) {
             case 'comments':
@@ -343,13 +344,13 @@ class UtilsI18n extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param integer $counter Total subscriptions; i.e. a counter value.
+     * @param int $counter Total subscriptions; i.e. a counter value.
      *
      * @return string The phrase `X subscription` or `X subscriptions`.
      */
     public function subscriptions($counter)
     {
-        $counter = (integer)$counter; // Force integer.
+        $counter = (integer) $counter; // Force integer.
 
         return sprintf(_n('%1$s subscription', '%1$s subscriptions', $counter, $this->plugin->text_domain), $counter);
     }
@@ -359,13 +360,13 @@ class UtilsI18n extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param integer $counter Total sub. event log entries; i.e. a counter value.
+     * @param int $counter Total sub. event log entries; i.e. a counter value.
      *
      * @return string The phrase `X sub. event log entry` or `X sub. event log entries`.
      */
     public function subEventLogEntries($counter)
     {
-        $counter = (integer)$counter; // Force integer.
+        $counter = (integer) $counter; // Force integer.
 
         return sprintf(_n('%1$s sub. event log entry', '%1$s sub. event log entries', $counter, $this->plugin->text_domain), $counter);
     }
@@ -375,13 +376,13 @@ class UtilsI18n extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param integer $counter Total queued notifications; i.e. a counter value.
+     * @param int $counter Total queued notifications; i.e. a counter value.
      *
      * @return string The phrase `X queued notification` or `X queued notifications`.
      */
     public function queuedNotifications($counter)
     {
-        $counter = (integer)$counter; // Force integer.
+        $counter = (integer) $counter; // Force integer.
 
         return sprintf(_n('%1$s queued notification', '%1$s queued notifications', $counter, $this->plugin->text_domain), $counter);
     }
@@ -391,13 +392,13 @@ class UtilsI18n extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param integer $counter Total queue event log entries; i.e. a counter value.
+     * @param int $counter Total queue event log entries; i.e. a counter value.
      *
      * @return string The phrase `X queue event log entry` or `X queue event log entries`.
      */
     public function queueEventLogEntries($counter)
     {
-        $counter = (integer)$counter; // Force integer.
+        $counter = (integer) $counter; // Force integer.
 
         return sprintf(_n('%1$s queue event log entry', '%1$s queue event log entries', $counter, $this->plugin->text_domain), $counter);
     }
@@ -416,4 +417,3 @@ class UtilsI18n extends AbsBase
                __('If you want statistical reports to remain accurate, please leave ALL log entries intact.', $this->plugin->text_domain);
     }
 }
-	

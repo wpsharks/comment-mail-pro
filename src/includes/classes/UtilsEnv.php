@@ -1,15 +1,16 @@
 <?php
 /**
- * Environment Utilities
+ * Environment Utilities.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * Environment Utilities
+ * Environment Utilities.
  *
  * @since 141111 First documented version.
  */
@@ -30,7 +31,7 @@ class UtilsEnv extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @return boolean `TRUE` if the current request is for a pro preview.
+     * @return bool `TRUE` if the current request is for a pro preview.
      */
     public function isProPreview()
     {
@@ -38,9 +39,9 @@ class UtilsEnv extends AbsBase
             return $is; // Cached this already.
         }
         if (!$this->isMenuPage(GLOBAL_NS.'*')) {
-            return ($is = false);
+            return $is = false;
         }
-        return ($is = !empty($_REQUEST[GLOBAL_NS.'_pro_preview']));
+        return $is = !empty($_REQUEST[GLOBAL_NS.'_pro_preview']);
     }
 
     /**
@@ -55,7 +56,7 @@ class UtilsEnv extends AbsBase
         if (!is_null($pagenow = &$this->staticKey(__FUNCTION__))) {
             return $pagenow; // Cached this already.
         }
-        return ($pagenow = !empty($GLOBALS['pagenow']) ? (string)$GLOBALS['pagenow'] : '');
+        return $pagenow = !empty($GLOBALS['pagenow']) ? (string) $GLOBALS['pagenow'] : '';
     }
 
     /**
@@ -71,10 +72,10 @@ class UtilsEnv extends AbsBase
             return $page; // Cached this already.
         }
         if (!is_admin()) {
-            return ($page = '');
+            return $page = '';
         }
         $page = !empty($_REQUEST['page'])
-            ? trim(stripslashes((string)$_REQUEST['page']))
+            ? trim(stripslashes((string) $_REQUEST['page']))
             : $this->currentPagenow();
 
         return $page; // Current menu page.
@@ -91,28 +92,28 @@ class UtilsEnv extends AbsBase
      *    `*` wildcard characters are supported in the page to check.
      *       Also note, the check is caSe insensitive.
      *
-     * @return boolean TRUE if current page is a menu page.
-     *    Pass `$page_to_check` to check a specific page.
+     * @return bool TRUE if current page is a menu page.
+     *              Pass `$page_to_check` to check a specific page.
      */
     public function isMenuPage($page_to_check = '')
     {
-        $page_to_check = (string)$page_to_check;
+        $page_to_check = (string) $page_to_check;
 
         if (!is_null($is = &$this->staticKey(__FUNCTION__, $page_to_check))) {
             return $is; // Cached this already.
         }
         if (!is_admin()) { // Not admin area?
-            return ($is = false); // Nope!
+            return $is = false; // Nope!
         }
         if (!($current_page = $this->currentMenuPage())) {
-            return ($is = false); // Not a menu page.
+            return $is = false; // Not a menu page.
         }
         if (!$page_to_check) { // Any menu page?
-            return ($is = true); // Yep, it is!
+            return $is = true; // Yep, it is!
         }
         $page_to_check_regex = '/^'.preg_replace(['/\\\\\*/', '/\\\\\^/'], ['.*?', '[^_]*?'], preg_quote($page_to_check, '/')).'$/i';
 
-        return ($is = (boolean)preg_match($page_to_check_regex, $current_page));
+        return $is = (boolean) preg_match($page_to_check_regex, $current_page);
     }
 
     /**
@@ -145,8 +146,7 @@ class UtilsEnv extends AbsBase
         if (function_exists('apache_setenv')) {
             @apache_setenv('no-gzip', '1');
         }
-        while (@ob_end_clean()) {
-            ;
+        while (@ob_end_clean()) {;
         }
     }
 
@@ -184,7 +184,6 @@ class UtilsEnv extends AbsBase
         if (($memory_limit = ini_get('memory_limit'))) {
             $limits[] = $this->plugin->utils_fs->abbrBytes($memory_limit);
         }
-        return ($max = min($limits));
+        return $max = min($limits);
     }
 }
-	

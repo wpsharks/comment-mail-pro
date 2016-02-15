@@ -1,15 +1,16 @@
 <?php
 /**
- * SSO Utilities
+ * SSO Utilities.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * SSO Utilities
+ * SSO Utilities.
  *
  * @since 141111 First documented version.
  */
@@ -32,24 +33,23 @@ class UtilsSso extends AbsBase
      *
      * @param string $service The service name we are dealing with.
      * @param string $sso_id  The SSO service's ID for this user.
-     *
      * @param array  $args    Add additional specs and/or behavioral args.
      *
-     * @return boolean `TRUE` on a successful/automatic login.
+     * @return bool `TRUE` on a successful/automatic login.
      */
     public function autoLogin($service, $sso_id, array $args = [])
     {
-        if (!($service = trim(strtolower((string)$service)))) {
+        if (!($service = trim(strtolower((string) $service)))) {
             return false; // Not possible.
         }
-        if (!($sso_id = trim((string)$sso_id))) {
+        if (!($sso_id = trim((string) $sso_id))) {
             return false; // Not possible.
         }
         $default_args = [
             'no_cache' => false,
         ];
-        $args         = array_merge($default_args, $args);
-        $args         = array_intersect_key($args, $default_args);
+        $args = array_merge($default_args, $args);
+        $args = array_intersect_key($args, $default_args);
 
         $user_exists = $user_id = $this->userExists($service, $sso_id, $args);
 
@@ -68,17 +68,16 @@ class UtilsSso extends AbsBase
      *
      * @param string $service The service name we are dealing with.
      * @param string $sso_id  The SSO service's ID for this user.
-     *
      * @param array  $args    Add additional specs and/or behavioral args.
      *
-     * @return boolean `TRUE` on a successful/automatic registration & login.
+     * @return bool `TRUE` on a successful/automatic registration & login.
      */
     public function autoRegisterLogin($service, $sso_id, array $args = [])
     {
-        if (!($service = trim(strtolower((string)$service)))) {
+        if (!($service = trim(strtolower((string) $service)))) {
             return false; // Not possible.
         }
-        if (!($sso_id = trim((string)$sso_id))) {
+        if (!($sso_id = trim((string) $sso_id))) {
             return false; // Not possible.
         }
         $default_args = [
@@ -88,8 +87,8 @@ class UtilsSso extends AbsBase
 
             'no_cache' => false,
         ];
-        $args         = array_merge($default_args, $args);
-        $args         = array_intersect_key($args, $default_args);
+        $args = array_merge($default_args, $args);
+        $args = array_intersect_key($args, $default_args);
 
         $args_no_cache_false = array_merge($args, ['no_cache' => false]);
         $args_no_cache_true  = array_merge($args, ['no_cache' => true]);
@@ -102,13 +101,13 @@ class UtilsSso extends AbsBase
         //if(!$this->plugin->utils_user->canRegister())
         //	return FALSE; // Not possible.
 
-        $fname = trim((string)$args['fname']);
-        $lname = trim((string)$args['lname']);
-        $email = trim((string)$args['email']);
+        $fname = trim((string) $args['fname']);
+        $lname = trim((string) $args['lname']);
+        $email = trim((string) $args['email']);
 
         $fname = $this->plugin->utils_string->firstName($fname, $email);
 
-        $no_cache = (boolean)$args['no_cache']; // Fresh check(s)?
+        $no_cache = (boolean) $args['no_cache']; // Fresh check(s)?
 
         if (!$fname || !$email || !is_email($email)
             || $this->plugin->utils_user->emailExistsOnBlog($email, $no_cache)
@@ -160,26 +159,25 @@ class UtilsSso extends AbsBase
      *
      * @param string $service The service name we are dealing with.
      * @param string $sso_id  The SSO service's ID for this user.
-     *
      * @param array  $args    Add additional specs and/or behavioral args.
      *
-     * @return integer A matching WP user ID, else `0` on failure.
+     * @return int A matching WP user ID, else `0` on failure.
      */
     public function userExists($service, $sso_id, array $args = [])
     {
-        if (!($service = trim(strtolower((string)$service)))) {
+        if (!($service = trim(strtolower((string) $service)))) {
             return 0; // Not possible.
         }
-        if (!($sso_id = trim((string)$sso_id))) {
+        if (!($sso_id = trim((string) $sso_id))) {
             return 0; // Not possible.
         }
         $default_args = [
             'no_cache' => false,
         ];
-        $args         = array_merge($default_args, $args);
-        $args         = array_intersect_key($args, $default_args);
+        $args = array_merge($default_args, $args);
+        $args = array_intersect_key($args, $default_args);
 
-        $no_cache = (boolean)$args['no_cache'];
+        $no_cache = (boolean) $args['no_cache'];
 
         $cache_keys = compact('service', 'sso_id');
         if (!is_null($user_id = &$this->cacheKey(__FUNCTION__, $cache_keys)) && !$no_cache) {
@@ -189,20 +187,20 @@ class UtilsSso extends AbsBase
 
         $matching_user_ids_sql = // Find a matching SSO ID in the `wp_users` table; for this blog.
 
-            "SELECT `user_id` FROM (". // See: <http://jas.xyz/1I52mVE>
+            'SELECT `user_id` FROM ('.// See: <http://jas.xyz/1I52mVE>
 
-            "	SELECT `user_id` FROM `".esc_sql($this->plugin->utils_db->wp->usermeta)."`".
+            '	SELECT `user_id` FROM `'.esc_sql($this->plugin->utils_db->wp->usermeta).'`'.
             "	 WHERE `meta_key` = '".esc_sql($meta_key)."'".
             "	 AND `meta_value` = '".esc_sql($sso_id)."'".
 
-            ") AS `user_id`"; // Alias requirement.
+            ') AS `user_id`'; // Alias requirement.
 
         $sql = // Find a user ID matching the SSO ID; if possible.
 
-            "SELECT `ID` FROM `".esc_sql($this->plugin->utils_db->wp->users)."`".
-            " WHERE `ID` IN(".$matching_user_ids_sql.") LIMIT 1";
+            'SELECT `ID` FROM `'.esc_sql($this->plugin->utils_db->wp->users).'`'.
+            ' WHERE `ID` IN('.$matching_user_ids_sql.') LIMIT 1';
 
-        return ($user_id = (integer)$this->plugin->utils_db->wp->get_var($sql));
+        return $user_id = (integer) $this->plugin->utils_db->wp->get_var($sql);
     }
 
     /**
@@ -227,8 +225,8 @@ class UtilsSso extends AbsBase
             'lname' => null,
             'email' => null,
         ];
-        $request_args         = array_merge($default_request_args, $request_args);
-        $request_args         = array_intersect_key($request_args, $default_request_args);
+        $request_args = array_merge($default_request_args, $request_args);
+        $request_args = array_intersect_key($request_args, $default_request_args);
 
         $default_args = [
             'service'     => '',
@@ -242,34 +240,34 @@ class UtilsSso extends AbsBase
             'lname' => '',
             'email' => '',
         ];
-        $args         = array_merge($default_args, $args);
-        $args         = array_intersect_key($args, $default_args);
+        $args = array_merge($default_args, $args);
+        $args = array_intersect_key($args, $default_args);
 
-        if (!($service = trim((string)$request_args['service']))) {
-            $service = trim((string)$args['service']);
+        if (!($service = trim((string) $request_args['service']))) {
+            $service = trim((string) $args['service']);
         }
-        if (!($action = trim((string)$request_args['action']))) {
-            $action = trim((string)$args['action']);
+        if (!($action = trim((string) $request_args['action']))) {
+            $action = trim((string) $args['action']);
         }
-        if (!($redirect_to = trim((string)$request_args['redirect_to']))) {
-            $redirect_to = trim((string)$args['redirect_to']);
+        if (!($redirect_to = trim((string) $request_args['redirect_to']))) {
+            $redirect_to = trim((string) $args['redirect_to']);
         }
-        if (!($sso_id = trim((string)$request_args['sso_id']))) {
-            $sso_id = trim((string)$args['sso_id']);
+        if (!($sso_id = trim((string) $request_args['sso_id']))) {
+            $sso_id = trim((string) $args['sso_id']);
         }
-        if (!($_wpnonce = trim((string)$request_args['_wpnonce']))) {
-            $_wpnonce = trim((string)$args['_wpnonce']);
+        if (!($_wpnonce = trim((string) $request_args['_wpnonce']))) {
+            $_wpnonce = trim((string) $args['_wpnonce']);
         }
-        if (!($fname = trim((string)$request_args['fname']))) {
-            $fname = trim((string)$args['fname']);
+        if (!($fname = trim((string) $request_args['fname']))) {
+            $fname = trim((string) $args['fname']);
         }
-        if (!($lname = trim((string)$request_args['lname']))) {
-            $lname = trim((string)$args['lname']);
+        if (!($lname = trim((string) $request_args['lname']))) {
+            $lname = trim((string) $args['lname']);
         }
-        if (!($email = trim((string)$request_args['email']))) {
-            $email = trim((string)$args['email']);
+        if (!($email = trim((string) $request_args['email']))) {
+            $email = trim((string) $args['email']);
         }
-        $form_fields   = new FormFields(
+        $form_fields = new FormFields(
             [
                 'ns_name_suffix' => '[sso]',
                 'ns_id_suffix'   => '-sso-complete-form',
@@ -280,7 +278,7 @@ class UtilsSso extends AbsBase
         $hidden_inputs = function () use ($_this, $form_fields, $service, $redirect_to, $sso_id) {
             return $_this->hiddenInputsForCompletion(get_defined_vars());
         };
-        $error_codes   = []; // Initialize error codes array.
+        $error_codes = []; // Initialize error codes array.
 
         if ($action === 'complete') { // Processing completion?
             //if(!$this->plugin->utils_user->canRegister())
@@ -288,9 +286,9 @@ class UtilsSso extends AbsBase
 
             if (!$service) { // Service is missing?
                 $error_codes[] = 'missing_service';
-            } else if (!$sso_id) { // SSO ID is missing?
+            } elseif (!$sso_id) { // SSO ID is missing?
                 $error_codes[] = 'missing_sso_id';
-            } else if (!wp_verify_nonce($_wpnonce, GLOBAL_NS.'_sso_complete')) {
+            } elseif (!wp_verify_nonce($_wpnonce, GLOBAL_NS.'_sso_complete')) {
                 $error_codes[] = 'invalid_wpnonce';
             }
             if (!$fname) { // First name is missing?
@@ -298,12 +296,12 @@ class UtilsSso extends AbsBase
             }
             if (!$email) { // Email address is missing?
                 $error_codes[] = 'missing_email';
-            } else if (!is_email($email)) { // Invalid email?
+            } elseif (!is_email($email)) { // Invalid email?
                 $error_codes[] = 'invalid_email';
-            } else if ($this->plugin->utils_user->emailExistsOnBlog($email)) {
+            } elseif ($this->plugin->utils_user->emailExistsOnBlog($email)) {
                 $error_codes[] = 'email_exists'; // Exists on this blog already.
             }
-        } else if ($action === 'callback') { // Handle duplicate email on callback.
+        } elseif ($action === 'callback') { // Handle duplicate email on callback.
             // Note: only occurs if an account exists w/ a different underlying SSO ID.
             // Otherwise, for existing accounts w/ a matching SSO ID, we automatically log them in.
 
@@ -343,60 +341,60 @@ class UtilsSso extends AbsBase
 
             'sso_id' => '',
         ];
-        $args         = array_merge($default_args, $args);
-        $args         = array_intersect_key($args, $default_args);
+        $args = array_merge($default_args, $args);
+        $args = array_intersect_key($args, $default_args);
 
-        /** @var $form_fields form_fields Reference for IDEs. */
+        /** @type $form_fields form_fields Reference for IDEs. */
         if (!(($form_fields = $args['form_fields']) instanceof form_fields)) {
             return ''; // Not possible.
         }
-        $service     = trim(strtolower((string)$args['service']));
-        $redirect_to = trim((string)$args['redirect_to']);
-        $sso_id      = trim((string)$args['sso_id']);
+        $service     = trim(strtolower((string) $args['service']));
+        $redirect_to = trim((string) $args['redirect_to']);
+        $sso_id      = trim((string) $args['sso_id']);
 
         $hidden_inputs = ''; // Initialize.
 
         $hidden_inputs .= $form_fields->hiddenInput(
-                [
-                    'name'          => 'service',
-                    'current_value' => $service,
-                ]
-            )."\n";
+            [
+                'name'          => 'service',
+                'current_value' => $service,
+            ]
+        )."\n";
         $hidden_inputs .= $form_fields->hiddenInput(
-                [
-                    'name'          => 'action',
-                    'current_value' => 'complete',
-                ]
-            )."\n";
+            [
+                'name'          => 'action',
+                'current_value' => 'complete',
+            ]
+        )."\n";
         $hidden_inputs .= $form_fields->hiddenInput(
-                [
-                    'name'          => 'redirect_to',
-                    'current_value' => $redirect_to,
-                ]
-            )."\n";
+            [
+                'name'          => 'redirect_to',
+                'current_value' => $redirect_to,
+            ]
+        )."\n";
         $hidden_inputs .= $form_fields->hiddenInput(
-                [
-                    'name'          => 'sso_id', // Encrypted for security.
-                    'current_value' => $this->plugin->utils_enc->encrypt($sso_id),
-                ]
-            )."\n";
+            [
+                'name'          => 'sso_id', // Encrypted for security.
+                'current_value' => $this->plugin->utils_enc->encrypt($sso_id),
+            ]
+        )."\n";
         $hidden_inputs .= $form_fields->hiddenInput(
-                [
-                    'name'          => '_wpnonce',
-                    'current_value' => wp_create_nonce(GLOBAL_NS.'_sso_complete'),
-                ]
-            )."\n";
-        $sso_get_vars = !empty($_GET[GLOBAL_NS]['sso']) ? (array)$_GET[GLOBAL_NS]['sso'] : [];
+            [
+                'name'          => '_wpnonce',
+                'current_value' => wp_create_nonce(GLOBAL_NS.'_sso_complete'),
+            ]
+        )."\n";
+        $sso_get_vars = !empty($_GET[GLOBAL_NS]['sso']) ? (array) $_GET[GLOBAL_NS]['sso'] : [];
         $sso_get_vars = $this->plugin->utils_string->trimStripDeep($sso_get_vars);
 
         foreach ($sso_get_vars as $_sso_var_key => $_sso_var_value) {
             if (!in_array($_sso_var_key, ['action', 'service', 'redirect_to', 'sso_id', '_wpnonce'], true)) {
                 $hidden_inputs .= $form_fields->hiddenInput(
-                        [
-                            'name'          => $_sso_var_key,
-                            'current_value' => (string)$_sso_var_value,
-                        ]
-                    )."\n";
+                    [
+                        'name'          => $_sso_var_key,
+                        'current_value' => (string) $_sso_var_value,
+                    ]
+                )."\n";
             }
         }
         unset($_sso_var_key, $_sso_var_value); // Housekeeping.

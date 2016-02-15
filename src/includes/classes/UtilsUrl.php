@@ -1,15 +1,16 @@
 <?php
 /**
- * URL Utilities
+ * URL Utilities.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * URL Utilities
+ * URL Utilities.
  *
  * @since 141111 First documented version.
  */
@@ -37,7 +38,7 @@ class UtilsUrl extends AbsBase
         if (!is_null($scheme = &$this->staticKey(__FUNCTION__))) {
             return $scheme; // Cached this already.
         }
-        return ($scheme = is_ssl() ? 'https' : 'http');
+        return $scheme = is_ssl() ? 'https' : 'http';
     }
 
     /**
@@ -55,7 +56,7 @@ class UtilsUrl extends AbsBase
         if (!is_null($scheme = &$this->staticKey(__FUNCTION__))) {
             return $scheme; // Cached this already.
         }
-        return ($scheme = (string)parse_url(home_url(), PHP_URL_SCHEME));
+        return $scheme = (string) parse_url(home_url(), PHP_URL_SCHEME);
     }
 
     /**
@@ -65,7 +66,6 @@ class UtilsUrl extends AbsBase
      *
      * @param string      $url    The input URL to work from (optional).
      *                            If empty, defaults to the current URL.
-     *
      * @param string|null $scheme Optional. Defaults to a `NULL` value.
      *                            See {@link \set_url_scheme()} in WordPress for further details.
      *
@@ -85,7 +85,7 @@ class UtilsUrl extends AbsBase
      */
     public function setScheme($url = '', $scheme = null)
     {
-        if (!($url = trim((string)$url))) {
+        if (!($url = trim((string) $url))) {
             $url = $this->current();
         }
         if ($scheme === 'front') { // Front-side?
@@ -99,7 +99,7 @@ class UtilsUrl extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param boolean $no_port No port number? Defaults to `FALSE`.
+     * @param bool $no_port No port number? Defaults to `FALSE`.
      *
      * @note  Some hosts include a port number in `$_SERVER['HTTP_HOST']`.
      *    That SHOULD be left intact for URL generation in almost every scenario.
@@ -113,7 +113,7 @@ class UtilsUrl extends AbsBase
         if (!is_null($host = &$this->staticKey(__FUNCTION__, $no_port))) {
             return $host; // Cached this already.
         }
-        $host = strtolower((string)$_SERVER['HTTP_HOST']);
+        $host = strtolower((string) $_SERVER['HTTP_HOST']);
 
         if ($no_port) { // Remove possible port number?
             $host = preg_replace('/\:[0-9]+$/', '', $host);
@@ -184,7 +184,7 @@ class UtilsUrl extends AbsBase
         if (!is_null($uri = &$this->staticKey(__FUNCTION__))) {
             return $uri; // Cached this already.
         }
-        return ($uri = '/'.ltrim((string)$_SERVER['REQUEST_URI'], '/'));
+        return $uri = '/'.ltrim((string) $_SERVER['REQUEST_URI'], '/');
     }
 
     /**
@@ -199,7 +199,7 @@ class UtilsUrl extends AbsBase
         if (!is_null($path = &$this->staticKey(__FUNCTION__))) {
             return $path; // Cached this already.
         }
-        return ($path = '/'.ltrim((string)parse_url($this->currentUri(), PHP_URL_PATH), '/'));
+        return $path = '/'.ltrim((string) parse_url($this->currentUri(), PHP_URL_PATH), '/');
     }
 
     /**
@@ -214,13 +214,13 @@ class UtilsUrl extends AbsBase
         if (!is_null($path_info = &$this->staticKey(__FUNCTION__))) {
             return $path_info; // Cached this already.
         }
-        $path_info = isset($_SERVER['PATH_INFO']) ? (string)$_SERVER['PATH_INFO'] : '';
+        $path_info = isset($_SERVER['PATH_INFO']) ? (string) $_SERVER['PATH_INFO'] : '';
         if (strpos($path_info, '?') !== false) {
             list($path_info) = explode('?', $path_info);
         }
         $path_info = $this->plugin->utils_string->trim($path_info, '', '/');
 
-        return ($path_info = str_replace('%', '%25', $path_info));
+        return $path_info = str_replace('%', '%25', $path_info);
     }
 
     /**
@@ -240,7 +240,7 @@ class UtilsUrl extends AbsBase
         }
         $url = '//'.$this->currentHost().$this->currentUri();
 
-        return ($url = $this->setScheme($url, $scheme));
+        return $url = $this->setScheme($url, $scheme);
     }
 
     /**
@@ -250,7 +250,6 @@ class UtilsUrl extends AbsBase
      *
      * @param string      $url    The input URL to work from (optional).
      *                            If empty, defaults to the current URL.
-     *
      * @param string|null $scheme Optional. Defaults to a `NULL` value.
      *                            See {@link set_scheme()} method for further details.
      *
@@ -258,10 +257,10 @@ class UtilsUrl extends AbsBase
      */
     public function noQuery($url = '', $scheme = null)
     {
-        if (!($url = trim((string)$url))) {
+        if (!($url = trim((string) $url))) {
             $url = $this->current();
         }
-        $url = strpos($url, '?') !== false ? (string)strstr($url, '?', true) : $url;
+        $url = strpos($url, '?') !== false ? (string) strstr($url, '?', true) : $url;
 
         return $this->setScheme($url, $scheme);
     }
@@ -273,10 +272,8 @@ class UtilsUrl extends AbsBase
      *
      * @param string      $nonce_action A specific nonce action.
      *                                  Defaults to `GLOBAL_NS`.
-     *
      * @param string      $url          The input URL to work from (optional).
      *                                  If empty, defaults to the current URL.
-     *
      * @param string|null $scheme       Optional . Defaults to `admin`.
      *                                  See {@link set_scheme()} method for further details.
      *
@@ -284,7 +281,7 @@ class UtilsUrl extends AbsBase
      */
     public function nonce($nonce_action = GLOBAL_NS, $url = '', $scheme = 'admin')
     {
-        if (!($url = trim((string)$url))) {
+        if (!($url = trim((string) $url))) {
             $url = $this->current();
         }
         $args = ['_wpnonce' => wp_create_nonce($nonce_action)];
@@ -300,10 +297,8 @@ class UtilsUrl extends AbsBase
      *
      * @param string      $page   A specific page value (optional).
      *                            If empty, we use `page` from the URL; else current `page`.
-     *
      * @param string      $url    The input URL to work from (optional).
      *                            If empty, defaults to the current URL.
-     *
      * @param string|null $scheme Optional . Defaults to `admin`.
      *                            See {@link set_scheme()} method for further details.
      *
@@ -311,20 +306,20 @@ class UtilsUrl extends AbsBase
      */
     public function pageOnly($page = '', $url = '', $scheme = 'admin')
     {
-        $page = trim((string)$page);
+        $page = trim((string) $page);
 
-        if (!($url = trim((string)$url))) {
+        if (!($url = trim((string) $url))) {
             $url = $this->current();
         }
-        $query = (string)parse_url($url, PHP_URL_QUERY);
+        $query = (string) parse_url($url, PHP_URL_QUERY);
         wp_parse_str($query, $query_vars);
         $url = $this->noQuery($url);
 
         if (!$page && !empty($query_vars['page'])) {
-            $page = trim((string)$query_vars['page']);
+            $page = trim((string) $query_vars['page']);
         }
         if (!$page && !empty($_REQUEST['page'])) {
-            $page = trim(stripslashes((string)$_REQUEST['page']));
+            $page = trim(stripslashes((string) $_REQUEST['page']));
         }
         $args = $page ? ['page' => $page] : [];
         $url  = add_query_arg(urlencode_deep($args), $url);
@@ -339,13 +334,10 @@ class UtilsUrl extends AbsBase
      *
      * @param string      $page         A specific page value (optional).
      *                                  If empty, we use `page` from the URL; else current `page`.
-     *
      * @param string      $nonce_action A specific nonce action.
      *                                  Defaults to `GLOBAL_NS`.
-     *
      * @param string      $url          The input URL to work from (optional).
      *                                  If empty, defaults to the current URL.
-     *
      * @param string|null $scheme       Optional . Defaults to `admin`.
      *                                  See {@link set_scheme()} method for further details.
      *
@@ -382,7 +374,6 @@ class UtilsUrl extends AbsBase
      *
      * @param string      $nonce_action A specific nonce action.
      *                                  Defaults to `GLOBAL_NS`.
-     *
      * @param string|null $scheme       Optional . Defaults to `admin`.
      *                                  See {@link set_scheme()} method for further details.
      *
@@ -602,7 +593,6 @@ class UtilsUrl extends AbsBase
      * @since 141111 First documented version.
      *
      * @param string      $type   New type/mode to use.
-     *
      * @param string|null $scheme Optional . Defaults to `admin`.
      *                            See {@link set_scheme()} method for further details.
      *
@@ -610,7 +600,7 @@ class UtilsUrl extends AbsBase
      */
     public function setTemplateType($type, $scheme = 'admin')
     {
-        $type = trim(strtolower((string)$type));
+        $type = trim(strtolower((string) $type));
         $url  = $this->pageNonceOnly('', GLOBAL_NS, '', $scheme);
         $args = [GLOBAL_NS => ['set_template_type' => $type]];
 
@@ -639,7 +629,6 @@ class UtilsUrl extends AbsBase
      *
      * @param string      $url    The input URL to work from (optional).
      *                            If empty, defaults to the main menu page.
-     *
      * @param string|null $scheme Optional . Defaults to `admin`.
      *                            See {@link set_scheme()} method for further details.
      *
@@ -647,7 +636,7 @@ class UtilsUrl extends AbsBase
      */
     public function proPreview($url = '', $scheme = 'admin')
     {
-        if (!($url = trim((string)$url))) {
+        if (!($url = trim((string) $url))) {
             $url = $this->mainMenuPageOnly();
         }
         $args = [GLOBAL_NS.'_pro_preview' => '1'];
@@ -670,12 +659,10 @@ class UtilsUrl extends AbsBase
      *
      *    You can pass `type:` or `type::` to remove existing filters of that specific <type><group>;
      *       i.e. without adding new filters; it just removes all filters of <type><group>.
-     *
-     * @param string       $url     The input URL to work from (optional).
-     *                              If empty, defaults to the current URL.
-     *
-     * @param string|null  $scheme  Optional . Defaults to `admin`.
-     *                              See {@link set_scheme()} method for further details.
+     * @param string      $url    The input URL to work from (optional).
+     *                            If empty, defaults to the current URL.
+     * @param string|null $scheme Optional . Defaults to `admin`.
+     *                            See {@link set_scheme()} method for further details.
      *
      * @return string URL w/ search filters added to the `s` key.
      */
@@ -684,15 +671,15 @@ class UtilsUrl extends AbsBase
         if (is_array($filters)) { // Force string.
             $filters = implode(' ', $filters);
         }
-        $filters = trim((string)$filters);
+        $filters = trim((string) $filters);
 
-        if (!($url = trim((string)$url))) {
+        if (!($url = trim((string) $url))) {
             $url = $this->current();
         }
-        $query = (string)parse_url($url, PHP_URL_QUERY);
+        $query = (string) parse_url($url, PHP_URL_QUERY);
         wp_parse_str($query, $query_vars);
 
-        $s            = !empty($query_vars['s']) ? (string)$query_vars['s'] : '';
+        $s            = !empty($query_vars['s']) ? (string) $query_vars['s'] : '';
         $filters      = preg_split('/\s+/', $filters, null, PREG_SPLIT_NO_EMPTY);
         $filter_regex = '/\b(?P<type>\w+)(?P<group>\:+)(?P<values>[^\s]+)?/i';
 
@@ -701,19 +688,21 @@ class UtilsUrl extends AbsBase
                 $s = preg_replace(
                     str_replace(
                         '<group>\:+', // Remove filters in this <group>.
-                        '<group>\:{'.strlen($_filter).'}', $filter_regex
+                        '<group>\:{'.strlen($_filter).'}',
+                        $filter_regex
                     ),
                     '',
                     $s
                 );
-            } else if (preg_match($filter_regex, $_filter, $_filter_m)) { // Remove <type><group>?
+            } elseif (preg_match($filter_regex, $_filter, $_filter_m)) { // Remove <type><group>?
                 $s = preg_replace(
                     str_replace(
                         '<type>\w+', // Remove filters of this <type><group>.
                         '<type>'.preg_quote(rtrim($_filter_m['type'], 's'), '/').'s*',
                         str_replace(
                             '<group>\:+', // We convert the <group> first; nested inside.
-                            '<group>\:{'.strlen($_filter_m['group']).'}', $filter_regex
+                            '<group>\:{'.strlen($_filter_m['group']).'}',
+                            $filter_regex
                         )
                     ),
                     '',
@@ -743,10 +732,8 @@ class UtilsUrl extends AbsBase
      * @param string      $plural Plural table name/key.
      * @param array       $ids    An array of IDs to act upon.
      * @param string      $action The bulk action to perform.
-     *
      * @param string      $url    The input URL to work from (optional).
      *                            If empty, defaults to the current URL.
-     *
      * @param string|null $scheme Optional . Defaults to `admin`.
      *                            See {@link set_scheme()} method for further details.
      *
@@ -754,10 +741,10 @@ class UtilsUrl extends AbsBase
      */
     public function tableBulkAction($plural, array $ids, $action, $url = '', $scheme = 'admin')
     {
-        $plural = trim((string)$plural);
-        $action = trim((string)$action);
+        $plural = trim((string) $plural);
+        $action = trim((string) $action);
 
-        if (!($url = trim((string)$url))) {
+        if (!($url = trim((string) $url))) {
             $url = $this->current();
         }
         $args = [$plural => $ids, 'action' => $action];
@@ -771,21 +758,18 @@ class UtilsUrl extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param array       $also_keep    Any additional names/keys to keep.
-     *                                  Built-in names/keys to keep already includes the following:
-     *                                  `page`, `orderby`, `order`, and `s` for searches.
+     * @param array $also_keep Any additional names/keys to keep.
+     *                         Built-in names/keys to keep already includes the following:
+     *                         `page`, `orderby`, `order`, and `s` for searches.
      *
      *    If `_wponce` is passed in this array, we not only keep that variable,
      *    but we also generate a new `_wpnonce` key too. In short, `_wpnonce` is
      *    forced into the URL w/ a fresh value when keeping `_wp_nonce`.
      *    ~ See also: {@link page_nonce_table_nav_vars_only()}.
-     *
      * @param string      $url          The input URL to work from (optional).
      *                                  Defaults to current URL. Existing vars will be taken from this URL.
-     *
      * @param string|null $scheme       Optional . Defaults to `admin`.
      *                                  See {@link set_scheme()} method for further details.
-     *
      * @param string      $nonce_action A specific nonce action.
      *                                  ~ See also: {@link page_nonce_table_nav_vars_only()}.
      *
@@ -797,10 +781,10 @@ class UtilsUrl extends AbsBase
      */
     public function pageTableNavVarsOnly(array $also_keep = [], $url = '', $scheme = 'admin', $nonce_action = GLOBAL_NS)
     {
-        if (!($url = trim((string)$url))) {
+        if (!($url = trim((string) $url))) {
             $url = $this->current();
         }
-        $query = (string)parse_url($url, PHP_URL_QUERY);
+        $query = (string) parse_url($url, PHP_URL_QUERY);
         wp_parse_str($query, $query_vars);
         $url = $this->noQuery($url);
 
@@ -813,7 +797,7 @@ class UtilsUrl extends AbsBase
         foreach ($keepers as $_keeper) { // Add keepers back onto the clean URL.
             if (isset($query_vars[$_keeper])) { // In query vars?
                 $url = add_query_arg(urlencode($_keeper), urlencode($query_vars[$_keeper]), $url);
-            } else if (isset($_r[$_keeper])) { // In the current request array?
+            } elseif (isset($_r[$_keeper])) { // In the current request array?
                 $url = add_query_arg(urlencode($_keeper), urlencode($_r[$_keeper]), $url);
             }
         }
@@ -848,7 +832,6 @@ class UtilsUrl extends AbsBase
      * @since 141111 First documented version.
      *
      * @param string      $notice_key The notice key to dismiss.
-     *
      * @param string|null $scheme     Optional . Defaults to `admin`.
      *                                See {@link set_scheme()} method for further details.
      *
@@ -856,7 +839,7 @@ class UtilsUrl extends AbsBase
      */
     public function dismissNotice($notice_key, $scheme = 'admin')
     {
-        $notice_key = trim((string)$notice_key);
+        $notice_key = trim((string) $notice_key);
 
         $url  = $this->nonce(GLOBAL_NS, '', $scheme);
         $args = [GLOBAL_NS => ['dismiss_notice' => compact('notice_key')]];
@@ -947,7 +930,6 @@ class UtilsUrl extends AbsBase
      * @since 141111 First documented version.
      *
      * @param string      $file   Optional file path; relative to plugin directory.
-     *
      * @param string|null $scheme Optional. Defaults to a `NULL` value.
      *                            See {@link set_scheme()} method for further details.
      *
@@ -958,7 +940,7 @@ class UtilsUrl extends AbsBase
         if (is_null($plugin_dir_url = &$this->staticKey(__FUNCTION__, 'plugin_dir_url'))) {
             $plugin_dir_url = rtrim(plugin_dir_url($this->plugin->file), '/');
         }
-        return $this->setScheme($plugin_dir_url.(string)$file, $scheme);
+        return $this->setScheme($plugin_dir_url.(string) $file, $scheme);
     }
 
     /**
@@ -968,16 +950,15 @@ class UtilsUrl extends AbsBase
      *
      * @param string $nonce_action A specific nonce action.
      *                             Defaults to `GLOBAL_NS`.
-     *
      * @param string $url          A specific URL to check?
      *                             Defaults to the current URL; i.e. current `$_REQUEST`.
      *
-     * @return boolean TRUE if it has a valid `_wpnonce`.
+     * @return bool TRUE if it has a valid `_wpnonce`.
      */
     public function hasValidNonce($nonce_action = GLOBAL_NS, $url = '')
     {
-        if (($url = trim((string)$url))) {
-            wp_parse_str((string)@parse_url($url, PHP_URL_QUERY), $_r);
+        if (($url = trim((string) $url))) {
+            wp_parse_str((string) @parse_url($url, PHP_URL_QUERY), $_r);
         } else {
             $_r = stripslashes_deep($_REQUEST);
         }
@@ -992,8 +973,7 @@ class UtilsUrl extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param integer     $post_id A WP post ID.
-     *
+     * @param int         $post_id A WP post ID.
      * @param string|null $scheme  Optional. Defaults to a `NULL` value.
      *                             See {@link set_scheme()} method for further details.
      *
@@ -1001,7 +981,7 @@ class UtilsUrl extends AbsBase
      */
     public function postShort($post_id, $scheme = null)
     {
-        $post_id = (integer)$post_id;
+        $post_id = (integer) $post_id;
 
         $url  = home_url('/', $scheme);
         $args = ['p' => $post_id];
@@ -1014,8 +994,7 @@ class UtilsUrl extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param integer     $post_id A WP post ID.
-     *
+     * @param int         $post_id A WP post ID.
      * @param string|null $scheme  Optional . Defaults to `admin`.
      *                             See {@link set_scheme()} method for further details.
      *
@@ -1023,7 +1002,7 @@ class UtilsUrl extends AbsBase
      */
     public function postEditShort($post_id, $scheme = 'admin')
     {
-        $post_id = (integer)$post_id;
+        $post_id = (integer) $post_id;
 
         $url  = admin_url('/post.php', $scheme);
         $args = ['post' => $post_id, 'action' => 'edit'];
@@ -1036,8 +1015,7 @@ class UtilsUrl extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param integer     $post_id A WP post ID.
-     *
+     * @param int         $post_id A WP post ID.
      * @param string|null $scheme  Optional . Defaults to `admin`.
      *                             See {@link set_scheme()} method for further details.
      *
@@ -1045,7 +1023,7 @@ class UtilsUrl extends AbsBase
      */
     public function postEditCommentsShort($post_id, $scheme = 'admin')
     {
-        $post_id = (integer)$post_id;
+        $post_id = (integer) $post_id;
 
         $url  = admin_url('/edit-comments.php', $scheme);
         $args = ['p' => $post_id];
@@ -1058,9 +1036,8 @@ class UtilsUrl extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param integer     $post_id A WP post ID.
+     * @param int         $post_id A WP post ID.
      * @param string      $s       Any additional search words/filters.
-     *
      * @param string|null $scheme  Optional . Defaults to `admin`.
      *                             See {@link set_scheme()} method for further details.
      *
@@ -1068,8 +1045,8 @@ class UtilsUrl extends AbsBase
      */
     public function postEditSubsShort($post_id, $s = '', $scheme = 'admin')
     {
-        $post_id = (integer)$post_id;
-        $s       = trim((string)$s);
+        $post_id = (integer) $post_id;
+        $s       = trim((string) $s);
 
         $url  = $this->subsMenuPageOnly($scheme);
         $args = ['s' => 'post_id:'.$post_id.($s ? ' '.$s : '')];
@@ -1083,7 +1060,6 @@ class UtilsUrl extends AbsBase
      * @since 141111 First documented version.
      *
      * @param string      $s      Search words/filters.
-     *
      * @param string|null $scheme Optional . Defaults to `admin`.
      *                            See {@link set_scheme()} method for further details.
      *
@@ -1091,7 +1067,7 @@ class UtilsUrl extends AbsBase
      */
     public function searchSubsShort($s = '', $scheme = 'admin')
     {
-        $s = trim((string)$s); // Search words/filters.
+        $s = trim((string) $s); // Search words/filters.
 
         $url  = $this->subsMenuPageOnly($scheme);
         $args = ['s' => $s]; // Query args.
@@ -1123,8 +1099,7 @@ class UtilsUrl extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param integer     $sub_id Subscription ID.
-     *
+     * @param int         $sub_id Subscription ID.
      * @param string|null $scheme Optional . Defaults to `admin`.
      *                            See {@link set_scheme()} method for further details.
      *
@@ -1132,7 +1107,7 @@ class UtilsUrl extends AbsBase
      */
     public function editSubShort($sub_id, $scheme = 'admin')
     {
-        $sub_id = (integer)$sub_id;
+        $sub_id = (integer) $sub_id;
 
         $url  = $this->subsMenuPageOnly();
         $url  = $this->pageTableNavVarsOnly([], $url, $scheme);
@@ -1146,8 +1121,7 @@ class UtilsUrl extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param integer     $user_id A WP User ID.
-     *
+     * @param int $user_id A WP User ID.
      * @param string|null Optional . Defaults to `admin`.
      *                             See {@link set_scheme()} method for further details.
      *
@@ -1155,7 +1129,7 @@ class UtilsUrl extends AbsBase
      */
     public function editUserShort($user_id, $scheme = 'admin')
     {
-        $user_id = (integer)$user_id;
+        $user_id = (integer) $user_id;
 
         $url  = admin_url('/user-edit.php', $scheme);
         $args = ['user_id' => $user_id];
@@ -1168,8 +1142,7 @@ class UtilsUrl extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param integer     $comment_id A WP comment ID.
-     *
+     * @param int         $comment_id A WP comment ID.
      * @param string|null $scheme     Optional. Defaults to a `NULL` value.
      *                                See {@link set_scheme()} method for further details.
      *
@@ -1177,7 +1150,7 @@ class UtilsUrl extends AbsBase
      */
     public function commentShort($comment_id, $scheme = null)
     {
-        $comment_id = (integer)$comment_id;
+        $comment_id = (integer) $comment_id;
 
         $url  = home_url('/', $scheme);
         $args = ['c' => $comment_id];
@@ -1190,8 +1163,7 @@ class UtilsUrl extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param integer     $comment_id A WP comment ID.
-     *
+     * @param int $comment_id A WP comment ID.
      * @param string|null Optional    . Defaults to `admin`.
      *                                See {@link set_scheme()} method for further details.
      *
@@ -1199,7 +1171,7 @@ class UtilsUrl extends AbsBase
      */
     public function commentEditShort($comment_id, $scheme = 'admin')
     {
-        $comment_id = (integer)$comment_id;
+        $comment_id = (integer) $comment_id;
 
         $url  = admin_url('/comment.php', $scheme);
         $args = ['action' => 'editcomment', 'c' => $comment_id];
@@ -1213,9 +1185,7 @@ class UtilsUrl extends AbsBase
      * @since 141111 First documented version.
      *
      * @param string      $sub_key Unique subscription key.
-     *
-     * @param boolean     $pls     Process list server?
-     *
+     * @param bool        $pls     Process list server?
      * @param string|null $scheme  Optional. Defaults to a `NULL` value.
      *                             See {@link set_scheme()} method for further details.
      *
@@ -1223,7 +1193,7 @@ class UtilsUrl extends AbsBase
      */
     public function subConfirmUrl($sub_key, $pls = false, $scheme = null)
     {
-        $sub_key = trim((string)$sub_key);
+        $sub_key = trim((string) $sub_key);
         $sub_key = !isset($sub_key[0]) ? '0' : $sub_key;
 
         $url  = home_url('/', $scheme);
@@ -1238,7 +1208,6 @@ class UtilsUrl extends AbsBase
      * @since 141111 First documented version.
      *
      * @param string      $sub_key Unique subscription key.
-     *
      * @param string|null $scheme  Optional. Defaults to a `NULL` value.
      *                             See {@link set_scheme()} method for further details.
      *
@@ -1246,7 +1215,7 @@ class UtilsUrl extends AbsBase
      */
     public function subUnsubscribeUrl($sub_key, $scheme = null)
     {
-        $sub_key = trim((string)$sub_key);
+        $sub_key = trim((string) $sub_key);
         $sub_key = !isset($sub_key[0]) ? '0' : $sub_key;
 
         $url  = home_url('/', $scheme);
@@ -1261,7 +1230,6 @@ class UtilsUrl extends AbsBase
      * @since 141111 First documented version.
      *
      * @param string      $sub_email Subscriber's email address.
-     *
      * @param string|null $scheme    Optional. Defaults to a `NULL` value.
      *                               See {@link set_scheme()} method for further details.
      *
@@ -1269,7 +1237,7 @@ class UtilsUrl extends AbsBase
      */
     public function subUnsubscribeAllUrl($sub_email, $scheme = null)
     {
-        $sub_email = trim((string)$sub_email);
+        $sub_email = trim((string) $sub_email);
         $sub_email = $this->plugin->utils_enc->encrypt($sub_email);
 
         $url  = home_url('/', $scheme);
@@ -1286,7 +1254,6 @@ class UtilsUrl extends AbsBase
      * @param string      $sub_key Unique subscription key.
      *                             If empty, the subscription management system will use
      *                             the current user's email address; if available/possible.
-     *
      * @param string|null $scheme  Optional. Defaults to a `NULL` value.
      *                             See {@link set_scheme()} method for further details.
      *
@@ -1294,7 +1261,7 @@ class UtilsUrl extends AbsBase
      */
     public function subManageUrl($sub_key = '', $scheme = null)
     {
-        $sub_key = trim((string)$sub_key);
+        $sub_key = trim((string) $sub_key);
         $sub_key = !isset($sub_key[0]) ? '0' : $sub_key;
 
         $url  = home_url('/', $scheme);
@@ -1308,27 +1275,24 @@ class UtilsUrl extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param string        $sub_key          Unique subscription key.
-     *                                        If empty, the subscription management system will use
-     *                                        the current user's email address; if available/possible.
-     *
-     * @param string|null   $scheme           Optional. Defaults to a `NULL` value.
-     *                                        See {@link set_scheme()} method for further details.
-     *
-     * @param boolean|array $include_nav_vars Defaults to a `NULL` value.
-     *                                        Use a non-empty array to add new nav vars; `TRUE` to simply include existing nav vars.
-     *                                        See also {@link sub_manage_summary_nav_vars()} for additional details.
-     *
-     * @param string        $return_type      Type of return value; i.e. `(string)$url` or `(array)$args`?
-     *                                        Set this to a value of `array` to indicate that you want `(array)$args`.
-     *                                        ~ Defaults to a value of `string`, indicating `(string)$url`.
+     * @param string      $sub_key          Unique subscription key.
+     *                                      If empty, the subscription management system will use
+     *                                      the current user's email address; if available/possible.
+     * @param string|null $scheme           Optional. Defaults to a `NULL` value.
+     *                                      See {@link set_scheme()} method for further details.
+     * @param bool|array  $include_nav_vars Defaults to a `NULL` value.
+     *                                      Use a non-empty array to add new nav vars; `TRUE` to simply include existing nav vars.
+     *                                      See also {@link sub_manage_summary_nav_vars()} for additional details.
+     * @param string      $return_type      Type of return value; i.e. `(string)$url` or `(array)$args`?
+     *                                      Set this to a value of `array` to indicate that you want `(array)$args`.
+     *                                      ~ Defaults to a value of `string`, indicating `(string)$url`.
      *
      * @return string URL w/ all args + nav vars. Or, `(array)$args`; i.e. array of all args + nav vars.
-     *    In short, return value is dependent upon the `$return_type` parameter.
+     *                In short, return value is dependent upon the `$return_type` parameter.
      */
     public function subManageSummaryUrl($sub_key = '', $scheme = null, $include_nav_vars = null, $return_type = 'string')
     {
-        $sub_key = trim((string)$sub_key);
+        $sub_key = trim((string) $sub_key);
         $sub_key = !isset($sub_key[0]) ? '0' : $sub_key;
 
         $url  = home_url('/', $scheme);
@@ -1345,9 +1309,9 @@ class UtilsUrl extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param boolean|array $include_nav_vars Defaults to a `TRUE` value.
-     *                                        Use a non-empty array to add new nav vars; `TRUE` to simply include existing nav vars.
-     *                                        ~ Any other value results in no nav vars; i.e. this function returns an empty array.
+     * @param bool|array $include_nav_vars Defaults to a `TRUE` value.
+     *                                     Use a non-empty array to add new nav vars; `TRUE` to simply include existing nav vars.
+     *                                     ~ Any other value results in no nav vars; i.e. this function returns an empty array.
      *
      *    • Regarding `(array)$include_nav_vars`; i.e. adding new nav vars:
      *
@@ -1355,9 +1319,8 @@ class UtilsUrl extends AbsBase
      *       If you want to override any that may already exist in these sources, define key `0` in your array.
      *       i.e. `if(array_key_exists(0, $include_nav_vars))`; yours will override any that exist already.
      *       ~ Noting that the `0` key is excluded automatically after interpretation for this purpose.
-     *
-     * @param string        $url              The input URL to work from (optional).
-     *                                        Defaults to current URL. Existing nav vars will be taken from this URL.
+     * @param string $url The input URL to work from (optional).
+     *                    Defaults to current URL. Existing nav vars will be taken from this URL.
      *
      * @return array An array of any summary nav vars; when/if applicable.
      *
@@ -1375,7 +1338,7 @@ class UtilsUrl extends AbsBase
         if (!is_array($nav_vars = $include_nav_vars)) {
             $nav_vars = []; // Force array.
         }
-        if (!($url = trim((string)$url))) {
+        if (!($url = trim((string) $url))) {
             $url = $this->current();
         }
         $existing_nav_vars = []; // Initialize.
@@ -1386,20 +1349,20 @@ class UtilsUrl extends AbsBase
             unset($nav_vars[0]); // Unset automatically after interpretation.
         }
         if (!$new_nav_vars_only) { // Only if we NEED existing nav vars.
-            $query = (string)parse_url($url, PHP_URL_QUERY);
+            $query = (string) parse_url($url, PHP_URL_QUERY);
             wp_parse_str($query, $query_vars); // By reference.
 
             if (!empty($query_vars[GLOBAL_NS]['manage']['summary_nav'])) {
-                $query_nav_vars = (array)$query_vars[GLOBAL_NS]['manage']['summary_nav'];
+                $query_nav_vars = (array) $query_vars[GLOBAL_NS]['manage']['summary_nav'];
             }
             if ($_REQUEST && !empty($_REQUEST[GLOBAL_NS]['manage']['summary_nav'])) {
-                $_r_nav_vars = $this->plugin->utils_string->trimStripDeep((array)$_REQUEST[GLOBAL_NS]['manage']['summary_nav']);
+                $_r_nav_vars = $this->plugin->utils_string->trimStripDeep((array) $_REQUEST[GLOBAL_NS]['manage']['summary_nav']);
             }
             foreach (array_keys(sub_manage_summary::$default_nav_vars) as $_nav_var_key) {
                 if (isset($query_nav_vars[$_nav_var_key])) {
-                    $existing_nav_vars[$_nav_var_key] = (string)$query_nav_vars[$_nav_var_key];
-                } else if (isset($_r_nav_vars[$_nav_var_key])) {
-                    $existing_nav_vars[$_nav_var_key] = (string)$_r_nav_vars[$_nav_var_key];
+                    $existing_nav_vars[$_nav_var_key] = (string) $query_nav_vars[$_nav_var_key];
+                } elseif (isset($_r_nav_vars[$_nav_var_key])) {
+                    $existing_nav_vars[$_nav_var_key] = (string) $_r_nav_vars[$_nav_var_key];
                 }
             }
             unset($_nav_var_key); // Housekeeping.
@@ -1412,14 +1375,12 @@ class UtilsUrl extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param string|null   $scheme           Optional. Defaults to a `NULL` value.
-     *                                        See {@link set_scheme()} method for further details.
-     *
-     * @param boolean|array $include_nav_vars Defaults to a `NULL` value.
-     *                                        Use a non-empty array to add new nav vars; `TRUE` to simply include existing nav vars.
-     *                                        See also {@link sub_manage_summary_nav_vars()} for additional details.
-     *
-     * @param array         $prefill          Any prefill variables; e.g. `post_id`, `comment_id`.
+     * @param string|null $scheme           Optional. Defaults to a `NULL` value.
+     *                                      See {@link set_scheme()} method for further details.
+     * @param bool|array  $include_nav_vars Defaults to a `NULL` value.
+     *                                      Use a non-empty array to add new nav vars; `TRUE` to simply include existing nav vars.
+     *                                      See also {@link sub_manage_summary_nav_vars()} for additional details.
+     * @param array       $prefill          Any prefill variables; e.g. `post_id`, `comment_id`.
      *
      * @return string URL w/ the given `$scheme`.
      */
@@ -1444,20 +1405,18 @@ class UtilsUrl extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param string        $sub_key          Unique subscription key.
-     *
-     * @param string|null   $scheme           Optional. Defaults to a `NULL` value.
-     *                                        See {@link set_scheme()} method for further details.
-     *
-     * @param boolean|array $include_nav_vars Defaults to a `NULL` value.
-     *                                        Use a non-empty array to add new nav vars; `TRUE` to simply include existing nav vars.
-     *                                        See also {@link sub_manage_summary_nav_vars()} for additional details.
+     * @param string      $sub_key          Unique subscription key.
+     * @param string|null $scheme           Optional. Defaults to a `NULL` value.
+     *                                      See {@link set_scheme()} method for further details.
+     * @param bool|array  $include_nav_vars Defaults to a `NULL` value.
+     *                                      Use a non-empty array to add new nav vars; `TRUE` to simply include existing nav vars.
+     *                                      See also {@link sub_manage_summary_nav_vars()} for additional details.
      *
      * @return string URL w/ the given `$scheme`.
      */
     public function subManageSubEditUrl($sub_key = '', $scheme = null, $include_nav_vars = null)
     {
-        $sub_key = trim((string)$sub_key);
+        $sub_key = trim((string) $sub_key);
         $sub_key = !isset($sub_key[0]) ? '0' : $sub_key;
 
         $url  = home_url('/', $scheme);
@@ -1474,14 +1433,12 @@ class UtilsUrl extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param string        $sub_key          Unique subscription key.
-     *
-     * @param string|null   $scheme           Optional. Defaults to a `NULL` value.
-     *                                        See {@link set_scheme()} method for further details.
-     *
-     * @param boolean|array $include_nav_vars Defaults to a `NULL` value.
-     *                                        Use a non-empty array to add new nav vars; `TRUE` to simply include existing nav vars.
-     *                                        See also {@link sub_manage_summary_nav_vars()} for additional details.
+     * @param string      $sub_key          Unique subscription key.
+     * @param string|null $scheme           Optional. Defaults to a `NULL` value.
+     *                                      See {@link set_scheme()} method for further details.
+     * @param bool|array  $include_nav_vars Defaults to a `NULL` value.
+     *                                      Use a non-empty array to add new nav vars; `TRUE` to simply include existing nav vars.
+     *                                      See also {@link sub_manage_summary_nav_vars()} for additional details.
      *
      * @return string URL w/ the given `$scheme`.
      *
@@ -1490,7 +1447,7 @@ class UtilsUrl extends AbsBase
      */
     public function subManageSubDeleteUrl($sub_key = '', $scheme = null, $include_nav_vars = null)
     {
-        $sub_key = trim((string)$sub_key);
+        $sub_key = trim((string) $sub_key);
         $sub_key = !isset($sub_key[0]) ? '0' : $sub_key;
 
         $url  = home_url('/', $scheme);
@@ -1527,11 +1484,9 @@ class UtilsUrl extends AbsBase
      * @since 141111 First documented version.
      *
      * @param string      $service     SSO service integration slug.
-     *
      * @param string      $action      A particular action; defaults to `authorize`.
      *                                 To request authorization, set this to `authorize`.
      *                                 To receive a callback, set this to `callback`.
-     *
      * @param null|string $redirect_to The underlying URL that a user is trying to access.
      *                                 If empty (and not === `NULL`), this defaults to the current URL; or the current `redirect_to`.
      *                                 If `NULL`, the `redirect_to` arg is excluded completely.
@@ -1541,24 +1496,24 @@ class UtilsUrl extends AbsBase
      *    Before an oAuth authorization redirection occurs, a `redirect_to` should be stored in a session;
      *    i.e. NOT passed through the oAuth callback URL. This is why it is forced to a `NULL` value here.
      *
-     * @param string|null $scheme      Optional. Defaults to a `NULL` value.
-     *                                 See {@link set_scheme()} method for further details.
+     * @param string|null $scheme Optional. Defaults to a `NULL` value.
+     *                            See {@link set_scheme()} method for further details.
      *
      * @return string URL w/ the given `$scheme`.
      */
     public function ssoActionUrl($service, $action = '', $redirect_to = '', $scheme = null)
     {
-        $service = trim((string)$service);
+        $service = trim((string) $service);
 
-        if (!($action = trim((string)$action))) {
+        if (!($action = trim((string) $action))) {
             $action = 'authorize';
         }
         if ($action === 'callback') {
             $redirect_to = null;
         }
-        if (isset($redirect_to) && !($redirect_to = trim((string)$redirect_to))) {
+        if (isset($redirect_to) && !($redirect_to = trim((string) $redirect_to))) {
             if (!empty($_REQUEST['redirect_to'])) {
-                $redirect_to = trim(stripslashes((string)$_REQUEST['redirect_to']));
+                $redirect_to = trim(stripslashes((string) $_REQUEST['redirect_to']));
             } else {
                 $redirect_to = $this->current();
             }
@@ -1575,4 +1530,3 @@ class UtilsUrl extends AbsBase
         return add_query_arg(urlencode_deep($args), $url);
     }
 }
-	

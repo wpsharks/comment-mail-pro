@@ -1,15 +1,16 @@
 <?php
 /**
- * Sub. Event Log Utilities
+ * Sub. Event Log Utilities.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * Sub. Event Log Utilities
+ * Sub. Event Log Utilities.
  *
  * @since 141111 First documented version.
  */
@@ -39,8 +40,8 @@ class UtilsSubEventLog extends AbsBase
         $unique_ids = []; // Initialize.
 
         foreach ($log_entry_ids as $_log_entry_id) {
-            if (is_numeric($_log_entry_id) && (integer)$_log_entry_id > 0) {
-                $unique_ids[] = (integer)$_log_entry_id;
+            if (is_numeric($_log_entry_id) && (integer) $_log_entry_id > 0) {
+                $unique_ids[] = (integer) $_log_entry_id;
             }
         }
         unset($_log_entry_id); // Housekeeping.
@@ -56,27 +57,27 @@ class UtilsSubEventLog extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param integer|string $log_entry_id Log entry ID.
-     * @param array          $args         Any additional behavioral args.
-     *
-     * @return boolean|null TRUE if log entry is deleted successfully.
-     *    Or, FALSE if unable to delete (e.g. already deleted).
-     *    Or, NULL on complete failure (e.g. invalid ID).
+     * @param int|string $log_entry_id Log entry ID.
+     * @param array      $args         Any additional behavioral args.
      *
      * @throws \exception If a deletion failure occurs.
+     * @return bool|null TRUE if log entry is deleted successfully.
+     *                   Or, FALSE if unable to delete (e.g. already deleted).
+     *                   Or, NULL on complete failure (e.g. invalid ID).
+     *
      */
     public function delete($log_entry_id, array $args = [])
     {
-        if (!($log_entry_id = (integer)$log_entry_id)) {
+        if (!($log_entry_id = (integer) $log_entry_id)) {
             return null; // Not possible.
         }
-        $sql = "DELETE FROM `".esc_sql($this->plugin->utils_db->prefix().'sub_event_log')."`".
+        $sql = 'DELETE FROM `'.esc_sql($this->plugin->utils_db->prefix().'sub_event_log').'`'.
                " WHERE `ID` = '".esc_sql($log_entry_id)."'";
 
         if (($deleted = $this->plugin->utils_db->wp->query($sql)) === false) {
             throw new \exception(__('Deletion failure.', $this->plugin->text_domain));
         }
-        return (boolean)$deleted; // Convert to boolean value.
+        return (boolean) $deleted; // Convert to boolean value.
     }
 
     /**
@@ -87,7 +88,7 @@ class UtilsSubEventLog extends AbsBase
      * @param array $log_entry_ids Log entry IDs.
      * @param array $args          Any additional behavioral args.
      *
-     * @return integer Number of log entries deleted successfully.
+     * @return int Number of log entries deleted successfully.
      */
     public function bulkDelete(array $log_entry_ids, array $args = [])
     {
@@ -95,7 +96,7 @@ class UtilsSubEventLog extends AbsBase
 
         foreach ($this->uniqueIds($log_entry_ids) as $_log_entry_id) {
             if ($this->delete($_log_entry_id, $args)) {
-                $counter++; // Bump counter.
+                ++$counter; // Bump counter.
             }
         }
         unset($_log_entry_id); // Housekeeping.
@@ -103,4 +104,3 @@ class UtilsSubEventLog extends AbsBase
         return $counter;
     }
 }
-	
