@@ -1,8 +1,9 @@
 <?php
 /**
- * SSO Storage
+ * SSO Storage.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
@@ -13,42 +14,42 @@ use OAuth\Common\Storage\Exception\TokenNotFoundException;
 use OAuth\Common\Storage\Exception\AuthorizationStateNotFoundException;
 
 /**
- * SSO Storage
+ * SSO Storage.
  *
  * @since 141111 First documented version.
  */
 class SsoStorage implements \OAuth\Common\Storage\TokenStorageInterface
 {
     /**
-     * @var Plugin Plugin class reference.
+     * @type Plugin Plugin class reference.
      *
      * @since 141111 First documented version.
      */
     protected $plugin;
 
     /**
-     * @var integer Time to live.
+     * @type int Time to live.
      *
      * @since 141111 First documented version.
      */
     protected $ttl;
 
     /**
-     * @var string SSO cookie key.
+     * @type string SSO cookie key.
      *
      * @since 141111 First documented version.
      */
     protected $key;
 
     /**
-     * @var string Transient key.
+     * @type string Transient key.
      *
      * @since 141111 First documented version.
      */
     protected $transient;
 
     /**
-     * @var array Transient SSO data.
+     * @type array Transient SSO data.
      *
      * @since 141111 First documented version.
      */
@@ -87,24 +88,24 @@ class SsoStorage implements \OAuth\Common\Storage\TokenStorageInterface
      */
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function hasAccessToken($service)
     {
-        $service = trim(strtolower((string)$service));
+        $service = trim(strtolower((string) $service));
 
         return !empty($this->data['tokens'][$service]);
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      *
      * @return \OAuth\oAuth1\Token\StdOAuth1Token
-     *    |\OAuth\oAuth2\Token\StdOAuth2Token
+     *                                            |\OAuth\oAuth2\Token\StdOAuth2Token
      */
     public function retrieveAccessToken($service)
     {
-        $service = trim(strtolower((string)$service));
+        $service = trim(strtolower((string) $service));
 
         if ($this->hasAccessToken($service)) {
             return unserialize($this->data['tokens'][$service]);
@@ -113,11 +114,11 @@ class SsoStorage implements \OAuth\Common\Storage\TokenStorageInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function storeAccessToken($service, TokenInterface $token)
     {
-        $service = trim(strtolower((string)$service));
+        $service = trim(strtolower((string) $service));
 
         $this->data['tokens'][$service] = serialize($token);
         set_transient($this->transient, $this->data, $this->ttl);
@@ -126,11 +127,11 @@ class SsoStorage implements \OAuth\Common\Storage\TokenStorageInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function clearToken($service)
     {
-        $service = trim(strtolower((string)$service));
+        $service = trim(strtolower((string) $service));
 
         unset($this->data['tokens'][$service]);
         set_transient($this->transient, $this->data, $this->ttl);
@@ -139,7 +140,7 @@ class SsoStorage implements \OAuth\Common\Storage\TokenStorageInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function clearAllTokens()
     {
@@ -154,21 +155,21 @@ class SsoStorage implements \OAuth\Common\Storage\TokenStorageInterface
      */
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function hasAuthorizationState($service)
     {
-        $service = trim(strtolower((string)$service));
+        $service = trim(strtolower((string) $service));
 
         return !empty($this->data['states'][$service]);
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function retrieveAuthorizationState($service)
     {
-        $service = trim(strtolower((string)$service));
+        $service = trim(strtolower((string) $service));
 
         if ($this->hasAuthorizationState($service)) {
             return unserialize($this->data['states'][$service]);
@@ -177,11 +178,11 @@ class SsoStorage implements \OAuth\Common\Storage\TokenStorageInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function storeAuthorizationState($service, $state)
     {
-        $service = trim(strtolower((string)$service));
+        $service = trim(strtolower((string) $service));
 
         $this->data['states'][$service] = serialize($state);
         set_transient($this->transient, $this->data, $this->ttl);
@@ -190,11 +191,11 @@ class SsoStorage implements \OAuth\Common\Storage\TokenStorageInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function clearAuthorizationState($service)
     {
-        $service = trim(strtolower((string)$service));
+        $service = trim(strtolower((string) $service));
 
         unset($this->data['states'][$service]);
         set_transient($this->transient, $this->data, $this->ttl);
@@ -203,7 +204,7 @@ class SsoStorage implements \OAuth\Common\Storage\TokenStorageInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function clearAllAuthorizationStates()
     {
@@ -218,21 +219,21 @@ class SsoStorage implements \OAuth\Common\Storage\TokenStorageInterface
      */
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function hasExtra($service)
     {
-        $service = trim(strtolower((string)$service));
+        $service = trim(strtolower((string) $service));
 
         return !empty($this->data['extras'][$service]);
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function retrieveExtra($service)
     {
-        $service = trim(strtolower((string)$service));
+        $service = trim(strtolower((string) $service));
 
         if ($this->hasExtra($service)) {
             return unserialize($this->data['extras'][$service]);
@@ -241,11 +242,11 @@ class SsoStorage implements \OAuth\Common\Storage\TokenStorageInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function storeExtra($service, $extra)
     {
-        $service = trim(strtolower((string)$service));
+        $service = trim(strtolower((string) $service));
 
         $this->data['extras'][$service] = serialize($extra);
         set_transient($this->transient, $this->data, $this->ttl);
@@ -254,11 +255,11 @@ class SsoStorage implements \OAuth\Common\Storage\TokenStorageInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function clearExtra($service)
     {
-        $service = trim(strtolower((string)$service));
+        $service = trim(strtolower((string) $service));
 
         unset($this->data['extras'][$service]);
         set_transient($this->transient, $this->data, $this->ttl);
@@ -267,7 +268,7 @@ class SsoStorage implements \OAuth\Common\Storage\TokenStorageInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function clearAllExtras()
     {
@@ -277,4 +278,3 @@ class SsoStorage implements \OAuth\Common\Storage\TokenStorageInterface
         return $this; // Allow chaining.
     }
 }
-	

@@ -1,15 +1,16 @@
 <?php
 /**
- * SSO Service Base Abstraction
+ * SSO Service Base Abstraction.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * SSO Service Base Abstraction
+ * SSO Service Base Abstraction.
  *
  * @since 141111 First documented version.
  */
@@ -20,21 +21,21 @@ abstract class SsoServiceBase extends AbsBase
      */
 
     /**
-     * @var string Service slug.
+     * @type string Service slug.
      *
      * @since 141111 First documented version.
      */
     protected $service;
 
     /**
-     * @var array Incoming request args.
+     * @type array Incoming request args.
      *
      * @since 141111 First documented version.
      */
     protected $request_args;
 
     /**
-     * @var sso_storage Storage class instance.
+     * @type sso_storage Storage class instance.
      *
      * @since 141111 First documented version.
      */
@@ -56,7 +57,7 @@ abstract class SsoServiceBase extends AbsBase
     {
         parent::__construct();
 
-        $this->service = trim((string)$service);
+        $this->service = trim((string) $service);
 
         $default_request_args = [
             'service'     => null,
@@ -76,12 +77,12 @@ abstract class SsoServiceBase extends AbsBase
             'lname' => null,
             'email' => null,
         ];
-        $this->request_args   = array_merge($default_request_args, $request_args);
-        $this->request_args   = array_intersect_key($this->request_args, $default_request_args);
+        $this->request_args = array_merge($default_request_args, $request_args);
+        $this->request_args = array_intersect_key($this->request_args, $default_request_args);
 
         foreach ($this->request_args as $_key => &$_value) {
             if (isset($_value)) {
-                $_value = trim((string)$_value);
+                $_value = trim((string) $_value);
             }
         }
         unset($_key, $_value); // Housekeeping.
@@ -101,7 +102,7 @@ abstract class SsoServiceBase extends AbsBase
 
         if ($this->request_args['redirect_to']) {
             $extra['redirect_to'] = $this->request_args['redirect_to'];
-        } else if (!$this->request_args['redirect_to'] && !empty($extra['redirect_to'])) {
+        } elseif (!$this->request_args['redirect_to'] && !empty($extra['redirect_to'])) {
             $this->request_args['redirect_to'] = $extra['redirect_to'];
         }
         if (!$this->request_args['redirect_to']) { // Use default value?
@@ -145,9 +146,9 @@ abstract class SsoServiceBase extends AbsBase
 
         if ($this->request_args['action'] === 'authorize') {
             $this->maybeHandleAuthorize();
-        } else if ($this->request_args['action'] === 'callback') {
+        } elseif ($this->request_args['action'] === 'callback') {
             $this->maybeHandleCallback();
-        } else if ($this->request_args['action'] === 'complete') {
+        } elseif ($this->request_args['action'] === 'complete') {
             $this->maybeHandleComplete();
         }
     }
@@ -204,7 +205,7 @@ abstract class SsoServiceBase extends AbsBase
     protected function processAuthorizationRedirect($url)
     {
         try { // Catch exceptions and log them for debugging.
-            if (!($url = trim((string)$url))) {
+            if (!($url = trim((string) $url))) {
                 throw new \exception(__('Empty authorization URL.', $this->plugin->text_domain));
             }
             wp_redirect($url);
@@ -223,7 +224,7 @@ abstract class SsoServiceBase extends AbsBase
      * @param array $args Specs and/or behavioral args.
      *
      * @throws \exception If auto register/login fails unexpectedly.
-     *    Should not occur given the validations performed here.
+     *                    Should not occur given the validations performed here.
      */
     protected function processCallbackCompleteRedirect(array $args = [])
     {
@@ -236,15 +237,15 @@ abstract class SsoServiceBase extends AbsBase
                 'lname' => '',
                 'email' => '',
             ];
-            $args         = array_merge($default_args, $args);
-            $args         = array_intersect_key($args, $default_args);
+            $args = array_merge($default_args, $args);
+            $args = array_intersect_key($args, $default_args);
 
-            $sso_id   = trim((string)$args['sso_id']);
-            $_wpnonce = trim((string)$args['_wpnonce']);
+            $sso_id   = trim((string) $args['sso_id']);
+            $_wpnonce = trim((string) $args['_wpnonce']);
 
-            $fname = trim((string)$args['fname']);
-            $lname = trim((string)$args['lname']);
-            $email = trim((string)$args['email']);
+            $fname = trim((string) $args['fname']);
+            $lname = trim((string) $args['lname']);
+            $email = trim((string) $args['email']);
 
             $user_exists = // Do they exist already? i.e. just logging in?
                 $sso_id && $this->plugin->utils_sso->userExists($this->service, $sso_id);
@@ -292,13 +293,13 @@ abstract class SsoServiceBase extends AbsBase
             echo '      <title>'.__('Redirecting...', $this->plugin->text_domain).'</title>';
             echo '      <script type="text/javascript">';
 
-            echo "         if(window.parent && window.parent !== window)".
+            echo '         if(window.parent && window.parent !== window)'.
                  "            window.parent.location = '".$this->plugin->utils_string->escJsSq($redirect_to)."';".
 
-                 "         else if(window.opener && window.opener !== window)". // Most common scenario.
+                 '         else if(window.opener && window.opener !== window)'.// Most common scenario.
                  "            window.opener.location = '".$this->plugin->utils_string->escJsSq($redirect_to)."', window.close();".
 
-                 "         else". // Redirect in the current window.
+                 '         else'.// Redirect in the current window.
                  "            window.location = '".$this->plugin->utils_string->escJsSq($redirect_to)."';";
 
             echo '      </script>';

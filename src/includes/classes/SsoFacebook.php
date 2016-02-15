@@ -1,15 +1,16 @@
 <?php
 /**
- * SSO for Facebook
+ * SSO for Facebook.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * SSO for Facebook
+ * SSO for Facebook.
  *
  * @since 141111 First documented version.
  */
@@ -41,7 +42,7 @@ class SsoFacebook extends SsoServiceBase
                 $this->plugin->options['sso_'.$this->service.'_secret'],
                 $this->plugin->utils_url->ssoActionUrl($this->service, 'callback')
             );
-            /** @var $service \OAuth\OAuth2\Service\Facebook */
+            /** @type $service \OAuth\OAuth2\Service\Facebook */
             $service = $service_factory->createService($this->service, $credentials, $this->storage, ['email']);
 
             $this->processAuthorizationRedirect($service->getAuthorizationUri());
@@ -67,7 +68,7 @@ class SsoFacebook extends SsoServiceBase
                 $this->plugin->options['sso_'.$this->service.'_secret'],
                 $this->plugin->utils_url->ssoActionUrl($this->service, 'callback')
             );
-            /** @var $service \OAuth\OAuth2\Service\Facebook */
+            /** @type $service \OAuth\OAuth2\Service\Facebook */
             $service = $service_factory->createService($this->service, $credentials, $this->storage, ['email']);
 
             # Request access token via oAuth API provided by this service.
@@ -79,7 +80,7 @@ class SsoFacebook extends SsoServiceBase
             if (!is_object($service_user = json_decode($service->request('/me')))) {
                 throw new \exception(__('Failed to acquire user.', $this->plugin->text_domain));
             }
-            if (empty($service_user->id) || !($sso_id = (string)$service_user->id)) {
+            if (empty($service_user->id) || !($sso_id = (string) $service_user->id)) {
                 throw new \exception(__('Failed to obtain user.', $this->plugin->text_domain));
             }
             foreach (['first_name', 'last_name', 'name', 'email'] as $_prop) {

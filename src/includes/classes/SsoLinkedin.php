@@ -1,15 +1,16 @@
 <?php
 /**
- * SSO for LinkedIn
+ * SSO for LinkedIn.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * SSO for LinkedIn
+ * SSO for LinkedIn.
  *
  * @since 141111 First documented version.
  */
@@ -41,7 +42,7 @@ class SsoLinkedin extends SsoServiceBase
                 $this->plugin->options['sso_'.$this->service.'_secret'],
                 $this->plugin->utils_url->ssoActionUrl($this->service, 'callback')
             );
-            /** @var $service \OAuth\OAuth2\Service\Linkedin */
+            /** @type $service \OAuth\OAuth2\Service\Linkedin */
             $service = $service_factory->createService($this->service, $credentials, $this->storage, ['r_basicprofile', 'r_emailaddress']);
 
             $this->processAuthorizationRedirect($service->getAuthorizationUri());
@@ -70,7 +71,7 @@ class SsoLinkedin extends SsoServiceBase
                 $this->plugin->options['sso_'.$this->service.'_secret'],
                 $this->plugin->utils_url->ssoActionUrl($this->service, 'callback')
             );
-            /** @var $service \OAuth\OAuth2\Service\Linkedin */
+            /** @type $service \OAuth\OAuth2\Service\Linkedin */
             $service = $service_factory->createService($this->service, $credentials, $this->storage, ['r_basicprofile', 'r_emailaddress']);
 
             # Request access token via oAuth API provided by this service.
@@ -82,7 +83,7 @@ class SsoLinkedin extends SsoServiceBase
             if (!is_object($service_user = json_decode($service->request('/people/~:(id,first-name,last-name,formatted-name,email-address)?format=json')))) {
                 throw new \exception(__('Failed to acquire user info.', $this->plugin->text_domain));
             }
-            if (empty($service_user->id) || !($sso_id = (string)$service_user->id)) {
+            if (empty($service_user->id) || !($sso_id = (string) $service_user->id)) {
                 throw new \exception(__('Failed to obtain user.', $this->plugin->text_domain));
             }
             foreach (['firstName', 'lastName', 'formattedName', 'emailAddress'] as $_prop) {
