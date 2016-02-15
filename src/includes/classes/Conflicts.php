@@ -4,14 +4,14 @@ namespace WebSharks\CommentMail\Pro;
 /**
  * Conflicts.
  *
- * @since 150422 Rewrite.
+ * @since 16xxxx
  */
 class Conflicts
 {
     /**
      * Check.
      *
-     * @since 150422 Rewrite.
+     * @since 16xxxx Rewrite.
      */
     public static function check()
     {
@@ -24,7 +24,7 @@ class Conflicts
     /**
      * Perform check.
      *
-     * @since 150422 Rewrite.
+     * @since 16xxxx Rewrite.
      */
     protected static function doCheck()
     {
@@ -43,7 +43,7 @@ class Conflicts
                 continue; // Nothing to check in this case.
             }
             if (in_array($_active_plugin_slug, $conflicting_plugin_slugs, true)) {
-                if (in_array($_active_plugin_slug, array('zencache', 'zencache-pro', 'quick-cache', 'quick-cache-pro'), true)) {
+                if (in_array($_active_plugin_slug, array('comment-mail', 'comment-mail-pro'), true)) {
                     add_action('admin_init', function () use ($_active_plugin_basename) {
                         if (function_exists('deactivate_plugins')) { // Can deactivate?
                             deactivate_plugins($_active_plugin_basename, true);
@@ -60,7 +60,7 @@ class Conflicts
     /**
      * Maybe enqueue dashboard notice.
      *
-     * @since 150422 Rewrite.
+     * @since 16xxxx Rewrite.
      */
     protected function maybeEnqueueNotice()
     {
@@ -78,9 +78,9 @@ class Conflicts
                 $name = trim(strtolower((string) $slug_or_ns));
                 $name = preg_replace('/[_\-]+(?:lite|pro)$/', '', $name);
                 $name = preg_replace('/[^a-z0-9]/', ' ', $name);
-                $name = str_replace('cache', 'Cache', ucwords($name));
+                $name = str_replace('mail', 'Mail', ucwords($name));
 
-                return $name; // e.g., `x-cache` becomes `X Cache`.
+                return $name; // e.g., `x-mail` becomes `X Mail`.
             };
             $this_plugin_name = NAME; // See `src/includes/stub.php` for details.
             $conflicting_plugin_name = $construct_name($GLOBALS[GLOBAL_NS.'_conflicting_plugin']);
