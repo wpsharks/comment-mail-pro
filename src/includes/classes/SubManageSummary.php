@@ -356,11 +356,11 @@ class SubManageSummary extends AbsBase
         if ($errors) { // We have deletion errors to report back?
             static::$processing_errors      = array_merge(static::$processing_errors, $errors);
             static::$processing_error_codes = array_merge(static::$processing_error_codes, array_keys($errors));
-            static::$processing_errors_html = array_merge(static::$processing_errors_html, array_map([$plugin->utils_string, 'markdown_no_p'], $errors));
+            static::$processing_errors_html = array_merge(static::$processing_errors_html, array_map([$plugin->utils_string, 'markdownNoP'], $errors));
         } elseif ($successes) { // Deleted successfully?
             static::$processing_successes      = array_merge(static::$processing_successes, $successes);
             static::$processing_success_codes  = array_merge(static::$processing_success_codes, array_keys($successes));
-            static::$processing_successes_html = array_merge(static::$processing_successes_html, array_map([$plugin->utils_string, 'markdown_no_p'], $successes));
+            static::$processing_successes_html = array_merge(static::$processing_successes_html, array_map([$plugin->utils_string, 'markdownNoP'], $successes));
         }
     }
 }

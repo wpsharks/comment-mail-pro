@@ -479,9 +479,9 @@ class QueueProcessor extends AbsBase
         } /*
          * Else, we can return the full set of entry properties for this queue entry.
          */
-        else {
+        else { // Validated entry props.
             return $this->entryProps('', '', $entry, $sub, $sub_post, $sub_comment, $post, $comment);
-        } // Validated entry props.
+        }
         /*
          * Otherwise (i.e. if we get down here); we need to log the invalidation.
          */
