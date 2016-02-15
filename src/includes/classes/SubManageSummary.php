@@ -1,15 +1,16 @@
 <?php
 /**
- * Sub. Management Summary
+ * Sub. Management Summary.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * Sub. Management Summary
+ * Sub. Management Summary.
  *
  * @since 141111 First documented version.
  */
@@ -20,49 +21,49 @@ class SubManageSummary extends AbsBase
      */
 
     /**
-     * @var string Unique subscription key.
+     * @type string Unique subscription key.
      *
      * @since 141111 First documented version.
      */
     protected $sub_key;
 
     /**
-     * @var string Email address via key.
+     * @type string Email address via key.
      *
      * @since 141111 First documented version.
      */
     protected $sub_email;
 
     /**
-     * @var array WP user IDs associated w/ email address.
+     * @type array WP user IDs associated w/ email address.
      *
      * @since 141111 First documented version.
      */
     protected $sub_user_ids;
 
     /**
-     * @var array WP user ID-based list of email addresses.
+     * @type array WP user ID-based list of email addresses.
      *
      * @since 141111 First documented version.
      */
     protected $sub_user_id_emails;
 
     /**
-     * @var \stdClass Query vars.
+     * @type \stdClass Query vars.
      *
      * @since 141111 First documented version.
      */
     protected $query_vars;
 
     /**
-     * @var \stdClass[] Subscriptions.
+     * @type \stdClass[] Subscriptions.
      *
      * @since 141111 First documented version.
      */
     protected $subs; // Array of subs.
 
     /**
-     * @var \stdClass|null Pagination vars.
+     * @type \stdClass|null Pagination vars.
      *
      * @since 141111 First documented version.
      */
@@ -73,49 +74,49 @@ class SubManageSummary extends AbsBase
      */
 
     /**
-     * @var boolean Processing form?
+     * @type bool Processing form?
      *
      * @since 141111 First documented version.
      */
     protected static $processing = false;
 
     /**
-     * @var array Any processing errors.
+     * @type array Any processing errors.
      *
      * @since 141111 First documented version.
      */
     protected static $processing_errors = [];
 
     /**
-     * @var array Any processing error codes.
+     * @type array Any processing error codes.
      *
      * @since 141111 First documented version.
      */
     protected static $processing_error_codes = [];
 
     /**
-     * @var array Any processing errors w/ HTML markup.
+     * @type array Any processing errors w/ HTML markup.
      *
      * @since 141111 First documented version.
      */
     protected static $processing_errors_html = [];
 
     /**
-     * @var array Any processing successes.
+     * @type array Any processing successes.
      *
      * @since 141111 First documented version.
      */
     protected static $processing_successes = [];
 
     /**
-     * @var array Any processing success codes.
+     * @type array Any processing success codes.
      *
      * @since 141111 First documented version.
      */
     protected static $processing_success_codes = [];
 
     /**
-     * @var array Any processing successes w/ HTML markup.
+     * @type array Any processing successes w/ HTML markup.
      *
      * @since 141111 First documented version.
      */
@@ -126,7 +127,7 @@ class SubManageSummary extends AbsBase
      */
 
     /**
-     * @var array Default nav vars.
+     * @type array Default nav vars.
      *
      * @since 141111 First documented version.
      */
@@ -147,14 +148,13 @@ class SubManageSummary extends AbsBase
      *
      * @param string $sub_key      Unique subscription key (optional).
      *                             If this is empty (or invalid), we use the sub's current email address.
-     *
      * @param array  $request_args An array of any nav request args.
      */
     public function __construct($sub_key = '', array $request_args = [])
     {
         parent::__construct();
 
-        if (($this->sub_key = trim((string)$sub_key))) {
+        if (($this->sub_key = trim((string) $sub_key))) {
             $this->sub_email = $this->plugin->utils_sub->keyToEmail($this->sub_key);
         }
         if (!$this->sub_email) { // Fallback on current email address.
@@ -174,16 +174,16 @@ class SubManageSummary extends AbsBase
         $request_args         = array_merge($default_request_args, $request_args);
         $request_args         = array_intersect_key($request_args, $default_request_args);
 
-        $this->query_vars = new \stdClass; // Initialize.
+        $this->query_vars = new \stdClass(); // Initialize.
 
-        $this->query_vars->current_page = max(1, (integer)$request_args['page']);
-        $upper_max_limit                = (integer)apply_filters(__CLASS__.'_upper_max_limit', 1000);
-        $this->query_vars->per_page     = (integer)$this->plugin->options['sub_manage_summary_max_limit'];
+        $this->query_vars->current_page = max(1, (integer) $request_args['page']);
+        $upper_max_limit                = (integer) apply_filters(__CLASS__.'_upper_max_limit', 1000);
+        $this->query_vars->per_page     = (integer) $this->plugin->options['sub_manage_summary_max_limit'];
         if ($this->query_vars->per_page > $upper_max_limit) {
             $this->query_vars->per_page = $upper_max_limit;
         }
         $this->query_vars->post_id = $this->issetOr($request_args['post_id'], null, 'integer');
-        $this->query_vars->status  = trim(strtolower((string)$request_args['status']));
+        $this->query_vars->status  = trim(strtolower((string) $request_args['status']));
 
         $this->subs            = []; // Initialize.
         $this->pagination_vars = null; // Initialize.
@@ -227,7 +227,7 @@ class SubManageSummary extends AbsBase
 
         if (!$this->sub_email && $this->sub_key) {
             $error_codes[] = 'invalid_sub_key';
-        } else if (!$this->sub_email) {
+        } elseif (!$this->sub_email) {
             $error_codes[] = 'missing_sub_key';
         }
         if (!$error_codes) { // i.e. have email?
@@ -260,8 +260,8 @@ class SubManageSummary extends AbsBase
         $calc_found_rows = 0; // Initialize.
         $this->subs      = []; // Initialize.
 
-        $sql = "SELECT SQL_CALC_FOUND_ROWS *". // w/ calc enabled.
-               " FROM `".esc_sql($this->plugin->utils_db->prefix().'subs')."`".
+        $sql = 'SELECT SQL_CALC_FOUND_ROWS *'.// w/ calc enabled.
+               ' FROM `'.esc_sql($this->plugin->utils_db->prefix().'subs').'`'.
 
                " WHERE (`email` = '".esc_sql($this->sub_email)."'".
                // See `assets/sma-diagram.png` for further details on this.
@@ -276,17 +276,17 @@ class SubManageSummary extends AbsBase
                    ? " AND `status` = '".esc_sql($status)."'" : '').
                " AND `status` NOT IN('unconfirmed', 'trashed')".
 
-               " ORDER BY".
-               " `post_id` ASC,".
-               " `comment_id` ASC,".
-               " `email` ASC,".
-               " `status` ASC".
+               ' ORDER BY'.
+               ' `post_id` ASC,'.
+               ' `comment_id` ASC,'.
+               ' `email` ASC,'.
+               ' `status` ASC'.
 
-               " LIMIT ".esc_sql($current_offset).",".esc_sql($max_limit);
+               ' LIMIT '.esc_sql($current_offset).','.esc_sql($max_limit);
 
         if (($results = $this->plugin->utils_db->wp->get_results($sql))) {
-            $this->subs      = $results = $this->plugin->utils_db->typifyDeep($results);
-            $calc_found_rows = (integer)$this->plugin->utils_db->wp->get_var("SELECT FOUND_ROWS()");
+            $this->subs      = $results      = $this->plugin->utils_db->typifyDeep($results);
+            $calc_found_rows = (integer) $this->plugin->utils_db->wp->get_var('SELECT FOUND_ROWS()');
         }
         $this->setPaginationVars($calc_found_rows);
     }
@@ -296,7 +296,7 @@ class SubManageSummary extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @return integer Current SQL offset value.
+     * @return int Current SQL offset value.
      */
     protected function currentOffset()
     {
@@ -308,17 +308,17 @@ class SubManageSummary extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param integer $calc_found_rows `SQL_CALC_FOUND_ROWS`.
+     * @param int $calc_found_rows `SQL_CALC_FOUND_ROWS`.
      */
     protected function setPaginationVars($calc_found_rows)
     {
         $current_page = $this->query_vars->current_page;
         $per_page     = $this->query_vars->per_page;
 
-        $total_subs  = (integer)$calc_found_rows;
+        $total_subs  = (integer) $calc_found_rows;
         $total_pages = ceil($total_subs / $per_page);
 
-        $this->pagination_vars = (object)get_defined_vars();
+        $this->pagination_vars = (object) get_defined_vars();
     }
 
     /*
@@ -348,7 +348,7 @@ class SubManageSummary extends AbsBase
 
         if ($deleted === null) { // Invalid sub key?
             $errors['sub_key'] = __('Invalid subscription key; unable to delete.', $plugin->text_domain);
-        } else if (!$deleted) { // Subscription has already been deleted?
+        } elseif (!$deleted) { // Subscription has already been deleted?
             $errors['sub_key'] = __('Already deleted; thanks.', $plugin->text_domain);
         } else {
             $successes['deleted_successfully'] = __('Subscription deleted successfully.', $plugin->text_domain);
@@ -357,7 +357,7 @@ class SubManageSummary extends AbsBase
             static::$processing_errors      = array_merge(static::$processing_errors, $errors);
             static::$processing_error_codes = array_merge(static::$processing_error_codes, array_keys($errors));
             static::$processing_errors_html = array_merge(static::$processing_errors_html, array_map([$plugin->utils_string, 'markdown_no_p'], $errors));
-        } else if ($successes) { // Deleted successfully?
+        } elseif ($successes) { // Deleted successfully?
             static::$processing_successes      = array_merge(static::$processing_successes, $successes);
             static::$processing_success_codes  = array_merge(static::$processing_success_codes, array_keys($successes));
             static::$processing_successes_html = array_merge(static::$processing_successes_html, array_map([$plugin->utils_string, 'markdown_no_p'], $successes));
