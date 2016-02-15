@@ -1,85 +1,86 @@
 <?php
 /**
- * Queue Processor
+ * Queue Processor.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * Queue Processor
+ * Queue Processor.
  *
  * @since 141111 First documented version.
  */
 class QueueProcessor extends AbsBase
 {
     /**
-     * @var boolean A CRON job?
+     * @type bool A CRON job?
      *
      * @since 141111 First documented version.
      */
     protected $is_cron;
 
     /**
-     * @var integer Start time.
+     * @type int Start time.
      *
      * @since 141111 First documented version.
      */
     protected $start_time;
 
     /**
-     * @var integer Max time (in seconds).
+     * @type int Max time (in seconds).
      *
      * @since 141111 First documented version.
      */
     protected $max_time;
 
     /**
-     * @var integer Delay (in milliseconds).
+     * @type int Delay (in milliseconds).
      *
      * @since 141111 First documented version.
      */
     protected $delay;
 
     /**
-     * @var integer Max entries to process.
+     * @type int Max entries to process.
      *
      * @since 141111 First documented version.
      */
     protected $max_limit;
 
     /**
-     * @var Template Subject template.
+     * @type Template Subject template.
      *
      * @since 141111 First documented version.
      */
     protected $subject_template;
 
     /**
-     * @var Template Message template.
+     * @type Template Message template.
      *
      * @since 141111 First documented version.
      */
     protected $message_template;
 
     /**
-     * @var \stdClass[] Entries being processed.
+     * @type \stdClass[] Entries being processed.
      *
      * @since 141111 First documented version.
      */
     protected $entries;
 
     /**
-     * @var integer Total entries.
+     * @type int Total entries.
      *
      * @since 141111 First documented version.
      */
     protected $total_entries;
 
     /**
-     * @var integer Processed entry counter.
+     * @type int Processed entry counter.
      *
      * @since 141111 First documented version.
      */
@@ -90,24 +91,21 @@ class QueueProcessor extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param boolean      $is_cron   Is this a CRON job?
-     *                                Defaults to a `TRUE` value. If calling directly pass `FALSE`.
-     *
-     * @param integer|null $max_time  Max time (in seconds).
+     * @param bool     $is_cron  Is this a CRON job?
+     *                           Defaults to a `TRUE` value. If calling directly pass `FALSE`.
+     * @param int|null $max_time Max time (in seconds).
      *
      *    This cannot be less than `10` seconds.
      *    This cannot be greater than `300` seconds.
      *
      *    * A default value is taken from the plugin options.
-     *
-     * @param integer|null $delay     Delay (in milliseconds).
+     * @param int|null $delay Delay (in milliseconds).
      *
      *    This cannot be less than `0` milliseconds.
      *    This (converted to seconds) cannot be greater than `$max_time` - `5`.
      *
      *    * A default value is taken from the plugin options.
-     *
-     * @param integer|null $max_limit Max entries to process.
+     * @param int|null $max_limit Max entries to process.
      *
      *    This cannot be less than `1`.
      *    This cannot be greater than `1000` (filterable).
@@ -118,14 +116,14 @@ class QueueProcessor extends AbsBase
     {
         parent::__construct();
 
-        $this->is_cron = (boolean)$is_cron;
+        $this->is_cron = (boolean) $is_cron;
 
         $this->start_time = time(); // Start time.
 
         if (isset($max_time)) { // Argument is set?
-            $this->max_time = (integer)$max_time; // This takes precedence.
+            $this->max_time = (integer) $max_time; // This takes precedence.
         } else {
-            $this->max_time = (integer)$this->plugin->options['queue_processor_max_time'];
+            $this->max_time = (integer) $this->plugin->options['queue_processor_max_time'];
         }
         if ($this->max_time < 10) {
             $this->max_time = 10;
@@ -134,9 +132,9 @@ class QueueProcessor extends AbsBase
             $this->max_time = 300;
         }
         if (isset($delay)) { // Argument is set?
-            $this->delay = (integer)$delay; // This takes precedence.
+            $this->delay = (integer) $delay; // This takes precedence.
         } else {
-            $this->delay = (integer)$this->plugin->options['queue_processor_delay'];
+            $this->delay = (integer) $this->plugin->options['queue_processor_delay'];
         }
         if ($this->delay < 0) {
             $this->delay = 0;
@@ -145,14 +143,14 @@ class QueueProcessor extends AbsBase
             $this->delay = 250; // Cannot be greater than max time - 5 seconds.
         }
         if (isset($max_limit)) { // Argument is set?
-            $this->max_limit = (integer)$max_limit; // This takes precedence.
+            $this->max_limit = (integer) $max_limit; // This takes precedence.
         } else {
-            $this->max_limit = (integer)$this->plugin->options['queue_processor_max_limit'];
+            $this->max_limit = (integer) $this->plugin->options['queue_processor_max_limit'];
         }
         if ($this->max_limit < 1) {
             $this->max_limit = 1;
         }
-        $upper_max_limit = (integer)apply_filters(__CLASS__.'_upper_max_limit', 1000);
+        $upper_max_limit = (integer) apply_filters(__CLASS__.'_upper_max_limit', 1000);
         if ($this->max_limit > $upper_max_limit) {
             $this->max_limit = $upper_max_limit;
         }
@@ -213,7 +211,7 @@ class QueueProcessor extends AbsBase
             $this->processEntry($_entry);
             $this->deleteEntry($_entry);
 
-            $this->processed_entry_counter++;
+            ++$this->processed_entry_counter;
 
             if ($this->isOutOfTime() || $this->isDelayOutOfTime()) {
                 break; // Out of time now; or after a possible delay.
@@ -376,7 +374,7 @@ class QueueProcessor extends AbsBase
      * @param \stdClass $entry Queue entry.
      *
      * @return \stdClass|null Structured entry properties.
-     *    If unable to validate, returns `NULL`.
+     *                        If unable to validate, returns `NULL`.
      *
      *    Object properties will include:
      *
@@ -409,78 +407,78 @@ class QueueProcessor extends AbsBase
          */
         if (!$entry->sub_id) {
             $invalidated_entry_props = $this->entryProps('invalidated', 'entry_sub_id_empty', $entry);
-        } else if (!$entry->post_id) {
+        } elseif (!$entry->post_id) {
             $invalidated_entry_props = $this->entryProps('invalidated', 'entry_post_id_empty', $entry);
-        } else if (!$entry->comment_id) {
+        } elseif (!$entry->comment_id) {
             $invalidated_entry_props = $this->entryProps('invalidated', 'entry_comment_id_empty', $entry);
         } /*
-		 * Now we check some basics in the subscription itself.
-	     */
-        else if (!($sub = $this->plugin->utils_sub->get($entry->sub_id))) {
+         * Now we check some basics in the subscription itself.
+         */
+        elseif (!($sub = $this->plugin->utils_sub->get($entry->sub_id))) {
             $invalidated_entry_props = $this->entryProps('invalidated', 'entry_sub_id_missing', $entry);
-        } else if (!$sub->email) {
+        } elseif (!$sub->email) {
             $invalidated_entry_props = $this->entryProps('invalidated', 'sub_email_empty', $entry, $sub);
-        } else if ($sub->status !== 'subscribed') {
+        } elseif ($sub->status !== 'subscribed') {
             $invalidated_entry_props = $this->entryProps('invalidated', 'sub_status_not_subscribed', $entry, $sub);
         } /*
-		 * Make sure the subscription still matches up with the same post/comment IDs.
-		 */
-        else if ($sub->post_id !== $entry->post_id) {
+         * Make sure the subscription still matches up with the same post/comment IDs.
+         */
+        elseif ($sub->post_id !== $entry->post_id) {
             $invalidated_entry_props = $this->entryProps('invalidated', 'sub_post_id_mismtach', $entry, $sub);
-        } else if ($sub->comment_id && $sub->comment_id !== $entry->comment_parent_id) {
+        } elseif ($sub->comment_id && $sub->comment_id !== $entry->comment_parent_id) {
             $invalidated_entry_props = $this->entryProps('invalidated', 'sub_comment_id_mismatch', $entry, $sub);
         } /*
-		 * Now we check the subscription's post ID.
-		 */
-        else if (!($sub_post = get_post($sub->post_id))) {
+         * Now we check the subscription's post ID.
+         */
+        elseif (!($sub_post = get_post($sub->post_id))) {
             $invalidated_entry_props = $this->entryProps('invalidated', 'sub_post_id_missing', $entry, $sub);
-        } else if (!$sub_post->post_title) {
+        } elseif (!$sub_post->post_title) {
             $invalidated_entry_props = $this->entryProps('invalidated', 'sub_post_title_empty', $entry, $sub, $sub_post);
-        } else if ($sub_post->post_status !== 'publish') {
+        } elseif ($sub_post->post_status !== 'publish') {
             $invalidated_entry_props = $this->entryProps('invalidated', 'sub_post_status_not_publish', $entry, $sub, $sub_post);
-        } else if (in_array($sub_post->post_type, ['revision', 'nav_menu_item'], true)) {
+        } elseif (in_array($sub_post->post_type, ['revision', 'nav_menu_item'], true)) {
             $invalidated_entry_props = $this->entryProps('invalidated', 'sub_post_type_auto_excluded', $entry, $sub, $sub_post);
         } /*
-		 * Now we check the subscription's comment ID; if applicable.
-		 */
-        else if ($sub->comment_id && !($sub_comment = get_comment($sub->comment_id))) {
+         * Now we check the subscription's comment ID; if applicable.
+         */
+        elseif ($sub->comment_id && !($sub_comment = get_comment($sub->comment_id))) {
             $invalidated_entry_props = $this->entryProps('invalidated', 'sub_comment_id_missing', $entry, $sub, $sub_post);
-        } else if ($sub_comment && $sub_comment->comment_type && $sub_comment->comment_type !== 'comment') {
+        } elseif ($sub_comment && $sub_comment->comment_type && $sub_comment->comment_type !== 'comment') {
             $invalidated_entry_props = $this->entryProps('invalidated', 'sub_comment_type_not_comment', $entry, $sub, $sub_post, $sub_comment);
-        } else if ($sub_comment && !$sub_comment->comment_content) {
+        } elseif ($sub_comment && !$sub_comment->comment_content) {
             $invalidated_entry_props = $this->entryProps('invalidated', 'sub_comment_content_empty', $entry, $sub, $sub_post, $sub_comment);
-        } else if ($sub_comment && $this->plugin->utils_db->commentStatusI18n($sub_comment->comment_approved) !== 'approve') {
+        } elseif ($sub_comment && $this->plugin->utils_db->commentStatusI18n($sub_comment->comment_approved) !== 'approve') {
             $invalidated_entry_props = $this->entryProps('invalidated', 'sub_comment_status_not_approve', $entry, $sub, $sub_post, $sub_comment);
         } /*
-		 * Make sure the comment we are notifying about still exists; and check validity.
-		 */
-        else if (!($comment = get_comment($entry->comment_id))) {
+         * Make sure the comment we are notifying about still exists; and check validity.
+         */
+        elseif (!($comment = get_comment($entry->comment_id))) {
             $invalidated_entry_props = $this->entryProps('invalidated', 'entry_comment_id_missing', $entry, $sub, $sub_post, $sub_comment);
-        } else if ($comment->comment_type && $comment->comment_type !== 'comment') {
+        } elseif ($comment->comment_type && $comment->comment_type !== 'comment') {
             $invalidated_entry_props = $this->entryProps('invalidated', 'comment_type_not_comment', $entry, $sub, $sub_post, $sub_comment, null, $comment);
-        } else if (!$comment->comment_content) {
+        } elseif (!$comment->comment_content) {
             $invalidated_entry_props = $this->entryProps('invalidated', 'comment_content_empty', $entry, $sub, $sub_post, $sub_comment, null, $comment);
-        } else if ($this->plugin->utils_db->commentStatusI18n($comment->comment_approved) !== 'approve') {
+        } elseif ($this->plugin->utils_db->commentStatusI18n($comment->comment_approved) !== 'approve') {
             $invalidated_entry_props = $this->entryProps('invalidated', 'comment_status_not_approve', $entry, $sub, $sub_post, $sub_comment, null, $comment);
         } /*
-		 * Make sure the post containing the comment we are notifying about still exists; and check validity.
-		 */
-        else if (!($post = get_post($comment->comment_post_ID))) {
+         * Make sure the post containing the comment we are notifying about still exists; and check validity.
+         */
+        elseif (!($post = get_post($comment->comment_post_ID))) {
             $invalidated_entry_props = $this->entryProps('invalidated', 'comment_post_id_missing', $entry, $sub, $sub_post, $sub_comment, null, $comment);
-        } else if (!$post->post_title) {
+        } elseif (!$post->post_title) {
             $invalidated_entry_props = $this->entryProps('invalidated', 'post_title_empty', $entry, $sub, $sub_post, $sub_comment, $post, $comment);
-        } else if ($post->post_status !== 'publish') {
+        } elseif ($post->post_status !== 'publish') {
             $invalidated_entry_props = $this->entryProps('invalidated', 'post_status_not_publish', $entry, $sub, $sub_post, $sub_comment, $post, $comment);
-        } else if (in_array($post->post_type, ['revision', 'nav_menu_item'], true)) {
+        } elseif (in_array($post->post_type, ['revision', 'nav_menu_item'], true)) {
             $invalidated_entry_props = $this->entryProps('invalidated', 'post_type_auto_excluded', $entry, $sub, $sub_post, $sub_comment, $post, $comment);
         } /*
-		 * Again, make sure the subscription still matches up with the same post/comment IDs; and that both still exist.
-		 */
-        else if ($sub->post_id !== (integer)$comment->comment_post_ID) {
+         * Again, make sure the subscription still matches up with the same post/comment IDs; and that both still exist.
+         */
+        elseif ($sub->post_id !== (integer) $comment->comment_post_ID) {
             $invalidated_entry_props = $this->entryProps('invalidated', 'sub_post_id_comment_mismtach', $entry, $sub, $sub_post, $sub_comment, $post, $comment);
         } /*
-		 * Else, we can return the full set of entry properties for this queue entry.
-		 */
+         * Else, we can return the full set of entry properties for this queue entry.
+         */
         else {
             return $this->entryProps('', '', $entry, $sub, $sub_post, $sub_comment, $post, $comment);
         } // Validated entry props.
@@ -500,22 +498,17 @@ class QueueProcessor extends AbsBase
      *
      * @param string         $event        Event type; `invalidated` or `notified`.
      * @param string         $note_code    See {@link UtilsEvent::queueNoteCode()}.
-     *
      * @param \stdClass      $entry        Queue entry.
-     *
      * @param \stdClass|null $sub          Subscription.
      * @param \WP_Post|null  $sub_post     Subscription post.
      * @param \stdClass|null $sub_comment  Subscription comment.
-     *
      * @param \WP_Post|null  $post         Post we are notifying about.
      * @param \stdClass|null $comment      Comment we are notifying about.
-     *
      * @param \stdClass[]    $props        Digestable entry props.
      * @param \stdClass[]    $comments     Digestable comments.
-     *
-     * @param boolean        $held         Held? Defaults to `FALSE`.
-     * @param integer        $dby_queue_id Digested by queue ID.
-     * @param boolean        $logged       Logged? Defaults to `FALSE`.
+     * @param bool           $held         Held? Defaults to `FALSE`.
+     * @param int            $dby_queue_id Digested by queue ID.
+     * @param bool           $logged       Logged? Defaults to `FALSE`.
      *
      * @return \stdClass Structured entry properties.
      *
@@ -545,49 +538,49 @@ class QueueProcessor extends AbsBase
     protected function entryProps(
         $event = '',
         $note_code = '',
-
-        \stdClass $entry,
-
+        //
+        \stdClass $entry = null,
+        //
         \stdClass $sub = null,
         \WP_Post $sub_post = null,
         \WP_Comment $sub_comment = null,
-
+        //
         \WP_Post $post = null,
         \WP_Comment $comment = null,
-
+        //
         array $props = [],
         array $comments = [],
-
+        //
         $held = false,
         $dby_queue_id = 0,
         $logged = false
     ) {
-        $event     = (string)$event;
-        $note_code = (string)$note_code;
+        $event     = (string) $event;
+        $note_code = (string) $note_code;
 
         if (!$comments && $comment) { // Not passed in?
             $comments = [$comment->comment_ID => $comment];
         }
-        $held         = (boolean)$held;
-        $dby_queue_id = (integer)$dby_queue_id;
-        $logged       = (boolean)$logged;
+        $held         = (boolean) $held;
+        $dby_queue_id = (integer) $dby_queue_id;
+        $logged       = (boolean) $logged;
 
-        $entry_props = (object)compact(
+        $entry_props = (object) compact(
             'event',
             'note_code',
-
+            //
             'entry',
-
+            //
             'sub',
             'sub_post',
             'sub_comment',
-
+            //
             'post',
             'comment',
-
+            //
             'props',
             'comments',
-
+            //
             'held',
             'dby_queue_id',
             'logged'
@@ -605,7 +598,7 @@ class QueueProcessor extends AbsBase
      *
      * @param \stdClass $entry_props Entry properties.
      *
-     * @return boolean TRUE if the notification should be held, for now.
+     * @return bool TRUE if the notification should be held, for now.
      */
     protected function checkEntryHoldUntilTime(\stdClass $entry_props)
     {
@@ -627,26 +620,29 @@ class QueueProcessor extends AbsBase
      *
      * @param \stdClass $entry_props Entry properties.
      *
-     * @return integer Hold until time; UNIX timestamp.
+     * @return int Hold until time; UNIX timestamp.
      */
     protected function entryHoldUntilTime(\stdClass $entry_props)
     {
-        switch ($entry_props->sub->deliver) // Check for digests.
-        {
+        switch ($entry_props->sub->deliver) {
+
             case 'hourly': // Delivery option = hourly digest.
                 if (($entry_last_notified_time = $this->entryLastNotifiedTime($entry_props))) {
                     return $entry_last_notified_time + 3600;
                 }
+                break;
 
             case 'daily': // Delivery option = daily digest.
                 if (($entry_last_notified_time = $this->entryLastNotifiedTime($entry_props))) {
                     return $entry_last_notified_time + 86400;
                 }
+                break;
 
             case 'weekly': // Delivery option = weekly digest.
                 if (($entry_last_notified_time = $this->entryLastNotifiedTime($entry_props))) {
                     return $entry_last_notified_time + 604800;
                 }
+                break;
         }
         return $entry_props->entry->hold_until_time ? $entry_props->entry->hold_until_time : $entry_props->entry->insertion_time;
     }
@@ -657,8 +653,7 @@ class QueueProcessor extends AbsBase
      * @since 141111 First documented version.
      *
      * @param \stdClass $entry_props           Entry properties.
-     *
-     * @param integer   $entry_hold_until_time Hold until time; UNIX timestamp.
+     * @param int       $entry_hold_until_time Hold until time; UNIX timestamp.
      *
      * @throws \exception If a DB update failure occurs.
      */
@@ -667,9 +662,9 @@ class QueueProcessor extends AbsBase
         if ($entry_props->held) {
             return; // Already did this.
         }
-        $entry_hold_until_time = (integer)$entry_hold_until_time;
+        $entry_hold_until_time = (integer) $entry_hold_until_time;
 
-        $sql = "UPDATE `".esc_sql($this->plugin->utils_db->prefix().'queue')."`".
+        $sql = 'UPDATE `'.esc_sql($this->plugin->utils_db->prefix().'queue').'`'.
 
                " SET `last_update_time` = '".esc_sql(time())."', `hold_until_time` = '".esc_sql($entry_hold_until_time)."'".
 
@@ -689,11 +684,11 @@ class QueueProcessor extends AbsBase
      *
      * @param \stdClass $entry_props Entry properties.
      *
-     * @return integer Last notified time; UNIX timestamp.
+     * @return int Last notified time; UNIX timestamp.
      */
     protected function entryLastNotifiedTime(\stdClass $entry_props)
     {
-        $sql = "SELECT `time` FROM `".esc_sql($this->plugin->utils_db->prefix().'queue_event_log')."`".
+        $sql = 'SELECT `time` FROM `'.esc_sql($this->plugin->utils_db->prefix().'queue_event_log').'`'.
 
                " WHERE `post_id` = '".esc_sql($entry_props->post->ID)."'".
 
@@ -703,11 +698,11 @@ class QueueProcessor extends AbsBase
                " AND `sub_id` = '".esc_sql($entry_props->sub->ID)."'".
                " AND `event` = 'notified'".
 
-               " ORDER BY `time` DESC".
+               ' ORDER BY `time` DESC'.
 
-               " LIMIT 1"; // Only need the last time.
+               ' LIMIT 1'; // Only need the last time.
 
-        return (integer)$this->plugin->utils_db->wp->get_var($sql);
+        return (integer) $this->plugin->utils_db->wp->get_var($sql);
     }
 
     /**
@@ -717,7 +712,7 @@ class QueueProcessor extends AbsBase
      *
      * @param \stdClass $entry_props entry properties.
      *
-     * @return boolean TRUE if the entry has other digestable entries.
+     * @return bool TRUE if the entry has other digestable entries.
      */
     protected function checkCompileEntryDigestableEntries(\stdClass $entry_props)
     {
@@ -757,7 +752,7 @@ class QueueProcessor extends AbsBase
      */
     protected function entryDigestableEntries(\stdClass $entry_props)
     {
-        $sql = "SELECT * FROM `".esc_sql($this->plugin->utils_db->prefix().'queue')."`".
+        $sql = 'SELECT * FROM `'.esc_sql($this->plugin->utils_db->prefix().'queue').'`'.
 
                " WHERE `post_id` = '".esc_sql($entry_props->post->ID)."'".
 
@@ -766,7 +761,7 @@ class QueueProcessor extends AbsBase
 
                " AND `sub_id` = '".esc_sql($entry_props->sub->ID)."'".
 
-               " ORDER BY `insertion_time` ASC"; // In chronological order.
+               ' ORDER BY `insertion_time` ASC'; // In chronological order.
 
         if (($entry_digestable_entries = $this->plugin->utils_db->wp->get_results($sql, OBJECT_K))) {
             $entry_digestable_entries = $this->plugin->utils_db->typifyDeep($entry_digestable_entries);
@@ -795,13 +790,13 @@ class QueueProcessor extends AbsBase
      */
     protected function entries()
     {
-        $sql = "SELECT * FROM `".esc_sql($this->plugin->utils_db->prefix().'queue')."`".
+        $sql = 'SELECT * FROM `'.esc_sql($this->plugin->utils_db->prefix().'queue').'`'.
 
                " WHERE `hold_until_time` < '".esc_sql(time())."'".
 
-               " ORDER BY `insertion_time` ASC". // Oldest get priority.
+               ' ORDER BY `insertion_time` ASC'.// Oldest get priority.
 
-               " LIMIT ".$this->max_limit; // Max limit for this class instance.
+               ' LIMIT '.$this->max_limit; // Max limit for this class instance.
 
         if (($entries = $this->plugin->utils_db->wp->get_results($sql, OBJECT_K))) {
             $entries = $this->plugin->utils_db->typifyDeep($entries);
@@ -837,20 +832,22 @@ class QueueProcessor extends AbsBase
         }
         $entry_headers[] = 'X-Sub-Key: '.$entry_props->sub->key;
 
-        if ($this->plugin->options['replies_via_email_enable']) switch ($this->plugin->options['replies_via_email_handler']) {
-            case 'mandrill': // Only choice at the moment; i.e. we have only integrated w/ Mandrill at this time.
+        if ($this->plugin->options['replies_via_email_enable']) {
+            switch ($this->plugin->options['replies_via_email_handler']) {
+                case 'mandrill': // Only choice at the moment; i.e. we have only integrated w/ Mandrill at this time.
 
-                if ($this->plugin->options['rve_mandrill_reply_to_email']) {
-                    $rve_mandrill_reply_to_email = $this->plugin->options['rve_mandrill_reply_to_email'];
+                    if ($this->plugin->options['rve_mandrill_reply_to_email']) {
+                        $rve_mandrill_reply_to_email = $this->plugin->options['rve_mandrill_reply_to_email'];
 
-                    if ($is_digest) { // In digests, we only want a post ID and sub key. A comment ID will need to be given by the end-user.
-                        $rve_mandrill_reply_to_email = $this->plugin->utils_rve->irtSuffix($rve_mandrill_reply_to_email, $entry_props->post->ID, null, $entry_props->sub->key);
-                    } else {
-                        $rve_mandrill_reply_to_email = $this->plugin->utils_rve->irtSuffix($rve_mandrill_reply_to_email, $entry_props->post->ID, $entry_props->comment->comment_ID, $entry_props->sub->key);
+                        if ($is_digest) { // In digests, we only want a post ID and sub key. A comment ID will need to be given by the end-user.
+                            $rve_mandrill_reply_to_email = $this->plugin->utils_rve->irtSuffix($rve_mandrill_reply_to_email, $entry_props->post->ID, null, $entry_props->sub->key);
+                        } else {
+                            $rve_mandrill_reply_to_email = $this->plugin->utils_rve->irtSuffix($rve_mandrill_reply_to_email, $entry_props->post->ID, $entry_props->comment->comment_ID, $entry_props->sub->key);
+                        }
+                        $entry_headers[] = 'Reply-To: '.$rve_mandrill_reply_to_email;
                     }
-                    $entry_headers[] = 'Reply-To: '.$rve_mandrill_reply_to_email;
-                }
-                break; // Break switch handler.
+                    break; // Break switch handler.
+            }
         }
         return $entry_headers; // Pass them back out now.
     }
@@ -866,7 +863,7 @@ class QueueProcessor extends AbsBase
      */
     protected function entrySubject(\stdClass $entry_props)
     {
-        $template_vars = (array)$entry_props;
+        $template_vars = (array) $entry_props;
 
         return trim(preg_replace('/\s+/', ' ', $this->subject_template->parse($template_vars)));
     }
@@ -882,7 +879,7 @@ class QueueProcessor extends AbsBase
      */
     protected function entryMessage(\stdClass $entry_props)
     {
-        $template_vars = (array)$entry_props;
+        $template_vars = (array) $entry_props;
 
         $email_rve_end_divider = null; // Initialize.
         if ($this->plugin->options['replies_via_email_enable']) {
@@ -898,7 +895,7 @@ class QueueProcessor extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @return boolean TRUE if out of time.
+     * @return bool TRUE if out of time.
      */
     protected function isOutOfTime()
     {
@@ -913,7 +910,7 @@ class QueueProcessor extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @return boolean TRUE if out of time.
+     * @return bool TRUE if out of time.
      */
     protected function isDelayOutOfTime()
     {
