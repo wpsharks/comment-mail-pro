@@ -1,15 +1,16 @@
 <?php
 /**
- * Sub Inserter
+ * Sub Inserter.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * Sub Inserter
+ * Sub Inserter.
  *
  * @since 141111 First documented version.
  */
@@ -18,14 +19,14 @@ class SubInserter extends AbsBase
     /* Related to the data. */
 
     /**
-     * @var array Based on request args.
+     * @type array Based on request args.
      *
      * @since 141111 First documented version.
      */
     protected $data;
 
     /**
-     * @var boolean Did we validate?
+     * @type bool Did we validate?
      *
      * @since 141111 First documented version.
      */
@@ -34,28 +35,28 @@ class SubInserter extends AbsBase
     /* Related to inserts. */
 
     /**
-     * @var boolean An insert?
+     * @type bool An insert?
      *
      * @since 141111 First documented version.
      */
     protected $is_insert;
 
     /**
-     * @var boolean Did we insert?
+     * @type bool Did we insert?
      *
      * @since 141111 First documented version.
      */
     protected $inserted;
 
     /**
-     * @var boolean Did we replace?
+     * @type bool Did we replace?
      *
      * @since 141111 First documented version.
      */
     protected $replaced;
 
     /**
-     * @var integer Insertion ID.
+     * @type int Insertion ID.
      *
      * @since 141111 First documented version.
      */
@@ -64,28 +65,28 @@ class SubInserter extends AbsBase
     /* Related to updates. */
 
     /**
-     * @var boolean An update?
+     * @type bool An update?
      *
      * @since 141111 First documented version.
      */
     protected $is_update;
 
     /**
-     * @var \stdClass|null Subscription.
+     * @type \stdClass|null Subscription.
      *
      * @since 141111 First documented version.
      */
     protected $sub; // On update only.
 
     /**
-     * @var boolean Did we update?
+     * @type bool Did we update?
      *
      * @since 141111 First documented version.
      */
     protected $updated;
 
     /**
-     * @var boolean Email & key changed?
+     * @type bool Email & key changed?
      *
      * @since 141111 First documented version.
      */
@@ -94,70 +95,70 @@ class SubInserter extends AbsBase
     /* Related to args/flags. */
 
     /**
-     * @var boolean Auto-confirm?
+     * @type bool Auto-confirm?
      *
      * @since 141111 First documented version.
      */
     protected $auto_confirm;
 
     /**
-     * @var boolean Process events?
+     * @type bool Process events?
      *
      * @since 141111 First documented version.
      */
     protected $process_events;
 
     /**
-     * @var boolean Process confirmation?
+     * @type bool Process confirmation?
      *
      * @since 141111 First documented version.
      */
     protected $process_confirmation;
 
     /**
-     * @var boolean Process list server?
+     * @type bool Process list server?
      *
      * @since 150922 Adding list server.
      */
     protected $process_list_server;
 
     /**
-     * @var boolean User initiated?
+     * @type bool User initiated?
      *
      * @since 141111 First documented version.
      */
     protected $user_initiated;
 
     /**
-     * @var boolean User-initiated data key protections?
+     * @type bool User-initiated data key protections?
      *
      * @since 141111 First documented version.
      */
     protected $ui_protected_data_keys_enable;
 
     /**
-     * @var \WP_User|null Initiating user.
+     * @type \WP_User|null Initiating user.
      *
      * @since 141111 First documented version.
      */
     protected $ui_protected_data_user;
 
     /**
-     * @var boolean Interpret `0` as current?
+     * @type bool Interpret `0` as current?
      *
      * @since 141111 First documented version.
      */
     protected $user_allow_0;
 
     /**
-     * @var boolean Keep existing?
+     * @type bool Keep existing?
      *
      * @since 141111 First documented version.
      */
     protected $keep_existing;
 
     /**
-     * @var boolean Keep existing?
+     * @type bool Keep existing?
      *
      * @since 141111 First documented version.
      */
@@ -166,14 +167,14 @@ class SubInserter extends AbsBase
     /* Related to user. */
 
     /**
-     * @var \WP_User|null Subscriber.
+     * @type \WP_User|null Subscriber.
      *
      * @since 141111 First documented version.
      */
     protected $user; // Subscriber.
 
     /**
-     * @var boolean Subscriber is current user?
+     * @type bool Subscriber is current user?
      *
      * @since 141111 First documented version.
      */
@@ -182,14 +183,14 @@ class SubInserter extends AbsBase
     /* Related to duplicates. */
 
     /**
-     * @var array An array of any duplicate key IDs.
+     * @type array An array of any duplicate key IDs.
      *
      * @since 141111 First documented version.
      */
     protected $duplicate_key_ids;
 
     /**
-     * @var array An array of any other duplicate IDs.
+     * @type array An array of any other duplicate IDs.
      *
      * @since 141111 First documented version.
      */
@@ -198,7 +199,7 @@ class SubInserter extends AbsBase
     /* Other misc. properties. */
 
     /**
-     * @var sub_confirmer|null Sub confirmer.
+     * @type sub_confirmer|null Sub confirmer.
      *
      * @since 141111 First documented version.
      */
@@ -207,14 +208,14 @@ class SubInserter extends AbsBase
     /* Related to error/success reporting. */
 
     /**
-     * @var array An array of any errors.
+     * @type array An array of any errors.
      *
      * @since 141111 First documented version.
      */
     protected $errors;
 
     /**
-     * @var array An array of any successes.
+     * @type array An array of any successes.
      *
      * @since 141111 First documented version.
      */
@@ -231,7 +232,6 @@ class SubInserter extends AbsBase
      *
      * @param array $request_args Arguments to the constructor.
      *                            These should NOT be trusted; they come from a `$_REQUEST` action.
-     *
      * @param array $args         Any additional behavioral args.
      *
      *    Regarding user-initiated actions. The following arguments may apply.
@@ -292,7 +292,7 @@ class SubInserter extends AbsBase
         /* Related to the data. */
 
         $default_request_args = [
-            'ID'  => null,
+            'ID' => null,
             // A key is always auto-generated on insert.
             // A key can NEVER be updated by anyone — only systematically!
             // A read-only key is required to update w/ `ui_protected_data_keys_enable`.
@@ -321,14 +321,14 @@ class SubInserter extends AbsBase
             'insertion_time'   => null,
             'last_update_time' => null,
         ];
-        $request_args         = array_merge($default_request_args, $request_args);
-        $request_args         = array_intersect_key($request_args, $default_request_args);
+        $request_args = array_merge($default_request_args, $request_args);
+        $request_args = array_intersect_key($request_args, $default_request_args);
 
         $this->data      = $request_args; // A copy of the request args.
         $this->validated = false; // Initialize; not validated yet, obviously.
 
         if (isset($this->data['ID'])) {
-            $this->data['ID'] = (integer)$this->data['ID'];
+            $this->data['ID'] = (integer) $this->data['ID'];
         }
         /* Related to inserts. */
 
@@ -365,20 +365,20 @@ class SubInserter extends AbsBase
 
             'check_blacklist' => true,
         ];
-        $args          = array_merge($defaults_args, $args);
-        $args          = array_intersect_key($args, $defaults_args);
+        $args = array_merge($defaults_args, $args);
+        $args = array_intersect_key($args, $defaults_args);
 
         if (isset($args['auto_confirm'])) {
-            $this->auto_confirm = (boolean)$args['auto_confirm'];
+            $this->auto_confirm = (boolean) $args['auto_confirm'];
         }
-        $this->process_events       = (boolean)$args['process_events'];
-        $this->process_confirmation = (boolean)$args['process_confirmation'];
-        $this->process_list_server  = (boolean)$args['process_list_server'];
+        $this->process_events       = (boolean) $args['process_events'];
+        $this->process_confirmation = (boolean) $args['process_confirmation'];
+        $this->process_list_server  = (boolean) $args['process_list_server'];
 
-        $this->user_initiated                = (boolean)$args['user_initiated'];
-        $this->user_initiated                = $this->plugin->utils_sub->checkUserInitiatedByAdmin(
-            $this->data['email'] ? $this->data['email'] // « On insert or update.
-                : ($this->is_update && $this->sub ? $this->sub->email : ''), $this->user_initiated
+        $this->user_initiated = (boolean) $args['user_initiated'];
+        $this->user_initiated = $this->plugin->utils_sub->checkUserInitiatedByAdmin(
+            $this->data['email'] ? $this->data['email'] : ($this->is_update && $this->sub ? $this->sub->email : ''),
+            $this->user_initiated
         );
         $this->ui_protected_data_keys_enable = $this->user_initiated && $args['ui_protected_data_keys_enable'];
         $this->ui_protected_data_user        = null; // Recording here; but can't be filled until later below.
@@ -404,15 +404,15 @@ class SubInserter extends AbsBase
         } else {
             $this->user_allow_0 = $this->user_initiated; // Defaults to this value.
         }
-        $this->keep_existing = (boolean)$args['keep_existing'];
+        $this->keep_existing = (boolean) $args['keep_existing'];
 
-        $this->check_blacklist = (boolean)$args['check_blacklist'];
+        $this->check_blacklist = (boolean) $args['check_blacklist'];
 
         /* Related to user. */
 
         if (!isset($this->user) || !$this->user->ID) {
-            if ((integer)$this->data['user_id'] > 0) { // A potentially new user ID?
-                $this->user = new \WP_User((integer)$this->data['user_id']);
+            if ((integer) $this->data['user_id'] > 0) { // A potentially new user ID?
+                $this->user = new \WP_User((integer) $this->data['user_id']);
             }
         }
         if ($this->user_initiated && $this->ui_protected_data_keys_enable
@@ -431,8 +431,8 @@ class SubInserter extends AbsBase
             }
         }
         if (!isset($this->user) || !$this->user->ID) {
-            if ((string)$this->data['email']) { // A potentially new email address?
-                if (($_user = \WP_User::get_data_by('email', (string)$this->data['email']))) {
+            if ((string) $this->data['email']) { // A potentially new email address?
+                if (($_user = \WP_User::get_data_by('email', (string) $this->data['email']))) {
                     $this->user = new \WP_User($_user->ID);
                 }
             }
@@ -500,7 +500,7 @@ class SubInserter extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @return boolean Did we insert|update?
+     * @return bool Did we insert|update?
      */
     public function didInsertUpdate()
     {
@@ -512,7 +512,7 @@ class SubInserter extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @return boolean Did we insert?
+     * @return bool Did we insert?
      */
     public function didInsert()
     {
@@ -524,7 +524,7 @@ class SubInserter extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @return boolean Did we replace?
+     * @return bool Did we replace?
      */
     public function didReplace()
     {
@@ -536,7 +536,7 @@ class SubInserter extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @return integer Insertion ID; if applicable.
+     * @return int Insertion ID; if applicable.
      */
     public function insertId()
     {
@@ -548,7 +548,7 @@ class SubInserter extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @return boolean Did we update?
+     * @return bool Did we update?
      */
     public function didUpdate()
     {
@@ -560,7 +560,7 @@ class SubInserter extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @return boolean Email & key changed?
+     * @return bool Email & key changed?
      */
     public function emailKeyChanged()
     {
@@ -584,7 +584,7 @@ class SubInserter extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @return boolean `TRUE` if has errors.
+     * @return bool `TRUE` if has errors.
      */
     public function hasErrors()
     {
@@ -632,7 +632,7 @@ class SubInserter extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @return boolean `TRUE` if has errors.
+     * @return bool `TRUE` if has errors.
      */
     public function hasSuccesses()
     {
@@ -693,7 +693,7 @@ class SubInserter extends AbsBase
         }
         if ($this->is_insert) {
             $this->insert();
-        } else if ($this->is_update) {
+        } elseif ($this->is_update) {
             $this->update();
         }
     }
@@ -720,7 +720,7 @@ class SubInserter extends AbsBase
         if (($insert_replace = $this->plugin->utils_db->wp->replace($table, $data_to_insert)) === false) {
             throw new \exception(__('Insert/replace failure.', $this->plugin->text_domain));
         }
-        if (!($this->insert_id = (integer)$this->plugin->utils_db->wp->insert_id)) {
+        if (!($this->insert_id = (integer) $this->plugin->utils_db->wp->insert_id)) {
             throw new \exception(__('Insert/replace failure.', $this->plugin->text_domain));
         }
         $this->inserted = true; // Flag as `TRUE` now; i.e. the Insert/replace was a success.
@@ -735,13 +735,12 @@ class SubInserter extends AbsBase
         if (!($this->sub = $this->plugin->utils_sub->get($this->insert_id, true))) {
             throw new \exception(__('Sub after insert failure.', $this->plugin->text_domain));
         }
-        $this->successes['inserted_successfully'] // Success entry!
-            = __('Subscription created successfully.', $this->plugin->text_domain);
+        $this->successes['inserted_successfully'] = __('Subscription created successfully.', $this->plugin->text_domain);
 
         if ($this->process_events) { // Processing events? i.e. log this insertion?
             new SubEventLogInserter(
                 array_merge(
-                    (array)$this->sub,
+                    (array) $this->sub,
                     [
                         'event'          => 'inserted',
                         'user_initiated' => $this->user_initiated,
@@ -761,8 +760,7 @@ class SubInserter extends AbsBase
             ); // With behavioral args.
 
             if ($this->sub_confirmer->sentEmailSuccessfully()) {
-                $this->successes['sent_confirmation_email_successfully'] // Success entry!
-                    = __('Request for email confirmation sent successfully.', $this->plugin->text_domain);
+                $this->successes['sent_confirmation_email_successfully'] = __('Request for email confirmation sent successfully.', $this->plugin->text_domain);
             }
         }
         $this->overwriteAnyOthersAfterInsertUpdate(); // Overwrites any others.
@@ -780,7 +778,7 @@ class SubInserter extends AbsBase
         $this->checkAutoConfirmBeforeInsertUpdate();
         $this->overwriteDuplicateKeyIdsBeforeUpdate();
 
-        $sub_before = (array)$this->sub; // For event logging.
+        $sub_before = (array) $this->sub; // For event logging.
 
         $table          = $this->plugin->utils_db->prefix().'subs';
         $data_to_update = $this->plugin->utils_array->removeNulls($this->data);
@@ -803,13 +801,12 @@ class SubInserter extends AbsBase
 
         unset($_property, $_value); // Housekeeping.
 
-        $this->successes['updated_successfully'] // Success entry!
-            = __('Subscription updated successfully.', $this->plugin->text_domain);
+        $this->successes['updated_successfully'] = __('Subscription updated successfully.', $this->plugin->text_domain);
 
         if ($this->process_events) { // Processing events? i.e. log this update?
             new SubEventLogInserter(
                 array_merge(
-                    (array)$this->sub,
+                    (array) $this->sub,
                     [
                         'event'          => 'updated',
                         'user_initiated' => $this->user_initiated,
@@ -829,10 +826,9 @@ class SubInserter extends AbsBase
             ); // With behavioral args.
 
             if ($this->sub_confirmer->sentEmailSuccessfully()) {
-                $this->successes['sent_confirmation_email_successfully'] // Success entry!
-                    = __('Request for email confirmation sent successfully.', $this->plugin->text_domain);
+                $this->successes['sent_confirmation_email_successfully'] = __('Request for email confirmation sent successfully.', $this->plugin->text_domain);
             }
-        } else if ($this->sub->status === 'subscribed' && $this->process_list_server) {
+        } elseif ($this->sub->status === 'subscribed' && $this->process_list_server) {
             $this->plugin->utils_list_server->maybeSubscribe(
                 [
                     'double_optin' => false,
@@ -855,14 +851,14 @@ class SubInserter extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @return boolean `TRUE` if there's an existing subscription that will suffice.
+     * @return bool `TRUE` if there's an existing subscription that will suffice.
      */
     protected function checkExistingBeforeInsert()
     {
         if (!$this->keep_existing) {
             return false; // Not applicable.
         }
-        $sql = "SELECT `ID` FROM `".esc_sql($this->plugin->utils_db->prefix().'subs')."`".
+        $sql = 'SELECT `ID` FROM `'.esc_sql($this->plugin->utils_db->prefix().'subs').'`'.
 
                " WHERE `post_id` = '".esc_sql($this->data['post_id'])."'".
                " AND `comment_id` = '".esc_sql($this->data['comment_id'])."'".
@@ -873,10 +869,10 @@ class SubInserter extends AbsBase
                " AND `fname` = '".esc_sql($this->data['fname'])."'".
                " AND `lname` = '".esc_sql($this->data['lname'])."'".
 
-               " AND `status` = 'subscribed'". // Only if `subscribed`.
+               " AND `status` = 'subscribed'".// Only if `subscribed`.
                " AND `deliver` = '".esc_sql($this->data['deliver'])."'";
 
-        return (boolean)$this->plugin->utils_db->wp->get_var($sql);
+        return (boolean) $this->plugin->utils_db->wp->get_var($sql);
     }
 
     /*
@@ -913,7 +909,7 @@ class SubInserter extends AbsBase
             'user_initiated' => $this->user_initiated,
             'auto_confirm'   => $this->auto_confirm,
         ];
-        $this->auto_confirm    = $this->plugin->utils_sub->canAutoConfirm($can_auto_confirm_args);
+        $this->auto_confirm = $this->plugin->utils_sub->canAutoConfirm($can_auto_confirm_args);
     }
 
     /*
@@ -936,7 +932,7 @@ class SubInserter extends AbsBase
         $new_comment_id = $this->newValueFor('comment_id');
         $new_email      = $this->newValueFor('email');
 
-        $sql = "SELECT `ID` FROM `".esc_sql($this->plugin->utils_db->prefix().'subs')."`".
+        $sql = 'SELECT `ID` FROM `'.esc_sql($this->plugin->utils_db->prefix().'subs').'`'.
 
                " WHERE `user_id` = '".esc_sql($new_user_id)."'".
                " AND `post_id` = '".esc_sql($new_post_id)."'".
@@ -994,7 +990,7 @@ class SubInserter extends AbsBase
         $new_comment_id = $this->newValueFor('comment_id');
         $new_email      = $this->newValueFor('email');
 
-        $sql = "SELECT `ID` FROM `".esc_sql($this->plugin->utils_db->prefix().'subs')."`".
+        $sql = 'SELECT `ID` FROM `'.esc_sql($this->plugin->utils_db->prefix().'subs').'`'.
 
                " WHERE `user_id` = '".esc_sql($new_user_id)."'".
                " AND `post_id` = '".esc_sql($new_post_id)."'".
@@ -1025,7 +1021,7 @@ class SubInserter extends AbsBase
      */
     protected function overwriteAnyOthersAfterInsertUpdate()
     {
-        $sql = "SELECT `ID` FROM `".esc_sql($this->plugin->utils_db->prefix().'subs')."`".
+        $sql = 'SELECT `ID` FROM `'.esc_sql($this->plugin->utils_db->prefix().'subs').'`'.
 
                " WHERE `post_id` = '".esc_sql($this->sub->post_id)."'".
 
@@ -1061,13 +1057,13 @@ class SubInserter extends AbsBase
      *
      * @param string $key_prop The key/property to acquire.
      *
-     * @return mixed The key/property value after an insert/update.
-     *
      * @throws \exception If unable to acquire key/property value.
+     *
+     * @return mixed The key/property value after an insert/update.
      */
     protected function newValueFor($key_prop)
     {
-        if (($key_prop = trim((string)$key_prop))) {
+        if (($key_prop = trim((string) $key_prop))) {
             if ($this->is_insert && isset($this->data[$key_prop])) {
                 return $this->data[$key_prop];
             }
@@ -1095,21 +1091,21 @@ class SubInserter extends AbsBase
     protected function sanitizeValidateData()
     {
         foreach ($this->data as $_key => &$_value) {
-            switch ($_key) // Validate each arg value.
-            {
+            switch ($_key) {// Validate each arg value.
+
                 case 'ID': // Primary key.
 
                     if (isset($_value)) {
-                        $_value = (integer)$_value;
+                        $_value = (integer) $_value;
                     }
                     if ($this->is_insert) {
                         $_value = null; // Nullify.
                     }
                     if ($this->is_insert && isset($_value)) { // Just to be thorough.
                         $this->errors['invalid_sub_id'] = sprintf(__('Invalid; insertion w/ ID: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
-                    } else if (($this->is_update || isset($_value)) && ($_value < 1 || strlen((string)$_value) > 20)) {
+                    } elseif (($this->is_update || isset($_value)) && ($_value < 1 || strlen((string) $_value) > 20)) {
                         $this->errors['invalid_sub_id'] = sprintf(__('Invalid ID: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
-                    } else if ($this->is_update && (!$this->sub || !$this->sub->ID || $_value !== $this->sub->ID)) {
+                    } elseif ($this->is_update && (!$this->sub || !$this->sub->ID || $_value !== $this->sub->ID)) {
                         $this->errors['invalid_sub_id'] = sprintf(__('Invalid ID: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
                     }
                     break; // Break switch handler.
@@ -1117,16 +1113,16 @@ class SubInserter extends AbsBase
                 case 'key': // Unique/secret key.
 
                     if (isset($_value)) {
-                        $_value = (string)$_value;
+                        $_value = (string) $_value;
                     }
                     if ($this->is_insert) { // Force a unique key.
                         $_value = $this->plugin->utils_enc->uunnciKey20Max();
                     }
                     if (isset($_value) && (!$_value || strlen($_value) > 20)) {
                         $this->errors['invalid_sub_key'] = sprintf(__('Invalid key: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
-                    } else if ($this->is_insert && (!isset($_value) || !$_value || strlen($_value) > 20)) {
+                    } elseif ($this->is_insert && (!isset($_value) || !$_value || strlen($_value) > 20)) {
                         $this->errors['invalid_sub_key'] = sprintf(__('Invalid key: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
-                    } else if ($this->is_update && $this->user_initiated && $this->ui_protected_data_keys_enable // Must have a matching key!
+                    } elseif ($this->is_update && $this->user_initiated && $this->ui_protected_data_keys_enable // Must have a matching key!
                                && (!isset($_value) || !$_value || strlen($_value) > 20 || !$this->sub || !$this->sub->key || $_value !== $this->sub->key)
                     ) {
                         $this->errors['invalid_sub_key'] = sprintf(__('Invalid key: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
@@ -1136,7 +1132,7 @@ class SubInserter extends AbsBase
                         $_value = null; // Nullify now; a key can never be changed by anyone!
                     }
                     if ($this->is_update && $this->data['email'] && $this->sub) { // Possible email change?
-                        if (strcasecmp((string)$this->data['email'], $this->sub->email) !== 0) { // Email changing?
+                        if (strcasecmp((string) $this->data['email'], $this->sub->email) !== 0) { // Email changing?
                             // Actions that change email should also change/nullify the existing key.
                             $this->email_key_changed = true; // Flag for API calls.
                             $_value                  = $this->plugin->utils_enc->uunnciKey20Max();
@@ -1157,7 +1153,7 @@ class SubInserter extends AbsBase
                         }
                     }
                     if (isset($_value)) {
-                        $_value = (integer)$_value;
+                        $_value = (integer) $_value;
                     }
                     if ($this->is_insert && !$_value) {
                         $_value = 0; // Use a default value.
@@ -1165,9 +1161,9 @@ class SubInserter extends AbsBase
                     if ($this->user) { // Match w/ `user`.
                         $_value = $this->user->ID;
                     }
-                    if (isset($_value) && ($_value < 0 || strlen((string)$_value) > 20)) {
+                    if (isset($_value) && ($_value < 0 || strlen((string) $_value) > 20)) {
                         $this->errors['invalid_sub_user_id'] = sprintf(__('Invalid user ID: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
-                    } else if ($this->is_insert && (!isset($_value) || $_value < 0 || strlen((string)$_value) > 20)) {
+                    } elseif ($this->is_insert && (!isset($_value) || $_value < 0 || strlen((string) $_value) > 20)) {
                         $this->errors['invalid_sub_user_id'] = sprintf(__('Invalid user ID: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
                     }
                     break; // Break switch handler.
@@ -1175,16 +1171,16 @@ class SubInserter extends AbsBase
                 case 'post_id': // Post ID.
 
                     if (isset($_value)) {
-                        $_value = (integer)$_value;
+                        $_value = (integer) $_value;
                     }
                     if ($this->is_insert && !$_value) {
                         $_value = 0; // Use a default value.
                     }
-                    if (isset($_value) && ($_value < 1 || strlen((string)$_value) > 20)) {
+                    if (isset($_value) && ($_value < 1 || strlen((string) $_value) > 20)) {
                         $this->errors['invalid_sub_post_id'] = sprintf(__('Invalid post ID: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
-                    } else if ($this->is_insert && (!isset($_value) || $_value < 1 || strlen((string)$_value) > 20)) {
+                    } elseif ($this->is_insert && (!isset($_value) || $_value < 1 || strlen((string) $_value) > 20)) {
                         $this->errors['invalid_sub_post_id'] = sprintf(__('Invalid post ID: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
-                    } else if ($this->user_initiated && $this->ui_protected_data_keys_enable && ($_post = get_post($_value))
+                    } elseif ($this->user_initiated && $this->ui_protected_data_keys_enable && ($_post = get_post($_value))
                                && (in_array($_post->post_status, ['future', 'draft', 'pending', 'private'], true) || ($_post->post_password && post_password_required($_post)))
                     ) {
                         $this->errors['invalid_sub_post_id'] = sprintf(__('Invalid post ID: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
@@ -1194,14 +1190,14 @@ class SubInserter extends AbsBase
                 case 'comment_id': // Comment ID.
 
                     if (isset($_value)) {
-                        $_value = (integer)$_value;
+                        $_value = (integer) $_value;
                     }
                     if ($this->is_insert && !$_value) {
                         $_value = 0; // Use a default value.
                     }
-                    if (isset($_value) && ($_value < 0 || strlen((string)$_value) > 20)) {
+                    if (isset($_value) && ($_value < 0 || strlen((string) $_value) > 20)) {
                         $this->errors['invalid_sub_comment_id'] = sprintf(__('Invalid comment ID: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
-                    } else if ($this->is_insert && (!isset($_value) || $_value < 0 || strlen((string)$_value) > 20)) {
+                    } elseif ($this->is_insert && (!isset($_value) || $_value < 0 || strlen((string) $_value) > 20)) {
                         $this->errors['invalid_sub_comment_id'] = sprintf(__('Invalid comment ID: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
                     }
                     break; // Break switch handler.
@@ -1209,14 +1205,14 @@ class SubInserter extends AbsBase
                 case 'deliver': // Delivery option.
 
                     if (isset($_value)) {
-                        $_value = (string)$_value;
+                        $_value = (string) $_value;
                     }
                     if ($this->is_insert && !$_value) {
                         $_value = 'asap'; // Use a default value.
                     }
                     if (isset($_value) && !in_array($_value, ['asap', 'hourly', 'daily', 'weekly'], true)) {
                         $this->errors['invalid_sub_delivery_option'] = sprintf(__('Invalid delivery option: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
-                    } else if ($this->is_insert && (!isset($_value) || !in_array($_value, ['asap', 'hourly', 'daily', 'weekly'], true))) {
+                    } elseif ($this->is_insert && (!isset($_value) || !in_array($_value, ['asap', 'hourly', 'daily', 'weekly'], true))) {
                         $this->errors['invalid_sub_delivery_option'] = sprintf(__('Invalid delivery option: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
                     }
                     break; // Break switch handler.
@@ -1224,7 +1220,7 @@ class SubInserter extends AbsBase
                 case 'fname': // First name.
 
                     if (isset($_value)) {
-                        $_value = (string)$_value;
+                        $_value = (string) $_value;
                     }
                     if ($this->is_insert && !$_value) {
                         $_value = ''; // Use a default value.
@@ -1233,13 +1229,13 @@ class SubInserter extends AbsBase
                         $_value = $this->plugin->utils_string->firstName('', $this->user);
                     }
                     if ($this->is_insert && !$_value && $this->data['email']) {
-                        $_value = $this->plugin->utils_string->emailName((string)$this->data['email']);
+                        $_value = $this->plugin->utils_string->emailName((string) $this->data['email']);
                     }
                     if ($this->is_update && isset($_value) && !$_value && $this->user) {
                         $_value = $this->plugin->utils_string->firstName('', $this->user);
                     }
                     if ($this->is_update && isset($_value) && !$_value && $this->data['email']) {
-                        $_value = $this->plugin->utils_string->emailName((string)$this->data['email']);
+                        $_value = $this->plugin->utils_string->emailName((string) $this->data['email']);
                     }
                     if ($this->is_update && isset($_value) && !$_value && $this->sub && $this->sub->email) {
                         $_value = $this->plugin->utils_string->emailName($this->sub->email);
@@ -1249,7 +1245,7 @@ class SubInserter extends AbsBase
                     }
                     if (isset($_value) && strlen($_value) > 50) {
                         $this->errors['invalid_sub_first_name'] = sprintf(__('Invalid first name: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
-                    } else if ($this->is_insert && (!isset($_value) || strlen($_value) > 50)) {
+                    } elseif ($this->is_insert && (!isset($_value) || strlen($_value) > 50)) {
                         $this->errors['invalid_sub_first_name'] = sprintf(__('Invalid first name: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
                     }
                     break; // Break switch handler.
@@ -1257,7 +1253,7 @@ class SubInserter extends AbsBase
                 case 'lname': // Last name.
 
                     if (isset($_value)) {
-                        $_value = (string)$_value;
+                        $_value = (string) $_value;
                     }
                     if ($this->is_insert && !$_value) {
                         $_value = ''; // Use a default value.
@@ -1273,7 +1269,7 @@ class SubInserter extends AbsBase
                     }
                     if (isset($_value) && strlen($_value) > 100) {
                         $this->errors['invalid_sub_last_name'] = sprintf(__('Invalid last name: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
-                    } else if ($this->is_insert && (!isset($_value) || strlen($_value) > 100)) {
+                    } elseif ($this->is_insert && (!isset($_value) || strlen($_value) > 100)) {
                         $this->errors['invalid_sub_last_name'] = sprintf(__('Invalid last name: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
                     }
                     break; // Break switch handler.
@@ -1281,7 +1277,7 @@ class SubInserter extends AbsBase
                 case 'email': // Email address.
 
                     if (isset($_value)) {
-                        $_value = (string)$_value;
+                        $_value = (string) $_value;
                     }
                     if ($this->is_insert && !$_value) {
                         $_value = ''; // Use a default value.
@@ -1294,9 +1290,9 @@ class SubInserter extends AbsBase
 
                     if (isset($_value) && (!$_value || !is_email($_value) || strlen($_value) > 100)) {
                         $this->errors['invalid_sub_email'] = sprintf(__('Invalid email address: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
-                    } else if ($this->is_insert && (!isset($_value) || !$_value || !is_email($_value) || strlen($_value) > 100)) {
+                    } elseif ($this->is_insert && (!isset($_value) || !$_value || !is_email($_value) || strlen($_value) > 100)) {
                         $this->errors['invalid_sub_email'] = sprintf(__('Invalid email address: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
-                    } else if (isset($_value) && $this->check_blacklist && $this->plugin->utils_sub->emailIsBlacklisted($_value)) {
+                    } elseif (isset($_value) && $this->check_blacklist && $this->plugin->utils_sub->emailIsBlacklisted($_value)) {
                         $this->errors['blacklisted_sub_email'] = sprintf(__('Blacklisted email address: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
                     }
                     break; // Break switch handler.
@@ -1309,7 +1305,7 @@ class SubInserter extends AbsBase
                         }
                     }
                     if (isset($_value)) {
-                        $_value = (string)$_value;
+                        $_value = (string) $_value;
                     }
                     if ($this->is_insert && !$_value) {
                         $_value = ''; // Use a default value.
@@ -1318,20 +1314,20 @@ class SubInserter extends AbsBase
                         $_value = $this->plugin->utils_ip->current();
                     }
                     if ($this->is_insert && !$_value && $this->data['last_ip']) {
-                        $_value = (string)$this->data['last_ip'];
+                        $_value = (string) $this->data['last_ip'];
                     }
                     if ($this->is_update && $this->sub && !$this->sub->insertion_ip && !$_value && $this->is_current_user) {
                         $_value = $this->plugin->utils_ip->current();
                     }
                     if ($this->is_update && isset($_value) && !$_value && $this->data['last_ip']) {
-                        $_value = (string)$this->data['last_ip'];
+                        $_value = (string) $this->data['last_ip'];
                     }
                     if ($this->is_update && isset($_value) && !$_value && $this->sub) {
                         $_value = $this->coalesce($this->sub->insertion_ip, $this->sub->last_ip);
                     }
                     if (isset($_value) && strlen($_value) > 39) {
                         $this->errors['invalid_sub_insertion_ip'] = sprintf(__('Invalid insertion IP: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
-                    } else if ($this->is_insert && (!isset($_value) || strlen($_value) > 39)) {
+                    } elseif ($this->is_insert && (!isset($_value) || strlen($_value) > 39)) {
                         $this->errors['invalid_sub_insertion_ip'] = sprintf(__('Invalid insertion IP: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
                     }
                     break; // Break switch handler.
@@ -1344,7 +1340,7 @@ class SubInserter extends AbsBase
                         }
                     }
                     if (isset($_value)) {
-                        $_value = (string)$_value;
+                        $_value = (string) $_value;
                     }
                     if ($this->is_insert && !$_value) {
                         $_value = ''; // Use a default value.
@@ -1369,7 +1365,7 @@ class SubInserter extends AbsBase
                     }
                     if (isset($_value) && strlen($_value) > 2) {
                         $this->errors['invalid_sub_insertion_region'] = sprintf(__('Invalid insertion region: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
-                    } else if ($this->is_insert && (!isset($_value) || strlen($_value) > 2)) {
+                    } elseif ($this->is_insert && (!isset($_value) || strlen($_value) > 2)) {
                         $this->errors['invalid_sub_insertion_region'] = sprintf(__('Invalid insertion region: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
                     }
                     break; // Break switch handler.
@@ -1382,7 +1378,7 @@ class SubInserter extends AbsBase
                         }
                     }
                     if (isset($_value)) {
-                        $_value = (string)$_value;
+                        $_value = (string) $_value;
                     }
                     if ($this->is_insert && !$_value) {
                         $_value = ''; // Use a default value.
@@ -1407,7 +1403,7 @@ class SubInserter extends AbsBase
                     }
                     if (isset($_value) && strlen($_value) > 2) {
                         $this->errors['invalid_sub_insertion_country'] = sprintf(__('Invalid insertion country: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
-                    } else if ($this->is_insert && (!isset($_value) || strlen($_value) > 2)) {
+                    } elseif ($this->is_insert && (!isset($_value) || strlen($_value) > 2)) {
                         $this->errors['invalid_sub_insertion_country'] = sprintf(__('Invalid insertion country: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
                     }
                     break; // Break switch handler.
@@ -1420,7 +1416,7 @@ class SubInserter extends AbsBase
                         }
                     }
                     if (isset($_value)) {
-                        $_value = (string)$_value;
+                        $_value = (string) $_value;
                     }
                     if ($this->is_insert && !$_value) {
                         $_value = ''; // Use a default value.
@@ -1429,17 +1425,17 @@ class SubInserter extends AbsBase
                         $_value = $this->plugin->utils_ip->current();
                     }
                     if ($this->is_insert && !$_value && $this->data['insertion_ip']) {
-                        $_value = (string)$this->data['insertion_ip'];
+                        $_value = (string) $this->data['insertion_ip'];
                     }
                     if ($this->is_update && isset($_value) && !$_value && $this->data['insertion_ip']) {
-                        $_value = (string)$this->data['insertion_ip'];
+                        $_value = (string) $this->data['insertion_ip'];
                     }
                     if ($this->is_update && isset($_value) && !$_value && $this->sub) {
                         $_value = $this->coalesce($this->sub->last_ip, $this->sub->insertion_ip);
                     }
                     if (isset($_value) && strlen($_value) > 39) {
                         $this->errors['invalid_sub_last_ip'] = sprintf(__('Invalid last IP: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
-                    } else if ($this->is_insert && (!isset($_value) || strlen($_value) > 39)) {
+                    } elseif ($this->is_insert && (!isset($_value) || strlen($_value) > 39)) {
                         $this->errors['invalid_sub_last_ip'] = sprintf(__('Invalid last IP: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
                     }
                     break; // Break switch handler.
@@ -1452,7 +1448,7 @@ class SubInserter extends AbsBase
                         }
                     }
                     if (isset($_value)) {
-                        $_value = (string)$_value;
+                        $_value = (string) $_value;
                     }
                     if ($this->is_insert && !$_value) {
                         $_value = ''; // Use a default value.
@@ -1471,7 +1467,7 @@ class SubInserter extends AbsBase
                     }
                     if (isset($_value) && strlen($_value) > 2) {
                         $this->errors['invalid_sub_last_region'] = sprintf(__('Invalid last region: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
-                    } else if ($this->is_insert && (!isset($_value) || strlen($_value) > 2)) {
+                    } elseif ($this->is_insert && (!isset($_value) || strlen($_value) > 2)) {
                         $this->errors['invalid_sub_last_region'] = sprintf(__('Invalid last region: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
                     }
                     break; // Break switch handler.
@@ -1484,7 +1480,7 @@ class SubInserter extends AbsBase
                         }
                     }
                     if (isset($_value)) {
-                        $_value = (string)$_value;
+                        $_value = (string) $_value;
                     }
                     if ($this->is_insert && !$_value) {
                         $_value = ''; // Use a default value.
@@ -1503,7 +1499,7 @@ class SubInserter extends AbsBase
                     }
                     if (isset($_value) && strlen($_value) > 2) {
                         $this->errors['invalid_sub_last_country'] = sprintf(__('Invalid last country: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
-                    } else if ($this->is_insert && (!isset($_value) || strlen($_value) > 2)) {
+                    } elseif ($this->is_insert && (!isset($_value) || strlen($_value) > 2)) {
                         $this->errors['invalid_sub_last_country'] = sprintf(__('Invalid last country: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
                     }
                     break; // Break switch handler.
@@ -1511,13 +1507,13 @@ class SubInserter extends AbsBase
                 case 'status': // Status.
 
                     if (isset($_value)) {
-                        $_value = (string)$_value;
+                        $_value = (string) $_value;
                     }
                     if ($this->is_insert && !$_value) {
                         $_value = 'unconfirmed'; // Use a default value.
                     }
                     if ($this->is_update && $this->user_initiated && $this->data['email'] && $this->sub) {
-                        if (strcasecmp((string)$this->data['email'], $this->sub->email) !== 0) { // Email changing?
+                        if (strcasecmp((string) $this->data['email'], $this->sub->email) !== 0) { // Email changing?
                             // NOTE: if `process_confirmation` is not `TRUE`, this silently unconfirms the subscriber.
                             // User-initiated actions that change email should set `process_confirmation = TRUE`.
                             $_value = 'unconfirmed'; // User MUST reconfirm when they change email addresses.
@@ -1525,11 +1521,11 @@ class SubInserter extends AbsBase
                     }
                     if (isset($_value) && !in_array($_value, ['unconfirmed', 'subscribed', 'suspended', 'trashed'], true)) {
                         $this->errors['invalid_sub_status'] = sprintf(__('Invalid status: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
-                    } else if ($this->is_insert && (!isset($_value) || !in_array($_value, ['unconfirmed', 'subscribed', 'suspended', 'trashed'], true))) {
+                    } elseif ($this->is_insert && (!isset($_value) || !in_array($_value, ['unconfirmed', 'subscribed', 'suspended', 'trashed'], true))) {
                         $this->errors['invalid_sub_status'] = sprintf(__('Invalid status: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
-                    } else if ($this->is_insert && $this->user_initiated && $this->ui_protected_data_keys_enable && $_value !== 'unconfirmed') {
+                    } elseif ($this->is_insert && $this->user_initiated && $this->ui_protected_data_keys_enable && $_value !== 'unconfirmed') {
                         $this->errors['invalid_sub_status'] = sprintf(__('Invalid status: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
-                    } else if ($this->is_update && isset($_value) && $this->user_initiated && $this->ui_protected_data_keys_enable
+                    } elseif ($this->is_update && isset($_value) && $this->user_initiated && $this->ui_protected_data_keys_enable
                                && !in_array($_value, ['unconfirmed', 'subscribed', 'suspended'], true) // Cannot `trash` themselves.
                     ) {
                         $this->errors['invalid_sub_status'] = sprintf(__('Invalid status: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
@@ -1558,14 +1554,14 @@ class SubInserter extends AbsBase
                         }
                     }
                     if (isset($_value)) {
-                        $_value = (integer)$_value;
+                        $_value = (integer) $_value;
                     }
                     if ($this->is_insert && $_value < 1) {
                         $_value = time(); // Use a default value.
                     }
-                    if (isset($_value) && strlen((string)$_value) !== 10) {
+                    if (isset($_value) && strlen((string) $_value) !== 10) {
                         $this->errors['invalid_sub_insertion_time'] = sprintf(__('Invalid insertion time: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
-                    } else if ($this->is_insert && (!isset($_value) || strlen((string)$_value) !== 10)) {
+                    } elseif ($this->is_insert && (!isset($_value) || strlen((string) $_value) !== 10)) {
                         $this->errors['invalid_sub_insertion_time'] = sprintf(__('Invalid insertion time: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
                     }
                     break; // Break switch handler.
@@ -1578,7 +1574,7 @@ class SubInserter extends AbsBase
                         }
                     }
                     if (isset($_value)) {
-                        $_value = (integer)$_value;
+                        $_value = (integer) $_value;
                     }
                     if ($this->is_insert && $_value < 1) {
                         $_value = time(); // Use a default value.
@@ -1586,9 +1582,9 @@ class SubInserter extends AbsBase
                     if ($_value < 1) {
                         $_value = time(); // Update time.
                     }
-                    if (isset($_value) && strlen((string)$_value) !== 10) {
+                    if (isset($_value) && strlen((string) $_value) !== 10) {
                         $this->errors['invalid_sub_last_update_time'] = sprintf(__('Invalid last update time: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
-                    } else if ($this->is_insert && (!isset($_value) || strlen((string)$_value) !== 10)) {
+                    } elseif ($this->is_insert && (!isset($_value) || strlen((string) $_value) !== 10)) {
                         $this->errors['invalid_sub_last_update_time'] = sprintf(__('Invalid last update time: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
                     }
                     break; // Break switch handler.
