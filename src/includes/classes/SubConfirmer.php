@@ -1,71 +1,72 @@
 <?php
 /**
- * Sub Confirmer
+ * Sub Confirmer.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * Sub Confirmer
+ * Sub Confirmer.
  *
  * @since 141111 First documented version.
  */
 class SubConfirmer extends AbsBase
 {
     /**
-     * @var \stdClass|null Subscription.
+     * @type \stdClass|null Subscription.
      *
      * @since 141111 First documented version.
      */
     protected $sub;
 
     /**
-     * @var null|boolean Auto-confirm?
+     * @type null|bool Auto-confirm?
      *
      * @since 141111 First documented version.
      */
     protected $auto_confirm;
 
     /**
-     * @var boolean Process events?
+     * @type bool Process events?
      *
      * @since 141111 First documented version.
      */
     protected $process_events;
 
     /**
-     * @var boolean Proces list server?
+     * @type bool Proces list server?
      *
      * @since 150922 Adding list server.
      */
     protected $process_list_server;
 
     /**
-     * @var boolean User initiated?
+     * @type bool User initiated?
      *
      * @since 141111 First documented version.
      */
     protected $user_initiated;
 
     /**
-     * @var boolean Auto confirmed?
+     * @type bool Auto confirmed?
      *
      * @since 141111 First documented version.
      */
     protected $auto_confirmed;
 
     /**
-     * @var boolean Confirming via email?
+     * @type bool Confirming via email?
      *
      * @since 141111 First documented version.
      */
     protected $confirming_via_email;
 
     /**
-     * @var boolean Sent an email?
+     * @type bool Sent an email?
      *
      * @since 141111 First documented version.
      */
@@ -76,15 +77,14 @@ class SubConfirmer extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param integer $sub_id Subscriber ID.
-     *
-     * @param array   $args   Any additional behavioral args.
+     * @param int   $sub_id Subscriber ID.
+     * @param array $args   Any additional behavioral args.
      */
     public function __construct($sub_id, array $args = [])
     {
         parent::__construct();
 
-        $sub_id    = (integer)$sub_id;
+        $sub_id    = (integer) $sub_id;
         $this->sub = $this->plugin->utils_sub->get($sub_id);
 
         $defaults_args = [
@@ -95,18 +95,19 @@ class SubConfirmer extends AbsBase
 
             'user_initiated' => false,
         ];
-        $args          = array_merge($defaults_args, $args);
-        $args          = array_intersect_key($args, $defaults_args);
+        $args = array_merge($defaults_args, $args);
+        $args = array_intersect_key($args, $defaults_args);
 
         if (isset($args['auto_confirm'])) {
-            $this->auto_confirm = (boolean)$args['auto_confirm'];
+            $this->auto_confirm = (boolean) $args['auto_confirm'];
         }
-        $this->process_events      = (boolean)$args['process_events'];
-        $this->process_list_server = (boolean)$args['process_list_server'];
+        $this->process_events      = (boolean) $args['process_events'];
+        $this->process_list_server = (boolean) $args['process_list_server'];
 
-        $this->user_initiated          = (boolean)$args['user_initiated'];
-        $this->user_initiated          = $this->plugin->utils_sub->checkUserInitiatedByAdmin(
-            $this->sub ? $this->sub->email : '', $this->user_initiated
+        $this->user_initiated = (boolean) $args['user_initiated'];
+        $this->user_initiated = $this->plugin->utils_sub->checkUserInitiatedByAdmin(
+            $this->sub ? $this->sub->email : '',
+            $this->user_initiated
         );
         $this->auto_confirmed          = false; // Initialize.
         $this->confirming_via_email    = false; // Initialize.
@@ -120,7 +121,7 @@ class SubConfirmer extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @return boolean `TRUE` if auto-confirmed.
+     * @return bool `TRUE` if auto-confirmed.
      */
     public function autoConfirmed()
     {
@@ -132,7 +133,7 @@ class SubConfirmer extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @return boolean `TRUE` if confirming via email.
+     * @return bool `TRUE` if confirming via email.
      */
     public function confirmingViaEmail()
     {
@@ -144,7 +145,7 @@ class SubConfirmer extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @return boolean `TRUE` if sent email successfully.
+     * @return bool `TRUE` if sent email successfully.
      */
     public function sentEmailSuccessfully()
     {
@@ -171,7 +172,7 @@ class SubConfirmer extends AbsBase
             return; // Nothing more to do.
         }
         $sub                 = $this->sub;
-        $sub_post            = $sub_comment = null;
+        $sub_post            = $sub_comment            = null;
         $process_list_server = $this->process_list_server;
 
         if (!($sub_post = get_post($this->sub->post_id))) {
@@ -193,7 +194,9 @@ class SubConfirmer extends AbsBase
         }
         $this->confirming_via_email    = true; // Flag this scenario.
         $this->sent_email_successfully = $this->plugin->utils_mail->send(
-            $this->sub->email, $subject, $message
+            $this->sub->email,
+            $subject,
+            $message
         );
     }
 
@@ -202,7 +205,7 @@ class SubConfirmer extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @return boolean TRUE if auto-confirmed in some way.
+     * @return bool TRUE if auto-confirmed in some way.
      */
     protected function maybeAutoConfirm()
     {
@@ -216,7 +219,7 @@ class SubConfirmer extends AbsBase
             'user_initiated' => $this->user_initiated,
             'auto_confirm'   => $this->auto_confirm,
         ];
-        $can_auto_confirm      = $this->plugin->utils_sub->canAutoConfirm($can_auto_confirm_args);
+        $can_auto_confirm = $this->plugin->utils_sub->canAutoConfirm($can_auto_confirm_args);
 
         if ($can_auto_confirm) { // Possible to auto-confirm?
             $this->plugin->utils_sub->confirm(
@@ -227,8 +230,8 @@ class SubConfirmer extends AbsBase
                 ]
             ); // With behavioral args.
 
-            return ($this->auto_confirmed = true);
+            return $this->auto_confirmed = true;
         }
-        return ($this->auto_confirmed = false);
+        return $this->auto_confirmed = false;
     }
 }
