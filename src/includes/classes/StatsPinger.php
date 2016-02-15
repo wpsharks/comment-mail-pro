@@ -1,15 +1,16 @@
 <?php
 /**
- * Stats Pinger
+ * Stats Pinger.
  *
  * @since     150708 Adding stats pinger.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * Stats Pinger
+ * Stats Pinger.
  *
  * @since 150708 Adding stats pinger.
  */
@@ -40,7 +41,7 @@ class StatsPinger extends AbsBase
         if ($this->plugin->options['last_pro_stats_log'] >= strtotime('-1 week')) {
             return; // No reason to keep pinging.
         }
-        $this->plugin->optionsQuickSave(['last_pro_stats_log' => (string)time()]);
+        $this->plugin->optionsQuickSave(['last_pro_stats_log' => (string) time()]);
 
         $stats_api_url      = 'https://stats.wpsharks.io/log';
         $stats_api_url_args = [
@@ -51,7 +52,7 @@ class StatsPinger extends AbsBase
             'product_version' => $this->plugin->version,
             'product'         => $this->plugin->slug.($this->plugin->is_pro ? '-pro' : ''),
         ];
-        $stats_api_url      = add_query_arg(urlencode_deep($stats_api_url_args), $stats_api_url);
+        $stats_api_url = add_query_arg(urlencode_deep($stats_api_url_args), $stats_api_url);
 
         wp_remote_get(
             $stats_api_url,
@@ -62,4 +63,3 @@ class StatsPinger extends AbsBase
         );
     }
 }
-	
