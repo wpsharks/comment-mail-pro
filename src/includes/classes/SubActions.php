@@ -1,22 +1,23 @@
 <?php
 /**
- * Subscriber Actions
+ * Subscriber Actions.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * Subscriber Actions
+ * Subscriber Actions.
  *
  * @since 141111 First documented version.
  */
 class SubActions extends AbsBase
 {
     /**
-     * @var array Valid actions.
+     * @type array Valid actions.
      *
      * @since 141111 First documented version.
      */
@@ -54,9 +55,11 @@ class SubActions extends AbsBase
         if (empty($_REQUEST[GLOBAL_NS])) {
             return; // Not applicable.
         }
-        foreach ((array)$_REQUEST[GLOBAL_NS] as $_action => $_request_args) {
+        foreach ((array) $_REQUEST[GLOBAL_NS] as $_action => $_request_args) {
             if ($_action && in_array($_action, $this->valid_actions, true)) {
-                $_method = preg_replace_callback('/_(.)/', function ($m) { return strtoupper($m[1]); }, strtolower($_action));
+                $_method = preg_replace_callback('/_(.)/', function ($m) {
+                    return strtoupper($m[1]);
+                }, strtolower($_action));
                 $this->{$_method}($this->plugin->utils_string->trimStripDeep($_request_args));
             }
         }
@@ -81,18 +84,18 @@ class SubActions extends AbsBase
 
         $error_codes = []; // Initialize.
 
-        $sub_key = (string)$request_args;
+        $sub_key = (string) $request_args;
         if (stripos($sub_key, '.pls') !== false) {
-            list($sub_key) = explode('.pls', $sub_key, 2);
+            list($sub_key)       = explode('.pls', $sub_key, 2);
             $process_list_server = true; // Processing.
         }
         if (!($sub_key = $this->plugin->utils_sub->sanitizeKey($sub_key))) {
             $error_codes[] = 'missing_sub_key';
-        } else if (!($sub = $this->plugin->utils_sub->get($sub_key))) {
+        } elseif (!($sub = $this->plugin->utils_sub->get($sub_key))) {
             $error_codes[] = 'invalid_sub_key';
-        } else if (!($sub_post = get_post($sub->post_id))) {
+        } elseif (!($sub_post = get_post($sub->post_id))) {
             $error_codes[] = 'sub_post_id_missing';
-        } else if ($sub->comment_id && !($sub_comment = get_comment($sub->comment_id))) {
+        } elseif ($sub->comment_id && !($sub_comment = get_comment($sub->comment_id))) {
             $error_codes[] = 'sub_comment_id_missing';
         }
         if (!$error_codes) { // If no errors; set current email.
@@ -130,7 +133,7 @@ class SubActions extends AbsBase
 
         if (!($sub_key = $this->plugin->utils_sub->sanitizeKey($request_args))) {
             $error_codes[] = 'missing_sub_key';
-        } else if (!($sub = $this->plugin->utils_sub->get($sub_key))) {
+        } elseif (!($sub = $this->plugin->utils_sub->get($sub_key))) {
             $error_codes[] = 'invalid_sub_key';
         }
         if (!$error_codes) {
