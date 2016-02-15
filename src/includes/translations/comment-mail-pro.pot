@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Comment Mail Pro 160215\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/comment-mail-pro\n"
-"POT-Creation-Date: 2016-02-15 02:02:07+00:00\n"
+"POT-Creation-Date: 2016-02-15 03:23:22+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -183,6 +183,18 @@ msgstr ""
 #: src/includes/templates/type-s/site/sub-actions/unsubscribed-all.php:31
 #: src/includes/templates/type-s/site/sub-actions/unsubscribed.php:37
 msgid "Please review the following error(s):"
+msgstr ""
+
+#: src/includes/classes/Conflicts.php:89
+msgid "Pro"
+msgstr ""
+
+#: src/includes/classes/Conflicts.php:90
+msgid "Lite"
+msgstr ""
+
+#: src/includes/classes/Conflicts.php:95
+msgid "<strong>%1$s</strong> is NOT running. A conflicting plugin, <strong>%2$s</strong>, is currently active. Please deactivate the %2$s plugin to clear this message."
 msgstr ""
 
 #: src/includes/classes/FormFields.php:142
@@ -1778,15 +1790,15 @@ msgstr ""
 
 #: src/includes/classes/MenuPage.php:1781
 #: src/includes/classes/MenuPage.php:2387
-#: src/includes/classes/MenuPage.php:4605 src/includes/classes/Plugin.php:1266
-#: src/includes/classes/Plugin.php:1267
+#: src/includes/classes/MenuPage.php:4605 src/includes/classes/Plugin.php:1169
+#: src/includes/classes/Plugin.php:1170
 msgid "Email Templates"
 msgstr ""
 
 #: src/includes/classes/MenuPage.php:1781
 #: src/includes/classes/MenuPage.php:3014
-#: src/includes/classes/MenuPage.php:4609 src/includes/classes/Plugin.php:1273
-#: src/includes/classes/Plugin.php:1274
+#: src/includes/classes/MenuPage.php:4609 src/includes/classes/Plugin.php:1176
+#: src/includes/classes/Plugin.php:1177
 msgid "Site Templates"
 msgstr ""
 
@@ -2098,8 +2110,8 @@ msgstr ""
 
 #: src/includes/classes/MenuPage.php:2015
 #: src/includes/classes/MenuPage.php:4591
-#: src/includes/classes/MenuPage.php:4598 src/includes/classes/Plugin.php:1259
-#: src/includes/classes/Plugin.php:1260
+#: src/includes/classes/MenuPage.php:4598 src/includes/classes/Plugin.php:1162
+#: src/includes/classes/Plugin.php:1163
 msgid "Import/Export"
 msgstr ""
 
@@ -3415,8 +3427,8 @@ msgid "Queued Notifications by Post ID"
 msgstr ""
 
 #: src/includes/classes/MenuPage.php:4466
-#: src/includes/classes/MenuPage.php:4563 src/includes/classes/Plugin.php:1320
-#: src/includes/classes/Plugin.php:1321
+#: src/includes/classes/MenuPage.php:4563 src/includes/classes/Plugin.php:1223
+#: src/includes/classes/Plugin.php:1224
 msgid "Pro Updater"
 msgstr ""
 
@@ -3484,7 +3496,7 @@ msgstr ""
 msgid "Options"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4584 src/includes/classes/Plugin.php:1784
+#: src/includes/classes/MenuPage.php:4584 src/includes/classes/Plugin.php:1687
 msgid "Preview Pro Features"
 msgstr ""
 
@@ -4051,7 +4063,7 @@ msgid "Edit Subscr."
 msgstr ""
 
 #: src/includes/classes/MenuPageSubsTable.php:253
-#: src/includes/classes/Plugin.php:1179
+#: src/includes/classes/Plugin.php:1082
 msgid "Resend email confirmation link? Are you sure?"
 msgstr ""
 
@@ -4080,7 +4092,7 @@ msgid "Trash"
 msgstr ""
 
 #: src/includes/classes/MenuPageSubsTable.php:264
-#: src/includes/classes/Plugin.php:1182 src/includes/classes/UtilsI18n.php:415
+#: src/includes/classes/Plugin.php:1085 src/includes/classes/UtilsI18n.php:415
 msgid "Delete permanently? Are you sure?"
 msgstr ""
 
@@ -4162,156 +4174,156 @@ msgstr ""
 msgid "No %1$s to display."
 msgstr ""
 
-#: src/includes/classes/Plugin.php:922
+#: src/includes/classes/Plugin.php:825
 msgid "<p style=\"font-size:120%%; font-weight:400; margin:0;\"><strong>%1$s&trade;</strong> + <strong>Subscribe to Comments Reloaded</strong> = Possible Conflict!</p>"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:923
+#: src/includes/classes/Plugin.php:826
 msgid "<strong>WARNING (ACTION REQUIRED):</strong> Running %1$s&trade; while Subscribe to Comments Reloaded is <em>also</em> an active WordPress plugin <strong>can cause problems</strong>; i.e., these two plugins do the same thing—%1$s being the newer of the two. We recommend keeping %1$s; please <a href=\"%2$s\">deactivate the Subscribe to Comments Reloaded plugin</a> to get rid of this message."
 msgstr ""
 
-#: src/includes/classes/Plugin.php:946
+#: src/includes/classes/Plugin.php:849
 msgid "<p style=\"font-size:120%%; font-weight:400; margin:0;\"><strong>%1$s&trade;</strong> + <strong>Jetpack Subscriptions module</strong> (with Follow Comments enabled) = Possible Conflict!</p>"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:947
+#: src/includes/classes/Plugin.php:850
 msgid "<strong>WARNING (ACTION REQUIRED):</strong> Running %1$s&trade; while the Jetpack Subscriptions module (with Follow Comments enabled) is <em>also</em> active in WordPress <strong>can cause problems</strong>; i.e., these two handle the same thing—%1$s being the newer of the two. We recommend keeping %1$s; please deactivate the Follow Comments functionality in the Jetpack Subscriptions module to get rid of this message (see <strong>Dashboard → Settings → Discussion → Jetpack Subscriptions Settings</strong>)."
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1186
+#: src/includes/classes/Plugin.php:1089
 msgid "January"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1187
+#: src/includes/classes/Plugin.php:1090
 msgid "February"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1188
+#: src/includes/classes/Plugin.php:1091
 msgid "March"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1189
+#: src/includes/classes/Plugin.php:1092
 msgid "April"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1190
+#: src/includes/classes/Plugin.php:1093
 msgid "May"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1191
+#: src/includes/classes/Plugin.php:1094
 msgid "June"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1192
+#: src/includes/classes/Plugin.php:1095
 msgid "July"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1193
+#: src/includes/classes/Plugin.php:1096
 msgid "August"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1194
+#: src/includes/classes/Plugin.php:1097
 msgid "September"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1195
+#: src/includes/classes/Plugin.php:1098
 msgid "October"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1196
+#: src/includes/classes/Plugin.php:1099
 msgid "November"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1197
+#: src/includes/classes/Plugin.php:1100
 msgid "December"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1200
+#: src/includes/classes/Plugin.php:1103
 msgid "Sun"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1201
+#: src/includes/classes/Plugin.php:1104
 msgid "Mon"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1202
+#: src/includes/classes/Plugin.php:1105
 msgid "Tue"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1203
+#: src/includes/classes/Plugin.php:1106
 msgid "Wed"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1204
+#: src/includes/classes/Plugin.php:1107
 msgid "Thu"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1205
+#: src/includes/classes/Plugin.php:1108
 msgid "Fri"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1206
+#: src/includes/classes/Plugin.php:1109
 msgid "Sat"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1254 src/includes/classes/Plugin.php:1255
+#: src/includes/classes/Plugin.php:1157 src/includes/classes/Plugin.php:1158
 msgid "Config. Options"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1283 src/includes/classes/Plugin.php:1284
+#: src/includes/classes/Plugin.php:1186 src/includes/classes/Plugin.php:1187
 msgid "Subscriptions"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1288 src/includes/classes/Plugin.php:1302
+#: src/includes/classes/Plugin.php:1191 src/includes/classes/Plugin.php:1205
 msgid "Event Log"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1289
+#: src/includes/classes/Plugin.php:1192
 msgid "Sub. Event Log"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1297 src/includes/classes/Plugin.php:1298
+#: src/includes/classes/Plugin.php:1200 src/includes/classes/Plugin.php:1201
 msgid "Mail Queue"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1303
+#: src/includes/classes/Plugin.php:1206
 msgid "Queue Event Log"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1311 src/includes/classes/Plugin.php:1312
+#: src/includes/classes/Plugin.php:1214 src/includes/classes/Plugin.php:1215
 msgid "Statistics/Charts"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1410 src/includes/classes/Plugin.php:1464
-#: src/includes/classes/Plugin.php:1517 src/includes/classes/Plugin.php:1570
+#: src/includes/classes/Plugin.php:1313 src/includes/classes/Plugin.php:1367
+#: src/includes/classes/Plugin.php:1420 src/includes/classes/Plugin.php:1473
 msgid "Per Page"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1782
+#: src/includes/classes/Plugin.php:1685
 msgid "Settings"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1787
+#: src/includes/classes/Plugin.php:1690
 msgid "Upgrade"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1867
+#: src/includes/classes/Plugin.php:1770
 msgid "<strong>%1$s Pro:</strong> a new version is now available. Please <a href=\"%2$s\">upgrade to v%3$s</a>."
 msgstr ""
 
-#: src/includes/classes/Plugin.php:2085
+#: src/includes/classes/Plugin.php:1988
 msgid "<strong>%1$s is disabled. Please visit the <a href=\"%2$s\">settings</a> and enable the plugin</strong>."
 msgstr ""
 
-#: src/includes/classes/Plugin.php:2154
+#: src/includes/classes/Plugin.php:2057
 msgid "dismiss &times;"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:2552
+#: src/includes/classes/Plugin.php:2455
 msgid "Every 5 Minutes"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:2553
+#: src/includes/classes/Plugin.php:2456
 msgid "Every 15 Minutes"
 msgstr ""
 
