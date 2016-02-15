@@ -60,7 +60,7 @@ class SsoGoogle extends SsoServiceBase
     {
         try { // Catch exceptions and log them for debugging.
             if (!$this->request_args['code']) { // Must have this.
-                throw new \exception(__('Missing oAuth code.', $this->plugin->text_domain));
+                throw new \exception(__('Missing oAuth code.', SLUG_TD));
             }
             $service_factory = new \OAuth\ServiceFactory();
             $credentials     = new \OAuth\Common\Consumer\Credentials(
@@ -78,10 +78,10 @@ class SsoGoogle extends SsoServiceBase
             # Acquire and validate data received from this service.
 
             if (!is_object($service_user = json_decode($service->request('https://www.googleapis.com/oauth2/v1/userinfo')))) {
-                throw new \exception(__('Failed to acquire user.', $this->plugin->text_domain));
+                throw new \exception(__('Failed to acquire user.', SLUG_TD));
             }
             if (empty($service_user->id) || !($sso_id = (string) $service_user->id)) {
-                throw new \exception(__('Failed to obtain user.', $this->plugin->text_domain));
+                throw new \exception(__('Failed to obtain user.', SLUG_TD));
             }
             foreach (['name', 'given_name', 'email'] as $_prop) {
                 if (!isset($service_user->{$_prop})) {

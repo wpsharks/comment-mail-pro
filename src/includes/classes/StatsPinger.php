@@ -49,8 +49,8 @@ class StatsPinger extends AbsBase
             'php_version'     => PHP_VERSION,
             'mysql_version'   => $this->plugin->utils_db->wp->db_version(),
             'wp_version'      => get_bloginfo('version'),
-            'product_version' => $this->plugin->version,
-            'product'         => $this->plugin->slug.($this->plugin->is_pro ? '-pro' : ''),
+            'product_version' => VERSION,
+            'product'         => SLUG_TD.(IS_PRO ? '-pro' : ''),
         ];
         $stats_api_url = add_query_arg(urlencode_deep($stats_api_url_args), $stats_api_url);
 

@@ -204,7 +204,7 @@ class UtilsDb extends AbsBase
                 return 'delete';
 
             default: // Throw exception on anything else.
-                throw new \exception(sprintf(__('Unexpected comment status: `%1$s`.', $this->plugin->text_domain), $status));
+                throw new \exception(sprintf(__('Unexpected comment status: `%1$s`.', SLUG_TD), $status));
         }
     }
 
@@ -238,7 +238,7 @@ class UtilsDb extends AbsBase
                 return 'closed';
 
             default: // Throw exception on anything else.
-                throw new \exception(sprintf(__('Unexpected post comment status: `%1$s`.', $this->plugin->text_domain), $status));
+                throw new \exception(sprintf(__('Unexpected post comment status: `%1$s`.', SLUG_TD), $status));
         }
     }
 
@@ -273,7 +273,7 @@ class UtilsDb extends AbsBase
                ' LIMIT 1'; // One to check.
 
         if ($this->wp->query($sql) === false) { // Initial query failure?
-            throw new \exception(__('Query failure.', $this->plugin->text_domain));
+            throw new \exception(__('Query failure.', SLUG_TD));
         }
         return $total = (integer) $this->wp->get_var('SELECT FOUND_ROWS()');
     }
@@ -391,7 +391,7 @@ class UtilsDb extends AbsBase
                ' LIMIT 1'; // One to check.
 
         if ($this->wp->query($sql) === false) { // Initial query failure?
-            throw new \exception(__('Query failure.', $this->plugin->text_domain));
+            throw new \exception(__('Query failure.', SLUG_TD));
         }
         return $total = (integer) $this->wp->get_var('SELECT FOUND_ROWS()');
     }
@@ -567,7 +567,7 @@ class UtilsDb extends AbsBase
                ' LIMIT 1'; // One to check.
 
         if ($this->wp->query($sql) === false) { // Initial query failure?
-            throw new \exception(__('Query failure.', $this->plugin->text_domain));
+            throw new \exception(__('Query failure.', SLUG_TD));
         }
         return $total = (integer) $this->wp->get_var('SELECT FOUND_ROWS()');
     }

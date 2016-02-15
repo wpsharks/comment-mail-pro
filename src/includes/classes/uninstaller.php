@@ -140,10 +140,10 @@ class Uninstaller extends AbsBase
     protected function deleteTransientKeys()
     {
         $like1 = // e.g. Delete all keys LIKE `%\_transient\_cmtmail\_%`.
-            '%'.$this->plugin->utils_db->wp->esc_like('_transient_'.$this->plugin->transient_prefix).'%';
+            '%'.$this->plugin->utils_db->wp->esc_like('_transient_'.TRANSIENT_PREFIX).'%';
 
         $like2 = // e.g. Delete all keys LIKE `%\_transient\_timeout\_cmtmail\_%`.
-            '%'.$this->plugin->utils_db->wp->esc_like('_transient_timeout_'.$this->plugin->transient_prefix).'%';
+            '%'.$this->plugin->utils_db->wp->esc_like('_transient_timeout_'.TRANSIENT_PREFIX).'%';
 
         $sql = // This will remove our transients/timeouts.
             'DELETE FROM `'.esc_sql($this->plugin->utils_db->wp->options).'`'.
@@ -212,7 +212,7 @@ class Uninstaller extends AbsBase
                 $_sql_file_table = $this->plugin->utils_db->prefix().$_sql_file_table;
 
                 if (!$this->plugin->utils_db->wp->query('DROP TABLE IF EXISTS `'.esc_sql($_sql_file_table).'`')) {
-                    throw new \exception(sprintf(__('DB table deletion failure: `%1$s`.', $this->plugin->text_domain), $_sql_file_table));
+                    throw new \exception(sprintf(__('DB table deletion failure: `%1$s`.', SLUG_TD), $_sql_file_table));
                 }
             }
         }

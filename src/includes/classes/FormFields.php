@@ -111,7 +111,7 @@ class FormFields extends AbsBase
         $slug = trim(preg_replace('/[^a-z0-9]/i', '-', $name), '-');
         $slug = $root_name ? 'root-'.$slug : $slug;
 
-        $id   = $this->plugin->slug.$this->ns_id_suffix.'-'.$slug;
+        $id   = SLUG_TD.$this->ns_id_suffix.'-'.$slug;
         $name = $root_name ? $name : GLOBAL_NS.$this->ns_name_suffix.'['.$name.']';
 
         $required                 = (boolean) $args['required'];
@@ -139,7 +139,7 @@ class FormFields extends AbsBase
             $row .= '<th scope="row">';
             $row .= '   <label for="'.esc_attr($id).'">'.
                     '      '.$label.($required ? // Change the short description based on this boolean.
-                    '        <span class="description">'.__('(required) *', $this->plugin->text_domain).'</span>' : '').
+                    '        <span class="description">'.__('(required) *', SLUG_TD).'</span>' : '').
                     '   </label>';
             $row .= '</th>';
         }
@@ -237,7 +237,7 @@ class FormFields extends AbsBase
         $slug = trim(preg_replace('/[^a-z0-9]/i', '-', $name), '-');
         $slug = $root_name ? 'root-'.$slug : $slug;
 
-        $id   = $this->plugin->slug.$this->ns_id_suffix.'-'.$slug;
+        $id   = SLUG_TD.$this->ns_id_suffix.'-'.$slug;
         $name = $root_name ? $name : GLOBAL_NS.$this->ns_name_suffix.'['.$name.']';
 
         $rows                     = (integer) $args['rows'];
@@ -268,9 +268,9 @@ class FormFields extends AbsBase
             $row .= '<th scope="row">';
             $row .= '   <label for="'.esc_attr($id).'">'.
                     '      '.$label.($required ? // Change the short description based on this boolean.
-                    '        <span class="description">'.__('(required) *', $this->plugin->text_domain).'</span>' : '').
+                    '        <span class="description">'.__('(required) *', SLUG_TD).'</span>' : '').
                     ($cm_mode ? '<span class="description" style="margin-left:2em;">'.
-                                '   <small>'.__('(<code>F11</code> toggles fullscreen editing)', $this->plugin->text_domain).'</small>'.
+                                '   <small>'.__('(<code>F11</code> toggles fullscreen editing)', SLUG_TD).'</small>'.
                                 ($cm_details ? '<small style="margin-left:2em;">'.$cm_details.'</small>' : '').
                                 '</span>' : '').
                     '   </label>';
@@ -370,7 +370,7 @@ class FormFields extends AbsBase
         $slug = trim(preg_replace('/[^a-z0-9]/i', '-', $name), '-');
         $slug = $root_name ? 'root-'.$slug : $slug;
 
-        $id   = $this->plugin->slug.$this->ns_id_suffix.'-'.$slug;
+        $id   = SLUG_TD.$this->ns_id_suffix.'-'.$slug;
         $name = $root_name ? $name : GLOBAL_NS.$this->ns_name_suffix.'['.$name.']';
 
         $required                 = (boolean) $args['required'];
@@ -423,7 +423,7 @@ class FormFields extends AbsBase
             $row .= '<th scope="row">';
             $row .= '   <label for="'.esc_attr($id).'">'.
                     '      '.$label.($required ? // Change the short description based on this boolean.
-                    '        <span class="description">'.__('(required) *', $this->plugin->text_domain).'</span>' : '').
+                    '        <span class="description">'.__('(required) *', SLUG_TD).'</span>' : '').
                     '   </label>';
             $row .= '</th>';
         }
@@ -518,7 +518,7 @@ class FormFields extends AbsBase
         $slug = trim(preg_replace('/[^a-z0-9]/i', '-', $name), '-');
         $slug = $root_name ? 'root-'.$slug : $slug;
 
-        $id   = $this->plugin->slug.$this->ns_id_suffix.'-'.$slug;
+        $id   = SLUG_TD.$this->ns_id_suffix.'-'.$slug;
         $name = $root_name ? $name : GLOBAL_NS.$this->ns_name_suffix.'['.$name.']';
 
         $current_value = $this->issetOr($args['current_value'], null, 'string');
@@ -577,7 +577,7 @@ class FormFields extends AbsBase
         $slug = trim(preg_replace('/[^a-z0-9]/i', '-', $name), '-');
         $slug = $root_name ? 'root-'.$slug : $slug;
 
-        $id   = $this->plugin->slug.$this->ns_id_suffix.'-'.$slug;
+        $id   = SLUG_TD.$this->ns_id_suffix.'-'.$slug;
         $name = $root_name ? $name : GLOBAL_NS.$this->ns_name_suffix.'['.$name.']';
 
         $current_value = $this->issetOr($args['current_value'], null, 'string');

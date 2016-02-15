@@ -198,7 +198,7 @@ class UtilsIp extends AbsBase
         # Check the filesystem cache; i.e., tmp directory.
 
         $tmp_dir    = $this->plugin->utils_fs->tmpDir();
-        $cache_dir  = $tmp_dir.'/'.$this->plugin->slug.'/ip-geo-data';
+        $cache_dir  = $tmp_dir.'/'.SLUG_TD.'/ip-geo-data';
         $cache_file = $cache_dir.'/'.sha1($ip).'.json';
 
         if (is_file($cache_file) && filemtime($cache_file) >= strtotime('-30 days')) {

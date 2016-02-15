@@ -44,16 +44,16 @@ class Upgrader extends AbsBase
      */
     protected function maybeUpgrade()
     {
-        if (version_compare($this->prev_version, $this->plugin->version, '>=')) {
+        if (version_compare($this->prev_version, VERSION, '>=')) {
             return; // Nothing to do; already @ latest version.
         }
-        $this->plugin->options['version'] = $this->plugin->version;
+        $this->plugin->options['version'] = VERSION;
         update_option(GLOBAL_NS.'_options', $this->plugin->options);
 
         new UpgraderVs($this->prev_version); // Run version-specific upgrader(s).
 
         $this->plugin->enqueueNotice(// Notify site owner about this upgrade process.
-            sprintf(__('<strong>%1$s&trade;</strong> was automatically recompiled upon detecting an upgrade to v%2$s. Your existing configuration remains :-)', $this->plugin->text_domain), esc_html($this->plugin->name), esc_html($this->plugin->version)),
+            sprintf(__('<strong>%1$s&trade;</strong> was automatically recompiled upon detecting an upgrade to v%2$s. Your existing configuration remains :-)', SLUG_TD), esc_html(NAME), esc_html(VERSION)),
             ['requires_cap' => $this->plugin->auto_recompile_cap, 'push_to_top' => true]
         );
     }

@@ -81,7 +81,7 @@ class UserRegister extends AbsBase
                " AND `user_id` = '0'"; // Not yet associated w/ a user ID.
 
         if ($this->plugin->utils_db->wp->query($sql) === false) {
-            throw new \exception(__('Update failure.', $this->plugin->text_domain));
+            throw new \exception(__('Update failure.', SLUG_TD));
         }
         $sql = 'UPDATE `'.esc_sql($this->plugin->utils_db->prefix().'queue_event_log').'`'.
                " SET `user_id` = '".esc_sql($this->user->ID)."'".// Update.
@@ -90,7 +90,7 @@ class UserRegister extends AbsBase
                " AND `user_id` = '0'"; // Not yet associated w/ a user ID.
 
         if ($this->plugin->utils_db->wp->query($sql) === false) {
-            throw new \exception(__('Update failure.', $this->plugin->text_domain));
+            throw new \exception(__('Update failure.', SLUG_TD));
         }
     }
 }

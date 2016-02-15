@@ -277,7 +277,7 @@ class UtilsMail extends AbsBase
             $sent                = $mail_smtp->send($to, $subject, $message, $headers, $attachments);
             $debug_output_markup = $this->plugin->utils_string->trimHtml($mail_smtp->debugOutputMarkup());
         } else {
-            $debug_output_markup = __('Complete failure; configuration incomplete.', $this->plugin->text_domain);
+            $debug_output_markup = __('Complete failure; configuration incomplete.', SLUG_TD);
         }
         $results_markup = $this->testResultsMarkup($to, $via, $sent, $debug_output_markup);
 
@@ -316,22 +316,22 @@ class UtilsMail extends AbsBase
             $via_markup = esc_html($via); // Convert this to HTML markup.
         }
         if ($sent && !$debug_output_markup) { // There might not be any output in some cases; e.g. if SMTP is not in use.
-            $debug_output_markup = '<em>'.esc_html(__('— please check your email to be sure you received the message —', $this->plugin->text_domain)).'</em>';
+            $debug_output_markup = '<em>'.esc_html(__('— please check your email to be sure you received the message —', SLUG_TD)).'</em>';
         } elseif (!$sent && !$debug_output_markup) { // There might not be any output in some cases; e.g., if SMTP is not in use.
-            $debug_output_markup = '<em>'.esc_html(__('— please seek assistance from your hosting company —', $this->plugin->text_domain)).'</em>';
+            $debug_output_markup = '<em>'.esc_html(__('— please seek assistance from your hosting company —', SLUG_TD)).'</em>';
         }
         $results_markup = '<h4 style="margin:0 0 1em 0;">'.
                           '   '.sprintf(
-                              __('%1$s&trade; sent a test email via %2$s to:', $this->plugin->text_domain),
-                              esc_html($this->plugin->name),
+                              __('%1$s&trade; sent a test email via %2$s to:', SLUG_TD),
+                              esc_html(NAME),
                               $via_markup
                           ).'<br />'.
                           '   &lt;<code>'.esc_html(implode('; ', $to)).'</code>&gt;'.
                           '</h4>';
 
         $results_markup .= '<h4 style="margin:0 0 1em 0;">'.
-                           '   '.__('Email sent successfully?', $this->plugin->text_domain).'<br />'.
-                           '<code>'.esc_html($sent ? __('seems so; please check your email to be sure', $this->plugin->text_domain) : __('no', $this->plugin->text_domain)).'</code>'.
+                           '   '.__('Email sent successfully?', SLUG_TD).'<br />'.
+                           '<code>'.esc_html($sent ? __('seems so; please check your email to be sure', SLUG_TD) : __('no', SLUG_TD)).'</code>'.
                            '</h4>';
 
         $results_markup .= '<hr />'.

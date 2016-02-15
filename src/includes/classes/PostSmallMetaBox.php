@@ -57,11 +57,11 @@ class PostSmallMetaBox extends AbsBase
                 'style'         => 'display:block; font-size:1.5em;',
             ]
         );
-        echo '<div class="'.esc_attr($this->plugin->slug.'-menu-page-area').'">'.
+        echo '<div class="'.esc_attr(SLUG_TD.'-menu-page-area').'">'.
 
              '  '.$total_subs_bubble.// In block format; i.e. 100% width.
 
-             '   <h4 style="margin:1em 0 .25em 0;">'.__('Most Recent Subscriptions', $this->plugin->text_domain).'</h4>'.
+             '   <h4 style="margin:1em 0 .25em 0;">'.__('Most Recent Subscriptions', SLUG_TD).'</h4>'.
              '   '.$this->plugin->utils_markup->lastXSubs(5, $this->post->ID, ['group_by_email' => true]).
 
              '</div>';

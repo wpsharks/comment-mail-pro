@@ -24,7 +24,7 @@ namespace WebSharks\CommentMail\Pro;
  */
 ?>
 <?php // Sets document <title> tag via `%%title%%` replacement code in header.
-echo str_replace('%%title%%', __('Confirmation Request', $plugin->text_domain), $email_header); ?>
+echo str_replace('%%title%%', __('Confirmation Request', SLUG_TD), $email_header); ?>
 
 <?php
 /*
@@ -54,7 +54,7 @@ $sub_confirm_url = $plugin->utils_url->subConfirmUrl($sub->key, $process_list_se
 $sub_name_email_markup = $plugin->utils_markup->nameEmail($sub->fname.' '.$sub->lname, $sub->email);
 
 // Subscriber's last known IP address.
-$sub_last_ip = $sub->last_ip ? $sub->last_ip : __('unknown', $plugin->text_domain);
+$sub_last_ip = $sub->last_ip ? $sub->last_ip : __('unknown', SLUG_TD);
 
 // Subscription last update time "ago"; e.g. `X [seconds/minutes/days/weeks/years] ago`.
 $sub_last_update_time_ago = $plugin->utils_date->i18nUtc('M jS, Y @ g:i a T', $sub->last_update_time);
@@ -63,15 +63,15 @@ $sub_last_update_time_ago = $plugin->utils_date->i18nUtc('M jS, Y @ g:i a T', $s
     <h2 style="margin-top:0; font-weight:normal;">
 
         <?php if ($sub->fname) : // We can call them by name? ?>
-            <?php echo esc_html(sprintf(__('%1$s, please', $plugin->text_domain), esc_html($sub->fname))); ?>
-        <?php else : echo __('Please', $plugin->text_domain); ?>
+            <?php echo esc_html(sprintf(__('%1$s, please', SLUG_TD), esc_html($sub->fname))); ?>
+        <?php else : echo __('Please', SLUG_TD); ?>
         <?php endif; ?>
 
         <a href="<?php echo esc_attr($sub_confirm_url); ?>">
-            <strong><?php echo __('click here to confirm', $plugin->text_domain); ?></strong>
+            <strong><?php echo __('click here to confirm', SLUG_TD); ?></strong>
         </a>
 
-        <?php echo __('your subscription.', $plugin->text_domain); ?>
+        <?php echo __('your subscription.', SLUG_TD); ?>
 
     </h2>
 
@@ -82,13 +82,13 @@ $sub_last_update_time_ago = $plugin->utils_date->i18nUtc('M jS, Y @ g:i a T', $s
         <?php if ($sub_comment) : // Subscribing to a specific comment? ?>
 
             <?php if ($subscribed_to_own_comment) : ?>
-                <?php echo sprintf(__('You are receiving this email because you asked to be notified about replies to <a href="%1$s">your comment</a>; on:', $plugin->text_domain), esc_html($sub_comment_url)); ?>
+                <?php echo sprintf(__('You are receiving this email because you asked to be notified about replies to <a href="%1$s">your comment</a>; on:', SLUG_TD), esc_html($sub_comment_url)); ?>
             <?php else : // The comment was not authored by this subscriber; i.e. it's not their own. ?>
-                <?php echo sprintf(__('You are receiving this email because you asked to be notified about replies to <a href="%1$s">this comment</a>; on:', $plugin->text_domain), esc_html($sub_comment_url)); ?>
+                <?php echo sprintf(__('You are receiving this email because you asked to be notified about replies to <a href="%1$s">this comment</a>; on:', SLUG_TD), esc_html($sub_comment_url)); ?>
             <?php endif; ?>
 
         <?php else : // All comments/replies on this post. ?>
-            <?php echo __('You are receiving this email because you asked to be notified about all comments/replies to:', $plugin->text_domain); ?>
+            <?php echo __('You are receiving this email because you asked to be notified about all comments/replies to:', SLUG_TD); ?>
         <?php endif; ?>
 
     </p>
@@ -116,9 +116,9 @@ $sub_last_update_time_ago = $plugin->utils_date->i18nUtc('M jS, Y @ g:i a T', $s
     </p>
 
     <p style="color:#888888; font-style:italic;">
-        <?php echo __('Note: if you did not make this request, please ignore this email. You will only be subscribed if you confirm.', $plugin->text_domain); ?>
-        <?php echo sprintf(__('This subscription was requested by %1$s; from IP address: <code>%2$s</code> on %3$s.', $plugin->text_domain), $sub_name_email_markup, esc_html($sub_last_ip), esc_html($sub_last_update_time_ago)); ?>
-        <?php echo __('If you need to report any continued abuse, please use the contact info at the bottom of this email.', $plugin->text_domain); ?>
+        <?php echo __('Note: if you did not make this request, please ignore this email. You will only be subscribed if you confirm.', SLUG_TD); ?>
+        <?php echo sprintf(__('This subscription was requested by %1$s; from IP address: <code>%2$s</code> on %3$s.', SLUG_TD), $sub_name_email_markup, esc_html($sub_last_ip), esc_html($sub_last_update_time_ago)); ?>
+        <?php echo __('If you need to report any continued abuse, please use the contact info at the bottom of this email.', SLUG_TD); ?>
     </p>
 
 <?php echo $email_footer; ?>

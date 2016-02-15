@@ -109,7 +109,7 @@ class ExportSubs extends AbsBase
 
         $output_file_args = [
             'data'                => $data,
-            'file_name'           => $this->plugin->slug.'-subs-'.$from.'-'.$to.'.csv',
+            'file_name'           => SLUG_TD.'-subs-'.$from.'-'.$to.'.csv',
             'content_type'        => 'text/csv; charset=UTF-8',
             'content_disposition' => 'attachment',
         ];

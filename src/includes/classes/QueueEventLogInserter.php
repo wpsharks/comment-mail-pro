@@ -97,7 +97,7 @@ class QueueEventLogInserter extends AbsBase
             return; // Not applicable.
         }
         if (!$this->plugin->utils_db->wp->insert($this->plugin->utils_db->prefix().'queue_event_log', $this->entry)) {
-            throw new \exception(__('Insertion failure.', $this->plugin->text_domain));
+            throw new \exception(__('Insertion failure.', SLUG_TD));
         }
     }
 }

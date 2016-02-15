@@ -54,7 +54,7 @@ class Installer extends AbsBase
                 $_sql = $this->plugin->utils_db->fulltextCompat($_sql);
 
                 if (!$this->plugin->utils_db->wp->query($_sql)) { // Table creation failure?
-                    throw new \exception(sprintf(__('DB table creation failure. Table: `%1$s`. SQL: `%2$s`.', $this->plugin->text_domain), $_sql_file_table, $_sql));
+                    throw new \exception(sprintf(__('DB table creation failure. Table: `%1$s`. SQL: `%2$s`.', SLUG_TD), $_sql_file_table, $_sql));
                 }
             }
         }
@@ -73,8 +73,8 @@ class Installer extends AbsBase
         }
         $notice_markup = $this->plugin->utils_fs->inlineIconSvg().
                          ' '.sprintf(
-                             __('%1$s&trade; installed successfully! Please <a href="%2$s"><strong>click here to configure</strong></a> basic options.', $this->plugin->text_domain),
-                             esc_html($this->plugin->name),
+                             __('%1$s&trade; installed successfully! Please <a href="%2$s"><strong>click here to configure</strong></a> basic options.', SLUG_TD),
+                             esc_html(NAME),
                              esc_attr($this->plugin->utils_url->mainMenuPageOnly())
                          );
         $this->plugin->enqueueUserNotice($notice_markup); // A quick reminder to configure options.

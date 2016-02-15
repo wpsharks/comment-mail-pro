@@ -32,8 +32,8 @@ class MenuPageSubsTable extends MenuPageTableBase
         $args = [
             'singular_name'  => 'subscription',
             'plural_name'    => 'subscriptions',
-            'singular_label' => __('subscription', $plugin->text_domain),
-            'plural_label'   => __('subscriptions', $plugin->text_domain),
+            'singular_label' => __('subscription', SLUG_TD),
+            'plural_label'   => __('subscriptions', SLUG_TD),
             'screen'         => $plugin->menu_page_hooks[GLOBAL_NS.'_subs'],
         ];
         parent::__construct($args); // Parent constructor.
@@ -57,30 +57,30 @@ class MenuPageSubsTable extends MenuPageTableBase
         $columns = [
             'cb' => '1', // Include checkboxes.
 
-            'email' => __('Subscriber', $plugin->text_domain),
-            'fname' => __('First Name', $plugin->text_domain),
-            'lname' => __('Last Name', $plugin->text_domain),
+            'email' => __('Subscriber', SLUG_TD),
+            'fname' => __('First Name', SLUG_TD),
+            'lname' => __('Last Name', SLUG_TD),
 
-            'user_id'    => __('WP User ID', $plugin->text_domain),
-            'post_id'    => __('Post', $plugin->text_domain),
-            'comment_id' => __('Comment', $plugin->text_domain),
+            'user_id'    => __('WP User ID', SLUG_TD),
+            'post_id'    => __('Post', SLUG_TD),
+            'comment_id' => __('Comment', SLUG_TD),
 
-            'deliver' => __('Delivery', $plugin->text_domain),
-            'status'  => __('Status', $plugin->text_domain),
+            'deliver' => __('Delivery', SLUG_TD),
+            'status'  => __('Status', SLUG_TD),
 
-            'insertion_time'   => __('Subscr. Time', $plugin->text_domain),
-            'last_update_time' => __('Last Update', $plugin->text_domain),
+            'insertion_time'   => __('Subscr. Time', SLUG_TD),
+            'last_update_time' => __('Last Update', SLUG_TD),
 
-            'insertion_ip'      => __('Subscr. IP', $plugin->text_domain),
-            'insertion_region'  => __('IP Region', $plugin->text_domain),
-            'insertion_country' => __('IP Country', $plugin->text_domain),
+            'insertion_ip'      => __('Subscr. IP', SLUG_TD),
+            'insertion_region'  => __('IP Region', SLUG_TD),
+            'insertion_country' => __('IP Country', SLUG_TD),
 
-            'last_ip'      => __('Last IP', $plugin->text_domain),
-            'last_region'  => __('Last IP Region', $plugin->text_domain),
-            'last_country' => __('Last IP Country', $plugin->text_domain),
+            'last_ip'      => __('Last IP', SLUG_TD),
+            'last_region'  => __('Last IP Region', SLUG_TD),
+            'last_country' => __('Last IP Country', SLUG_TD),
 
-            'key' => __('Key', $plugin->text_domain),
-            'ID'  => __('ID', $plugin->text_domain),
+            'key' => __('Key', SLUG_TD),
+            'ID'  => __('ID', SLUG_TD),
         ];
         if (!$plugin->options['geo_location_tracking_enable']) {
             foreach ($columns as $_key => $_column) {
@@ -234,7 +234,7 @@ class MenuPageSubsTable extends MenuPageTableBase
             'email_style' => 'font-weight:normal;',
         ];
         $name       = $item->fname.' '.$item->lname; // Concatenate.
-        $email_info = '<i class="'.esc_attr('si si-'.$this->plugin->slug.'-one').'"></i>'.
+        $email_info = '<i class="'.esc_attr('si si-'.SLUG_TD.'-one').'"></i>'.
                            ' '.$this->plugin->utils_markup->nameEmail($name, $item->email, $name_email_args);
 
         $edit_url      = $this->plugin->utils_url->editSubShort($item->ID);
@@ -246,23 +246,23 @@ class MenuPageSubsTable extends MenuPageTableBase
         $delete_url    = $this->plugin->utils_url->tableBulkAction($this->plural_name, [$item->ID], 'delete');
 
         $row_actions = [
-            'edit' => '<a href="'.esc_attr($edit_url).'">'.__('Edit Subscr.', $this->plugin->text_domain).'</a>',
+            'edit' => '<a href="'.esc_attr($edit_url).'">'.__('Edit Subscr.', SLUG_TD).'</a>',
 
             'reconfirm' => '<a href="#"'.// Depends on `menu-pages.js`.
                            ' data-pmp-action="'.esc_attr($reconfirm_url).'"'.// The action URL.
-                           ' data-pmp-confirmation="'.esc_attr(__('Resend email confirmation link? Are you sure?', $this->plugin->text_domain)).'">'.
-                           '  '.__('Reconfirm', $this->plugin->text_domain).
+                           ' data-pmp-confirmation="'.esc_attr(__('Resend email confirmation link? Are you sure?', SLUG_TD)).'">'.
+                           '  '.__('Reconfirm', SLUG_TD).
                            '</a>',
 
-            'confirm'   => '<a href="'.esc_attr($confirm_url).'">'.__('Subscribe', $this->plugin->text_domain).'</a>',
-            'unconfirm' => '<a href="'.esc_attr($unconfirm_url).'">'.__('Unconfirm', $this->plugin->text_domain).'</a>',
-            'suspend'   => '<a href="'.esc_attr($suspend_url).'">'.__('Suspend', $this->plugin->text_domain).'</a>',
-            'trash'     => '<a href="'.esc_attr($trash_url).'" title="'.esc_attr(__('Trash', $this->plugin->text_domain)).'"><i class="fa fa-trash-o"></i></a>',
+            'confirm'   => '<a href="'.esc_attr($confirm_url).'">'.__('Subscribe', SLUG_TD).'</a>',
+            'unconfirm' => '<a href="'.esc_attr($unconfirm_url).'">'.__('Unconfirm', SLUG_TD).'</a>',
+            'suspend'   => '<a href="'.esc_attr($suspend_url).'">'.__('Suspend', SLUG_TD).'</a>',
+            'trash'     => '<a href="'.esc_attr($trash_url).'" title="'.esc_attr(__('Trash', SLUG_TD)).'"><i class="fa fa-trash-o"></i></a>',
 
             'delete' => '<a href="#"'.// Depends on `menu-pages.js`.
                         ' data-pmp-action="'.esc_attr($delete_url).'"'.// The action URL.
-                        ' data-pmp-confirmation="'.esc_attr(__('Delete permanently? Are you sure?', $this->plugin->text_domain)).'"'.
-                        ' title="'.esc_attr(__('Delete', $this->plugin->text_domain)).'">'.
+                        ' data-pmp-confirmation="'.esc_attr(__('Delete permanently? Are you sure?', SLUG_TD)).'"'.
+                        ' title="'.esc_attr(__('Delete', SLUG_TD)).'">'.
                         '  <i class="fa fa-times-circle"></i>'.
                         '</a>',
         ];
@@ -407,12 +407,12 @@ class MenuPageSubsTable extends MenuPageTableBase
     protected function get_bulk_actions()
     { // @codingStandardsIgnoreEnd
         return [
-            'reconfirm' => __('Reconfirm', $this->plugin->text_domain),
-            'confirm'   => __('Confirm', $this->plugin->text_domain),
-            'unconfirm' => __('Unconfirm', $this->plugin->text_domain),
-            'suspend'   => __('Suspend', $this->plugin->text_domain),
-            'trash'     => __('Trash', $this->plugin->text_domain),
-            'delete'    => __('Delete', $this->plugin->text_domain),
+            'reconfirm' => __('Reconfirm', SLUG_TD),
+            'confirm'   => __('Confirm', SLUG_TD),
+            'unconfirm' => __('Unconfirm', SLUG_TD),
+            'suspend'   => __('Suspend', SLUG_TD),
+            'trash'     => __('Trash', SLUG_TD),
+            'delete'    => __('Delete', SLUG_TD),
         ];
     }
 

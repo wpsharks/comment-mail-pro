@@ -876,11 +876,8 @@ class UtilsUrl extends AbsBase
      */
     public function productPage($scheme = null)
     {
-        if (!empty($this->plugin->product_url)) {
-            $url = $this->plugin->product_url;
-        } else { // Provided by plugin class?
-            $url = 'http://www.websharks-inc.com/product/'.urlencode($this->plugin->slug).'/';
-        }
+        $url = 'http://'.DOMAIN;
+
         return isset($scheme) ? $this->setScheme($url, $scheme) : $url;
     }
 
@@ -896,11 +893,8 @@ class UtilsUrl extends AbsBase
      */
     public function subscribePage($scheme = null)
     {
-        if (!empty($this->plugin->subscribe_url)) {
-            $url = $this->plugin->subscribe_url;
-        } else { // Provided by plugin class?
-            $url = 'http://www.websharks-inc.com/r/'.urlencode($this->plugin->slug).'-subscribe/';
-        }
+        $url = 'http://'.DOMAIN.'/r/subscribe';
+
         return isset($scheme) ? $this->setScheme($url, $scheme) : $url;
     }
 
@@ -914,13 +908,10 @@ class UtilsUrl extends AbsBase
      *
      * @return string Subscribe page URL; normally at WebSharks™.
      */
-    public function testerPage($scheme = null)
+    public function betaTesterPage($scheme = null)
     {
-        if (!empty($this->plugin->tester_url)) {
-            $url = $this->plugin->tester_url;
-        } else { // Provided by plugin class?
-            $url = 'http://www.comment-mail.com/beta%20testers';
-        }
+        $url = 'http://'.DOMAIN.'/beta-testers';
+
         return isset($scheme) ? $this->setScheme($url, $scheme) : $url;
     }
 
@@ -938,7 +929,7 @@ class UtilsUrl extends AbsBase
     public function to($file = '', $scheme = null)
     {
         if (is_null($plugin_dir_url = &$this->staticKey(__FUNCTION__, 'plugin_dir_url'))) {
-            $plugin_dir_url = rtrim(plugin_dir_url($this->plugin->file), '/');
+            $plugin_dir_url = rtrim(plugin_dir_url(PLUGIN_FILE), '/');
         }
         return $this->setScheme($plugin_dir_url.(string) $file, $scheme);
     }

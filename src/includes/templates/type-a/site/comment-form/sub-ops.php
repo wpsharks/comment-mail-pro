@@ -48,33 +48,33 @@ namespace WebSharks\CommentMail\Pro;
 
     <label for="<?php echo esc_attr($sub_type_id); ?>" class="cso-sub-type">
         <span class="cso-icon"><?php echo $inline_icon_svg; ?></span>
-        <?php echo __('Receive Email Notifications?', $plugin->text_domain); ?>
+        <?php echo __('Receive Email Notifications?', SLUG_TD); ?>
     </label>
 
-    <select id="<?php echo esc_attr($sub_type_id); ?>" name="<?php echo esc_attr($sub_type_name); ?>" class="cso-sub-type form-control" title="<?php echo __('Receive Notifications?', $plugin->text_domain); ?>">
-        <option value=""<?php selected('', $current->sub_type); ?>><?php echo __('no, do not subscribe', $plugin->text_domain); ?></option>
-        <option value="comment"<?php selected('comment', $current->sub_type); ?>><?php echo __('yes, replies to my comment', $plugin->text_domain); ?></option>
-        <option value="comments"<?php selected('comments', $current->sub_type); ?>><?php echo __('yes, all comments/replies', $plugin->text_domain); ?></option>
+    <select id="<?php echo esc_attr($sub_type_id); ?>" name="<?php echo esc_attr($sub_type_name); ?>" class="cso-sub-type form-control" title="<?php echo __('Receive Notifications?', SLUG_TD); ?>">
+        <option value=""<?php selected('', $current->sub_type); ?>><?php echo __('no, do not subscribe', SLUG_TD); ?></option>
+        <option value="comment"<?php selected('comment', $current->sub_type); ?>><?php echo __('yes, replies to my comment', SLUG_TD); ?></option>
+        <option value="comments"<?php selected('comments', $current->sub_type); ?>><?php echo __('yes, all comments/replies', SLUG_TD); ?></option>
     </select>
 
     <?php // TIP: this is optional. If you exclude this select menu, the value will automatically default to `asap`. ?>
-    <select id="<?php echo esc_attr($sub_deliver_id); ?>" name="<?php echo esc_attr($sub_deliver_name); ?>" class="cso-sub-deliver form-control" title="<?php echo __('Notify Me', $plugin->text_domain); ?>">
-        <option value="asap"<?php selected('asap', $current->sub_deliver); ?>><?php echo __('instantly', $plugin->text_domain); ?></option>
-        <option value="hourly"<?php selected('hourly', $current->sub_deliver); ?>><?php echo __('hourly digest', $plugin->text_domain); ?></option>
-        <option value="daily"<?php selected('daily', $current->sub_deliver); ?>><?php echo __('daily digest', $plugin->text_domain); ?></option>
-        <option value="weekly"<?php selected('weekly', $current->sub_deliver); ?>><?php echo __('weekly digest', $plugin->text_domain); ?></option>
+    <select id="<?php echo esc_attr($sub_deliver_id); ?>" name="<?php echo esc_attr($sub_deliver_name); ?>" class="cso-sub-deliver form-control" title="<?php echo __('Notify Me', SLUG_TD); ?>">
+        <option value="asap"<?php selected('asap', $current->sub_deliver); ?>><?php echo __('instantly', SLUG_TD); ?></option>
+        <option value="hourly"<?php selected('hourly', $current->sub_deliver); ?>><?php echo __('hourly digest', SLUG_TD); ?></option>
+        <option value="daily"<?php selected('daily', $current->sub_deliver); ?>><?php echo __('daily digest', SLUG_TD); ?></option>
+        <option value="weekly"<?php selected('weekly', $current->sub_deliver); ?>><?php echo __('weekly digest', SLUG_TD); ?></option>
     </select>
 
   <div class="cso-sub-list">
         <?php if ($plugin->options['list_server_enable'] && $plugin->options['list_server']) : ?>
-            <input type="checkbox" id="<?php echo esc_attr($sub_list_id); ?>" name="<?php echo esc_attr($sub_list_name); ?>" value="1" /> <?php echo __('Yes, I want to receive blog updates also.', $plugin->text_domain); ?>
+            <input type="checkbox" id="<?php echo esc_attr($sub_list_id); ?>" name="<?php echo esc_attr($sub_list_name); ?>" value="1" /> <?php echo __('Yes, I want to receive blog updates also.', SLUG_TD); ?>
         <?php endif; ?>
     </div>
 
     <div class="cso-links">
-        <span class="cso-link-new"><?php echo sprintf(__('Or, you can <a href="%1$s">subscribe without commenting</a>.', $plugin->text_domain), esc_attr($sub_new_url)); ?></span>
+        <span class="cso-link-new"><?php echo sprintf(__('Or, you can <a href="%1$s">subscribe without commenting</a>.', SLUG_TD), esc_attr($sub_new_url)); ?></span>
         <?php if ($current->sub_email) : // TIP: this is optional. If you exclude this, subscribers can still view their summary via emails they receive. ?>
-            <span class="cso-link-summary">~ <a href="<?php echo esc_attr($sub_summary_url); ?>"><?php echo __('manage my subscriptions', $plugin->text_domain); ?></a></span>
+            <span class="cso-link-summary">~ <a href="<?php echo esc_attr($sub_summary_url); ?>"><?php echo __('manage my subscriptions', SLUG_TD); ?></a></span>
         <?php endif; ?>
     </div>
 

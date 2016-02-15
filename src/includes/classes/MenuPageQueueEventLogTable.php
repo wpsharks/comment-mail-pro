@@ -32,8 +32,8 @@ class MenuPageQueueEventLogTable extends MenuPageTableBase
         $args = [
             'singular_name'  => 'queue_event_log_entry',
             'plural_name'    => 'queue_event_log_entries',
-            'singular_label' => __('queue event log entry', $plugin->text_domain),
-            'plural_label'   => __('queue event log entries', $plugin->text_domain),
+            'singular_label' => __('queue event log entry', SLUG_TD),
+            'plural_label'   => __('queue event log entries', SLUG_TD),
             'screen'         => $plugin->menu_page_hooks[GLOBAL_NS.'_queue_event_log'],
         ];
         parent::__construct($args); // Parent constructor.
@@ -56,30 +56,30 @@ class MenuPageQueueEventLogTable extends MenuPageTableBase
 
         $columns = [
             'cb' => '1', // Include checkboxes.
-            'ID' => __('Entry', $plugin->text_domain),
+            'ID' => __('Entry', SLUG_TD),
 
-            'time'  => __('Time', $plugin->text_domain),
-            'event' => __('Event', $plugin->text_domain),
+            'time'  => __('Time', SLUG_TD),
+            'event' => __('Event', SLUG_TD),
 
-            'queue_id'     => __('Queue ID', $plugin->text_domain),
-            'dby_queue_id' => __('Digested by Queue ID', $plugin->text_domain),
+            'queue_id'     => __('Queue ID', SLUG_TD),
+            'dby_queue_id' => __('Digested by Queue ID', SLUG_TD),
 
-            'sub_id' => __('Subscr. ID', $plugin->text_domain),
+            'sub_id' => __('Subscr. ID', SLUG_TD),
 
-            'user_id'           => __('WP User ID', $plugin->text_domain),
-            'post_id'           => __('Subscr. to Post ID', $plugin->text_domain),
-            'comment_parent_id' => __('Subscr. to Comment ID', $plugin->text_domain),
-            'comment_id'        => __('Regarding Comment ID', $plugin->text_domain),
+            'user_id'           => __('WP User ID', SLUG_TD),
+            'post_id'           => __('Subscr. to Post ID', SLUG_TD),
+            'comment_parent_id' => __('Subscr. to Comment ID', SLUG_TD),
+            'comment_id'        => __('Regarding Comment ID', SLUG_TD),
 
-            'fname' => __('Subscr. First Name', $plugin->text_domain),
-            'lname' => __('Subscr. Last Name', $plugin->text_domain),
-            'email' => __('Subscr. Email', $plugin->text_domain),
+            'fname' => __('Subscr. First Name', SLUG_TD),
+            'lname' => __('Subscr. Last Name', SLUG_TD),
+            'email' => __('Subscr. Email', SLUG_TD),
 
-            'ip'      => __('Subscr. IP', $plugin->text_domain),
-            'region'  => __('Subscr. IP Region', $plugin->text_domain),
-            'country' => __('Subscr. IP Country', $plugin->text_domain),
+            'ip'      => __('Subscr. IP', SLUG_TD),
+            'region'  => __('Subscr. IP Region', SLUG_TD),
+            'country' => __('Subscr. IP Country', SLUG_TD),
 
-            'status' => __('Subscr. Status', $plugin->text_domain),
+            'status' => __('Subscr. Status', SLUG_TD),
         ];
         if (!$plugin->options['geo_location_tracking_enable']) {
             foreach ($columns as $_key => $_column) {
@@ -226,8 +226,8 @@ class MenuPageQueueEventLogTable extends MenuPageTableBase
             'delete' => '<a href="#"'.// Depends on `menu-pages.js`.
                         ' data-pmp-action="'.esc_attr($delete_url).'"'.// The action URL.
                         ' data-pmp-confirmation="'.esc_attr($this->plugin->utils_i18n->logEntryJsDeletionConfirmationWarning()).'"'.
-                        ' title="'.esc_attr(__('Delete Queue Event Log Entry', $this->plugin->text_domain)).'">'.
-                        '  <i class="fa fa-times-circle"></i> '.__('Delete', $this->plugin->text_domain).
+                        ' title="'.esc_attr(__('Delete Queue Event Log Entry', SLUG_TD)).'">'.
+                        '  <i class="fa fa-times-circle"></i> '.__('Delete', SLUG_TD).
                         '</a>',
         ];
         return $id_info.$this->row_actions($row_actions);
@@ -396,7 +396,7 @@ class MenuPageQueueEventLogTable extends MenuPageTableBase
     protected function get_bulk_actions()
     { // @codingStandardsIgnoreEnd
         return [
-            'delete' => __('Delete', $this->plugin->text_domain),
+            'delete' => __('Delete', SLUG_TD),
         ];
     }
 

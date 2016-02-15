@@ -83,7 +83,7 @@ class UpgraderVs extends AbsBase
             || $this->plugin->utils_db->wp->query($sql2) === false
             || $this->plugin->utils_db->wp->query($sql3) === false
         ) {
-            throw new \exception(__('Query failure.', $this->plugin->text_domain));
+            throw new \exception(__('Query failure.', SLUG_TD));
         }
     }
 }

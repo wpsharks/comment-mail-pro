@@ -60,10 +60,10 @@ class SsoLinkedin extends SsoServiceBase
     {
         try { // Catch exceptions and log them for debugging.
             if ($this->request_args['oauth_problem'] === 'user_refused') {
-                throw new \exception(__('Missing oAuth code; user refusal.', $this->plugin->text_domain));
+                throw new \exception(__('Missing oAuth code; user refusal.', SLUG_TD));
             }
             if (!$this->request_args['code']) { // Must have this.
-                throw new \exception(__('Missing oAuth code.', $this->plugin->text_domain));
+                throw new \exception(__('Missing oAuth code.', SLUG_TD));
             }
             $service_factory = new \OAuth\ServiceFactory();
             $credentials     = new \OAuth\Common\Consumer\Credentials(
@@ -81,10 +81,10 @@ class SsoLinkedin extends SsoServiceBase
             # Acquire and validate data received from this service.
 
             if (!is_object($service_user = json_decode($service->request('/people/~:(id,first-name,last-name,formatted-name,email-address)?format=json')))) {
-                throw new \exception(__('Failed to acquire user info.', $this->plugin->text_domain));
+                throw new \exception(__('Failed to acquire user info.', SLUG_TD));
             }
             if (empty($service_user->id) || !($sso_id = (string) $service_user->id)) {
-                throw new \exception(__('Failed to obtain user.', $this->plugin->text_domain));
+                throw new \exception(__('Failed to obtain user.', SLUG_TD));
             }
             foreach (['firstName', 'lastName', 'formattedName', 'emailAddress'] as $_prop) {
                 if (!isset($service_user->{$_prop})) {

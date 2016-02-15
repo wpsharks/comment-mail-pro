@@ -146,10 +146,10 @@ class MailSmtp extends AbsBase
         $this->mailer = new \PHPMailer(true);
 
         if (!$this->plugin->options['smtp_enable']) {
-            throw new \exception(__('SMTP not enabled.', $this->plugin->text_domain));
+            throw new \exception(__('SMTP not enabled.', SLUG_TD));
         }
         if (!$this->plugin->options['smtp_host'] || !$this->plugin->options['smtp_port']) {
-            throw new \exception(__('SMTP host/port missing.', $this->plugin->text_domain));
+            throw new \exception(__('SMTP host/port missing.', SLUG_TD));
         }
     }
 
@@ -308,7 +308,7 @@ class MailSmtp extends AbsBase
             $this->message_text = $this->message;
         }
         if (!$this->message_text) { // Set a default plain text alternative in this case.
-            $this->message_text = __('To view this email message, open it in a program that understands HTML!', $this->plugin->text_domain);
+            $this->message_text = __('To view this email message, open it in a program that understands HTML!', SLUG_TD);
         }
         // Some of the above details may be overridden by headers parsed here; e.g. `from_name`, `from_email`, `reply_to_email`, or `recipients`.
         $this->headers = $this->plugin->utils_mail->parseHeadersDeep($headers, $this->from_name, $this->from_email, $this->reply_to_email, $this->recipients);

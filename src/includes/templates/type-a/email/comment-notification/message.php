@@ -24,7 +24,7 @@ namespace WebSharks\CommentMail\Pro;
  */
 ?>
 <?php // Sets document <title> tag via `%%title%%` replacement code in header.
-echo str_replace('%%title%%', __('Comment Notification(s)', $plugin->text_domain), $email_header); ?>
+echo str_replace('%%title%%', __('Comment Notification(s)', SLUG_TD), $email_header); ?>
 
 <?php
 /*
@@ -51,7 +51,7 @@ $subscribed_to_own_comment = $sub_comment && strcasecmp($sub_comment->comment_au
 $sub_name_email_markup = $plugin->utils_markup->nameEmail($sub->fname.' '.$sub->lname, $sub->email);
 
 // Subscriber's last known IP address.
-$sub_last_ip = $sub->last_ip ? $sub->last_ip : __('unknown', $plugin->text_domain);
+$sub_last_ip = $sub->last_ip ? $sub->last_ip : __('unknown', SLUG_TD);
 
 // Subscription last update time "ago"; e.g. `X [seconds/minutes/days/weeks/years] ago`.
 $sub_last_update_time_ago = $plugin->utils_date->i18nUtc('M jS, Y @ g:i a T', $sub->last_update_time);
@@ -68,13 +68,13 @@ $replies_via_email_enable = $sub_post_comments_open && $plugin->options['replies
             <?php if ($sub_comment) : // Subscribed to a specific comment? ?>
 
                 <?php if ($subscribed_to_own_comment) : ?>
-                    <?php echo sprintf(__('New Replies to Your Comment</a> on <em>%1$s</em>', $plugin->text_domain), esc_html($sub_post_title_clip)); ?>
+                    <?php echo sprintf(__('New Replies to Your Comment</a> on <em>%1$s</em>', SLUG_TD), esc_html($sub_post_title_clip)); ?>
                 <?php else : // The comment was not authored by this subscriber; i.e. it's not their own. ?>
-                    <?php echo sprintf(__('New Replies to <a href="%1$s">a Comment</a> on <em>%2$s</em>', $plugin->text_domain), esc_attr($sub_comment_url), esc_html($sub_post_title_clip)); ?>
+                    <?php echo sprintf(__('New Replies to <a href="%1$s">a Comment</a> on <em>%2$s</em>', SLUG_TD), esc_attr($sub_comment_url), esc_html($sub_post_title_clip)); ?>
                 <?php endif; ?>
 
             <?php else : // All comments/replies on this post. ?>
-                <?php echo sprintf(__('New Comments on <em><a href="%1$s">%2$s</a></em>', $plugin->text_domain), esc_attr($sub_post_comments_url), esc_html($sub_post_title_clip)); ?>
+                <?php echo sprintf(__('New Comments on <em><a href="%1$s">%2$s</a></em>', SLUG_TD), esc_attr($sub_post_comments_url), esc_html($sub_post_title_clip)); ?>
             <?php endif; ?>
 
         <?php else : // There's just a single comment/reply in this notification. ?>
@@ -82,13 +82,13 @@ $replies_via_email_enable = $sub_post_comments_open && $plugin->options['replies
             <?php if ($sub_comment) : // Subscribed to a specific comment? ?>
 
                 <?php if ($subscribed_to_own_comment) : ?>
-                    <?php echo sprintf(__('New Reply to Your Comment</a> on <em>%1$s</em>', $plugin->text_domain), esc_html($sub_post_title_clip)); ?>
+                    <?php echo sprintf(__('New Reply to Your Comment</a> on <em>%1$s</em>', SLUG_TD), esc_html($sub_post_title_clip)); ?>
                 <?php else : // The comment was not authored by this subscriber; i.e. it's not their own. ?>
-                    <?php echo sprintf(__('New Reply to <a href="%1$s">a Comment</a> on <em>%2$s</em>', $plugin->text_domain), esc_attr($sub_comment_url), esc_html($sub_post_title_clip)); ?>
+                    <?php echo sprintf(__('New Reply to <a href="%1$s">a Comment</a> on <em>%2$s</em>', SLUG_TD), esc_attr($sub_comment_url), esc_html($sub_post_title_clip)); ?>
                 <?php endif; ?>
 
             <?php else : // All comments/replies on this post ID. ?>
-                <?php echo sprintf(__('New Comment on <em><a href="%1$s">%2$s</a></em>', $plugin->text_domain), esc_attr($sub_post_comments_url), esc_html($sub_post_title_clip)); ?>
+                <?php echo sprintf(__('New Comment on <em><a href="%1$s">%2$s</a></em>', SLUG_TD), esc_attr($sub_post_comments_url), esc_html($sub_post_title_clip)); ?>
             <?php endif; ?>
 
         <?php endif; ?>
@@ -130,11 +130,11 @@ $replies_via_email_enable = $sub_post_comments_open && $plugin->options['replies
 
             <p style="font-weight: bold;">
                 <?php if ($_comment_reply_to_own_comment) : ?>
-                    <?php echo sprintf(__('In response to <a href="%1$s">your comment</a>', $plugin->text_domain), esc_attr($_comment_parent_url)); ?>
+                    <?php echo sprintf(__('In response to <a href="%1$s">your comment</a>', SLUG_TD), esc_attr($_comment_parent_url)); ?>
                 <?php else : ?>
-                    <?php echo sprintf(__('In response to <a href="%1$s">this comment</a>', $plugin->text_domain), esc_attr($_comment_parent_url)); ?>
+                    <?php echo sprintf(__('In response to <a href="%1$s">this comment</a>', SLUG_TD), esc_attr($_comment_parent_url)); ?>
                     <?php if ($_comment_parent->comment_author) : ?>
-                        <?php echo sprintf(__(' posted by %1$s', $plugin->text_domain), esc_html($_comment_parent->comment_author)); ?>
+                        <?php echo sprintf(__(' posted by %1$s', SLUG_TD), esc_html($_comment_parent->comment_author)); ?>
                     <?php endif; ?>
                 <?php endif; ?>
                 <?php echo ':'; ?>
@@ -144,9 +144,9 @@ $replies_via_email_enable = $sub_post_comments_open && $plugin->options['replies
             </p>
             <p style="font-size:110%; font-weight:bold;">
                 <?php if ($_comment->comment_author) : ?>
-                    <?php echo sprintf(__('%1$s added this reply %2$s.', $plugin->text_domain), esc_html($_comment->comment_author), esc_html($_comment_time_ago)); ?>
+                    <?php echo sprintf(__('%1$s added this reply %2$s.', SLUG_TD), esc_html($_comment->comment_author), esc_html($_comment_time_ago)); ?>
                 <?php else : // The site is not collecting comment author names. ?>
-                    <?php echo sprintf(__('This reply was posted %1$s.', $plugin->text_domain), esc_html($_comment_time_ago)); ?>
+                    <?php echo sprintf(__('This reply was posted %1$s.', SLUG_TD), esc_html($_comment_time_ago)); ?>
                 <?php endif; ?>
             </p>
             <p style="font-size:130%;">
@@ -154,21 +154,21 @@ $replies_via_email_enable = $sub_post_comments_open && $plugin->options['replies
             </p>
             <p>
                 <a href="<?php echo esc_attr($_comment_url); ?>">
-                    <?php echo __('Continue reading', $plugin->text_domain); ?>
+                    <?php echo __('Continue reading', SLUG_TD); ?>
                 </a>
                 <?php if ($sub_post_comments_open) : ?>
                     | <a href="<?php echo esc_attr($_comment_reply_url); ?>">
                         <?php if ($_comment->comment_author) : ?>
-                            <?php echo __('Reply to', $plugin->text_domain).' '.esc_html($_comment->comment_author); ?>
+                            <?php echo __('Reply to', SLUG_TD).' '.esc_html($_comment->comment_author); ?>
                         <?php else : ?>
-                            <?php echo __('Reply', $plugin->text_domain); ?>
+                            <?php echo __('Reply', SLUG_TD); ?>
                         <?php endif; ?>
                     </a>
                     <?php if ($replies_via_email_enable) : ?>
                         <?php if ($is_digest) : // Marker only needed in digests. ?>
-                            <small><em><?php echo sprintf(__('— or reply to this email &amp; start your message with: <code>%1$s</code>', $plugin->text_domain), esc_html($_comment_rve_irt_marker)); ?></em></small>
+                            <small><em><?php echo sprintf(__('— or reply to this email &amp; start your message with: <code>%1$s</code>', SLUG_TD), esc_html($_comment_rve_irt_marker)); ?></em></small>
                         <?php else : // The `Reply-To:` field in the email will suffice in other cases; i.e. there is only one comment in this notification. ?>
-                            <small><em><?php echo __('— or simply reply to this email', $plugin->text_domain); ?></em></small>
+                            <small><em><?php echo __('— or simply reply to this email', SLUG_TD); ?></em></small>
                         <?php endif; ?>
                     <?php endif; ?>
                 <?php endif; ?>
@@ -178,9 +178,9 @@ $replies_via_email_enable = $sub_post_comments_open && $plugin->options['replies
 
             <p style="font-size:110%; font-weight:bold;">
                 <?php if ($_comment->comment_author) : ?>
-                    <?php echo sprintf(__('%1$s posted this comment %2$s.', $plugin->text_domain), esc_html($_comment->comment_author), esc_html($_comment_time_ago)); ?>
+                    <?php echo sprintf(__('%1$s posted this comment %2$s.', SLUG_TD), esc_html($_comment->comment_author), esc_html($_comment_time_ago)); ?>
                 <?php else : // The site is not collecting comment author names. ?>
-                    <?php echo sprintf(__('This comment was posted %1$s.', $plugin->text_domain), esc_html($_comment_time_ago)); ?>
+                    <?php echo sprintf(__('This comment was posted %1$s.', SLUG_TD), esc_html($_comment_time_ago)); ?>
                 <?php endif; ?>
             </p>
             <p style="font-size:130%;">
@@ -188,22 +188,22 @@ $replies_via_email_enable = $sub_post_comments_open && $plugin->options['replies
             </p>
             <p>
                 <a href="<?php echo esc_attr($_comment_url); ?>">
-                    <?php echo __('Continue reading', $plugin->text_domain); ?>
+                    <?php echo __('Continue reading', SLUG_TD); ?>
                 </a>
                 <?php if ($sub_post_comments_open) : ?>
                     | <a href="<?php echo esc_attr($_comment_reply_url); ?>">
                         <?php if ($_comment->comment_author) : ?>
-                            <?php echo __('Reply to', $plugin->text_domain).' '.esc_html($_comment->comment_author); ?>
+                            <?php echo __('Reply to', SLUG_TD).' '.esc_html($_comment->comment_author); ?>
                         <?php else : ?>
-                            <?php echo __('Reply', $plugin->text_domain); ?>
+                            <?php echo __('Reply', SLUG_TD); ?>
                         <?php endif; ?>
                     </a>
                     <?php if ($replies_via_email_enable) : ?>
                         <?php if ($is_digest) : // Marker only needed in digests. ?>
-                            <small><em><?php echo sprintf(__('— or reply to this email &amp; start your message with: <code>%1$s</code>', $plugin->text_domain), esc_html($_comment_rve_irt_marker)); ?></em></small>
+                            <small><em><?php echo sprintf(__('— or reply to this email &amp; start your message with: <code>%1$s</code>', SLUG_TD), esc_html($_comment_rve_irt_marker)); ?></em></small>
                         <?php else : // The `Reply-To:` field in the email will suffice in other cases; i.e. there is only one comment in this notification. ?>
-                            <small><em><?php echo __('— or simply reply to this email', $plugin->text_domain); ?></em></small>
-                            <small><strong><?php echo __('Please Note:', $plugin->text_domain); ?></strong> <em><?php echo __('Your reply will be posted publicly and immediately.', $plugin->text_domain); ?></em></small>
+                            <small><em><?php echo __('— or simply reply to this email', SLUG_TD); ?></em></small>
+                            <small><strong><?php echo __('Please Note:', SLUG_TD); ?></strong> <em><?php echo __('Your reply will be posted publicly and immediately.', SLUG_TD); ?></em></small>
                         <?php endif; ?>
                     <?php endif; ?>
                 <?php endif; ?>

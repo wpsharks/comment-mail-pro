@@ -83,7 +83,7 @@ class UtilsArray extends AbsBase
     public function unshiftAssoc(array &$array, $key, $value)
     {
         if (!is_integer($key) && !is_string($key)) {
-            throw new \exception(__('Invalid `$key` arg.', $this->plugin->text_domain));
+            throw new \exception(__('Invalid `$key` arg.', SLUG_TD));
         }
         unset($array[$key]); // Unset first.
 

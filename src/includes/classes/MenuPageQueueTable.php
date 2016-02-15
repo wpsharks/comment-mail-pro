@@ -32,8 +32,8 @@ class MenuPageQueueTable extends MenuPageTableBase
         $args = [
             'singular_name'  => 'queued_notification',
             'plural_name'    => 'queued_notifications',
-            'singular_label' => __('queued notification', $plugin->text_domain),
-            'plural_label'   => __('queued notifications', $plugin->text_domain),
+            'singular_label' => __('queued notification', SLUG_TD),
+            'plural_label'   => __('queued notifications', SLUG_TD),
             'screen'         => $plugin->menu_page_hooks[GLOBAL_NS.'_queue'],
         ];
         parent::__construct($args); // Parent constructor.
@@ -56,15 +56,15 @@ class MenuPageQueueTable extends MenuPageTableBase
 
         return [
             'cb'                => '1', // Include checkboxes.
-            'ID'                => __('ID', $plugin->text_domain),
-            'insertion_time'    => __('Time', $plugin->text_domain),
-            'sub_id'            => __('Subscr. ID', $plugin->text_domain),
-            'user_id'           => __('WP User ID', $plugin->text_domain),
-            'post_id'           => __('Subscr. to Post ID', $plugin->text_domain),
-            'comment_parent_id' => __('Subscr. to Comment ID', $plugin->text_domain),
-            'comment_id'        => __('Regarding Comment ID', $plugin->text_domain),
-            'last_update_time'  => __('Last Update', $plugin->text_domain),
-            'hold_until_time'   => __('Holding Until', $plugin->text_domain),
+            'ID'                => __('ID', SLUG_TD),
+            'insertion_time'    => __('Time', SLUG_TD),
+            'sub_id'            => __('Subscr. ID', SLUG_TD),
+            'user_id'           => __('WP User ID', SLUG_TD),
+            'post_id'           => __('Subscr. to Post ID', SLUG_TD),
+            'comment_parent_id' => __('Subscr. to Comment ID', SLUG_TD),
+            'comment_id'        => __('Regarding Comment ID', SLUG_TD),
+            'last_update_time'  => __('Last Update', SLUG_TD),
+            'hold_until_time'   => __('Holding Until', SLUG_TD),
         ];
     }
 
@@ -164,9 +164,9 @@ class MenuPageQueueTable extends MenuPageTableBase
         $row_actions = [
             'delete' => '<a href="#"'.// Depends on `menu-pages.js`.
                         ' data-pmp-action="'.esc_attr($delete_url).'"'.// The action URL.
-                        ' data-pmp-confirmation="'.esc_attr(__('Delete queued notification? Are you sure?', $this->plugin->text_domain)).'"'.
-                        ' title="'.esc_attr(__('Delete Queued Notification', $this->plugin->text_domain)).'">'.
-                        '  <i class="fa fa-times-circle"></i> '.__('Delete', $this->plugin->text_domain).
+                        ' data-pmp-confirmation="'.esc_attr(__('Delete queued notification? Are you sure?', SLUG_TD)).'"'.
+                        ' title="'.esc_attr(__('Delete Queued Notification', SLUG_TD)).'">'.
+                        '  <i class="fa fa-times-circle"></i> '.__('Delete', SLUG_TD).
                         '</a>',
         ];
         return $id_info.$this->row_actions($row_actions);
@@ -288,7 +288,7 @@ class MenuPageQueueTable extends MenuPageTableBase
     protected function get_bulk_actions()
     { // @codingStandardsIgnoreEnd
         return [
-            'delete' => __('Delete', $this->plugin->text_domain),
+            'delete' => __('Delete', SLUG_TD),
         ];
     }
 

@@ -268,7 +268,7 @@ class ChartData extends AbsBase
      */
     protected function subsOverviewXEventConfirmationPercentages()
     {
-        return $this->subsOverviewEventStatusPercentages(['subscribed'], __('Confirmed', $this->plugin->text_domain));
+        return $this->subsOverviewEventStatusPercentages(['subscribed'], __('Confirmed', SLUG_TD));
     }
 
     /**
@@ -280,7 +280,7 @@ class ChartData extends AbsBase
      */
     protected function subsOverviewXEventSuspensionPercentages()
     {
-        return $this->subsOverviewEventStatusPercentages(['suspended'], __('Suspended', $this->plugin->text_domain));
+        return $this->subsOverviewEventStatusPercentages(['suspended'], __('Suspended', SLUG_TD));
     }
 
     /**
@@ -292,7 +292,7 @@ class ChartData extends AbsBase
      */
     protected function subsOverviewXEventUnsubscribePercentages()
     {
-        return $this->subsOverviewEventStatusPercentages(['trashed', 'deleted'], __('Unsubscribed', $this->plugin->text_domain));
+        return $this->subsOverviewEventStatusPercentages(['trashed', 'deleted'], __('Unsubscribed', SLUG_TD));
     }
 
     /**
@@ -332,7 +332,7 @@ class ChartData extends AbsBase
                     ' LIMIT 1'; // Only need one to check.
 
             if ($this->plugin->utils_db->wp->query($_sql) === false) {
-                throw new \exception(__('Query failure.', $this->plugin->text_domain));
+                throw new \exception(__('Query failure.', SLUG_TD));
             }
             $data[] = (integer) $this->plugin->utils_db->wp->get_var('SELECT FOUND_ROWS()');
         }
@@ -345,7 +345,7 @@ class ChartData extends AbsBase
                     array_merge(
                         $this->colors,
                         [
-                            'label' => __('Total Subscriptions', $this->plugin->text_domain),
+                            'label' => __('Total Subscriptions', SLUG_TD),
                             'data'  => $data,
                         ]
                     ),
@@ -355,8 +355,8 @@ class ChartData extends AbsBase
                 'scaleLabel' => '<%=value%>',
 
                 'tooltipTemplate' => '<%=label%>: <%=value%> '.
-                                     '<%if(parseInt(value) < 1 || parseInt(value) > 1){%>'.__('subscriptions', $this->plugin->text_domain).'<%}%>'.
-                                     '<%if(parseInt(value) === 1){%>'.__('subscription', $this->plugin->text_domain).'<%}%>',
+                                     '<%if(parseInt(value) < 1 || parseInt(value) > 1){%>'.__('subscriptions', SLUG_TD).'<%}%>'.
+                                     '<%if(parseInt(value) === 1){%>'.__('subscription', SLUG_TD).'<%}%>',
             ],
         ];
     }
@@ -374,9 +374,9 @@ class ChartData extends AbsBase
     {
         $data = [
             [ // Initialize column headers.
-              __('Country', $this->plugin->text_domain),
-              __('Total Subscriptions', $this->plugin->text_domain),
-              __('Percentage', $this->plugin->text_domain),
+              __('Country', SLUG_TD),
+              __('Total Subscriptions', SLUG_TD),
+              __('Percentage', SLUG_TD),
             ],
         ];
         $grand_total     = 0; // Initialize.
@@ -456,9 +456,9 @@ class ChartData extends AbsBase
 
         $data = [
             [ // Initialize column headers.
-              __('Region', $this->plugin->text_domain),
-              __('Total Subscriptions', $this->plugin->text_domain),
-              __('Percentage', $this->plugin->text_domain),
+              __('Region', SLUG_TD),
+              __('Total Subscriptions', SLUG_TD),
+              __('Percentage', SLUG_TD),
             ],
         ];
         $grand_total     = 0; // Initialize.
@@ -562,12 +562,12 @@ class ChartData extends AbsBase
                      ' LIMIT 1'; // Only need one to check.
 
             if ($this->plugin->utils_db->wp->query($_sql1) === false) {
-                throw new \exception(__('Query failure.', $this->plugin->text_domain));
+                throw new \exception(__('Query failure.', SLUG_TD));
             }
             $data1[] = (integer) $this->plugin->utils_db->wp->get_var('SELECT FOUND_ROWS()');
 
             if ($this->plugin->utils_db->wp->query($_sql2) === false) {
-                throw new \exception(__('Query failure.', $this->plugin->text_domain));
+                throw new \exception(__('Query failure.', SLUG_TD));
             }
             $data2[] = (integer) $this->plugin->utils_db->wp->get_var('SELECT FOUND_ROWS()');
         }
@@ -585,14 +585,14 @@ class ChartData extends AbsBase
                     array_merge(
                         $this->secondary_colors,
                         [
-                            'label' => __('New Subscriptions', $this->plugin->text_domain),
+                            'label' => __('New Subscriptions', SLUG_TD),
                             'data'  => $data1,
                         ]
                     ),
                     array_merge(
                         $this->primary_colors,
                         [
-                            'label' => sprintf(__('Total %1$s', $this->plugin->text_domain), $label),
+                            'label' => sprintf(__('Total %1$s', SLUG_TD), $label),
                             'data'  => $data2, 'percent' => $percent,
                         ]
                     ),
@@ -648,10 +648,10 @@ class ChartData extends AbsBase
             foreach (($results = $this->plugin->utils_db->typifyDeep($results)) as $_result) {
                 $_post            = get_post($_result->post_id);
                 $_post_type       = $_post ? get_post_type_object($_post->post_type) : null;
-                $_post_type       = $_post_type ? $_post_type->labels->singular_name : __('Post', $this->plugin->text_domain);
+                $_post_type       = $_post_type ? $_post_type->labels->singular_name : __('Post', SLUG_TD);
                 $_post_title_clip = $_post && $_post->post_title ? ' — '.$this->plugin->utils_string->clip($_post->post_title, 20) : '';
 
-                $labels[] = sprintf(__('%1$s ID #%2$s%3$s', $this->plugin->text_domain), $_post_type, $_result->post_id, $_post_title_clip);
+                $labels[] = sprintf(__('%1$s ID #%2$s%3$s', SLUG_TD), $_post_type, $_result->post_id, $_post_title_clip);
                 $data[]   = (integer) $_result->total_subs; // Total subscriptions.
             }
         }
@@ -670,7 +670,7 @@ class ChartData extends AbsBase
                     array_merge(
                         $this->colors,
                         [
-                            'label' => __('Total Subscriptions', $this->plugin->text_domain),
+                            'label' => __('Total Subscriptions', SLUG_TD),
                             'data'  => $data,
                         ]
                     ),
@@ -680,8 +680,8 @@ class ChartData extends AbsBase
                 'scaleLabel' => '<%=value%>',
 
                 'tooltipTemplate' => '<%=label%>: <%=value%> '.
-                                     '<%if(parseInt(value) < 1 || parseInt(value) > 1){%>'.__('subscriptions', $this->plugin->text_domain).'<%}%>'.
-                                     '<%if(parseInt(value) === 1){%>'.__('subscription', $this->plugin->text_domain).'<%}%>',
+                                     '<%if(parseInt(value) < 1 || parseInt(value) > 1){%>'.__('subscriptions', SLUG_TD).'<%}%>'.
+                                     '<%if(parseInt(value) === 1){%>'.__('subscription', SLUG_TD).'<%}%>',
             ],
         ];
     }
@@ -905,7 +905,7 @@ class ChartData extends AbsBase
                     ' LIMIT 1'; // Only need one to check.
 
             if ($this->plugin->utils_db->wp->query($_sql) === false) {
-                throw new \exception(__('Query failure.', $this->plugin->text_domain));
+                throw new \exception(__('Query failure.', SLUG_TD));
             }
             $data[] = (integer) $this->plugin->utils_db->wp->get_var('SELECT FOUND_ROWS()');
         }
@@ -918,7 +918,7 @@ class ChartData extends AbsBase
                     array_merge(
                         $this->colors,
                         [
-                            'label' => __('Total Processed Notifications', $this->plugin->text_domain),
+                            'label' => __('Total Processed Notifications', SLUG_TD),
                             'data'  => $data,
                         ]
                     ),
@@ -928,8 +928,8 @@ class ChartData extends AbsBase
                 'scaleLabel' => '<%=value%>',
 
                 'tooltipTemplate' => '<%=label%>: <%=value%> '.
-                                     '<%if(parseInt(value) < 1 || parseInt(value) > 1){%>'.__('notifications', $this->plugin->text_domain).'<%}%>'.
-                                     '<%if(parseInt(value) === 1){%>'.__('notification', $this->plugin->text_domain).'<%}%>',
+                                     '<%if(parseInt(value) < 1 || parseInt(value) > 1){%>'.__('notifications', SLUG_TD).'<%}%>'.
+                                     '<%if(parseInt(value) === 1){%>'.__('notification', SLUG_TD).'<%}%>',
             ],
         ];
     }
@@ -973,12 +973,12 @@ class ChartData extends AbsBase
                      ' LIMIT 1'; // Only need one to check.
 
             if ($this->plugin->utils_db->wp->query($_sql1) === false) {
-                throw new \exception(__('Query failure.', $this->plugin->text_domain));
+                throw new \exception(__('Query failure.', SLUG_TD));
             }
             $data1[] = (integer) $this->plugin->utils_db->wp->get_var('SELECT FOUND_ROWS()');
 
             if ($this->plugin->utils_db->wp->query($_sql2) === false) {
-                throw new \exception(__('Query failure.', $this->plugin->text_domain));
+                throw new \exception(__('Query failure.', SLUG_TD));
             }
             $data2[] = (integer) $this->plugin->utils_db->wp->get_var('SELECT FOUND_ROWS()');
         }
@@ -996,14 +996,14 @@ class ChartData extends AbsBase
                     array_merge(
                         $this->secondary_colors,
                         [
-                            'label' => __('Queued Notifications', $this->plugin->text_domain),
+                            'label' => __('Queued Notifications', SLUG_TD),
                             'data'  => $data1,
                         ]
                     ),
                     array_merge(
                         $this->primary_colors,
                         [
-                            'label' => sprintf(__('Total %1$s', $this->plugin->text_domain), $label),
+                            'label' => sprintf(__('Total %1$s', SLUG_TD), $label),
                             'data'  => $data2, 'percent' => $percent,
                         ]
                     ),
@@ -1148,22 +1148,22 @@ class ChartData extends AbsBase
     protected function chartIsValid()
     {
         if (!$this->view || !method_exists($this, $this->view.'X')) {
-            $this->errors[] = __('Invalid Chart View. Please try again.', $this->plugin->text_domain);
+            $this->errors[] = __('Invalid Chart View. Please try again.', SLUG_TD);
         }
         if (!method_exists($this, $this->view.'X'.$this->chart->type)) {
-            $this->errors[] = __('Missing or invalid Chart Type. Please try again.', $this->plugin->text_domain);
+            $this->errors[] = __('Missing or invalid Chart Type. Please try again.', SLUG_TD);
         }
         if (preg_match('/(?:^geo|[a-z0-9]Geo)(?:[A-Z0-9]|$)/', $this->chart->type) && !$this->plugin->options['geo_location_tracking_enable']) {
-            $this->errors[] = __('Geo IP tracking not enabled yet. Please check config. options.', $this->plugin->text_domain);
+            $this->errors[] = __('Geo IP tracking not enabled yet. Please check config. options.', SLUG_TD);
         }
         if (preg_match('/(?:^|_)by_post_id(?:_|$)/i', $this->input_view) && $this->chart->post_id <= 0) {
-            $this->errors[] = __('Missing or invalid Post ID. Please try again.', $this->plugin->text_domain);
+            $this->errors[] = __('Missing or invalid Post ID. Please try again.', SLUG_TD);
         }
         if (!$this->chart->from_time || !$this->chart->to_time) {
-            $this->errors[] = __('Missing or invalid Date(s). Please try again.', $this->plugin->text_domain);
+            $this->errors[] = __('Missing or invalid Date(s). Please try again.', SLUG_TD);
         }
         if (!in_array($this->chart->by, ['hours', 'days', 'weeks', 'months', 'years'], true)) {
-            $this->errors[] = __('Missing or invalid Breakdown. Please try again.', $this->plugin->text_domain);
+            $this->errors[] = __('Missing or invalid Breakdown. Please try again.', SLUG_TD);
         }
         if (!$this->errors) {
             $this->parseTimesSetupPeriods(); // Times/periods.
@@ -1172,13 +1172,13 @@ class ChartData extends AbsBase
             // If no errors thus far, let's do one last on the times.
 
             if (!$this->chart->from_time || !$this->chart->to_time) {
-                $this->errors[] = __('Missing or invalid Date(s). Please try again.', $this->plugin->text_domain);
+                $this->errors[] = __('Missing or invalid Date(s). Please try again.', SLUG_TD);
             } elseif ($this->chart->from_time >= $this->chart->to_time) {
-                $this->errors[] = __('From Date >= To Date. Please try again.', $this->plugin->text_domain);
+                $this->errors[] = __('From Date >= To Date. Please try again.', SLUG_TD);
             } elseif (empty($this->chart->time_periods)) {
-                $this->errors[] = __('Not enough data for that time period and/or Breakdown. Please try again.', $this->plugin->text_domain);
+                $this->errors[] = __('Not enough data for that time period and/or Breakdown. Please try again.', SLUG_TD);
             } elseif (count($this->chart->time_periods) > ($time_periods_max_limit = apply_filters(__CLASS__.'_time_periods_max_limit', 100))) {
-                $this->errors[] = sprintf(__('Too many time periods needed. Please try again. Based on your configuration of this chart, there would need to be more than `%1$s` bars to represent the data that you want. This would require _many_ DB queries, and it would be very difficult to read the chart. Please broaden your Breakdown or reduce the difference between From Date and To Date.', $this->plugin->text_domain), $time_periods_max_limit);
+                $this->errors[] = sprintf(__('Too many time periods needed. Please try again. Based on your configuration of this chart, there would need to be more than `%1$s` bars to represent the data that you want. This would require _many_ DB queries, and it would be very difficult to read the chart. Please broaden your Breakdown or reduce the difference between From Date and To Date.', SLUG_TD), $time_periods_max_limit);
             }
         }
         return empty($this->errors); // If no errors we're good-to-go!
@@ -1212,9 +1212,9 @@ class ChartData extends AbsBase
         # Invalid times before we even begin? e.g. One of the `strtotime()` calls choked above?
 
         if (!$this->chart->from_time || !$this->chart->to_time) {
-            $this->errors[] = __('Missing or invalid Date(s). Please try again.', $this->plugin->text_domain);
+            $this->errors[] = __('Missing or invalid Date(s). Please try again.', SLUG_TD);
         } elseif ($this->chart->from_time >= $this->chart->to_time) {
-            $this->errors[] = __('From Date >= To Date. Please try again.', $this->plugin->text_domain);
+            $this->errors[] = __('From Date >= To Date. Please try again.', SLUG_TD);
         }
         if ($this->errors) {
             return; // Nothing more we can do here.
@@ -1316,14 +1316,14 @@ class ChartData extends AbsBase
                 break; // Break switch handler.
 
             default: // Unexpected breakdown "by" syntax?
-                throw new \exception(__('Unexcpected Breakdown.', $this->plugin->text_domain));
+                throw new \exception(__('Unexcpected Breakdown.', SLUG_TD));
         }
         # Invalid times after adjustments/rounding above?
 
         if (!$this->chart->from_time || !$this->chart->to_time) {
-            $this->errors[] = __('Missing or invalid Date(s). Please try again.', $this->plugin->text_domain);
+            $this->errors[] = __('Missing or invalid Date(s). Please try again.', SLUG_TD);
         } elseif ($this->chart->from_time >= $this->chart->to_time) {
-            $this->errors[] = __('From Date >= To Date. Please try again.', $this->plugin->text_domain);
+            $this->errors[] = __('From Date >= To Date. Please try again.', SLUG_TD);
         }
         if ($this->errors) {
             return; // Nothing more we can do here.
@@ -1375,7 +1375,7 @@ class ChartData extends AbsBase
         return '<div class="pmp-note pmp-error" style="margin:1em 0 0 0;">'.
 
                ' <p style="margin:0 0 .5em 0; font-weight:bold;">'.
-               '    <i class="fa fa-warning"></i> '.__('Please review the following error(s):', $this->plugin->text_domain).
+               '    <i class="fa fa-warning"></i> '.__('Please review the following error(s):', SLUG_TD).
                ' </p>'.
 
                ' <ul class="pmp-list-items" style="margin-top:0; margin-bottom:0;">'.

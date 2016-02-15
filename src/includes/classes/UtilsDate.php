@@ -133,7 +133,7 @@ class UtilsDate extends AbsBase
             $to = time(); // Current time.
         }
         if (!isset($suffix)) { // Use default value?
-            $suffix = ' '.__('ago', $this->plugin->text_domain);
+            $suffix = ' '.__('ago', SLUG_TD);
         }
         $from   = (integer) $from; // Force integer.
         $to     = (integer) $to; // Force integer.
@@ -144,34 +144,34 @@ class UtilsDate extends AbsBase
         if ($difference < 3600) { // Less than a minute?
             $minutes = (integer) round($difference / 60);
 
-            $since = sprintf(_n('%1$s minute', '%1$s minutes', $minutes, $this->plugin->text_domain), $minutes);
-            $since = ($minutes < 1) ? __('less than a minute', $this->plugin->text_domain) : $since;
-            $since = ($minutes >= 60) ? __('about 1 hour', $this->plugin->text_domain) : $since;
+            $since = sprintf(_n('%1$s minute', '%1$s minutes', $minutes, SLUG_TD), $minutes);
+            $since = ($minutes < 1) ? __('less than a minute', SLUG_TD) : $since;
+            $since = ($minutes >= 60) ? __('about 1 hour', SLUG_TD) : $since;
         } elseif ($difference >= 3600 && $difference < 86400) {
             $hours = (integer) round($difference / 3600);
 
-            $since = sprintf(_n('%1$s hour', '%1$s hours', $hours, $this->plugin->text_domain), $hours);
-            $since = ($hours >= 24) ? __('about 1 day', $this->plugin->text_domain) : $since;
+            $since = sprintf(_n('%1$s hour', '%1$s hours', $hours, SLUG_TD), $hours);
+            $since = ($hours >= 24) ? __('about 1 day', SLUG_TD) : $since;
         } elseif ($difference >= 86400 && $difference < 604800) {
             $days = (integer) round($difference / 86400);
 
-            $since = sprintf(_n('%1$s day', '%1$s days', $days, $this->plugin->text_domain), $days);
-            $since = ($days >= 7) ? __('about 1 week', $this->plugin->text_domain) : $since;
+            $since = sprintf(_n('%1$s day', '%1$s days', $days, SLUG_TD), $days);
+            $since = ($days >= 7) ? __('about 1 week', SLUG_TD) : $since;
         } elseif ($difference >= 604800 && $difference < 2592000) {
             $weeks = (integer) round($difference / 604800);
 
-            $since = sprintf(_n('%1$s week', '%1$s weeks', $weeks, $this->plugin->text_domain), $weeks);
-            $since = ($weeks >= 4) ? __('about 1 month', $this->plugin->text_domain) : $since;
+            $since = sprintf(_n('%1$s week', '%1$s weeks', $weeks, SLUG_TD), $weeks);
+            $since = ($weeks >= 4) ? __('about 1 month', SLUG_TD) : $since;
         } elseif ($difference >= 2592000 && $difference < 31556926) {
             $months = (integer) round($difference / 2592000);
 
-            $since = sprintf(_n('%1$s month', '%1$s months', $months, $this->plugin->text_domain), $months);
-            $since = ($months >= 12) ? __('about 1 year', $this->plugin->text_domain) : $since;
+            $since = sprintf(_n('%1$s month', '%1$s months', $months, SLUG_TD), $months);
+            $since = ($months >= 12) ? __('about 1 year', SLUG_TD) : $since;
         } else {
             // We use years here (default case handler).
 
             $years = (integer) round($difference / 31556926);
-            $since = sprintf(_n('%1$s year', '%1$s years', $years, $this->plugin->text_domain), $years);
+            $since = sprintf(_n('%1$s year', '%1$s years', $years, SLUG_TD), $years);
         }
         return $since.$suffix; // Human readable time difference calculation.
     }

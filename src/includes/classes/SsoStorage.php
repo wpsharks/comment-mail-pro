@@ -76,7 +76,7 @@ class SsoStorage implements \OAuth\Common\Storage\TokenStorageInterface
         }
         $this->key       = preg_replace('/[^a-z0-9]/i', '', $this->key);
         $this->key       = substr($this->key, 0, 20); // 20 chars max.
-        $this->transient = $this->plugin->transient_prefix.'sso_key_'.$this->key;
+        $this->transient = TRANSIENT_PREFIX.'sso_key_'.$this->key;
 
         if (!($this->data = get_transient($this->transient))) {
             $this->data = []; // Initialize.
@@ -110,7 +110,7 @@ class SsoStorage implements \OAuth\Common\Storage\TokenStorageInterface
         if ($this->hasAccessToken($service)) {
             return unserialize($this->data['tokens'][$service]);
         }
-        throw new TokenNotFoundException(__('Token not found.', $this->plugin->text_domain));
+        throw new TokenNotFoundException(__('Token not found.', SLUG_TD));
     }
 
     /**
@@ -174,7 +174,7 @@ class SsoStorage implements \OAuth\Common\Storage\TokenStorageInterface
         if ($this->hasAuthorizationState($service)) {
             return unserialize($this->data['states'][$service]);
         }
-        throw new AuthorizationStateNotFoundException(__('State not found.', $this->plugin->text_domain));
+        throw new AuthorizationStateNotFoundException(__('State not found.', SLUG_TD));
     }
 
     /**
@@ -238,7 +238,7 @@ class SsoStorage implements \OAuth\Common\Storage\TokenStorageInterface
         if ($this->hasExtra($service)) {
             return unserialize($this->data['extras'][$service]);
         }
-        throw new \Exception(__('Extra data not found.', $this->plugin->text_domain));
+        throw new \Exception(__('Extra data not found.', SLUG_TD));
     }
 
     /**

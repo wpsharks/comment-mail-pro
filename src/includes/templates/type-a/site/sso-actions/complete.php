@@ -36,12 +36,12 @@ namespace WebSharks\CommentMail\Pro;
  */
 ?>
 <?php // Sets document <title> tag via `%%title%%` replacement code in header.
-echo str_replace('%%title%%', __('Complete Registration', $plugin->text_domain), $site_header); ?>
+echo str_replace('%%title%%', __('Complete Registration', SLUG_TD), $site_header); ?>
 
     <div class="sso-complete">
 
         <h2 style="margin-top:0;">
-            <?php echo __('Please Complete Registration', $plugin->text_domain); ?>
+            <?php echo __('Please Complete Registration', SLUG_TD); ?>
         </h2>
 
         <hr />
@@ -50,7 +50,7 @@ echo str_replace('%%title%%', __('Complete Registration', $plugin->text_domain),
 
             <div class="alert alert-danger">
                 <h4>
-                    <?php echo __('Please review the following error(s):', $plugin->text_domain); ?>
+                    <?php echo __('Please review the following error(s):', SLUG_TD); ?>
                 </h4>
                 <ul class="list-unstyled">
                     <?php foreach ($error_codes as $_error_code) : ?>
@@ -58,30 +58,30 @@ echo str_replace('%%title%%', __('Complete Registration', $plugin->text_domain),
                             <i class="fa fa-warning fa-fw"></i>
                             <?php switch ($_error_code) {
                                 case 'users_cannot_register':
-                                    echo __('Sorry, not accepting new users at this time. Please try again later.', $plugin->text_domain);
+                                    echo __('Sorry, not accepting new users at this time. Please try again later.', SLUG_TD);
                                     // This will only occur if you forget to enable "anyone can register" in your WP General Settings.
                                     break; // Break switch handler.
 
                                 case 'missing_fname':
-                                    echo __('Missing first name; please try again.', $plugin->text_domain);
+                                    echo __('Missing first name; please try again.', SLUG_TD);
                                     break; // Break switch handler.
 
                                 case 'missing_email':
-                                    echo __('Missing email address; please try again.', $plugin->text_domain);
+                                    echo __('Missing email address; please try again.', SLUG_TD);
                                     break; // Break switch handler.
 
                                 case 'invalid_email':
-                                    echo __('Invalid email address; please try again.', $plugin->text_domain);
+                                    echo __('Invalid email address; please try again.', SLUG_TD);
                                     break; // Break switch handler.
 
                                 case 'email_exists': // Only occurs if an account exists w/ a different underlying SSO ID.
                                     // Otherwise, for existing accounts w/ a matching SSO ID, they will have already been logged-in automatically.
-                                    echo __('An account w/ this email address already exists.', $plugin->text_domain).
-                                         ' '.sprintf(__('Please <a href="%1$s">log in</a>.', $plugin->text_domain), esc_attr(wp_login_url($redirect_to)));
+                                    echo __('An account w/ this email address already exists.', SLUG_TD).
+                                         ' '.sprintf(__('Please <a href="%1$s">log in</a>.', SLUG_TD), esc_attr(wp_login_url($redirect_to)));
                                     break; // Break switch handler.
 
                                 default: // Anything else that is unexpected/unknown at this time.
-                                    echo __('Unknown error; unable to complete registration/login. Sorry!', $plugin->text_domain);
+                                    echo __('Unknown error; unable to complete registration/login. Sorry!', SLUG_TD);
                             } ?>
                         </li>
                     <?php endforeach; ?>
@@ -96,19 +96,19 @@ echo str_replace('%%title%%', __('Complete Registration', $plugin->text_domain),
                 <?php echo $form_fields->inputRow(
                     array(
                         'type'  => 'email', // For `<input>` type.
-                        'label' => __('<i class="fa fa-fw fa-envelope-o"></i> Email Address', $plugin->text_domain),
+                        'label' => __('<i class="fa fa-fw fa-envelope-o"></i> Email Address', SLUG_TD),
                         'name'  => 'email', 'required' => true, 'maxlength' => 100, 'current_value' => $email,
                     )
                 ); ?>
                 <?php echo $form_fields->inputRow(
                     array(
-                        'label' => __('<i class="fa fa-fw fa-pencil-square-o"></i> First Name', $plugin->text_domain),
+                        'label' => __('<i class="fa fa-fw fa-pencil-square-o"></i> First Name', SLUG_TD),
                         'name'  => 'fname', 'required' => true, 'maxlength' => 50, 'current_value' => $fname,
                     )
                 ); ?>
                 <?php echo $form_fields->inputRow(
                     array(
-                        'label' => __('<i class="fa fa-fw fa-level-up fa-rotate-90"></i> Last Name', $plugin->text_domain),
+                        'label' => __('<i class="fa fa-fw fa-level-up fa-rotate-90"></i> Last Name', SLUG_TD),
                         'name'  => 'lname', 'required' => false, 'maxlength' => 100, 'current_value' => $lname,
                     )
                 ); ?>
@@ -121,7 +121,7 @@ echo str_replace('%%title%%', __('Complete Registration', $plugin->text_domain),
                 <?php echo $hidden_inputs(); // Required for processing. ?>
 
                 <?php echo '<input type="submit"'.
-                           ' value="'.esc_attr(__('Complete Registration', $plugin->text_domain)).'"'.
+                           ' value="'.esc_attr(__('Complete Registration', SLUG_TD)).'"'.
                            ' class="btn btn-primary" />'; ?>
 
             </p>

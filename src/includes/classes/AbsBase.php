@@ -108,7 +108,7 @@ abstract class AbsBase
         if (is_object($this->___overload) && property_exists($this->___overload, $property)) {
             return $this->___overload->{$property};
         }
-        throw new \exception(sprintf(__('Undefined overload property: `%1$s`.', $this->plugin->text_domain), $property));
+        throw new \exception(sprintf(__('Undefined overload property: `%1$s`.', SLUG_TD), $property));
     }
 
     /**
@@ -126,7 +126,7 @@ abstract class AbsBase
     {
         $property = (string) $property; // Force string.
 
-        throw new \exception(sprintf(__('Refused to set overload property: `%1$s`.', $this->plugin->text_domain), $property));
+        throw new \exception(sprintf(__('Refused to set overload property: `%1$s`.', SLUG_TD), $property));
     }
 
     /**
@@ -143,7 +143,7 @@ abstract class AbsBase
     {
         $property = (string) $property; // Force string.
 
-        throw new \exception(sprintf(__('Refused to unset overload property: `%1$s`.', $this->plugin->text_domain), $property));
+        throw new \exception(sprintf(__('Refused to unset overload property: `%1$s`.', SLUG_TD), $property));
     }
 
     /*

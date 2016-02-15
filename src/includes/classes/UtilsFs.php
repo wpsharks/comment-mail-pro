@@ -40,7 +40,7 @@ class UtilsFs extends AbsBase
         $tmp_dir = $this->nSeps(get_temp_dir());
 
         if (!$tmp_dir || !@is_dir($tmp_dir) || !@is_writable($tmp_dir)) {
-            throw new \exception(__('Unable to find a writable tmp directory.', $this->plugin->text_domain));
+            throw new \exception(__('Unable to find a writable tmp directory.', SLUG_TD));
         }
         return $tmp_dir; // Writable tmp directory.
     }
@@ -134,7 +134,7 @@ class UtilsFs extends AbsBase
             return; // Empty.
         }
         if ($require_uploaded_file && (empty($_FILES) || !is_uploaded_file($path))) {
-            throw new \exception(sprintf(__('Security flag. Not an uploaded file: `%1$s`.', $this->plugin->text_domain), $path));
+            throw new \exception(sprintf(__('Security flag. Not an uploaded file: `%1$s`.', SLUG_TD), $path));
         }
         $path = $this->nSeps($path); // Normalize separators for remaining checks.
 
@@ -142,7 +142,7 @@ class UtilsFs extends AbsBase
             || strpos($path, './') !== false || strpos($path, '..') !== false
             || strpos($path, '/.') !== false || stripos(basename($path), 'config') !== false
         ) {
-            throw new \exception(sprintf(__('Security flag. Dangerous file path: `%1$s`.', $this->plugin->text_domain), $path));
+            throw new \exception(sprintf(__('Security flag. Dangerous file path: `%1$s`.', SLUG_TD), $path));
         }
     }
 

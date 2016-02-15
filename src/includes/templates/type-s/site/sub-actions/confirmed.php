@@ -25,7 +25,7 @@ namespace WebSharks\CommentMail\Pro;
  */
 ?>
 <?php // Sets document <title> tag via `%%title%%` replacement code in header.
-echo str_replace('%%title%%', __('Confirmation', $plugin->text_domain), $site_header); ?>
+echo str_replace('%%title%%', __('Confirmation', SLUG_TD), $site_header); ?>
 
     <div class="confirm">
 
@@ -33,7 +33,7 @@ echo str_replace('%%title%%', __('Confirmation', $plugin->text_domain), $site_he
 
             <div class="alert alert-danger" style="margin:0;">
                 <h4>
-                    <?php echo __('Please review the following error(s):', $plugin->text_domain); ?>
+                    <?php echo __('Please review the following error(s):', SLUG_TD); ?>
                 </h4>
                 <ul class="list-unstyled">
                     <?php foreach ($error_codes as $_error_code) : ?>
@@ -41,27 +41,27 @@ echo str_replace('%%title%%', __('Confirmation', $plugin->text_domain), $site_he
                             <i class="fa fa-warning fa-fw"></i>
                             <?php switch ($_error_code) {
                                 case 'missing_sub_key':
-                                    echo __('Subscription key is missing; unable to confirm.', $plugin->text_domain);
+                                    echo __('Subscription key is missing; unable to confirm.', SLUG_TD);
                                     break; // Break switch handler.
 
                                 case 'invalid_sub_key':
-                                    echo __('Invalid subscription key; unable to confirm.', $plugin->text_domain);
+                                    echo __('Invalid subscription key; unable to confirm.', SLUG_TD);
                                     break; // Break switch handler.
 
                                 case 'sub_post_id_missing':
-                                    echo __('Unable to confirm; the post you\'re subscribing to has since been deleted. Sorry!', $plugin->text_domain);
+                                    echo __('Unable to confirm; the post you\'re subscribing to has since been deleted. Sorry!', SLUG_TD);
                                     break; // Break switch handler.
 
                                 case 'sub_comment_id_missing':
-                                    echo __('Unable to confirm; the comment you\'re subscribing to has since been deleted. Sorry!', $plugin->text_domain);
+                                    echo __('Unable to confirm; the comment you\'re subscribing to has since been deleted. Sorry!', SLUG_TD);
                                     break; // Break switch handler.
 
                                 case 'sub_already_confirmed':
-                                    echo __('Already confirmed! Thank you.', $plugin->text_domain);
+                                    echo __('Already confirmed! Thank you.', SLUG_TD);
                                     break; // Break switch handler.
 
                                 default: // Anything else that is unexpected/unknown at this time.
-                                    echo __('Unknown error; unable to confirm. Sorry!', $plugin->text_domain);
+                                    echo __('Unknown error; unable to confirm. Sorry!', SLUG_TD);
                             } ?>
                         </li>
                     <?php endforeach; ?>
@@ -97,20 +97,20 @@ echo str_replace('%%title%%', __('Confirmation', $plugin->text_domain), $site_he
 
             switch ($sub->deliver) {
                 case 'asap': // Instant notifications?
-                    $sub_deliver_description = __('each email notification will be delivered to you instantly', $plugin->text_domain);
+                    $sub_deliver_description = __('each email notification will be delivered to you instantly', SLUG_TD);
                     break; // Break switch handler.
 
                 case 'hourly': // As a digest?
                 case 'daily':
                 case 'weekly':
-                    $sub_deliver_description = __('notifications will be delivered as a digest', $plugin->text_domain);
+                    $sub_deliver_description = __('notifications will be delivered as a digest', SLUG_TD);
                     break; // Break switch handler.
             }
             // Subscriber's `"name" <email>` w/ HTML markup enhancements.
             $sub_name_email_markup = $plugin->utils_markup->nameEmail($sub->fname.' '.$sub->lname, $sub->email);
 
             // Subscriber's last known IP address.
-            $sub_last_ip = $sub->last_ip ? $sub->last_ip : __('unknown', $plugin->text_domain);
+            $sub_last_ip = $sub->last_ip ? $sub->last_ip : __('unknown', SLUG_TD);
 
             // Subscription last update time "ago"; e.g. `X [seconds/minutes/days/weeks/years] ago`.
             $sub_last_update_time_ago = $plugin->utils_date->i18nUtc('M jS, Y @ g:i a T', $sub->last_update_time);

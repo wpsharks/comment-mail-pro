@@ -347,11 +347,11 @@ class SubManageSummary extends AbsBase
         $deleted === null ? 'invalid_sub_key' : 'sub_already_unsubscribed';
 
         if ($deleted === null) { // Invalid sub key?
-            $errors['sub_key'] = __('Invalid subscription key; unable to delete.', $plugin->text_domain);
+            $errors['sub_key'] = __('Invalid subscription key; unable to delete.', SLUG_TD);
         } elseif (!$deleted) { // Subscription has already been deleted?
-            $errors['sub_key'] = __('Already deleted; thanks.', $plugin->text_domain);
+            $errors['sub_key'] = __('Already deleted; thanks.', SLUG_TD);
         } else {
-            $successes['deleted_successfully'] = __('Subscription deleted successfully.', $plugin->text_domain);
+            $successes['deleted_successfully'] = __('Subscription deleted successfully.', SLUG_TD);
         }
         if ($errors) { // We have deletion errors to report back?
             static::$processing_errors      = array_merge(static::$processing_errors, $errors);

@@ -718,10 +718,10 @@ class SubInserter extends AbsBase
         unset($data_to_insert['ID']); // We never want to insert an ID.
 
         if (($insert_replace = $this->plugin->utils_db->wp->replace($table, $data_to_insert)) === false) {
-            throw new \exception(__('Insert/replace failure.', $this->plugin->text_domain));
+            throw new \exception(__('Insert/replace failure.', SLUG_TD));
         }
         if (!($this->insert_id = (integer) $this->plugin->utils_db->wp->insert_id)) {
-            throw new \exception(__('Insert/replace failure.', $this->plugin->text_domain));
+            throw new \exception(__('Insert/replace failure.', SLUG_TD));
         }
         $this->inserted = true; // Flag as `TRUE` now; i.e. the Insert/replace was a success.
 
@@ -733,9 +733,9 @@ class SubInserter extends AbsBase
         $this->plugin->utils_sub->nullifyCache([$this->insert_id, $this->data['key']]);
 
         if (!($this->sub = $this->plugin->utils_sub->get($this->insert_id, true))) {
-            throw new \exception(__('Sub after insert failure.', $this->plugin->text_domain));
+            throw new \exception(__('Sub after insert failure.', SLUG_TD));
         }
-        $this->successes['inserted_successfully'] = __('Subscription created successfully.', $this->plugin->text_domain);
+        $this->successes['inserted_successfully'] = __('Subscription created successfully.', SLUG_TD);
 
         if ($this->process_events) { // Processing events? i.e. log this insertion?
             new SubEventLogInserter(
@@ -760,7 +760,7 @@ class SubInserter extends AbsBase
             ); // With behavioral args.
 
             if ($this->sub_confirmer->sentEmailSuccessfully()) {
-                $this->successes['sent_confirmation_email_successfully'] = __('Request for email confirmation sent successfully.', $this->plugin->text_domain);
+                $this->successes['sent_confirmation_email_successfully'] = __('Request for email confirmation sent successfully.', SLUG_TD);
             }
         }
         $this->overwriteAnyOthersAfterInsertUpdate(); // Overwrites any others.
@@ -785,14 +785,14 @@ class SubInserter extends AbsBase
         unset($data_to_update['ID']); // We don't need to update the `ID`.
 
         if ($this->plugin->utils_db->wp->update($table, $data_to_update, ['ID' => $this->sub->ID]) === false) {
-            throw new \exception(__('Update failure.', $this->plugin->text_domain));
+            throw new \exception(__('Update failure.', SLUG_TD));
         }
         $this->updated = true; // Flag as `TRUE` now; i.e. the update was a success.
 
         $this->plugin->utils_sub->nullifyCache([$this->sub->ID, $this->sub->key]);
 
         if (!($sub_after = $this->plugin->utils_sub->get($this->sub->ID, true))) {
-            throw new \exception(__('Sub after update failure.', $this->plugin->text_domain));
+            throw new \exception(__('Sub after update failure.', SLUG_TD));
         }
         foreach ($sub_after as $_property => $_value) { // Updates object properties.
             $this->sub->{$_property} = $_value; // Update property references.
@@ -801,7 +801,7 @@ class SubInserter extends AbsBase
 
         unset($_property, $_value); // Housekeeping.
 
-        $this->successes['updated_successfully'] = __('Subscription updated successfully.', $this->plugin->text_domain);
+        $this->successes['updated_successfully'] = __('Subscription updated successfully.', SLUG_TD);
 
         if ($this->process_events) { // Processing events? i.e. log this update?
             new SubEventLogInserter(
@@ -826,7 +826,7 @@ class SubInserter extends AbsBase
             ); // With behavioral args.
 
             if ($this->sub_confirmer->sentEmailSuccessfully()) {
-                $this->successes['sent_confirmation_email_successfully'] = __('Request for email confirmation sent successfully.', $this->plugin->text_domain);
+                $this->successes['sent_confirmation_email_successfully'] = __('Request for email confirmation sent successfully.', SLUG_TD);
             }
         } elseif ($this->sub->status === 'subscribed' && $this->process_list_server) {
             $this->plugin->utils_list_server->maybeSubscribe(
@@ -1074,7 +1074,7 @@ class SubInserter extends AbsBase
                 return $this->sub->{$key_prop};
             }
         }
-        throw new \exception(sprintf(__('Missing key/prop: `%1$s`.', $this->plugin->text_domain), $key_prop));
+        throw new \exception(sprintf(__('Missing key/prop: `%1$s`.', SLUG_TD), $key_prop));
     }
 
     /*
@@ -1102,11 +1102,11 @@ class SubInserter extends AbsBase
                         $_value = null; // Nullify.
                     }
                     if ($this->is_insert && isset($_value)) { // Just to be thorough.
-                        $this->errors['invalid_sub_id'] = sprintf(__('Invalid; insertion w/ ID: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
+                        $this->errors['invalid_sub_id'] = sprintf(__('Invalid; insertion w/ ID: `%1$s`.', SLUG_TD), esc_html($_value));
                     } elseif (($this->is_update || isset($_value)) && ($_value < 1 || strlen((string) $_value) > 20)) {
-                        $this->errors['invalid_sub_id'] = sprintf(__('Invalid ID: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
+                        $this->errors['invalid_sub_id'] = sprintf(__('Invalid ID: `%1$s`.', SLUG_TD), esc_html($_value));
                     } elseif ($this->is_update && (!$this->sub || !$this->sub->ID || $_value !== $this->sub->ID)) {
-                        $this->errors['invalid_sub_id'] = sprintf(__('Invalid ID: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
+                        $this->errors['invalid_sub_id'] = sprintf(__('Invalid ID: `%1$s`.', SLUG_TD), esc_html($_value));
                     }
                     break; // Break switch handler.
 
@@ -1119,13 +1119,13 @@ class SubInserter extends AbsBase
                         $_value = $this->plugin->utils_enc->uunnciKey20Max();
                     }
                     if (isset($_value) && (!$_value || strlen($_value) > 20)) {
-                        $this->errors['invalid_sub_key'] = sprintf(__('Invalid key: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
+                        $this->errors['invalid_sub_key'] = sprintf(__('Invalid key: `%1$s`.', SLUG_TD), esc_html($_value));
                     } elseif ($this->is_insert && (!isset($_value) || !$_value || strlen($_value) > 20)) {
-                        $this->errors['invalid_sub_key'] = sprintf(__('Invalid key: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
+                        $this->errors['invalid_sub_key'] = sprintf(__('Invalid key: `%1$s`.', SLUG_TD), esc_html($_value));
                     } elseif ($this->is_update && $this->user_initiated && $this->ui_protected_data_keys_enable // Must have a matching key!
                                && (!isset($_value) || !$_value || strlen($_value) > 20 || !$this->sub || !$this->sub->key || $_value !== $this->sub->key)
                     ) {
-                        $this->errors['invalid_sub_key'] = sprintf(__('Invalid key: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
+                        $this->errors['invalid_sub_key'] = sprintf(__('Invalid key: `%1$s`.', SLUG_TD), esc_html($_value));
                     }
                     if ($this->is_update) { // If updating, always nullify the key now.
                         // Key changes may ONLY occur systematically; as seen in the section below.
@@ -1140,7 +1140,7 @@ class SubInserter extends AbsBase
                     }
                     if (empty($this->errors['invalid_sub_key'])) {
                         if (isset($_value) && (!$_value || strlen($_value) > 20)) {
-                            $this->errors['invalid_sub_key'] = sprintf(__('Invalid key: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
+                            $this->errors['invalid_sub_key'] = sprintf(__('Invalid key: `%1$s`.', SLUG_TD), esc_html($_value));
                         }
                     }
                     break; // Break switch handler.
@@ -1162,9 +1162,9 @@ class SubInserter extends AbsBase
                         $_value = $this->user->ID;
                     }
                     if (isset($_value) && ($_value < 0 || strlen((string) $_value) > 20)) {
-                        $this->errors['invalid_sub_user_id'] = sprintf(__('Invalid user ID: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
+                        $this->errors['invalid_sub_user_id'] = sprintf(__('Invalid user ID: `%1$s`.', SLUG_TD), esc_html($_value));
                     } elseif ($this->is_insert && (!isset($_value) || $_value < 0 || strlen((string) $_value) > 20)) {
-                        $this->errors['invalid_sub_user_id'] = sprintf(__('Invalid user ID: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
+                        $this->errors['invalid_sub_user_id'] = sprintf(__('Invalid user ID: `%1$s`.', SLUG_TD), esc_html($_value));
                     }
                     break; // Break switch handler.
 
@@ -1177,13 +1177,13 @@ class SubInserter extends AbsBase
                         $_value = 0; // Use a default value.
                     }
                     if (isset($_value) && ($_value < 1 || strlen((string) $_value) > 20)) {
-                        $this->errors['invalid_sub_post_id'] = sprintf(__('Invalid post ID: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
+                        $this->errors['invalid_sub_post_id'] = sprintf(__('Invalid post ID: `%1$s`.', SLUG_TD), esc_html($_value));
                     } elseif ($this->is_insert && (!isset($_value) || $_value < 1 || strlen((string) $_value) > 20)) {
-                        $this->errors['invalid_sub_post_id'] = sprintf(__('Invalid post ID: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
+                        $this->errors['invalid_sub_post_id'] = sprintf(__('Invalid post ID: `%1$s`.', SLUG_TD), esc_html($_value));
                     } elseif ($this->user_initiated && $this->ui_protected_data_keys_enable && ($_post = get_post($_value))
                                && (in_array($_post->post_status, ['future', 'draft', 'pending', 'private'], true) || ($_post->post_password && post_password_required($_post)))
                     ) {
-                        $this->errors['invalid_sub_post_id'] = sprintf(__('Invalid post ID: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
+                        $this->errors['invalid_sub_post_id'] = sprintf(__('Invalid post ID: `%1$s`.', SLUG_TD), esc_html($_value));
                     }
                     break; // Break switch handler.
 
@@ -1196,9 +1196,9 @@ class SubInserter extends AbsBase
                         $_value = 0; // Use a default value.
                     }
                     if (isset($_value) && ($_value < 0 || strlen((string) $_value) > 20)) {
-                        $this->errors['invalid_sub_comment_id'] = sprintf(__('Invalid comment ID: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
+                        $this->errors['invalid_sub_comment_id'] = sprintf(__('Invalid comment ID: `%1$s`.', SLUG_TD), esc_html($_value));
                     } elseif ($this->is_insert && (!isset($_value) || $_value < 0 || strlen((string) $_value) > 20)) {
-                        $this->errors['invalid_sub_comment_id'] = sprintf(__('Invalid comment ID: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
+                        $this->errors['invalid_sub_comment_id'] = sprintf(__('Invalid comment ID: `%1$s`.', SLUG_TD), esc_html($_value));
                     }
                     break; // Break switch handler.
 
@@ -1211,9 +1211,9 @@ class SubInserter extends AbsBase
                         $_value = 'asap'; // Use a default value.
                     }
                     if (isset($_value) && !in_array($_value, ['asap', 'hourly', 'daily', 'weekly'], true)) {
-                        $this->errors['invalid_sub_delivery_option'] = sprintf(__('Invalid delivery option: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
+                        $this->errors['invalid_sub_delivery_option'] = sprintf(__('Invalid delivery option: `%1$s`.', SLUG_TD), esc_html($_value));
                     } elseif ($this->is_insert && (!isset($_value) || !in_array($_value, ['asap', 'hourly', 'daily', 'weekly'], true))) {
-                        $this->errors['invalid_sub_delivery_option'] = sprintf(__('Invalid delivery option: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
+                        $this->errors['invalid_sub_delivery_option'] = sprintf(__('Invalid delivery option: `%1$s`.', SLUG_TD), esc_html($_value));
                     }
                     break; // Break switch handler.
 
@@ -1244,9 +1244,9 @@ class SubInserter extends AbsBase
                         $_value = $this->plugin->utils_string->cleanName($_value);
                     }
                     if (isset($_value) && strlen($_value) > 50) {
-                        $this->errors['invalid_sub_first_name'] = sprintf(__('Invalid first name: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
+                        $this->errors['invalid_sub_first_name'] = sprintf(__('Invalid first name: `%1$s`.', SLUG_TD), esc_html($_value));
                     } elseif ($this->is_insert && (!isset($_value) || strlen($_value) > 50)) {
-                        $this->errors['invalid_sub_first_name'] = sprintf(__('Invalid first name: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
+                        $this->errors['invalid_sub_first_name'] = sprintf(__('Invalid first name: `%1$s`.', SLUG_TD), esc_html($_value));
                     }
                     break; // Break switch handler.
 
@@ -1268,9 +1268,9 @@ class SubInserter extends AbsBase
                         $_value = $this->plugin->utils_string->cleanName($_value);
                     }
                     if (isset($_value) && strlen($_value) > 100) {
-                        $this->errors['invalid_sub_last_name'] = sprintf(__('Invalid last name: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
+                        $this->errors['invalid_sub_last_name'] = sprintf(__('Invalid last name: `%1$s`.', SLUG_TD), esc_html($_value));
                     } elseif ($this->is_insert && (!isset($_value) || strlen($_value) > 100)) {
-                        $this->errors['invalid_sub_last_name'] = sprintf(__('Invalid last name: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
+                        $this->errors['invalid_sub_last_name'] = sprintf(__('Invalid last name: `%1$s`.', SLUG_TD), esc_html($_value));
                     }
                     break; // Break switch handler.
 
@@ -1289,11 +1289,11 @@ class SubInserter extends AbsBase
                     //	$_value = $this->user->user_email;
 
                     if (isset($_value) && (!$_value || !is_email($_value) || strlen($_value) > 100)) {
-                        $this->errors['invalid_sub_email'] = sprintf(__('Invalid email address: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
+                        $this->errors['invalid_sub_email'] = sprintf(__('Invalid email address: `%1$s`.', SLUG_TD), esc_html($_value));
                     } elseif ($this->is_insert && (!isset($_value) || !$_value || !is_email($_value) || strlen($_value) > 100)) {
-                        $this->errors['invalid_sub_email'] = sprintf(__('Invalid email address: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
+                        $this->errors['invalid_sub_email'] = sprintf(__('Invalid email address: `%1$s`.', SLUG_TD), esc_html($_value));
                     } elseif (isset($_value) && $this->check_blacklist && $this->plugin->utils_sub->emailIsBlacklisted($_value)) {
-                        $this->errors['blacklisted_sub_email'] = sprintf(__('Blacklisted email address: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
+                        $this->errors['blacklisted_sub_email'] = sprintf(__('Blacklisted email address: `%1$s`.', SLUG_TD), esc_html($_value));
                     }
                     break; // Break switch handler.
 
@@ -1326,9 +1326,9 @@ class SubInserter extends AbsBase
                         $_value = $this->coalesce($this->sub->insertion_ip, $this->sub->last_ip);
                     }
                     if (isset($_value) && strlen($_value) > 39) {
-                        $this->errors['invalid_sub_insertion_ip'] = sprintf(__('Invalid insertion IP: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
+                        $this->errors['invalid_sub_insertion_ip'] = sprintf(__('Invalid insertion IP: `%1$s`.', SLUG_TD), esc_html($_value));
                     } elseif ($this->is_insert && (!isset($_value) || strlen($_value) > 39)) {
-                        $this->errors['invalid_sub_insertion_ip'] = sprintf(__('Invalid insertion IP: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
+                        $this->errors['invalid_sub_insertion_ip'] = sprintf(__('Invalid insertion IP: `%1$s`.', SLUG_TD), esc_html($_value));
                     }
                     break; // Break switch handler.
 
@@ -1364,9 +1364,9 @@ class SubInserter extends AbsBase
                         $_value = $this->plugin->utils_ip->region($this->coalesce($this->sub->insertion_ip, $this->sub->last_ip));
                     }
                     if (isset($_value) && strlen($_value) > 2) {
-                        $this->errors['invalid_sub_insertion_region'] = sprintf(__('Invalid insertion region: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
+                        $this->errors['invalid_sub_insertion_region'] = sprintf(__('Invalid insertion region: `%1$s`.', SLUG_TD), esc_html($_value));
                     } elseif ($this->is_insert && (!isset($_value) || strlen($_value) > 2)) {
-                        $this->errors['invalid_sub_insertion_region'] = sprintf(__('Invalid insertion region: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
+                        $this->errors['invalid_sub_insertion_region'] = sprintf(__('Invalid insertion region: `%1$s`.', SLUG_TD), esc_html($_value));
                     }
                     break; // Break switch handler.
 
@@ -1402,9 +1402,9 @@ class SubInserter extends AbsBase
                         $_value = $this->plugin->utils_ip->country($this->coalesce($this->sub->insertion_ip, $this->sub->last_ip));
                     }
                     if (isset($_value) && strlen($_value) > 2) {
-                        $this->errors['invalid_sub_insertion_country'] = sprintf(__('Invalid insertion country: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
+                        $this->errors['invalid_sub_insertion_country'] = sprintf(__('Invalid insertion country: `%1$s`.', SLUG_TD), esc_html($_value));
                     } elseif ($this->is_insert && (!isset($_value) || strlen($_value) > 2)) {
-                        $this->errors['invalid_sub_insertion_country'] = sprintf(__('Invalid insertion country: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
+                        $this->errors['invalid_sub_insertion_country'] = sprintf(__('Invalid insertion country: `%1$s`.', SLUG_TD), esc_html($_value));
                     }
                     break; // Break switch handler.
 
@@ -1434,9 +1434,9 @@ class SubInserter extends AbsBase
                         $_value = $this->coalesce($this->sub->last_ip, $this->sub->insertion_ip);
                     }
                     if (isset($_value) && strlen($_value) > 39) {
-                        $this->errors['invalid_sub_last_ip'] = sprintf(__('Invalid last IP: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
+                        $this->errors['invalid_sub_last_ip'] = sprintf(__('Invalid last IP: `%1$s`.', SLUG_TD), esc_html($_value));
                     } elseif ($this->is_insert && (!isset($_value) || strlen($_value) > 39)) {
-                        $this->errors['invalid_sub_last_ip'] = sprintf(__('Invalid last IP: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
+                        $this->errors['invalid_sub_last_ip'] = sprintf(__('Invalid last IP: `%1$s`.', SLUG_TD), esc_html($_value));
                     }
                     break; // Break switch handler.
 
@@ -1466,9 +1466,9 @@ class SubInserter extends AbsBase
                         $_value = $this->plugin->utils_ip->region($this->coalesce($this->sub->last_ip, $this->sub->insertion_ip));
                     }
                     if (isset($_value) && strlen($_value) > 2) {
-                        $this->errors['invalid_sub_last_region'] = sprintf(__('Invalid last region: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
+                        $this->errors['invalid_sub_last_region'] = sprintf(__('Invalid last region: `%1$s`.', SLUG_TD), esc_html($_value));
                     } elseif ($this->is_insert && (!isset($_value) || strlen($_value) > 2)) {
-                        $this->errors['invalid_sub_last_region'] = sprintf(__('Invalid last region: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
+                        $this->errors['invalid_sub_last_region'] = sprintf(__('Invalid last region: `%1$s`.', SLUG_TD), esc_html($_value));
                     }
                     break; // Break switch handler.
 
@@ -1498,9 +1498,9 @@ class SubInserter extends AbsBase
                         $_value = $this->plugin->utils_ip->country($this->coalesce($this->sub->last_ip, $this->sub->insertion_ip));
                     }
                     if (isset($_value) && strlen($_value) > 2) {
-                        $this->errors['invalid_sub_last_country'] = sprintf(__('Invalid last country: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
+                        $this->errors['invalid_sub_last_country'] = sprintf(__('Invalid last country: `%1$s`.', SLUG_TD), esc_html($_value));
                     } elseif ($this->is_insert && (!isset($_value) || strlen($_value) > 2)) {
-                        $this->errors['invalid_sub_last_country'] = sprintf(__('Invalid last country: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
+                        $this->errors['invalid_sub_last_country'] = sprintf(__('Invalid last country: `%1$s`.', SLUG_TD), esc_html($_value));
                     }
                     break; // Break switch handler.
 
@@ -1520,15 +1520,15 @@ class SubInserter extends AbsBase
                         }
                     }
                     if (isset($_value) && !in_array($_value, ['unconfirmed', 'subscribed', 'suspended', 'trashed'], true)) {
-                        $this->errors['invalid_sub_status'] = sprintf(__('Invalid status: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
+                        $this->errors['invalid_sub_status'] = sprintf(__('Invalid status: `%1$s`.', SLUG_TD), esc_html($_value));
                     } elseif ($this->is_insert && (!isset($_value) || !in_array($_value, ['unconfirmed', 'subscribed', 'suspended', 'trashed'], true))) {
-                        $this->errors['invalid_sub_status'] = sprintf(__('Invalid status: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
+                        $this->errors['invalid_sub_status'] = sprintf(__('Invalid status: `%1$s`.', SLUG_TD), esc_html($_value));
                     } elseif ($this->is_insert && $this->user_initiated && $this->ui_protected_data_keys_enable && $_value !== 'unconfirmed') {
-                        $this->errors['invalid_sub_status'] = sprintf(__('Invalid status: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
+                        $this->errors['invalid_sub_status'] = sprintf(__('Invalid status: `%1$s`.', SLUG_TD), esc_html($_value));
                     } elseif ($this->is_update && isset($_value) && $this->user_initiated && $this->ui_protected_data_keys_enable
                                && !in_array($_value, ['unconfirmed', 'subscribed', 'suspended'], true) // Cannot `trash` themselves.
                     ) {
-                        $this->errors['invalid_sub_status'] = sprintf(__('Invalid status: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
+                        $this->errors['invalid_sub_status'] = sprintf(__('Invalid status: `%1$s`.', SLUG_TD), esc_html($_value));
                     }
                     // However, they SHOULD be allowed to delete/unsubscribe; which is a separate issue altogether; i.e. not covered here.
 
@@ -1560,9 +1560,9 @@ class SubInserter extends AbsBase
                         $_value = time(); // Use a default value.
                     }
                     if (isset($_value) && strlen((string) $_value) !== 10) {
-                        $this->errors['invalid_sub_insertion_time'] = sprintf(__('Invalid insertion time: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
+                        $this->errors['invalid_sub_insertion_time'] = sprintf(__('Invalid insertion time: `%1$s`.', SLUG_TD), esc_html($_value));
                     } elseif ($this->is_insert && (!isset($_value) || strlen((string) $_value) !== 10)) {
-                        $this->errors['invalid_sub_insertion_time'] = sprintf(__('Invalid insertion time: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
+                        $this->errors['invalid_sub_insertion_time'] = sprintf(__('Invalid insertion time: `%1$s`.', SLUG_TD), esc_html($_value));
                     }
                     break; // Break switch handler.
 
@@ -1583,9 +1583,9 @@ class SubInserter extends AbsBase
                         $_value = time(); // Update time.
                     }
                     if (isset($_value) && strlen((string) $_value) !== 10) {
-                        $this->errors['invalid_sub_last_update_time'] = sprintf(__('Invalid last update time: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
+                        $this->errors['invalid_sub_last_update_time'] = sprintf(__('Invalid last update time: `%1$s`.', SLUG_TD), esc_html($_value));
                     } elseif ($this->is_insert && (!isset($_value) || strlen((string) $_value) !== 10)) {
-                        $this->errors['invalid_sub_last_update_time'] = sprintf(__('Invalid last update time: `%1$s`.', $this->plugin->text_domain), esc_html($_value));
+                        $this->errors['invalid_sub_last_update_time'] = sprintf(__('Invalid last update time: `%1$s`.', SLUG_TD), esc_html($_value));
                     }
                     break; // Break switch handler.
             }

@@ -19,7 +19,7 @@ namespace WebSharks\CommentMail\Pro;
 
 <div class="comment-sso-ops">
     <span class="csso-label">
-        <?php echo __('Login with:', $plugin->text_domain); ?>
+        <?php echo __('Login with:', SLUG_TD); ?>
     </span>
     <?php foreach ($sso_services as $_sso_service) : ?>
         <a href="<?php echo esc_attr($plugin->utils_url->ssoActionUrl($_sso_service)); ?>" class="<?php echo esc_attr('csso-link csso-'.$_sso_service); ?>"></a>

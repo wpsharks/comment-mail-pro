@@ -671,7 +671,7 @@ class QueueProcessor extends AbsBase
                " WHERE `ID` = '".esc_sql($entry_props->entry->ID)."'";
 
         if (!$this->plugin->utils_db->wp->query($sql)) {
-            throw new \exception(__('Update failure.', $this->plugin->text_domain));
+            throw new \exception(__('Update failure.', SLUG_TD));
         }
         $entry_props->entry->hold_until_time = $entry_hold_until_time;
         $entry_props->held                   = true; // Flag as `TRUE` now.

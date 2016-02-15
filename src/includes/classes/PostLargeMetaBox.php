@@ -48,8 +48,8 @@ class PostLargeMetaBox extends AbsBase
     {
         $post_comment_status = $this->plugin->utils_db->postCommentStatusI18n($this->post->comment_status);
 
-        echo '<div class="'.esc_attr($this->plugin->slug.'-menu-page-area').'">'."\n";
-        echo __('Coming soon...', $this->plugin->text_domain);
+        echo '<div class="'.esc_attr(SLUG_TD.'-menu-page-area').'">'."\n";
+        echo __('Coming soon...', SLUG_TD);
         echo '</div>';
 
         if ($post_comment_status !== 'open' && !$this->post->comment_count) {

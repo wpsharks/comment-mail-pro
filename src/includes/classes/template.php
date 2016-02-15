@@ -81,14 +81,14 @@ class Template extends AbsBase
             $this->type = $this->plugin->options['template_type'];
         }
         if (!$this->type) { // Empty type property?
-            throw new \exception(__('Empty type.', $this->plugin->text_domain));
+            throw new \exception(__('Empty type.', SLUG_TD));
         }
         $this->file = (string) $file; // Initialize.
         $this->file = $this->plugin->utils_string->trimDeep($this->file, '', '/');
         $this->file = $this->plugin->utils_fs->nSeps($this->file);
 
         if (!$this->file) { // Empty file property?
-            throw new \exception(__('Empty file.', $this->plugin->text_domain));
+            throw new \exception(__('Empty file.', SLUG_TD));
         }
         $this->snippet_sub_dir = dirname($this->file).'/snippet';
         $this->force_default   = (boolean) $force_default;
@@ -317,8 +317,8 @@ class Template extends AbsBase
 
         $dirs = []; // Initialize.
         // e.g. `wp-content/themes/[theme]/[plugin slug]/type-a/[site/comment-form/file.php]`
-        $dirs[] = get_stylesheet_directory().'/'.$this->plugin->slug.'/type-'.$this->type;
-        $dirs[] = get_template_directory().'/'.$this->plugin->slug.'/type-'.$this->type;
+        $dirs[] = get_stylesheet_directory().'/'.SLUG_TD.'/type-'.$this->type;
+        $dirs[] = get_template_directory().'/'.SLUG_TD.'/type-'.$this->type;
 
         foreach ($dirs as $_dir /* In order of precedence. */) { // Note: don't check `filesize()` here; templates CAN be empty.
             if (is_file($_dir.'/'.$this->file) && is_readable($_dir.'/'.$this->file)) {
@@ -349,7 +349,7 @@ class Template extends AbsBase
         }
         unset($_dir); // Housekeeping.
 
-        throw new \exception(sprintf(__('Missing template: `type-%1$s/%2$s`.', $this->plugin->text_domain), $this->type, $this->file));
+        throw new \exception(sprintf(__('Missing template: `type-%1$s/%2$s`.', SLUG_TD), $this->type, $this->file));
     }
 
     /**
@@ -372,8 +372,8 @@ class Template extends AbsBase
 
         $dirs = []; // Initialize.
         // e.g. `wp-content/themes/[theme]/[plugin slug]/type-a/[site/comment-form/snippet/file.php]`
-        $dirs[] = get_stylesheet_directory().'/'.$this->plugin->slug.'/type-'.$this->type.'/'.$this->snippet_sub_dir;
-        $dirs[] = get_template_directory().'/'.$this->plugin->slug.'/type-'.$this->type.'/'.$this->snippet_sub_dir;
+        $dirs[] = get_stylesheet_directory().'/'.SLUG_TD.'/type-'.$this->type.'/'.$this->snippet_sub_dir;
+        $dirs[] = get_template_directory().'/'.SLUG_TD.'/type-'.$this->type.'/'.$this->snippet_sub_dir;
 
         foreach ($dirs as $_dir /* In order of precedence. */) { // Note: don't check `filesize()` here; snippets CAN be empty.
             if (is_file($_dir.'/'.$file) && is_readable($_dir.'/'.$file)) {
@@ -404,7 +404,7 @@ class Template extends AbsBase
         }
         unset($_dir); // Housekeeping.
 
-        throw new \exception(sprintf(__('Missing snippet: `%1$s`.', $this->plugin->text_domain), 'type-'.$this->type.'/'.$this->snippet_sub_dir.'/'.$file));
+        throw new \exception(sprintf(__('Missing snippet: `%1$s`.', SLUG_TD), 'type-'.$this->type.'/'.$this->snippet_sub_dir.'/'.$file));
     }
 
     /**

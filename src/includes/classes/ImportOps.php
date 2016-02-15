@@ -93,7 +93,7 @@ class ImportOps extends AbsBase
      */
     protected function enqueueNoticesAndRedirect()
     {
-        $notice_markup = sprintf(__('<strong>Imported %1$s&trade; config. options successfully.</strong>', $this->plugin->text_domain), esc_html($this->plugin->name));
+        $notice_markup = sprintf(__('<strong>Imported %1$s&trade; config. options successfully.</strong>', SLUG_TD), esc_html(NAME));
 
         $this->plugin->enqueueUserNotice($notice_markup, ['transient' => true, 'for_page' => $this->plugin->utils_env->currentMenuPage()]);
 

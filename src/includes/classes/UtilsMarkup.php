@@ -133,7 +133,7 @@ class UtilsMarkup extends AbsBase
 
         $style = (string) $args['style'];
 
-        $post_total_comments_desc = sprintf(_n('%1$s Comment', '%1$s Comments', $post_total_comments, $this->plugin->text_domain), esc_html($post_total_comments));
+        $post_total_comments_desc = sprintf(_n('%1$s Comment', '%1$s Comments', $post_total_comments, SLUG_TD), esc_html($post_total_comments));
         $post_edit_comments_url   = $this->plugin->utils_url->postEditCommentsShort($post_id);
 
         return '<a href="'.esc_attr($post_edit_comments_url).'" class="pmp-post-com-count post-com-count" style="'.esc_attr($style).'" title="'.esc_attr($post_total_comments_desc).'">'.
@@ -169,7 +169,7 @@ class UtilsMarkup extends AbsBase
         $post_total_subs_label = $subscriptions // What should label contain?
             ? $this->plugin->utils_i18n->subscriptions($post_total_subs) : $post_total_subs;
 
-        $post_total_subs_desc = sprintf(_n('%1$s Subscription', '%1$s Subscriptions', $post_total_subs, $this->plugin->text_domain), esc_html($post_total_subs));
+        $post_total_subs_desc = sprintf(_n('%1$s Subscription', '%1$s Subscriptions', $post_total_subs, SLUG_TD), esc_html($post_total_subs));
         $post_edit_subs_url   = $this->plugin->utils_url->postEditSubsShort($post_id);
 
         return '<a href="'.esc_attr($post_edit_subs_url).'" class="pmp-post-sub-count" style="'.esc_attr($style).'" title="'.esc_attr($post_total_subs_desc).'">'.
@@ -231,7 +231,7 @@ class UtilsMarkup extends AbsBase
                 $_name_maybe .= ' '.$_sub->lname;
             }
             $last_x_email_lis[] = '<li>'.// Display varies based on arguments.
-                                  ' <i class="'.esc_attr('si si-'.$this->plugin->slug).'"></i> '.
+                                  ' <i class="'.esc_attr('si si-'.SLUG_TD).'"></i> '.
                                   $this->nameEmail($_name_maybe, $_sub->email, $name_email_args).'</a>'.
                                   '</li>';
         }
@@ -239,7 +239,7 @@ class UtilsMarkup extends AbsBase
 
         if (empty($last_x_email_lis)) { // If no results, add a no subscriptions message.
             $last_x_email_lis[] = '<li style="font-style:italic;">'.
-                                  ' '.__('No subscriptions at this time.', $this->plugin->text_domain).
+                                  ' '.__('No subscriptions at this time.', SLUG_TD).
                                   '</li>';
         }
         return '<ul class="pmp-last-x-sub-emails pmp-clean-list-items" style="'.esc_attr($list_style).'">'.
@@ -309,7 +309,7 @@ class UtilsMarkup extends AbsBase
             }
             $options .= '<option value="'.esc_attr($_user->ID).'"'.$_selected.'>'.
                         '  '.esc_html(
-                            __('User', $this->plugin->text_domain).' ID #'.$_user->ID.
+                            __('User', SLUG_TD).' ID #'.$_user->ID.
                             ' :: '.$_user->user_login.// The user's username; i.e. what they log in with.
                             ' :: "'.$_user->display_name.'"'.($display_emails ? ' <'.$_user->user_email.'>' : '')
                         ).
@@ -320,7 +320,7 @@ class UtilsMarkup extends AbsBase
         if ($allow_arbitrary) { // Allow arbitrary select option?
             if (!isset($selected_user_id) && isset($current_user_id) && $current_user_id > 0) {
                 $options .= '<option value="'.esc_attr($current_user_id).'" selected="selected">'.
-                            '  '.esc_html(__('User', $this->plugin->text_domain).' ID #'.$current_user_id).
+                            '  '.esc_html(__('User', SLUG_TD).' ID #'.$current_user_id).
                             '</option>';
             }
         }
@@ -391,7 +391,7 @@ class UtilsMarkup extends AbsBase
         if ($allow_empty) { // Allow empty selection?
             $options = '<option value="0"></option>';
         }
-        $default_post_type_label = __('Post', $this->plugin->text_domain);
+        $default_post_type_label = __('Post', SLUG_TD);
 
         foreach ($posts as $_post) { // Iterate posts.
             $_selected = ''; // Initialize.
@@ -409,14 +409,14 @@ class UtilsMarkup extends AbsBase
                 $options .= '<option value="'.esc_attr($_post->ID).'"'.$_selected.'>'.
                             '  '.esc_html(
                                 $_post_type->labels->singular_name.' #'.$_post->ID.':'.
-                                ' '.($_post->post_title ? $_post->post_title : __('Untitled', $this->plugin->text_domain))
+                                ' '.($_post->post_title ? $_post->post_title : __('Untitled', SLUG_TD))
                             ).
                             '</option>';
             } else { // Front-end display should be friendlier in some ways.
                 $options .= '<option value="'.esc_attr($_post->ID).'"'.$_selected.'>'.
                             '  '.esc_html(
                                 $this->plugin->utils_date->i18n('M jS, Y', strtotime($_post->post_date_gmt)).
-                                ' — '.($_post->post_title ? $_post->post_title : __('Untitled', $this->plugin->text_domain))
+                                ' — '.($_post->post_title ? $_post->post_title : __('Untitled', SLUG_TD))
                             ).
                             '</option>';
             }
@@ -426,7 +426,7 @@ class UtilsMarkup extends AbsBase
         if ($allow_arbitrary) { // Allow arbitrary select option?
             if (!isset($selected_post_id) && isset($current_post_id) && $current_post_id > 0) {
                 $options .= '<option value="'.esc_attr($current_post_id).'" selected="selected">'.
-                            '  '.esc_html(__('Post', $this->plugin->text_domain).' ID #'.$current_post_id).
+                            '  '.esc_html(__('Post', SLUG_TD).' ID #'.$current_post_id).
                             '</option>';
             }
         }
@@ -504,7 +504,7 @@ class UtilsMarkup extends AbsBase
         }
         $options = ''; // Initialize.
         if ($allow_empty) { // Allow empty selection?
-            $options = '<option value="0">'.__('— All Comments/Replies —', $this->plugin->text_domain).'</option>';
+            $options = '<option value="0">'.__('— All Comments/Replies —', SLUG_TD).'</option>';
         }
         foreach ($comments as $_comment) { // Iterate comments.
             $_selected = ''; // Initialize.
@@ -537,7 +537,7 @@ class UtilsMarkup extends AbsBase
         if ($allow_arbitrary) { // Allow arbitrary select option?
             if (!isset($selected_comment_id) && isset($current_comment_id) && $current_comment_id > 0) {
                 $options .= '<option value="'.esc_attr($current_comment_id).'" selected="selected">'.
-                            '  '.esc_html(__('Comment', $this->plugin->text_domain).' ID #'.$current_comment_id).
+                            '  '.esc_html(__('Comment', SLUG_TD).' ID #'.$current_comment_id).
                             '</option>';
             }
         }
@@ -843,13 +843,13 @@ class UtilsMarkup extends AbsBase
         $icon_prefix          = (boolean) $args['icon_prefix'];
         $for_wordpress_suffix = (boolean) $args['for_wordpress_suffix'];
 
-        $icon   = '<i class="'.esc_attr('si si-'.$this->plugin->slug).'"></i>';
+        $icon   = '<i class="'.esc_attr('si si-'.SLUG_TD).'"></i>';
         $anchor = '<a href="'.esc_attr($anchor_to).'" target="'.esc_attr($anchor_target).'" style="'.esc_attr($anchor_style).'">'.
-                  ($icon_prefix ? $icon.' ' : '').esc_html($this->plugin->name).'&trade;'.
+                  ($icon_prefix ? $icon.' ' : '').esc_html(NAME).'&trade;'.
                   '</a>';
-        $suffix = $for_wordpress_suffix ? ' '.__('for WordPress', $this->plugin->text_domain) : '';
+        $suffix = $for_wordpress_suffix ? ' '.__('for WordPress', SLUG_TD) : '';
 
-        return sprintf(__('Powered by %1$s', $this->plugin->text_domain), $anchor.$suffix);
+        return sprintf(__('Powered by %1$s', SLUG_TD), $anchor.$suffix);
     }
 
     /**
@@ -906,9 +906,9 @@ class UtilsMarkup extends AbsBase
     public function pmpPath()
     {
         $path = '<code class="pmp-path">';
-        $path .= __('WP Dashboard', $this->plugin->text_domain);
-        # $path .= ' &#10609; '.__('Comments', $this->plugin->text_domain);
-        $path .= ' &#10609; '.esc_html($this->plugin->name).'&trade;';
+        $path .= __('WP Dashboard', SLUG_TD);
+        # $path .= ' &#10609; '.__('Comments', SLUG_TD);
+        $path .= ' &#10609; '.esc_html(NAME).'&trade;';
 
         foreach (func_get_args() as $_path_name) {
             $path .= ' &#10609; '.(string) $_path_name;

@@ -17,8 +17,8 @@ namespace WebSharks\CommentMail\Pro;
 ?>
 <?php echo $form_fields->selectRow(
     array(
-        'placeholder'         => __('— All Comments/Replies —', $plugin->text_domain),
-        'label'               => __('<i class="fa fa-fw fa-comment-o"></i> Comment', $plugin->text_domain),
+        'placeholder'         => __('— All Comments/Replies —', SLUG_TD),
+        'label'               => __('<i class="fa fa-fw fa-comment-o"></i> Comment', SLUG_TD),
         'name'                => 'comment_id', 'required' => false, 'options' => '%%comments%%', 'post_id' => $post_id, 'current_value' => null,
         'input_fallback_args' => array('type' => 'number', 'maxlength' => 20, 'other_attrs' => 'min="1" max="18446744073709551615"', 'current_value_empty_on_0' => true),
     )

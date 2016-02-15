@@ -206,7 +206,7 @@ abstract class SsoServiceBase extends AbsBase
     {
         try { // Catch exceptions and log them for debugging.
             if (!($url = trim((string) $url))) {
-                throw new \exception(__('Empty authorization URL.', $this->plugin->text_domain));
+                throw new \exception(__('Empty authorization URL.', SLUG_TD));
             }
             wp_redirect($url);
             exit();
@@ -272,12 +272,12 @@ abstract class SsoServiceBase extends AbsBase
             }
             if ($user_exists) { // This user already exists?
                 if (!$this->plugin->utils_sso->autoLogin($this->service, $sso_id, $args)) {
-                    throw new \exception(__('Auto login failure.', $this->plugin->text_domain));
+                    throw new \exception(__('Auto login failure.', SLUG_TD));
                 }
                 goto redirect; // Perform redirection, the user is now logged-in.
             }
             if (!$this->plugin->utils_sso->autoRegisterLogin($this->service, $sso_id, $args)) {
-                throw new \exception(__('Auto register/login failure.', $this->plugin->text_domain));
+                throw new \exception(__('Auto register/login failure.', SLUG_TD));
             }
             redirect: // Target point; perform redirection.
 
@@ -290,7 +290,7 @@ abstract class SsoServiceBase extends AbsBase
             echo '   <head>';
             echo '      <meta charset="UTF-8" />';
             echo '      <meta name="viewport" content="width=device-width, initial-scale=1.0" />';
-            echo '      <title>'.__('Redirecting...', $this->plugin->text_domain).'</title>';
+            echo '      <title>'.__('Redirecting...', SLUG_TD).'</title>';
             echo '      <script type="text/javascript">';
 
             echo '         if(window.parent && window.parent !== window)'.
@@ -329,6 +329,6 @@ abstract class SsoServiceBase extends AbsBase
     {
         $this->plugin->utils_log->maybeDebug($exception);
 
-        exit(__('An unexpected error ocurred. Please start over and try again. Sorry!', $this->plugin->text_domain));
+        exit(__('An unexpected error ocurred. Please start over and try again. Sorry!', SLUG_TD));
     }
 }

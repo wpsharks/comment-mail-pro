@@ -120,7 +120,7 @@ class UtilsRve extends AbsBase
     public function endDivider()
     {
         return '<p style="float:left; display:none; overflow:hidden; margin:0; padding:0; font-size:0px; line-height:0px; max-height:0px; mso-hide:all;">'.
-               '!~~~end-rve--- '.__('reply above this line please', $this->plugin->text_domain).' ---end-rve~~~!'.
+               '!~~~end-rve--- '.__('reply above this line please', SLUG_TD).' ---end-rve~~~!'.
                '</p>';
     }
 
@@ -173,7 +173,7 @@ class UtilsRve extends AbsBase
         if ($pattern_name === 'wrote_by_line') { // Auto-generated `wrote:` line.
             return '(?i:.*?\s(?:wrote|writes|said|says)\:)'; // Variations.
         }
-        throw new \exception(__('Invalid `$pattern_name`.', $this->plugin->text_domain));
+        throw new \exception(__('Invalid `$pattern_name`.', SLUG_TD));
     }
 
     /**
@@ -515,7 +515,7 @@ class UtilsRve extends AbsBase
         $response = wp_remote_post(
             site_url('/wp-comments-post.php'),
             [
-                'user-agent' => $this->plugin->name.'/'.$this->plugin->version,
+                'user-agent' => NAME.'/'.VERSION,
                 'headers'    => [
                     'REMOTE_ADDR'          => $from_ip,
                     'HTTP_X_FORWARDED_FOR' => $from_ip,

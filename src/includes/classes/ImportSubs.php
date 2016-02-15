@@ -140,14 +140,14 @@ class ImportSubs extends AbsBase
             }
             if ($current_csv_line_index >= 1 && !$csv_headers) {
                 $this->errors[] = // Missing required headers.
-                    __('Missing first-line CSV headers; please try again.', $this->plugin->text_domain);
+                    __('Missing first-line CSV headers; please try again.', SLUG_TD);
                 break; // Stop here; we have no headers in this importation.
             }
             if ($current_csv_line_index >= 1 && !in_array('ID', $csv_headers, true)) {
                 if (!in_array('email', $csv_headers, true) || !in_array('post_id', $csv_headers, true)) {
                     $this->errors[] = // Missing required headers.
-                        __('First-line CSV headers MUST contain (at a minimum); one of:', $this->plugin->text_domain).
-                        ' '.__('<code>"ID"</code>, or <code>"email"</code> together with a <code>"post_id"</code>.', $this->plugin->text_domain);
+                        __('First-line CSV headers MUST contain (at a minimum); one of:', SLUG_TD).
+                        ' '.__('<code>"ID"</code>, or <code>"email"</code> together with a <code>"post_id"</code>.', SLUG_TD);
                     break; // Stop here; we have no headers in this importation.
                 }
             }
@@ -184,7 +184,7 @@ class ImportSubs extends AbsBase
                 ++$this->total_imported_subs; // Increment counter; this was a success.
             } elseif ($_sub_inserter->hasErrors()) { // If the inserter has errors for this line; report those.
                 $_sub_inserter_errors       = array_values($_sub_inserter->errors()); // Values only; discard keys.
-                $_sub_inserter_error_prefix = sprintf(__('_Line #%1$s:_', $this->plugin->text_domain), esc_html($current_csv_line_number));
+                $_sub_inserter_error_prefix = sprintf(__('_Line #%1$s:_', SLUG_TD), esc_html($current_csv_line_number));
 
                 foreach ($_sub_inserter_errors as &$_sub_inserter_error) {
                     $_sub_inserter_error = $_sub_inserter_error_prefix.' '.$_sub_inserter_error;
@@ -233,11 +233,11 @@ class ImportSubs extends AbsBase
     {
         $notice_markup = $error_markup = ''; // Initialize.
         $subs_i18n     = $this->plugin->utils_i18n->subscriptions($this->total_imported_subs); // e.g. `X subscription(s)`.
-        $notice_markup = sprintf(__('<strong>Imported %1$s successfully.</strong>', $this->plugin->text_domain), esc_html($subs_i18n));
+        $notice_markup = sprintf(__('<strong>Imported %1$s successfully.</strong>', SLUG_TD), esc_html($subs_i18n));
 
         if ($this->errors) {
             // Do we have errors to report also? If so, present these as individual list items.
-            $error_markup = __('<strong>The following errors were encountered during importation:</strong>', $this->plugin->text_domain);
+            $error_markup = __('<strong>The following errors were encountered during importation:</strong>', SLUG_TD);
             $error_markup .= '<ul class="pmp-list-items"><li>'.implode('</li><li>', $this->errorsHtml()).'</li></ul>';
         }
         if ($notice_markup) { // This really should always be displayed; even if we imported `0` subscriptions.

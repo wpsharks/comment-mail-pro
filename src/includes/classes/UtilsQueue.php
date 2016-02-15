@@ -75,7 +75,7 @@ class UtilsQueue extends AbsBase
                " WHERE `ID` = '".esc_sql($queue_id)."'";
 
         if (($deleted = $this->plugin->utils_db->wp->query($sql)) === false) {
-            throw new \exception(__('Deletion failure.', $this->plugin->text_domain));
+            throw new \exception(__('Deletion failure.', SLUG_TD));
         }
         return (boolean) $deleted; // Convert to boolean value.
     }

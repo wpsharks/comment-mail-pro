@@ -10,7 +10,9 @@ if (!defined('WPINC')) {
     exit('Do NOT access this file directly: '.basename(__FILE__));
 }
 require_once __DIR__.'/stub.php';
-require_once __DIR__.'/stcr.php';
-require_once __DIR__.'/api.php';
 
-$GLOBALS[GLOBAL_NS] = new Plugin();
+if (!Conflicts::check()) {
+    require_once __DIR__.'/stcr.php';
+    require_once __DIR__.'/api.php';
+    $GLOBALS[GLOBAL_NS] = new Plugin();
+}

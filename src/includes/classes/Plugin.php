@@ -47,112 +47,13 @@ class Plugin extends AbsBase
      */
 
     /**
-     * Identifies pro version.
-     *
-     * @since 141111 First documented version.
-     *
-     * @type bool `TRUE` for pro version.
-     */
-    public $is_pro = true;
-
-    /**
-     * Plugin name.
-     *
-     * @since 141111 First documented version.
-     *
-     * @type string Plugin name.
-     */
-    public $name = 'Comment Mail';
-
-    /**
-     * Plugin name (abbreviated).
-     *
-     * @since 141111 First documented version.
-     *
-     * @type string Plugin name (abbreviated).
-     */
-    public $short_name = 'CM';
-
-    /**
-     * Transient prefix.
-     *
-     * @since 141111 First documented version.
-     *
-     * @type string 8-character transient prefix.
-     */
-    public $transient_prefix = 'cmtmail_';
-
-    /**
-     * Query var prefix.
-     *
-     * @since 141111 First documented version.
-     *
-     * @type string Query var prefix.
-     */
-    public $qv_prefix = 'cm_';
-
-    /**
-     * Site name.
-     *
-     * @since 141111 First documented version.
-     *
-     * @type string Site name.
-     */
-    public $site_name = 'Comment-Mail.com';
-
-    /**
-     * Plugin product page URL.
-     *
-     * @since 141111 First documented version.
-     *
-     * @type string Plugin product page URL.
-     */
-    public $product_url = 'http://comment-mail.com';
-
-    /**
      * Used by the plugin's uninstall handler.
      *
      * @since 141111 Adding uninstall handler.
      *
-     * @type bool Defined by constructor.
+     * @type bool|null Defined by constructor.
      */
-    public $enable_hooks;
-
-    /**
-     * Text domain for translations; based on `GLOBAL_NS`.
-     *
-     * @since 141111 First documented version.
-     *
-     * @type string Defined by class constructor; for translations.
-     */
-    public $text_domain;
-
-    /**
-     * Plugin slug; based on `GLOBAL_NS`.
-     *
-     * @since 141111 First documented version.
-     *
-     * @type string Defined by constructor.
-     */
-    public $slug;
-
-    /**
-     * Stub `__FILE__` location.
-     *
-     * @since 141111 First documented version.
-     *
-     * @type string Defined by class constructor.
-     */
-    public $file;
-
-    /**
-     * Version string in YYMMDD[+build] format.
-     *
-     * @since 141111 First documented version.
-     *
-     * @type string Current version of the software.
-     */
-    public $version = '160215'; //version//
+    public $enable_hooks = null;
 
     /*
      * Public Properties (Defined @ Setup)
@@ -250,17 +151,19 @@ class Plugin extends AbsBase
     public function __construct($enable_hooks = true)
     {
         /*
+         * Global reference.
+         */
+        $GLOBALS[GLOBAL_NS] = $this;
+
+        /*
          * Parent constructor.
          */
-        $GLOBALS[GLOBAL_NS] = $this; // Global ref.
-        parent::__construct(); // Run parent constructor.
+        parent::__construct();
 
         /*
          * Initialize properties.
          */
         $this->enable_hooks = (boolean) $enable_hooks;
-        $this->text_domain  = $this->slug  = str_replace('_', '-', GLOBAL_NS);
-        $this->file         = dirname(dirname(dirname(dirname(__DIR__)))).'/plugin.php';
 
         /*
          * With or without hooks?
@@ -272,8 +175,8 @@ class Plugin extends AbsBase
          * Setup primary plugin hooks.
          */
         add_action('after_setup_theme', [$this, 'setup']);
-        register_activation_hook($this->file, [$this, 'activate']);
-        register_deactivation_hook($this->file, [$this, 'deactivate']);
+        register_activation_hook(PLUGIN_FILE, [$this, 'activate']);
+        register_deactivation_hook(PLUGIN_FILE, [$this, 'deactivate']);
     }
 
     /*
@@ -304,7 +207,7 @@ class Plugin extends AbsBase
         /*
          * Load the plugin's text domain for translations.
          */
-        load_plugin_textdomain($this->text_domain); // Translations.
+        load_plugin_textdomain(SLUG_TD); // Translations.
 
         /*
          * Load additional class dependencies.
@@ -327,7 +230,7 @@ class Plugin extends AbsBase
         $this->default_options = [
             # Core/systematic option keys.
 
-            'version'                  => $this->version,
+            'version'                  => VERSION,
             'crons_setup'              => '0', // `0` or timestamp.
             'stcr_transition_complete' => '0', // `0|1` transitioned?
 
@@ -688,7 +591,7 @@ class Plugin extends AbsBase
 
         add_action('admin_menu', [$this, 'addMenuPages'], 10);
         add_filter('set-screen-option', [$this, 'setScreenOption'], 10, 3);
-        add_filter('plugin_action_links_'.plugin_basename($this->file), [$this, 'addSettingsLink'], 10, 1);
+        add_filter('plugin_action_links_'.plugin_basename(PLUGIN_FILE), [$this, 'addSettingsLink'], 10, 1);
 
         add_filter('manage_users_columns', [$this, 'manageUsersColumns'], 10, 1);
         add_filter('manage_users_custom_column', [$this, 'manageUsersCustomColumn'], 10, 3);
@@ -830,7 +733,7 @@ class Plugin extends AbsBase
      */
     public function checkVersion()
     {
-        if (version_compare($this->options['version'], $this->version, '>=')) {
+        if (version_compare($this->options['version'], VERSION, '>=')) {
             return; // Nothing to do; already @ latest version.
         }
         new Upgrader(); // Upgrade handler.
@@ -919,8 +822,8 @@ class Plugin extends AbsBase
         if (!is_admin() || !empty($_REQUEST['action'])) {
             return; // Stay quiet in this case.
         }
-        $conflict = sprintf(__('<p style="font-size:120%%; font-weight:400; margin:0;"><strong>%1$s&trade;</strong> + <strong>Subscribe to Comments Reloaded</strong> = Possible Conflict!</p>', $this->text_domain), esc_html($this->name));
-        $conflict .= '<p style="margin:0;">'.sprintf(__('<strong>WARNING (ACTION REQUIRED):</strong> Running %1$s&trade; while Subscribe to Comments Reloaded is <em>also</em> an active WordPress plugin <strong>can cause problems</strong>; i.e., these two plugins do the same thing—%1$s being the newer of the two. We recommend keeping %1$s; please <a href="%2$s">deactivate the Subscribe to Comments Reloaded plugin</a> to get rid of this message.', $this->text_domain), esc_html($this->name), esc_html(admin_url('plugins.php'))).'</p>';
+        $conflict = sprintf(__('<p style="font-size:120%%; font-weight:400; margin:0;"><strong>%1$s&trade;</strong> + <strong>Subscribe to Comments Reloaded</strong> = Possible Conflict!</p>', SLUG_TD), esc_html(NAME));
+        $conflict .= '<p style="margin:0;">'.sprintf(__('<strong>WARNING (ACTION REQUIRED):</strong> Running %1$s&trade; while Subscribe to Comments Reloaded is <em>also</em> an active WordPress plugin <strong>can cause problems</strong>; i.e., these two plugins do the same thing—%1$s being the newer of the two. We recommend keeping %1$s; please <a href="%2$s">deactivate the Subscribe to Comments Reloaded plugin</a> to get rid of this message.', SLUG_TD), esc_html(NAME), esc_html(admin_url('plugins.php'))).'</p>';
         $this->enqueueError($conflict);
     }
 
@@ -943,8 +846,8 @@ class Plugin extends AbsBase
         if (!is_admin() || !empty($_REQUEST['action'])) {
             return; // Stay quiet in this case.
         }
-        $conflict = sprintf(__('<p style="font-size:120%%; font-weight:400; margin:0;"><strong>%1$s&trade;</strong> + <strong>Jetpack Subscriptions module</strong> (with Follow Comments enabled) = Possible Conflict!</p>', $this->text_domain), esc_html($this->name));
-        $conflict .= '<p style="margin:0;">'.sprintf(__('<strong>WARNING (ACTION REQUIRED):</strong> Running %1$s&trade; while the Jetpack Subscriptions module (with Follow Comments enabled) is <em>also</em> active in WordPress <strong>can cause problems</strong>; i.e., these two handle the same thing—%1$s being the newer of the two. We recommend keeping %1$s; please deactivate the Follow Comments functionality in the Jetpack Subscriptions module to get rid of this message (see <strong>Dashboard → Settings → Discussion → Jetpack Subscriptions Settings</strong>).', $this->text_domain), esc_html($this->name)).'</p>';
+        $conflict = sprintf(__('<p style="font-size:120%%; font-weight:400; margin:0;"><strong>%1$s&trade;</strong> + <strong>Jetpack Subscriptions module</strong> (with Follow Comments enabled) = Possible Conflict!</p>', SLUG_TD), esc_html(NAME));
+        $conflict .= '<p style="margin:0;">'.sprintf(__('<strong>WARNING (ACTION REQUIRED):</strong> Running %1$s&trade; while the Jetpack Subscriptions module (with Follow Comments enabled) is <em>also</em> active in WordPress <strong>can cause problems</strong>; i.e., these two handle the same thing—%1$s being the newer of the two. We recommend keeping %1$s; please deactivate the Follow Comments functionality in the Jetpack Subscriptions module to get rid of this message (see <strong>Dashboard → Settings → Discussion → Jetpack Subscriptions Settings</strong>).', SLUG_TD), esc_html(NAME)).'</p>';
         $this->enqueueError($conflict);
     }
 
@@ -1037,10 +940,10 @@ class Plugin extends AbsBase
         $icon = $this->utils_fs->inlineIconSvg();
 
         if (!$this->utils_env->isMenuPage('post-new.php')) {
-            add_meta_box(GLOBAL_NS.'_small', $icon.' '.$this->name.'&trade;', [$this, 'postSmallMetaBox'], $post_type, 'normal', 'default');
+            add_meta_box(GLOBAL_NS.'_small', $icon.' '.NAME.'&trade;', [$this, 'postSmallMetaBox'], $post_type, 'normal', 'default');
         }
         // @TODO disabling this for now.
-        //add_meta_box(GLOBAL_NS.'_large', $icon.' '.$this->name.'&trade; '.__('Subscriptions', $this->text_domain),
+        //add_meta_box(GLOBAL_NS.'_large', $icon.' '.NAME.'&trade; '.__('Subscriptions', SLUG_TD),
         //             array($this, 'postLargeMetaBox'), $post_type, 'normal', 'high');
     }
 
@@ -1105,7 +1008,7 @@ class Plugin extends AbsBase
         wp_enqueue_style('font-awesome', set_url_scheme('//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'), [], null, 'all');
         wp_enqueue_style('sharkicons', $this->utils_url->to('/src/vendor/websharks/sharkicons/src/short-classes.min.css'), [], null, 'all');
 
-        wp_enqueue_style(GLOBAL_NS, $this->utils_url->to('/src/client-s/css/menu-pages.min.css'), $deps, $this->version, 'all');
+        wp_enqueue_style(GLOBAL_NS, $this->utils_url->to('/src/client-s/css/menu-pages.min.css'), $deps, VERSION, 'all');
     }
 
     /**
@@ -1127,7 +1030,7 @@ class Plugin extends AbsBase
         wp_enqueue_style('font-awesome', set_url_scheme('//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'), [], null, 'all');
         wp_enqueue_style('sharkicons', $this->utils_url->to('/src/vendor/websharks/sharkicons/src/short-classes.min.css'), [], null, 'all');
 
-        wp_enqueue_style(GLOBAL_NS, $this->utils_url->to('/src/client-s/css/menu-pages.min.css'), $deps, $this->version, 'all');
+        wp_enqueue_style(GLOBAL_NS, $this->utils_url->to('/src/client-s/css/menu-pages.min.css'), $deps, VERSION, 'all');
     }
 
     /**
@@ -1161,7 +1064,7 @@ class Plugin extends AbsBase
         wp_enqueue_script('jquery-datetimepicker', $this->utils_url->to('/src/vendor/package/datetimepicker/jquery.datetimepicker.js'), ['jquery'], null, true);
         wp_enqueue_script('chosen', set_url_scheme('//cdnjs.cloudflare.com/ajax/libs/chosen/1.1.0/chosen.jquery.min.js'), ['jquery'], null, true);
 
-        wp_enqueue_script(GLOBAL_NS, $this->utils_url->to('/src/client-s/js/menu-pages.min.js'), $deps, $this->version, true);
+        wp_enqueue_script(GLOBAL_NS, $this->utils_url->to('/src/client-s/js/menu-pages.min.js'), $deps, VERSION, true);
 
         wp_localize_script(
             GLOBAL_NS,
@@ -1176,34 +1079,34 @@ class Plugin extends AbsBase
             GLOBAL_NS,
             GLOBAL_NS.'_i18n',
             [
-                'bulkReconfirmConfirmation' => __('Resend email confirmation link? Are you sure?', $this->text_domain),
+                'bulkReconfirmConfirmation' => __('Resend email confirmation link? Are you sure?', SLUG_TD),
                 'bulkDeleteConfirmation'    => $this->utils_env->isMenuPage('*_event_log')
                     ? $this->utils_i18n->logEntryJsDeletionConfirmationWarning()
-                    : __('Delete permanently? Are you sure?', $this->text_domain),
+                    : __('Delete permanently? Are you sure?', SLUG_TD),
                 'dateTimePickerI18n' => [
                     'en' => [
                         'months' => [
-                            __('January', $this->text_domain),
-                            __('February', $this->text_domain),
-                            __('March', $this->text_domain),
-                            __('April', $this->text_domain),
-                            __('May', $this->text_domain),
-                            __('June', $this->text_domain),
-                            __('July', $this->text_domain),
-                            __('August', $this->text_domain),
-                            __('September', $this->text_domain),
-                            __('October', $this->text_domain),
-                            __('November', $this->text_domain),
-                            __('December', $this->text_domain),
+                            __('January', SLUG_TD),
+                            __('February', SLUG_TD),
+                            __('March', SLUG_TD),
+                            __('April', SLUG_TD),
+                            __('May', SLUG_TD),
+                            __('June', SLUG_TD),
+                            __('July', SLUG_TD),
+                            __('August', SLUG_TD),
+                            __('September', SLUG_TD),
+                            __('October', SLUG_TD),
+                            __('November', SLUG_TD),
+                            __('December', SLUG_TD),
                         ],
                         'dayOfWeek' => [
-                            __('Sun', $this->text_domain),
-                            __('Mon', $this->text_domain),
-                            __('Tue', $this->text_domain),
-                            __('Wed', $this->text_domain),
-                            __('Thu', $this->text_domain),
-                            __('Fri', $this->text_domain),
-                            __('Sat', $this->text_domain),
+                            __('Sun', SLUG_TD),
+                            __('Mon', SLUG_TD),
+                            __('Tue', SLUG_TD),
+                            __('Wed', SLUG_TD),
+                            __('Thu', SLUG_TD),
+                            __('Fri', SLUG_TD),
+                            __('Sat', SLUG_TD),
                         ],
                     ],
                 ],
@@ -1241,8 +1144,8 @@ class Plugin extends AbsBase
 
         /* ----------------------------------------- */
 
-        $_menu_title                      = $this->name.' <sup style="font-size:60%; line-height:1;">Pro</sup>';
-        $_page_title                      = $this->name.'&trade;';
+        $_menu_title                      = NAME.' <sup style="font-size:60%; line-height:1;">Pro</sup>';
+        $_page_title                      = NAME.'&trade;';
         $_menu_position                   = apply_filters(__METHOD__.'_position', '25.00001');
         $this->menu_page_hooks[GLOBAL_NS] = add_menu_page($_page_title, $_menu_title, $this->cap, GLOBAL_NS, [$this, 'menuPageOptions'], 'data:image/svg+xml;base64,'.base64_encode($icon), $_menu_position);
         add_action('load-'.$this->menu_page_hooks[GLOBAL_NS], [$this, 'menuPageOptionsScreen']);
@@ -1251,27 +1154,27 @@ class Plugin extends AbsBase
 
         /* ----------------------------------------- */
 
-        $_menu_title = __('Config. Options', $this->text_domain);
-        $_page_title = $this->name.'&trade; &#10609; '.__('Config. Options', $this->text_domain);
+        $_menu_title = __('Config. Options', SLUG_TD);
+        $_page_title = NAME.'&trade; &#10609; '.__('Config. Options', SLUG_TD);
         add_submenu_page(GLOBAL_NS, $_page_title, $_menu_title, $this->cap, GLOBAL_NS, [$this, 'menuPageOptions']);
 
         $_menu_title = // Visible on-demand only.
-            '<small><em>'.$child_branch_indent.__('Import/Export', $this->text_domain).'</em></small>';
-        $_page_title = $this->name.'&trade; &#10609; '.__('Import/Export', $this->text_domain);
+            '<small><em>'.$child_branch_indent.__('Import/Export', SLUG_TD).'</em></small>';
+        $_page_title = NAME.'&trade; &#10609; '.__('Import/Export', SLUG_TD);
         //$_menu_parent                                          = $current_menu_page === GLOBAL_NS.'_import_export' ? GLOBAL_NS : NULL;
         $this->menu_page_hooks[GLOBAL_NS.'_import_export'] = add_submenu_page(GLOBAL_NS, $_page_title, $_menu_title, $this->cap, GLOBAL_NS.'_import_export', [$this, 'menuPageImportExport']);
         add_action('load-'.$this->menu_page_hooks[GLOBAL_NS.'_import_export'], [$this, 'menuPageImportExportScreen']);
 
         $_menu_title = // Visible on-demand only.
-            '<small><em>'.$child_branch_indent.__('Email Templates', $this->text_domain).'</em></small>';
-        $_page_title = $this->name.'&trade; &#10609; '.__('Email Templates', $this->text_domain);
+            '<small><em>'.$child_branch_indent.__('Email Templates', SLUG_TD).'</em></small>';
+        $_page_title = NAME.'&trade; &#10609; '.__('Email Templates', SLUG_TD);
         //$_menu_parent                                            = $current_menu_page === GLOBAL_NS.'_email_templates' ? GLOBAL_NS : NULL;
         $this->menu_page_hooks[GLOBAL_NS.'_email_templates'] = add_submenu_page(GLOBAL_NS, $_page_title, $_menu_title, $this->cap, GLOBAL_NS.'_email_templates', [$this, 'menuPageEmailTemplates']);
         add_action('load-'.$this->menu_page_hooks[GLOBAL_NS.'_email_templates'], [$this, 'menuPageEmailTemplatesScreen']);
 
         $_menu_title = // Visible on-demand only.
-            '<small><em>'.$child_branch_indent.__('Site Templates', $this->text_domain).'</em></small>';
-        $_page_title = $this->name.'&trade; &#10609; '.__('Site Templates', $this->text_domain);
+            '<small><em>'.$child_branch_indent.__('Site Templates', SLUG_TD).'</em></small>';
+        $_page_title = NAME.'&trade; &#10609; '.__('Site Templates', SLUG_TD);
         //$_menu_parent                                           = $current_menu_page === GLOBAL_NS.'_site_templates' ? GLOBAL_NS : NULL;
         $this->menu_page_hooks[GLOBAL_NS.'_site_templates'] = add_submenu_page(GLOBAL_NS, $_page_title, $_menu_title, $this->cap, GLOBAL_NS.'_site_templates', [$this, 'menuPageSiteTemplates']);
         add_action('load-'.$this->menu_page_hooks[GLOBAL_NS.'_site_templates'], [$this, 'menuPageSiteTemplatesScreen']);
@@ -1280,13 +1183,13 @@ class Plugin extends AbsBase
 
         /* ----------------------------------------- */
 
-        $_menu_title                              = $divider.__('Subscriptions', $this->text_domain);
-        $_page_title                              = $this->name.'&trade; &#10609; '.__('Subscriptions', $this->text_domain);
+        $_menu_title                              = $divider.__('Subscriptions', SLUG_TD);
+        $_page_title                              = NAME.'&trade; &#10609; '.__('Subscriptions', SLUG_TD);
         $this->menu_page_hooks[GLOBAL_NS.'_subs'] = add_submenu_page(GLOBAL_NS, $_page_title, $_menu_title, $this->manage_cap, GLOBAL_NS.'_subs', [$this, 'menuPageSubs']);
         add_action('load-'.$this->menu_page_hooks[GLOBAL_NS.'_subs'], [$this, 'menuPageSubsScreen']);
 
-        $_menu_title                                       = $child_branch_indent.__('Event Log', $this->text_domain);
-        $_page_title                                       = $this->name.'&trade; &#10609; '.__('Sub. Event Log', $this->text_domain);
+        $_menu_title                                       = $child_branch_indent.__('Event Log', SLUG_TD);
+        $_page_title                                       = NAME.'&trade; &#10609; '.__('Sub. Event Log', SLUG_TD);
         $this->menu_page_hooks[GLOBAL_NS.'_sub_event_log'] = add_submenu_page(GLOBAL_NS, $_page_title, $_menu_title, $this->manage_cap, GLOBAL_NS.'_sub_event_log', [$this, 'menuPageSubEventLog']);
         add_action('load-'.$this->menu_page_hooks[GLOBAL_NS.'_sub_event_log'], [$this, 'menuPageSubEventLogScreen']);
 
@@ -1294,13 +1197,13 @@ class Plugin extends AbsBase
 
         /* ----------------------------------------- */
 
-        $_menu_title                               = $divider.__('Mail Queue', $this->text_domain);
-        $_page_title                               = $this->name.'&trade; &#10609; '.__('Mail Queue', $this->text_domain);
+        $_menu_title                               = $divider.__('Mail Queue', SLUG_TD);
+        $_page_title                               = NAME.'&trade; &#10609; '.__('Mail Queue', SLUG_TD);
         $this->menu_page_hooks[GLOBAL_NS.'_queue'] = add_submenu_page(GLOBAL_NS, $_page_title, $_menu_title, $this->manage_cap, GLOBAL_NS.'_queue', [$this, 'menuPageQueue']);
         add_action('load-'.$this->menu_page_hooks[GLOBAL_NS.'_queue'], [$this, 'menuPageQueueScreen']);
 
-        $_menu_title                                         = $child_branch_indent.__('Event Log', $this->text_domain);
-        $_page_title                                         = $this->name.'&trade; &#10609; '.__('Queue Event Log', $this->text_domain);
+        $_menu_title                                         = $child_branch_indent.__('Event Log', SLUG_TD);
+        $_page_title                                         = NAME.'&trade; &#10609; '.__('Queue Event Log', SLUG_TD);
         $this->menu_page_hooks[GLOBAL_NS.'_queue_event_log'] = add_submenu_page(GLOBAL_NS, $_page_title, $_menu_title, $this->manage_cap, GLOBAL_NS.'_queue_event_log', [$this, 'menuPageQueueEventLog']);
         add_action('load-'.$this->menu_page_hooks[GLOBAL_NS.'_queue_event_log'], [$this, 'menuPageQueueEventLogScreen']);
 
@@ -1308,8 +1211,8 @@ class Plugin extends AbsBase
 
         /* ----------------------------------------- */
 
-        $_menu_title                               = $divider.__('Statistics/Charts', $this->text_domain);
-        $_page_title                               = $this->name.'&trade; &#10609; '.__('Statistics/Charts', $this->text_domain);
+        $_menu_title                               = $divider.__('Statistics/Charts', SLUG_TD);
+        $_page_title                               = NAME.'&trade; &#10609; '.__('Statistics/Charts', SLUG_TD);
         $this->menu_page_hooks[GLOBAL_NS.'_stats'] = add_submenu_page(GLOBAL_NS, $_page_title, $_menu_title, $this->manage_cap, GLOBAL_NS.'_stats', [$this, 'menuPageStats']);
         add_action('load-'.$this->menu_page_hooks[GLOBAL_NS.'_stats'], [$this, 'menuPageStatsScreen']);
 
@@ -1317,8 +1220,8 @@ class Plugin extends AbsBase
 
         /* ----------------------------------------- */
 
-        $_menu_title                                     = $divider.__('Pro Updater', $this->text_domain);
-        $_page_title                                     = $this->name.'&trade; &#10609; '.__('Pro Updater', $this->text_domain);
+        $_menu_title                                     = $divider.__('Pro Updater', SLUG_TD);
+        $_page_title                                     = NAME.'&trade; &#10609; '.__('Pro Updater', SLUG_TD);
         $this->menu_page_hooks[GLOBAL_NS.'_pro_updater'] = add_submenu_page(GLOBAL_NS, $_page_title, $_menu_title, $this->update_cap, GLOBAL_NS.'_pro_updater', [$this, 'menuPageProUpdater']);
         add_action('load-'.$this->menu_page_hooks[GLOBAL_NS.'_pro_updater'], [$this, 'menuPageProUpdaterScreen']);
 
@@ -1407,7 +1310,7 @@ class Plugin extends AbsBase
             'per_page',
             [
                 'default' => '20', // Default items per page.
-                'label'   => __('Per Page', $this->text_domain),
+                'label'   => __('Per Page', SLUG_TD),
                 'option'  => GLOBAL_NS.'_subs_per_page',
             ]
         );
@@ -1461,7 +1364,7 @@ class Plugin extends AbsBase
             'per_page',
             [
                 'default' => '20', // Default items per page.
-                'label'   => __('Per Page', $this->text_domain),
+                'label'   => __('Per Page', SLUG_TD),
                 'option'  => GLOBAL_NS.'_sub_event_log_entries_per_page',
             ]
         );
@@ -1514,7 +1417,7 @@ class Plugin extends AbsBase
             'per_page',
             [
                 'default' => '20', // Default items per page.
-                'label'   => __('Per Page', $this->text_domain),
+                'label'   => __('Per Page', SLUG_TD),
                 'option'  => GLOBAL_NS.'_queued_notifications_per_page',
             ]
         );
@@ -1567,7 +1470,7 @@ class Plugin extends AbsBase
             'per_page',
             [
                 'default' => '20', // Default items per page.
-                'label'   => __('Per Page', $this->text_domain),
+                'label'   => __('Per Page', SLUG_TD),
                 'option'  => GLOBAL_NS.'_queue_event_log_entries_per_page',
             ]
         );
@@ -1771,7 +1674,7 @@ class Plugin extends AbsBase
      *
      * @since       141111 First documented version.
      *
-     * @attaches-to `plugin_action_links_'.plugin_basename($this->file)` filter.
+     * @attaches-to `plugin_action_links_'.plugin_basename(PLUGIN_FILE)` filter.
      *
      * @param array $links An array of the existing links provided by WordPress.
      *
@@ -1779,12 +1682,12 @@ class Plugin extends AbsBase
      */
     public function addSettingsLink(array $links)
     {
-        $links[] = '<a href="'.esc_attr($this->utils_url->mainMenuPageOnly()).'">'.__('Settings', $this->text_domain).'</a><br/>';
-        if (!$this->is_pro) {
-            $links[] = '<a href="'.esc_attr($this->utils_url->proPreview()).'">'.__('Preview Pro Features', $this->text_domain).'</a>';
+        $links[] = '<a href="'.esc_attr($this->utils_url->mainMenuPageOnly()).'">'.__('Settings', SLUG_TD).'</a><br/>';
+        if (!IS_PRO) {
+            $links[] = '<a href="'.esc_attr($this->utils_url->proPreview()).'">'.__('Preview Pro Features', SLUG_TD).'</a>';
         }
-        if (!$this->is_pro) {
-            $links[] = '<a href="'.esc_attr($this->utils_url->productPage()).'" target="_blank">'.__('Upgrade', $this->text_domain).'</a>';
+        if (!IS_PRO) {
+            $links[] = '<a href="'.esc_attr($this->utils_url->productPage()).'" target="_blank">'.__('Upgrade', SLUG_TD).'</a>';
         }
         return apply_filters(__METHOD__, $links, get_defined_vars());
     }
@@ -1861,10 +1764,10 @@ class Plugin extends AbsBase
         $product_api_response = wp_remote_post($product_api_url, ['body' => $product_api_input_vars]);
         $product_api_response = json_decode(wp_remote_retrieve_body($product_api_response), true);
 
-        if (!is_array($product_api_response) || empty($product_api_response['pro_version']) || version_compare($this->version, $product_api_response['pro_version'], '>=')) {
+        if (!is_array($product_api_response) || empty($product_api_response['pro_version']) || version_compare(VERSION, $product_api_response['pro_version'], '>=')) {
             return; // Current pro version is the latest stable version. Nothing more to do here.
         }
-        $this->enqueueNotice(sprintf(__('<strong>%1$s Pro:</strong> a new version is now available. Please <a href="%2$s">upgrade to v%3$s</a>.', $this->text_domain), esc_html($this->name), esc_attr($this->utils_url->proUpdaterMenuPageOnly()), esc_html($product_api_response['pro_version'])), ['persistent' => true, 'persistent_id' => 'new-pro-version-available', 'requires_cap' => $this->update_cap]);
+        $this->enqueueNotice(sprintf(__('<strong>%1$s Pro:</strong> a new version is now available. Please <a href="%2$s">upgrade to v%3$s</a>.', SLUG_TD), esc_html(NAME), esc_attr($this->utils_url->proUpdaterMenuPageOnly()), esc_html($product_api_response['pro_version'])), ['persistent' => true, 'persistent_id' => 'new-pro-version-available', 'requires_cap' => $this->update_cap]);
     }
 
     /**
@@ -1891,7 +1794,7 @@ class Plugin extends AbsBase
         if (!current_user_can($this->update_cap)) {
             return $transient; // Nothing to do.
         }
-        if (empty($_r['_wpnonce']) || !wp_verify_nonce((string) $_r['_wpnonce'], 'upgrade-plugin_'.plugin_basename($this->file))) {
+        if (empty($_r['_wpnonce']) || !wp_verify_nonce((string) $_r['_wpnonce'], 'upgrade-plugin_'.plugin_basename(PLUGIN_FILE))) {
             return $transient; // Nothing to doe.
         }
         if (empty($_r[GLOBAL_NS.'_update_pro_version']) || !($update_pro_version = (string) $_r[GLOBAL_NS.'_update_pro_version'])) {
@@ -1904,10 +1807,10 @@ class Plugin extends AbsBase
             $transient = new \stdClass();
         }
         $transient->last_checked                           = time();
-        $transient->checked[plugin_basename($this->file)]  = $this->version;
-        $transient->response[plugin_basename($this->file)] = (object) [
+        $transient->checked[plugin_basename(PLUGIN_FILE)]  = VERSION;
+        $transient->response[plugin_basename(PLUGIN_FILE)] = (object) [
             'id'          => 0, // It has no ID in this case.
-            'slug'        => $this->slug.'-pro',
+            'slug'        => SLUG_TD.'-pro',
             'url'         => $this->utils_url->proUpdaterMenuPageOnly(),
             'new_version' => $update_pro_version,
             'package'     => $update_pro_zip,
@@ -2082,7 +1985,7 @@ class Plugin extends AbsBase
     public function allAdminNotices()
     {
         if (!$this->options['enable']) {
-            $this->enqueueWarning(sprintf(__('<strong>%1$s is disabled. Please visit the <a href="%2$s">settings</a> and enable the plugin</strong>.', $this->text_domain), esc_html($this->name), esc_attr($this->utils_url->mainMenuPageOnly())));
+            $this->enqueueWarning(sprintf(__('<strong>%1$s is disabled. Please visit the <a href="%2$s">settings</a> and enable the plugin</strong>.', SLUG_TD), esc_html(NAME), esc_attr($this->utils_url->mainMenuPageOnly())));
         }
         if (!is_array($notices = get_option(GLOBAL_NS.'_notices'))) {
             update_option(GLOBAL_NS.'_notices', ($notices = []));
@@ -2151,12 +2054,12 @@ class Plugin extends AbsBase
                     $_dismiss_url = $this->utils_url->dismissNotice($_key);
                     $_dismiss     = '<a href="'.esc_attr($_dismiss_url).'"'.
                                       '  style="'.esc_attr($_dismiss_style).'">'.
-                                      '  '.__('dismiss &times;', $this->text_domain).
+                                      '  '.__('dismiss &times;', SLUG_TD).
                                       '</a>';
                 } else {
                     $_dismiss = ''; // Default value; n/a.
                 }
-                $_classes = $this->slug.'-menu-page-area'; // Always.
+                $_classes = SLUG_TD.'-menu-page-area'; // Always.
 
                 switch ($_args['type']) {
                     case 'error':
@@ -2549,8 +2452,8 @@ class Plugin extends AbsBase
      */
     public function extendCronSchedules(array $schedules)
     {
-        $schedules['every5m']  = ['interval' => 300, 'display' => __('Every 5 Minutes', $this->text_domain)];
-        $schedules['every15m'] = ['interval' => 900, 'display' => __('Every 15 Minutes', $this->text_domain)];
+        $schedules['every5m']  = ['interval' => 300, 'display' => __('Every 5 Minutes', SLUG_TD)];
+        $schedules['every15m'] = ['interval' => 900, 'display' => __('Every 15 Minutes', SLUG_TD)];
 
         return apply_filters(__METHOD__, $schedules, get_defined_vars());
     }

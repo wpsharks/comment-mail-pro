@@ -41,7 +41,7 @@ class UserColumns extends AbsBase
             return $columns; // Not applicable.
         }
         if ($this->plugin->options['sso_enable']) {
-            $columns[GLOBAL_NS.'_sso_services'] = __('SSO Service', $this->plugin->text_domain);
+            $columns[GLOBAL_NS.'_sso_services'] = __('SSO Service', SLUG_TD);
         }
         return $columns;
     }

@@ -26,7 +26,7 @@ namespace WebSharks\CommentMail\Pro;
  */
 ?>
 <?php // Sets document <title> tag via `%%title%%` replacement code in header.
-echo str_replace('%%title%%', __('Unsubscribe', $plugin->text_domain), $site_header); ?>
+echo str_replace('%%title%%', __('Unsubscribe', SLUG_TD), $site_header); ?>
 
     <div class="unsubscribe">
 
@@ -34,7 +34,7 @@ echo str_replace('%%title%%', __('Unsubscribe', $plugin->text_domain), $site_hea
 
             <div class="alert alert-danger" style="margin:0;">
                 <h4>
-                    <?php echo __('Please review the following error(s):', $plugin->text_domain); ?>
+                    <?php echo __('Please review the following error(s):', SLUG_TD); ?>
                 </h4>
                 <ul class="list-unstyled">
                     <?php foreach ($error_codes as $_error_code) : ?>
@@ -42,22 +42,22 @@ echo str_replace('%%title%%', __('Unsubscribe', $plugin->text_domain), $site_hea
                             <i class="fa fa-warning fa-fw"></i>
                             <?php switch ($_error_code) {
                                 case 'missing_sub_key':
-                                    echo __('Subscription key is missing; unable to unsubscribe.', $plugin->text_domain);
+                                    echo __('Subscription key is missing; unable to unsubscribe.', SLUG_TD);
                                     break; // Break switch handler.
 
                                 case 'invalid_sub_key':
-                                    // echo __('Invalid subscription key; unable to unsubscribe (or already unsubscribed).', $plugin->text_domain);
-                                    echo __('Looks like you\'ve already unsubscribed! Sorry to see you go.', $plugin->text_domain);
+                                    // echo __('Invalid subscription key; unable to unsubscribe (or already unsubscribed).', SLUG_TD);
+                                    echo __('Looks like you\'ve already unsubscribed! Sorry to see you go.', SLUG_TD);
                                     break; // Break switch handler.
 
                                 case 'sub_already_unsubscribed':
-                                    echo __('Already unsubscribed! Sorry to see you go.', $plugin->text_domain);
+                                    echo __('Already unsubscribed! Sorry to see you go.', SLUG_TD);
                                     break; // Break switch handler.
 
                                 default: // Anything else that is unexpected/unknown at this time.
-                                    echo __('Unknown error; unable to unsubscribe. Sorry!', $plugin->text_domain).
+                                    echo __('Unknown error; unable to unsubscribe. Sorry!', SLUG_TD).
                                          ' '.sprintf(
-                                             __('Please contact &lt;%1$s&gt; for assistance.', $plugin->text_domain),
+                                             __('Please contact &lt;%1$s&gt; for assistance.', SLUG_TD),
                                              esc_html($plugin->options['can_spam_postmaster'])
                                          );
                             } ?>
@@ -100,7 +100,7 @@ echo str_replace('%%title%%', __('Unsubscribe', $plugin->text_domain), $site_hea
             $sub_name_email_markup = $plugin->utils_markup->nameEmail($sub->fname.' '.$sub->lname, $sub->email);
 
             // Subscriber's last known IP address.
-            $sub_last_ip = $sub->last_ip ? $sub->last_ip : __('unknown', $plugin->text_domain);
+            $sub_last_ip = $sub->last_ip ? $sub->last_ip : __('unknown', SLUG_TD);
 
             // Subscription last update time "ago"; e.g. `X [seconds/minutes/days/weeks/years] ago`.
             $sub_last_update_time_ago = $plugin->utils_date->i18nUtc('M jS, Y @ g:i a T', $sub->last_update_time);
@@ -114,16 +114,16 @@ echo str_replace('%%title%%', __('Unsubscribe', $plugin->text_domain), $site_hea
 
             <div class="alert alert-success" style="margin:0;">
                 <h4 style="margin:0;">
-                    <i class="fa fa-check fa-fw"></i> <?php echo __('Unsubscribed successfully. Sorry to see you go!', $plugin->text_domain); ?>
+                    <i class="fa fa-check fa-fw"></i> <?php echo __('Unsubscribed successfully. Sorry to see you go!', SLUG_TD); ?>
                 </h4>
             </div>
 
             <div class="alert alert-danger text-center pull-right" style="margin:1em 1em 1em 1em;">
                 <a class="text-danger" href="<?php echo esc_attr($sub_unsubscribe_all_url); ?>"
                    data-action="<?php echo esc_attr($sub_unsubscribe_all_url); ?>"
-                   data-confirmation="<?php echo __('Delete (unsubscribe) ALL subscriptions associated with your email address? Are you absolutely sure?', $plugin->text_domain); ?>"
-                   title="<?php echo __('Delete (unsubscribe) ALL subscriptions associated with your email address?', $plugin->text_domain); ?>">
-                    <i class="fa fa-times-circle"></i> <?php echo __('Unsubscribe All?', $plugin->text_domain); ?>
+                   data-confirmation="<?php echo __('Delete (unsubscribe) ALL subscriptions associated with your email address? Are you absolutely sure?', SLUG_TD); ?>"
+                   title="<?php echo __('Delete (unsubscribe) ALL subscriptions associated with your email address?', SLUG_TD); ?>">
+                    <i class="fa fa-times-circle"></i> <?php echo __('Unsubscribe All?', SLUG_TD); ?>
                 </a>
             </div>
 
@@ -131,13 +131,13 @@ echo str_replace('%%title%%', __('Unsubscribe', $plugin->text_domain), $site_hea
                 <?php if ($sub_comment) : // Unsubscribed from a specific comment? ?>
 
                     <?php if ($subscribed_to_own_comment) : ?>
-                        <?php echo sprintf(__('You\'ll no longer be notified about replies to <a href="%1$s">your comment</a>; on:', $plugin->text_domain), esc_html($sub_comment_url)); ?>
+                        <?php echo sprintf(__('You\'ll no longer be notified about replies to <a href="%1$s">your comment</a>; on:', SLUG_TD), esc_html($sub_comment_url)); ?>
                     <?php else : // The comment was not authored by this subscriber; i.e. it's not their own. ?>
-                        <?php echo sprintf(__('You\'ll no longer be notified about replies to <a href="%1$s">comment ID #%2$s</a>; on:', $plugin->text_domain), esc_html($sub_comment_url), esc_html($sub_comment->comment_ID)); ?>
+                        <?php echo sprintf(__('You\'ll no longer be notified about replies to <a href="%1$s">comment ID #%2$s</a>; on:', SLUG_TD), esc_html($sub_comment_url), esc_html($sub_comment->comment_ID)); ?>
                     <?php endif; ?>
 
                 <?php else : // All comments/replies on this post. ?>
-                    <?php echo __('You\'ll no longer be notified about comments/replies to:', $plugin->text_domain); ?>
+                    <?php echo __('You\'ll no longer be notified about comments/replies to:', SLUG_TD); ?>
                 <?php endif; ?>
             </h4>
 
@@ -148,14 +148,14 @@ echo str_replace('%%title%%', __('Unsubscribe', $plugin->text_domain), $site_hea
                 <?php elseif ($sub_post) : // Unsubscribing from all comments/replies. ?>
                     <em><a href="<?php echo esc_attr($sub_post_comments_url); ?>"><?php echo esc_html($sub_post_title_clip); ?></a></em>
                 <?php else : // Unsubscribing from all comments/replies; fallback w/ just the `$sub->post_id`. ?>
-                    <?php echo sprintf(__('Post ID #<code>%1$s</code>', $plugin->text_domain), esc_html($sub->post_id)); ?>
+                    <?php echo sprintf(__('Post ID #<code>%1$s</code>', SLUG_TD), esc_html($sub->post_id)); ?>
                 <?php endif; ?>
             </h4>
 
             <hr style="margin:0 0 1em 0;" />
 
             <h5 style="font-style:italic; margin:0;">
-                <i class="fa fa-frown-o"></i> <?php echo sprintf(__('Too many emails? ~ Please feel free to <a href="%1$s">add a new/different subscription</a> if you like!', $plugin->text_domain), esc_attr($sub_new_url)); ?>
+                <i class="fa fa-frown-o"></i> <?php echo sprintf(__('Too many emails? ~ Please feel free to <a href="%1$s">add a new/different subscription</a> if you like!', SLUG_TD), esc_attr($sub_new_url)); ?>
             </h5>
 
             <?php

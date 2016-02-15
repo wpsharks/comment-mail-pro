@@ -32,36 +32,36 @@ class UtilsI18n extends AbsBase
 
         switch ($action) {
             case 'reconfirm':
-                $i18n = __('reconfirmed', $this->plugin->text_domain);
+                $i18n = __('reconfirmed', SLUG_TD);
                 break;
 
             case 'confirm':
-                $i18n = __('confirmed', $this->plugin->text_domain);
+                $i18n = __('confirmed', SLUG_TD);
                 break;
 
             case 'unconfirm':
-                $i18n = __('unconfirmed', $this->plugin->text_domain);
+                $i18n = __('unconfirmed', SLUG_TD);
                 break;
 
             case 'suspend':
-                $i18n = __('suspended', $this->plugin->text_domain);
+                $i18n = __('suspended', SLUG_TD);
                 break;
 
             case 'trash':
-                $i18n = __('trashed', $this->plugin->text_domain);
+                $i18n = __('trashed', SLUG_TD);
                 break;
 
             case 'update':
-                $i18n = __('updated', $this->plugin->text_domain);
+                $i18n = __('updated', SLUG_TD);
                 break;
 
             case 'delete':
-                $i18n = __('deleted', $this->plugin->text_domain);
+                $i18n = __('deleted', SLUG_TD);
                 break;
 
             default: // Default case handler.
                 if ($action) { // Only if it's not empty.
-                    $i18n = __(rtrim($action, 'ed').'ed', $this->plugin->text_domain);
+                    $i18n = __(rtrim($action, 'ed').'ed', SLUG_TD);
                 }
                 break;
         }
@@ -99,52 +99,52 @@ class UtilsI18n extends AbsBase
 
         switch ($status) {
             case 'approve':
-                $i18n = __('approved', $this->plugin->text_domain);
+                $i18n = __('approved', SLUG_TD);
                 break;
 
             case 'hold':
-                $i18n = __('pending', $this->plugin->text_domain);
+                $i18n = __('pending', SLUG_TD);
                 break;
 
             case 'trash':
-                $i18n = __('trashed', $this->plugin->text_domain);
+                $i18n = __('trashed', SLUG_TD);
                 break;
 
             case 'spam':
-                $i18n = __('spammy', $this->plugin->text_domain);
+                $i18n = __('spammy', SLUG_TD);
                 break;
 
             case 'delete':
-                $i18n = __('deleted', $this->plugin->text_domain);
+                $i18n = __('deleted', SLUG_TD);
                 break;
 
             case 'open':
-                $i18n = __('open', $this->plugin->text_domain);
+                $i18n = __('open', SLUG_TD);
                 break;
 
             case 'closed':
-                $i18n = __('closed', $this->plugin->text_domain);
+                $i18n = __('closed', SLUG_TD);
                 break;
 
             case 'unconfirmed':
-                $i18n = __('unconfirmed', $this->plugin->text_domain);
+                $i18n = __('unconfirmed', SLUG_TD);
                 break;
 
             case 'subscribed':
-                $i18n = __('subscribed', $this->plugin->text_domain);
+                $i18n = __('subscribed', SLUG_TD);
                 break;
 
             case 'suspended':
-                $i18n = __('suspended', $this->plugin->text_domain);
+                $i18n = __('suspended', SLUG_TD);
                 break;
 
             case 'trashed':
-                $i18n = __('trashed', $this->plugin->text_domain);
+                $i18n = __('trashed', SLUG_TD);
                 break;
 
             default: // Default case handler.
                 if ($status) { // Only if it's not empty.
-                    $i18n = __(rtrim($status, 'ed').'ed', $this->plugin->text_domain);
+                    $i18n = __(rtrim($status, 'ed').'ed', SLUG_TD);
                 }
                 break;
         }
@@ -182,40 +182,40 @@ class UtilsI18n extends AbsBase
 
         switch ($event) {
             case 'inserted':
-                $i18n = __('inserted', $this->plugin->text_domain);
+                $i18n = __('inserted', SLUG_TD);
                 break;
 
             case 'updated':
-                $i18n = __('updated', $this->plugin->text_domain);
+                $i18n = __('updated', SLUG_TD);
                 break;
 
             case 'overwritten':
-                $i18n = __('overwritten', $this->plugin->text_domain);
+                $i18n = __('overwritten', SLUG_TD);
                 break;
 
             case 'purged':
-                $i18n = __('purged', $this->plugin->text_domain);
+                $i18n = __('purged', SLUG_TD);
                 break;
 
             case 'cleaned':
-                $i18n = __('cleaned', $this->plugin->text_domain);
+                $i18n = __('cleaned', SLUG_TD);
                 break;
 
             case 'deleted':
-                $i18n = __('deleted', $this->plugin->text_domain);
+                $i18n = __('deleted', SLUG_TD);
                 break;
 
             case 'invalidated':
-                $i18n = __('invalidated', $this->plugin->text_domain);
+                $i18n = __('invalidated', SLUG_TD);
                 break;
 
             case 'notified':
-                $i18n = __('notified', $this->plugin->text_domain);
+                $i18n = __('notified', SLUG_TD);
                 break;
 
             default: // Default case handler.
                 if ($event) { // Only if it's not empty.
-                    $i18n = __(rtrim($event, 'ed').'ed', $this->plugin->text_domain);
+                    $i18n = __(rtrim($event, 'ed').'ed', SLUG_TD);
                 }
                 break;
         }
@@ -253,24 +253,24 @@ class UtilsI18n extends AbsBase
 
         switch ($deliver) {
             case 'asap':
-                $i18n = __('instantly', $this->plugin->text_domain);
+                $i18n = __('instantly', SLUG_TD);
                 break;
 
             case 'hourly':
-                $i18n = __('hourly', $this->plugin->text_domain);
+                $i18n = __('hourly', SLUG_TD);
                 break;
 
             case 'daily':
-                $i18n = __('daily', $this->plugin->text_domain);
+                $i18n = __('daily', SLUG_TD);
                 break;
 
             case 'weekly':
-                $i18n = __('weekly', $this->plugin->text_domain);
+                $i18n = __('weekly', SLUG_TD);
                 break;
 
             default: // Default case handler.
                 if ($deliver) { // Only if it's not empty.
-                    $i18n = __(rtrim($deliver, 'ed').'ed', $this->plugin->text_domain);
+                    $i18n = __(rtrim($deliver, 'ed').'ed', SLUG_TD);
                 }
                 break;
         }
@@ -308,16 +308,16 @@ class UtilsI18n extends AbsBase
 
         switch ($sub_type) {
             case 'comments':
-                $i18n = __('all comments', $this->plugin->text_domain);
+                $i18n = __('all comments', SLUG_TD);
                 break;
 
             case 'comment':
-                $i18n = __('replies only', $this->plugin->text_domain);
+                $i18n = __('replies only', SLUG_TD);
                 break;
 
             default: // Default case handler.
                 if ($action) { // Only if it's not empty.
-                    $i18n = __(rtrim($action, 'ed').'ed', $this->plugin->text_domain);
+                    $i18n = __(rtrim($action, 'ed').'ed', SLUG_TD);
                 }
                 break;
         }
@@ -352,7 +352,7 @@ class UtilsI18n extends AbsBase
     {
         $counter = (integer) $counter; // Force integer.
 
-        return sprintf(_n('%1$s subscription', '%1$s subscriptions', $counter, $this->plugin->text_domain), $counter);
+        return sprintf(_n('%1$s subscription', '%1$s subscriptions', $counter, SLUG_TD), $counter);
     }
 
     /**
@@ -368,7 +368,7 @@ class UtilsI18n extends AbsBase
     {
         $counter = (integer) $counter; // Force integer.
 
-        return sprintf(_n('%1$s sub. event log entry', '%1$s sub. event log entries', $counter, $this->plugin->text_domain), $counter);
+        return sprintf(_n('%1$s sub. event log entry', '%1$s sub. event log entries', $counter, SLUG_TD), $counter);
     }
 
     /**
@@ -384,7 +384,7 @@ class UtilsI18n extends AbsBase
     {
         $counter = (integer) $counter; // Force integer.
 
-        return sprintf(_n('%1$s queued notification', '%1$s queued notifications', $counter, $this->plugin->text_domain), $counter);
+        return sprintf(_n('%1$s queued notification', '%1$s queued notifications', $counter, SLUG_TD), $counter);
     }
 
     /**
@@ -400,7 +400,7 @@ class UtilsI18n extends AbsBase
     {
         $counter = (integer) $counter; // Force integer.
 
-        return sprintf(_n('%1$s queue event log entry', '%1$s queue event log entries', $counter, $this->plugin->text_domain), $counter);
+        return sprintf(_n('%1$s queue event log entry', '%1$s queue event log entries', $counter, SLUG_TD), $counter);
     }
 
     /**
@@ -412,8 +412,8 @@ class UtilsI18n extends AbsBase
      */
     public function logEntryJsDeletionConfirmationWarning()
     {
-        return __('Delete permanently? Are you sure?', $this->plugin->text_domain)."\n\n".
-               __('WARNING: Deleting log entries is not recommended, as this will have an impact on statistical reporting.', $this->plugin->text_domain)."\n\n".
-               __('If you want statistical reports to remain accurate, please leave ALL log entries intact.', $this->plugin->text_domain);
+        return __('Delete permanently? Are you sure?', SLUG_TD)."\n\n".
+               __('WARNING: Deleting log entries is not recommended, as this will have an impact on statistical reporting.', SLUG_TD)."\n\n".
+               __('If you want statistical reports to remain accurate, please leave ALL log entries intact.', SLUG_TD);
     }
 }

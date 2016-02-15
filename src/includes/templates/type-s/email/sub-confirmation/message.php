@@ -24,7 +24,7 @@ namespace WebSharks\CommentMail\Pro;
  */
 ?>
 <?php // Sets document <title> tag via `%%title%%` replacement code in header.
-echo str_replace('%%title%%', __('Confirmation Request', $plugin->text_domain), $email_header); ?>
+echo str_replace('%%title%%', __('Confirmation Request', SLUG_TD), $email_header); ?>
 
 <?php
 /*
@@ -54,7 +54,7 @@ $sub_confirm_url = $plugin->utils_url->subConfirmUrl($sub->key, $process_list_se
 $sub_name_email_markup = $plugin->utils_markup->nameEmail($sub->fname.' '.$sub->lname, $sub->email);
 
 // Subscriber's last known IP address.
-$sub_last_ip = $sub->last_ip ? $sub->last_ip : __('unknown', $plugin->text_domain);
+$sub_last_ip = $sub->last_ip ? $sub->last_ip : __('unknown', SLUG_TD);
 
 // Subscription last update time "ago"; e.g. `X [seconds/minutes/days/weeks/years] ago`.
 $sub_last_update_time_ago = $plugin->utils_date->i18nUtc('M jS, Y @ g:i a T', $sub->last_update_time);
@@ -79,9 +79,9 @@ $sub_last_update_time_ago = $plugin->utils_date->i18nUtc('M jS, Y @ g:i a T', $s
     ); ?>
 
     <p style="color:#888888; font-style:italic;">
-        <?php echo __('Note: if you did not make this request, please ignore this email. You will only be subscribed if you confirm.', $plugin->text_domain); ?>
-        <?php echo sprintf(__('This subscription was requested by %1$s; from IP address: <code>%2$s</code> on %3$s.', $plugin->text_domain), $sub_name_email_markup, esc_html($sub_last_ip), esc_html($sub_last_update_time_ago)); ?>
-        <?php echo __('If you need to report any continued abuse, please use the contact info at the bottom of this email.', $plugin->text_domain); ?>
+        <?php echo __('Note: if you did not make this request, please ignore this email. You will only be subscribed if you confirm.', SLUG_TD); ?>
+        <?php echo sprintf(__('This subscription was requested by %1$s; from IP address: <code>%2$s</code> on %3$s.', SLUG_TD), $sub_name_email_markup, esc_html($sub_last_ip), esc_html($sub_last_update_time_ago)); ?>
+        <?php echo __('If you need to report any continued abuse, please use the contact info at the bottom of this email.', SLUG_TD); ?>
     </p>
 
 <?php echo $email_footer; ?>

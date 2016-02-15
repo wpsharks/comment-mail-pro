@@ -32,8 +32,8 @@ class MenuPageSubEventLogTable extends MenuPageTableBase
         $args = [
             'singular_name'  => 'sub_event_log_entry',
             'plural_name'    => 'sub_event_log_entries',
-            'singular_label' => __('sub. event log entry', $plugin->text_domain),
-            'plural_label'   => __('sub. event log entries', $plugin->text_domain),
+            'singular_label' => __('sub. event log entry', SLUG_TD),
+            'plural_label'   => __('sub. event log entries', SLUG_TD),
             'screen'         => $plugin->menu_page_hooks[GLOBAL_NS.'_sub_event_log'],
         ];
         parent::__construct($args); // Parent constructor.
@@ -56,50 +56,50 @@ class MenuPageSubEventLogTable extends MenuPageTableBase
 
         $columns = [
             'cb' => '1', // Include checkboxes.
-            'ID' => __('Entry', $plugin->text_domain),
+            'ID' => __('Entry', SLUG_TD),
 
-            'time'   => __('Time', $plugin->text_domain),
-            'sub_id' => __('Subscr. ID', $plugin->text_domain),
+            'time'   => __('Time', SLUG_TD),
+            'sub_id' => __('Subscr. ID', SLUG_TD),
 
-            'event'          => __('Event', $plugin->text_domain),
-            'oby_sub_id'     => __('Overwritten By', $plugin->text_domain),
-            'user_initiated' => __('User Initiated', $plugin->text_domain),
+            'event'          => __('Event', SLUG_TD),
+            'oby_sub_id'     => __('Overwritten By', SLUG_TD),
+            'user_initiated' => __('User Initiated', SLUG_TD),
 
-            'key_before' => __('Subscr. Key Before', $plugin->text_domain),
-            'key'        => __('Subscr. Key After', $plugin->text_domain),
+            'key_before' => __('Subscr. Key Before', SLUG_TD),
+            'key'        => __('Subscr. Key After', SLUG_TD),
 
-            'user_id_before' => __('WP User ID Before', $plugin->text_domain),
-            'user_id'        => __('WP User ID After', $plugin->text_domain),
+            'user_id_before' => __('WP User ID Before', SLUG_TD),
+            'user_id'        => __('WP User ID After', SLUG_TD),
 
-            'post_id_before' => __('Post ID Before', $plugin->text_domain),
-            'post_id'        => __('Post ID After', $plugin->text_domain),
+            'post_id_before' => __('Post ID Before', SLUG_TD),
+            'post_id'        => __('Post ID After', SLUG_TD),
 
-            'comment_id_before' => __('Comment ID Before', $plugin->text_domain),
-            'comment_id'        => __('Comment ID After', $plugin->text_domain),
+            'comment_id_before' => __('Comment ID Before', SLUG_TD),
+            'comment_id'        => __('Comment ID After', SLUG_TD),
 
-            'status_before' => __('Status Before', $plugin->text_domain),
-            'status'        => __('Status After', $plugin->text_domain),
+            'status_before' => __('Status Before', SLUG_TD),
+            'status'        => __('Status After', SLUG_TD),
 
-            'deliver_before' => __('Delivery Before', $plugin->text_domain),
-            'deliver'        => __('Delivery After', $plugin->text_domain),
+            'deliver_before' => __('Delivery Before', SLUG_TD),
+            'deliver'        => __('Delivery After', SLUG_TD),
 
-            'fname_before' => __('First Name Before', $plugin->text_domain),
-            'fname'        => __('First Name After', $plugin->text_domain),
+            'fname_before' => __('First Name Before', SLUG_TD),
+            'fname'        => __('First Name After', SLUG_TD),
 
-            'lname_before' => __('Last Name Before', $plugin->text_domain),
-            'lname'        => __('Last Name After', $plugin->text_domain),
+            'lname_before' => __('Last Name Before', SLUG_TD),
+            'lname'        => __('Last Name After', SLUG_TD),
 
-            'email_before' => __('Email Before', $plugin->text_domain),
-            'email'        => __('Email After', $plugin->text_domain),
+            'email_before' => __('Email Before', SLUG_TD),
+            'email'        => __('Email After', SLUG_TD),
 
-            'ip_before' => __('IP Address Before', $plugin->text_domain),
-            'ip'        => __('IP Address After', $plugin->text_domain),
+            'ip_before' => __('IP Address Before', SLUG_TD),
+            'ip'        => __('IP Address After', SLUG_TD),
 
-            'region_before' => __('IP Region Before', $plugin->text_domain),
-            'region'        => __('IP Region After', $plugin->text_domain),
+            'region_before' => __('IP Region Before', SLUG_TD),
+            'region'        => __('IP Region After', SLUG_TD),
 
-            'country_before' => __('IP Country Before', $plugin->text_domain),
-            'country'        => __('IP Country After', $plugin->text_domain),
+            'country_before' => __('IP Country Before', SLUG_TD),
+            'country'        => __('IP Country After', SLUG_TD),
         ];
         if (!$plugin->options['geo_location_tracking_enable']) {
             foreach ($columns as $_key => $_column) {
@@ -274,8 +274,8 @@ class MenuPageSubEventLogTable extends MenuPageTableBase
             'delete' => '<a href="#"'.// Depends on `menu-pages.js`.
                         ' data-pmp-action="'.esc_attr($delete_url).'"'.// The action URL.
                         ' data-pmp-confirmation="'.esc_attr($this->plugin->utils_i18n->logEntryJsDeletionConfirmationWarning()).'"'.
-                        ' title="'.esc_attr(__('Delete Sub. Event Log Entry', $this->plugin->text_domain)).'">'.
-                        '  <i class="fa fa-times-circle"></i> '.__('Delete', $this->plugin->text_domain).
+                        ' title="'.esc_attr(__('Delete Sub. Event Log Entry', SLUG_TD)).'">'.
+                        '  <i class="fa fa-times-circle"></i> '.__('Delete', SLUG_TD).
                         '</a>',
         ];
         return $id_info.$this->row_actions($row_actions);
@@ -311,14 +311,14 @@ class MenuPageSubEventLogTable extends MenuPageTableBase
 
                 if ($item->oby_sub_id && !empty($this->merged_result_sets['subs'][$item->oby_sub_id])) {
                     $edit_url     = $this->plugin->utils_url->editSubShort($item->oby_sub_id);
-                    $oby_sub_info = '<i class="'.esc_attr('si si-'.$this->plugin->slug.'-one').'"></i>'.
+                    $oby_sub_info = '<i class="'.esc_attr('si si-'.SLUG_TD.'-one').'"></i>'.
                                     ' <span>ID <a href="'.esc_attr($edit_url).'" title="'.esc_attr($item->oby_sub_key).'">#'.esc_html($item->oby_sub_id).'</a></span>';
                 } else {
-                    $oby_sub_info = '<i class="'.esc_attr('si si-'.$this->plugin->slug.'-one').'"></i>'.
+                    $oby_sub_info = '<i class="'.esc_attr('si si-'.SLUG_TD.'-one').'"></i>'.
                                     ' <span>ID #'.esc_html($item->oby_sub_id).'</span>';
                 }
                 return esc_html($event_label).' '.$this->plugin->utils_event->subOverwrittenQLink($item).'<br />'.
-                       '<i class="pmp-child-branch"></i> '.__('by', $this->plugin->text_domain).' '.$oby_sub_info;
+                       '<i class="pmp-child-branch"></i> '.__('by', SLUG_TD).' '.$oby_sub_info;
 
             case 'purged': // Subscription was purged in this case.
 
@@ -475,7 +475,7 @@ class MenuPageSubEventLogTable extends MenuPageTableBase
     protected function get_bulk_actions()
     { // @codingStandardsIgnoreEnd
         return [
-            'delete' => __('Delete', $this->plugin->text_domain),
+            'delete' => __('Delete', SLUG_TD),
         ];
     }
 

@@ -483,7 +483,7 @@ class ImportStcr extends AbsBase
         $status .= '   <head>'."\n";
 
         $status .= '      <meta charset="UTF-8" />'."\n";
-        $status .= '      <title>'.esc_html(__('StCR Importer', $this->plugin->text_domain)).'</title>'."\n";
+        $status .= '      <title>'.esc_html(__('StCR Importer', SLUG_TD)).'</title>'."\n";
 
         $status .= '      <style type="text/css">'."\n";
         $status .= '         body { background: #CCCCCC; color: #000000; }'."\n";
@@ -513,7 +513,7 @@ class ImportStcr extends AbsBase
                    '               var $totalSkippedSubs = $("#total-skipped-subs");'."\n".
                    '               $totalSkippedSubs.html(Number($totalSkippedSubs.text()) + Number(additionalSkippedSubs));'."\n".
                    '               $("#importing").remove();'."\n".// Removing importing div/animation.
-                   '               $("body").append("<div>'.sprintf(__('<strong>Import complete!<strong> (<a href=\'%1$s\' target=\'_parent\'>view list of all subscriptions</a>)', $this->plugin->text_domain), esc_attr($this->plugin->utils_url->subsMenuPageOnly())).'</div>");'."\n".
+                   '               $("body").append("<div>'.sprintf(__('<strong>Import complete!<strong> (<a href=\'%1$s\' target=\'_parent\'>view list of all subscriptions</a>)', SLUG_TD), esc_attr($this->plugin->utils_url->subsMenuPageOnly())).'</div>");'."\n".
                    '            }'."\n";
         $status .= '      </script>'."\n";
 
@@ -523,20 +523,20 @@ class ImportStcr extends AbsBase
 
         if ($this->has_more_posts_to_import) { // Import will continue w/ child processes?
             $status .= '   <div id="importing">'.
-                       '      <strong>'.__('Importing StCR Subscribers', $this->plugin->text_domain).'</strong>'.
+                       '      <strong>'.__('Importing StCR Subscribers', SLUG_TD).'</strong>'.
                        '       &nbsp;&nbsp; <img src="'.esc_html($this->plugin->utils_url->to('/src/client-s/images/tiny-progress-bar.gif')).'"'.
                        '                        style="width:16px; height:11px; border:0; vertical-align:middle;" />'.
                        '   </div>'."\n";
         }
-        $status .= '      <code id="total-imported-post-ids">'.esc_html($this->total_imported_post_ids).'</code> '.__('post IDs', $this->plugin->text_domain).';'.
-                   '      <code id="total-imported-subs">'.esc_html($this->total_imported_subs).'</code> '.__('subscriptions', $this->plugin->text_domain).
-                   '      (<code id="total-skipped-subs">'.esc_html($this->total_skipped_subs).'</code> '.__('skipped', $this->plugin->text_domain).';'.
-                   '      <code id="total-created-subs">'.esc_html($this->total_created_subs).'</code> '.__('created', $this->plugin->text_domain).').'."\n";
+        $status .= '      <code id="total-imported-post-ids">'.esc_html($this->total_imported_post_ids).'</code> '.__('post IDs', SLUG_TD).';'.
+                   '      <code id="total-imported-subs">'.esc_html($this->total_imported_subs).'</code> '.__('subscriptions', SLUG_TD).
+                   '      (<code id="total-skipped-subs">'.esc_html($this->total_skipped_subs).'</code> '.__('skipped', SLUG_TD).';'.
+                   '      <code id="total-created-subs">'.esc_html($this->total_created_subs).'</code> '.__('created', SLUG_TD).').'."\n";
 
         if ($this->has_more_posts_to_import) { // Import will contiue w/ child processes?
             $status .= '   <iframe src="'.esc_attr((string) $child_status_url).'" style="width:1px; height:1px; border:0; visibility:hidden;"></iframe>';
         } else {
-            $status .= ' <div><strong>'.__('Import complete!', $this->plugin->text_domain).'</strong></div>';
+            $status .= ' <div><strong>'.__('Import complete!', SLUG_TD).'</strong></div>';
         }
         $status .= '   </body>'."\n";
 
@@ -675,7 +675,7 @@ class ImportStcr extends AbsBase
         $log_file = dirname(dirname(plugin_dir_path(__FILE__))).'/stcr-import-failures.log';
 
         if (is_file($log_file) && !is_writable($log_file)) {
-            throw new \Exception(sprintf(__('StCR import log file is NOT writable: `%1$s`. Please set permissions to `644` (or higher). `666` might be needed in some cases.', $this->plugin->text_domain), $log_file));
+            throw new \Exception(sprintf(__('StCR import log file is NOT writable: `%1$s`. Please set permissions to `644` (or higher). `666` might be needed in some cases.', SLUG_TD), $log_file));
         }
         $log_entry = $msg."\n";
         foreach ($details as $key => $val) {

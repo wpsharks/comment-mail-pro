@@ -131,7 +131,7 @@ class UtilsEnc extends AbsBase
         $iv     = wp_generate_password(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC), false);
 
         if (!is_string($e = mcrypt_encrypt(MCRYPT_RIJNDAEL_256, $key, $string, MCRYPT_MODE_CBC, $iv)) || !isset($e[0])) {
-            throw new \exception(__('String encryption failed; `$e` is NOT string; or it has no length.', $this->plugin->text_domain));
+            throw new \exception(__('String encryption failed; `$e` is NOT string; or it has no length.', SLUG_TD));
         }
         $e = '~r2:'.$iv.($w_md5_cs ? ':'.md5($e) : '').'|'.$e; // Pack components.
 
@@ -184,7 +184,7 @@ class UtilsEnc extends AbsBase
         $key = (string) substr($this->key($key), 0, mcrypt_get_key_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC));
 
         if (!is_string($string = mcrypt_decrypt(MCRYPT_RIJNDAEL_256, $key, $iv_md5_e['e'], MCRYPT_MODE_CBC, $iv_md5_e['iv'])) || !isset($string[0])) {
-            throw new \exception(__('String decryption failed; `$string` is NOT a string, or it has no length.', $this->plugin->text_domain));
+            throw new \exception(__('String decryption failed; `$string` is NOT a string, or it has no length.', SLUG_TD));
         }
         if (!strlen($string = preg_replace('/^~r2\|/', '', $string, 1, $r2)) || !$r2) {
             return $string = ''; // Missing packed components.
@@ -226,7 +226,7 @@ class UtilsEnc extends AbsBase
         unset($_i, $_char, $_key_char); // Housekeeping.
 
         if (!isset($e[0])) { // Hmm, unknown encryption failure?
-            throw new \exception(__('String encryption failed; `$e` has no length.', $this->plugin->text_domain));
+            throw new \exception(__('String encryption failed; `$e` has no length.', SLUG_TD));
         }
         $e = '~xe'.($w_md5_cs ? ':'.md5($e) : '').'|'.$e; // Pack components.
 
@@ -279,7 +279,7 @@ class UtilsEnc extends AbsBase
         unset($_i, $_char, $_key_char); // Housekeeping.
 
         if (!isset($string[0])) { // Hmm, unknown decryption failure?
-            throw new \exception(__('String decryption failed; `$string` has no length.', $this->plugin->text_domain));
+            throw new \exception(__('String decryption failed; `$string` has no length.', SLUG_TD));
         }
         if (!strlen($string = preg_replace('/^~xe\|/', '', $string, 1, $xe)) || !$xe) {
             return $string = ''; // Missing packed components.
@@ -311,7 +311,7 @@ class UtilsEnc extends AbsBase
         $trim_padding_chars = (string) $trim_padding_chars;
 
         if (!is_string($base64_url_safe = base64_encode($string))) {
-            throw new \exception(__('Base64 encoding failed (`$base64_url_safe` is NOT a string).', $this->plugin->text_domain));
+            throw new \exception(__('Base64 encoding failed (`$base64_url_safe` is NOT a string).', SLUG_TD));
         }
         $base64_url_safe = str_replace($url_unsafe_chars, $url_safe_chars, $base64_url_safe);
         $base64_url_safe = isset($trim_padding_chars[0]) ? rtrim($base64_url_safe, $trim_padding_chars) : $base64_url_safe;
@@ -348,7 +348,7 @@ class UtilsEnc extends AbsBase
         $string = str_replace($url_safe_chars, $url_unsafe_chars, $string);
 
         if (!is_string($string = base64_decode($string, true))) {
-            throw new \exception(__('Base64 decoding failed (`$string` is NOT a string).', $this->plugin->text_domain));
+            throw new \exception(__('Base64 decoding failed (`$string` is NOT a string).', SLUG_TD));
         }
         return $string;
     }
@@ -393,7 +393,7 @@ class UtilsEnc extends AbsBase
         $expires = $expires_after > 0 ? time() + $expires_after : 0;
 
         if (headers_sent()) { // Headers sent already?
-            throw new \exception(__('Doing it wrong! Headers have already been sent.', $this->plugin->text_domain));
+            throw new \exception(__('Doing it wrong! Headers have already been sent.', SLUG_TD));
         }
         setcookie($name, $value, $expires, COOKIEPATH, COOKIE_DOMAIN);
         setcookie($name, $value, $expires, SITECOOKIEPATH, COOKIE_DOMAIN);
@@ -416,7 +416,7 @@ class UtilsEnc extends AbsBase
             return; // Not possible.
         }
         if (headers_sent()) { // Headers sent already?
-            throw new \exception(__('Doing it wrong! Headers have already been sent.', $this->plugin->text_domain));
+            throw new \exception(__('Doing it wrong! Headers have already been sent.', SLUG_TD));
         }
         setcookie($name, '', time() - 3600, COOKIEPATH, COOKIE_DOMAIN);
         setcookie($name, '', time() - 3600, SITECOOKIEPATH, COOKIE_DOMAIN);
