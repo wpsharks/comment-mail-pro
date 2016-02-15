@@ -76,7 +76,7 @@ namespace WebSharks\CommentMail\Pro;
 <?php $service_links = ob_get_clean(); ?>
 
 <?php echo $template->snippet(
-    'sso-ops.php', array(
+    'sso-ops.php', [
         '[css_styles]'    => $css_styles,
         '[service_links]' => $service_links,
-    )); ?>
+    ]); ?>

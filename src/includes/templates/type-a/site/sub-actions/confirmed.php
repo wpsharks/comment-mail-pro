@@ -39,7 +39,8 @@ echo str_replace('%%title%%', __('Confirmation', SLUG_TD), $site_header); ?>
                     <?php foreach ($error_codes as $_error_code) : ?>
                         <li>
                             <i class="fa fa-warning fa-fw"></i>
-                            <?php switch ($_error_code) {
+                            <?php
+                            switch ($_error_code) {
                                 case 'missing_sub_key':
                                     echo __('Subscription key is missing; unable to confirm.', SLUG_TD);
                                     break; // Break switch handler.
@@ -141,7 +142,8 @@ echo str_replace('%%title%%', __('Confirmation', SLUG_TD), $site_header); ?>
             <p>
                 <?php echo sprintf(__('Your email address is: &lt;<code>%1$s</code>&gt;;', SLUG_TD), esc_html($sub->email)); ?><br />
                 <?php echo sprintf(__('You chose delivery option: <code>%1$s</code>;', SLUG_TD), esc_html($sub_deliver_label)); ?>
-                <?php switch ($sub->deliver) {
+                <?php
+                switch ($sub->deliver) {
                     case 'asap': // Instant notifications?
                         echo __('each email notification will be delivered to you instantly.', SLUG_TD);
                         break; // Break switch handler.

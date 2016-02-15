@@ -96,7 +96,8 @@ echo str_replace('%%title%%', $is_edit ? __('Edit Subscription', SLUG_TD)
                     <?php foreach ($error_codes as $_error_code) : ?>
                         <li>
                             <i class="fa fa-warning fa-fw"></i>
-                            <?php switch ($_error_code) {
+                            <?php
+                            switch ($_error_code) {
                                 case 'missing_sub_key':
                                     echo __('Subscription key is missing; unable to edit.', SLUG_TD);
                                     break; // Break switch handler.
@@ -190,21 +191,21 @@ echo str_replace('%%title%%', $is_edit ? __('Edit Subscription', SLUG_TD)
 
                     <?php if (!$is_edit) : ?>
                         <?php echo $form_fields->selectRow(
-                            array(
+                            [
                                 'placeholder'         => __('Select a Post...', SLUG_TD),
                                 'label'               => __('<i class="fa fa-fw fa-thumb-tack"></i> Post', SLUG_TD),
                                 'name'                => 'post_id', 'required' => true, 'options' => '%%posts%%', 'current_value' => $current_value_for('post_id'),
                                 'notes_after'         => __('Required; the Post you\'re subscribing to.', SLUG_TD),
-                                'input_fallback_args' => array('type' => 'number', 'maxlength' => 20, 'other_attrs' => 'min="1" max="18446744073709551615"', 'placeholder' => '', 'current_value_empty_on_0' => true),
-                            )
+                                'input_fallback_args' => ['type' => 'number', 'maxlength' => 20, 'other_attrs' => 'min="1" max="18446744073709551615"', 'placeholder' => '', 'current_value_empty_on_0' => true],
+                            ]
                         ); ?>
                         <?php echo $form_fields->selectRow(
-                            array( // Note: if you change this row; also change the AJAX template variation.
+                            [ // Note: if you change this row; also change the AJAX template variation.
                                 'placeholder'         => __('— All Comments/Replies —', SLUG_TD),
                                 'label'               => __('<i class="fa fa-fw fa-comment-o"></i> Comment', SLUG_TD),
                                 'name'                => 'comment_id', 'required' => false, 'options' => '%%comments%%', 'post_id' => $current_value_for('post_id'), 'current_value' => $current_value_for('comment_id'),
-                                'input_fallback_args' => array('type' => 'number', 'maxlength' => 20, 'other_attrs' => 'min="1" max="18446744073709551615"', 'current_value_empty_on_0' => true),
-                            )
+                                'input_fallback_args' => ['type' => 'number', 'maxlength' => 20, 'other_attrs' => 'min="1" max="18446744073709551615"', 'current_value_empty_on_0' => true],
+                            ]
                         ); ?>
                         <?php /* -------------------------------------------------------------------- */ ?>
                         <?php echo $form_fields->horizontalLineRow(/* -------------------------------------------------------------------- */); ?>
@@ -212,23 +213,23 @@ echo str_replace('%%title%%', $is_edit ? __('Edit Subscription', SLUG_TD)
                     <?php endif; ?>
 
                     <?php echo $form_fields->inputRow(
-                        array(
+                        [
                             'type'  => 'email', // For `<input>` type.
                             'label' => __('<i class="fa fa-fw fa-envelope-o"></i> Email', SLUG_TD),
                             'name'  => 'email', 'required' => true, 'maxlength' => 100, 'current_value' => $current_value_for('email'),
-                        )
+                        ]
                     ); ?>
                     <?php echo $form_fields->inputRow(
-                        array(
+                        [
                             'label' => __('<i class="fa fa-fw fa-pencil-square-o"></i> First Name', SLUG_TD),
                             'name'  => 'fname', 'required' => true, 'maxlength' => 50, 'current_value' => $current_value_for('fname'),
-                        )
+                        ]
                     ); ?>
                     <?php echo $form_fields->inputRow(
-                        array(
+                        [
                             'label' => __('<i class="fa fa-fw fa-level-up fa-rotate-90"></i> Last Name', SLUG_TD),
                             'name'  => 'lname', 'required' => false, 'maxlength' => 100, 'current_value' => $current_value_for('lname'),
-                        )
+                        ]
                     ); ?>
                     <?php /* -------------------------------------------------------------------- */ ?>
                     <?php echo $form_fields->horizontalLineRow(/* -------------------------------------------------------------------- */); ?>
@@ -236,21 +237,21 @@ echo str_replace('%%title%%', $is_edit ? __('Edit Subscription', SLUG_TD)
 
                     <?php if ($is_edit) : // Only for edits. ?>
                         <?php echo $form_fields->selectRow(// New subscriptions always start w/ an `unconfirmed` status.
-                            array(
+                            [
                                 'placeholder' => __('Select a Status...', SLUG_TD),
                                 'label'       => __('<i class="fa fa-fw fa-flag-o"></i> Status', SLUG_TD),
                                 'name'        => 'status', 'required' => true, 'options' => '%%status%%', 'current_value' => $current_value_for('status'),
-                            )
+                            ]
                         );
                         ?>
                     <?php endif; ?>
                     <?php echo $form_fields->selectRow(
-                        array(
+                        [
                             'placeholder' => __('Select a Delivery Option...', SLUG_TD),
                             'label'       => __('<i class="fa fa-fw fa-paper-plane-o"></i> Deliver', SLUG_TD),
                             'name'        => 'deliver', 'required' => true, 'options' => '%%deliver%%', 'current_value' => $current_value_for('deliver'),
                             'notes_after' => __('Any value that is not <code>instantly</code> results in a digest instead of instant notifications.', SLUG_TD),
-                        )
+                        ]
                     ); ?>
                     </tbody>
                 </table>

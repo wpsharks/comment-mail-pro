@@ -34,7 +34,8 @@ echo str_replace('%%title%%', __('Unsubscribe All', SLUG_TD), $site_header); ?>
                     <?php foreach ($error_codes as $_error_code) : ?>
                         <li>
                             <i class="fa fa-warning fa-fw"></i>
-                            <?php switch ($_error_code) {
+                            <?php
+                            switch ($_error_code) {
                                 case 'missing_sub_email':
                                     echo __('Subscription email is missing; unable to unsubscribe all.', SLUG_TD);
                                     break; // Break switch handler.

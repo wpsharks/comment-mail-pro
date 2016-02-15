@@ -39,7 +39,8 @@ echo str_replace('%%title%%', __('Confirmation', SLUG_TD), $site_header); ?>
                     <?php foreach ($error_codes as $_error_code) : ?>
                         <li>
                             <i class="fa fa-warning fa-fw"></i>
-                            <?php switch ($_error_code) {
+                            <?php
+                            switch ($_error_code) {
                                 case 'missing_sub_key':
                                     echo __('Subscription key is missing; unable to confirm.', SLUG_TD);
                                     break; // Break switch handler.
@@ -121,7 +122,7 @@ echo str_replace('%%title%%', __('Confirmation', SLUG_TD), $site_header); ?>
 
             <?php echo $template->snippet(
                 'confirmed.php',
-                array(
+                [
                     'sub_comment'               => $sub_comment,
                     'subscribed_to_own_comment' => $subscribed_to_own_comment,
 
@@ -139,7 +140,7 @@ echo str_replace('%%title%%', __('Confirmation', SLUG_TD), $site_header); ?>
 
                     '[sub_comment_url]' => esc_attr($sub_comment_url),
                     '[sub_comment_id]'  => esc_html($sub_comment ? $sub_comment->comment_ID : 0),
-                )
+                ]
             ); ?>
         <?php endif; // END: confirmed successfully w/ no major errors. ?>
 

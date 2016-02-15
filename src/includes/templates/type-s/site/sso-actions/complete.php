@@ -56,7 +56,8 @@ echo str_replace('%%title%%', __('Complete Registration', SLUG_TD), $site_header
                     <?php foreach ($error_codes as $_error_code) : ?>
                         <li>
                             <i class="fa fa-warning fa-fw"></i>
-                            <?php switch ($_error_code) {
+                            <?php
+                            switch ($_error_code) {
                                 case 'users_cannot_register':
                                     echo __('Sorry, not accepting new users at this time. Please try again later.', SLUG_TD);
                                     // This will only occur if you forget to enable "anyone can register" in your WP General Settings.
@@ -94,23 +95,23 @@ echo str_replace('%%title%%', __('Complete Registration', SLUG_TD), $site_header
             <table>
                 <tbody>
                 <?php echo $form_fields->inputRow(
-                    array(
+                    [
                         'type'  => 'email', // For `<input>` type.
                         'label' => __('<i class="fa fa-fw fa-envelope-o"></i> Email Address', SLUG_TD),
                         'name'  => 'email', 'required' => true, 'maxlength' => 100, 'current_value' => $email,
-                    )
+                    ]
                 ); ?>
                 <?php echo $form_fields->inputRow(
-                    array(
+                    [
                         'label' => __('<i class="fa fa-fw fa-pencil-square-o"></i> First Name', SLUG_TD),
                         'name'  => 'fname', 'required' => true, 'maxlength' => 50, 'current_value' => $fname,
-                    )
+                    ]
                 ); ?>
                 <?php echo $form_fields->inputRow(
-                    array(
+                    [
                         'label' => __('<i class="fa fa-fw fa-level-up fa-rotate-90"></i> Last Name', SLUG_TD),
                         'name'  => 'lname', 'required' => false, 'maxlength' => 100, 'current_value' => $lname,
-                    )
+                    ]
                 ); ?>
                 </tbody>
             </table>

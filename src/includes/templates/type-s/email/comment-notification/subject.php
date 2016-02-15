@@ -43,7 +43,7 @@ $is_digest = count($comments) > 1; // `TRUE`, if more than one comment in the no
 
 <?php echo $template->snippet(
     'subject.php',
-    array(
+    [
         'is_digest'                 => $is_digest,
         'sub_comment'               => $sub_comment,
         'subscribed_to_own_comment' => $subscribed_to_own_comment,
@@ -51,5 +51,5 @@ $is_digest = count($comments) > 1; // `TRUE`, if more than one comment in the no
         '[sub_post_title_clip]' => $sub_post_title_clip,
 
         '[sub_comment_id]' => $sub_comment ? $sub_comment->comment_ID : 0,
-    )
+    ]
 ); ?>

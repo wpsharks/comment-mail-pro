@@ -64,7 +64,7 @@ $replies_via_email_enable = $sub_post_comments_open && $plugin->options['replies
 ?>
 <?php echo $template->snippet(
     'message-heading.php',
-    array(
+    [
         'is_digest'                 => $is_digest,
         'sub_comment'               => $sub_comment,
         'subscribed_to_own_comment' => $subscribed_to_own_comment,
@@ -74,7 +74,7 @@ $replies_via_email_enable = $sub_post_comments_open && $plugin->options['replies
 
         '[sub_comment_url]' => esc_attr($sub_comment_url),
         '[sub_comment_id]'  => esc_html($sub_comment ? $sub_comment->comment_ID : 0),
-    )
+    ]
 ); ?>
 
     <?php foreach ($comments as $_comment) : // Comments in this notification. ?>
@@ -112,24 +112,24 @@ $replies_via_email_enable = $sub_post_comments_open && $plugin->options['replies
 
             <?php echo $template->snippet(
                 'message-in-response-to.php',
-                array(
+                [
                     '[comment_parent_url]'         => esc_attr($_comment_parent_url),
                     '[comment_parent_id]'          => esc_html($_comment_parent->comment_ID),
                     '[comment_parent_author]'      => esc_html($_comment_parent->comment_author),
                     '[comment_parent_clip]'        => esc_html($_comment_parent_clip),
                     'comment_reply_to_own_comment' => $_comment_reply_to_own_comment,
-                )
+                ]
             ); ?>
 
             <?php echo $template->snippet(
                 'message-reply-from.php',
-                array(
+                [
                     '[comment_url]'      => esc_attr($_comment_url),
                     '[comment_id]'       => esc_html($_comment->comment_ID),
                     '[comment_time_ago]' => esc_html($_comment_time_ago),
                     '[comment_author]'   => esc_html($_comment->comment_author),
                     '[comment_clip]'     => esc_html($_comment_clip),
-                )
+                ]
             ); ?>
             <p>
                 <a href="<?php echo esc_attr($_comment_url); ?>">
@@ -157,13 +157,13 @@ $replies_via_email_enable = $sub_post_comments_open && $plugin->options['replies
 
             <?php echo $template->snippet(
                 'message-comment-from.php',
-                array(
+                [
                     '[comment_url]'      => esc_attr($_comment_url),
                     '[comment_id]'       => esc_html($_comment->comment_ID),
                     '[comment_time_ago]' => esc_html($_comment_time_ago),
                     '[comment_author]'   => esc_html($_comment->comment_author),
                     '[comment_clip]'     => esc_html($_comment_clip),
-                )
+                ]
             ); ?>
             <p>
                 <a href="<?php echo esc_attr($_comment_url); ?>">

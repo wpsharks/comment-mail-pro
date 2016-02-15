@@ -62,7 +62,7 @@ $sub_last_update_time_ago = $plugin->utils_date->i18nUtc('M jS, Y @ g:i a T', $s
 
     <?php echo $template->snippet(
         'message.php',
-        array(
+        [
             'sub_comment'               => $sub_comment,
             'subscribed_to_own_comment' => $subscribed_to_own_comment,
             'sub_post_comments_open'    => $sub_post_comments_open,
@@ -75,7 +75,7 @@ $sub_last_update_time_ago = $plugin->utils_date->i18nUtc('M jS, Y @ g:i a T', $s
 
             '[sub_comment_url]' => esc_attr($sub_comment_url),
             '[sub_comment_id]'  => esc_html($sub_comment ? $sub_comment->comment_ID : 0),
-        )
+        ]
     ); ?>
 
     <p style="color:#888888; font-style:italic;">

@@ -21,4 +21,4 @@ namespace WebSharks\CommentMail\Pro;
  */
 ?>
 
-<?php echo $template->snippet('footer-tag.php', array()); ?>
+<?php echo $template->snippet('footer-tag.php', []); ?>

@@ -40,7 +40,8 @@ echo str_replace('%%title%%', __('Unsubscribe', SLUG_TD), $site_header); ?>
                     <?php foreach ($error_codes as $_error_code) : ?>
                         <li>
                             <i class="fa fa-warning fa-fw"></i>
-                            <?php switch ($_error_code) {
+                            <?php
+                            switch ($_error_code) {
                                 case 'missing_sub_key':
                                     echo __('Subscription key is missing; unable to unsubscribe.', SLUG_TD);
                                     break; // Break switch handler.
@@ -114,7 +115,7 @@ echo str_replace('%%title%%', __('Unsubscribe', SLUG_TD), $site_header); ?>
 
         <?php echo $template->snippet(
             'unsubscribed.php',
-            array(
+            [
                 'sub_post'                  => $sub_post,
                 'sub_comment'               => $sub_comment,
                 'subscribed_to_own_comment' => $subscribed_to_own_comment,
@@ -131,7 +132,7 @@ echo str_replace('%%title%%', __('Unsubscribe', SLUG_TD), $site_header); ?>
 
                 '[sub_unsubscribe_all_url]' => esc_attr($sub_unsubscribe_all_url),
                 '[sub_new_url]'             => esc_attr($sub_new_url),
-            )
+            ]
         ); ?>
 
         <?php

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Comment Mail Pro 160215\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/comment-mail-pro\n"
-"POT-Creation-Date: 2016-02-15 03:23:22+00:00\n"
+"POT-Creation-Date: 2016-02-15 06:07:32+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -169,17 +169,17 @@ msgstr ""
 #: src/includes/templates/type-a/site/sso-actions/complete.php:53
 #: src/includes/templates/type-a/site/sub-actions/confirmed.php:36
 #: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:93
-#: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:139
+#: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:140
 #: src/includes/templates/type-a/site/sub-actions/manage-summary.php:95
-#: src/includes/templates/type-a/site/sub-actions/manage-summary.php:140
+#: src/includes/templates/type-a/site/sub-actions/manage-summary.php:141
 #: src/includes/templates/type-a/site/sub-actions/unsubscribed-all.php:31
 #: src/includes/templates/type-a/site/sub-actions/unsubscribed.php:37
 #: src/includes/templates/type-s/site/sso-actions/complete.php:53
 #: src/includes/templates/type-s/site/sub-actions/confirmed.php:36
 #: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:93
-#: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:139
+#: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:140
 #: src/includes/templates/type-s/site/sub-actions/manage-summary.php:95
-#: src/includes/templates/type-s/site/sub-actions/manage-summary.php:140
+#: src/includes/templates/type-s/site/sub-actions/manage-summary.php:141
 #: src/includes/templates/type-s/site/sub-actions/unsubscribed-all.php:31
 #: src/includes/templates/type-s/site/sub-actions/unsubscribed.php:37
 msgid "Please review the following error(s):"
@@ -3673,8 +3673,8 @@ msgstr ""
 #: src/includes/classes/MenuPageSubEventLogTable.php:478
 #: src/includes/classes/MenuPageSubsTable.php:265
 #: src/includes/classes/MenuPageSubsTable.php:415
-#: src/includes/templates/type-a/site/sub-actions/manage-summary.php:276
-#: src/includes/templates/type-s/site/sub-actions/manage-summary.php:276
+#: src/includes/templates/type-a/site/sub-actions/manage-summary.php:277
+#: src/includes/templates/type-s/site/sub-actions/manage-summary.php:277
 msgid "Delete"
 msgstr ""
 
@@ -3848,9 +3848,9 @@ msgstr ""
 #: src/includes/classes/MenuPageSubFormBase.php:281
 #: src/includes/classes/UtilsMarkup.php:507
 #: src/includes/templates/type-a/site/sub-actions/manage-sub-form-comment-id-row-via-ajax.php:20
-#: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:203
+#: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:204
 #: src/includes/templates/type-s/site/sub-actions/manage-sub-form-comment-id-row-via-ajax.php:20
-#: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:203
+#: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:204
 msgid "— All Comments/Replies —"
 msgstr ""
 
@@ -3876,16 +3876,16 @@ msgid "If empty, the system will automatically try to find a matching user ID fo
 msgstr ""
 
 #: src/includes/classes/MenuPageSubFormBase.php:136
-#: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:217
-#: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:217
+#: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:218
+#: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:218
 msgid "<i class=\"fa fa-fw fa-envelope-o\"></i> Email"
 msgstr ""
 
 #: src/includes/classes/MenuPageSubFormBase.php:142
-#: src/includes/templates/type-a/site/sso-actions/complete.php:105
-#: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:223
-#: src/includes/templates/type-s/site/sso-actions/complete.php:105
-#: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:223
+#: src/includes/templates/type-a/site/sso-actions/complete.php:106
+#: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:224
+#: src/includes/templates/type-s/site/sso-actions/complete.php:106
+#: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:224
 msgid "<i class=\"fa fa-fw fa-pencil-square-o\"></i> First Name"
 msgstr ""
 
@@ -3926,14 +3926,14 @@ msgid "Country Codes"
 msgstr ""
 
 #: src/includes/classes/MenuPageSubFormBase.php:185
-#: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:240
-#: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:240
+#: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:241
+#: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:241
 msgid "Select a Status..."
 msgstr ""
 
 #: src/includes/classes/MenuPageSubFormBase.php:186
-#: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:241
-#: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:241
+#: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:242
+#: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:242
 msgid "<i class=\"fa fa-fw fa-flag-o\"></i> Status"
 msgstr ""
 
@@ -3942,32 +3942,32 @@ msgid "Request confirmation via email"
 msgstr ""
 
 #: src/includes/classes/MenuPageSubFormBase.php:198
-#: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:249
-#: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:249
+#: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:250
+#: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:250
 msgid "Select a Delivery Option..."
 msgstr ""
 
 #: src/includes/classes/MenuPageSubFormBase.php:199
-#: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:250
-#: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:250
+#: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:251
+#: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:251
 msgid "<i class=\"fa fa-fw fa-paper-plane-o\"></i> Deliver"
 msgstr ""
 
 #: src/includes/classes/MenuPageSubFormBase.php:201
-#: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:252
-#: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:252
+#: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:253
+#: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:253
 msgid "Any value that is not <code>instantly</code> results in a digest instead of instant notifications."
 msgstr ""
 
 #: src/includes/classes/MenuPageSubFormBase.php:217
-#: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:265
-#: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:265
+#: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:266
+#: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:266
 msgid "Update Subscription"
 msgstr ""
 
 #: src/includes/classes/MenuPageSubFormBase.php:218
-#: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:266
-#: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:266
+#: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:267
+#: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:267
 msgid "Create Subscription"
 msgstr ""
 
@@ -4018,8 +4018,8 @@ msgstr ""
 #: src/includes/classes/MenuPageSubsTable.php:69
 #: src/includes/classes/UtilsEvent.php:276
 #: src/includes/classes/UtilsEvent.php:321
-#: src/includes/templates/type-a/site/sub-actions/manage-summary.php:212
-#: src/includes/templates/type-s/site/sub-actions/manage-summary.php:212
+#: src/includes/templates/type-a/site/sub-actions/manage-summary.php:213
+#: src/includes/templates/type-s/site/sub-actions/manage-summary.php:213
 msgid "Status"
 msgstr ""
 
@@ -4057,8 +4057,8 @@ msgstr ""
 
 #: src/includes/classes/MenuPageSubsTable.php:249
 #: src/includes/classes/MenuPageTableBase.php:483
-#: src/includes/templates/type-a/site/sub-actions/manage-summary.php:269
-#: src/includes/templates/type-s/site/sub-actions/manage-summary.php:269
+#: src/includes/templates/type-a/site/sub-actions/manage-summary.php:270
+#: src/includes/templates/type-s/site/sub-actions/manage-summary.php:270
 msgid "Edit Subscr."
 msgstr ""
 
@@ -4851,8 +4851,8 @@ msgstr ""
 
 #: src/includes/classes/UtilsEvent.php:281
 #: src/includes/classes/UtilsEvent.php:326
-#: src/includes/templates/type-a/site/sub-actions/manage-summary.php:203
-#: src/includes/templates/type-s/site/sub-actions/manage-summary.php:203
+#: src/includes/templates/type-a/site/sub-actions/manage-summary.php:204
+#: src/includes/templates/type-s/site/sub-actions/manage-summary.php:204
 msgid "Email Address"
 msgstr ""
 
@@ -5198,12 +5198,12 @@ msgstr ""
 
 #: src/includes/templates/type-a/email/comment-notification/message.php:54
 #: src/includes/templates/type-a/email/sub-confirmation/message.php:57
-#: src/includes/templates/type-a/site/sub-actions/confirmed.php:101
-#: src/includes/templates/type-a/site/sub-actions/unsubscribed.php:103
+#: src/includes/templates/type-a/site/sub-actions/confirmed.php:102
+#: src/includes/templates/type-a/site/sub-actions/unsubscribed.php:104
 #: src/includes/templates/type-s/email/comment-notification/message.php:54
 #: src/includes/templates/type-s/email/sub-confirmation/message.php:57
-#: src/includes/templates/type-s/site/sub-actions/confirmed.php:113
-#: src/includes/templates/type-s/site/sub-actions/unsubscribed.php:103
+#: src/includes/templates/type-s/site/sub-actions/confirmed.php:114
+#: src/includes/templates/type-s/site/sub-actions/unsubscribed.php:104
 msgid "unknown"
 msgstr ""
 
@@ -5495,9 +5495,9 @@ msgstr ""
 
 #: src/includes/templates/type-a/site/footer-tag.php:51
 #: src/includes/templates/type-a/site/sub-actions/manage-summary.php:87
-#: src/includes/templates/type-a/site/sub-actions/manage-summary.php:184
+#: src/includes/templates/type-a/site/sub-actions/manage-summary.php:185
 #: src/includes/templates/type-s/site/sub-actions/manage-summary.php:87
-#: src/includes/templates/type-s/site/sub-actions/manage-summary.php:184
+#: src/includes/templates/type-s/site/sub-actions/manage-summary.php:185
 msgid "My Comment Subscriptions"
 msgstr ""
 
@@ -5514,9 +5514,9 @@ msgid "Or, login with:"
 msgstr ""
 
 #: src/includes/templates/type-a/site/sso-actions/complete.php:39
-#: src/includes/templates/type-a/site/sso-actions/complete.php:124
+#: src/includes/templates/type-a/site/sso-actions/complete.php:125
 #: src/includes/templates/type-s/site/sso-actions/complete.php:39
-#: src/includes/templates/type-s/site/sso-actions/complete.php:124
+#: src/includes/templates/type-s/site/sso-actions/complete.php:125
 msgid "Complete Registration"
 msgstr ""
 
@@ -5525,50 +5525,50 @@ msgstr ""
 msgid "Please Complete Registration"
 msgstr ""
 
-#: src/includes/templates/type-a/site/sso-actions/complete.php:61
-#: src/includes/templates/type-s/site/sso-actions/complete.php:61
+#: src/includes/templates/type-a/site/sso-actions/complete.php:62
+#: src/includes/templates/type-s/site/sso-actions/complete.php:62
 msgid "Sorry, not accepting new users at this time. Please try again later."
 msgstr ""
 
-#: src/includes/templates/type-a/site/sso-actions/complete.php:66
-#: src/includes/templates/type-s/site/sso-actions/complete.php:66
+#: src/includes/templates/type-a/site/sso-actions/complete.php:67
+#: src/includes/templates/type-s/site/sso-actions/complete.php:67
 msgid "Missing first name; please try again."
 msgstr ""
 
-#: src/includes/templates/type-a/site/sso-actions/complete.php:70
-#: src/includes/templates/type-s/site/sso-actions/complete.php:70
+#: src/includes/templates/type-a/site/sso-actions/complete.php:71
+#: src/includes/templates/type-s/site/sso-actions/complete.php:71
 msgid "Missing email address; please try again."
 msgstr ""
 
-#: src/includes/templates/type-a/site/sso-actions/complete.php:74
-#: src/includes/templates/type-s/site/sso-actions/complete.php:74
+#: src/includes/templates/type-a/site/sso-actions/complete.php:75
+#: src/includes/templates/type-s/site/sso-actions/complete.php:75
 msgid "Invalid email address; please try again."
-msgstr ""
-
-#: src/includes/templates/type-a/site/sso-actions/complete.php:79
-#: src/includes/templates/type-s/site/sso-actions/complete.php:79
-msgid "An account w/ this email address already exists."
 msgstr ""
 
 #: src/includes/templates/type-a/site/sso-actions/complete.php:80
 #: src/includes/templates/type-s/site/sso-actions/complete.php:80
+msgid "An account w/ this email address already exists."
+msgstr ""
+
+#: src/includes/templates/type-a/site/sso-actions/complete.php:81
+#: src/includes/templates/type-s/site/sso-actions/complete.php:81
 msgid "Please <a href=\"%1$s\">log in</a>."
 msgstr ""
 
-#: src/includes/templates/type-a/site/sso-actions/complete.php:84
-#: src/includes/templates/type-s/site/sso-actions/complete.php:84
+#: src/includes/templates/type-a/site/sso-actions/complete.php:85
+#: src/includes/templates/type-s/site/sso-actions/complete.php:85
 msgid "Unknown error; unable to complete registration/login. Sorry!"
 msgstr ""
 
-#: src/includes/templates/type-a/site/sso-actions/complete.php:99
-#: src/includes/templates/type-s/site/sso-actions/complete.php:99
+#: src/includes/templates/type-a/site/sso-actions/complete.php:100
+#: src/includes/templates/type-s/site/sso-actions/complete.php:100
 msgid "<i class=\"fa fa-fw fa-envelope-o\"></i> Email Address"
 msgstr ""
 
-#: src/includes/templates/type-a/site/sso-actions/complete.php:111
-#: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:229
-#: src/includes/templates/type-s/site/sso-actions/complete.php:111
-#: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:229
+#: src/includes/templates/type-a/site/sso-actions/complete.php:112
+#: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:230
+#: src/includes/templates/type-s/site/sso-actions/complete.php:112
+#: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:230
 msgid "<i class=\"fa fa-fw fa-level-up fa-rotate-90\"></i> Last Name"
 msgstr ""
 
@@ -5577,241 +5577,241 @@ msgstr ""
 msgid "Confirmation"
 msgstr ""
 
-#: src/includes/templates/type-a/site/sub-actions/confirmed.php:44
-#: src/includes/templates/type-s/site/sub-actions/confirmed.php:44
+#: src/includes/templates/type-a/site/sub-actions/confirmed.php:45
+#: src/includes/templates/type-s/site/sub-actions/confirmed.php:45
 msgid "Subscription key is missing; unable to confirm."
 msgstr ""
 
-#: src/includes/templates/type-a/site/sub-actions/confirmed.php:48
-#: src/includes/templates/type-s/site/sub-actions/confirmed.php:48
+#: src/includes/templates/type-a/site/sub-actions/confirmed.php:49
+#: src/includes/templates/type-s/site/sub-actions/confirmed.php:49
 msgid "Invalid subscription key; unable to confirm."
 msgstr ""
 
-#: src/includes/templates/type-a/site/sub-actions/confirmed.php:52
-#: src/includes/templates/type-s/site/sub-actions/confirmed.php:52
+#: src/includes/templates/type-a/site/sub-actions/confirmed.php:53
+#: src/includes/templates/type-s/site/sub-actions/confirmed.php:53
 msgid "Unable to confirm; the post you're subscribing to has since been deleted. Sorry!"
 msgstr ""
 
-#: src/includes/templates/type-a/site/sub-actions/confirmed.php:56
-#: src/includes/templates/type-s/site/sub-actions/confirmed.php:56
+#: src/includes/templates/type-a/site/sub-actions/confirmed.php:57
+#: src/includes/templates/type-s/site/sub-actions/confirmed.php:57
 msgid "Unable to confirm; the comment you're subscribing to has since been deleted. Sorry!"
 msgstr ""
 
-#: src/includes/templates/type-a/site/sub-actions/confirmed.php:60
-#: src/includes/templates/type-s/site/sub-actions/confirmed.php:60
+#: src/includes/templates/type-a/site/sub-actions/confirmed.php:61
+#: src/includes/templates/type-s/site/sub-actions/confirmed.php:61
 msgid "Already confirmed! Thank you."
 msgstr ""
 
-#: src/includes/templates/type-a/site/sub-actions/confirmed.php:64
-#: src/includes/templates/type-s/site/sub-actions/confirmed.php:64
+#: src/includes/templates/type-a/site/sub-actions/confirmed.php:65
+#: src/includes/templates/type-s/site/sub-actions/confirmed.php:65
 msgid "Unknown error; unable to confirm. Sorry!"
 msgstr ""
 
-#: src/includes/templates/type-a/site/sub-actions/confirmed.php:112
+#: src/includes/templates/type-a/site/sub-actions/confirmed.php:113
 msgid "Confirmed successfully. Thank you%1$s!"
 msgstr ""
 
-#: src/includes/templates/type-a/site/sub-actions/confirmed.php:120
+#: src/includes/templates/type-a/site/sub-actions/confirmed.php:121
 msgid "You'll be notified about replies to <a href=\"%1$s\">your comment</a>; on:"
 msgstr ""
 
-#: src/includes/templates/type-a/site/sub-actions/confirmed.php:122
+#: src/includes/templates/type-a/site/sub-actions/confirmed.php:123
 msgid "You'll be notified about replies to <a href=\"%1$s\">comment ID #%2$s</a>; on:"
 msgstr ""
 
-#: src/includes/templates/type-a/site/sub-actions/confirmed.php:126
+#: src/includes/templates/type-a/site/sub-actions/confirmed.php:127
 msgid "You'll be notified about all comments/replies to:"
 msgstr ""
 
-#: src/includes/templates/type-a/site/sub-actions/confirmed.php:142
+#: src/includes/templates/type-a/site/sub-actions/confirmed.php:143
 msgid "Your email address is: &lt;<code>%1$s</code>&gt;;"
 msgstr ""
 
-#: src/includes/templates/type-a/site/sub-actions/confirmed.php:143
+#: src/includes/templates/type-a/site/sub-actions/confirmed.php:144
 msgid "You chose delivery option: <code>%1$s</code>;"
 msgstr ""
 
-#: src/includes/templates/type-a/site/sub-actions/confirmed.php:146
+#: src/includes/templates/type-a/site/sub-actions/confirmed.php:148
 msgid "each email notification will be delivered to you instantly."
 msgstr ""
 
-#: src/includes/templates/type-a/site/sub-actions/confirmed.php:152
+#: src/includes/templates/type-a/site/sub-actions/confirmed.php:154
 msgid "notifications will be delivered as a digest."
 msgstr ""
 
-#: src/includes/templates/type-a/site/sub-actions/confirmed.php:160
+#: src/includes/templates/type-a/site/sub-actions/confirmed.php:162
 msgid "If any of this is incorrect, please <a href=\"%1$s\">click here to edit</a> your subscription."
 msgstr ""
 
 #: src/includes/templates/type-a/site/sub-actions/manage-sub-form-comment-id-row-via-ajax.php:21
-#: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:204
+#: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:205
 #: src/includes/templates/type-s/site/sub-actions/manage-sub-form-comment-id-row-via-ajax.php:21
-#: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:204
+#: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:205
 msgid "<i class=\"fa fa-fw fa-comment-o\"></i> Comment"
 msgstr ""
 
 #: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:61
-#: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:179
-#: src/includes/templates/type-a/site/sub-actions/manage-summary.php:268
+#: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:180
+#: src/includes/templates/type-a/site/sub-actions/manage-summary.php:269
 #: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:61
-#: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:179
-#: src/includes/templates/type-s/site/sub-actions/manage-summary.php:268
+#: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:180
+#: src/includes/templates/type-s/site/sub-actions/manage-summary.php:269
 msgid "Edit Subscription"
 msgstr ""
 
 #: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:62
-#: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:181
+#: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:182
 #: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:62
-#: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:181
+#: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:182
 msgid "Add New Subscription"
 msgstr ""
 
 #: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:73
-#: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:156
+#: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:157
 #: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:73
-#: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:156
+#: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:157
 msgid "Submission accepted; nice work!"
 msgstr ""
 
 #: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:84
-#: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:167
-#: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:175
+#: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:168
+#: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:176
 #: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:84
-#: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:167
-#: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:175
+#: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:168
+#: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:176
 msgid "Back to My Subscriptions"
 msgstr ""
 
-#: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:101
-#: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:101
+#: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:102
+#: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:102
 msgid "Subscription key is missing; unable to edit."
 msgstr ""
 
-#: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:105
-#: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:105
+#: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:106
+#: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:106
 msgid "Invalid subscription key; unable to edit."
 msgstr ""
 
-#: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:109
-#: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:109
+#: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:110
+#: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:110
 msgid "Sorry; not accepting new subscriptions at this time."
 msgstr ""
 
-#: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:113
-#: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:113
+#: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:114
+#: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:114
 msgid "Unknown error; unable to add/edit. Sorry!"
-msgstr ""
-
-#: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:194
-#: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:194
-msgid "Select a Post..."
 msgstr ""
 
 #: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:195
 #: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:195
+msgid "Select a Post..."
+msgstr ""
+
+#: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:196
+#: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:196
 msgid "<i class=\"fa fa-fw fa-thumb-tack\"></i> Post"
 msgstr ""
 
-#: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:197
-#: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:197
+#: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:198
+#: src/includes/templates/type-s/site/sub-actions/manage-sub-form.php:198
 msgid "Required; the Post you're subscribing to."
 msgstr ""
 
-#: src/includes/templates/type-a/site/sub-actions/manage-summary.php:103
-#: src/includes/templates/type-s/site/sub-actions/manage-summary.php:103
+#: src/includes/templates/type-a/site/sub-actions/manage-summary.php:104
+#: src/includes/templates/type-s/site/sub-actions/manage-summary.php:104
 msgid "Missing subscription key; unable to display summary."
 msgstr ""
 
-#: src/includes/templates/type-a/site/sub-actions/manage-summary.php:107
-#: src/includes/templates/type-s/site/sub-actions/manage-summary.php:107
+#: src/includes/templates/type-a/site/sub-actions/manage-summary.php:108
+#: src/includes/templates/type-s/site/sub-actions/manage-summary.php:108
 msgid "Invalid subscription key; unable to display summary."
 msgstr ""
 
-#: src/includes/templates/type-a/site/sub-actions/manage-summary.php:111
-#: src/includes/templates/type-s/site/sub-actions/manage-summary.php:111
+#: src/includes/templates/type-a/site/sub-actions/manage-summary.php:112
+#: src/includes/templates/type-s/site/sub-actions/manage-summary.php:112
 msgid "Unknown error; unable to display summary. Sorry!"
 msgstr ""
 
-#: src/includes/templates/type-a/site/sub-actions/manage-summary.php:157
-#: src/includes/templates/type-s/site/sub-actions/manage-summary.php:157
+#: src/includes/templates/type-a/site/sub-actions/manage-summary.php:158
+#: src/includes/templates/type-s/site/sub-actions/manage-summary.php:158
 msgid "Submission accepted; thank you :-)"
-msgstr ""
-
-#: src/includes/templates/type-a/site/sub-actions/manage-summary.php:180
-#: src/includes/templates/type-a/site/sub-actions/unsubscribed.php:124
-#: src/includes/templates/type-s/site/sub-actions/manage-summary.php:180
-msgid "Delete (unsubscribe) ALL subscriptions associated with your email address? Are you absolutely sure?"
 msgstr ""
 
 #: src/includes/templates/type-a/site/sub-actions/manage-summary.php:181
 #: src/includes/templates/type-a/site/sub-actions/unsubscribed.php:125
 #: src/includes/templates/type-s/site/sub-actions/manage-summary.php:181
+msgid "Delete (unsubscribe) ALL subscriptions associated with your email address? Are you absolutely sure?"
+msgstr ""
+
+#: src/includes/templates/type-a/site/sub-actions/manage-summary.php:182
+#: src/includes/templates/type-a/site/sub-actions/unsubscribed.php:126
+#: src/includes/templates/type-s/site/sub-actions/manage-summary.php:182
 msgid "Delete (unsubscribe) ALL subscriptions associated with your email address?"
 msgstr ""
 
-#: src/includes/templates/type-a/site/sub-actions/manage-summary.php:194
-#: src/includes/templates/type-s/site/sub-actions/manage-summary.php:194
+#: src/includes/templates/type-a/site/sub-actions/manage-summary.php:195
+#: src/includes/templates/type-s/site/sub-actions/manage-summary.php:195
 msgid "No subscriptions at this time. You may <a href=\"%1$s\">click here</a> to create one <i class=\"fa fa-smile-o\"></i>"
 msgstr ""
 
-#: src/includes/templates/type-a/site/sub-actions/manage-summary.php:206
-#: src/includes/templates/type-s/site/sub-actions/manage-summary.php:206
+#: src/includes/templates/type-a/site/sub-actions/manage-summary.php:207
+#: src/includes/templates/type-s/site/sub-actions/manage-summary.php:207
 msgid "Subscribed To"
 msgstr ""
 
-#: src/includes/templates/type-a/site/sub-actions/manage-summary.php:209
-#: src/includes/templates/type-s/site/sub-actions/manage-summary.php:209
+#: src/includes/templates/type-a/site/sub-actions/manage-summary.php:210
+#: src/includes/templates/type-s/site/sub-actions/manage-summary.php:210
 msgid "Type"
 msgstr ""
 
-#: src/includes/templates/type-a/site/sub-actions/manage-summary.php:215
-#: src/includes/templates/type-s/site/sub-actions/manage-summary.php:215
+#: src/includes/templates/type-a/site/sub-actions/manage-summary.php:216
+#: src/includes/templates/type-s/site/sub-actions/manage-summary.php:216
 msgid "Deliver"
-msgstr ""
-
-#: src/includes/templates/type-a/site/sub-actions/manage-summary.php:274
-#: src/includes/templates/type-s/site/sub-actions/manage-summary.php:274
-msgid "Delete subscription? Are you sure?"
 msgstr ""
 
 #: src/includes/templates/type-a/site/sub-actions/manage-summary.php:275
 #: src/includes/templates/type-s/site/sub-actions/manage-summary.php:275
+msgid "Delete subscription? Are you sure?"
+msgstr ""
+
+#: src/includes/templates/type-a/site/sub-actions/manage-summary.php:276
+#: src/includes/templates/type-s/site/sub-actions/manage-summary.php:276
 msgid "Delete Subscription"
 msgstr ""
 
-#: src/includes/templates/type-a/site/sub-actions/manage-summary.php:281
-#: src/includes/templates/type-s/site/sub-actions/manage-summary.php:281
+#: src/includes/templates/type-a/site/sub-actions/manage-summary.php:282
+#: src/includes/templates/type-s/site/sub-actions/manage-summary.php:282
 msgid "%1$s ID <a href=\"%2$s\">#<code>%3$s</code></a> <a href=\"%4$s\">%5$s</a>"
 msgstr ""
 
-#: src/includes/templates/type-a/site/sub-actions/manage-summary.php:283
-#: src/includes/templates/type-a/site/sub-actions/unsubscribed.php:151
-#: src/includes/templates/type-s/site/sub-actions/manage-summary.php:283
+#: src/includes/templates/type-a/site/sub-actions/manage-summary.php:284
+#: src/includes/templates/type-a/site/sub-actions/unsubscribed.php:152
+#: src/includes/templates/type-s/site/sub-actions/manage-summary.php:284
 msgid "Post ID #<code>%1$s</code>"
 msgstr ""
 
-#: src/includes/templates/type-a/site/sub-actions/manage-summary.php:291
-#: src/includes/templates/type-s/site/sub-actions/manage-summary.php:291
+#: src/includes/templates/type-a/site/sub-actions/manage-summary.php:292
+#: src/includes/templates/type-s/site/sub-actions/manage-summary.php:292
 msgid "Replies to <a href=\"%1$s\">your comment</a>; ID <a href=\"%1$s\">#<code>%2$s</code></a> posted %3$s"
 msgstr ""
 
-#: src/includes/templates/type-a/site/sub-actions/manage-summary.php:293
-#: src/includes/templates/type-s/site/sub-actions/manage-summary.php:293
+#: src/includes/templates/type-a/site/sub-actions/manage-summary.php:294
+#: src/includes/templates/type-s/site/sub-actions/manage-summary.php:294
 msgid "Replies to <a href=\"%1$s\">comment ID #<code>%2$s</code></a> posted %3$s"
 msgstr ""
 
-#: src/includes/templates/type-a/site/sub-actions/manage-summary.php:296
-#: src/includes/templates/type-s/site/sub-actions/manage-summary.php:296
+#: src/includes/templates/type-a/site/sub-actions/manage-summary.php:297
+#: src/includes/templates/type-s/site/sub-actions/manage-summary.php:297
 msgid "by: <a href=\"%1$s\">%2$s</a>"
 msgstr ""
 
-#: src/includes/templates/type-a/site/sub-actions/manage-summary.php:299
-#: src/includes/templates/type-s/site/sub-actions/manage-summary.php:299
+#: src/includes/templates/type-a/site/sub-actions/manage-summary.php:300
+#: src/includes/templates/type-s/site/sub-actions/manage-summary.php:300
 msgid "Comment ID #<code>%1$s</code>"
 msgstr ""
 
-#: src/includes/templates/type-a/site/sub-actions/manage-summary.php:324
-#: src/includes/templates/type-s/site/sub-actions/manage-summary.php:324
+#: src/includes/templates/type-a/site/sub-actions/manage-summary.php:325
+#: src/includes/templates/type-s/site/sub-actions/manage-summary.php:325
 msgid "Page %1$s of %2$s"
 msgstr ""
 
@@ -5820,38 +5820,38 @@ msgstr ""
 msgid "Unsubscribe All"
 msgstr ""
 
-#: src/includes/templates/type-a/site/sub-actions/unsubscribed-all.php:39
-#: src/includes/templates/type-s/site/sub-actions/unsubscribed-all.php:39
+#: src/includes/templates/type-a/site/sub-actions/unsubscribed-all.php:40
+#: src/includes/templates/type-s/site/sub-actions/unsubscribed-all.php:40
 msgid "Subscription email is missing; unable to unsubscribe all."
 msgstr ""
 
-#: src/includes/templates/type-a/site/sub-actions/unsubscribed-all.php:43
-#: src/includes/templates/type-s/site/sub-actions/unsubscribed-all.php:43
+#: src/includes/templates/type-a/site/sub-actions/unsubscribed-all.php:44
+#: src/includes/templates/type-s/site/sub-actions/unsubscribed-all.php:44
 msgid "Already unsubscribed all! Sorry to see you go."
 msgstr ""
 
-#: src/includes/templates/type-a/site/sub-actions/unsubscribed-all.php:47
-#: src/includes/templates/type-s/site/sub-actions/unsubscribed-all.php:47
+#: src/includes/templates/type-a/site/sub-actions/unsubscribed-all.php:48
+#: src/includes/templates/type-s/site/sub-actions/unsubscribed-all.php:48
 msgid "Unknown error; unable to unsubscribe all. Sorry!"
 msgstr ""
 
-#: src/includes/templates/type-a/site/sub-actions/unsubscribed-all.php:49
-#: src/includes/templates/type-a/site/sub-actions/unsubscribed.php:60
-#: src/includes/templates/type-s/site/sub-actions/unsubscribed-all.php:49
-#: src/includes/templates/type-s/site/sub-actions/unsubscribed.php:60
+#: src/includes/templates/type-a/site/sub-actions/unsubscribed-all.php:50
+#: src/includes/templates/type-a/site/sub-actions/unsubscribed.php:61
+#: src/includes/templates/type-s/site/sub-actions/unsubscribed-all.php:50
+#: src/includes/templates/type-s/site/sub-actions/unsubscribed.php:61
 msgid "Please contact &lt;%1$s&gt; for assistance."
 msgstr ""
 
-#: src/includes/templates/type-a/site/sub-actions/unsubscribed-all.php:72
+#: src/includes/templates/type-a/site/sub-actions/unsubscribed-all.php:73
 msgid "Unsubscribed all successfully. Sorry to see you go!"
 msgstr ""
 
-#: src/includes/templates/type-a/site/sub-actions/unsubscribed-all.php:77
+#: src/includes/templates/type-a/site/sub-actions/unsubscribed-all.php:78
 msgid "&lt;%1$s&gt; will no longer be notified about any comments/replies."
 msgstr ""
 
-#: src/includes/templates/type-a/site/sub-actions/unsubscribed-all.php:83
-#: src/includes/templates/type-a/site/sub-actions/unsubscribed.php:158
+#: src/includes/templates/type-a/site/sub-actions/unsubscribed-all.php:84
+#: src/includes/templates/type-a/site/sub-actions/unsubscribed.php:159
 msgid "Too many emails? ~ Please feel free to <a href=\"%1$s\">add a new/different subscription</a> if you like!"
 msgstr ""
 
@@ -5860,51 +5860,51 @@ msgstr ""
 msgid "Unsubscribe"
 msgstr ""
 
-#: src/includes/templates/type-a/site/sub-actions/unsubscribed.php:45
-#: src/includes/templates/type-s/site/sub-actions/unsubscribed.php:45
+#: src/includes/templates/type-a/site/sub-actions/unsubscribed.php:46
+#: src/includes/templates/type-s/site/sub-actions/unsubscribed.php:46
 msgid "Subscription key is missing; unable to unsubscribe."
 msgstr ""
 
-#: src/includes/templates/type-a/site/sub-actions/unsubscribed.php:50
-#: src/includes/templates/type-s/site/sub-actions/unsubscribed.php:50
+#: src/includes/templates/type-a/site/sub-actions/unsubscribed.php:51
+#: src/includes/templates/type-s/site/sub-actions/unsubscribed.php:51
 msgid "Looks like you've already unsubscribed! Sorry to see you go."
 msgstr ""
 
-#: src/includes/templates/type-a/site/sub-actions/unsubscribed.php:54
-#: src/includes/templates/type-s/site/sub-actions/unsubscribed.php:54
+#: src/includes/templates/type-a/site/sub-actions/unsubscribed.php:55
+#: src/includes/templates/type-s/site/sub-actions/unsubscribed.php:55
 msgid "Already unsubscribed! Sorry to see you go."
 msgstr ""
 
-#: src/includes/templates/type-a/site/sub-actions/unsubscribed.php:58
-#: src/includes/templates/type-s/site/sub-actions/unsubscribed.php:58
+#: src/includes/templates/type-a/site/sub-actions/unsubscribed.php:59
+#: src/includes/templates/type-s/site/sub-actions/unsubscribed.php:59
 msgid "Unknown error; unable to unsubscribe. Sorry!"
 msgstr ""
 
-#: src/includes/templates/type-a/site/sub-actions/unsubscribed.php:117
+#: src/includes/templates/type-a/site/sub-actions/unsubscribed.php:118
 msgid "Unsubscribed successfully. Sorry to see you go!"
 msgstr ""
 
-#: src/includes/templates/type-a/site/sub-actions/unsubscribed.php:126
+#: src/includes/templates/type-a/site/sub-actions/unsubscribed.php:127
 msgid "Unsubscribe All?"
 msgstr ""
 
-#: src/includes/templates/type-a/site/sub-actions/unsubscribed.php:134
+#: src/includes/templates/type-a/site/sub-actions/unsubscribed.php:135
 msgid "You'll no longer be notified about replies to <a href=\"%1$s\">your comment</a>; on:"
 msgstr ""
 
-#: src/includes/templates/type-a/site/sub-actions/unsubscribed.php:136
+#: src/includes/templates/type-a/site/sub-actions/unsubscribed.php:137
 msgid "You'll no longer be notified about replies to <a href=\"%1$s\">comment ID #%2$s</a>; on:"
 msgstr ""
 
-#: src/includes/templates/type-a/site/sub-actions/unsubscribed.php:140
+#: src/includes/templates/type-a/site/sub-actions/unsubscribed.php:141
 msgid "You'll no longer be notified about comments/replies to:"
 msgstr ""
 
-#: src/includes/templates/type-s/site/sub-actions/confirmed.php:100
+#: src/includes/templates/type-s/site/sub-actions/confirmed.php:101
 msgid "each email notification will be delivered to you instantly"
 msgstr ""
 
-#: src/includes/templates/type-s/site/sub-actions/confirmed.php:106
+#: src/includes/templates/type-s/site/sub-actions/confirmed.php:107
 msgid "notifications will be delivered as a digest"
 msgstr ""
 

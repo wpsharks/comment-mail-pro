@@ -113,7 +113,7 @@ namespace WebSharks\CommentMail\Pro;
 
 <?php echo $template->snippet(
     'sub-ops.php',
-    array(
+    [
         '[css_styles]'          => $css_styles,
         '[inline_icon_svg]'     => $inline_icon_svg,
         '[sub_type_options]'    => $sub_type_options,
@@ -123,5 +123,5 @@ namespace WebSharks\CommentMail\Pro;
         '[current_sub_email]'   => esc_html($current->sub_email),
         '[sub_new_url]'         => esc_attr($sub_new_url),
         '[sub_summary_url]'     => esc_attr($sub_summary_url),
-    )
+    ]
 ); ?>

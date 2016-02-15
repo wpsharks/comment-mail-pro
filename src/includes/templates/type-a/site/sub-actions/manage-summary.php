@@ -98,7 +98,8 @@ str_replace('%%title%%', __('My Comment Subscriptions', SLUG_TD), $site_header);
                     <?php foreach ($error_codes as $_error_code) : ?>
                         <li>
                             <i class="fa fa-warning fa-fw"></i>
-                            <?php switch ($_error_code) {
+                            <?php
+                            switch ($_error_code) {
                                 case 'missing_sub_key':
                                     echo __('Missing subscription key; unable to display summary.', SLUG_TD);
                                     break; // Break switch handler.
@@ -254,7 +255,7 @@ str_replace('%%title%%', __('My Comment Subscriptions', SLUG_TD), $site_header);
                                     // Type of subscription; one of `comment` or `comments`.
                                     $_sub_type = $_sub->comment_id ? 'comment' : 'comments';
 
-                                    $_sub_name_email_args = array('anchor_to' => $_sub_edit_url);
+                                    $_sub_name_email_args = ['anchor_to' => $_sub_edit_url];
                                     // This is the subscriber's `"name" <email>` w/ HTML markup enhancements.
                                     $_sub_name_email_markup = $plugin->utils_markup->nameEmail($_sub->fname.' '.$_sub->lname, $_sub->email, $_sub_name_email_args);
 
@@ -329,7 +330,7 @@ str_replace('%%title%%', __('My Comment Subscriptions', SLUG_TD), $site_header);
                             <ul class="pagination" style="margin:0;">
 
                                 <?php if ($pagination_vars->current_page > 1) : // Create a previous page link? ?>
-                                    <?php $_prev_page_url = $plugin->utils_url->subManageSummaryUrl($sub_key, null, array('page' => $pagination_vars->current_page - 1)); ?>
+                                    <?php $_prev_page_url = $plugin->utils_url->subManageSummaryUrl($sub_key, null, ['page' => $pagination_vars->current_page - 1]); ?>
                                     <li><a href="<?php echo esc_attr($_prev_page_url); ?>">&laquo;</a></li>
                                 <?php else : // Not possible; this is the first page. ?>
                                     <li class="disabled"><a href="#">&laquo;</a></li>
@@ -342,15 +343,19 @@ str_replace('%%title%%', __('My Comment Subscriptions', SLUG_TD), $site_header);
 
                                 for ($_i = 1, $_page = $_page_links_start_at_page;
                                     $_i <= $_max_page_links && $_page <= $pagination_vars->total_pages; $_i++ && $_page++) :
-                                    $_page_url = $plugin->utils_url->subManageSummaryUrl($sub_key, null, array('page' => $_page)); ?>
+                                    $_page_url = $plugin->utils_url->subManageSummaryUrl($sub_key, null, ['page' => $_page]); ?>
 
-                                    <li<?php if ($_page === $pagination_vars->current_page) : ?> class="active"<?php endif; ?>>
+                                    <li <?php if ($_page === $pagination_vars->current_page) : ?>
+                                            class="active"
+                                        <?php endif; ?>
+                                        >
                                         <a href="<?php echo esc_attr($_page_url); ?>"><?php echo esc_html($_page); ?></a>
                                     </li>
-                                <?php endfor; ?>
+                                <?php // End loop.
+                                endfor; ?>
 
                                 <?php if ($pagination_vars->current_page < $pagination_vars->total_pages) : // Create a next page link? ?>
-                                    <?php $_next_page_url = $plugin->utils_url->subManageSummaryUrl($sub_key, null, array('page' => $pagination_vars->current_page + 1)); ?>
+                                    <?php $_next_page_url = $plugin->utils_url->subManageSummaryUrl($sub_key, null, ['page' => $pagination_vars->current_page + 1]); ?>
                                     <li><a href="<?php echo esc_attr($_next_page_url); ?>">&raquo;</a></li>
                                 <?php else : // Not possible; this is the last page. ?>
                                     <li class="disabled"><a href="#">&raquo;</a></li>
