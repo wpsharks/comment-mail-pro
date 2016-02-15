@@ -4,6 +4,7 @@
  *
  * @since 160212 PSR compliance.
  */
+// @codingStandardsIgnoreFile
 namespace WebSharks\CommentMail\Pro;
 
 if (!defined('WPINC')) {
