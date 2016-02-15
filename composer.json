@@ -53,10 +53,7 @@
 
   "autoload": {
     "psr-4": {
-      "WebSharks\\CommentMail\\Pro\\Classes\\": "src/includes/classes",
-      "WebSharks\\CommentMail\\Pro\\Functions\\": "src/includes/functions",
-      "WebSharks\\CommentMail\\Pro\\Interfaces\\": "src/includes/interfaces",
-      "WebSharks\\CommentMail\\Pro\\Traits\\": "src/includes/traits"
+      "WebSharks\\CommentMail\\Pro\\": "src/includes/classes"
     },
     "files": ["src/includes/functions/_load.php"]
   },
