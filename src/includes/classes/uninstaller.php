@@ -1,15 +1,16 @@
 <?php
 /**
- * Uninstall Routines
+ * Uninstall Routines.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * Uninstall Routines
+ * Uninstall Routines.
  *
  * @since 141111 First documented version.
  */
@@ -125,7 +126,7 @@ class Uninstaller extends AbsBase
             '%'.$this->plugin->utils_db->wp->esc_like(GLOBAL_NS).'%';
 
         $sql = // Removes any other option keys for this plugin.
-            "DELETE FROM `".esc_sql($this->plugin->utils_db->wp->options)."`".
+            'DELETE FROM `'.esc_sql($this->plugin->utils_db->wp->options).'`'.
             " WHERE `option_name` LIKE '".esc_sql($like)."'";
 
         $this->plugin->utils_db->wp->query($sql);
@@ -145,7 +146,7 @@ class Uninstaller extends AbsBase
             '%'.$this->plugin->utils_db->wp->esc_like('_transient_timeout_'.$this->plugin->transient_prefix).'%';
 
         $sql = // This will remove our transients/timeouts.
-            "DELETE FROM `".esc_sql($this->plugin->utils_db->wp->options)."`".
+            'DELETE FROM `'.esc_sql($this->plugin->utils_db->wp->options).'`'.
             " WHERE `option_name` LIKE '".esc_sql($like1)."' OR `option_name` LIKE '".esc_sql($like2)."'";
 
         $this->plugin->utils_db->wp->query($sql);
@@ -162,7 +163,7 @@ class Uninstaller extends AbsBase
             '%'.$this->plugin->utils_db->wp->esc_like(GLOBAL_NS).'%';
 
         $sql = // This will remove our StCR import history also.
-            "DELETE FROM `".esc_sql($this->plugin->utils_db->wp->postmeta)."`".
+            'DELETE FROM `'.esc_sql($this->plugin->utils_db->wp->postmeta).'`'.
             " WHERE `meta_key` LIKE '".esc_sql($like)."'";
 
         $this->plugin->utils_db->wp->query($sql);
@@ -184,14 +185,14 @@ class Uninstaller extends AbsBase
                     '%'.$this->plugin->utils_db->wp->esc_like(GLOBAL_NS).'%';
 
             $sql = // This will delete all screen options too.
-                "DELETE FROM `".esc_sql($this->plugin->utils_db->wp->usermeta)."`".
+                'DELETE FROM `'.esc_sql($this->plugin->utils_db->wp->usermeta).'`'.
                 " WHERE `meta_key` LIKE '".esc_sql($like)."'";
         } else { // No special considerations; there is only one blog.
             $like = // e.g. Delete all keys LIKE `%comment\_mail%`.
                 '%'.$this->plugin->utils_db->wp->esc_like(GLOBAL_NS).'%';
 
             $sql = // This will delete all screen options too.
-                "DELETE FROM `".esc_sql($this->plugin->utils_db->wp->usermeta)."`".
+                'DELETE FROM `'.esc_sql($this->plugin->utils_db->wp->usermeta).'`'.
                 " WHERE `meta_key` LIKE '".esc_sql($like)."'";
         }
         $this->plugin->utils_db->wp->query($sql);
