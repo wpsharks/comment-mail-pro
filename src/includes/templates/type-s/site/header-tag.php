@@ -1,6 +1,7 @@
 <?php
 namespace WebSharks\CommentMail\Pro;
-/**
+
+/*
  * @var Plugin   $plugin Plugin class.
  * @var Template $template Template class.
  *
@@ -30,7 +31,7 @@ $home_url = home_url('/'); // Multisite compatible.
 $blog_name_clip = $plugin->utils_string->clip(get_bloginfo('name'));
 
 // Summary return URL; w/ all summary navigation vars preserved.
-$sub_summary_return_url = $plugin->utils_url->subManageSummaryUrl(!empty($sub_key) ? $sub_key : '', NULL, TRUE);
+$sub_summary_return_url = $plugin->utils_url->subManageSummaryUrl(!empty($sub_key) ? $sub_key : '', null, true);
 
 // Current `host[/path]` with support for multisite network child blogs.
 $current_host_path = $plugin->utils_url->currentHostPath();
@@ -40,9 +41,11 @@ $icon_bubbles_url = $plugin->utils_url->to('/src/client-s/images/icon-bubbles.pn
 ?>
 
 <?php echo $template->snippet(
-	'header-tag.php', array(
-		'[home_url]'          => esc_attr($home_url),
-		'[blog_name_clip]'    => esc_html($blog_name_clip),
-		'[current_host_path]' => esc_html($current_host_path),
-		'[icon_bubbles_url]'  => esc_attr($icon_bubbles_url),
-	)); ?>
+    'header-tag.php',
+    array(
+        '[home_url]'          => esc_attr($home_url),
+        '[blog_name_clip]'    => esc_html($blog_name_clip),
+        '[current_host_path]' => esc_html($current_host_path),
+        '[icon_bubbles_url]'  => esc_attr($icon_bubbles_url),
+    )
+); ?>

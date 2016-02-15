@@ -1,6 +1,7 @@
 <?php
 namespace WebSharks\CommentMail\Pro;
-/**
+
+/*
  * @var Plugin   $plugin Plugin class.
  * @var Template $template Template class.
  *
@@ -23,12 +24,12 @@ namespace WebSharks\CommentMail\Pro;
  *    you may also use any WordPress functions that you like.
  */
 ?>
-					</div> <!-- Close panel body. -->
-				</div> <!-- Close panel/inner wrapper. -->
+                    </div> <!-- Close panel body. -->
+                </div> <!-- Close panel/inner wrapper. -->
 
-				<?php echo $site_footer_tag; ?>
+                <?php echo $site_footer_tag; ?>
 
-			</div> <!-- Close container. -->
-		</div> <!-- Close wrapper. -->
-	</body>
+            </div> <!-- Close container. -->
+        </div> <!-- Close wrapper. -->
+    </body>
 </html>

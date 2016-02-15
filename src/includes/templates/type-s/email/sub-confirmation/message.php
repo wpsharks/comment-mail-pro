@@ -1,6 +1,7 @@
 <?php
 namespace WebSharks\CommentMail\Pro;
-/**
+
+/*
  * @var Plugin           $plugin              Plugin class.
  * @var Template         $template            Template class.
  *
@@ -59,26 +60,28 @@ $sub_last_ip = $sub->last_ip ? $sub->last_ip : __('unknown', $plugin->text_domai
 $sub_last_update_time_ago = $plugin->utils_date->i18nUtc('M jS, Y @ g:i a T', $sub->last_update_time);
 ?>
 
-	<?php echo $template->snippet(
-		'message.php', array(
-			'sub_comment'               => $sub_comment,
-			'subscribed_to_own_comment' => $subscribed_to_own_comment,
-			'sub_post_comments_open'    => $sub_post_comments_open,
+    <?php echo $template->snippet(
+        'message.php',
+        array(
+            'sub_comment'               => $sub_comment,
+            'subscribed_to_own_comment' => $subscribed_to_own_comment,
+            'sub_post_comments_open'    => $sub_post_comments_open,
 
-			'[sub_fname]'               => esc_html($sub->fname),
-			'[sub_confirm_url]'         => esc_attr($sub_confirm_url),
+            '[sub_fname]'       => esc_html($sub->fname),
+            '[sub_confirm_url]' => esc_attr($sub_confirm_url),
 
-			'[sub_post_comments_url]'   => esc_attr($sub_post_comments_url),
-			'[sub_post_title_clip]'     => esc_html($sub_post_title_clip),
+            '[sub_post_comments_url]' => esc_attr($sub_post_comments_url),
+            '[sub_post_title_clip]'   => esc_html($sub_post_title_clip),
 
-			'[sub_comment_url]'         => esc_attr($sub_comment_url),
-			'[sub_comment_id]'          => esc_html($sub_comment ? $sub_comment->comment_ID : 0),
-		)); ?>
+            '[sub_comment_url]' => esc_attr($sub_comment_url),
+            '[sub_comment_id]'  => esc_html($sub_comment ? $sub_comment->comment_ID : 0),
+        )
+    ); ?>
 
-	<p style="color:#888888; font-style:italic;">
-		<?php echo __('Note: if you did not make this request, please ignore this email. You will only be subscribed if you confirm.', $plugin->text_domain); ?>
-		<?php echo sprintf(__('This subscription was requested by %1$s; from IP address: <code>%2$s</code> on %3$s.', $plugin->text_domain), $sub_name_email_markup, esc_html($sub_last_ip), esc_html($sub_last_update_time_ago)); ?>
-		<?php echo __('If you need to report any continued abuse, please use the contact info at the bottom of this email.', $plugin->text_domain); ?>
-	</p>
+    <p style="color:#888888; font-style:italic;">
+        <?php echo __('Note: if you did not make this request, please ignore this email. You will only be subscribed if you confirm.', $plugin->text_domain); ?>
+        <?php echo sprintf(__('This subscription was requested by %1$s; from IP address: <code>%2$s</code> on %3$s.', $plugin->text_domain), $sub_name_email_markup, esc_html($sub_last_ip), esc_html($sub_last_update_time_ago)); ?>
+        <?php echo __('If you need to report any continued abuse, please use the contact info at the bottom of this email.', $plugin->text_domain); ?>
+    </p>
 
 <?php echo $email_footer; ?>

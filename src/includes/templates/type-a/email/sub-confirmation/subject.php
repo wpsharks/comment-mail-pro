@@ -1,6 +1,7 @@
 <?php
 namespace WebSharks\CommentMail\Pro;
-/**
+
+/*
  * @var Plugin           $plugin      Plugin class.
  * @var Template         $template    Template class.
  *
@@ -36,14 +37,14 @@ $sub_post_title_clip = $plugin->utils_string->clip($sub_post->post_title, 30);
 // Subscribed to their own comment?
 $subscribed_to_own_comment = $sub_comment && strcasecmp($sub_comment->comment_author_email, $sub->email) === 0;
 ?>
-<?php if($sub_comment): // Subscribed to a specific comment? ?>
+<?php if ($sub_comment) : // Subscribed to a specific comment? ?>
 
-	<?php if($subscribed_to_own_comment): ?>
-		<?php echo sprintf(__('to your comment on: %1$s', $plugin->text_domain), $sub_post_title_clip); ?>
-	<?php else: // The comment was not authored by this subscriber; i.e. it's not their own. ?>
-		<?php echo sprintf(__('to comment ID #%1$s on: %2$s', $plugin->text_domain), $sub_comment->comment_ID, $sub_post_title_clip); ?>
-	<?php endif; ?>
+    <?php if ($subscribed_to_own_comment) : ?>
+        <?php echo sprintf(__('to your comment on: %1$s', $plugin->text_domain), $sub_post_title_clip); ?>
+    <?php else : // The comment was not authored by this subscriber; i.e. it's not their own. ?>
+        <?php echo sprintf(__('to comment ID #%1$s on: %2$s', $plugin->text_domain), $sub_comment->comment_ID, $sub_post_title_clip); ?>
+    <?php endif; ?>
 
-<?php else: // All comments/replies to this post. ?>
-	<?php echo sprintf(__('to: %1$s', $plugin->text_domain), $sub_post_title_clip); ?>
+<?php else : // All comments/replies to this post. ?>
+    <?php echo sprintf(__('to: %1$s', $plugin->text_domain), $sub_post_title_clip); ?>
 <?php endif; ?>

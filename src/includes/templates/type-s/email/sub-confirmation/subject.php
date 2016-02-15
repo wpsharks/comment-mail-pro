@@ -1,6 +1,7 @@
 <?php
 namespace WebSharks\CommentMail\Pro;
-/**
+
+/*
  * @var Plugin           $plugin      Plugin class.
  * @var Template         $template    Template class.
  *
@@ -36,11 +37,13 @@ $subscribed_to_own_comment = $sub_comment && strcasecmp($sub_comment->comment_au
 ?>
 
 <?php echo $template->snippet(
-	'subject.php', array(
-		'sub_comment'               => $sub_comment,
-		'subscribed_to_own_comment' => $subscribed_to_own_comment,
+    'subject.php',
+    array(
+        'sub_comment'               => $sub_comment,
+        'subscribed_to_own_comment' => $subscribed_to_own_comment,
 
-		'[sub_post_title_clip]'     => $sub_post_title_clip,
+        '[sub_post_title_clip]' => $sub_post_title_clip,
 
-		'[sub_comment_id]'          => $sub_comment ? $sub_comment->comment_ID : 0,
-	)); ?>
+        '[sub_comment_id]' => $sub_comment ? $sub_comment->comment_ID : 0,
+    )
+); ?>

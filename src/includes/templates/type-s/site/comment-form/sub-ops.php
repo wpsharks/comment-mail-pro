@@ -1,6 +1,7 @@
 <?php
 namespace WebSharks\CommentMail\Pro;
-/**
+
+/*
  * @var Plugin    $plugin Plugin class.
  * @var Template  $template Template class.
  *
@@ -44,81 +45,83 @@ namespace WebSharks\CommentMail\Pro;
 ?>
 
 <?php ob_start(); ?>
-	<style type="text/css">
-		.comment-sub-ops
-		{
-			margin : 1em 0 1em 0;
-		}
-		.comment-sub-ops label
-		{
-			display : block;
-		}
-		.comment-sub-ops select
-		{
-			box-sizing : border-box;
-			display    : inline-block;
-		}
-		.comment-sub-ops select.cso-sub-type
-		{
-			width : 70%;
-			float : left;
-		}
-		.comment-sub-ops select.cso-sub-deliver
-		{
-			width : 28%;
-			float : right;
-		}
-		.comment-sub-ops select.cso-sub-deliver[disabled]
-		{
-			opacity : 0.3;
-		}
-		.comment-sub-ops .cso-links
-		{
-			font-size   : 80%;
-			line-height : 1.5em;
-			margin      : 0 0 0 .5em;
-			clear       : both;
-		}
-		.comment-sub-ops .cso-links .cso-link-summary
-		{
-			display     : block;
-			line-height : 1em;
-		}
-	</style>
+    <style type="text/css">
+        .comment-sub-ops
+        {
+            margin : 1em 0 1em 0;
+        }
+        .comment-sub-ops label
+        {
+            display : block;
+        }
+        .comment-sub-ops select
+        {
+            box-sizing : border-box;
+            display    : inline-block;
+        }
+        .comment-sub-ops select.cso-sub-type
+        {
+            width : 70%;
+            float : left;
+        }
+        .comment-sub-ops select.cso-sub-deliver
+        {
+            width : 28%;
+            float : right;
+        }
+        .comment-sub-ops select.cso-sub-deliver[disabled]
+        {
+            opacity : 0.3;
+        }
+        .comment-sub-ops .cso-links
+        {
+            font-size   : 80%;
+            line-height : 1.5em;
+            margin      : 0 0 0 .5em;
+            clear       : both;
+        }
+        .comment-sub-ops .cso-links .cso-link-summary
+        {
+            display     : block;
+            line-height : 1em;
+        }
+    </style>
 <?php $css_styles = ob_get_clean(); ?>
 
 <?php ob_start(); ?>
-	<select id="<?php echo esc_attr($sub_type_id); ?>" name="<?php echo esc_attr($sub_type_name); ?>" class="cso-sub-type form-control" title="<?php echo __('Receive Notifications?', $plugin->text_domain); ?>">
-		<option value=""<?php selected('', $current->sub_type); ?>><?php echo __('no, do not subscribe', $plugin->text_domain); ?></option>
-		<option value="comment"<?php selected('comment', $current->sub_type); ?>><?php echo __('yes, replies to my comment', $plugin->text_domain); ?></option>
-		<option value="comments"<?php selected('comments', $current->sub_type); ?>><?php echo __('yes, all comments/replies', $plugin->text_domain); ?></option>
-	</select>
+    <select id="<?php echo esc_attr($sub_type_id); ?>" name="<?php echo esc_attr($sub_type_name); ?>" class="cso-sub-type form-control" title="<?php echo __('Receive Notifications?', $plugin->text_domain); ?>">
+        <option value=""<?php selected('', $current->sub_type); ?>><?php echo __('no, do not subscribe', $plugin->text_domain); ?></option>
+        <option value="comment"<?php selected('comment', $current->sub_type); ?>><?php echo __('yes, replies to my comment', $plugin->text_domain); ?></option>
+        <option value="comments"<?php selected('comments', $current->sub_type); ?>><?php echo __('yes, all comments/replies', $plugin->text_domain); ?></option>
+    </select>
 <?php $sub_type_options = ob_get_clean(); ?>
 
 <?php ob_start(); ?>
-	<select id="<?php echo esc_attr($sub_deliver_id); ?>" name="<?php echo esc_attr($sub_deliver_name); ?>" class="cso-sub-deliver form-control" title="<?php echo __('Notify Me', $plugin->text_domain); ?>">
-		<option value="asap"<?php selected('asap', $current->sub_deliver); ?>><?php echo __('instantly', $plugin->text_domain); ?></option>
-		<option value="hourly"<?php selected('hourly', $current->sub_deliver); ?>><?php echo __('hourly digest', $plugin->text_domain); ?></option>
-		<option value="daily"<?php selected('daily', $current->sub_deliver); ?>><?php echo __('daily digest', $plugin->text_domain); ?></option>
-		<option value="weekly"<?php selected('weekly', $current->sub_deliver); ?>><?php echo __('weekly digest', $plugin->text_domain); ?></option>
-	</select>
+    <select id="<?php echo esc_attr($sub_deliver_id); ?>" name="<?php echo esc_attr($sub_deliver_name); ?>" class="cso-sub-deliver form-control" title="<?php echo __('Notify Me', $plugin->text_domain); ?>">
+        <option value="asap"<?php selected('asap', $current->sub_deliver); ?>><?php echo __('instantly', $plugin->text_domain); ?></option>
+        <option value="hourly"<?php selected('hourly', $current->sub_deliver); ?>><?php echo __('hourly digest', $plugin->text_domain); ?></option>
+        <option value="daily"<?php selected('daily', $current->sub_deliver); ?>><?php echo __('daily digest', $plugin->text_domain); ?></option>
+        <option value="weekly"<?php selected('weekly', $current->sub_deliver); ?>><?php echo __('weekly digest', $plugin->text_domain); ?></option>
+    </select>
 <?php $sub_deliver_options = ob_get_clean(); ?>
 
 <?php ob_start(); ?>
-	<?php if($plugin->options['list_server_enable'] && $plugin->options['list_server']): ?>
-		<input type="checkbox" id="<?php echo esc_attr($sub_list_id); ?>" name="<?php echo esc_attr($sub_list_name); ?>" value="1" /> <?php echo __('Yes, I want to receive blog updates also.', $plugin->text_domain); ?>
-	<?php endif; ?>
+    <?php if ($plugin->options['list_server_enable'] && $plugin->options['list_server']) : ?>
+        <input type="checkbox" id="<?php echo esc_attr($sub_list_id); ?>" name="<?php echo esc_attr($sub_list_name); ?>" value="1" /> <?php echo __('Yes, I want to receive blog updates also.', $plugin->text_domain); ?>
+    <?php endif; ?>
 <?php $sub_list_checkbox = ob_get_clean(); ?>
 
 <?php echo $template->snippet(
-	'sub-ops.php', array(
-		'[css_styles]'          => $css_styles,
-		'[inline_icon_svg]'     => $inline_icon_svg,
-		'[sub_type_options]'    => $sub_type_options,
-		'[sub_deliver_options]' => $sub_deliver_options,
-		'[sub_list_checkbox]'   => $sub_list_checkbox,
-		'[sub_type_id]'         => esc_html($sub_type_id),
-		'[current_sub_email]'   => esc_html($current->sub_email),
-		'[sub_new_url]'         => esc_attr($sub_new_url),
-		'[sub_summary_url]'     => esc_attr($sub_summary_url),
-	)); ?>
+    'sub-ops.php',
+    array(
+        '[css_styles]'          => $css_styles,
+        '[inline_icon_svg]'     => $inline_icon_svg,
+        '[sub_type_options]'    => $sub_type_options,
+        '[sub_deliver_options]' => $sub_deliver_options,
+        '[sub_list_checkbox]'   => $sub_list_checkbox,
+        '[sub_type_id]'         => esc_html($sub_type_id),
+        '[current_sub_email]'   => esc_html($current->sub_email),
+        '[sub_new_url]'         => esc_attr($sub_new_url),
+        '[sub_summary_url]'     => esc_attr($sub_summary_url),
+    )
+); ?>

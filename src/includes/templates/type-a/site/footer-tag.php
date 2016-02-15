@@ -1,6 +1,7 @@
 <?php
 namespace WebSharks\CommentMail\Pro;
-/**
+
+/*
  * @var Plugin   $plugin Plugin class.
  * @var Template $template Template class.
  *
@@ -30,7 +31,7 @@ $home_url = home_url('/'); // Multisite compatible.
 $blog_name_clip = $plugin->utils_string->clip(get_bloginfo('name'));
 
 // Summary return URL; w/ all summary navigation vars preserved.
-$sub_summary_return_url = $plugin->utils_url->subManageSummaryUrl(!empty($sub_key) ? $sub_key : '', NULL, TRUE);
+$sub_summary_return_url = $plugin->utils_url->subManageSummaryUrl(!empty($sub_key) ? $sub_key : '', null, true);
 
 // Current `host[/path]` with support for multisite network child blogs.
 $current_host_path = $plugin->utils_url->currentHostPath();
@@ -40,36 +41,36 @@ $can_spam_privacy_policy_url = $plugin->options['can_spam_privacy_policy_url'];
 ?>
 
 <footer class="center-block clearfix">
-	<div class="row">
+    <div class="row">
 
-		<div class="col-md-6 text-left">
+        <div class="col-md-6 text-left">
 
-			<?php if($parent_template->file() !== 'site/sub-actions/manage-summary.php'): ?>
-				<?php // Displays a link leading them back to their subscriptions; if not already there. ?>
-				<a href="<?php echo esc_attr($sub_summary_return_url); ?>">
-					<i class="fa fa-arrow-circle-left"></i> <?php echo __('My Comment Subscriptions', $plugin->text_domain); ?>
-				</a>
-				<span class="text-muted">|</span>
-			<?php endif; ?>
+            <?php if ($parent_template->file() !== 'site/sub-actions/manage-summary.php') : ?>
+                <?php // Displays a link leading them back to their subscriptions; if not already there. ?>
+                <a href="<?php echo esc_attr($sub_summary_return_url); ?>">
+                    <i class="fa fa-arrow-circle-left"></i> <?php echo __('My Comment Subscriptions', $plugin->text_domain); ?>
+                </a>
+                <span class="text-muted">|</span>
+            <?php endif; ?>
 
-			<a href="<?php echo esc_attr($home_url); ?>">
-				<i class="fa fa-home"></i> <?php echo sprintf(__('Return to <em>%1$s</em>', $plugin->text_domain), esc_html($blog_name_clip)); ?>
-			</a>
+            <a href="<?php echo esc_attr($home_url); ?>">
+                <i class="fa fa-home"></i> <?php echo sprintf(__('Return to <em>%1$s</em>', $plugin->text_domain), esc_html($blog_name_clip)); ?>
+            </a>
 
-			<?php if($can_spam_privacy_policy_url): ?>
-				<span class="text-muted">|</span>
-				<a href="<?php echo esc_attr($can_spam_privacy_policy_url); ?>">
-					<?php echo __('Privacy Policy', $plugin->text_domain); ?>
-				</a>
-			<?php endif; ?>
+            <?php if ($can_spam_privacy_policy_url) : ?>
+                <span class="text-muted">|</span>
+                <a href="<?php echo esc_attr($can_spam_privacy_policy_url); ?>">
+                    <?php echo __('Privacy Policy', $plugin->text_domain); ?>
+                </a>
+            <?php endif; ?>
 
-		</div>
+        </div>
 
-		<div class="col-md-6 text-right">
-			<?php if($plugin->options['site_footer_powered_by_enable']): ?>
-				<?php echo $plugin->utils_markup->poweredBy(); ?>
-			<?php endif; ?>
-		</div>
+        <div class="col-md-6 text-right">
+            <?php if ($plugin->options['site_footer_powered_by_enable']) : ?>
+                <?php echo $plugin->utils_markup->poweredBy(); ?>
+            <?php endif; ?>
+        </div>
 
-	</div>
+    </div>
 </footer>

@@ -1,6 +1,7 @@
 <?php
 namespace WebSharks\CommentMail\Pro;
-/**
+
+/*
  * @var Plugin   $plugin Plugin class.
  * @var Template $template Template class.
  *
@@ -37,17 +38,17 @@ namespace WebSharks\CommentMail\Pro;
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8" />
-	<title>%%title%%</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<?php echo $site_header_styles; ?>
-	<?php echo $site_header_scripts; ?>
+    <meta charset="UTF-8" />
+    <title>%%title%%</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <?php echo $site_header_styles; ?>
+    <?php echo $site_header_scripts; ?>
 </head>
 <body>
 <div id="wrapper" class="wrapper" role="main">
-	<div id="container" class="container">
+    <div id="container" class="container">
 
-		<?php echo $site_header_tag; ?>
+        <?php echo $site_header_tag; ?>
 
-		<div id="inner-wrapper" class="inner-wrapper panel panel-default">
-			<div class="panel-body">
+        <div id="inner-wrapper" class="inner-wrapper panel panel-default">
+            <div class="panel-body">

@@ -1,6 +1,7 @@
 <?php
 namespace WebSharks\CommentMail\Pro;
-/**
+
+/*
  * @var Plugin   $plugin Plugin class.
  * @var Template $template Template class.
  *
@@ -17,71 +18,71 @@ namespace WebSharks\CommentMail\Pro;
 ?>
 
 <?php ob_start(); ?>
-	<style type="text/css">
-		.login-sso-ops
-		{
-			text-align : center;
-			margin     : 0 0 1em 0;
-		}
-		.login-sso-ops .lsso-label
-		{
-			vertical-align : middle;
-			display        : inline-block;
+    <style type="text/css">
+        .login-sso-ops
+        {
+            text-align : center;
+            margin     : 0 0 1em 0;
+        }
+        .login-sso-ops .lsso-label
+        {
+            vertical-align : middle;
+            display        : inline-block;
 
-			opacity        : 0.5;
-		}
-		.login-sso-ops .lsso-link
-		{
-			width               : 2em;
-			max-width           : 48px;
+            opacity        : 0.5;
+        }
+        .login-sso-ops .lsso-link
+        {
+            width               : 2em;
+            max-width           : 48px;
 
-			height              : 2em;
-			max-height          : 48px;
+            height              : 2em;
+            max-height          : 48px;
 
-			border-radius       : 5px;
+            border-radius       : 5px;
 
-			vertical-align      : middle;
-			display             : inline-block;
+            vertical-align      : middle;
+            display             : inline-block;
 
-			margin              : 0 0 0 .25em;
+            margin              : 0 0 0 .25em;
 
-			background-size     : 100%;
-			background-position : 0 0;
+            background-size     : 100%;
+            background-position : 0 0;
 
-			-webkit-transition  : all ease 0.1s;
-			-moz-transition     : all ease 0.1s;
-			-o-transition       : all ease 0.1s;
-			-ms-transition      : all ease 0.1s;
-			transition          : all ease 0.1s;
-		}
-		.login-sso-ops .lsso-link:hover
-		{
-			background-position : 0 -2em;
-		}
-		body > .login-sso-ops /* When hooked to `login_footer`. */
-		{
-			background   : #FFFFFF;
-			border       : 1px solid #333333;
-			border-width : 1px 0 1px 0;
+            -webkit-transition  : all ease 0.1s;
+            -moz-transition     : all ease 0.1s;
+            -o-transition       : all ease 0.1s;
+            -ms-transition      : all ease 0.1s;
+            transition          : all ease 0.1s;
+        }
+        .login-sso-ops .lsso-link:hover
+        {
+            background-position : 0 -2em;
+        }
+        body > .login-sso-ops /* When hooked to `login_footer`. */
+        {
+            background   : #FFFFFF;
+            border       : 1px solid #333333;
+            border-width : 1px 0 1px 0;
 
-			margin       : 2em 0 0 0;
-			padding      : .5em 0 .5em 0;
-		}
-		<?php foreach($sso_services as $_sso_service): ?>
-			<?php echo '.login-sso-ops .lsso-link.lsso-'.esc_html($_sso_service).
-			' { background-image : url("'.esc_url($plugin->utils_url->to('/src/client-s/images/sso-'.$_sso_service.'.png')).'"); }'."\n"; ?>
-		<?php endforeach; ?>
-	</style>
+            margin       : 2em 0 0 0;
+            padding      : .5em 0 .5em 0;
+        }
+        <?php foreach ($sso_services as $_sso_service): ?>
+            <?php echo '.login-sso-ops .lsso-link.lsso-'.esc_html($_sso_service).
+            ' { background-image : url("'.esc_url($plugin->utils_url->to('/src/client-s/images/sso-'.$_sso_service.'.png')).'"); }'."\n"; ?>
+        <?php endforeach; ?>
+    </style>
 <?php $css_styles = ob_get_clean(); ?>
 
 <?php ob_start(); ?>
-<?php foreach($sso_services as $_sso_service): ?>
-	<a href="<?php echo esc_attr($plugin->utils_url->ssoActionUrl($_sso_service)); ?>" class="<?php echo esc_attr('lsso-link lsso-'.$_sso_service); ?>"></a>
+<?php foreach ($sso_services as $_sso_service): ?>
+    <a href="<?php echo esc_attr($plugin->utils_url->ssoActionUrl($_sso_service)); ?>" class="<?php echo esc_attr('lsso-link lsso-'.$_sso_service); ?>"></a>
 <?php endforeach; ?>
 <?php $service_links = ob_get_clean(); ?>
 
 <?php echo $template->snippet(
-	'sso-ops.php', array(
-		'[css_styles]'    => $css_styles,
-		'[service_links]' => $service_links,
-	)); ?>
+    'sso-ops.php', array(
+        '[css_styles]'    => $css_styles,
+        '[service_links]' => $service_links,
+    )); ?>

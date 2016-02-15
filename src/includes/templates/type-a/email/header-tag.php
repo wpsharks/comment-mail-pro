@@ -1,6 +1,7 @@
 <?php
 namespace WebSharks\CommentMail\Pro;
-/**
+
+/*
  * @var Plugin   $plugin Plugin class.
  * @var Template $template Template class.
  *
@@ -37,10 +38,10 @@ $icon_bubbles_url = $plugin->utils_url->to('/src/client-s/images/icon-bubbles.pn
 ?>
 
 <header>
-	<h1 style="margin:0;">
-		<?php echo esc_html($blog_name_clip); ?><br />
-		<small style="color:#888888;"><a href="<?php echo esc_attr($home_url); ?>" style="color:#888888;"><?php echo esc_html($current_host_path); ?></a></small>
-	</h1>
+    <h1 style="margin:0;">
+        <?php echo esc_html($blog_name_clip); ?><br />
+        <small style="color:#888888;"><a href="<?php echo esc_attr($home_url); ?>" style="color:#888888;"><?php echo esc_html($current_host_path); ?></a></small>
+    </h1>
 </header>
 
 <hr style="margin-bottom:2em;" />

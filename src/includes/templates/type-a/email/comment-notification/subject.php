@@ -1,6 +1,7 @@
 <?php
 namespace WebSharks\CommentMail\Pro;
-/**
+
+/*
  * @var Plugin           $plugin      Plugin class.
  * @var Template         $template    Template class.
  *
@@ -39,32 +40,32 @@ $subscribed_to_own_comment = $sub_comment && strcasecmp($sub_comment->comment_au
 // A notification may contain one (or more) comments. Is this a digest?
 $is_digest = count($comments) > 1; // `TRUE`, if more than one comment in the notification.
 ?>
-<?php if($is_digest): // Multiple comments/replies in this notification? ?>
+<?php if ($is_digest) : // Multiple comments/replies in this notification? ?>
 
-	<?php if($sub_comment): // Subscribed to a specific comment? ?>
+    <?php if ($sub_comment) : // Subscribed to a specific comment? ?>
 
-		<?php if($subscribed_to_own_comment): ?>
-			<?php echo sprintf(__('[New Replies to Your Comment] %1$s', $plugin->text_domain), $sub_post_title_clip); ?>
-		<?php else: // The comment was not authored by this subscriber; i.e. it's not their own. ?>
-			<?php echo sprintf(__('[New Replies to Comment ID #%1$s] %2$s', $plugin->text_domain), $sub_comment->comment_ID, $sub_post_title_clip); ?>
-		<?php endif; ?>
+        <?php if ($subscribed_to_own_comment) : ?>
+            <?php echo sprintf(__('[New Replies to Your Comment] %1$s', $plugin->text_domain), $sub_post_title_clip); ?>
+        <?php else : // The comment was not authored by this subscriber; i.e. it's not their own. ?>
+            <?php echo sprintf(__('[New Replies to Comment ID #%1$s] %2$s', $plugin->text_domain), $sub_comment->comment_ID, $sub_post_title_clip); ?>
+        <?php endif; ?>
 
-	<?php else: // All comments/replies on this post ID. ?>
-		<?php echo sprintf(__('[New Comments] %1$s', $plugin->text_domain), $sub_post_title_clip); ?>
-	<?php endif; ?>
+    <?php else : // All comments/replies on this post ID. ?>
+        <?php echo sprintf(__('[New Comments] %1$s', $plugin->text_domain), $sub_post_title_clip); ?>
+    <?php endif; ?>
 
-<?php else: // There's just a single comment/reply in this notification. ?>
+<?php else : // There's just a single comment/reply in this notification. ?>
 
-	<?php if($sub_comment): // Subscribed to a specific comment? ?>
+    <?php if ($sub_comment) : // Subscribed to a specific comment? ?>
 
-		<?php if($subscribed_to_own_comment): ?>
-			<?php echo sprintf(__('[New Reply to Your Comment] %1$s', $plugin->text_domain), $sub_post_title_clip); ?>
-		<?php else: // The comment was not authored by this subscriber; i.e. it's not their own. ?>
-			<?php echo sprintf(__('[New Reply to Comment ID #%1$s] %2$s', $plugin->text_domain), $sub_comment->comment_ID, $sub_post_title_clip); ?>
-		<?php endif; ?>
+        <?php if ($subscribed_to_own_comment) : ?>
+            <?php echo sprintf(__('[New Reply to Your Comment] %1$s', $plugin->text_domain), $sub_post_title_clip); ?>
+        <?php else : // The comment was not authored by this subscriber; i.e. it's not their own. ?>
+            <?php echo sprintf(__('[New Reply to Comment ID #%1$s] %2$s', $plugin->text_domain), $sub_comment->comment_ID, $sub_post_title_clip); ?>
+        <?php endif; ?>
 
-	<?php else: // All comments/replies on this post ID. ?>
-		<?php echo sprintf(__('[New Comment] %1$s', $plugin->text_domain), $sub_post_title_clip); ?>
-	<?php endif; ?>
+    <?php else : // All comments/replies on this post ID. ?>
+        <?php echo sprintf(__('[New Comment] %1$s', $plugin->text_domain), $sub_post_title_clip); ?>
+    <?php endif; ?>
 
 <?php endif; ?>

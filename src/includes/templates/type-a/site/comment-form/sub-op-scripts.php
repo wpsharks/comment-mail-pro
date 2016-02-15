@@ -1,6 +1,7 @@
 <?php
 namespace WebSharks\CommentMail\Pro;
-/**
+
+/*
  * @var Plugin   $plugin Plugin class.
  * @var Template $template Template class.
  *
@@ -10,37 +11,37 @@ namespace WebSharks\CommentMail\Pro;
  */
 ?>
 <script type="text/javascript">
-	(function($) // Comment Mail™ subscr. options.
-	{
-		'use strict'; // Strict standards.
+    (function($) // Comment Mail™ subscr. options.
+    {
+        'use strict'; // Strict standards.
 
-		$(document).ready(
-			function() // On DOM ready handler.
-			{
-				var $subOps = $('.comment-sub-ops'),
-					$subType, $subDeliver; // Initialize vars.
+        $(document).ready(
+            function() // On DOM ready handler.
+            {
+                var $subOps = $('.comment-sub-ops'),
+                    $subType, $subDeliver; // Initialize vars.
 
-				if($subOps.data('auto') === 'position') $subOps.prevUntil('form')
-					.each(function(/* Auto-position subscription options. */)
-					      {
-						      var $this = $(this); // Cache this.
-						      if($this.find(':input[type="submit"]').length)
-						      {
-							      $subOps.remove(), $this.before($subOps);
-							      return false; // Break the each() loop.
-						      }
-					      });
-				$subOps = $('.comment-sub-ops'),
-					$subType = $subOps.find('select.cso-sub-type'),
-					$subDeliver = $subOps.find('select.cso-sub-deliver');
+                if($subOps.data('auto') === 'position') $subOps.prevUntil('form')
+                    .each(function(/* Auto-position subscription options. */)
+                          {
+                              var $this = $(this); // Cache this.
+                              if($this.find(':input[type="submit"]').length)
+                              {
+                                  $subOps.remove(), $this.before($subOps);
+                                  return false; // Break the each() loop.
+                              }
+                          });
+                $subOps = $('.comment-sub-ops'),
+                    $subType = $subOps.find('select.cso-sub-type'),
+                    $subDeliver = $subOps.find('select.cso-sub-deliver');
 
-				$subType.on('change', function()
-				{
-					if($(this).val() === '')
-						$subDeliver.attr('disabled', 'disabled');
-					else $subDeliver.removeAttr('disabled');
-				})
-					.trigger('change');
-			});
-	})(jQuery);
+                $subType.on('change', function()
+                {
+                    if($(this).val() === '')
+                        $subDeliver.attr('disabled', 'disabled');
+                    else $subDeliver.removeAttr('disabled');
+                })
+                    .trigger('change');
+            });
+    })(jQuery);
 </script>

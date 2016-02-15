@@ -1,6 +1,7 @@
 <?php
 namespace WebSharks\CommentMail\Pro;
-/**
+
+/*
  * @var Plugin      $plugin Plugin class.
  * @var Template    $template Template class.
  *
@@ -41,13 +42,16 @@ namespace WebSharks\CommentMail\Pro;
 ?>
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8" />
-		<title>%%title%%</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<?php echo $email_header_styles; ?>
-		<?php echo $email_header_scripts; ?>
-	</head>
-	<body>
-		<?php if(isset($email_rve_end_divider)) echo $email_rve_end_divider; ?>
-		<?php echo $email_header_tag; ?>
+    <head>
+        <meta charset="UTF-8" />
+        <title>%%title%%</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <?php echo $email_header_styles; ?>
+        <?php echo $email_header_scripts; ?>
+    </head>
+    <body>
+        <?php if (isset($email_rve_end_divider)) : ?>
+            <?php echo $email_rve_end_divider; ?>
+        <?php endif; ?>
+
+        <?php echo $email_header_tag; ?>

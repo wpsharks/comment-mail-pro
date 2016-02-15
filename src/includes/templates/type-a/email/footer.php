@@ -1,6 +1,7 @@
 <?php
 namespace WebSharks\CommentMail\Pro;
-/**
+
+/*
  * @var Plugin   $plugin Plugin class.
  * @var Template $template Template class.
  *
@@ -29,40 +30,40 @@ namespace WebSharks\CommentMail\Pro;
 
 <?php // CAN-SPAM compliance links; manage/unsubscribe. ?>
 
-<?php if(stripos($parent_template->file(), '/comment-notification/') && !empty($sub)): ?>
+<?php if (stripos($parent_template->file(), '/comment-notification/') && !empty($sub)) : ?>
 
-	<?php
-	/*
+    <?php
+    /*
      * Here we define a few more variables of our own.
      * All based on what the template makes available to us;
      * ~ as documented at the top of this file.
      */
-	// Summary URL; i.e. comment subscription management area.
-	$sub_summary_url = $plugin->utils_url->subManageSummaryUrl($sub->key);
+    // Summary URL; i.e. comment subscription management area.
+    $sub_summary_url = $plugin->utils_url->subManageSummaryUrl($sub->key);
 
-	// Unsubscribes (deletes) the subscription this email is associated with.
-	$sub_unsubscribe_url = $plugin->utils_url->subUnsubscribeUrl($sub->key);
+    // Unsubscribes (deletes) the subscription this email is associated with.
+    $sub_unsubscribe_url = $plugin->utils_url->subUnsubscribeUrl($sub->key);
 
-	// Unsubscribes (deletes) ALL subscriptions associated w/ their email at the same time.
-	$sub_unsubscribe_all_url = $plugin->utils_url->subUnsubscribeAllUrl($sub->email);
+    // Unsubscribes (deletes) ALL subscriptions associated w/ their email at the same time.
+    $sub_unsubscribe_all_url = $plugin->utils_url->subUnsubscribeAllUrl($sub->email);
 
-	// Subscription creation URL; user may create a new subscription.
-	$sub_new_url = $plugin->utils_url->subManageSubNewUrl();
-	?>
+    // Subscription creation URL; user may create a new subscription.
+    $sub_new_url = $plugin->utils_url->subManageSubNewUrl();
+    ?>
 
-	<p style="color:#888888;">
-		<strong><?php echo __('Manage Subscriptions', $plugin->text_domain); ?></strong><br />
-		<?php echo sprintf(__('<a href="%1$s">My Comment Subscriptions</a>', $plugin->text_domain), esc_attr($sub_summary_url)); ?><br />
-		&nbsp;&#42774;&nbsp; <?php echo sprintf(__('<a href="%1$s">One-Click Unsubscribe</a>', $plugin->text_domain), esc_attr($sub_unsubscribe_url)); ?>
-	</p>
-	<?php // Disable this functionality for now; see http://bit.ly/1OYd4ie ?>
-	<?php // @todo Remove completely, or reconsider, Add New Subscription from front-end ?>
-	<?php /*
-	<p style="color:#888888;">
-		<strong><?php echo __('Create New Subscription?', $plugin->text_domain); ?></strong><br />
-		<?php echo sprintf(__('<a href="%1$s">Add New Comment Subscription</a>', $plugin->text_domain), esc_attr($sub_new_url)); ?>
-	</p>
- 	*/?>
+    <p style="color:#888888;">
+        <strong><?php echo __('Manage Subscriptions', $plugin->text_domain); ?></strong><br />
+        <?php echo sprintf(__('<a href="%1$s">My Comment Subscriptions</a>', $plugin->text_domain), esc_attr($sub_summary_url)); ?><br />
+        &nbsp;&#42774;&nbsp; <?php echo sprintf(__('<a href="%1$s">One-Click Unsubscribe</a>', $plugin->text_domain), esc_attr($sub_unsubscribe_url)); ?>
+    </p>
+    <?php // Disable this functionality for now; see http://bit.ly/1OYd4ie ?>
+    <?php // @todo Remove completely, or reconsider, Add New Subscription from front-end ?>
+    <?php /*
+    <p style="color:#888888;">
+        <strong><?php echo __('Create New Subscription?', $plugin->text_domain); ?></strong><br />
+        <?php echo sprintf(__('<a href="%1$s">Add New Comment Subscription</a>', $plugin->text_domain), esc_attr($sub_new_url)); ?>
+    </p>
+    */?>
 
 <?php endif; ?>
 
@@ -88,22 +89,22 @@ $can_spam_privacy_policy_url = $plugin->options['can_spam_privacy_policy_url'];
 ?>
 
 <p style="color:#888888;">
-	<strong><?php echo __('Contact Info', $plugin->text_domain); ?></strong><br />
-	<?php echo sprintf(__('Website URL: <a href="%1$s">%2$s</a>', $plugin->text_domain), esc_attr($home_url), esc_html($home_url)); ?><br />
-	<?php echo sprintf(__('Report Abuse to: <a href="mailto:%1$s">%2$s</a>', $plugin->text_domain), esc_attr(urlencode($can_spam_postmaster)), esc_html($can_spam_postmaster)); ?>
-	<?php if($can_spam_privacy_policy_url): ?><br />
-		<?php echo sprintf(__('Privacy Policy: <a href="%1$s">%2$s</a>', $plugin->text_domain), esc_attr($can_spam_privacy_policy_url), esc_html($can_spam_privacy_policy_url)); ?>
-	<?php endif; ?>
+    <strong><?php echo __('Contact Info', $plugin->text_domain); ?></strong><br />
+    <?php echo sprintf(__('Website URL: <a href="%1$s">%2$s</a>', $plugin->text_domain), esc_attr($home_url), esc_html($home_url)); ?><br />
+    <?php echo sprintf(__('Report Abuse to: <a href="mailto:%1$s">%2$s</a>', $plugin->text_domain), esc_attr(urlencode($can_spam_postmaster)), esc_html($can_spam_postmaster)); ?>
+    <?php if ($can_spam_privacy_policy_url) : ?><br />
+        <?php echo sprintf(__('Privacy Policy: <a href="%1$s">%2$s</a>', $plugin->text_domain), esc_attr($can_spam_privacy_policy_url), esc_html($can_spam_privacy_policy_url)); ?>
+    <?php endif; ?>
 </p>
 <p style="color:#888888;">
-	<strong><?php echo __('Our Mailing Address', $plugin->text_domain); ?></strong><br />
-	<?php echo $can_spam_mailing_address; ?>
+    <strong><?php echo __('Our Mailing Address', $plugin->text_domain); ?></strong><br />
+    <?php echo $can_spam_mailing_address; ?>
 </p>
 
-<?php if($plugin->options['email_footer_powered_by_enable']): ?>
-	<hr /><p style="color:#888888;">
-		<?php echo $plugin->utils_markup->poweredBy(); ?>
-	</p>
+<?php if ($plugin->options['email_footer_powered_by_enable']) : ?>
+    <hr /><p style="color:#888888;">
+        <?php echo $plugin->utils_markup->poweredBy(); ?>
+    </p>
 <?php endif; ?>
 
 <?php // Close body. ?>

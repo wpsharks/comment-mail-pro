@@ -1,6 +1,7 @@
 <?php
 namespace WebSharks\CommentMail\Pro;
-/**
+
+/*
  * @var Plugin   $plugin Plugin class.
  * @var Template $template Template class.
  *
@@ -30,7 +31,7 @@ $home_url = home_url('/'); // Multisite compatible.
 $blog_name_clip = $plugin->utils_string->clip(get_bloginfo('name'));
 
 // Summary return URL; w/ all summary navigation vars preserved.
-$sub_summary_return_url = $plugin->utils_url->subManageSummaryUrl(!empty($sub_key) ? $sub_key : '', NULL, TRUE);
+$sub_summary_return_url = $plugin->utils_url->subManageSummaryUrl(!empty($sub_key) ? $sub_key : '', null, true);
 
 // Current `host[/path]` with support for multisite network child blogs.
 $current_host_path = $plugin->utils_url->currentHostPath();
@@ -40,11 +41,11 @@ $icon_bubbles_url = $plugin->utils_url->to('/src/client-s/images/icon-bubbles.pn
 ?>
 
 <header class="center-block clearfix">
-	<h1>
-		<?php echo esc_html($blog_name_clip); ?><br />
-		<a href="<?php echo esc_attr($home_url); ?>">
-			<small><i class="fa fa-link"></i> <?php echo esc_html($current_host_path); ?></small>
-		</a>
-	</h1>
-	<img src="<?php echo esc_attr($icon_bubbles_url); ?>" class="icon-bubbles" />
+    <h1>
+        <?php echo esc_html($blog_name_clip); ?><br />
+        <a href="<?php echo esc_attr($home_url); ?>">
+            <small><i class="fa fa-link"></i> <?php echo esc_html($current_host_path); ?></small>
+        </a>
+    </h1>
+    <img src="<?php echo esc_attr($icon_bubbles_url); ?>" class="icon-bubbles" />
 </header>
