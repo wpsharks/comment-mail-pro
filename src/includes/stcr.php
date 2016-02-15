@@ -24,4 +24,5 @@ namespace { // Global namespace.
             endif;
         }
     );
+
 }
