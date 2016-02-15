@@ -1,22 +1,23 @@
 <?php
 /**
- * Sub. Event Log Inserter
+ * Sub. Event Log Inserter.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * Sub. Event Log Inserter
+ * Sub. Event Log Inserter.
  *
  * @since 141111 First documented version.
  */
 class SubEventLogInserter extends AbsBase
 {
     /**
-     * @var array Log entry data.
+     * @type array Log entry data.
      *
      * @since 141111 First documented version.
      */
@@ -28,7 +29,6 @@ class SubEventLogInserter extends AbsBase
      * @since 141111 First documented version.
      *
      * @param array $entry  Log entry data; w/ sub. now.
-     *
      * @param array $before Log entry data; w/ sub. before.
      *                      Not applicable w/ insertions.
      *
@@ -148,4 +148,3 @@ class SubEventLogInserter extends AbsBase
         }
     }
 }
-	
