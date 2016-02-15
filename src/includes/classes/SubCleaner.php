@@ -1,36 +1,37 @@
 <?php
 /**
- * Sub Cleaner
+ * Sub Cleaner.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * Sub Cleaner
+ * Sub Cleaner.
  *
  * @since 141111 First documented version.
  */
 class SubCleaner extends AbsBase
 {
     /**
-     * @var integer Start time.
+     * @type int Start time.
      *
      * @since 141111 First documented version.
      */
     protected $start_time;
 
     /**
-     * @var integer Max execution time.
+     * @type int Max execution time.
      *
      * @since 141111 First documented version.
      */
     protected $max_time;
 
     /**
-     * @var integer Total cleaned subs.
+     * @type int Total cleaned subs.
      *
      * @since 141111 First documented version.
      */
@@ -41,7 +42,7 @@ class SubCleaner extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param integer|null $max_time Max time (in seconds).
+     * @param int|null $max_time Max time (in seconds).
      *
      *    This cannot be less than `10` seconds.
      *    This cannot be greater than `3600` seconds.
@@ -53,9 +54,9 @@ class SubCleaner extends AbsBase
         $this->start_time = time();
 
         if (isset($max_time)) { // Argument is set?
-            $this->max_time = (integer)$max_time;
+            $this->max_time = (integer) $max_time;
         } else { // This takes precedence.
-            $this->max_time = (integer)$this->plugin->options['sub_cleaner_max_time'];
+            $this->max_time = (integer) $this->plugin->options['sub_cleaner_max_time'];
         }
         if ($this->max_time < 10) {
             $this->max_time = 10;
@@ -115,11 +116,11 @@ class SubCleaner extends AbsBase
         if ($this->isOutOfTime()) {
             return; // Not enough time.
         }
-        $user_ids = "SELECT `ID` FROM `".esc_sql($this->plugin->utils_db->wp->users)."`";
-        $user_ids = "SELECT `ID` FROM (".$user_ids.") AS `ID`"; // See: <http://jas.xyz/1I52mVE>
+        $user_ids = 'SELECT `ID` FROM `'.esc_sql($this->plugin->utils_db->wp->users).'`';
+        $user_ids = 'SELECT `ID` FROM ('.$user_ids.') AS `ID`'; // See: <http://jas.xyz/1I52mVE>
 
-        $sql = "SELECT `ID` FROM `".esc_sql($this->plugin->utils_db->prefix().'subs')."`".
-               " WHERE `user_id` != '0' AND `user_id` NOT IN(".$user_ids.")";
+        $sql = 'SELECT `ID` FROM `'.esc_sql($this->plugin->utils_db->prefix().'subs').'`'.
+               " WHERE `user_id` != '0' AND `user_id` NOT IN(".$user_ids.')';
 
         if (($ids = array_map('intval', $this->plugin->utils_db->wp->get_col($sql)))) {
             $this->cleaned += $this->plugin->utils_sub->bulkDelete($ids, ['cleaning' => true]);
@@ -142,7 +143,7 @@ class SubCleaner extends AbsBase
         if (!($exp_time = strtotime('-'.$this->plugin->options['unconfirmed_expiration_time']))) {
             return; // Invalid time. Not compatible with `strtotime()`.
         }
-        $sql = "SELECT `ID` FROM `".esc_sql($this->plugin->utils_db->prefix().'subs')."`".
+        $sql = 'SELECT `ID` FROM `'.esc_sql($this->plugin->utils_db->prefix().'subs').'`'.
 
                " WHERE `status` = 'unconfirmed'".
                " AND `last_update_time` < '".esc_sql($exp_time)."'";
@@ -168,7 +169,7 @@ class SubCleaner extends AbsBase
         if (!($exp_time = strtotime('-'.$this->plugin->options['trashed_expiration_time']))) {
             return; // Invalid time. Not compatible with `strtotime()`.
         }
-        $sql = "SELECT `ID` FROM `".esc_sql($this->plugin->utils_db->prefix().'subs')."`".
+        $sql = 'SELECT `ID` FROM `'.esc_sql($this->plugin->utils_db->prefix().'subs').'`'.
 
                " WHERE `status` = 'trashed'".
                " AND `last_update_time` < '".esc_sql($exp_time)."'";
@@ -183,7 +184,7 @@ class SubCleaner extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @return boolean TRUE if out of time.
+     * @return bool TRUE if out of time.
      */
     protected function isOutOfTime()
     {
@@ -193,4 +194,3 @@ class SubCleaner extends AbsBase
         return false; // Let's keep cleaning!
     }
 }
-	
