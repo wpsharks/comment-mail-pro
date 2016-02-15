@@ -1,29 +1,30 @@
 <?php
 /**
- * SSO Actions
+ * SSO Actions.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * SSO Actions
+ * SSO Actions.
  *
  * @since 141111 First documented version.
  */
 class SsoActions extends AbsBase
 {
     /**
-     * @var array Valid actions.
+     * @type array Valid actions.
      *
      * @since 141111 First documented version.
      */
     protected $valid_actions;
 
     /**
-     * @var array Valid services.
+     * @type array Valid services.
      *
      * @since 141111 First documented version.
      */
@@ -72,9 +73,11 @@ class SsoActions extends AbsBase
         }
         unset($_cb_r_arg_key); // Housekeeping.
 
-        foreach ((array)$_REQUEST[GLOBAL_NS] as $_action => $_request_args) {
+        foreach ((array) $_REQUEST[GLOBAL_NS] as $_action => $_request_args) {
             if ($_action && in_array($_action, $this->valid_actions, true) && is_array($_request_args)) {
-                $_method = preg_replace_callback('/_(.)/', function ($m) { return strtoupper($m[1]); }, strtolower($_action));
+                $_method = preg_replace_callback('/_(.)/', function ($m) {
+                    return strtoupper($m[1]);
+                }, strtolower($_action));
                 $this->{$_method}(array_merge($cb_r_args, $this->plugin->utils_string->trimStripDeep($_request_args)));
             }
         }
@@ -104,4 +107,3 @@ class SsoActions extends AbsBase
         exit(); // Stop; always.
     }
 }
-	
