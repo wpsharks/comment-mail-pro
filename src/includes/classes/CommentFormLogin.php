@@ -59,7 +59,7 @@ class CommentFormLogin extends AbsBase
         if ($enabled_post_types && !in_array($post_type, $enabled_post_types, true)) {
             return; // Ignore; not enabled for this post type.
         }
-        foreach (($sso_services = sso_actions::$valid_services) as $_key => $_service) {
+        foreach (($sso_services = SsoActions::$valid_services) as $_key => $_service) {
             if (!$this->plugin->options['sso_'.$_service.'_key'] || !$this->plugin->options['sso_'.$_service.'_secret']) {
                 unset($sso_services[$_key]); // Remove from the array.
             }

@@ -1349,7 +1349,7 @@ class UtilsUrl extends AbsBase
             if ($_REQUEST && !empty($_REQUEST[GLOBAL_NS]['manage']['summary_nav'])) {
                 $_r_nav_vars = $this->plugin->utils_string->trimStripDeep((array) $_REQUEST[GLOBAL_NS]['manage']['summary_nav']);
             }
-            foreach (array_keys(sub_manage_summary::$default_nav_vars) as $_nav_var_key) {
+            foreach (array_keys(SubManageSummary::$default_nav_vars) as $_nav_var_key) {
                 if (isset($query_nav_vars[$_nav_var_key])) {
                     $existing_nav_vars[$_nav_var_key] = (string) $query_nav_vars[$_nav_var_key];
                 } elseif (isset($_r_nav_vars[$_nav_var_key])) {

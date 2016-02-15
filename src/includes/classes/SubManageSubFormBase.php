@@ -353,7 +353,7 @@ class SubManageSubFormBase extends AbsBase
         }
         $current_summary_nav_vars = $this->plugin->utils_url->subManageSummaryNavVars();
 
-        foreach (array_keys(sub_manage_summary::$default_nav_vars) as $_summary_nav_var_key) {
+        foreach (array_keys(SubManageSummary::$default_nav_vars) as $_summary_nav_var_key) {
             if (isset($current_summary_nav_vars[$_summary_nav_var_key])) {
                 $hidden_inputs .= $this->form_fields->hiddenInput(
                     [

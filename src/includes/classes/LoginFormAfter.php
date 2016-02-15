@@ -41,7 +41,7 @@ class LoginFormAfter extends AbsBase
         if (!$this->plugin->options['login_form_sso_template_enable']) {
             return; // Disabled currently.
         }
-        foreach (($sso_services = sso_actions::$valid_services) as $_key => $_service) {
+        foreach (($sso_services = SsoActions::$valid_services) as $_key => $_service) {
             if (!$this->plugin->options['sso_'.$_service.'_key'] || !$this->plugin->options['sso_'.$_service.'_secret']) {
                 unset($sso_services[$_key]); // Remove from the array.
             }
