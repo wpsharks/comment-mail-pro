@@ -208,8 +208,10 @@ class QueueProcessor extends AbsBase
         $this->total_entries = count($this->entries);
 
         foreach ($this->entries as $_entry_id_key => $_entry) {
-            $this->processEntry($_entry);
-            $this->deleteEntry($_entry);
+            if ($this->processEntry($_entry)) {
+                $this->deleteEntry($_entry);
+            } // Do not delete those being held over.
+            // See: <https://github.com/websharks/comment-mail/issues/173>
 
             ++$this->processed_entry_counter;
 
@@ -226,43 +228,50 @@ class QueueProcessor extends AbsBase
      * @since 141111 First documented version.
      *
      * @param \stdClass $entry Queue entry.
+     *
+     * @return bool True if OK to delete; i.e., if entry was logged in some way.
+     *              This will return `false` if it is not OK to delete; e.g., being held over.
      */
     protected function processEntry(\stdClass $entry)
     {
         if ($entry->dby_queue_id || $entry->logged) {
-            return; // Already processed this.
+            return true; // Already processed this.
         }
         if (!($entry_props = $this->validatedEntryProps($entry))) {
-            return; // Bypass; unable to validate entry props.
+            return true; // Bypass; unable to validate entry props.
         }
         if ($this->checkEntryHoldUntilTime($entry_props)) {
-            return; // Holding (for now); nothing more.
+            return false; // Holding (for now).
         }
         $this->checkCompileEntryDigestableEntries($entry_props);
 
         if (!($entry_headers = $this->entryHeaders($entry_props))) {
             $entry_props->event     = 'invalidated'; // Invalidate.
             $entry_props->note_code = 'comment_notification_headers_empty';
+
             $this->logEntry($entry_props); // Log invalidation.
-            return; // Not possible; headers are empty.
+            return true; // Not possible; headers are empty.
         }
         if (!($entry_subject = $this->entrySubject($entry_props))) {
             $entry_props->event     = 'invalidated'; // Invalidate.
             $entry_props->note_code = 'comment_notification_subject_empty';
+
             $this->logEntry($entry_props); // Log invalidation.
-            return; // Not possible; subject line is empty.
+            return true; // Not possible; subject line is empty.
         }
         if (!($entry_message = $this->entryMessage($entry_props))) {
             $entry_props->event     = 'invalidated'; // Invalidate.
             $entry_props->note_code = 'comment_notification_message_empty';
+
             $this->logEntry($entry_props); // Log invalidation.
-            return; // Not possible; message body is empty.
+            return true; // Not possible; message body is empty.
         }
         $entry_props->event     = 'notified'; // Notifying now.
         $entry_props->note_code = 'comment_notification_sent_successfully';
-        $this->logEntry($entry_props); // Log successful processing.
 
+        $this->logEntry($entry_props); // Log successful processing.
         $this->plugin->utils_mail->send($entry_props->sub->email, $entry_subject, $entry_message, $entry_headers);
+        return true; // Notified; OK to delete this entry now.
     }
 
     /**
