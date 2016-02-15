@@ -1,15 +1,16 @@
 <?php
 /**
- * User Columns
+ * User Columns.
  *
  * @since     151224 Adding custom user columns.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * User Columns
+ * User Columns.
  *
  * @since 151224 Adding custom user columns.
  */
@@ -66,4 +67,3 @@ class UserColumns extends AbsBase
         return $value;
     }
 }
-  
