@@ -1,99 +1,100 @@
 <?php
 /**
- * Sub Deleter
+ * Sub Deleter.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * Sub Deleter
+ * Sub Deleter.
  *
  * @since 141111 First documented version.
  */
 class SubDeleter extends AbsBase
 {
     /**
-     * @var \stdClass|null Subscription.
+     * @type \stdClass|null Subscription.
      *
      * @since 141111 First documented version.
      */
     protected $sub;
 
     /**
-     * @var string Last known IP.
+     * @type string Last known IP.
      *
      * @since 141111 First documented version.
      */
     protected $last_ip;
 
     /**
-     * @var string Last known region.
+     * @type string Last known region.
      *
      * @since 141111 First documented version.
      */
     protected $last_region;
 
     /**
-     * @var string Last known country.
+     * @type string Last known country.
      *
      * @since 141111 First documented version.
      */
     protected $last_country;
 
     /**
-     * @var integer Overwritten by subscription ID.
+     * @type int Overwritten by subscription ID.
      *
      * @since 141111 First documented version.
      */
     protected $oby_sub_id;
 
     /**
-     * @var integer Sub ID that did an overwrite; did a replace?
+     * @type int Sub ID that did an overwrite; did a replace?
      *
      * @since 141111 First documented version.
      */
     protected $oby_sub_id_did_replace;
 
     /**
-     * @var boolean Purging?
+     * @type bool Purging?
      *
      * @since 141111 First documented version.
      */
     protected $purging;
 
     /**
-     * @var boolean Cleaning?
+     * @type bool Cleaning?
      *
      * @since 141111 First documented version.
      */
     protected $cleaning;
 
     /**
-     * @var boolean Process events?
+     * @type bool Process events?
      *
      * @since 141111 First documented version.
      */
     protected $process_events;
 
     /**
-     * @var boolean User initiated?
+     * @type bool User initiated?
      *
      * @since 141111 First documented version.
      */
     protected $user_initiated;
 
     /**
-     * @var string Event taking place.
+     * @type string Event taking place.
      *
      * @since 141111 First documented version.
      */
     protected $event;
 
     /**
-     * @var boolean Deleted?
+     * @type bool Deleted?
      *
      * @since 141111 First documented version.
      */
@@ -102,8 +103,8 @@ class SubDeleter extends AbsBase
     /**
      * Class constructor.
      *
-     * @param integer $sub_id Subscription ID.
-     * @param array   $args   Any additional behavior args.
+     * @param int   $sub_id Subscription ID.
+     * @param array $args   Any additional behavior args.
      *
      * @since 141111 First documented version.
      */
@@ -111,7 +112,7 @@ class SubDeleter extends AbsBase
     {
         parent::__construct();
 
-        $sub_id    = (integer)$sub_id;
+        $sub_id    = (integer) $sub_id;
         $this->sub = $this->plugin->utils_sub->get($sub_id);
 
         $defaults_args = [
@@ -128,23 +129,24 @@ class SubDeleter extends AbsBase
 
             'user_initiated' => false,
         ];
-        $args          = array_merge($defaults_args, $args);
-        $args          = array_intersect_key($args, $defaults_args);
+        $args = array_merge($defaults_args, $args);
+        $args = array_intersect_key($args, $defaults_args);
 
-        $this->last_ip      = trim((string)$args['last_ip']);
-        $this->last_region  = trim((string)$args['last_region']);
-        $this->last_country = trim((string)$args['last_country']);
+        $this->last_ip      = trim((string) $args['last_ip']);
+        $this->last_region  = trim((string) $args['last_region']);
+        $this->last_country = trim((string) $args['last_country']);
 
-        $this->oby_sub_id             = (integer)$args['oby_sub_id'];
-        $this->oby_sub_id_did_replace = (boolean)$args['oby_sub_id_did_replace'];
-        $this->purging                = (boolean)$args['purging'];
-        $this->cleaning               = (boolean)$args['cleaning'];
+        $this->oby_sub_id             = (integer) $args['oby_sub_id'];
+        $this->oby_sub_id_did_replace = (boolean) $args['oby_sub_id_did_replace'];
+        $this->purging                = (boolean) $args['purging'];
+        $this->cleaning               = (boolean) $args['cleaning'];
 
-        $this->process_events = (boolean)$args['process_events'];
+        $this->process_events = (boolean) $args['process_events'];
 
-        $this->user_initiated = (boolean)$args['user_initiated'];
+        $this->user_initiated = (boolean) $args['user_initiated'];
         $this->user_initiated = $this->plugin->utils_sub->checkUserInitiatedByAdmin(
-            $this->sub ? $this->sub->email : '', $this->user_initiated
+            $this->sub ? $this->sub->email : '',
+            $this->user_initiated
         );
         # Auto-fill last IP, region, country if it's the current user.
 
@@ -176,9 +178,9 @@ class SubDeleter extends AbsBase
 
         if ($this->oby_sub_id) {
             $this->event = 'overwritten';
-        } else if ($this->purging) {
+        } elseif ($this->purging) {
             $this->event = 'purged';
-        } else if ($this->cleaning) {
+        } elseif ($this->cleaning) {
             $this->event = 'cleaned';
         } else {
             $this->event = 'deleted';
@@ -213,15 +215,15 @@ class SubDeleter extends AbsBase
         if ($this->sub->status === 'deleted') {
             return; // Deleted already.
         }
-        $sub_before = (array)$this->sub; // For event logging.
+        $sub_before = (array) $this->sub; // For event logging.
 
-        $sql = "DELETE FROM `".esc_sql($this->plugin->utils_db->prefix().'subs')."`".
+        $sql = 'DELETE FROM `'.esc_sql($this->plugin->utils_db->prefix().'subs').'`'.
                " WHERE `ID` = '".esc_sql($this->sub->ID)."'";
 
         if (($this->deleted = $this->plugin->utils_db->wp->query($sql)) === false) {
             throw new \exception(__('Deletion failure.', $this->plugin->text_domain));
         }
-        $this->deleted = (boolean)$this->deleted; // Convert to boolean now.
+        $this->deleted = (boolean) $this->deleted; // Convert to boolean now.
 
         $this->sub->status = 'deleted'; // Obj. properties.
 
@@ -242,7 +244,7 @@ class SubDeleter extends AbsBase
             if ($this->deleted || ($this->event === 'overwritten' && $this->oby_sub_id && $this->oby_sub_id_did_replace)) {
                 new SubEventLogInserter(
                     array_merge(
-                        (array)$this->sub,
+                        (array) $this->sub,
                         [
                             'event'          => $this->event,
                             'oby_sub_id'     => $this->oby_sub_id,
