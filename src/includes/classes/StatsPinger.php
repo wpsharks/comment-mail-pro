@@ -1,4 +1,5 @@
 <?php
+/*[pro strip-from="lite"]*/
 /**
  * Stats Pinger.
  *
@@ -63,3 +64,4 @@ class StatsPinger extends AbsBase
         );
     }
 }
+/*[/pro]*/

@@ -48,7 +48,9 @@ class MenuPageActions extends AbsBase
 
             'stats_chart_data_via_ajax',
 
+            /*[pro strip-from="lite"]*/
             'pro_update',
+            /*[/pro]*/
         ];
         $this->maybeHandle();
     }
@@ -367,6 +369,7 @@ class MenuPageActions extends AbsBase
         exit(); // Stop after output; always.
     }
 
+    /*[pro strip-from="lite"]*/
     /**
      * Action handler.
      *
@@ -445,4 +448,5 @@ class MenuPageActions extends AbsBase
         wp_redirect($redirect_to);
         exit();
     }
+    /*[/pro]*/
 }

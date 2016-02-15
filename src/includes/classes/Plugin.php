@@ -60,6 +60,15 @@ class Plugin extends AbsBase
      */
 
     /**
+     * An array of pro-only option keys.
+     *
+     * @since 141111 First documented version.
+     *
+     * @type array Default options array.
+     */
+    public $pro_only_option_keys;
+
+    /**
      * An array of all default option values.
      *
      * @since 141111 First documented version.
@@ -224,6 +233,173 @@ class Plugin extends AbsBase
         $this->update_cap         = apply_filters(__METHOD__.'_update_cap', 'update_plugins');
         $this->uninstall_cap      = apply_filters(__METHOD__.'_uninstall_cap', 'delete_plugins');
 
+        /*
+         * Setup pro-only option keys.
+         */
+        $this->pro_only_option_keys = [
+
+            # Updates.
+
+            'pro_update_check',
+            'last_pro_update_check',
+
+            'pro_update_username',
+            'pro_update_password',
+
+            # Stats pinger.
+
+            'last_pro_stats_log',
+
+            # SSO.
+
+            'sso_enable',
+
+            'comment_form_sso_template_enable',
+            'comment_form_sso_scripts_enable',
+
+            'login_form_sso_template_enable',
+            'login_form_sso_scripts_enable',
+
+            'sso_twitter_key',
+            'sso_twitter_secret',
+
+            'sso_facebook_key',
+            'sso_facebook_secret',
+
+            'sso_google_key',
+            'sso_google_secret',
+
+            'sso_linkedin_key',
+            'sso_linkedin_secret',
+
+            # SMTP configuration.
+
+            'smtp_enable',
+
+            'smtp_host',
+            'smtp_port',
+            'smtp_secure',
+
+            'smtp_username',
+            'smtp_password',
+
+            'smtp_from_name',
+            'smtp_from_email',
+            'smtp_reply_to_email',
+            'smtp_force_from',
+
+            # Replies via email.
+
+            'replies_via_email_enable',
+            'replies_via_email_handler',
+
+            'rve_mandrill_reply_to_email',
+            'rve_mandrill_max_spam_score',
+            'rve_mandrill_spf_check_enable',
+            'rve_mandrill_dkim_check_enable',
+
+            # List server integrations.
+
+            'list_server_enable',
+            'list_server',
+
+            'list_server_mailchimp_api_key',
+            'list_server_mailchimp_list_id',
+
+            # Blacklisting.
+
+            'email_blacklist_patterns',
+
+            # Performance tuning.
+
+            'queue_processor_max_time',
+            'queue_processor_delay',
+            'queue_processor_max_limit',
+            'queue_processor_realtime_max_limit',
+
+            'sub_cleaner_max_time',
+            'unconfirmed_expiration_time',
+            'trashed_expiration_time',
+
+            'log_cleaner_max_time',
+            'sub_event_log_expiration_time',
+            'queue_event_log_expiration_time',
+
+            # IP tracking.
+
+            'prioritize_remote_addr',
+            'geo_location_tracking_enable',
+
+            # Comment notifications.
+
+            'comment_notification_parent_content_clip_max_chars',
+            'comment_notification_content_clip_max_chars',
+
+            # Subscription summary.
+
+            'sub_manage_summary_max_limit',
+
+            # Select options.
+
+            'post_select_options_enable',
+            'post_select_options_media_enable',
+            'comment_select_options_enable',
+            'user_select_options_enable',
+            'max_select_options',
+
+            # Menu pages; i.e. logo display.
+
+            'menu_pages_logo_icon_enable',
+
+            # Template-related config. options.
+
+            'template_type',
+            'template_syntax_theme',
+
+            # PHP-based templates for the site.
+
+            'template__type_a__site__header___php',
+            'template__type_a__site__header_styles___php',
+            'template__type_a__site__header_scripts___php',
+            'template__type_a__site__header_tag___php',
+
+            'template__type_a__site__footer_tag___php',
+            'template__type_a__site__footer___php',
+
+            'template__type_a__site__comment_form__sso_ops___php',
+            'template__type_a__site__comment_form__sso_op_scripts___php',
+
+            'template__type_a__site__login_form__sso_ops___php',
+            'template__type_a__site__login_form__sso_op_scripts___php',
+
+            'template__type_a__site__sso_actions__complete___php',
+
+            'template__type_a__site__comment_form__sub_ops___php',
+            'template__type_a__site__comment_form__sub_op_scripts___php',
+
+            'template__type_a__site__sub_actions__confirmed___php',
+            'template__type_a__site__sub_actions__unsubscribed___php',
+            'template__type_a__site__sub_actions__unsubscribed_all___php',
+            'template__type_a__site__sub_actions__manage_summary___php',
+            'template__type_a__site__sub_actions__manage_sub_form___php',
+            'template__type_a__site__sub_actions__manage_sub_form_comment_id_row_via_ajax___php',
+
+            # PHP-based templates for emails.
+
+            'template__type_a__email__header___php',
+            'template__type_a__email__header_styles___php',
+            'template__type_a__email__header_scripts___php',
+            'template__type_a__email__header_tag___php',
+
+            'template__type_a__email__footer_tag___php',
+            'template__type_a__email__footer___php',
+
+            'template__type_a__email__sub_confirmation__subject___php',
+            'template__type_a__email__sub_confirmation__message___php',
+
+            'template__type_a__email__comment_notification__subject___php',
+            'template__type_a__email__comment_notification__message___php',
+        ];
         /*
          * Setup the array of all plugin options.
          */
@@ -564,6 +740,11 @@ class Plugin extends AbsBase
         if (!$this->options['auto_confirm_force_enable']) {
             $this->options['all_wp_users_confirm_email'] = '0';
         }
+        foreach (!IS_PRO ? $this->pro_only_option_keys : [] as $_key) {
+            $this->options[$_key] = $this->default_options[$_key];
+        } // Force default pro-only option keys in lite version.
+        unset($_key); // Housekeeping.
+
         /*
          * With or without hooks?
          */
@@ -578,11 +759,16 @@ class Plugin extends AbsBase
         add_action('init', [$this, 'jetpackCheck'], 100);
 
         add_action('admin_init', [$this, 'checkVersion'], 10);
+
+        /*[pro strip-from="lite"]*/
         add_action('admin_init', [$this, 'checkLatestProVersion'], 10);
         add_filter('fs_ftp_connection_types', [$this, 'fsFtpConnectionTypes'], 10);
         add_filter('pre_site_transient_update_plugins', [$this, 'preSiteTransientUpdatePlugins'], 10);
+        /*[/pro]*/
 
+        /*[pro strip-from="lite"]*/
         add_action('admin_init', [$this, 'statsPinger'], 10); // Anonymous stats collection.
+        /*[/pro]*/
 
         add_action('all_admin_notices', [$this, 'allAdminNotices'], 10);
 
@@ -674,7 +860,6 @@ class Plugin extends AbsBase
     {
         $property = (string) $property;
 
-        // This loads utilities.
         if (strpos($property, 'utils_') === 0) {
             $class_property = ucfirst(
                 preg_replace_callback(
@@ -721,7 +906,7 @@ class Plugin extends AbsBase
      */
     public function activate()
     {
-        new Installer(); // Installation handler.
+        new Installer();
     }
 
     /**
@@ -764,7 +949,7 @@ class Plugin extends AbsBase
      */
     public function uninstall()
     {
-        new Uninstaller(); // Uninstall handler.
+        new Uninstaller();
     }
 
     /*
@@ -780,7 +965,7 @@ class Plugin extends AbsBase
      */
     public function statsPinger()
     {
-        new StatsPinger(); // Stats pinger.
+        new StatsPinger();
     }
 
     /*
@@ -865,6 +1050,12 @@ class Plugin extends AbsBase
     public function optionsQuickSave(array $options)
     {
         $this->options = array_merge($this->default_options, $this->options, $options);
+
+        foreach (!IS_PRO ? $this->pro_only_option_keys : [] as $_key) {
+            $this->options[$_key] = $this->default_options[$_key];
+        } // Force default pro-only option keys in lite version.
+        unset($_key); // Housekeeping.
+
         $this->options = array_intersect_key($this->options, $this->default_options);
         $this->options = array_map('strval', $this->options); // Force strings.
 
@@ -881,6 +1072,12 @@ class Plugin extends AbsBase
     public function optionsSave(array $options)
     {
         $this->options = array_merge($this->default_options, $this->options, $options);
+
+        foreach (!IS_PRO ? $this->pro_only_option_keys : [] as $_key) {
+            $this->options[$_key] = $this->default_options[$_key];
+        } // Force default pro-only option keys in lite version.
+        unset($_key); // Housekeeping.
+
         $this->options = array_intersect_key($this->options, $this->default_options);
         $this->options = array_map('strval', $this->options); // Force strings.
 
@@ -943,7 +1140,7 @@ class Plugin extends AbsBase
             add_meta_box(GLOBAL_NS.'_small', $icon.' '.NAME.'&trade;', [$this, 'postSmallMetaBox'], $post_type, 'normal', 'default');
         }
         // @TODO disabling this for now.
-        //add_meta_box(GLOBAL_NS.'_large', $icon.' '.NAME.'&trade; '.__('Subscriptions', SLUG_TD),
+        // add_meta_box(GLOBAL_NS.'_large', $icon.' '.NAME.'&trade; '.__('Subscriptions', SLUG_TD),
         //             array($this, 'postLargeMetaBox'), $post_type, 'normal', 'high');
     }
 
@@ -1220,12 +1417,14 @@ class Plugin extends AbsBase
 
         /* ----------------------------------------- */
 
+        /*[pro strip-from="lite"]*/
         $_menu_title                                     = $divider.__('Pro Updater', SLUG_TD);
         $_page_title                                     = NAME.'&trade; &#10609; '.__('Pro Updater', SLUG_TD);
         $this->menu_page_hooks[GLOBAL_NS.'_pro_updater'] = add_submenu_page(GLOBAL_NS, $_page_title, $_menu_title, $this->update_cap, GLOBAL_NS.'_pro_updater', [$this, 'menuPageProUpdater']);
         add_action('load-'.$this->menu_page_hooks[GLOBAL_NS.'_pro_updater'], [$this, 'menuPageProUpdaterScreen']);
 
         unset($_menu_title, $_page_title); // Housekeeping.
+        /*[/pro]*/
     }
 
     /**
@@ -1736,6 +1935,7 @@ class Plugin extends AbsBase
      * Pro Update-Related Methods
      */
 
+     /*[pro strip-from="lite"]*/
     /**
      * Checks for a new pro release once every hour.
      *
@@ -1769,7 +1969,9 @@ class Plugin extends AbsBase
         }
         $this->enqueueNotice(sprintf(__('<strong>%1$s Pro:</strong> a new version is now available. Please <a href="%2$s">upgrade to v%3$s</a>.', SLUG_TD), esc_html(NAME), esc_attr($this->utils_url->proUpdaterMenuPageOnly()), esc_html($product_api_response['pro_version'])), ['persistent' => true, 'persistent_id' => 'new-pro-version-available', 'requires_cap' => $this->update_cap]);
     }
+    /*[/pro]*/
 
+    /*[pro strip-from="lite"]*/
     /**
      * Modifies transient data associated with this plugin.
      *
@@ -1817,7 +2019,9 @@ class Plugin extends AbsBase
         ];
         return $transient; // Nodified now.
     }
+    /*[/pro]*/
 
+    /*[pro strip-from="lite"]*/
     /**
      * Appends hidden inputs for pro updater when FTP credentials are requested by WP.
      *
@@ -1855,6 +2059,7 @@ class Plugin extends AbsBase
 
         return $types; // Filter through.
     }
+    /*[/pro]*/
 
     /*
      * Admin Notice/Error Related Methods
