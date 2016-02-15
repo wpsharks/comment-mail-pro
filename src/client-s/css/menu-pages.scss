@@ -125,6 +125,8 @@ A menu page area ~ post com/sub bubbles.
 }
 
 .comment-mail-menu-page-area .pmp-post-sub-count {
+  @include sharkicon(comment-mail);
+
   border-radius:              3px;
   text-align:                 left;
   text-decoration:            none;
@@ -134,11 +136,12 @@ A menu page area ~ post com/sub bubbles.
 }
 
 .comment-mail-menu-page-area .pmp-post-sub-count::before {
-  @include sharkicon(comment-mail);
-
   float:                      left;
   margin:                     0 .5em 0 0;
   display:                    inline-block;
+  color:                      #5a5a5a;
+  font-size:                  normal;
+  line-height:                1.5;
 }
 
 .comment-mail-menu-page-area .pmp-post-sub-count > .pmp-sub-count {
