@@ -1,57 +1,58 @@
 <?php
 /**
- * Template
+ * Template.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * Template
+ * Template.
  *
  * @since 141111 First documented version.
  */
 class Template extends AbsBase
 {
     /**
-     * @var string Type of template.
+     * @type string Type of template.
      *
      * @since 141111 First documented version.
      */
     protected $type;
 
     /**
-     * @var string Template file.
+     * @type string Template file.
      *
      * @since 141111 First documented version.
      */
     protected $file;
 
     /**
-     * @var string Snippet sub-directory.
+     * @type string Snippet sub-directory.
      *
      * @since 141111 First documented version.
      */
     protected $snippet_sub_dir;
 
     /**
-     * @var boolean Force default template?
+     * @type bool Force default template?
      *
      * @since 141111 First documented version.
      */
     protected $force_default;
 
     /**
-     * @var string Template file contents.
+     * @type string Template file contents.
      *
      * @since 141111 First documented version.
      */
     protected $file_contents;
 
     /**
-     * @var array Current vars.
+     * @type array Current vars.
      *
      * @since 141111 First documented version.
      */
@@ -63,11 +64,9 @@ class Template extends AbsBase
      * @since 141111 First documented version.
      *
      * @param string      $file          Template file.
-     *
      * @param string|null $type          Template type. Defaults to an empty string.
      *                                   An empty string (or `NULL`) indicates the currently configured type.
-     *
-     * @param boolean     $force_default Force default template?
+     * @param bool        $force_default Force default template?
      *
      * @throws \exception If `$file` is empty.
      */
@@ -76,7 +75,7 @@ class Template extends AbsBase
         parent::__construct();
 
         if ($type) { // Use a specific type?
-            $this->type = trim(strtolower((string)$type));
+            $this->type = trim(strtolower((string) $type));
         }
         if (!$this->type) {
             $this->type = $this->plugin->options['template_type'];
@@ -84,7 +83,7 @@ class Template extends AbsBase
         if (!$this->type) { // Empty type property?
             throw new \exception(__('Empty type.', $this->plugin->text_domain));
         }
-        $this->file = (string)$file; // Initialize.
+        $this->file = (string) $file; // Initialize.
         $this->file = $this->plugin->utils_string->trimDeep($this->file, '', '/');
         $this->file = $this->plugin->utils_fs->nSeps($this->file);
 
@@ -92,7 +91,7 @@ class Template extends AbsBase
             throw new \exception(__('Empty file.', $this->plugin->text_domain));
         }
         $this->snippet_sub_dir = dirname($this->file).'/snippet';
-        $this->force_default   = (boolean)$force_default;
+        $this->force_default   = (boolean) $force_default;
         $this->file_contents   = $this->getFileContents();
         $this->current_vars    = []; // Initialize.
     }
@@ -162,18 +161,18 @@ class Template extends AbsBase
      */
     public function snippet($file, array $shortcodes_vars = [])
     {
-        $file = (string)$file; // Force string.
+        $file = (string) $file; // Force string.
         $file = $this->plugin->utils_string->trimDeep($file, '', '/');
         $file = $this->plugin->utils_fs->nSeps($file);
 
         $shortcodes_vars = // Merge w/ current vars.
             array_merge($this->current_vars, $shortcodes_vars);
-        $shortcodes      = []; // Initialize.
+        $shortcodes = []; // Initialize.
 
         foreach ($shortcodes_vars as $_key => $_value) {
             if (is_string($_key) && preg_match('/^\[(?:[^\s\[\]]+?)\]$/', $_key)) {
                 if (is_string($_value) || is_integer($_value) || is_float($_value)) {
-                    $shortcodes[$_key] = (string)$_value;
+                    $shortcodes[$_key] = (string) $_value;
                 }
             }
         }
@@ -214,16 +213,16 @@ class Template extends AbsBase
         // All header-related templates.
 
         if (is_null($site_header_template = &$this->cacheKey(__FUNCTION__, 'site_header_template'))) {
-            $site_header_template = new Template('site/header.php');
+            $site_header_template = new self('site/header.php');
         }
         if (is_null($site_header_styles_template = &$this->cacheKey(__FUNCTION__, 'site_header_styles_template'))) {
-            $site_header_styles_template = new Template('site/header-styles.php');
+            $site_header_styles_template = new self('site/header-styles.php');
         }
         if (is_null($site_header_scripts_template = &$this->cacheKey(__FUNCTION__, 'site_header_scripts_template'))) {
-            $site_header_scripts_template = new Template('site/header-scripts.php');
+            $site_header_scripts_template = new self('site/header-scripts.php');
         }
         if (is_null($site_header_tag_template = &$this->cacheKey(__FUNCTION__, 'site_header_tag_template'))) {
-            $site_header_tag_template = new Template('site/header-tag.php');
+            $site_header_tag_template = new self('site/header-tag.php');
         }
         $site_header_styles  = $site_header_styles_template->parse($vars);
         $site_header_scripts = $site_header_scripts_template->parse($vars);
@@ -234,10 +233,10 @@ class Template extends AbsBase
         // All footer-related templates.
 
         if (is_null($site_footer_tag_template = &$this->cacheKey(__FUNCTION__, 'site_footer_tag_template'))) {
-            $site_footer_tag_template = new Template('site/footer-tag.php');
+            $site_footer_tag_template = new self('site/footer-tag.php');
         }
         if (is_null($site_footer_template = &$this->cacheKey(__FUNCTION__, 'site_footer_template'))) {
-            $site_footer_template = new Template('site/footer.php');
+            $site_footer_template = new self('site/footer.php');
         }
         $site_footer_tag  = $site_footer_tag_template->parse($vars);
         $site_footer_vars = compact('site_footer_tag'); // Only one for now.
@@ -270,16 +269,16 @@ class Template extends AbsBase
         // All header-related templates.
 
         if (is_null($email_header_template = &$this->cacheKey(__FUNCTION__, 'email_header_template'))) {
-            $email_header_template = new Template('email/header.php');
+            $email_header_template = new self('email/header.php');
         }
         if (is_null($email_header_styles_template = &$this->cacheKey(__FUNCTION__, 'email_header_styles_template'))) {
-            $email_header_styles_template = new Template('email/header-styles.php');
+            $email_header_styles_template = new self('email/header-styles.php');
         }
         if (is_null($email_header_scripts_template = &$this->cacheKey(__FUNCTION__, 'email_header_scripts_template'))) {
-            $email_header_scripts_template = new Template('email/header-scripts.php');
+            $email_header_scripts_template = new self('email/header-scripts.php');
         }
         if (is_null($email_header_tag_template = &$this->cacheKey(__FUNCTION__, 'email_header_tag_template'))) {
-            $email_header_tag_template = new Template('email/header-tag.php');
+            $email_header_tag_template = new self('email/header-tag.php');
         }
         $email_header_styles  = $email_header_styles_template->parse($vars);
         $email_header_scripts = $email_header_scripts_template->parse($vars);
@@ -290,10 +289,10 @@ class Template extends AbsBase
         // All footer-related templates.
 
         if (is_null($email_footer_tag_template = &$this->cacheKey(__FUNCTION__, 'email_footer_tag_template'))) {
-            $email_footer_tag_template = new Template('email/footer-tag.php');
+            $email_footer_tag_template = new self('email/footer-tag.php');
         }
         if (is_null($email_footer_template = &$this->cacheKey(__FUNCTION__, 'email_footer_template'))) {
-            $email_footer_template = new Template('email/footer.php');
+            $email_footer_template = new self('email/footer.php');
         }
         $email_footer_tag  = $email_footer_tag_template->parse($vars);
         $email_footer_vars = compact('email_footer_tag'); // Only one for now.
@@ -360,9 +359,9 @@ class Template extends AbsBase
      *
      * @param string $file File path, relative to snippet sub-directory.
      *
+     * @throws \exception If unable to locate the snippet.
      * @return string Snippet file contents; for the requested snippet.
      *
-     * @throws \exception If unable to locate the snippet.
      */
     protected function snippetFileContents($file)
     {
@@ -421,11 +420,11 @@ class Template extends AbsBase
     {
         $plugin = plugin(); // Plugin class.
 
-        $type       = $file = ''; // Initialize.
-        $option_key = trim(strtolower((string)$option_key));
+        $type       = $file       = ''; // Initialize.
+        $option_key = trim(strtolower((string) $option_key));
 
         if (preg_match('/^template__type_(?P<type>.+?)__/', $option_key, $_m)) {
-            $type = trim(strtolower((string)$_m['type'])); // Key has type?
+            $type = trim(strtolower((string) $_m['type'])); // Key has type?
         }
         if (!$type) {
             $type = $plugin->options['template_type'];
@@ -441,7 +440,7 @@ class Template extends AbsBase
         $file = $plugin->utils_string->trimDeep($file, '', '/');
         $file = $plugin->utils_fs->nSeps($file);
 
-        return (object)compact('type', 'file');
+        return (object) compact('type', 'file');
     }
 
     /**
@@ -460,19 +459,19 @@ class Template extends AbsBase
         $type = $file = ''; // Initialize.
 
         if (is_array($data)) {
-            $data = (object)$data;
+            $data = (object) $data;
         }
         if (!is_object($data)) {
-            $data = new \stdClass;
+            $data = new \stdClass();
         }
         if (!empty($data->type)) { // Specific type?
-            $type = trim(strtolower((string)$data->type));
+            $type = trim(strtolower((string) $data->type));
         }
         if (!$type) {
             $type = $plugin->options['template_type'];
         }
         if (!empty($data->file)) { // In case it is empty.
-            $file = trim(strtolower((string)$data->file));
+            $file = trim(strtolower((string) $data->file));
         }
         $file = $plugin->utils_string->trimDeep($file, '', '/');
         $file = $plugin->utils_fs->nSeps($file);
