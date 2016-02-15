@@ -1,36 +1,37 @@
 <?php
 /**
- * User Deletion Handler
+ * User Deletion Handler.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * User Deletion Handler
+ * User Deletion Handler.
  *
  * @since 141111 First documented version.
  */
 class UserDelete extends AbsBase
 {
     /**
-     * @var integer User ID.
+     * @type int User ID.
      *
      * @since 141111 First documented version.
      */
     protected $user_id;
 
     /**
-     * @var integer Blog ID.
+     * @type int Blog ID.
      *
      * @since 141111 First documented version.
      */
     protected $blog_id;
 
     /**
-     * @var boolean Switched blog?
+     * @type bool Switched blog?
      *
      * @since 141111 First documented version.
      */
@@ -39,8 +40,8 @@ class UserDelete extends AbsBase
     /**
      * Class constructor.
      *
-     * @param integer|string $user_id User ID.
-     * @param integer|string $blog_id Blog ID. Defaults to `0` (current blog).
+     * @param int|string $user_id User ID.
+     * @param int|string $blog_id Blog ID. Defaults to `0` (current blog).
      *
      * @since 141111 First documented version.
      */
@@ -49,8 +50,8 @@ class UserDelete extends AbsBase
         parent::__construct();
 
         $this->switched_blog = false;
-        $this->user_id       = (integer)$user_id;
-        $this->blog_id       = (integer)$blog_id;
+        $this->user_id       = (integer) $user_id;
+        $this->blog_id       = (integer) $blog_id;
 
         $this->maybePurgeSubs();
     }
