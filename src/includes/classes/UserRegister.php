@@ -1,22 +1,23 @@
 <?php
 /**
- * User Register
+ * User Register.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * User Register
+ * User Register.
  *
  * @since 141111 First documented version.
  */
 class UserRegister extends AbsBase
 {
     /**
-     * @var \WP_User|null
+     * @type \WP_User|null
      *
      * @since 141111 First documented version.
      */
@@ -25,7 +26,7 @@ class UserRegister extends AbsBase
     /**
      * Class constructor.
      *
-     * @param integer|string $user_id User ID.
+     * @param int|string $user_id User ID.
      *
      * @since 141111 First documented version.
      */
@@ -33,7 +34,7 @@ class UserRegister extends AbsBase
     {
         parent::__construct();
 
-        if (($user_id = (integer)$user_id)) {
+        if (($user_id = (integer) $user_id)) {
             $this->user = new \WP_User($user_id);
         }
         $this->maybeUpdateSubs();
@@ -59,7 +60,7 @@ class UserRegister extends AbsBase
         }
         # Update the subs table; i.e. associate w/ this user where applicable.
 
-        $sql = "SELECT `ID` FROM `".esc_sql($this->plugin->utils_db->prefix().'subs')."`".
+        $sql = 'SELECT `ID` FROM `'.esc_sql($this->plugin->utils_db->prefix().'subs').'`'.
 
                " WHERE `email` = '".esc_sql($this->user->user_email)."'".
                " AND `user_id` = '0'"; // Not yet associated w/ a user ID.
@@ -73,8 +74,8 @@ class UserRegister extends AbsBase
 
         # Update event logs too; i.e. associate w/ this user where applicable.
 
-        $sql = "UPDATE `".esc_sql($this->plugin->utils_db->prefix().'sub_event_log')."`".
-               " SET `user_id` = '".esc_sql($this->user->ID)."'". // Update.
+        $sql = 'UPDATE `'.esc_sql($this->plugin->utils_db->prefix().'sub_event_log').'`'.
+               " SET `user_id` = '".esc_sql($this->user->ID)."'".// Update.
 
                " WHERE `email` = '".esc_sql($this->user->user_email)."'".
                " AND `user_id` = '0'"; // Not yet associated w/ a user ID.
@@ -82,8 +83,8 @@ class UserRegister extends AbsBase
         if ($this->plugin->utils_db->wp->query($sql) === false) {
             throw new \exception(__('Update failure.', $this->plugin->text_domain));
         }
-        $sql = "UPDATE `".esc_sql($this->plugin->utils_db->prefix().'queue_event_log')."`".
-               " SET `user_id` = '".esc_sql($this->user->ID)."'". // Update.
+        $sql = 'UPDATE `'.esc_sql($this->plugin->utils_db->prefix().'queue_event_log').'`'.
+               " SET `user_id` = '".esc_sql($this->user->ID)."'".// Update.
 
                " WHERE `email` = '".esc_sql($this->user->user_email)."'".
                " AND `user_id` = '0'"; // Not yet associated w/ a user ID.
