@@ -287,7 +287,7 @@ class UtilsDb extends AbsBase
      *
      * @throws \exception If a query failure occurs.
      *
-     * @return \stdClass[] An array of all users.
+     * @return \WP_User[] An array of all users.
      */
     public function allUsers(array $args = [])
     {
@@ -312,24 +312,18 @@ class UtilsDb extends AbsBase
         if ($fail_on_max && $this->totalUsers($args) > $max) {
             return $users = []; // Fail when there are too many.
         }
-        $columns = [
-            'ID',
-            'user_login',
-            'user_nicename',
-            'user_email',
-            'user_url',
-            'user_registered',
-            'user_activation_key',
-            'user_status',
-            'display_name',
-        ];
-        $sql = 'SELECT `'.implode('`,`', array_map('esc_sql', $columns)).'`'.
+        $sql = 'SELECT *'.// Everything please.
                    ' FROM `'.esc_html($this->wp->users).'`'.
 
                    ($max !== PHP_INT_MAX ? ' LIMIT '.esc_sql($max) : '');
 
         if (($results = $this->wp->get_results($sql, OBJECT_K))) {
-            return $users = $results = $this->typifyDeep($results);
+            $users = $results; // Set as users.
+
+            foreach ($users as &$_user) {
+                $_user = new \WP_User($_user);
+            }
+            unset($_user); // Housekeeping.
         }
         return $users = []; // Default return value.
     }
@@ -405,7 +399,7 @@ class UtilsDb extends AbsBase
      *
      * @throws \exception If a query failure occurs.
      *
-     * @return \stdClass[] An array of all posts.
+     * @return \WP_Post[] An array of all posts.
      */
     public function allPosts(array $args = [])
     {
@@ -443,19 +437,7 @@ class UtilsDb extends AbsBase
         $post_types    = $include_post_types ? $include_post_types : get_post_types(['exclude_from_search' => false]);
         $post_statuses = get_post_stati(['exclude_from_search' => false]);
 
-        $columns = [
-            'ID',
-            'post_author',
-            'post_date_gmt',
-            'post_title',
-            'post_status',
-            'comment_status',
-            'post_name',
-            'post_parent',
-            'post_type',
-            'comment_count',
-        ];
-        $sql = 'SELECT `'.implode('`,`', array_map('esc_sql', $columns)).'`'.
+        $sql = 'SELECT *'.// Everything please.
                    ' FROM `'.esc_html($this->wp->posts).'`'.
 
                    " WHERE `post_type` IN('".implode("','", array_map('esc_sql', $post_types))."')".
@@ -476,8 +458,7 @@ class UtilsDb extends AbsBase
                    ($max !== PHP_INT_MAX ? ' LIMIT '.esc_sql($max) : '');
 
         if (($results = $this->wp->get_results($sql, OBJECT_K))) {
-            $post_results = $page_results // Initialize.
-                          = $media_results                          = $other_results                          = [];
+            $post_results = $page_results = $media_results = $other_results = [];
 
             foreach ($results as $_key => $_result) {
                 if ($_result->post_type === 'post') {
@@ -492,11 +473,15 @@ class UtilsDb extends AbsBase
             }
             unset($_key, $_result); // Housekeeping.
 
-            $results = $post_results + $page_results // Highest priority.
-                  + $other_results  // Everything else.
-                  + $media_results; // Lowest priority.
+            $results = $post_results + $page_results + $other_results + $media_results;
+            $posts   = $results; // Use as posts in this order of priority.
 
-            return $posts = $results = $this->typifyDeep($results);
+            foreach ($posts as &$_post) {
+                $_post = new \WP_Post($_post);
+            }
+            unset($_post); // Housekeeping.
+
+            return $posts;
         }
         return $posts = []; // Default return value.
     }
@@ -582,7 +567,7 @@ class UtilsDb extends AbsBase
      *
      * @throws \exception If a query failure occurs.
      *
-     * @return \stdClass[] An array of all comments.
+     * @return \WP_Comment[] An array of all comments.
      */
     public function allComments($post_id, array $args = [])
     {
@@ -635,18 +620,7 @@ class UtilsDb extends AbsBase
         if ($fail_on_max && $this->totalComments($post_id, $args) > $max) {
             return $comments = []; // Fail when there are too many.
         }
-        $columns = [
-            'comment_ID',
-            'comment_post_ID',
-            'comment_author',
-            'comment_author_email',
-            'comment_date_gmt',
-            'comment_approved',
-            'comment_type',
-            'comment_parent',
-            'comment_content',
-        ];
-        $sql = 'SELECT `'.implode('`,`', array_map('esc_sql', $columns)).'`'.
+        $sql = 'SELECT *'.// Everything please.
                    ' FROM `'.esc_html($this->wp->comments).'`'.
 
                    " WHERE `comment_post_ID` = '".esc_sql($post_id)."'".
@@ -660,7 +634,14 @@ class UtilsDb extends AbsBase
                    ($max !== PHP_INT_MAX ? ' LIMIT '.esc_sql($max) : '');
 
         if (($results = $this->wp->get_results($sql, OBJECT_K))) {
-            return $comments = $results = $this->typifyDeep($results);
+            $comments = $results; // Set as comments.
+
+            foreach ($comments as &$_comment) {
+                $_comment = new \WP_Comment($_comment);
+            }
+            unset($_comment); // Housekeeping.
+
+            return $comments;
         }
         return $comments = []; // Default return value.
     }
