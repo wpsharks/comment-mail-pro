@@ -152,7 +152,7 @@ class Plugin extends AbsBase
      *
      * @type string Current version of the software.
      */
-    public $version = '151224'; //version//
+    public $version = '160215'; //version//
 
     /*
      * Public Properties (Defined @ Setup)
