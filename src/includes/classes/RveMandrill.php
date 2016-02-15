@@ -1,29 +1,30 @@
 <?php
 /**
- * Replies via Email; Mandrill Webhook Listener
+ * Replies via Email; Mandrill Webhook Listener.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * Replies via Email; Mandrill Webhook Listener
+ * Replies via Email; Mandrill Webhook Listener.
  *
  * @since 141111 First documented version.
  */
 class RveMandrill extends AbsBase
 {
     /**
-     * @var string Key for this webhook.
+     * @type string Key for this webhook.
      *
      * @since 141111 First documented version.
      */
     protected $key;
 
     /**
-     * @var array Mandrill input events.
+     * @type array Mandrill input events.
      *
      * @since 141111 First documented version.
      */
@@ -40,7 +41,7 @@ class RveMandrill extends AbsBase
     {
         parent::__construct();
 
-        $this->key    = trim((string)$key);
+        $this->key    = trim((string) $key);
         $this->events = []; // Initialize.
 
         $this->prepWebhook();
@@ -119,8 +120,9 @@ class RveMandrill extends AbsBase
      */
     protected function processEvents()
     {
-        foreach ($this->events as $_event) // Iterate all events.
-        {
+        foreach ($this->events as $_event) {
+            // Iterate all events.
+
             if (empty($_event->ts) || $_event->ts < strtotime('-7 days')) {
                 continue; // Missing timestamp; or it's very old.
             }
@@ -141,22 +143,22 @@ class RveMandrill extends AbsBase
             $_html_body = $this->issetOr($_event->msg->html, '', 'string');
 
             if (isset($_event->msg->spam_report->score)) {
-                $_spam_score = (float)$_event->msg->spam_report->score;
+                $_spam_score = (float) $_event->msg->spam_report->score;
             } else {
                 $_spam_score = 0.0; // Default value.
             }
             if (isset($_event->msg->spf->result)) {
-                $_spf_result = strtolower((string)$_event->msg->spf->result);
+                $_spf_result = strtolower((string) $_event->msg->spf->result);
             } else {
                 $_spf_result = 'none'; // Default value.
             }
             if (isset($_event->msg->dkim->signed)) {
-                $_dkim_signed = (boolean)$_event->msg->dkim->signed;
+                $_dkim_signed = (boolean) $_event->msg->dkim->signed;
             } else {
                 $_dkim_signed = false; // Default value.
             }
             if (isset($_event->msg->dkim->valid)) {
-                $_dkim_valid = (boolean)$_event->msg->dkim->valid;
+                $_dkim_valid = (boolean) $_event->msg->dkim->valid;
             } else {
                 $_dkim_valid = false; // Default value.
             }
@@ -211,25 +213,25 @@ class RveMandrill extends AbsBase
             'dkim_signed' => false,
             'dkim_valid'  => false,
         ];
-        $args         = array_merge($default_args, $args);
-        $args         = array_intersect_key($args, $default_args);
+        $args = array_merge($default_args, $args);
+        $args = array_intersect_key($args, $default_args);
 
-        $reply_to_email = trim((string)$args['reply_to_email']);
+        $reply_to_email = trim((string) $args['reply_to_email']);
 
-        $from_name  = trim((string)$args['from_name']);
-        $from_email = trim((string)$args['from_email']);
+        $from_name  = trim((string) $args['from_name']);
+        $from_email = trim((string) $args['from_email']);
 
-        $subject = trim((string)$args['subject']);
+        $subject = trim((string) $args['subject']);
 
-        $text_body = trim((string)$args['text_body']);
-        $html_body = trim((string)$args['html_body']);
+        $text_body = trim((string) $args['text_body']);
+        $html_body = trim((string) $args['html_body']);
 
-        $spam_score = (float)$args['spam_score'];
+        $spam_score = (float) $args['spam_score'];
 
-        $spf_result = trim(strtolower((string)$args['spf_result']));
+        $spf_result = trim(strtolower((string) $args['spf_result']));
 
-        $dkim_signed = (boolean)$args['dkim_signed'];
-        $dkim_valid  = (boolean)$args['dkim_valid'];
+        $dkim_signed = (boolean) $args['dkim_signed'];
+        $dkim_valid  = (boolean) $args['dkim_valid'];
 
         $force_status = null; // Initialize.
 
@@ -242,10 +244,10 @@ class RveMandrill extends AbsBase
         if (!($rich_text_body = $this->coalesce($html_body, $text_body))) {
             return; // Empty reply; nothing to do here.
         }
-        if ($spam_score >= (float)$this->plugin->options['rve_mandrill_max_spam_score']) {
+        if ($spam_score >= (float) $this->plugin->options['rve_mandrill_max_spam_score']) {
             $force_status = 'spam'; // Force this to be considered `spam`.
         }
-        if (($spf_check = (integer)$this->plugin->options['rve_mandrill_spf_check_enable'])) {
+        if (($spf_check = (integer) $this->plugin->options['rve_mandrill_spf_check_enable'])) {
             if (($spf_check === 1 && !in_array($spf_result, ['pass', 'neutral', 'softfail', 'none'], true))
                 || ($spf_check === 2 && !in_array($spf_result, ['pass', 'neutral', 'none'], true))
                 || ($spf_check === 3 && !in_array($spf_result, ['pass', 'neutral'], true))
@@ -254,24 +256,23 @@ class RveMandrill extends AbsBase
                 $force_status = 'spam'; // Force this to be considered `spam`.
             }
         }
-        if (($dkim_check = (integer)$this->plugin->options['rve_mandrill_dkim_check_enable'])) {
+        if (($dkim_check = (integer) $this->plugin->options['rve_mandrill_dkim_check_enable'])) {
             if (($dkim_check === 1 && $dkim_signed && !$dkim_valid) || ($dkim_check === 2 && (!$dkim_signed || !$dkim_valid))) {
                 $force_status = 'spam'; // Force this to be considered `spam`.
             }
         }
         $post_comment_args = compact(
             'reply_to_email',
-
+            //
             'from_name',
             'from_email',
-
+            //
             'subject',
-
+            //
             'rich_text_body',
-
+            //
             'force_status'
         );
         $this->plugin->utils_rve->maybePostComment($post_comment_args);
     }
 }
-	
