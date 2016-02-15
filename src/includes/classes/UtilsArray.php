@@ -1,15 +1,16 @@
 <?php
 /**
- * Array Utilities
+ * Array Utilities.
  *
  * @since     141111 First documented version.
+ *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
  */
 namespace WebSharks\CommentMail\Pro;
 
 /**
- * Array Utilities
+ * Array Utilities.
  *
  * @since 141111 First documented version.
  */
@@ -69,13 +70,13 @@ class UtilsArray extends AbsBase
      *
      * @since 141111 First documented version.
      *
-     * @param array          $array An input array; by reference.
-     * @param string|integer New    array key; string or integer.
-     * @param mixed          $value New array value.
-     *
-     * @return integer Like {@link \array_unshift()}, returns the new number of elements.
+     * @param array $array An input array; by reference.
+     * @param string|int New    array key; string or integer.
+     * @param mixed $value New array value.
      *
      * @throws \exception If the input `$key` is not an integer|string.
+     * @return int Like {@link \array_unshift()}, returns the new number of elements.
+     *
      *
      * @see   \array_unshift()
      */
@@ -100,7 +101,7 @@ class UtilsArray extends AbsBase
      *
      * @param array $array An input array; by reference.
      *
-     * @return boolean Like {@link \shuffle()}, this returns `TRUE`.
+     * @return bool Like {@link \shuffle()}, this returns `TRUE`.
      *
      * @see   \shuffle()
      */
@@ -129,7 +130,7 @@ class UtilsArray extends AbsBase
      *
      * @param array $array An input array; by reference.
      *
-     * @return boolean Like {@link \shuffle()}, this returns `TRUE`.
+     * @return bool Like {@link \shuffle()}, this returns `TRUE`.
      *
      * @see   \shuffle()
      * @see   shuffleAssoc()
@@ -201,4 +202,3 @@ class UtilsArray extends AbsBase
         return $array; // `NULL` values removed deeply.
     }
 }
-	
