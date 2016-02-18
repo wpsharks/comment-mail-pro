@@ -1,0 +1,24 @@
+project_title                                           = Comment Mail Pro
+project_owner                                           = websharks
+project_slug                                            = comment-mail-pro
+project_namespace                                       = WebSharks\\CommentMail\\Pro
+project_sub_namespace                                   = CommentMailPro
+project_other_phar_fileset_exclusions                   = README.md
+project_other_zip_tgz_fileset_exclusions                = README.md
+
+project_lite_title                                      = Comment Mail
+project_lite_slug                                       = comment-mail
+project_lite_namespace                                  = WebSharks\\CommentMail
+project_lite_sub_namespace                              = CommentMail
+project_lite_other_phar_fileset_exclusions              = README.md
+project_lite_other_zip_tgz_fileset_exclusions           = README.md
+project_lite_text_domain_regex_replacement_pattern      = SLUG_TD
+project_lite_alter_namespace_in_other_files_pattern     =
+
+project_version                                         = %y%m%d
+
+project_php_required_version                            = 5.4
+project_php_tested_up_to_version                        = ${php.version}
+
+project_wp_required_version                             = 4.4
+project_wp_tested_up_to_version                         = 4.5-alpha
