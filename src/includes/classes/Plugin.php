@@ -2251,11 +2251,16 @@ class Plugin extends AbsBase
             }
             if ($_args['markup']) { // Only display non-empty notices.
                 if ($_args['persistent']) { // Need [dismiss] link?
-                    $_dismiss     = '<div class="comment-mail-menu-page-area updated notice is-dismissible">'.
-                                    '   <button type="button" class="notice-dismiss">'.
-                                    '      <span class="screen-reader-text">Dismiss this notice.</span>'.
-                                    '   </button>'.
-                                    '</div>';
+                    $_dismiss_style = 'padding-right: 38px;'.
+                                      'position: relative;'.
+                                      'text-decoration: none;';
+                    $_dismiss_url   = $this->utils_url->dismissNotice($_key);
+                    $_dismiss       = '<div class="notice" style="'.esc_attr($_dismiss_style).'">'.
+                                      '   <p>Notice content here</p>'.
+                                      '   <a class="notice-dismiss" href="'.esc_attr($_dismiss_url).'">'.
+                                      '      <span class="screen-reader-text">Dismiss</span>'.
+                                      '   </a>'.
+                                      '</div>';
                 } else {
                     $_dismiss = ''; // Default value; n/a.
                 }
