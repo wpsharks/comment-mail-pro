@@ -352,7 +352,7 @@ class UtilsI18n extends AbsBase
     {
         $counter = (integer) $counter; // Force integer.
 
-        return sprintf(_n('%1$s subscription', '%1$s subscriptions', $counter, SLUG_TD), $counter);
+        return sprintf(_n('%1$s Subscription Total (View)', '%1$s Subscriptions Total (View All)', $counter, SLUG_TD), $counter);
     }
 
     /**

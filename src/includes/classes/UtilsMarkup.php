@@ -105,7 +105,8 @@ class UtilsMarkup extends AbsBase
 
                ($name ? $name_span_tag : '').
                ($name && $email ? $separator : '').
-               ($email ? '&lt;'.($anchor && $anchor_tag ? $anchor_tag : esc_html($email_clip)).'&gt;' : '').
+               ($email ? '&lt;'.esc_html($email_clip).'&gt;' : '').
+               ($email ? '&lsqb;'.($anchor && $anchor_tag ? $anchor_tag : 'view').'&rsqb;' : '').
 
                ($span_title ? '</span>' : '');
     }
@@ -169,7 +170,7 @@ class UtilsMarkup extends AbsBase
         $post_total_subs_label = $subscriptions // What should label contain?
             ? $this->plugin->utils_i18n->subscriptions($post_total_subs) : $post_total_subs;
 
-        $post_total_subs_desc = sprintf(_n('%1$s Subscription', '%1$s Subscriptions', $post_total_subs, SLUG_TD), esc_html($post_total_subs));
+        $post_total_subs_desc = sprintf(_n('%1$s Subscription Total (View)', '%1$s Subscriptions Total (View All)', $post_total_subs, SLUG_TD), esc_html($post_total_subs));
         $post_edit_subs_url   = $this->plugin->utils_url->postEditSubsShort($post_id);
 
         return '<a href="'.esc_attr($post_edit_subs_url).'" class="pmp-post-sub-count" style="'.esc_attr($style).'" title="'.esc_attr($post_total_subs_desc).'">'.
@@ -208,8 +209,8 @@ class UtilsMarkup extends AbsBase
             'group_by_email'        => false,
             'no_cache'              => false,
 
-            'show_fname'      => false,
-            'show_lname'      => false,
+            'show_fname'      => true,
+            'show_lname'      => true,
             'name_email_args' => ['anchor_to' => 'search'],
             'list_style'      => 'margin:0;',
         ];
