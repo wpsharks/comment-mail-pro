@@ -2251,16 +2251,12 @@ class Plugin extends AbsBase
             }
             if ($_args['markup']) { // Only display non-empty notices.
                 if ($_args['persistent']) { // Need [dismiss] link?
-                    $_dismiss_style = 'padding-right: 38px;'.
-                                      'position: relative;'.
-                                      'text-decoration: none;';
                     $_dismiss_url   = $this->utils_url->dismissNotice($_key);
-                    $_dismiss       = '<div class="notice" style="'.esc_attr($_dismiss_style).'">'.
-                                      '   <p>Notice content here</p>'.
-                                      '   <a class="notice-dismiss" href="'.esc_attr($_dismiss_url).'">'.
-                                      '      <span class="screen-reader-text">Dismiss</span>'.
-                                      '   </a>'.
-                                      '</div>';
+                    $_dismiss       = '<a href="'.esc_attr($_dismiss_url).'">'.
+                                      '  <button type="button" class="notice-dismiss">'.
+                                      '     <span class="screen-reader-text">Dismiss this notice.</span>'.
+                                      '  </button>'.
+                                      '</a>';
                 } else {
                     $_dismiss = ''; // Default value; n/a.
                 }
@@ -2280,7 +2276,7 @@ class Plugin extends AbsBase
                         $_classes .= ' updated'; // Green informational notice
                 }
                 $_full_markup = // Put together the full markup; including other pieces.
-                    '<div class="'.esc_attr($_classes).' style="clear: both;">'.// clear:both needed to fix StCR options page clash; see http://bit.ly/1V83vQl
+                    '<div class="notice '.esc_attr($_classes).'" style="clear: both; padding-right: 38px; position: relative;">'.// clear:both needed to fix StCR options page clash; see http://bit.ly/1V83vQl
                     '  '.$this->utils_string->pWrap($_args['markup'], $_dismiss).
                     '</div>';
 
