@@ -2262,6 +2262,7 @@ class Plugin extends AbsBase
                                       '</a>';
                 } else {
                     $_dismiss = ''; // Default value; n/a.
+                    $_dismiss_style = '';
                 }
                 $_classes = SLUG_TD.'-menu-page-area'; // Always.
 
