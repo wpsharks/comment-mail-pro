@@ -2253,7 +2253,8 @@ class Plugin extends AbsBase
                 if ($_args['persistent']) { // Need [dismiss] link?
                     $_dismiss_style = 'clear: both;'.
                                       'padding-right: 38px;'.
-                                      'position: relative;';
+                                      'position: relative;'.
+                                      'padding-bottom: 10px;';
                     $_dismiss_url   = $this->utils_url->dismissNotice($_key);
                     $_dismiss       = '<a href="'.esc_attr($_dismiss_url).'">'.
                                       '  <button type="button" class="notice-dismiss">'.
@@ -2280,7 +2281,7 @@ class Plugin extends AbsBase
                         $_classes .= ' updated'; // Green informational notice
                 }
                 $_full_markup = // Put together the full markup; including other pieces.
-                    '<div class="notice '.esc_attr($_classes).'" style="padding-bottom: 10px; '.esc_attr($_dismiss_style).'">'.// clear:both needed to fix StCR options page clash; see http://bit.ly/1V83vQl
+                    '<div class="notice '.esc_attr($_classes).'" style="'.esc_attr($_dismiss_style).'">'.// clear:both needed to fix StCR options page clash; see http://bit.ly/1V83vQl
                     '  '.$this->utils_string->pWrap($_args['markup'], $_dismiss).
                     '</div>';
 
