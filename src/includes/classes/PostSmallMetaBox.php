@@ -54,12 +54,12 @@ class PostSmallMetaBox extends AbsBase
             $total_subs,
             [
                 'subscriptions' => true,
-                'style'         => 'display:block; font-size:1.1em; background:#2EA2CC;',
+                'style'         => 'display:block; font-size:1em; background:#2EA2CC; margin-top: 1em; padding: 0.5em 1em;',
             ]
         );
         echo '<div class="'.esc_attr(SLUG_TD.'-menu-page-area').'">'.
 
-             '   <h4 style="margin:1em 0 .25em 0;">'.__('Most Recent Subscriptions', SLUG_TD).'</h4>'.
+             '   <h4 style="margin:1em 0 1em 0;">'.__('Most Recent Subscriptions', SLUG_TD).'</h4>'.
 
              '   '.$this->plugin->utils_markup->lastXSubs(5, $this->post->ID, ['group_by_email' => true]).
 

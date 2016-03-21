@@ -101,12 +101,11 @@ class UtilsMarkup extends AbsBase
         } else {
             $anchor_tag = $custom_anchor_tag; // Default behavior; assume a custom URL was given.
         }
-        return ($span_title ? '<span title="'.esc_attr($name_email_attr_value).'">' : '').
+        return ($span_title ? '<span title="'.esc_attr($name_email_attr_value).'" style="font-weight:bold;">' : '').
 
                ($name ? $name_span_tag : '').
                ($name && $email ? $separator : '').
-               ($email ? '&lt;'.esc_html($email_clip).'&gt;' : '').
-               ($email ? '&lsqb;'.($anchor && $anchor_tag ? $anchor_tag : 'view').'&rsqb;' : '').
+               ($email ? '&lt;'.($anchor && $anchor_tag ? $anchor_tag : esc_html($email_clip)).'&gt;' : '').
 
                ($span_title ? '</span>' : '');
     }
@@ -211,7 +210,10 @@ class UtilsMarkup extends AbsBase
 
             'show_fname'      => true,
             'show_lname'      => true,
-            'name_email_args' => ['anchor_to' => 'search'],
+            'show_date'       => true,
+            'show_time'       => true,
+            'name_email_args' => ['anchor_to' => ''],
+            'view_args'       => ['anchor_to' => 'search'],
             'list_style'      => 'margin:0;',
         ];
         $args = array_merge($default_args, $args);
@@ -219,11 +221,15 @@ class UtilsMarkup extends AbsBase
 
         $show_fname      = (boolean) $args['show_fname'];
         $show_lname      = (boolean) $args['show_lname'];
+        $show_date       = (boolean) $args['show_date'];
+        $show_time       = (boolean) $args['show_time'];
         $name_email_args = (array) $args['name_email_args'];
+        $view_args       = (array) $args['view_args'];
         $list_style      = trim((string) $args['list_style']);
 
         foreach ($this->plugin->utils_sub->lastX($x, $post_id, $args) as $_sub) {
             $_name_maybe = ''; // Initialize.
+            $_date_maybe = '';
 
             if ($show_fname) {
                 $_name_maybe .= $_sub->fname;
@@ -231,9 +237,16 @@ class UtilsMarkup extends AbsBase
             if ($show_lname) {
                 $_name_maybe .= ' '.$_sub->lname;
             }
+            if ($show_date) {
+                $_date_maybe .= ' '.$_sub->insertion_time;
+            }
+            if ($show_time) {
+                $_date_maybe .= ' '.$_sub->insertion_time;
+            }
             $last_x_email_lis[] = '<li>'.// Display varies based on arguments.
                                   ' <i class="'.esc_attr('si si-'.SLUG_TD).'"></i> '.
-                                  $this->nameEmail($_name_maybe, $_sub->email, $name_email_args).'</a>'.
+                                  $this->nameEmail($_name_maybe, $_sub->email, $name_email_args).' on '.esc_html($this->plugin->utils_date->i18n('M jS, Y g:ia', $_sub->insertion_time)).
+                                  '<span style="font-style: italic"> ('.esc_html($this->plugin->utils_date->approxTimeDifference($_sub->insertion_time)).') </span> '.'&lsqb;'.$this->nameEmail('view', $view_args).'&rsqb;'.'</a>'.
                                   '</li>';
         }
         unset($_sub, $_name_maybe); // Housekeeping.
