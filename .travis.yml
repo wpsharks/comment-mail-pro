@@ -19,7 +19,7 @@ notifications:
 
 # <custom> Begin custom matrix.
 
-matrix: # Tests for Comet Cache WordPress plugin.
+matrix: # Tests for Comment Mail WordPress plugin.
 
   include: # Cover both ends of our PHP spectrum.
 
