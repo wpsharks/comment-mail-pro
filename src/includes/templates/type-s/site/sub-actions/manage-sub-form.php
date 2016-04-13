@@ -173,9 +173,13 @@ echo str_replace('%%title%%', $is_edit ? __('Edit Subscription', SLUG_TD)
             <?php endif; ?>
 
                 <h2 style="margin-top:0;">
-                    <a href="<?php echo esc_attr($sub_summary_return_url); ?>" title="<?php echo __('Back to My Subscriptions', SLUG_TD); ?>">
-                        <i class="fa fa-arrow-circle-left pull-right"></i>
-                    </a>
+                    
+                    <?php if( $has_subscriptions ) : ?>
+                        <a href="<?php echo esc_attr($sub_summary_return_url); ?>" title="<?php echo __('Back to My Subscriptions', SLUG_TD); ?>">
+                            <i class="fa fa-arrow-circle-left pull-right"></i>
+                        </a>
+                    <?php endif; ?>
+
                     <?php if ($is_edit) : ?>
                         <?php echo __('Edit Subscription', SLUG_TD); ?>
                     <?php else : // Creating a new subscription. ?>
