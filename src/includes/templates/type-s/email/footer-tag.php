@@ -20,5 +20,28 @@ namespace WebSharks\CommentMail\Pro;
  *    you may also use any WordPress functions that you like.
  */
 ?>
+<?php
+/*
+ * Here we define a few more variables of our own.
+ * All based on what the template makes available to us;
+ * ~ as documented at the top of this file.
+ */
+// Site home page URL; i.e. to main site.
+$home_url = home_url('/'); // Multisite compatible.
 
-<?php echo $template->snippet('footer-tag.php', []); ?>
+// A clip of the blog's name; as configured in WordPress.
+$blog_name_clip = $plugin->utils_string->clip(get_bloginfo('name'));
+
+// Current `host[/path]` with support for multisite network child blogs.
+$current_host_path = $plugin->utils_url->currentHostPath();
+
+?>
+
+<?php echo $template->snippet(
+    'footer-tag.php',
+    [
+        '[home_url]'                     => esc_attr($home_url),
+        '[blog_name_clip]'               => esc_html($blog_name_clip),
+        '[current_host_path]'            => esc_html($current_host_path),
+    ]
+); ?>
