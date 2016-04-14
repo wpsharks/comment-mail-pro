@@ -246,7 +246,7 @@ class UtilsMarkup extends AbsBase
             $last_x_email_lis[] = '<li>'.// Display varies based on arguments.
                                   ' <i class="'.esc_attr('si si-'.SLUG_TD).'"></i> '.
                                   $this->nameEmail($_name_maybe, $_sub->email, $name_email_args).' on '.esc_html($this->plugin->utils_date->i18n('M jS, Y g:ia', $_sub->insertion_time)).
-                                  '<span style="font-style: italic"> ('.esc_html($this->plugin->utils_date->approxTimeDifference($_sub->insertion_time)).') </span> '.'&lsqb;'.$this->nameEmail('view',$_sub->email, $view_args).'&rsqb;'.'</a>'.
+                                  '<span style="font-style: italic"> ('.esc_html($this->plugin->utils_date->approxTimeDifference($_sub->insertion_time)).') </span> '.'&lsqb;'.'<a href="'.esc_url($this->plugin->utils_url->searchSubsShort('sub_email:'.$_sub->email)).'">view'.'&rsqb;'.'</a>'.
                                   '</li>';
         }
         unset($_sub, $_name_maybe); // Housekeeping.
