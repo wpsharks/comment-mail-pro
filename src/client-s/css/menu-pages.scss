@@ -676,9 +676,10 @@ Menu page styles.
 Menu page heading styles.
 */
 .comment-mail-menu-page .pmp-heading {
-  padding-bottom:             1em;
+  padding-bottom:             3em;
   margin-bottom:              2em;
   position:                   relative;
+  min-height:                 70px;
 }
 
 .comment-mail-menu-page .pmp-heading::after {
@@ -694,6 +695,11 @@ Menu page heading styles.
 .comment-mail-menu-page .pmp-heading img.pmp-logo-icon {
   width:                      400px;
   margin:                     0 0 1em .5em;
+}
+
+.comment-mail-menu-page .pmp-heading .pmp-heading-links {
+  float:            left;
+  clear:            left;
 }
 
 .comment-mail-menu-page .pmp-heading .pmp-heading-links a {
