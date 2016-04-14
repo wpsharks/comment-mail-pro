@@ -24,9 +24,10 @@ namespace WebSharks\CommentMail\Pro;
  *    you may also use any WordPress functions that you like.
  */
 ?>
-<?php echo $email_footer_tag; ?>
 
 <hr style="margin-top:10em;" />
+
+<?php echo $email_footer_tag; ?>
 
 <?php // CAN-SPAM compliance links; manage/unsubscribe. ?>
 

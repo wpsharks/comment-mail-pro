@@ -62,7 +62,7 @@ namespace WebSharks\CommentMail\Pro;
         {
             background-position : 0 -2em;
         }
-        <?php foreach ($sso_services as $_sso_service): ?>
+        <?php foreach ($sso_services as $_sso_service) : ?>
             <?php echo '.comment-sso-ops .csso-link.csso-'.esc_html($_sso_service).
             ' { background-image : url("'.esc_url($plugin->utils_url->to('/src/client-s/images/sso-'.$_sso_service.'.png')).'"); }'."\n"; ?>
         <?php endforeach; ?>
@@ -70,13 +70,15 @@ namespace WebSharks\CommentMail\Pro;
 <?php $css_styles = ob_get_clean(); ?>
 
 <?php ob_start(); ?>
-    <?php foreach ($sso_services as $_sso_service): ?>
+    <?php foreach ($sso_services as $_sso_service) : ?>
         <a href="<?php echo esc_attr($plugin->utils_url->ssoActionUrl($_sso_service)); ?>" class="<?php echo esc_attr('csso-link csso-'.$_sso_service); ?>"></a>
     <?php endforeach; ?>
 <?php $service_links = ob_get_clean(); ?>
 
 <?php echo $template->snippet(
-    'sso-ops.php', [
+    'sso-ops.php',
+    [
         '[css_styles]'    => $css_styles,
         '[service_links]' => $service_links,
-    ]); ?>
+    ]
+); ?>

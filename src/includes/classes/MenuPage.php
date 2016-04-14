@@ -2451,7 +2451,13 @@ class MenuPage extends AbsBase
                                    'notes_before'  => '<p class="pmp-note pmp-notice">'.__('<strong>Note:</strong> The default template is already optimized for popular email clients; i.e., you shouldn\'t need to customize. However, if don\'t like the defaults; tweak things a bit until you reach perfection <i class="fa fa-smile-o"></i>', SLUG_TD).'</p>'.
                                                       '<p class="pmp-note pmp-info">'.__('<strong>Tip:</strong> this template allows you to create a custom email footer design. If you would like to rebrand or enhance email messages, this is the file that we suggest you edit. This file contains the <code>&lt;footer&gt;</code> tag, which is pulled together into a full, final, and complete HTML document. In other words, there is no reason to use <code>&lt;/body&gt;&lt;/html&gt;</code> tags here, they are produced elsewhere. Please note, while this template is focused on the <code>&lt;footer&gt;</code> tag, you are not limited to <em>just</em> the <code>&lt;footer&gt;</code>; i.e., you can add any HTML that you like.', SLUG_TD).'</p>',
                                    'notes_after' => '<p class="pmp-note pmp-info">'.__('<strong>Tip:</strong> If you mess up your template by accident; empty the field completely and save your options. This reverts you back to the default template file automatically.', SLUG_TD).'</p>',
-                                   'cm_details'  => $shortcode_details([]),
+                                   'cm_details'  => $shortcode_details(
+                                       [
+                                           '[home_url]'          => __('Site home page URL; i.e., back to main site.', SLUG_TD),
+                                           '[blog_name_clip]'    => __('A clip of the blog\'s name; as configured in WordPress.', SLUG_TD),
+                                           '[current_host_path]' => __('Current <code>host/path</code> with support for multisite network child blogs.', SLUG_TD),
+                                       ]
+                                   ),
                                ]
                            ).
                            '  </tbody>'.
