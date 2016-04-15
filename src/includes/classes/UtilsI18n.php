@@ -353,10 +353,9 @@ class UtilsI18n extends AbsBase
         $counter = (integer) $counter; // Force integer.
 
         if (empty($counter)) { // If no results, add a no subscriptions message.
-            return sprintf(_n('No Subscriptions (View)','No Subscriptions (View)', $counter, SLUG_TD), $counter);
-        }
-        else {
-            return sprintf(_n('%1$s Subscriptions Total (View All)','%1$s Subscriptions Total (View All)', $counter, SLUG_TD), $counter);
+            return sprintf(_n('No Subscriptions (View)', 'No Subscriptions (View)', $counter, SLUG_TD), $counter);
+        } else {
+            return sprintf(_n('%1$s Subscriptions Total (View All)', '%1$s Subscriptions Total (View All)', $counter, SLUG_TD), $counter);
         }
     }
 
