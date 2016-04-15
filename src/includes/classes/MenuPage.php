@@ -2138,7 +2138,7 @@ class MenuPage extends AbsBase
                             '    </tbody>'.
                             ' </table>';
 
-            $_panel_body .= '<iframe src="'.esc_attr($this->plugin->utils_url->to('/client-s/iframes/stcr-import-start.html')).'" name="'.esc_attr(GLOBAL_NS.'_import_stcr_iframe').'" class="pmp-import-iframe-output"></iframe>';
+            $_panel_body .= '<iframe src="'.esc_attr($this->plugin->utils_url->to('/src/client-s/iframes/stcr-import-start.html')).'" name="'.esc_attr(GLOBAL_NS.'_import_stcr_iframe').'" class="pmp-import-iframe-output"></iframe>';
 
             $_panel_body .= '<p><em>'.sprintf(__('Note: Running the import multiple times will not result in duplicate data; %1$s&trade; will simply ignore any subscriptions that have already been imported.', SLUG_TD), esc_html(NAME)).'</em></p>';
 
