@@ -1,4 +1,4 @@
-## Comment Mail™ (WP Comment Subscriptions)
+## Comment Mail™ (WP Comment Subscriptions) [![Build Status](https://travis-ci.org/websharks/comment-mail-pro.svg?branch=000000-dev)](https://travis-ci.org/websharks/comment-mail-pro)
 
 A WordPress plugin enabling email subscriptions for comments.
 
