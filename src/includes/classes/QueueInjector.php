@@ -76,7 +76,7 @@ class QueueInjector extends AbsBase
 
         $sql = $this->plugin->utils_string->trim($sql, '', ','); // Trim leftover delimiter.
 
-        if ($this->plugin->utils_db->wp->query($sql) === false) { // Insert failure?
+        if (!$this->plugin->utils_db->wp->query($sql)) { // Insert failure?
             throw new \exception(__('Insertion failure.', SLUG_TD));
         }
     }
