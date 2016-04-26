@@ -268,7 +268,7 @@ class UtilsDb extends AbsBase
         if (!is_null($total = &$this->cacheKey(__FUNCTION__, $cache_keys)) && !$no_cache) {
             return $total; // Already cached this.
         }
-        $sql = 'SELECT SQL_CALC_FOUND_ROWS `ID` FROM `'.esc_html($this->wp->users).'`'.
+        $sql = 'SELECT SQL_CALC_FOUND_ROWS `ID` FROM `'.esc_sql($this->wp->users).'`'.
 
                ' LIMIT 1'; // One to check.
 
@@ -313,7 +313,7 @@ class UtilsDb extends AbsBase
             return $users = []; // Fail when there are too many.
         }
         $sql = 'SELECT *'.// Everything please.
-                   ' FROM `'.esc_html($this->wp->users).'`'.
+                   ' FROM `'.esc_sql($this->wp->users).'`'.
 
                    ($max !== PHP_INT_MAX ? ' LIMIT '.esc_sql($max) : '');
 
@@ -367,7 +367,7 @@ class UtilsDb extends AbsBase
         $post_types    = $include_post_types ? $include_post_types : get_post_types(['exclude_from_search' => false]);
         $post_statuses = get_post_stati(['exclude_from_search' => false]);
 
-        $sql = 'SELECT SQL_CALC_FOUND_ROWS `ID` FROM `'.esc_html($this->wp->posts).'`'.
+        $sql = 'SELECT SQL_CALC_FOUND_ROWS `ID` FROM `'.esc_sql($this->wp->posts).'`'.
 
                " WHERE `post_type` IN('".implode("','", array_map('esc_sql', $post_types))."')".
                ($exclude_post_types ? " AND `post_type` NOT IN('".implode("','", array_map('esc_sql', $exclude_post_types))."')" : '').
@@ -438,7 +438,7 @@ class UtilsDb extends AbsBase
         $post_statuses = get_post_stati(['exclude_from_search' => false]);
 
         $sql = 'SELECT *'.// Everything please.
-                   ' FROM `'.esc_html($this->wp->posts).'`'.
+                   ' FROM `'.esc_sql($this->wp->posts).'`'.
 
                    " WHERE `post_type` IN('".implode("','", array_map('esc_sql', $post_types))."')".
                    ($exclude_post_types ? " AND `post_type` NOT IN('".implode("','", array_map('esc_sql', $exclude_post_types))."')" : '').
@@ -541,7 +541,7 @@ class UtilsDb extends AbsBase
         if ($exclude_password_protected && $post->post_password) { // Has password?
             return $total = 0; // Passwords excluded; automatic zero.
         }
-        $sql = 'SELECT SQL_CALC_FOUND_ROWS `comment_ID` FROM `'.esc_html($this->wp->comments).'`'.
+        $sql = 'SELECT SQL_CALC_FOUND_ROWS `comment_ID` FROM `'.esc_sql($this->wp->comments).'`'.
 
                " WHERE `comment_post_ID` = '".esc_sql($post_id)."'".
                " AND (`comment_type` = '' OR `comment_type` = 'comment')".
@@ -621,7 +621,7 @@ class UtilsDb extends AbsBase
             return $comments = []; // Fail when there are too many.
         }
         $sql = 'SELECT *'.// Everything please.
-                   ' FROM `'.esc_html($this->wp->comments).'`'.
+                   ' FROM `'.esc_sql($this->wp->comments).'`'.
 
                    " WHERE `comment_post_ID` = '".esc_sql($post_id)."'".
                    " AND (`comment_type` = '' OR `comment_type` = 'comment')".
