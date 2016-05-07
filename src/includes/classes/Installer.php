@@ -53,7 +53,7 @@ class Installer extends AbsBase
                 $_sql = str_replace('%%prefix%%', $this->plugin->utils_db->prefix(), $_sql);
                 $_sql = $this->plugin->utils_db->fulltextCompat($_sql);
 
-                if (!$this->plugin->utils_db->wp->query($_sql)) { // Table creation failure?
+                if ($this->plugin->utils_db->wp->query($_sql) === false) { // Table creation failure?
                     throw new \exception(sprintf(__('DB table creation failure. Table: `%1$s`. SQL: `%2$s`.', SLUG_TD), $_sql_file_table, $_sql));
                 }
             }

@@ -634,7 +634,6 @@ class QueueProcessor extends AbsBase
     protected function entryHoldUntilTime(\stdClass $entry_props)
     {
         switch ($entry_props->sub->deliver) {
-
             case 'hourly': // Delivery option = hourly digest.
                 if (($entry_last_notified_time = $this->entryLastNotifiedTime($entry_props))) {
                     return $entry_last_notified_time + 3600;
@@ -679,7 +678,7 @@ class QueueProcessor extends AbsBase
 
                " WHERE `ID` = '".esc_sql($entry_props->entry->ID)."'";
 
-        if (!$this->plugin->utils_db->wp->query($sql)) {
+        if ($this->plugin->utils_db->wp->query($sql) === false) {
             throw new \exception(__('Update failure.', SLUG_TD));
         }
         $entry_props->entry->hold_until_time = $entry_hold_until_time;
