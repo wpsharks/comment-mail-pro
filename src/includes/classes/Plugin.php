@@ -1341,7 +1341,7 @@ class Plugin extends AbsBase
 
         /* ----------------------------------------- */
 
-        $_menu_title                      = NAME.' <sup style="font-size:60%; line-height:1;">Pro</sup>';
+        $_menu_title                      = NAME.(IS_PRO ? ' <sup style="font-size:60%; line-height:1;">Pro</sup>' : '');
         $_page_title                      = NAME.'&trade;';
         $_menu_position                   = apply_filters(__METHOD__.'_position', '25.00001');
         $this->menu_page_hooks[GLOBAL_NS] = add_menu_page($_page_title, $_menu_title, $this->cap, GLOBAL_NS, [$this, 'menuPageOptions'], 'data:image/svg+xml;base64,'.base64_encode($icon), $_menu_position);
