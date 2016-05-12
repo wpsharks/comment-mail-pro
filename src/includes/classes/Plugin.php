@@ -1408,12 +1408,14 @@ class Plugin extends AbsBase
 
         /* ----------------------------------------- */
 
+        /*[pro strip-from="lite"]*/
         $_menu_title                               = $divider.__('Statistics/Charts', SLUG_TD);
         $_page_title                               = NAME.'&trade; &#10609; '.__('Statistics/Charts', SLUG_TD);
         $this->menu_page_hooks[GLOBAL_NS.'_stats'] = add_submenu_page(GLOBAL_NS, $_page_title, $_menu_title, $this->manage_cap, GLOBAL_NS.'_stats', [$this, 'menuPageStats']);
         add_action('load-'.$this->menu_page_hooks[GLOBAL_NS.'_stats'], [$this, 'menuPageStatsScreen']);
 
         unset($_menu_title, $_page_title); // Housekeeping.
+        /*[/pro]*/
 
         /* ----------------------------------------- */
 
