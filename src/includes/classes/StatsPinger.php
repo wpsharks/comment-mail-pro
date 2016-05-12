@@ -1,4 +1,5 @@
 <?php
+/*[pro exclude-file-from="lite"]*/
 /*[pro strip-from="lite"]*/
 /**
  * Stats Pinger.
