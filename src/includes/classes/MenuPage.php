@@ -4584,13 +4584,6 @@ class MenuPage extends AbsBase
                     ($this->plugin->utils_env->isMenuPage(GLOBAL_NS) ? ' class="pmp-active"' : '').'>'.
                     '<i class="fa fa-gears"></i> '.__('Options', SLUG_TD).'</a>'."\n";
 
-        if (!IS_PRO) { // Display pro preview/upgrade related links?
-            $heading .= '  <a href="'.esc_attr($this->plugin->utils_url->proPreview()).'"'.
-                        ($this->plugin->utils_env->isProPreview() ? ' class="pmp-active"' : '').'>'.
-                        '<i class="fa fa-eye"></i> '.__('Preview Pro Features', SLUG_TD).'</a>'."\n";
-
-            $heading .= '  <a href="'.esc_attr($this->plugin->utils_url->productPage()).'" target="_blank"><i class="fa fa-heart-o"></i> '.__('Pro Upgrade', SLUG_TD).'</a>'."\n";
-        }
         if (IS_PRO) { // Display import options for pro users.
             $heading .= '  <a href="'.esc_attr($this->plugin->utils_url->importExportMenuPageOnly()).'"'.
                         ($this->plugin->utils_env->isMenuPage(GLOBAL_NS.'_import_export') ? ' class="pmp-active"' : '').'>'.
@@ -4613,6 +4606,14 @@ class MenuPage extends AbsBase
         $heading .= '  <a href="'.esc_attr($this->plugin->utils_url->siteTemplatesMenuPageOnly()).'"'.
                     ($this->plugin->utils_env->isMenuPage(GLOBAL_NS.'_site_templates') ? ' class="pmp-active"' : '').'>'.
                     '<i class="fa fa-code"></i> '.__('Site Templates', SLUG_TD).'</a>'."\n";
+
+        if (!IS_PRO) { // Display pro preview/upgrade related links?
+            $heading .= '  <a href="'.esc_attr($this->plugin->utils_url->proPreview()).'"'.
+                        ($this->plugin->utils_env->isProPreview() ? ' class="pmp-active"' : '').'>'.
+                        '<i class="fa fa-eye"></i> '.__('Preview Pro Features', SLUG_TD).'</a>'."\n";
+
+            $heading .= '  <a href="'.esc_attr($this->plugin->utils_url->productPage()).'" target="_blank"><i class="fa fa-heart-o"></i> '.__('Pro Upgrade', SLUG_TD).'</a>'."\n";
+        }
 
         $heading .= '  </div>'."\n";
 

@@ -676,20 +676,10 @@ Menu page styles.
 Menu page heading styles.
 */
 .comment-mail-menu-page .pmp-heading {
-  padding-bottom:             3em;
+  padding-bottom:             60px;
   margin-bottom:              2em;
   position:                   relative;
-  min-height:                 70px;
-}
-
-.comment-mail-menu-page .pmp-heading::after {
-  content:                    '';
-  bottom:                     0;
-  left:                       0;
-  position:                   absolute;
-  width:                      100%;
-  height:                    .25em;
-  background:                 linear-gradient(to left, rgba(204, 204, 204, 0), rgba(204, 204, 204, 0.75), rgba(204, 204, 204, 0));
+  min-height:                 90px;
 }
 
 .comment-mail-menu-page .pmp-heading img.pmp-logo-icon {
@@ -700,6 +690,16 @@ Menu page heading styles.
 .comment-mail-menu-page .pmp-heading .pmp-heading-links {
   float:            left;
   clear:            left;
+}
+
+.comment-mail-menu-page .pmp-heading .pmp-heading-links::after {
+  content:                    '';
+  bottom:                     0;
+  left:                       0;
+  position:                   absolute;
+  width:                      100%;
+  height:                    .25em;
+  background:                 linear-gradient(to left, rgba(204, 204, 204, 0), rgba(204, 204, 204, 0.75), rgba(204, 204, 204, 0));
 }
 
 .comment-mail-menu-page .pmp-heading .pmp-heading-links a {
