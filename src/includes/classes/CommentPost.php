@@ -72,6 +72,9 @@ class CommentPost extends AbsBase
         if (!$this->comment_id) {
             return; // Not applicable.
         }
+        if ($this->comment_status === 'spam') {
+            return; // Not applicable.
+        }
         if (empty($_POST[GLOBAL_NS.'_sub_type'])) {
             return; // Not applicable.
         }
