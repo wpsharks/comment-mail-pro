@@ -161,7 +161,7 @@ class SubManageSubFormBase extends AbsBase
         $is_edit           = $this->is_edit;
         $sub               = $this->sub;
         $current_email     = $this->plugin->utils_sub->currentEmail();
-        $has_subscriptions = $current_email ? (bool)$this->plugin->utils_sub->queryTotal( null, [ 'sub_email' => $current_email, 'status' => 'subscribed', 'sub_email_or_user_ids' => true ] ) : false;
+        $has_subscriptions = $current_email ? (bool)$this->plugin->utils_sub->queryTotal(null, ['sub_email' => $current_email, 'status' => 'subscribed', 'sub_email_or_user_ids' => true]) : false;
 
         // $has_subscriptions = false;
 

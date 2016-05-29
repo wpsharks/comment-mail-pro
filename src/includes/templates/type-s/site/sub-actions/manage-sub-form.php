@@ -78,7 +78,7 @@ echo str_replace('%%title%%', $is_edit ? __('Edit Subscription', SLUG_TD)
                         </li>
                     <?php endforeach; ?>
                 </ul>
-                <?php if($valid_sub_key != null) : ?>
+                <?php if ($valid_sub_key != null) : ?>
                 <p style="margin-top:1em;">
                     <a href="<?php echo esc_attr($plugin->utils_url->subManageSummaryUrl($sub_key, null, true)); ?>">
                         <i class="fa fa-arrow-circle-left"></i> <?php echo __('Back to My Subscriptions', SLUG_TD); ?>
@@ -175,7 +175,7 @@ echo str_replace('%%title%%', $is_edit ? __('Edit Subscription', SLUG_TD)
 
                 <h2 style="margin-top:0;">
 
-                    <?php if( $has_subscriptions ) : ?>
+                    <?php if ($has_subscriptions) : ?>
                         <a href="<?php echo esc_attr($sub_summary_return_url); ?>" title="<?php echo __('Back to My Subscriptions', SLUG_TD); ?>">
                             <i class="fa fa-arrow-circle-left pull-right"></i>
                         </a>

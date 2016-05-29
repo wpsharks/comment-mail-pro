@@ -32,7 +32,7 @@ $blog_name_clip = $plugin->utils_string->clip(get_bloginfo('name'));
 
 // Summary return URL; w/ all summary navigation vars preserved. Display only when the current user has subscriptions.
 $current_email = $plugin->utils_sub->currentEmail();
-$has_subscriptions = $current_email ? (bool)$this->plugin->utils_sub->queryTotal( null, [ 'sub_email' => $current_email, 'status' => 'subscribed', 'sub_email_or_user_ids' => true ] ) : false;
+$has_subscriptions = $current_email ? (bool)$this->plugin->utils_sub->queryTotal(null, ['sub_email' => $current_email, 'status' => 'subscribed', 'sub_email_or_user_ids' => true]) : false;
 
 $sub_summary_return_url = $has_subscriptions && $plugin->utils_url->subManageSummaryUrl(!empty($sub_key) ? $sub_key : '', null, true);
 // $sub_summary_return_url = '';
