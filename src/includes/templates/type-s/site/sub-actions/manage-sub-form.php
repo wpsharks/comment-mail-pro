@@ -67,7 +67,6 @@ echo str_replace('%%title%%', $is_edit ? __('Edit Subscription', SLUG_TD)
                  && $error_codes[0] === 'invalid_sub_key_after_email_key_change'
                  && $processing && $processing_successes && $processing_email_key_change
         ) : ?>
-
             <div class="alert alert-success" style="margin:0;">
                 <h4>
                     <?php echo __('Submission accepted; nice work!', SLUG_TD); ?>
@@ -79,11 +78,13 @@ echo str_replace('%%title%%', $is_edit ? __('Edit Subscription', SLUG_TD)
                         </li>
                     <?php endforeach; ?>
                 </ul>
+                <?php if($valid_sub_key != null) : ?>
                 <p style="margin-top:1em;">
                     <a href="<?php echo esc_attr($plugin->utils_url->subManageSummaryUrl($sub_key, null, true)); ?>">
                         <i class="fa fa-arrow-circle-left"></i> <?php echo __('Back to My Subscriptions', SLUG_TD); ?>
                     </a>
                 </p>
+            <?php endif; ?>
             </div>
 
         <?php elseif ($error_codes) : // Any other major errors? ?>
@@ -173,7 +174,7 @@ echo str_replace('%%title%%', $is_edit ? __('Edit Subscription', SLUG_TD)
             <?php endif; ?>
 
                 <h2 style="margin-top:0;">
-                    
+
                     <?php if( $has_subscriptions ) : ?>
                         <a href="<?php echo esc_attr($sub_summary_return_url); ?>" title="<?php echo __('Back to My Subscriptions', SLUG_TD); ?>">
                             <i class="fa fa-arrow-circle-left pull-right"></i>
