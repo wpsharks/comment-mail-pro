@@ -132,55 +132,55 @@ class UpgraderVs extends AbsBase
             unset($_marker, $_key, $_key_data, $_value); // Housekeeping.
             unset($_default_template, $_default_template_nws, $_new_and_old_template);
 
-            $this->plugin->optionsSave($this->plugin->options);
+            if (isset($_options_reset) && is_array($_options_reset) && count($_options_reset) >= 1) {
+                $this->plugin->optionsSave($this->plugin->options);
 
-            $_options_to_menu_map = [
-                # PHP-based templates for the site.
+                $_options_to_menu_map = [
+                    # PHP-based templates for the site.
 
-                'template__type_a__site__header___php' => 'Comment Mail → Config Options → Site Templates → Site Header',
-                'template__type_a__site__header_styles___php' => 'Comment Mail → Config Options → Site Templates → Site Header Styles',
-                'template__type_a__site__header_scripts___php' => 'Comment Mail → Config Options → Site Templates → Site Header Scripts',
-                'template__type_a__site__header_tag___php' => 'Comment Mail → Config Options → Site Templates → Site Header Tag',
+                    'template__type_a__site__header___php' => 'Comment Mail → Config Options → Site Templates → Site Header',
+                    'template__type_a__site__header_styles___php' => 'Comment Mail → Config Options → Site Templates → Site Header Styles',
+                    'template__type_a__site__header_scripts___php' => 'Comment Mail → Config Options → Site Templates → Site Header Scripts',
+                    'template__type_a__site__header_tag___php' => 'Comment Mail → Config Options → Site Templates → Site Header Tag',
 
-                'template__type_a__site__footer_tag___php' => 'Comment Mail → Config Options → Site Templates → Site Footer Tag',
-                'template__type_a__site__footer___php' => 'Comment Mail → Config Options → Site Templates → Site Footer',
+                    'template__type_a__site__footer_tag___php' => 'Comment Mail → Config Options → Site Templates → Site Footer Tag',
+                    'template__type_a__site__footer___php' => 'Comment Mail → Config Options → Site Templates → Site Footer',
 
-                'template__type_a__site__comment_form__sso_ops___php' => 'Comment Mail → Config Options → Site Templates → Comment Form SSO Options',
-                'template__type_a__site__comment_form__sso_op_scripts___php' => 'Comment Mail → Config Options → Site Templates → Comment Form Scripts for SSO Options',
+                    'template__type_a__site__comment_form__sso_ops___php' => 'Comment Mail → Config Options → Site Templates → Comment Form SSO Options',
+                    'template__type_a__site__comment_form__sso_op_scripts___php' => 'Comment Mail → Config Options → Site Templates → Comment Form Scripts for SSO Options',
 
-                'template__type_a__site__login_form__sso_ops___php' => 'Comment Mail → Config Options → Site Templates → Login Form SSO Options',
-                'template__type_a__site__login_form__sso_op_scripts___php' => 'Comment Mail → Config Options → Site Templates → Login Form Scripts for SSO Options',
+                    'template__type_a__site__login_form__sso_ops___php' => 'Comment Mail → Config Options → Site Templates → Login Form SSO Options',
+                    'template__type_a__site__login_form__sso_op_scripts___php' => 'Comment Mail → Config Options → Site Templates → Login Form Scripts for SSO Options',
 
-                'template__type_a__site__sso_actions__complete___php' => 'Comment Mail → Config Options → Site Templates → Single Sign-on Registration Complete',
+                    'template__type_a__site__sso_actions__complete___php' => 'Comment Mail → Config Options → Site Templates → Single Sign-on Registration Complete',
 
-                'template__type_a__site__comment_form__sub_ops___php' => 'Comment Mail → Config Options → Site Templates → Comment Form Subscr. Options',
-                'template__type_a__site__comment_form__sub_op_scripts___php' => 'Comment Mail → Config Options → Site Templates → Comment Form Scripts for Subscr. Options',
+                    'template__type_a__site__comment_form__sub_ops___php' => 'Comment Mail → Config Options → Site Templates → Comment Form Subscr. Options',
+                    'template__type_a__site__comment_form__sub_op_scripts___php' => 'Comment Mail → Config Options → Site Templates → Comment Form Scripts for Subscr. Options',
 
-                'template__type_a__site__sub_actions__confirmed___php' => 'Comment Mail → Config Options → Site Templates → Subscr. Confirmed',
-                'template__type_a__site__sub_actions__unsubscribed___php' => 'Comment Mail → Config Options → Site Templates → Unsubscribed',
-                'template__type_a__site__sub_actions__unsubscribed_all___php' => 'Comment Mail → Config Options → Site Templates → Unsubscribed All',
-                'template__type_a__site__sub_actions__manage_summary___php' => 'Comment Mail → Config Options → Site Templates → Summary',
-                'template__type_a__site__sub_actions__manage_sub_form___php' => 'Comment Mail → Config Options → Site Templates → Add/Edit Form',
-                'template__type_a__site__sub_actions__manage_sub_form_comment_id_row_via_ajax___php' => 'Comment Mail → Config Options → Site Templates → Comment ID Row via AJAX',
+                    'template__type_a__site__sub_actions__confirmed___php' => 'Comment Mail → Config Options → Site Templates → Subscr. Confirmed',
+                    'template__type_a__site__sub_actions__unsubscribed___php' => 'Comment Mail → Config Options → Site Templates → Unsubscribed',
+                    'template__type_a__site__sub_actions__unsubscribed_all___php' => 'Comment Mail → Config Options → Site Templates → Unsubscribed All',
+                    'template__type_a__site__sub_actions__manage_summary___php' => 'Comment Mail → Config Options → Site Templates → Summary',
+                    'template__type_a__site__sub_actions__manage_sub_form___php' => 'Comment Mail → Config Options → Site Templates → Add/Edit Form',
+                    'template__type_a__site__sub_actions__manage_sub_form_comment_id_row_via_ajax___php' => 'Comment Mail → Config Options → Site Templates → Comment ID Row via AJAX',
 
-                # PHP-based templates for emails.
+                    # PHP-based templates for emails.
 
-                'template__type_a__email__header___php' => 'Comment Mail → Config Options → Email Templates → Email Header',
-                'template__type_a__email__header_styles___php' => 'Comment Mail → Config Options → Email Templates → Email Header Styles',
-                'template__type_a__email__header_scripts___php' => 'Comment Mail → Config Options → Email Templates → Email Header Scripts',
-                'template__type_a__email__header_tag___php' => 'Comment Mail → Config Options → Email Templates → Email Header Tag',
+                    'template__type_a__email__header___php' => 'Comment Mail → Config Options → Email Templates → Email Header',
+                    'template__type_a__email__header_styles___php' => 'Comment Mail → Config Options → Email Templates → Email Header Styles',
+                    'template__type_a__email__header_scripts___php' => 'Comment Mail → Config Options → Email Templates → Email Header Scripts',
+                    'template__type_a__email__header_tag___php' => 'Comment Mail → Config Options → Email Templates → Email Header Tag',
 
-                'template__type_a__email__footer_tag___php' => 'Comment Mail → Config Options → Email Templates → Email Footer Tag',
-                'template__type_a__email__footer___php' => 'Comment Mail → Config Options → Email Templates → Email Footer',
+                    'template__type_a__email__footer_tag___php' => 'Comment Mail → Config Options → Email Templates → Email Footer Tag',
+                    'template__type_a__email__footer___php' => 'Comment Mail → Config Options → Email Templates → Email Footer',
 
-                'template__type_a__email__sub_confirmation__subject___php' => 'Comment Mail → Config Options → Email Templates → Subscr. Confirmation Subject',
-                'template__type_a__email__sub_confirmation__message___php' => 'Comment Mail → Config Options → Email Templates → Subscr. Confirmation Message Body',
+                    'template__type_a__email__sub_confirmation__subject___php' => 'Comment Mail → Config Options → Email Templates → Subscr. Confirmation Subject',
+                    'template__type_a__email__sub_confirmation__message___php' => 'Comment Mail → Config Options → Email Templates → Subscr. Confirmation Message Body',
 
-                'template__type_a__email__comment_notification__subject___php' => 'Comment Mail → Config Options → Email Templates → Comment Notification Subject',
-                'template__type_a__email__comment_notification__message___php' => 'Comment Mail → Config Options → Email Templates → Comment Notification Message Body'
-            ];
+                    'template__type_a__email__comment_notification__subject___php' => 'Comment Mail → Config Options → Email Templates → Comment Notification Subject',
+                    'template__type_a__email__comment_notification__message___php' => 'Comment Mail → Config Options → Email Templates → Comment Notification Message Body'
+                ];
 
-            if (isset($_options_reset) && is_array($_options_reset)) {
                 $_options_reset_html = ''; // Initialize
 
                 foreach ($_options_reset as $_key => $_option) { // Build list of menu paths to templates that have been reset
