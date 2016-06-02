@@ -334,8 +334,8 @@ class Template extends AbsBase
         $option_key = static::dataOptionKey(['type' => $this->type, 'file' => $this->file]);
 
         if (!empty($this->plugin->options[$option_key])) {
-            // Strip legacy template backup, if applicable
-            $this->plugin->options[$option_key] = preg_replace('/\<\?php\s+\/\* --------------------------- Legacy Template Backup ---------------------------.*/su', '', $this->plugin->options[$option_key]);
+            // Strip legacy template backup, if applicable; see `fromLteV160213()` in `UpgraderVs.php`
+            $this->plugin->options[$option_key] = preg_replace('/\<\?php\s+\/\*\s+\-{3,}\s+Legacy\s+Template\s+Backup\s+\-{3,}.*/uis', '', $this->plugin->options[$option_key]);
 
             return $this->plugin->options[$option_key];
         }

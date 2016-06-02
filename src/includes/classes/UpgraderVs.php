@@ -111,21 +111,27 @@ class UpgraderVs extends AbsBase
  */ ?>';
 
             foreach ($this->plugin->options as $_key => &$_value) {
-                if (strpos($_key, 'template__') === 0) {
-                    $_key_data             = Template::optionKeyData($_key);
-                    $_default_template     = new Template($_key_data->file, $_key_data->type, true);
-                    $_default_template_nws = $_default_template->fileContents();
-                    $_new_and_old_template = $_default_template_nws ."\n\n". $_marker ."\n\n". $_value;
+                if (strpos($_key, 'template__type_a__') === 0) {
+                    $_key_data                  = Template::optionKeyData($_key);
+                    $_default_template          = new Template($_key_data->file, $_key_data->type, true);
+                    $_option_template_contents  = $_value; // A copy of the option value (potentially incompatible, modified template).
+                    $_default_template_contents = $_default_template->fileContents(); // New (safe) default template
+                    $_option_template_nws       = preg_replace('/\s+/', '', $_option_template_contents); // Strip whitespace for comparison
+                    $_default_template_nws      = preg_replace('/\s+/', '', $_default_template_contents); // Strip whitespace for comparison
 
-                    $this->plugin->options[$_key] = $_new_and_old_template;
+                    if (!$_option_template_nws || $_option_template_nws === $_default_template_nws) {
+                        continue; // Skip this one, because it's empty, or it's no different from the default template.
+                    }
 
+                    // Add note and append the modified (incompatible) template to the bottom of the new default template
+                    $_value = $_default_template_contents."\n\n".$_marker."\n\n".$_option_template_contents;
                 }
             }
             unset($_marker, $_key, $_key_data, $_value); // Housekeeping.
             unset($_default_template, $_default_template_nws, $_new_and_old_template);
 
 
-            $this->plugin->optionsSave($this->plugin->options); // Update with backed up Advanced Templates
+            $this->plugin->optionsSave($this->plugin->options);
 
         }
     }
