@@ -123,6 +123,8 @@ class UpgraderVs extends AbsBase
                         continue; // Skip this one, because it's empty, or it's no different from the default template.
                     }
 
+                    $_options_reset[] = $_key; // Save this so that we can let the site owner know which keys were reset.
+
                     // Add note and append the modified (incompatible) template to the bottom of the new default template
                     $_value = $_default_template_contents."\n\n".$_marker."\n\n".$_option_template_contents;
                 }
@@ -130,9 +132,75 @@ class UpgraderVs extends AbsBase
             unset($_marker, $_key, $_key_data, $_value); // Housekeeping.
             unset($_default_template, $_default_template_nws, $_new_and_old_template);
 
-
             $this->plugin->optionsSave($this->plugin->options);
 
+            $_options_to_menu_map = [
+                # PHP-based templates for the site.
+
+                'template__type_a__site__header___php' => 'Comment Mail → Config Options → Site Templates → Site Header',
+                'template__type_a__site__header_styles___php' => 'Comment Mail → Config Options → Site Templates → Site Header Styles',
+                'template__type_a__site__header_scripts___php' => 'Comment Mail → Config Options → Site Templates → Site Header Scripts',
+                'template__type_a__site__header_tag___php' => 'Comment Mail → Config Options → Site Templates → Site Header Tag',
+
+                'template__type_a__site__footer_tag___php' => 'Comment Mail → Config Options → Site Templates → Site Footer Tag',
+                'template__type_a__site__footer___php' => 'Comment Mail → Config Options → Site Templates → Site Footer',
+
+                'template__type_a__site__comment_form__sso_ops___php' => 'Comment Mail → Config Options → Site Templates → Comment Form SSO Options',
+                'template__type_a__site__comment_form__sso_op_scripts___php' => 'Comment Mail → Config Options → Site Templates → Comment Form Scripts for SSO Options',
+
+                'template__type_a__site__login_form__sso_ops___php' => 'Comment Mail → Config Options → Site Templates → Login Form SSO Options',
+                'template__type_a__site__login_form__sso_op_scripts___php' => 'Comment Mail → Config Options → Site Templates → Login Form Scripts for SSO Options',
+
+                'template__type_a__site__sso_actions__complete___php' => 'Comment Mail → Config Options → Site Templates → Single Sign-on Registration Complete',
+
+                'template__type_a__site__comment_form__sub_ops___php' => 'Comment Mail → Config Options → Site Templates → Comment Form Subscr. Options',
+                'template__type_a__site__comment_form__sub_op_scripts___php' => 'Comment Mail → Config Options → Site Templates → Comment Form Scripts for Subscr. Options',
+
+                'template__type_a__site__sub_actions__confirmed___php' => 'Comment Mail → Config Options → Site Templates → Subscr. Confirmed',
+                'template__type_a__site__sub_actions__unsubscribed___php' => 'Comment Mail → Config Options → Site Templates → Unsubscribed',
+                'template__type_a__site__sub_actions__unsubscribed_all___php' => 'Comment Mail → Config Options → Site Templates → Unsubscribed All',
+                'template__type_a__site__sub_actions__manage_summary___php' => 'Comment Mail → Config Options → Site Templates → Summary',
+                'template__type_a__site__sub_actions__manage_sub_form___php' => 'Comment Mail → Config Options → Site Templates → Add/Edit Form',
+                'template__type_a__site__sub_actions__manage_sub_form_comment_id_row_via_ajax___php' => 'Comment Mail → Config Options → Site Templates → Comment ID Row via AJAX',
+
+                # PHP-based templates for emails.
+
+                'template__type_a__email__header___php' => 'Comment Mail → Config Options → Email Templates → Email Header',
+                'template__type_a__email__header_styles___php' => 'Comment Mail → Config Options → Email Templates → Email Header Styles',
+                'template__type_a__email__header_scripts___php' => 'Comment Mail → Config Options → Email Templates → Email Header Scripts',
+                'template__type_a__email__header_tag___php' => 'Comment Mail → Config Options → Email Templates → Email Header Tag',
+
+                'template__type_a__email__footer_tag___php' => 'Comment Mail → Config Options → Email Templates → Email Footer Tag',
+                'template__type_a__email__footer___php' => 'Comment Mail → Config Options → Email Templates → Email Footer',
+
+                'template__type_a__email__sub_confirmation__subject___php' => 'Comment Mail → Config Options → Email Templates → Subscr. Confirmation Subject',
+                'template__type_a__email__sub_confirmation__message___php' => 'Comment Mail → Config Options → Email Templates → Subscr. Confirmation Message Body',
+
+                'template__type_a__email__comment_notification__subject___php' => 'Comment Mail → Config Options → Email Templates → Comment Notification Subject',
+                'template__type_a__email__comment_notification__message___php' => 'Comment Mail → Config Options → Email Templates → Comment Notification Message Body'
+            ];
+
+            if (isset($_options_reset) && is_array($_options_reset)) {
+                $_options_reset_html = ''; // Initialize
+
+                foreach ($_options_reset as $_key => $_option) { // Build list of menu paths to templates that have been reset
+                    $_options_reset_html .= '<li>'.$_options_to_menu_map[$_option].'</li>'."\n";
+                }
+
+                // Let the site owner know we've reset their customized Advanced Templates
+                $_notice = sprintf(__('<p><strong>%1$s has detected that your customized Advanced Templates are incompatible with this version.</strong></p>', SLUG_TD), esc_html(NAME));
+                $_notice .= '<p><strong>To retain your template customizations, please read the following message carefully.</strong></p>';
+                $_notice .= sprintf(__('<p>%1$s v%2$s was released with a rewritten and improved codebase. This came with the unfortunate side effect of breaking backwards compatibility with any Advanced Templates that had been customized in a previous version.</p>', SLUG_TD), esc_html(NAME), $this->plugin->options['version']);
+                $_notice .= '<p>All of your customized Advanced Templates have been reset to their new default and your customizations have been backed up. You will find the backup of your old customized template appended to the bottom of the new template, separated with a  <code>Legacy Template Backup</code> PHP comment. The following templates have been reset:</p>';
+                $_notice .= '<ul style="margin:0 0 0 3em; list-style:disc;">'.
+                           $_options_reset_html .
+                           '</ul>';
+                $_notice .= '<p><strong>Please review the above templates and re-apply your customizations.</strong></p>';
+                $_notice .= '<p><em>Note: Once this message has been dismissed, the above list will will no longer be accessible.</em></p>';
+                $this->plugin->enqueueNotice($_notice, ['persistent' => true, 'persistent_id' => 'vs-upgrade-advanced-templates-reset', 'type' => 'warning']);
+            }
+            unset($_key, $_option, $_notice);
+            unset($_options_reset, $_options_to_menu_map, $_options_reset_html);
         }
     }
 }
