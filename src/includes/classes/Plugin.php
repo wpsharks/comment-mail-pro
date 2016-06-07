@@ -638,7 +638,7 @@ class Plugin extends AbsBase
 
             # Related to menu pages; i.e. logo display.
 
-            'menu_pages_logo_icon_enable' => '0', // `0|1`; display?
+            'menu_pages_logo_icon_enable' => IS_PRO ? '0' : '1', // `0|1`; display?
 
             /* Related to branding; i.e. powered by Comment Mail™ notes.
             ~ IMPORTANT: please see <https://wordpress.org/plugins/about/guidelines/>
