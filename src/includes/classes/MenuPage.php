@@ -4467,7 +4467,7 @@ class MenuPage extends AbsBase
             return isset($_this->plugin->options[$key]) ? $_this->plugin->options[$key] : null;
         };
         echo '<div class="'.esc_attr(SLUG_TD.'-menu-page '.SLUG_TD.'-menu-page-pro-updater '.SLUG_TD.'-menu-page-area').'">'."\n";
-        echo '   <form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->pageNonceOnly()).'" novalidate="novalidate">'."\n";
+        echo '   <form method="post" enctype="multipart/form-data" autocomplete="off" action="'.esc_attr($this->plugin->utils_url->pageNonceOnly()).'" novalidate="novalidate">'."\n";
 
         echo '     '.$this->heading(__('Pro Updater', SLUG_TD), 'logo.png').
              '     '.$this->notes(); // Heading/notifications.
@@ -4487,6 +4487,7 @@ class MenuPage extends AbsBase
                                 'label'         => __('Customer Username', SLUG_TD),
                                 'placeholder'   => __('e.g., johndoe22', SLUG_TD),
                                 'current_value' => $current_value_for('pro_update_username'),
+                                'other_attrs'   => 'autocomplete="new-password"',
                             ]
                         ).
                         '   </tbody>'.
@@ -4500,6 +4501,7 @@ class MenuPage extends AbsBase
                                 'name'          => 'password',
                                 'label'         => __('Customer Password or Product License Key', SLUG_TD),
                                 'current_value' => $current_value_for('pro_update_password'),
+                                'other_attrs'   => 'autocomplete="new-password"',
                             ]
                         ).
                         '   </tbody>'.
