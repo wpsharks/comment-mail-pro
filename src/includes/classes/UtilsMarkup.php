@@ -921,11 +921,11 @@ class UtilsMarkup extends AbsBase
     {
         $path = '<code class="pmp-path">';
         $path .= __('WP Dashboard', SLUG_TD);
-        # $path .= ' &#10609; '.__('Comments', SLUG_TD);
-        $path .= ' &#10609; '.esc_html(NAME).'&trade;';
+        # $path .= ' &#8594; '.__('Comments', SLUG_TD);
+        $path .= ' &#8594; '.esc_html(NAME).'&trade;';
 
         foreach (func_get_args() as $_path_name) {
-            $path .= ' &#10609; '.(string) $_path_name;
+            $path .= ' &#8594; '.(string) $_path_name;
         }
         $path .= '</code>';
 
