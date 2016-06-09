@@ -4568,13 +4568,15 @@ class MenuPage extends AbsBase
         $heading .= '  <button type="button" class="plugin-menu-page-restore-defaults"'.'<a href="#" data-pmp-action="'.esc_attr($this->plugin->utils_url->restoreDefaultOptions()).'" data-pmp-confirmation="'.esc_attr(__('Restore default plugin options? You will lose all of your current settings! Are you absolutely sure?', SLUG_TD)).'"> '.__('Restore', SLUG_TD).' <i class="fa fa-ambulance"></i></button>'.'</a>'."\n";
 
         $heading .= '  <div class="pmp-heading-options">'."\n";
-        $heading .= '     <a href="'.esc_attr($this->plugin->utils_url->proUpdaterMenuPageOnly()).'" ><i class="fa fa-magic"></i> '.__('Pro Updater', SLUG_TD).'</a>'."\n";
+        if (IS_PRO) { // Display Pro Updater link?
+            $heading .= '     <a href="'.esc_attr($this->plugin->utils_url->proUpdaterMenuPageOnly()).'" ><i class="fa fa-magic"></i> '.__('Pro Updater', SLUG_TD).'</a>'."\n";
+        }
         $heading .= '     <a href="'.esc_attr($this->plugin->utils_url->subscribePage()).'" target="_blank"><i class="fa fa-envelope-o"></i> '.__('Newsletter (Subscribe)', SLUG_TD).'</a>'."\n";
         $heading .= '     <a href="'.esc_attr($this->plugin->utils_url->betaTesterPage()).'" target="_blank"><i class="fa fa-envelope-o"></i> '.__('Beta Testers', SLUG_TD).'</a>'."\n";
         $heading .= '  </div>'."\n";
 
         $heading .= '  <div class="pmp-version">'."\n";
-        $heading .= '     <span> '.sprintf(__('%1$s&trade; Pro v%2$s (<a href="https://comment-mail.com/changelog/" target="_blank">changelog</a>)', SLUG_TD), esc_html(NAME), esc_html(VERSION)).'</span>'."\n";
+        $heading .= '     <span> '.sprintf(__('%1$s&trade;%2$s v%3$s (<a href="https://comment-mail.com/changelog/" target="_blank">changelog</a>)', SLUG_TD), esc_html(NAME), (IS_PRO ? ' Pro' : ''), esc_html(VERSION)).'</span>'."\n";
         $heading .= '  </div>'."\n";
 
         if ($logo_icon && $this->plugin->options['menu_pages_logo_icon_enable']) {

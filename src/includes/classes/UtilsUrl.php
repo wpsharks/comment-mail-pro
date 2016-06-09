@@ -910,7 +910,7 @@ class UtilsUrl extends AbsBase
      */
     public function betaTesterPage($scheme = null)
     {
-        $url = 'http://'.DOMAIN.'/beta-testers';
+        $url = 'http://'.DOMAIN.'/beta-testers/';
 
         return isset($scheme) ? $this->setScheme($url, $scheme) : $url;
     }
