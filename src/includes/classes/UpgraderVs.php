@@ -104,7 +104,7 @@ class UpgraderVs extends AbsBase
  * copy of which is included below. You can reference your original template below to reapply
  * those changes to the new default template above. When you are ready to discard this backup,
  * simply delete this comment, and everything below it, and save the template. If you leave 
- * this comment here and save your the options, your backup below will be also saved.
+ * this comment here and save the options, your backup below will be also saved.
  * 
  * Note: Everything below this comment is not parsed by Comment Mail; it is only here for
  * your reference so that you can re-apply your modifications to the new template above.
