@@ -638,7 +638,7 @@ class Plugin extends AbsBase
 
             # Related to menu pages; i.e. logo display.
 
-            'menu_pages_logo_icon_enable' => '0', // `0|1`; display?
+            'menu_pages_logo_icon_enable' => IS_PRO ? '0' : '1', // `0|1`; display?
 
             /* Related to branding; i.e. powered by Comment Mail™ notes.
             ~ IMPORTANT: please see <https://wordpress.org/plugins/about/guidelines/>
@@ -1083,7 +1083,10 @@ class Plugin extends AbsBase
 
         foreach ($this->options as $_key => &$_value) {
             if (strpos($_key, 'template__') === 0) {
-                $_key_data             = Template::optionKeyData($_key);
+                $_key_data = Template::optionKeyData($_key);
+                if (!IS_PRO && $_key_data->type === 'a') {
+                    continue; // Not possible in lite version.
+                }
                 $_default_template     = new Template($_key_data->file, $_key_data->type, true);
                 $_default_template_nws = preg_replace('/\s+/', '', $_default_template->fileContents());
                 $_option_template_nws  = preg_replace('/\s+/', '', $_value);
@@ -1341,7 +1344,7 @@ class Plugin extends AbsBase
 
         /* ----------------------------------------- */
 
-        $_menu_title                      = NAME.' <sup style="font-size:60%; line-height:1;">Pro</sup>';
+        $_menu_title                      = NAME.(IS_PRO ? ' <sup style="font-size:60%; line-height:1;">Pro</sup>' : '');
         $_page_title                      = NAME.'&trade;';
         $_menu_position                   = apply_filters(__METHOD__.'_position', '25.00001');
         $this->menu_page_hooks[GLOBAL_NS] = add_menu_page($_page_title, $_menu_title, $this->cap, GLOBAL_NS, [$this, 'menuPageOptions'], 'data:image/svg+xml;base64,'.base64_encode($icon), $_menu_position);
@@ -1408,12 +1411,14 @@ class Plugin extends AbsBase
 
         /* ----------------------------------------- */
 
+        /*[pro strip-from="lite"]*/
         $_menu_title                               = $divider.__('Statistics/Charts', SLUG_TD);
         $_page_title                               = NAME.'&trade; &#8594; '.__('Statistics/Charts', SLUG_TD);
         $this->menu_page_hooks[GLOBAL_NS.'_stats'] = add_submenu_page(GLOBAL_NS, $_page_title, $_menu_title, $this->manage_cap, GLOBAL_NS.'_stats', [$this, 'menuPageStats']);
         add_action('load-'.$this->menu_page_hooks[GLOBAL_NS.'_stats'], [$this, 'menuPageStatsScreen']);
 
         unset($_menu_title, $_page_title); // Housekeeping.
+        /*[/pro]*/
 
         /* ----------------------------------------- */
 

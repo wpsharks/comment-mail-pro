@@ -1,4 +1,5 @@
 <?php
+/*[pro exclude-file-from="lite"]*/
 /**
  * Replies via Email; Mandrill Webhook Listener.
  *
