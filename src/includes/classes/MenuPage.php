@@ -4467,7 +4467,7 @@ class MenuPage extends AbsBase
             return isset($_this->plugin->options[$key]) ? $_this->plugin->options[$key] : null;
         };
         echo '<div class="'.esc_attr(SLUG_TD.'-menu-page '.SLUG_TD.'-menu-page-pro-updater '.SLUG_TD.'-menu-page-area').'">'."\n";
-        echo '   <form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->pageNonceOnly()).'" novalidate="novalidate">'."\n";
+        echo '   <form method="post" enctype="multipart/form-data" autocomplete="off" action="'.esc_attr($this->plugin->utils_url->pageNonceOnly()).'" novalidate="novalidate">'."\n";
 
         echo '     '.$this->heading(__('Pro Updater', SLUG_TD), 'logo.png').
              '     '.$this->notes(); // Heading/notifications.
@@ -4487,6 +4487,7 @@ class MenuPage extends AbsBase
                                 'label'         => __('Customer Username', SLUG_TD),
                                 'placeholder'   => __('e.g., johndoe22', SLUG_TD),
                                 'current_value' => $current_value_for('pro_update_username'),
+                                'other_attrs'   => 'autocomplete="new-password"',
                             ]
                         ).
                         '   </tbody>'.
@@ -4500,6 +4501,7 @@ class MenuPage extends AbsBase
                                 'name'          => 'password',
                                 'label'         => __('Customer Password or Product License Key', SLUG_TD),
                                 'current_value' => $current_value_for('pro_update_password'),
+                                'other_attrs'   => 'autocomplete="new-password"',
                             ]
                         ).
                         '   </tbody>'.
@@ -4566,13 +4568,15 @@ class MenuPage extends AbsBase
         $heading .= '  <button type="button" class="plugin-menu-page-restore-defaults"'.'<a href="#" data-pmp-action="'.esc_attr($this->plugin->utils_url->restoreDefaultOptions()).'" data-pmp-confirmation="'.esc_attr(__('Restore default plugin options? You will lose all of your current settings! Are you absolutely sure?', SLUG_TD)).'"> '.__('Restore', SLUG_TD).' <i class="fa fa-ambulance"></i></button>'.'</a>'."\n";
 
         $heading .= '  <div class="pmp-heading-options">'."\n";
-        $heading .= '     <a href="'.esc_attr($this->plugin->utils_url->proUpdaterMenuPageOnly()).'" ><i class="fa fa-magic"></i> '.__('Pro Updater', SLUG_TD).'</a>'."\n";
+        if (IS_PRO) { // Display Pro Updater link?
+            $heading .= '     <a href="'.esc_attr($this->plugin->utils_url->proUpdaterMenuPageOnly()).'" ><i class="fa fa-magic"></i> '.__('Pro Updater', SLUG_TD).'</a>'."\n";
+        }
         $heading .= '     <a href="'.esc_attr($this->plugin->utils_url->subscribePage()).'" target="_blank"><i class="fa fa-envelope-o"></i> '.__('Newsletter (Subscribe)', SLUG_TD).'</a>'."\n";
         $heading .= '     <a href="'.esc_attr($this->plugin->utils_url->betaTesterPage()).'" target="_blank"><i class="fa fa-envelope-o"></i> '.__('Beta Testers', SLUG_TD).'</a>'."\n";
         $heading .= '  </div>'."\n";
 
         $heading .= '  <div class="pmp-version">'."\n";
-        $heading .= '     <span> '.sprintf(__('%1$s&trade; Pro v%2$s (<a href="https://comment-mail.com/changelog/" target="_blank">changelog</a>)', SLUG_TD), esc_html(NAME), esc_html(VERSION)).'</span>'."\n";
+        $heading .= '     <span> '.sprintf(__('%1$s&trade;%2$s v%3$s (<a href="https://comment-mail.com/changelog/" target="_blank">changelog</a>)', SLUG_TD), esc_html(NAME), (IS_PRO ? ' Pro' : ''), esc_html(VERSION)).'</span>'."\n";
         $heading .= '  </div>'."\n";
 
         if ($logo_icon && $this->plugin->options['menu_pages_logo_icon_enable']) {

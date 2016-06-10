@@ -638,7 +638,7 @@ class Plugin extends AbsBase
 
             # Related to menu pages; i.e. logo display.
 
-            'menu_pages_logo_icon_enable' => '0', // `0|1`; display?
+            'menu_pages_logo_icon_enable' => IS_PRO ? '0' : '1', // `0|1`; display?
 
             /* Related to branding; i.e. powered by Comment Mail™ notes.
             ~ IMPORTANT: please see <https://wordpress.org/plugins/about/guidelines/>
@@ -1083,7 +1083,10 @@ class Plugin extends AbsBase
 
         foreach ($this->options as $_key => &$_value) {
             if (strpos($_key, 'template__') === 0) {
-                $_key_data             = Template::optionKeyData($_key);
+                $_key_data = Template::optionKeyData($_key);
+                if (!IS_PRO && $_key_data->type === 'a') {
+                    continue; // Not possible in lite version.
+                }
                 $_default_template     = new Template($_key_data->file, $_key_data->type, true);
                 $_default_template_nws = preg_replace('/\s+/', '', $_default_template->fileContents());
                 $_option_template_nws  = preg_replace('/\s+/', '', $_value);
@@ -1341,7 +1344,7 @@ class Plugin extends AbsBase
 
         /* ----------------------------------------- */
 
-        $_menu_title                      = NAME.' <sup style="font-size:60%; line-height:1;">Pro</sup>';
+        $_menu_title                      = NAME.(IS_PRO ? ' <sup style="font-size:60%; line-height:1;">Pro</sup>' : '');
         $_page_title                      = NAME.'&trade;';
         $_menu_position                   = apply_filters(__METHOD__.'_position', '25.00001');
         $this->menu_page_hooks[GLOBAL_NS] = add_menu_page($_page_title, $_menu_title, $this->cap, GLOBAL_NS, [$this, 'menuPageOptions'], 'data:image/svg+xml;base64,'.base64_encode($icon), $_menu_position);
@@ -1352,26 +1355,26 @@ class Plugin extends AbsBase
         /* ----------------------------------------- */
 
         $_menu_title = __('Config. Options', SLUG_TD);
-        $_page_title = NAME.'&trade; &#10609; '.__('Config. Options', SLUG_TD);
+        $_page_title = NAME.'&trade; &#8594; '.__('Config. Options', SLUG_TD);
         add_submenu_page(GLOBAL_NS, $_page_title, $_menu_title, $this->cap, GLOBAL_NS, [$this, 'menuPageOptions']);
 
         $_menu_title = // Visible on-demand only.
             '<small><em>'.$child_branch_indent.__('Import/Export', SLUG_TD).'</em></small>';
-        $_page_title = NAME.'&trade; &#10609; '.__('Import/Export', SLUG_TD);
+        $_page_title = NAME.'&trade; &#8594; '.__('Import/Export', SLUG_TD);
         //$_menu_parent                                          = $current_menu_page === GLOBAL_NS.'_import_export' ? GLOBAL_NS : NULL;
         $this->menu_page_hooks[GLOBAL_NS.'_import_export'] = add_submenu_page(GLOBAL_NS, $_page_title, $_menu_title, $this->cap, GLOBAL_NS.'_import_export', [$this, 'menuPageImportExport']);
         add_action('load-'.$this->menu_page_hooks[GLOBAL_NS.'_import_export'], [$this, 'menuPageImportExportScreen']);
 
         $_menu_title = // Visible on-demand only.
             '<small><em>'.$child_branch_indent.__('Email Templates', SLUG_TD).'</em></small>';
-        $_page_title = NAME.'&trade; &#10609; '.__('Email Templates', SLUG_TD);
+        $_page_title = NAME.'&trade; &#8594; '.__('Email Templates', SLUG_TD);
         //$_menu_parent                                            = $current_menu_page === GLOBAL_NS.'_email_templates' ? GLOBAL_NS : NULL;
         $this->menu_page_hooks[GLOBAL_NS.'_email_templates'] = add_submenu_page(GLOBAL_NS, $_page_title, $_menu_title, $this->cap, GLOBAL_NS.'_email_templates', [$this, 'menuPageEmailTemplates']);
         add_action('load-'.$this->menu_page_hooks[GLOBAL_NS.'_email_templates'], [$this, 'menuPageEmailTemplatesScreen']);
 
         $_menu_title = // Visible on-demand only.
             '<small><em>'.$child_branch_indent.__('Site Templates', SLUG_TD).'</em></small>';
-        $_page_title = NAME.'&trade; &#10609; '.__('Site Templates', SLUG_TD);
+        $_page_title = NAME.'&trade; &#8594; '.__('Site Templates', SLUG_TD);
         //$_menu_parent                                           = $current_menu_page === GLOBAL_NS.'_site_templates' ? GLOBAL_NS : NULL;
         $this->menu_page_hooks[GLOBAL_NS.'_site_templates'] = add_submenu_page(GLOBAL_NS, $_page_title, $_menu_title, $this->cap, GLOBAL_NS.'_site_templates', [$this, 'menuPageSiteTemplates']);
         add_action('load-'.$this->menu_page_hooks[GLOBAL_NS.'_site_templates'], [$this, 'menuPageSiteTemplatesScreen']);
@@ -1381,12 +1384,12 @@ class Plugin extends AbsBase
         /* ----------------------------------------- */
 
         $_menu_title                              = $divider.__('Subscriptions', SLUG_TD);
-        $_page_title                              = NAME.'&trade; &#10609; '.__('Subscriptions', SLUG_TD);
+        $_page_title                              = NAME.'&trade; &#8594; '.__('Subscriptions', SLUG_TD);
         $this->menu_page_hooks[GLOBAL_NS.'_subs'] = add_submenu_page(GLOBAL_NS, $_page_title, $_menu_title, $this->manage_cap, GLOBAL_NS.'_subs', [$this, 'menuPageSubs']);
         add_action('load-'.$this->menu_page_hooks[GLOBAL_NS.'_subs'], [$this, 'menuPageSubsScreen']);
 
         $_menu_title                                       = $child_branch_indent.__('Event Log', SLUG_TD);
-        $_page_title                                       = NAME.'&trade; &#10609; '.__('Sub. Event Log', SLUG_TD);
+        $_page_title                                       = NAME.'&trade; &#8594; '.__('Sub. Event Log', SLUG_TD);
         $this->menu_page_hooks[GLOBAL_NS.'_sub_event_log'] = add_submenu_page(GLOBAL_NS, $_page_title, $_menu_title, $this->manage_cap, GLOBAL_NS.'_sub_event_log', [$this, 'menuPageSubEventLog']);
         add_action('load-'.$this->menu_page_hooks[GLOBAL_NS.'_sub_event_log'], [$this, 'menuPageSubEventLogScreen']);
 
@@ -1395,12 +1398,12 @@ class Plugin extends AbsBase
         /* ----------------------------------------- */
 
         $_menu_title                               = $divider.__('Mail Queue', SLUG_TD);
-        $_page_title                               = NAME.'&trade; &#10609; '.__('Mail Queue', SLUG_TD);
+        $_page_title                               = NAME.'&trade; &#8594; '.__('Mail Queue', SLUG_TD);
         $this->menu_page_hooks[GLOBAL_NS.'_queue'] = add_submenu_page(GLOBAL_NS, $_page_title, $_menu_title, $this->manage_cap, GLOBAL_NS.'_queue', [$this, 'menuPageQueue']);
         add_action('load-'.$this->menu_page_hooks[GLOBAL_NS.'_queue'], [$this, 'menuPageQueueScreen']);
 
         $_menu_title                                         = $child_branch_indent.__('Event Log', SLUG_TD);
-        $_page_title                                         = NAME.'&trade; &#10609; '.__('Queue Event Log', SLUG_TD);
+        $_page_title                                         = NAME.'&trade; &#8594; '.__('Queue Event Log', SLUG_TD);
         $this->menu_page_hooks[GLOBAL_NS.'_queue_event_log'] = add_submenu_page(GLOBAL_NS, $_page_title, $_menu_title, $this->manage_cap, GLOBAL_NS.'_queue_event_log', [$this, 'menuPageQueueEventLog']);
         add_action('load-'.$this->menu_page_hooks[GLOBAL_NS.'_queue_event_log'], [$this, 'menuPageQueueEventLogScreen']);
 
@@ -1408,18 +1411,20 @@ class Plugin extends AbsBase
 
         /* ----------------------------------------- */
 
+        /*[pro strip-from="lite"]*/
         $_menu_title                               = $divider.__('Statistics/Charts', SLUG_TD);
-        $_page_title                               = NAME.'&trade; &#10609; '.__('Statistics/Charts', SLUG_TD);
+        $_page_title                               = NAME.'&trade; &#8594; '.__('Statistics/Charts', SLUG_TD);
         $this->menu_page_hooks[GLOBAL_NS.'_stats'] = add_submenu_page(GLOBAL_NS, $_page_title, $_menu_title, $this->manage_cap, GLOBAL_NS.'_stats', [$this, 'menuPageStats']);
         add_action('load-'.$this->menu_page_hooks[GLOBAL_NS.'_stats'], [$this, 'menuPageStatsScreen']);
 
         unset($_menu_title, $_page_title); // Housekeeping.
+        /*[/pro]*/
 
         /* ----------------------------------------- */
 
         /*[pro strip-from="lite"]*/
         $_menu_title                                     = $divider.__('Pro Updater', SLUG_TD);
-        $_page_title                                     = NAME.'&trade; &#10609; '.__('Pro Updater', SLUG_TD);
+        $_page_title                                     = NAME.'&trade; &#8594; '.__('Pro Updater', SLUG_TD);
         $this->menu_page_hooks[GLOBAL_NS.'_pro_updater'] = add_submenu_page(GLOBAL_NS, $_page_title, $_menu_title, $this->update_cap, GLOBAL_NS.'_pro_updater', [$this, 'menuPageProUpdater']);
         add_action('load-'.$this->menu_page_hooks[GLOBAL_NS.'_pro_updater'], [$this, 'menuPageProUpdaterScreen']);
 
