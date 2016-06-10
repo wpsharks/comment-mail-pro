@@ -110,9 +110,7 @@ class Uninstaller extends AbsBase
      */
     protected function clearCronHooks()
     {
-        wp_clear_scheduled_hook('_cron_'.GLOBAL_NS.'_queue_processor');
-        wp_clear_scheduled_hook('_cron_'.GLOBAL_NS.'_sub_cleaner');
-        wp_clear_scheduled_hook('_cron_'.GLOBAL_NS.'_log_cleaner');
+        $this->plugin->resetCronSetup();
     }
 
     /**
