@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Comment Mail Pro package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Comment Mail Pro 160215\n"
+"Project-Id-Version: Comment Mail Pro 160611-RC\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/comment-mail-pro\n"
-"POT-Creation-Date: 2016-02-15 06:16:48+00:00\n"
+"POT-Creation-Date: 2016-06-11 02:07:43+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -24,148 +24,148 @@ msgstr ""
 msgid "Refused to unset overload property: `%1$s`."
 msgstr ""
 
-#: src/includes/classes/ChartData.php:271
+#: src/includes/classes/ChartData.php:272
 msgid "Confirmed"
 msgstr ""
 
-#: src/includes/classes/ChartData.php:283
+#: src/includes/classes/ChartData.php:284
 msgid "Suspended"
 msgstr ""
 
-#: src/includes/classes/ChartData.php:295
-#: src/includes/classes/MenuPage.php:3180
-#: src/includes/classes/MenuPage.php:3519
+#: src/includes/classes/ChartData.php:296
+#: src/includes/classes/MenuPage.php:3186
+#: src/includes/classes/MenuPage.php:3525
 msgid "Unsubscribed"
 msgstr ""
 
-#: src/includes/classes/ChartData.php:335
-#: src/includes/classes/ChartData.php:565
-#: src/includes/classes/ChartData.php:570
-#: src/includes/classes/ChartData.php:908
-#: src/includes/classes/ChartData.php:976
-#: src/includes/classes/ChartData.php:981
+#: src/includes/classes/ChartData.php:336
+#: src/includes/classes/ChartData.php:566
+#: src/includes/classes/ChartData.php:571
+#: src/includes/classes/ChartData.php:909
+#: src/includes/classes/ChartData.php:977
+#: src/includes/classes/ChartData.php:982
 #: src/includes/classes/UpgraderVs.php:86 src/includes/classes/UtilsDb.php:276
-#: src/includes/classes/UtilsDb.php:394 src/includes/classes/UtilsDb.php:570
+#: src/includes/classes/UtilsDb.php:388 src/includes/classes/UtilsDb.php:555
 msgid "Query failure."
 msgstr ""
 
-#: src/includes/classes/ChartData.php:348
-#: src/includes/classes/ChartData.php:378
-#: src/includes/classes/ChartData.php:460
-#: src/includes/classes/ChartData.php:673
-#: src/includes/classes/MenuPage.php:3988
+#: src/includes/classes/ChartData.php:349
+#: src/includes/classes/ChartData.php:379
+#: src/includes/classes/ChartData.php:461
+#: src/includes/classes/ChartData.php:674
+#: src/includes/classes/MenuPage.php:3994
 msgid "Total Subscriptions"
 msgstr ""
 
-#: src/includes/classes/ChartData.php:358
-#: src/includes/classes/ChartData.php:683
+#: src/includes/classes/ChartData.php:359
+#: src/includes/classes/ChartData.php:684
 #: src/includes/classes/ImportStcr.php:532
 #: src/includes/classes/MenuPageSubsTable.php:36
 msgid "subscriptions"
 msgstr ""
 
-#: src/includes/classes/ChartData.php:359
-#: src/includes/classes/ChartData.php:684
+#: src/includes/classes/ChartData.php:360
+#: src/includes/classes/ChartData.php:685
 #: src/includes/classes/MenuPageSubsTable.php:35
 msgid "subscription"
 msgstr ""
 
-#: src/includes/classes/ChartData.php:377
+#: src/includes/classes/ChartData.php:378
 msgid "Country"
 msgstr ""
 
-#: src/includes/classes/ChartData.php:379
-#: src/includes/classes/ChartData.php:461
+#: src/includes/classes/ChartData.php:380
+#: src/includes/classes/ChartData.php:462
 msgid "Percentage"
 msgstr ""
 
-#: src/includes/classes/ChartData.php:459
+#: src/includes/classes/ChartData.php:460
 msgid "Region"
 msgstr ""
 
-#: src/includes/classes/ChartData.php:588
+#: src/includes/classes/ChartData.php:589
 msgid "New Subscriptions"
 msgstr ""
 
-#: src/includes/classes/ChartData.php:595
-#: src/includes/classes/ChartData.php:1006
+#: src/includes/classes/ChartData.php:596
+#: src/includes/classes/ChartData.php:1007
 msgid "Total %1$s"
 msgstr ""
 
-#: src/includes/classes/ChartData.php:651
+#: src/includes/classes/ChartData.php:652
 #: src/includes/classes/MenuPageSubsTable.php:65
-#: src/includes/classes/UtilsMarkup.php:394
-#: src/includes/classes/UtilsMarkup.php:429
+#: src/includes/classes/UtilsMarkup.php:408
+#: src/includes/classes/UtilsMarkup.php:443
 msgid "Post"
 msgstr ""
 
-#: src/includes/classes/ChartData.php:654
+#: src/includes/classes/ChartData.php:655
 msgid "%1$s ID #%2$s%3$s"
 msgstr ""
 
-#: src/includes/classes/ChartData.php:921
-#: src/includes/classes/MenuPage.php:4243
+#: src/includes/classes/ChartData.php:922
+#: src/includes/classes/MenuPage.php:4249
 msgid "Total Processed Notifications"
 msgstr ""
 
-#: src/includes/classes/ChartData.php:931
+#: src/includes/classes/ChartData.php:932
 msgid "notifications"
 msgstr ""
 
-#: src/includes/classes/ChartData.php:932
+#: src/includes/classes/ChartData.php:933
 msgid "notification"
 msgstr ""
 
-#: src/includes/classes/ChartData.php:999
+#: src/includes/classes/ChartData.php:1000
 msgid "Queued Notifications"
 msgstr ""
 
-#: src/includes/classes/ChartData.php:1151
+#: src/includes/classes/ChartData.php:1152
 msgid "Invalid Chart View. Please try again."
 msgstr ""
 
-#: src/includes/classes/ChartData.php:1154
+#: src/includes/classes/ChartData.php:1155
 msgid "Missing or invalid Chart Type. Please try again."
 msgstr ""
 
-#: src/includes/classes/ChartData.php:1157
+#: src/includes/classes/ChartData.php:1158
 msgid "Geo IP tracking not enabled yet. Please check config. options."
 msgstr ""
 
-#: src/includes/classes/ChartData.php:1160
+#: src/includes/classes/ChartData.php:1161
 msgid "Missing or invalid Post ID. Please try again."
 msgstr ""
 
-#: src/includes/classes/ChartData.php:1163
-#: src/includes/classes/ChartData.php:1175
-#: src/includes/classes/ChartData.php:1215
-#: src/includes/classes/ChartData.php:1324
+#: src/includes/classes/ChartData.php:1164
+#: src/includes/classes/ChartData.php:1176
+#: src/includes/classes/ChartData.php:1216
+#: src/includes/classes/ChartData.php:1325
 msgid "Missing or invalid Date(s). Please try again."
 msgstr ""
 
-#: src/includes/classes/ChartData.php:1166
+#: src/includes/classes/ChartData.php:1167
 msgid "Missing or invalid Breakdown. Please try again."
 msgstr ""
 
-#: src/includes/classes/ChartData.php:1177
-#: src/includes/classes/ChartData.php:1217
-#: src/includes/classes/ChartData.php:1326
+#: src/includes/classes/ChartData.php:1178
+#: src/includes/classes/ChartData.php:1218
+#: src/includes/classes/ChartData.php:1327
 msgid "From Date >= To Date. Please try again."
 msgstr ""
 
-#: src/includes/classes/ChartData.php:1179
+#: src/includes/classes/ChartData.php:1180
 msgid "Not enough data for that time period and/or Breakdown. Please try again."
 msgstr ""
 
-#: src/includes/classes/ChartData.php:1181
+#: src/includes/classes/ChartData.php:1182
 msgid "Too many time periods needed. Please try again. Based on your configuration of this chart, there would need to be more than `%1$s` bars to represent the data that you want. This would require _many_ DB queries, and it would be very difficult to read the chart. Please broaden your Breakdown or reduce the difference between From Date and To Date."
 msgstr ""
 
-#: src/includes/classes/ChartData.php:1319
+#: src/includes/classes/ChartData.php:1320
 msgid "Unexcpected Breakdown."
 msgstr ""
 
-#: src/includes/classes/ChartData.php:1378
+#: src/includes/classes/ChartData.php:1379
 #: src/includes/templates/type-a/site/sso-actions/complete.php:53
 #: src/includes/templates/type-a/site/sub-actions/confirmed.php:36
 #: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:93
@@ -207,7 +207,7 @@ msgstr ""
 msgid "(<code>F11</code> toggles fullscreen editing)"
 msgstr ""
 
-#: src/includes/classes/ImportOps.php:96
+#: src/includes/classes/ImportOps.php:97
 msgid "<strong>Imported %1$s&trade; config. options successfully.</strong>"
 msgstr ""
 
@@ -284,25 +284,25 @@ msgstr ""
 msgid "Deletion failure."
 msgstr ""
 
-#: src/includes/classes/MailSmtp.php:149
+#: src/includes/classes/MailSmtp.php:150
 msgid "SMTP not enabled."
 msgstr ""
 
-#: src/includes/classes/MailSmtp.php:152
+#: src/includes/classes/MailSmtp.php:153
 msgid "SMTP host/port missing."
 msgstr ""
 
-#: src/includes/classes/MailSmtp.php:311
+#: src/includes/classes/MailSmtp.php:312
 msgid "To view this email message, open it in a program that understands HTML!"
 msgstr ""
 
 #: src/includes/classes/MenuPage.php:77 src/includes/classes/MenuPage.php:2378
-#: src/includes/classes/MenuPage.php:3005
+#: src/includes/classes/MenuPage.php:3011
 msgid "No shortcodes for this template at the present time."
 msgstr ""
 
 #: src/includes/classes/MenuPage.php:79 src/includes/classes/MenuPage.php:2380
-#: src/includes/classes/MenuPage.php:3007
+#: src/includes/classes/MenuPage.php:3013
 msgid "shortcodes explained"
 msgstr ""
 
@@ -348,13 +348,13 @@ msgstr ""
 #: src/includes/classes/MenuPage.php:1917
 #: src/includes/classes/MenuPage.php:1938
 #: src/includes/classes/MenuPage.php:1977
-#: src/includes/classes/MenuPage.php:4029
-#: src/includes/classes/MenuPage.php:4144
-#: src/includes/classes/MenuPage.php:4154
-#: src/includes/classes/MenuPage.php:4267
-#: src/includes/classes/MenuPage.php:4355
-#: src/includes/classes/MenuPage.php:4366
-#: src/includes/classes/MenuPage.php:4513
+#: src/includes/classes/MenuPage.php:4035
+#: src/includes/classes/MenuPage.php:4150
+#: src/includes/classes/MenuPage.php:4160
+#: src/includes/classes/MenuPage.php:4273
+#: src/includes/classes/MenuPage.php:4361
+#: src/includes/classes/MenuPage.php:4372
+#: src/includes/classes/MenuPage.php:4521
 msgid "Select an Option..."
 msgstr ""
 
@@ -625,8 +625,8 @@ msgid "For advanced use only. If you disable the built-in template system, you m
 msgstr ""
 
 #: src/includes/classes/MenuPage.php:432 src/includes/classes/MenuPage.php:445
-#: src/includes/classes/MenuPage.php:3226
-#: src/includes/classes/MenuPage.php:3635
+#: src/includes/classes/MenuPage.php:3232
+#: src/includes/classes/MenuPage.php:3641
 msgid "Comment Form Subscr. Options Template"
 msgstr ""
 
@@ -637,93 +637,6 @@ msgstr ""
 #: src/includes/classes/MenuPage.php:1472
 #: src/includes/classes/MenuPage.php:2416
 #: src/includes/classes/MenuPage.php:2447
-#: src/includes/classes/MenuPage.php:2478
-#: src/includes/classes/MenuPage.php:2509
-#: src/includes/classes/MenuPage.php:2552
-#: src/includes/classes/MenuPage.php:2584
-#: src/includes/classes/MenuPage.php:2618
-#: src/includes/classes/MenuPage.php:2649
-#: src/includes/classes/MenuPage.php:2681
-#: src/includes/classes/MenuPage.php:2720
-#: src/includes/classes/MenuPage.php:2743
-#: src/includes/classes/MenuPage.php:2766
-#: src/includes/classes/MenuPage.php:2789
-#: src/includes/classes/MenuPage.php:2812
-#: src/includes/classes/MenuPage.php:2835
-#: src/includes/classes/MenuPage.php:2865
-#: src/includes/classes/MenuPage.php:2888
-#: src/includes/classes/MenuPage.php:2918
-#: src/includes/classes/MenuPage.php:2941
-#: src/includes/classes/MenuPage.php:3043
-#: src/includes/classes/MenuPage.php:3074
-#: src/includes/classes/MenuPage.php:3113
-#: src/includes/classes/MenuPage.php:3152
-#: src/includes/classes/MenuPage.php:3191
-#: src/includes/classes/MenuPage.php:3227
-#: src/includes/classes/MenuPage.php:3271
-#: src/includes/classes/MenuPage.php:3301
-#: src/includes/classes/MenuPage.php:3339
-#: src/includes/classes/MenuPage.php:3362
-#: src/includes/classes/MenuPage.php:3385
-#: src/includes/classes/MenuPage.php:3408
-#: src/includes/classes/MenuPage.php:3431
-#: src/includes/classes/MenuPage.php:3454
-#: src/includes/classes/MenuPage.php:3484
-#: src/includes/classes/MenuPage.php:3507
-#: src/includes/classes/MenuPage.php:3530
-#: src/includes/classes/MenuPage.php:3560
-#: src/includes/classes/MenuPage.php:3583
-#: src/includes/classes/MenuPage.php:3606
-#: src/includes/classes/MenuPage.php:3636
-#: src/includes/classes/MenuPage.php:3660
-#: src/includes/classes/MenuPage.php:3690
-#: src/includes/classes/MenuPage.php:3714
-#: src/includes/classes/MenuPage.php:3737
-#: src/includes/classes/MenuPage.php:3761
-#: src/includes/classes/MenuPage.php:3784
-msgid "Template Content..."
-msgstr ""
-
-#: src/includes/classes/MenuPage.php:437 src/includes/classes/MenuPage.php:450
-#: src/includes/classes/MenuPage.php:1378
-#: src/includes/classes/MenuPage.php:1391
-#: src/includes/classes/MenuPage.php:1463
-#: src/includes/classes/MenuPage.php:1476
-#: src/includes/classes/MenuPage.php:3117
-#: src/includes/classes/MenuPage.php:3156
-#: src/includes/classes/MenuPage.php:3195
-#: src/includes/classes/MenuPage.php:3231
-#: src/includes/classes/MenuPage.php:3275
-#: src/includes/classes/MenuPage.php:3305
-#: src/includes/classes/MenuPage.php:3488
-#: src/includes/classes/MenuPage.php:3511
-#: src/includes/classes/MenuPage.php:3534
-#: src/includes/classes/MenuPage.php:3564
-#: src/includes/classes/MenuPage.php:3587
-#: src/includes/classes/MenuPage.php:3610
-#: src/includes/classes/MenuPage.php:3640
-#: src/includes/classes/MenuPage.php:3664
-#: src/includes/classes/MenuPage.php:3694
-#: src/includes/classes/MenuPage.php:3718
-#: src/includes/classes/MenuPage.php:3741
-#: src/includes/classes/MenuPage.php:3765
-#: src/includes/classes/MenuPage.php:3788
-msgid "<strong>Note:</strong> The default template is already optimized for most WordPress themes; i.e., you shouldn't need to customize. However, if your theme is not playing well with the default; tweak things a bit until you reach perfection <i class=\"fa fa-smile-o\"></i>"
-msgstr ""
-
-#: src/includes/classes/MenuPage.php:439 src/includes/classes/MenuPage.php:452
-#: src/includes/classes/MenuPage.php:3233
-#: src/includes/classes/MenuPage.php:3642
-msgid "This template is connected to one of two hooks that are expected to exist in all themes following WordPress standards. If the <code>%1$s</code> hook/filter exists, we use it (ideal). Otherwise, we use the <code>%2$s</code> action hook (most common). This is how the template is integrated into your comment form automatically. If both of these hooks are missing from your WP theme (e.g., subscr. options are not showing up no matter what you do), you will need to seek assistance from a theme developer."
-msgstr ""
-
-#: src/includes/classes/MenuPage.php:440 src/includes/classes/MenuPage.php:453
-#: src/includes/classes/MenuPage.php:1381
-#: src/includes/classes/MenuPage.php:1394
-#: src/includes/classes/MenuPage.php:1466
-#: src/includes/classes/MenuPage.php:1479
-#: src/includes/classes/MenuPage.php:2422
-#: src/includes/classes/MenuPage.php:2453
 #: src/includes/classes/MenuPage.php:2484
 #: src/includes/classes/MenuPage.php:2515
 #: src/includes/classes/MenuPage.php:2558
@@ -746,9 +659,9 @@ msgstr ""
 #: src/includes/classes/MenuPage.php:3119
 #: src/includes/classes/MenuPage.php:3158
 #: src/includes/classes/MenuPage.php:3197
-#: src/includes/classes/MenuPage.php:3234
-#: src/includes/classes/MenuPage.php:3278
-#: src/includes/classes/MenuPage.php:3308
+#: src/includes/classes/MenuPage.php:3233
+#: src/includes/classes/MenuPage.php:3277
+#: src/includes/classes/MenuPage.php:3307
 #: src/includes/classes/MenuPage.php:3345
 #: src/includes/classes/MenuPage.php:3368
 #: src/includes/classes/MenuPage.php:3391
@@ -761,49 +674,136 @@ msgstr ""
 #: src/includes/classes/MenuPage.php:3566
 #: src/includes/classes/MenuPage.php:3589
 #: src/includes/classes/MenuPage.php:3612
-#: src/includes/classes/MenuPage.php:3643
+#: src/includes/classes/MenuPage.php:3642
 #: src/includes/classes/MenuPage.php:3666
-#: src/includes/classes/MenuPage.php:3697
+#: src/includes/classes/MenuPage.php:3696
 #: src/includes/classes/MenuPage.php:3720
-#: src/includes/classes/MenuPage.php:3744
+#: src/includes/classes/MenuPage.php:3743
 #: src/includes/classes/MenuPage.php:3767
 #: src/includes/classes/MenuPage.php:3790
+msgid "Template Content..."
+msgstr ""
+
+#: src/includes/classes/MenuPage.php:437 src/includes/classes/MenuPage.php:450
+#: src/includes/classes/MenuPage.php:1378
+#: src/includes/classes/MenuPage.php:1391
+#: src/includes/classes/MenuPage.php:1463
+#: src/includes/classes/MenuPage.php:1476
+#: src/includes/classes/MenuPage.php:3123
+#: src/includes/classes/MenuPage.php:3162
+#: src/includes/classes/MenuPage.php:3201
+#: src/includes/classes/MenuPage.php:3237
+#: src/includes/classes/MenuPage.php:3281
+#: src/includes/classes/MenuPage.php:3311
+#: src/includes/classes/MenuPage.php:3494
+#: src/includes/classes/MenuPage.php:3517
+#: src/includes/classes/MenuPage.php:3540
+#: src/includes/classes/MenuPage.php:3570
+#: src/includes/classes/MenuPage.php:3593
+#: src/includes/classes/MenuPage.php:3616
+#: src/includes/classes/MenuPage.php:3646
+#: src/includes/classes/MenuPage.php:3670
+#: src/includes/classes/MenuPage.php:3700
+#: src/includes/classes/MenuPage.php:3724
+#: src/includes/classes/MenuPage.php:3747
+#: src/includes/classes/MenuPage.php:3771
+#: src/includes/classes/MenuPage.php:3794
+msgid "<strong>Note:</strong> The default template is already optimized for most WordPress themes; i.e., you shouldn't need to customize. However, if your theme is not playing well with the default; tweak things a bit until you reach perfection <i class=\"fa fa-smile-o\"></i>"
+msgstr ""
+
+#: src/includes/classes/MenuPage.php:439 src/includes/classes/MenuPage.php:452
+#: src/includes/classes/MenuPage.php:3239
+#: src/includes/classes/MenuPage.php:3648
+msgid "This template is connected to one of two hooks that are expected to exist in all themes following WordPress standards. If the <code>%1$s</code> hook/filter exists, we use it (ideal). Otherwise, we use the <code>%2$s</code> action hook (most common). This is how the template is integrated into your comment form automatically. If both of these hooks are missing from your WP theme (e.g., subscr. options are not showing up no matter what you do), you will need to seek assistance from a theme developer."
+msgstr ""
+
+#: src/includes/classes/MenuPage.php:440 src/includes/classes/MenuPage.php:453
+#: src/includes/classes/MenuPage.php:1381
+#: src/includes/classes/MenuPage.php:1394
+#: src/includes/classes/MenuPage.php:1466
+#: src/includes/classes/MenuPage.php:1479
+#: src/includes/classes/MenuPage.php:2422
+#: src/includes/classes/MenuPage.php:2453
+#: src/includes/classes/MenuPage.php:2490
+#: src/includes/classes/MenuPage.php:2521
+#: src/includes/classes/MenuPage.php:2564
+#: src/includes/classes/MenuPage.php:2596
+#: src/includes/classes/MenuPage.php:2630
+#: src/includes/classes/MenuPage.php:2661
+#: src/includes/classes/MenuPage.php:2693
+#: src/includes/classes/MenuPage.php:2732
+#: src/includes/classes/MenuPage.php:2755
+#: src/includes/classes/MenuPage.php:2778
+#: src/includes/classes/MenuPage.php:2801
+#: src/includes/classes/MenuPage.php:2824
+#: src/includes/classes/MenuPage.php:2847
+#: src/includes/classes/MenuPage.php:2877
+#: src/includes/classes/MenuPage.php:2900
+#: src/includes/classes/MenuPage.php:2930
+#: src/includes/classes/MenuPage.php:2953
+#: src/includes/classes/MenuPage.php:3055
+#: src/includes/classes/MenuPage.php:3086
+#: src/includes/classes/MenuPage.php:3125
+#: src/includes/classes/MenuPage.php:3164
+#: src/includes/classes/MenuPage.php:3203
+#: src/includes/classes/MenuPage.php:3240
+#: src/includes/classes/MenuPage.php:3284
+#: src/includes/classes/MenuPage.php:3314
+#: src/includes/classes/MenuPage.php:3351
+#: src/includes/classes/MenuPage.php:3374
+#: src/includes/classes/MenuPage.php:3397
+#: src/includes/classes/MenuPage.php:3420
+#: src/includes/classes/MenuPage.php:3443
+#: src/includes/classes/MenuPage.php:3466
+#: src/includes/classes/MenuPage.php:3496
+#: src/includes/classes/MenuPage.php:3519
+#: src/includes/classes/MenuPage.php:3542
+#: src/includes/classes/MenuPage.php:3572
+#: src/includes/classes/MenuPage.php:3595
+#: src/includes/classes/MenuPage.php:3618
+#: src/includes/classes/MenuPage.php:3649
+#: src/includes/classes/MenuPage.php:3672
+#: src/includes/classes/MenuPage.php:3703
+#: src/includes/classes/MenuPage.php:3726
+#: src/includes/classes/MenuPage.php:3750
+#: src/includes/classes/MenuPage.php:3773
+#: src/includes/classes/MenuPage.php:3796
 msgid "<strong>Tip:</strong> If you mess up your template by accident; empty the field completely and save your options. This reverts you back to the default template file automatically."
 msgstr ""
 
 #: src/includes/classes/MenuPage.php:456 src/includes/classes/MenuPage.php:1397
 #: src/includes/classes/MenuPage.php:1482
-#: src/includes/classes/MenuPage.php:3237
-#: src/includes/classes/MenuPage.php:3281
-#: src/includes/classes/MenuPage.php:3311
+#: src/includes/classes/MenuPage.php:3243
+#: src/includes/classes/MenuPage.php:3287
+#: src/includes/classes/MenuPage.php:3317
 msgid "Stylesheet containing a default set of structral styles."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:457 src/includes/classes/MenuPage.php:3238
+#: src/includes/classes/MenuPage.php:457 src/includes/classes/MenuPage.php:3244
 msgid "Inline SVG icon that inherits the color and width of it's container automatically. Note, this is a scalable vector graphic that will look great at any size &gt;= 16x16 pixels."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:458 src/includes/classes/MenuPage.php:3239
+#: src/includes/classes/MenuPage.php:458 src/includes/classes/MenuPage.php:3245
 msgid "Select menu options. Allows a subscriber to choose if they wan't to subscribe or not; and in which way."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:459 src/includes/classes/MenuPage.php:3240
+#: src/includes/classes/MenuPage.php:459 src/includes/classes/MenuPage.php:3246
 msgid "Select menu options. Allows a subscriber to choose a delivery option; e.g., asap, hourly, daily, weeky. This can be excluded if you wish. A default value of <code>asap</code> will be used in that case."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:460 src/includes/classes/MenuPage.php:3241
+#: src/includes/classes/MenuPage.php:460 src/includes/classes/MenuPage.php:3247
 msgid "The <code>id=\"\"</code> attribute value used in <code>[sub_type_options]</code>."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:461 src/includes/classes/MenuPage.php:3242
+#: src/includes/classes/MenuPage.php:461 src/includes/classes/MenuPage.php:3248
 msgid "The current subscriber's email address, if it is known to have been confirmed; i.e., if it really is their email address. This will be empty if they have not previously confirmed a subscription."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:462 src/includes/classes/MenuPage.php:3243
+#: src/includes/classes/MenuPage.php:462 src/includes/classes/MenuPage.php:3249
 msgid "A URL leading to the \"Add Subscription\" page. This allows a visitor to subscribe w/o commenting even."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:463 src/includes/classes/MenuPage.php:3244
+#: src/includes/classes/MenuPage.php:463 src/includes/classes/MenuPage.php:3250
 msgid "A URL leading to the subscription summary page (i.e., the My Subscriptions page). A link to the summary page (i.e., the My Subscriptions page) should only be displayed <code>[if current_sub_email]</code> is known."
 msgstr ""
 
@@ -1528,22 +1528,22 @@ msgstr ""
 
 #: src/includes/classes/MenuPage.php:1373
 #: src/includes/classes/MenuPage.php:1386
-#: src/includes/classes/MenuPage.php:3270
-#: src/includes/classes/MenuPage.php:3689
+#: src/includes/classes/MenuPage.php:3276
+#: src/includes/classes/MenuPage.php:3695
 msgid "Comment Form SSO Options Template"
 msgstr ""
 
 #: src/includes/classes/MenuPage.php:1380
 #: src/includes/classes/MenuPage.php:1393
-#: src/includes/classes/MenuPage.php:3277
-#: src/includes/classes/MenuPage.php:3696
+#: src/includes/classes/MenuPage.php:3283
+#: src/includes/classes/MenuPage.php:3702
 msgid "This template is connected to one of two hooks that are expected to exist in all themes following WordPress standards. If the <code>%1$s</code> hook/filter exists, we use it (ideal). Otherwise, we use the <code>%2$s</code> action hook as a fallback. This is how the template is integrated into your comment form automatically. If both of these hooks are missing from your WP theme (e.g., SSO options are not showing up no matter what you do), you will need to seek assistance from a theme developer."
 msgstr ""
 
 #: src/includes/classes/MenuPage.php:1398
 #: src/includes/classes/MenuPage.php:1483
-#: src/includes/classes/MenuPage.php:3282
-#: src/includes/classes/MenuPage.php:3312
+#: src/includes/classes/MenuPage.php:3288
+#: src/includes/classes/MenuPage.php:3318
 msgid "Links/icons for the SSO services that you have integrated with."
 msgstr ""
 
@@ -1561,15 +1561,15 @@ msgstr ""
 
 #: src/includes/classes/MenuPage.php:1458
 #: src/includes/classes/MenuPage.php:1471
-#: src/includes/classes/MenuPage.php:3300
-#: src/includes/classes/MenuPage.php:3736
+#: src/includes/classes/MenuPage.php:3306
+#: src/includes/classes/MenuPage.php:3742
 msgid "Login Form SSO Options Template"
 msgstr ""
 
 #: src/includes/classes/MenuPage.php:1465
 #: src/includes/classes/MenuPage.php:1478
-#: src/includes/classes/MenuPage.php:3307
-#: src/includes/classes/MenuPage.php:3743
+#: src/includes/classes/MenuPage.php:3313
+#: src/includes/classes/MenuPage.php:3749
 msgid "This template is connected to one of two hooks that are expected to exist in all themes following WordPress standards. If the <code>%1$s</code> hook/filter exists, we use it (ideal). Otherwise, we use the <code>%2$s</code> action hook as a fallback. This is how the template is integrated into your login form automatically. If both of these hooks are missing from your WP theme (e.g., SSO options are not showing up no matter what you do), you will need to seek assistance from a theme developer."
 msgstr ""
 
@@ -1790,15 +1790,15 @@ msgstr ""
 
 #: src/includes/classes/MenuPage.php:1781
 #: src/includes/classes/MenuPage.php:2387
-#: src/includes/classes/MenuPage.php:4605 src/includes/classes/Plugin.php:1169
-#: src/includes/classes/Plugin.php:1170
+#: src/includes/classes/MenuPage.php:4608 src/includes/classes/Plugin.php:1360
+#: src/includes/classes/Plugin.php:1361
 msgid "Email Templates"
 msgstr ""
 
 #: src/includes/classes/MenuPage.php:1781
-#: src/includes/classes/MenuPage.php:3014
-#: src/includes/classes/MenuPage.php:4609 src/includes/classes/Plugin.php:1176
-#: src/includes/classes/Plugin.php:1177
+#: src/includes/classes/MenuPage.php:3020
+#: src/includes/classes/MenuPage.php:4612 src/includes/classes/Plugin.php:1367
+#: src/includes/classes/Plugin.php:1368
 msgid "Site Templates"
 msgstr ""
 
@@ -2103,15 +2103,15 @@ msgid "Misc. UI-Related Settings"
 msgstr ""
 
 #: src/includes/classes/MenuPage.php:1998
-#: src/includes/classes/MenuPage.php:2960
-#: src/includes/classes/MenuPage.php:3803
+#: src/includes/classes/MenuPage.php:2966
+#: src/includes/classes/MenuPage.php:3809
 msgid "Save All Changes"
 msgstr ""
 
 #: src/includes/classes/MenuPage.php:2015
-#: src/includes/classes/MenuPage.php:4591
-#: src/includes/classes/MenuPage.php:4598 src/includes/classes/Plugin.php:1162
-#: src/includes/classes/Plugin.php:1163
+#: src/includes/classes/MenuPage.php:4594
+#: src/includes/classes/MenuPage.php:4601 src/includes/classes/Plugin.php:1353
+#: src/includes/classes/Plugin.php:1354
 msgid "Import/Export"
 msgstr ""
 
@@ -2348,56 +2348,56 @@ msgid "Export Config. Options"
 msgstr ""
 
 #: src/includes/classes/MenuPage.php:2396
-#: src/includes/classes/MenuPage.php:3023
+#: src/includes/classes/MenuPage.php:3029
 msgid "Template Mode:"
 msgstr ""
 
 #: src/includes/classes/MenuPage.php:2397
-#: src/includes/classes/MenuPage.php:3024
-#: src/includes/classes/MenuPageActions.php:144
+#: src/includes/classes/MenuPage.php:3030
+#: src/includes/classes/MenuPageActions.php:146
 msgid "simple"
 msgstr ""
 
 #: src/includes/classes/MenuPage.php:2398
-#: src/includes/classes/MenuPage.php:3025
-#: src/includes/classes/MenuPageActions.php:144
+#: src/includes/classes/MenuPage.php:3031
+#: src/includes/classes/MenuPageActions.php:146
 msgid "advanced"
 msgstr ""
 
 #: src/includes/classes/MenuPage.php:2405
-#: src/includes/classes/MenuPage.php:2709
+#: src/includes/classes/MenuPage.php:2715
 msgid "Email Header/Footer Templates"
 msgstr ""
 
 #: src/includes/classes/MenuPage.php:2406
-#: src/includes/classes/MenuPage.php:2710
+#: src/includes/classes/MenuPage.php:2716
 msgid "These are used in all emails; i.e., global header/footer."
 msgstr ""
 
 #: src/includes/classes/MenuPage.php:2415
-#: src/includes/classes/MenuPage.php:2788
+#: src/includes/classes/MenuPage.php:2794
 msgid "Email Header Tag Template"
 msgstr ""
 
 #: src/includes/classes/MenuPage.php:2420
 #: src/includes/classes/MenuPage.php:2451
-#: src/includes/classes/MenuPage.php:2482
-#: src/includes/classes/MenuPage.php:2513
-#: src/includes/classes/MenuPage.php:2556
-#: src/includes/classes/MenuPage.php:2588
-#: src/includes/classes/MenuPage.php:2622
-#: src/includes/classes/MenuPage.php:2653
-#: src/includes/classes/MenuPage.php:2685
-#: src/includes/classes/MenuPage.php:2724
-#: src/includes/classes/MenuPage.php:2747
-#: src/includes/classes/MenuPage.php:2770
-#: src/includes/classes/MenuPage.php:2793
-#: src/includes/classes/MenuPage.php:2816
-#: src/includes/classes/MenuPage.php:2839
-#: src/includes/classes/MenuPage.php:2869
-#: src/includes/classes/MenuPage.php:2892
-#: src/includes/classes/MenuPage.php:2922
-#: src/includes/classes/MenuPage.php:2945
+#: src/includes/classes/MenuPage.php:2488
+#: src/includes/classes/MenuPage.php:2519
+#: src/includes/classes/MenuPage.php:2562
+#: src/includes/classes/MenuPage.php:2594
+#: src/includes/classes/MenuPage.php:2628
+#: src/includes/classes/MenuPage.php:2659
+#: src/includes/classes/MenuPage.php:2691
+#: src/includes/classes/MenuPage.php:2730
+#: src/includes/classes/MenuPage.php:2753
+#: src/includes/classes/MenuPage.php:2776
+#: src/includes/classes/MenuPage.php:2799
+#: src/includes/classes/MenuPage.php:2822
+#: src/includes/classes/MenuPage.php:2845
+#: src/includes/classes/MenuPage.php:2875
+#: src/includes/classes/MenuPage.php:2898
+#: src/includes/classes/MenuPage.php:2928
+#: src/includes/classes/MenuPage.php:2951
 msgid "<strong>Note:</strong> The default template is already optimized for popular email clients; i.e., you shouldn't need to customize. However, if don't like the defaults; tweak things a bit until you reach perfection <i class=\"fa fa-smile-o\"></i>"
 msgstr ""
 
@@ -2406,14 +2406,16 @@ msgid "<strong>Tip:</strong> this template represents the meat of the email head
 msgstr ""
 
 #: src/includes/classes/MenuPage.php:2425
-#: src/includes/classes/MenuPage.php:3052
-#: src/includes/classes/MenuPage.php:3083
+#: src/includes/classes/MenuPage.php:2456
+#: src/includes/classes/MenuPage.php:3058
+#: src/includes/classes/MenuPage.php:3089
 msgid "Site home page URL; i.e., back to main site."
 msgstr ""
 
 #: src/includes/classes/MenuPage.php:2426
-#: src/includes/classes/MenuPage.php:3053
-#: src/includes/classes/MenuPage.php:3084
+#: src/includes/classes/MenuPage.php:2457
+#: src/includes/classes/MenuPage.php:3059
+#: src/includes/classes/MenuPage.php:3090
 msgid "A clip of the blog's name; as configured in WordPress."
 msgstr ""
 
@@ -2422,17 +2424,17 @@ msgid "Current <code>domain/path</code> with support for multisite network child
 msgstr ""
 
 #: src/includes/classes/MenuPage.php:2428
-#: src/includes/classes/MenuPage.php:3055
+#: src/includes/classes/MenuPage.php:3061
 msgid "Icon URL; to the plugin's icon image."
 msgstr ""
 
 #: src/includes/classes/MenuPage.php:2436
-#: src/includes/classes/MenuPage.php:2801
+#: src/includes/classes/MenuPage.php:2807
 msgid "Email Header Tag"
 msgstr ""
 
 #: src/includes/classes/MenuPage.php:2446
-#: src/includes/classes/MenuPage.php:2811
+#: src/includes/classes/MenuPage.php:2817
 msgid "Email Footer Tag Template"
 msgstr ""
 
@@ -2440,742 +2442,743 @@ msgstr ""
 msgid "<strong>Tip:</strong> this template allows you to create a custom email footer design. If you would like to rebrand or enhance email messages, this is the file that we suggest you edit. This file contains the <code>&lt;footer&gt;</code> tag, which is pulled together into a full, final, and complete HTML document. In other words, there is no reason to use <code>&lt;/body&gt;&lt;/html&gt;</code> tags here, they are produced elsewhere. Please note, while this template is focused on the <code>&lt;footer&gt;</code> tag, you are not limited to <em>just</em> the <code>&lt;footer&gt;</code>; i.e., you can add any HTML that you like."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2460
-#: src/includes/classes/MenuPage.php:2824
+#: src/includes/classes/MenuPage.php:2458
+#: src/includes/classes/MenuPage.php:3060
+msgid "Current <code>host/path</code> with support for multisite network child blogs."
+msgstr ""
+
+#: src/includes/classes/MenuPage.php:2466
+#: src/includes/classes/MenuPage.php:2830
 msgid "Email Footer Tag"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2467
-#: src/includes/classes/MenuPage.php:2854
+#: src/includes/classes/MenuPage.php:2473
+#: src/includes/classes/MenuPage.php:2860
 msgid "Email Subscr. Confirmation Templates"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2468
-#: src/includes/classes/MenuPage.php:2855
+#: src/includes/classes/MenuPage.php:2474
+#: src/includes/classes/MenuPage.php:2861
 msgid "Email subject line &amp; message used in %1$s&trade; confirmation requests."
-msgstr ""
-
-#: src/includes/classes/MenuPage.php:2477
-#: src/includes/classes/MenuPage.php:2864
-msgid "Subscr. Confirmation Subject Line Template"
 msgstr ""
 
 #: src/includes/classes/MenuPage.php:2483
 #: src/includes/classes/MenuPage.php:2870
-msgid "<strong>Tip:</strong> this is merely a subject line for email confirmation requests. Customize if you like, but not necessary. Note that extra whitespace in subject templates is stripped automatically at runtime. That's why this template is able to break things down into multiple lines. This is for clarity only. In the end, the email will always contain a one-line subject of course. Multiline subjects are unsupported by the vast majority of email clients anyway."
-msgstr ""
-
-#: src/includes/classes/MenuPage.php:2487
-#: src/includes/classes/MenuPage.php:2518
-msgid "If the subscription is for a specific comment; i.e., not the entire post."
-msgstr ""
-
-#: src/includes/classes/MenuPage.php:2488
-#: src/includes/classes/MenuPage.php:2519
-msgid "If they are subscribing to their own comment."
+msgid "Subscr. Confirmation Subject Line Template"
 msgstr ""
 
 #: src/includes/classes/MenuPage.php:2489
+#: src/includes/classes/MenuPage.php:2876
+msgid "<strong>Tip:</strong> this is merely a subject line for email confirmation requests. Customize if you like, but not necessary. Note that extra whitespace in subject templates is stripped automatically at runtime. That's why this template is able to break things down into multiple lines. This is for clarity only. In the end, the email will always contain a one-line subject of course. Multiline subjects are unsupported by the vast majority of email clients anyway."
+msgstr ""
+
+#: src/includes/classes/MenuPage.php:2493
 #: src/includes/classes/MenuPage.php:2524
-#: src/includes/classes/MenuPage.php:2564
-#: src/includes/classes/MenuPage.php:2597
-#: src/includes/classes/MenuPage.php:3130
-#: src/includes/classes/MenuPage.php:3167
+msgid "If the subscription is for a specific comment; i.e., not the entire post."
+msgstr ""
+
+#: src/includes/classes/MenuPage.php:2494
+#: src/includes/classes/MenuPage.php:2525
+msgid "If they are subscribing to their own comment."
+msgstr ""
+
+#: src/includes/classes/MenuPage.php:2495
+#: src/includes/classes/MenuPage.php:2530
+#: src/includes/classes/MenuPage.php:2570
+#: src/includes/classes/MenuPage.php:2603
+#: src/includes/classes/MenuPage.php:3136
+#: src/includes/classes/MenuPage.php:3173
 msgid "A short clip of the full post title."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2490
-#: src/includes/classes/MenuPage.php:2526
-#: src/includes/classes/MenuPage.php:2565
-#: src/includes/classes/MenuPage.php:2599
+#: src/includes/classes/MenuPage.php:2496
+#: src/includes/classes/MenuPage.php:2532
+#: src/includes/classes/MenuPage.php:2571
+#: src/includes/classes/MenuPage.php:2605
 msgid "Comment ID; if applicable, they are subscribed to."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2498
-#: src/includes/classes/MenuPage.php:2877
+#: src/includes/classes/MenuPage.php:2504
+#: src/includes/classes/MenuPage.php:2883
 msgid "Subscr. Confirmation Subject"
-msgstr ""
-
-#: src/includes/classes/MenuPage.php:2508
-#: src/includes/classes/MenuPage.php:2887
-msgid "Subscr. Confirmation Message Body Template"
 msgstr ""
 
 #: src/includes/classes/MenuPage.php:2514
 #: src/includes/classes/MenuPage.php:2893
-msgid "<strong>Tip:</strong> this particular template allows you to customize the body of an email message that is sent to request a subscription confirmation. Note that it is not necessary to create a header/footer for this template. This template pulls together a global email header/footer design that have already been configured elsewhere; i.e., all you need here is the message body. You'll notice that the first line of the message body is a link that a user may click to complete confirmation. If you modify this template, it is suggested that you always keep this link at the top of the email. It is (by far) the most important element in this message. End users need a way to confirm their subscription."
+msgid "Subscr. Confirmation Message Body Template"
 msgstr ""
 
 #: src/includes/classes/MenuPage.php:2520
+#: src/includes/classes/MenuPage.php:2899
+msgid "<strong>Tip:</strong> this particular template allows you to customize the body of an email message that is sent to request a subscription confirmation. Note that it is not necessary to create a header/footer for this template. This template pulls together a global email header/footer design that have already been configured elsewhere; i.e., all you need here is the message body. You'll notice that the first line of the message body is a link that a user may click to complete confirmation. If you modify this template, it is suggested that you always keep this link at the top of the email. It is (by far) the most important element in this message. End users need a way to confirm their subscription."
+msgstr ""
+
+#: src/includes/classes/MenuPage.php:2526
 msgid "If comments are still open the underlying post they are subscribing to."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2521
-#: src/includes/classes/MenuPage.php:3124
-#: src/includes/classes/MenuPage.php:3164
+#: src/includes/classes/MenuPage.php:2527
+#: src/includes/classes/MenuPage.php:3130
+#: src/includes/classes/MenuPage.php:3170
 msgid "Subscriber's first name."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2522
+#: src/includes/classes/MenuPage.php:2528
 msgid "Confirmation URL. Clicking this URL will confirm the subscription."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2523
-#: src/includes/classes/MenuPage.php:2596
-#: src/includes/classes/MenuPage.php:3129
+#: src/includes/classes/MenuPage.php:2529
+#: src/includes/classes/MenuPage.php:2602
+#: src/includes/classes/MenuPage.php:3135
 msgid "URL to comments on the post they're subscribed to."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2525
-#: src/includes/classes/MenuPage.php:2598
-#: src/includes/classes/MenuPage.php:3132
+#: src/includes/classes/MenuPage.php:2531
+#: src/includes/classes/MenuPage.php:2604
+#: src/includes/classes/MenuPage.php:3138
 msgid "URL to comment they're subscribed to; if applicable."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2534
-#: src/includes/classes/MenuPage.php:2900
+#: src/includes/classes/MenuPage.php:2540
+#: src/includes/classes/MenuPage.php:2906
 msgid "Subscr. Confirmation Message Body"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2541
-#: src/includes/classes/MenuPage.php:2907
+#: src/includes/classes/MenuPage.php:2547
+#: src/includes/classes/MenuPage.php:2913
 msgid "Comment Notification Email Templates"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2542
-#: src/includes/classes/MenuPage.php:2908
+#: src/includes/classes/MenuPage.php:2548
+#: src/includes/classes/MenuPage.php:2914
 msgid "Email subject line &amp; message used in %1$s&trade; notifications."
-msgstr ""
-
-#: src/includes/classes/MenuPage.php:2551
-#: src/includes/classes/MenuPage.php:2917
-msgid "Comment Notification Subject Line Template"
 msgstr ""
 
 #: src/includes/classes/MenuPage.php:2557
 #: src/includes/classes/MenuPage.php:2923
-msgid "<strong>Tip:</strong> this is merely a subject line for email notifications. Customize if you like, but not necessary. Note that extra whitespace in subject templates is stripped automatically at runtime. That's why this template is able to break things down into multiple lines. This is for clarity only. In the end, the email will always contain a one-line subject of course. Multiline subjects are unsupported by the vast majority of email clients anyway."
-msgstr ""
-
-#: src/includes/classes/MenuPage.php:2561
-#: src/includes/classes/MenuPage.php:2593
-msgid "A notification may contain one (or more) comments. Is this a digest?"
-msgstr ""
-
-#: src/includes/classes/MenuPage.php:2562
-#: src/includes/classes/MenuPage.php:2594
-#: src/includes/classes/MenuPage.php:3122
-msgid "If the subscription is to a specific comment; i.e., not the entire post."
+msgid "Comment Notification Subject Line Template"
 msgstr ""
 
 #: src/includes/classes/MenuPage.php:2563
-#: src/includes/classes/MenuPage.php:2595
-#: src/includes/classes/MenuPage.php:3123
+#: src/includes/classes/MenuPage.php:2929
+msgid "<strong>Tip:</strong> this is merely a subject line for email notifications. Customize if you like, but not necessary. Note that extra whitespace in subject templates is stripped automatically at runtime. That's why this template is able to break things down into multiple lines. This is for clarity only. In the end, the email will always contain a one-line subject of course. Multiline subjects are unsupported by the vast majority of email clients anyway."
+msgstr ""
+
+#: src/includes/classes/MenuPage.php:2567
+#: src/includes/classes/MenuPage.php:2599
+msgid "A notification may contain one (or more) comments. Is this a digest?"
+msgstr ""
+
+#: src/includes/classes/MenuPage.php:2568
+#: src/includes/classes/MenuPage.php:2600
+#: src/includes/classes/MenuPage.php:3128
+msgid "If the subscription is to a specific comment; i.e., not the entire post."
+msgstr ""
+
+#: src/includes/classes/MenuPage.php:2569
+#: src/includes/classes/MenuPage.php:2601
+#: src/includes/classes/MenuPage.php:3129
 msgid "Subscribed to their own comment?"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2573
-#: src/includes/classes/MenuPage.php:2930
+#: src/includes/classes/MenuPage.php:2579
+#: src/includes/classes/MenuPage.php:2936
 msgid "Comment Notification Subject"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2583
+#: src/includes/classes/MenuPage.php:2589
 msgid "Comment Notification Message Heading Template"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2589
+#: src/includes/classes/MenuPage.php:2595
 msgid "<strong>Tip:</strong> this particular template allows you to customize the heading in an email message that is sent to notify an end-user about one or more comments on your blog. You'll notice that there are several conditional tags in this template. An email notification can include one (or more) comments; i.e., some subscribers may choose to receive notifications in the form of a digest. This template has the job of dealing with either case; i.e., one comment in the notification, or more than one."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2607
+#: src/includes/classes/MenuPage.php:2613
 msgid "Comment Notification Message Heading"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2617
+#: src/includes/classes/MenuPage.php:2623
 msgid "Comment Notification Message In-Response-To Template"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2623
+#: src/includes/classes/MenuPage.php:2629
 msgid "<strong>Tip:</strong> this particular template allows you to customize the blurp that will appear before a comment that's a reply; i.e., not a new comment, but a response to someone. This helps to offer the reader some context when they receive the notification."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2627
+#: src/includes/classes/MenuPage.php:2633
 msgid "Parent comment URL."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2628
+#: src/includes/classes/MenuPage.php:2634
 msgid "Parent comment ID."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2629
+#: src/includes/classes/MenuPage.php:2635
 msgid "Parent comment author name."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2630
+#: src/includes/classes/MenuPage.php:2636
 msgid "A shorter clip of the full parent comment message body."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2638
+#: src/includes/classes/MenuPage.php:2644
 msgid "Comment Notification Message In-Response-To"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2648
+#: src/includes/classes/MenuPage.php:2654
 msgid "Comment Notification Message Reply-From Template"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2654
+#: src/includes/classes/MenuPage.php:2660
 msgid "<strong>Tip:</strong> this particular template allows you to customize the blurp that will appear for a comment that's a reply; i.e., not a new comment, but a response to someone. In the final email, this will come just after the In-Response-To template (as seen above)."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2658
+#: src/includes/classes/MenuPage.php:2664
 msgid "URL to comment reply."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2659
+#: src/includes/classes/MenuPage.php:2665
 msgid "Comment reply ID."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2660
+#: src/includes/classes/MenuPage.php:2666
 msgid "How long ago the comment reply was posted (human readable)."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2661
+#: src/includes/classes/MenuPage.php:2667
 msgid "Comment reply author's name."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2662
+#: src/includes/classes/MenuPage.php:2668
 msgid "A shorter clip of the full comment reply message body."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2670
+#: src/includes/classes/MenuPage.php:2676
 msgid "Comment Notification Message Reply-From"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2680
+#: src/includes/classes/MenuPage.php:2686
 msgid "Comment Notification Message Comment-From Template"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2686
+#: src/includes/classes/MenuPage.php:2692
 msgid "<strong>Tip:</strong> this particular template allows you to customize the blurp that will appear for a new comment; i.e., one that's not a reply, but a new top-level comment."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2690
+#: src/includes/classes/MenuPage.php:2696
 msgid "URL to comment."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2691
+#: src/includes/classes/MenuPage.php:2697
 msgid "Comment ID."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2692
+#: src/includes/classes/MenuPage.php:2698
 msgid "How long ago the comment was posted (human readable)."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2693
+#: src/includes/classes/MenuPage.php:2699
 msgid "Comment author's name."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2694
+#: src/includes/classes/MenuPage.php:2700
 msgid "A shorter clip of the full comment message body."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2702
+#: src/includes/classes/MenuPage.php:2708
 msgid "Comment Notification Message Comment-From"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2719
+#: src/includes/classes/MenuPage.php:2725
 msgid "Email Header Template"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2725
+#: src/includes/classes/MenuPage.php:2731
 msgid "<strong>Tip:</strong> this particular template establishes the opening <code>&lt;html&gt;&lt;body&gt;</code> tags, and it pulls together a few other components; i.e., the Header Styles, Header Scripts, and Header Tag templates. These other components can be configured separately. For this reason, it is normally not necessary to edit this file. Instead, we suggest editing the \"Email Header Tag\" template. The choice is yours though."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2732
+#: src/includes/classes/MenuPage.php:2738
 msgid "Email Header"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2742
+#: src/includes/classes/MenuPage.php:2748
 msgid "Email Header Styles Template"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2748
+#: src/includes/classes/MenuPage.php:2754
 msgid "<strong>Tip:</strong> this template establishes just a few basic styles for email messages. If you modify the default set of email templates, it might be helpful to add a few new styles of your own here. That said, for emails, it is generally a good idea to use inline <code>style=\"\"</code> attributes instead of a stylesheet. For some things it's OK, but for the most part, inline styles are better for emails; i.e., they are the most compatible across various email clients."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2755
+#: src/includes/classes/MenuPage.php:2761
 msgid "Email Header Styles"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2765
+#: src/includes/classes/MenuPage.php:2771
 msgid "Email Header Scripts Template"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2771
+#: src/includes/classes/MenuPage.php:2777
 msgid "<strong>Tip:</strong> this template only exists for the sake of being thorough. Using <code>&lt;script&gt;</code> tags in email messages is NOT recommended. They will mostly likely be excluded by popular email clients anyway. For this reason, you will find that this template comes empty by default."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2778
+#: src/includes/classes/MenuPage.php:2784
 msgid "Email Header Scripts"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2794
+#: src/includes/classes/MenuPage.php:2800
 msgid "<strong>Tip:</strong> this template represents the meat of the email header design. If you would like to rebrand or enhance the default template, this is the file that we suggest you edit. This file contains the <code>&lt;header&gt;</code> tag, which is pulled together by the primary Email Header Template to create the full, final, complete HTML header markup. In other words, there is no reason to use <code>&lt;html&gt;&lt;body&gt;</code> tags here, they are produced elsewhere. Please note, while this template is focused on the <code>&lt;header&gt;</code> tag, you are not limited to <em>just</em> the <code>&lt;header&gt;</code>; i.e., you can add any HTML that you like. As with all templates, you can also use PHP tags if necessary, and even WordPress functionality if you like."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2817
+#: src/includes/classes/MenuPage.php:2823
 msgid "<strong>Tip:</strong> this template is by far the easiest way to create a custom email footer design. If you would like to rebrand or enhance the default template, this is the file that we suggest you edit. This file contains the <code>&lt;footer&gt;</code> tag, which is pulled together by the primary Email Footer Template to create the full, final, complete HTML footer markup. In other words, there is no reason to use <code>&lt;/body&gt;&lt;/html&gt;</code> tags here, they are produced elsewhere. Please note, while this template is focused on the <code>&lt;footer&gt;</code> tag, you are not limited to <em>just</em> the <code>&lt;footer&gt;</code>; i.e., you can add any HTML that you like. As with all templates, you can also use PHP tags if necessary, and even WordPress functionality if you like."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2834
+#: src/includes/classes/MenuPage.php:2840
 msgid "Email Footer Template"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2840
+#: src/includes/classes/MenuPage.php:2846
 msgid "<strong>Tip:</strong> this particular template deals with the closing <code>&lt;/body&gt;&lt;/html&gt;</code> tags. It also pulls together a few specific details from your config. options, in order to establish edit/unsubscribe links; along with a mailing address. These are needed for you to remain CAN-SPAM compliant. Please note, it is normally not necessary to edit this file. Instead, we suggest editing the \"Email Footer Tag\" template. The choice is yours though."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2847
+#: src/includes/classes/MenuPage.php:2853
 msgid "Email Footer"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2940
+#: src/includes/classes/MenuPage.php:2946
 msgid "Comment Notification Message Body Template"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2946
+#: src/includes/classes/MenuPage.php:2952
 msgid "<strong>Tip:</strong> this particular template allows you to customize the body of an email message that is sent to notify an end-user about one or more comments on your blog. Note that it is not necessary to create a header/footer for this template. This template pulls together a global email header/footer design that have already been configured elsewhere; i.e., all you need here is the message body. You'll notice that there are several PHP conditional tags in this template. An email notification can include one (or more) comments; i.e., some subscribers may choose to receive notifications in the form of a digest. This template has the job of dealing with either case; i.e., one comment in the notification, or more than one."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:2953
+#: src/includes/classes/MenuPage.php:2959
 msgid "Comment Notification Message Body"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3032
-#: src/includes/classes/MenuPage.php:3328
+#: src/includes/classes/MenuPage.php:3038
+#: src/includes/classes/MenuPage.php:3334
 msgid "Site Header/Footer Templates"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3033
-#: src/includes/classes/MenuPage.php:3329
+#: src/includes/classes/MenuPage.php:3039
+#: src/includes/classes/MenuPage.php:3335
 msgid "These are used in all portions of the front-end UI; i.e., global header/footer."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3042
-#: src/includes/classes/MenuPage.php:3407
+#: src/includes/classes/MenuPage.php:3048
+#: src/includes/classes/MenuPage.php:3413
 msgid "Site Header Tag Template"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3047
-#: src/includes/classes/MenuPage.php:3078
-#: src/includes/classes/MenuPage.php:3343
-#: src/includes/classes/MenuPage.php:3366
-#: src/includes/classes/MenuPage.php:3389
-#: src/includes/classes/MenuPage.php:3412
-#: src/includes/classes/MenuPage.php:3435
-#: src/includes/classes/MenuPage.php:3458
+#: src/includes/classes/MenuPage.php:3053
+#: src/includes/classes/MenuPage.php:3084
+#: src/includes/classes/MenuPage.php:3349
+#: src/includes/classes/MenuPage.php:3372
+#: src/includes/classes/MenuPage.php:3395
+#: src/includes/classes/MenuPage.php:3418
+#: src/includes/classes/MenuPage.php:3441
+#: src/includes/classes/MenuPage.php:3464
 msgid "<strong>Note:</strong> The default template is already optimized for most WordPress installs; i.e., you shouldn't need to customize. However, if you don't like the defaults; tweak things a bit until you reach perfection <i class=\"fa fa-smile-o\"></i>"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3048
+#: src/includes/classes/MenuPage.php:3054
 msgid "<strong>Tip:</strong> this template represents the meat of the front-end header design. If you would like to rebrand or enhance site templates, this is the file that we suggest you edit. This file contains the <code>&lt;header&gt;</code> tag, which is pulled together into a full, final, and complete HTML document. In other words, there is no reason to use <code>&lt;html&gt;&lt;body&gt;</code> tags here, they are produced elsewhere. Please note, while this template is focused on the <code>&lt;header&gt;</code> tag, you are not limited to <em>just</em> the <code>&lt;header&gt;</code>; i.e., you can add any HTML that you like."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3054
-msgid "Current <code>host/path</code> with support for multisite network child blogs."
-msgstr ""
-
-#: src/includes/classes/MenuPage.php:3063
-#: src/includes/classes/MenuPage.php:3420
+#: src/includes/classes/MenuPage.php:3069
+#: src/includes/classes/MenuPage.php:3426
 msgid "Site Header Tag"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3073
-#: src/includes/classes/MenuPage.php:3430
+#: src/includes/classes/MenuPage.php:3079
+#: src/includes/classes/MenuPage.php:3436
 msgid "Site Footer Tag Template"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3079
+#: src/includes/classes/MenuPage.php:3085
 msgid "<strong>Tip:</strong> this template allows you to create a custom front-end footer design. If you would like to rebrand or enhance site templates, this is the file that we suggest you edit. This file contains the <code>&lt;footer&gt;</code> tag, which is pulled together into a full, final, and complete HTML document. In other words, there is no reason to use <code>&lt;/body&gt;&lt;/html&gt;</code> tags here, they are produced elsewhere. Please note, while this template is focused on the <code>&lt;footer&gt;</code> tag, you are not limited to <em>just</em> the <code>&lt;footer&gt;</code>; i.e., you can add any HTML that you like."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3085
+#: src/includes/classes/MenuPage.php:3091
 msgid "Privacy policy URL; as configured in plugin options via the dashboard."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3086
+#: src/includes/classes/MenuPage.php:3092
 msgid "Summary return URL; w/ all summary navigation vars preserved."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3087
+#: src/includes/classes/MenuPage.php:3093
 msgid "Plugin's powered-by link &amp; branding; if enabled in plugin config. options."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3095
-#: src/includes/classes/MenuPage.php:3443
+#: src/includes/classes/MenuPage.php:3101
+#: src/includes/classes/MenuPage.php:3449
 msgid "Site Footer Tag"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3102
-#: src/includes/classes/MenuPage.php:3473
+#: src/includes/classes/MenuPage.php:3108
+#: src/includes/classes/MenuPage.php:3479
 msgid "Subscr. Action Templates"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3103
-#: src/includes/classes/MenuPage.php:3474
+#: src/includes/classes/MenuPage.php:3109
+#: src/includes/classes/MenuPage.php:3480
 msgid "These are shown to a subscriber when they confirm and/or unsubscribe."
-msgstr ""
-
-#: src/includes/classes/MenuPage.php:3112
-#: src/includes/classes/MenuPage.php:3483
-msgid "Subscr. Confirmed Template"
 msgstr ""
 
 #: src/includes/classes/MenuPage.php:3118
 #: src/includes/classes/MenuPage.php:3489
+msgid "Subscr. Confirmed Template"
+msgstr ""
+
+#: src/includes/classes/MenuPage.php:3124
+#: src/includes/classes/MenuPage.php:3495
 msgid "<strong>Tip:</strong> this particular template allows you to customize the content of the page that is displayed to a user who has just confirmed their subscription via email (i.e., the page displayed after a user clicks the confirmation link). Note that it is not necessary to create a header/footer for this template. This template pulls together a global front-end header/footer design that have already been configured elsewhere; i.e., all you need here is the content."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3125
-#: src/includes/classes/MenuPage.php:3165
-#: src/includes/classes/MenuPage.php:3200
+#: src/includes/classes/MenuPage.php:3131
+#: src/includes/classes/MenuPage.php:3171
+#: src/includes/classes/MenuPage.php:3206
 msgid "Subscriber's email address."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3126
+#: src/includes/classes/MenuPage.php:3132
 msgid "Delivery option label; e.g., asap, hourly, daily, weekly."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3127
+#: src/includes/classes/MenuPage.php:3133
 msgid "A brief description of the delivery option."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3128
+#: src/includes/classes/MenuPage.php:3134
 msgid "Subscription edit URL; i.e., so they can make any last-minute changes."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3131
+#: src/includes/classes/MenuPage.php:3137
 msgid "The post ID they're subscribed to."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3133
+#: src/includes/classes/MenuPage.php:3139
 msgid "Comment ID they're subscribed to; if applicable."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3141
-#: src/includes/classes/MenuPage.php:3496
+#: src/includes/classes/MenuPage.php:3147
+#: src/includes/classes/MenuPage.php:3502
 msgid "Subscr. Confirmed"
-msgstr ""
-
-#: src/includes/classes/MenuPage.php:3151
-#: src/includes/classes/MenuPage.php:3506
-msgid "Unsubscribed Template"
 msgstr ""
 
 #: src/includes/classes/MenuPage.php:3157
 #: src/includes/classes/MenuPage.php:3512
-msgid "<strong>Tip:</strong> this particular template allows you to customize the content of the page that is displayed to a user who has just unsubscribed from a subscription (i.e., the page displayed after a user clicks an unsubscribe link). Note that it is not necessary to create a header/footer for this template. This template pulls together a global front-end header/footer design that have already been configured elsewhere; i.e., all you need here is the content."
-msgstr ""
-
-#: src/includes/classes/MenuPage.php:3161
-msgid "If the post they were subscribed to still exists."
-msgstr ""
-
-#: src/includes/classes/MenuPage.php:3162
-msgid "If the subscription was to a specific comment; i.e., not the entire post."
+msgid "Unsubscribed Template"
 msgstr ""
 
 #: src/includes/classes/MenuPage.php:3163
-msgid "They were subscribed to their own comment?"
+#: src/includes/classes/MenuPage.php:3518
+msgid "<strong>Tip:</strong> this particular template allows you to customize the content of the page that is displayed to a user who has just unsubscribed from a subscription (i.e., the page displayed after a user clicks an unsubscribe link). Note that it is not necessary to create a header/footer for this template. This template pulls together a global front-end header/footer design that have already been configured elsewhere; i.e., all you need here is the content."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3166
-msgid "URL to comments on the post they were subscribed to."
+#: src/includes/classes/MenuPage.php:3167
+msgid "If the post they were subscribed to still exists."
 msgstr ""
 
 #: src/includes/classes/MenuPage.php:3168
-msgid "The post ID they were subscribed to."
+msgid "If the subscription was to a specific comment; i.e., not the entire post."
 msgstr ""
 
 #: src/includes/classes/MenuPage.php:3169
-msgid "URL to comment they were subscribed to; if applicable."
-msgstr ""
-
-#: src/includes/classes/MenuPage.php:3170
-msgid "Comment ID they were subscribed to; if applicable."
-msgstr ""
-
-#: src/includes/classes/MenuPage.php:3171
-msgid "Unsubscribes (deletes) ALL subscriptions associated w/ their email address."
+msgid "They were subscribed to their own comment?"
 msgstr ""
 
 #: src/includes/classes/MenuPage.php:3172
-#: src/includes/classes/MenuPage.php:3201
-msgid "Subscription creation URL; i.e., so they can add a new subscription if they like."
+msgid "URL to comments on the post they were subscribed to."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3190
-#: src/includes/classes/MenuPage.php:3529
-msgid "Unsubscribed All Template"
+#: src/includes/classes/MenuPage.php:3174
+msgid "The post ID they were subscribed to."
+msgstr ""
+
+#: src/includes/classes/MenuPage.php:3175
+msgid "URL to comment they were subscribed to; if applicable."
+msgstr ""
+
+#: src/includes/classes/MenuPage.php:3176
+msgid "Comment ID they were subscribed to; if applicable."
+msgstr ""
+
+#: src/includes/classes/MenuPage.php:3177
+msgid "Unsubscribes (deletes) ALL subscriptions associated w/ their email address."
+msgstr ""
+
+#: src/includes/classes/MenuPage.php:3178
+#: src/includes/classes/MenuPage.php:3207
+msgid "Subscription creation URL; i.e., so they can add a new subscription if they like."
 msgstr ""
 
 #: src/includes/classes/MenuPage.php:3196
 #: src/includes/classes/MenuPage.php:3535
+msgid "Unsubscribed All Template"
+msgstr ""
+
+#: src/includes/classes/MenuPage.php:3202
+#: src/includes/classes/MenuPage.php:3541
 msgid "<strong>Tip:</strong> this particular template allows you to customize the content of the page that is displayed to a user who has just unsubscribed from all of their subscriptions (i.e., the page displayed after a user clicks the \"unsubscribe all\" link). Note that it is not necessary to create a header/footer for this template. This template pulls together a global front-end header/footer design that have already been configured elsewhere; i.e., all you need here is the content."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3209
-#: src/includes/classes/MenuPage.php:3542
+#: src/includes/classes/MenuPage.php:3215
+#: src/includes/classes/MenuPage.php:3548
 msgid "Unsubscribed All"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3216
-#: src/includes/classes/MenuPage.php:3625
+#: src/includes/classes/MenuPage.php:3222
+#: src/includes/classes/MenuPage.php:3631
 msgid "Subscription Option Templates"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3217
-#: src/includes/classes/MenuPage.php:3626
+#: src/includes/classes/MenuPage.php:3223
+#: src/includes/classes/MenuPage.php:3632
 msgid "Provides options that allow commenters to subscribe &amp; receive notifications."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3232
-#: src/includes/classes/MenuPage.php:3641
+#: src/includes/classes/MenuPage.php:3238
+#: src/includes/classes/MenuPage.php:3647
 msgid "<strong>Tip:</strong> this particular template allows you to customize the HTML snippet that is displayed below your comment form; providing end-users with a way to create a subscription."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3252
-#: src/includes/classes/MenuPage.php:3649
+#: src/includes/classes/MenuPage.php:3258
+#: src/includes/classes/MenuPage.php:3655
 msgid "Comment Form Subscr. Options"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3260
-#: src/includes/classes/MenuPage.php:3679
+#: src/includes/classes/MenuPage.php:3266
+#: src/includes/classes/MenuPage.php:3685
 msgid "Single Sign-on Templates"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3261
-#: src/includes/classes/MenuPage.php:3680
+#: src/includes/classes/MenuPage.php:3267
+#: src/includes/classes/MenuPage.php:3686
 msgid "Provides options that allow commenters to login w/ popular social network accounts."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3276
-#: src/includes/classes/MenuPage.php:3695
+#: src/includes/classes/MenuPage.php:3282
+#: src/includes/classes/MenuPage.php:3701
 msgid "<strong>Tip:</strong> this particular template allows you to customize the HTML snippet that is displayed above your comment form; providing end-users with a way to login with a popular social network account. This will only be applicable if you have Single Sign-on (SSO) enabled in your config. options."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3290
-#: src/includes/classes/MenuPage.php:3703
+#: src/includes/classes/MenuPage.php:3296
+#: src/includes/classes/MenuPage.php:3709
 msgid "Comment Form SSO Options"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3306
-#: src/includes/classes/MenuPage.php:3742
+#: src/includes/classes/MenuPage.php:3312
+#: src/includes/classes/MenuPage.php:3748
 msgid "<strong>Tip:</strong> this particular template allows you to customize the HTML snippet that is displayed within your login form; providing end-users with a way to login with a popular social network account. This will only be applicable if you have Single Sign-on (SSO) enabled in your config. options."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3320
-#: src/includes/classes/MenuPage.php:3750
+#: src/includes/classes/MenuPage.php:3326
+#: src/includes/classes/MenuPage.php:3756
 msgid "Login Form SSO Options"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3338
+#: src/includes/classes/MenuPage.php:3344
 msgid "Site Header Template"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3344
+#: src/includes/classes/MenuPage.php:3350
 msgid "<strong>Tip:</strong> this particular template establishes the opening <code>&lt;html&gt;&lt;body&gt;</code> tags, and it pulls together a few other components; i.e., the Header Styles, Header Scripts, and Header Tag templates. These other components can be configured separately. For this reason, it is normally not necessary to edit this file. Instead, we suggest editing the \"Site Header Tag\" template. The choice is yours though."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3351
+#: src/includes/classes/MenuPage.php:3357
 msgid "Site Header"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3361
+#: src/includes/classes/MenuPage.php:3367
 msgid "Site Header Styles Template"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3367
+#: src/includes/classes/MenuPage.php:3373
 msgid "<strong>Tip:</strong> this template establishes just a few basic styles needed by other front-end templates listed on this page. If you modify the default set of templates, it might be helpful to add a few new styles of your own here. That said, this software uses the %1$s. Therefore, you already have a full set of mobile-first design functionality available to you, even before you add styles of your own."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3367
-#: src/includes/classes/MenuPage.php:3390
+#: src/includes/classes/MenuPage.php:3373
+#: src/includes/classes/MenuPage.php:3396
 msgid "Bootstrap CSS/JS libraries"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3374
+#: src/includes/classes/MenuPage.php:3380
 msgid "Site Header Styles"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3384
+#: src/includes/classes/MenuPage.php:3390
 msgid "Site Header Scripts Template"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3390
+#: src/includes/classes/MenuPage.php:3396
 msgid "<strong>Tip:</strong> this template establishes just a few basic JavaScript libraries needed by other front-end templates listed on this page. If you modify the default set of templates, it might be helpful to add a few new scripts of your own here. That said, this software uses the %1$s. Therefore, you already have a full set of mobile-first design functionality available to you, even before you add scripts of your own."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3397
+#: src/includes/classes/MenuPage.php:3403
 msgid "Site Header Scripts"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3413
+#: src/includes/classes/MenuPage.php:3419
 msgid "<strong>Tip:</strong> this template represents the meat of the front-end header design. If you would like to rebrand or enhance the default template, this is the file that we suggest you edit. This file contains the <code>&lt;header&gt;</code> tag, which is pulled together by the primary Site Header Template to create the full, final, complete HTML header markup. In other words, there is no reason to use <code>&lt;html&gt;&lt;body&gt;</code> tags here, they are produced elsewhere. Please note, while this template is focused on the <code>&lt;header&gt;</code> tag, you are not limited to <em>just</em> the <code>&lt;header&gt;</code>; i.e., you can add any HTML that you like. As with all templates, you can also use PHP tags if necessary, and even WordPress functionality if you like."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3436
+#: src/includes/classes/MenuPage.php:3442
 msgid "<strong>Tip:</strong> this template is by far the easiest way to create a custom front-end footer design. If you would like to rebrand or enhance the default template, this is the file that we suggest you edit. This file contains the <code>&lt;footer&gt;</code> tag, which is pulled together by the primary Site Footer Template to create the full, final, complete HTML footer markup. In other words, there is no reason to use <code>&lt;/body&gt;&lt;/html&gt;</code> tags here, they are produced elsewhere. Please note, while this template is focused on the <code>&lt;footer&gt;</code> tag, you are not limited to <em>just</em> the <code>&lt;footer&gt;</code>; i.e., you can add any HTML that you like. As with all templates, you can also use PHP tags if necessary, and even WordPress functionality if you like."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3453
+#: src/includes/classes/MenuPage.php:3459
 msgid "Site Footer Template"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3459
+#: src/includes/classes/MenuPage.php:3465
 msgid "<strong>Tip:</strong> this particular template deals with the closing <code>&lt;/body&gt;&lt;/html&gt;</code> tags. It is normally not necessary to edit this file. Instead, we suggest editing the \"Site Footer Tag\" template. The choice is yours though."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3466
+#: src/includes/classes/MenuPage.php:3472
 msgid "Site Footer"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3549
+#: src/includes/classes/MenuPage.php:3555
 msgid "Subscr. Summary Templates"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3550
+#: src/includes/classes/MenuPage.php:3556
 msgid "Related to the Summary (aka: \"My Subscriptions\") page and add/edit form."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3559
+#: src/includes/classes/MenuPage.php:3565
 msgid "Summary Template"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3565
+#: src/includes/classes/MenuPage.php:3571
 msgid "<strong>Tip:</strong> this particular template allows you to customize the content of the page that is displayed to a user who is managing their subscriptions (i.e., the page displayed after a user clicks the \"manage my subscriptions\" link). Note that it is not necessary to create a header/footer for this template. This template pulls together a global front-end header/footer design that have already been configured elsewhere; i.e., all you need here is the content."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3572
+#: src/includes/classes/MenuPage.php:3578
 msgid "Summary"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3582
+#: src/includes/classes/MenuPage.php:3588
 msgid "Add/Edit Form Template"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3588
+#: src/includes/classes/MenuPage.php:3594
 msgid "<strong>Tip:</strong> this particular template allows you to customize the content of the page that is displayed to a user who would like to add a new subscription (i.e., the page displayed after a user clicks the \"add subscription\" or \"subscribe without commenting\" link). This same template also contains the form that a subscriber may use to edit an existing subscription; i.e., it must be able to deal with both scenarios. Note that it is not necessary to create a header/footer for this template. This template pulls together a global front-end header/footer design that have already been configured elsewhere; i.e., all you need here is the content."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3595
+#: src/includes/classes/MenuPage.php:3601
 msgid "Add/Edit Form"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3605
+#: src/includes/classes/MenuPage.php:3611
 msgid "Add/Edit Form Template (Comment ID Row via AJAX)"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3611
+#: src/includes/classes/MenuPage.php:3617
 msgid "<strong>Tip:</strong> this particular template contains content delivered via AJAX. When a subscriber is using the Add/Edit Form Template, and they choose a particular Post ID from a list of options, the comments for the post ID they select will be collected and displayed automagically for them. This table row will contain a list of those comments for the post ID they selected. If you edit this, please make sure that this template only contains a table row, and nothing more. The underlying JavaScript/AJAX routines will always expect this template to produce a single <code>&lt;tr&gt;</code> tag with a list of select menu options."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3618
+#: src/includes/classes/MenuPage.php:3624
 msgid "Comment ID Row via AJAX"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3659
-#: src/includes/classes/MenuPage.php:3672
+#: src/includes/classes/MenuPage.php:3665
+#: src/includes/classes/MenuPage.php:3678
 msgid "Comment Form Scripts for Subscr. Options"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3665
+#: src/includes/classes/MenuPage.php:3671
 msgid "<strong>Tip:</strong> this template contains just a few lines of JavaScript needed by the default Comment Form Subscr. Options Template. Customize if you like, but not necessary."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3713
-#: src/includes/classes/MenuPage.php:3726
+#: src/includes/classes/MenuPage.php:3719
+#: src/includes/classes/MenuPage.php:3732
 msgid "Comment Form Scripts for SSO Options"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3719
+#: src/includes/classes/MenuPage.php:3725
 msgid "<strong>Tip:</strong> this template contains just a few lines of JavaScript needed by the default Comment Form SSO Options Template. Customize if you like, but not necessary."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3760
-#: src/includes/classes/MenuPage.php:3773
+#: src/includes/classes/MenuPage.php:3766
+#: src/includes/classes/MenuPage.php:3779
 msgid "Login Form Scripts for SSO Options"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3766
+#: src/includes/classes/MenuPage.php:3772
 msgid "<strong>Tip:</strong> this template contains just a few lines of JavaScript needed by the default Login Form SSO Options Template. Customize if you like, but not necessary."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3783
+#: src/includes/classes/MenuPage.php:3789
 msgid "SSO Registration Completion Template"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3789
+#: src/includes/classes/MenuPage.php:3795
 msgid "<strong>Tip:</strong> this particular template allows you to customize the content of the page that is displayed to a user who has just logged-in through an SSO service provider for the first time. This is only applicable if you have Single Sign-on (SSO) enabled in your config. options. Also, this particular page is only displayed when there is information missing and/or considered private by the SSO service provider. For instance, Twitter will not share a user's email address through any of their APIs (i.e., there is no way to collect the email address behind-the-scenes when it comes to Twitter). Therefore, this template exists as a way for your site to collect that last bit of information before you allow them to log in for the first time. Note that it is not necessary to create a header/footer for this template. This template pulls together a global front-end header/footer design that have already been configured elsewhere; i.e., all you need here is the content."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3796
+#: src/includes/classes/MenuPage.php:3802
 msgid "Single Sign-on Registration Completion"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3836
+#: src/includes/classes/MenuPage.php:3842
 msgid "%1$s&trade; &raquo; Subscriptions"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3837
+#: src/includes/classes/MenuPage.php:3843
 msgid "Add New"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3856
+#: src/includes/classes/MenuPage.php:3862
 msgid "%1$s&trade; &raquo; New Subscription"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3874
+#: src/includes/classes/MenuPage.php:3880
 msgid "%1$s&trade; &raquo; Edit Subscription"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3892
+#: src/includes/classes/MenuPage.php:3898
 msgid "%1$s&trade; &raquo; Subscriptions &raquo; Event Log"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3910
+#: src/includes/classes/MenuPage.php:3916
 msgid "%1$s&trade; &raquo; Queued (Pending) Notifications"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3928
+#: src/includes/classes/MenuPage.php:3934
 msgid "%1$s&trade; &raquo; Queue &raquo; Event Log"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3956
+#: src/includes/classes/MenuPage.php:3962
 msgid "%1$s&trade; &raquo; Statistics/Charts"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3964
+#: src/includes/classes/MenuPage.php:3970
 msgid "You can type (or select) a particular date/time. Upon clicking the input field a date picker will open for you."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3965
+#: src/includes/classes/MenuPage.php:3971
 msgid "TIP: you can also type things like: now, 30 days ago, -30 days, -2 weeks, and more. Anything compatible with PHP's strtotime() function will work here."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3966
+#: src/includes/classes/MenuPage.php:3972
 msgid "As expected, relative dates like: -30 days; are based on your current local time when used in the From Date; i.e., your current local time -30 days."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3967
+#: src/includes/classes/MenuPage.php:3973
 msgid "However, relative dates used in the To Date are slightly different. With the exception of the phrase \"now\", relative To Date phrases are relative to the From Date you've given."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3968
+#: src/includes/classes/MenuPage.php:3974
 msgid "Typing (or selecting) a specific date in either field will behave as expected; i.e., you get data from (or to) that specific date. Only relative dates (i.e., phrases) are impacted by the above."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3969
+#: src/includes/classes/MenuPage.php:3975
 #: src/includes/classes/UtilsEvent.php:49
 #: src/includes/classes/UtilsEvent.php:75
 #: src/includes/classes/UtilsEvent.php:254
@@ -3187,387 +3190,387 @@ msgstr ""
 msgid "[?]"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3987
-#: src/includes/classes/MenuPage.php:4107
+#: src/includes/classes/MenuPage.php:3993
+#: src/includes/classes/MenuPage.php:4113
 msgid "Subscr. Totals"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3991
+#: src/includes/classes/MenuPage.php:3997
 msgid "Post Popularity"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3992
+#: src/includes/classes/MenuPage.php:3998
 msgid "Most Popular Posts"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:3993
-msgid "Least Popular Posts"
-msgstr ""
-
-#: src/includes/classes/MenuPage.php:3996
-#: src/includes/classes/MenuPage.php:4111
-msgid "Geographic Popularity"
-msgstr ""
-
-#: src/includes/classes/MenuPage.php:3997
-msgid "Audience by Country"
-msgstr ""
-
-#: src/includes/classes/MenuPage.php:3998
-msgid "Audience by US Region"
-msgstr ""
-
 #: src/includes/classes/MenuPage.php:3999
-msgid "Audience by CA Region"
+msgid "Least Popular Posts"
 msgstr ""
 
 #: src/includes/classes/MenuPage.php:4002
 #: src/includes/classes/MenuPage.php:4117
-msgid "Status Change Percentages"
+msgid "Geographic Popularity"
 msgstr ""
 
 #: src/includes/classes/MenuPage.php:4003
-msgid "Confirmation Percentages"
+msgid "Audience by Country"
 msgstr ""
 
 #: src/includes/classes/MenuPage.php:4004
-msgid "Suspension Percentages"
+msgid "Audience by US Region"
 msgstr ""
 
 #: src/includes/classes/MenuPage.php:4005
+msgid "Audience by CA Region"
+msgstr ""
+
+#: src/includes/classes/MenuPage.php:4008
+#: src/includes/classes/MenuPage.php:4123
+msgid "Status Change Percentages"
+msgstr ""
+
+#: src/includes/classes/MenuPage.php:4009
+msgid "Confirmation Percentages"
+msgstr ""
+
+#: src/includes/classes/MenuPage.php:4010
+msgid "Suspension Percentages"
+msgstr ""
+
+#: src/includes/classes/MenuPage.php:4011
 msgid "Unsubscribe Percentages"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4028
-#: src/includes/classes/MenuPage.php:4143
-#: src/includes/classes/MenuPage.php:4266
-#: src/includes/classes/MenuPage.php:4354
+#: src/includes/classes/MenuPage.php:4034
+#: src/includes/classes/MenuPage.php:4149
+#: src/includes/classes/MenuPage.php:4272
+#: src/includes/classes/MenuPage.php:4360
 msgid "Chart Type"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4039
-#: src/includes/classes/MenuPage.php:4170
+#: src/includes/classes/MenuPage.php:4045
+#: src/includes/classes/MenuPage.php:4176
 msgid "Exclude"
-msgstr ""
-
-#: src/includes/classes/MenuPage.php:4040
-#: src/includes/classes/MenuPage.php:4171
-msgid "One or More..."
 msgstr ""
 
 #: src/includes/classes/MenuPage.php:4046
 #: src/includes/classes/MenuPage.php:4177
+msgid "One or More..."
+msgstr ""
+
+#: src/includes/classes/MenuPage.php:4052
+#: src/includes/classes/MenuPage.php:4183
 msgid "Systematics (i.e., Show User-Initiated Events Only)"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4053
-#: src/includes/classes/MenuPage.php:4184
-#: src/includes/classes/MenuPage.php:4277
-#: src/includes/classes/MenuPage.php:4382
+#: src/includes/classes/MenuPage.php:4059
+#: src/includes/classes/MenuPage.php:4190
+#: src/includes/classes/MenuPage.php:4283
+#: src/includes/classes/MenuPage.php:4388
 msgid "From Date (%1$s) %2$s"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4054
-#: src/includes/classes/MenuPage.php:4185
-#: src/includes/classes/MenuPage.php:4278
-#: src/includes/classes/MenuPage.php:4383
+#: src/includes/classes/MenuPage.php:4060
+#: src/includes/classes/MenuPage.php:4191
+#: src/includes/classes/MenuPage.php:4284
+#: src/includes/classes/MenuPage.php:4389
 msgid "e.g., 7 days ago; %1$s 00:00"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4062
-#: src/includes/classes/MenuPage.php:4193
-#: src/includes/classes/MenuPage.php:4286
-#: src/includes/classes/MenuPage.php:4391
+#: src/includes/classes/MenuPage.php:4068
+#: src/includes/classes/MenuPage.php:4199
+#: src/includes/classes/MenuPage.php:4292
+#: src/includes/classes/MenuPage.php:4397
 msgid "To Date (%1$s) %2$s"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4063
-#: src/includes/classes/MenuPage.php:4194
-#: src/includes/classes/MenuPage.php:4287
-#: src/includes/classes/MenuPage.php:4392
+#: src/includes/classes/MenuPage.php:4069
+#: src/includes/classes/MenuPage.php:4200
+#: src/includes/classes/MenuPage.php:4293
+#: src/includes/classes/MenuPage.php:4398
 msgid "e.g., now; %1$s 00:00"
-msgstr ""
-
-#: src/includes/classes/MenuPage.php:4071
-#: src/includes/classes/MenuPage.php:4202
-#: src/includes/classes/MenuPage.php:4295
-#: src/includes/classes/MenuPage.php:4400
-msgid "Breakdown By"
-msgstr ""
-
-#: src/includes/classes/MenuPage.php:4072
-#: src/includes/classes/MenuPage.php:4203
-#: src/includes/classes/MenuPage.php:4296
-#: src/includes/classes/MenuPage.php:4401
-msgid "e.g., hours, days, weeks, months, years"
 msgstr ""
 
 #: src/includes/classes/MenuPage.php:4077
 #: src/includes/classes/MenuPage.php:4208
 #: src/includes/classes/MenuPage.php:4301
 #: src/includes/classes/MenuPage.php:4406
-msgid "hours"
+msgid "Breakdown By"
 msgstr ""
 
 #: src/includes/classes/MenuPage.php:4078
 #: src/includes/classes/MenuPage.php:4209
 #: src/includes/classes/MenuPage.php:4302
 #: src/includes/classes/MenuPage.php:4407
+msgid "e.g., hours, days, weeks, months, years"
+msgstr ""
+
+#: src/includes/classes/MenuPage.php:4083
+#: src/includes/classes/MenuPage.php:4214
+#: src/includes/classes/MenuPage.php:4307
+#: src/includes/classes/MenuPage.php:4412
+msgid "hours"
+msgstr ""
+
+#: src/includes/classes/MenuPage.php:4084
+#: src/includes/classes/MenuPage.php:4215
+#: src/includes/classes/MenuPage.php:4308
+#: src/includes/classes/MenuPage.php:4413
 msgid "days"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4079
-#: src/includes/classes/MenuPage.php:4210
-#: src/includes/classes/MenuPage.php:4303
-#: src/includes/classes/MenuPage.php:4408
+#: src/includes/classes/MenuPage.php:4085
+#: src/includes/classes/MenuPage.php:4216
+#: src/includes/classes/MenuPage.php:4309
+#: src/includes/classes/MenuPage.php:4414
 msgid "weeks"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4080
-#: src/includes/classes/MenuPage.php:4211
-#: src/includes/classes/MenuPage.php:4304
-#: src/includes/classes/MenuPage.php:4409
+#: src/includes/classes/MenuPage.php:4086
+#: src/includes/classes/MenuPage.php:4217
+#: src/includes/classes/MenuPage.php:4310
+#: src/includes/classes/MenuPage.php:4415
 msgid "months"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4081
-#: src/includes/classes/MenuPage.php:4212
-#: src/includes/classes/MenuPage.php:4305
-#: src/includes/classes/MenuPage.php:4410
+#: src/includes/classes/MenuPage.php:4087
+#: src/includes/classes/MenuPage.php:4218
+#: src/includes/classes/MenuPage.php:4311
+#: src/includes/classes/MenuPage.php:4416
 msgid "years"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4089
+#: src/includes/classes/MenuPage.php:4095
 msgid "Subscriptions Overview"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4108
+#: src/includes/classes/MenuPage.php:4114
 msgid "Total Subscriptions (for Post ID)"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4112
+#: src/includes/classes/MenuPage.php:4118
 msgid "Audience by Country (for Post ID)"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4113
+#: src/includes/classes/MenuPage.php:4119
 msgid "Audience by US Region (for Post ID)"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4114
+#: src/includes/classes/MenuPage.php:4120
 msgid "Audience by CA Region (for Post ID)"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4118
+#: src/includes/classes/MenuPage.php:4124
 msgid "Confirmation Percentages (for Post ID)"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4119
+#: src/includes/classes/MenuPage.php:4125
 msgid "Suspension Percentages (for Post ID)"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4120
+#: src/includes/classes/MenuPage.php:4126
 msgid "Unsubscribe Percentages (for Post ID)"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4153
-#: src/includes/classes/MenuPage.php:4365
+#: src/includes/classes/MenuPage.php:4159
+#: src/includes/classes/MenuPage.php:4371
 #: src/includes/classes/UtilsEvent.php:273
 #: src/includes/classes/UtilsEvent.php:318
 msgid "Post ID"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4220
+#: src/includes/classes/MenuPage.php:4226
 msgid "Subscriptions by Post ID"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4242
-#: src/includes/classes/MenuPage.php:4331
+#: src/includes/classes/MenuPage.php:4248
+#: src/includes/classes/MenuPage.php:4337
 msgid "Processed Notification Totals"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4246
-#: src/includes/classes/MenuPage.php:4335
+#: src/includes/classes/MenuPage.php:4252
+#: src/includes/classes/MenuPage.php:4341
 msgid "Processed Notification Percentages"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4247
+#: src/includes/classes/MenuPage.php:4253
 msgid "Processed Percentages"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4248
+#: src/includes/classes/MenuPage.php:4254
 msgid "Notified Percentages"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4249
+#: src/includes/classes/MenuPage.php:4255
 msgid "Invalidated Percentages"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4313
+#: src/includes/classes/MenuPage.php:4319
 msgid "Queued Notifications Overview"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4332
+#: src/includes/classes/MenuPage.php:4338
 msgid "Total Processed Notifications (for Post ID)"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4336
+#: src/includes/classes/MenuPage.php:4342
 msgid "Processed Percentages (for Post ID)"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4337
+#: src/includes/classes/MenuPage.php:4343
 msgid "Notified Percentages (for Post ID)"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4338
+#: src/includes/classes/MenuPage.php:4344
 msgid "Invalidated Percentages (for Post ID)"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4418
+#: src/includes/classes/MenuPage.php:4424
 msgid "Queued Notifications by Post ID"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4466
-#: src/includes/classes/MenuPage.php:4563 src/includes/classes/Plugin.php:1223
-#: src/includes/classes/Plugin.php:1224
+#: src/includes/classes/MenuPage.php:4472
+#: src/includes/classes/MenuPage.php:4572 src/includes/classes/Plugin.php:1417
+#: src/includes/classes/Plugin.php:1418
 msgid "Pro Updater"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4474
+#: src/includes/classes/MenuPage.php:4480
 msgid "From this page you can update to the latest version of %1$s Pro for WordPress. %1$s Pro is a premium product available for purchase @ <a href=\"%2$s\" target=\"_blank\">%3$s</a>. In order to connect with our update servers, we ask that you supply your account login details for <a href=\"%2$s\" target=\"_blank\">%3$s</a>. If you prefer not to provide your password, you can use your License Key in place of your password. Your License Key is located under \"My Account\" when you log in @ <a href=\"%2$s\" target=\"_blank\">%3$s</a>. This will authenticate your copy of %1$s Pro; providing you with access to the latest version. You only need to enter these credentials once. %1$s Pro will save them in your WordPress database."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4481
+#: src/includes/classes/MenuPage.php:4487
 msgid "Customer Username"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4482
+#: src/includes/classes/MenuPage.php:4488
 msgid "e.g., johndoe22"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4495
+#: src/includes/classes/MenuPage.php:4502
 msgid "Customer Password or Product License Key"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4502
+#: src/includes/classes/MenuPage.php:4510
 msgid "Update Credentials"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4516
+#: src/includes/classes/MenuPage.php:4524
 msgid "Yes, display a notification in my WordPress Dashboard when a new version is available."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4517
+#: src/includes/classes/MenuPage.php:4525
 msgid "No, do not display any update notifications in my WordPress Dashboard."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4519
+#: src/includes/classes/MenuPage.php:4527
 msgid "When a new version of %1$s Pro becomes available, %1$s Pro can display a notification in your WordPress Dashboard prompting you to return to this page and perform an upgrade."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4525
+#: src/includes/classes/MenuPage.php:4533
 msgid "Update Notifier"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4532
+#: src/includes/classes/MenuPage.php:4540
 msgid "Update Now"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4560
+#: src/includes/classes/MenuPage.php:4568
 msgid "Restore default plugin options? You will lose all of your current settings! Are you absolutely sure?"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4560
+#: src/includes/classes/MenuPage.php:4568
 msgid "Restore"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4564
+#: src/includes/classes/MenuPage.php:4574
 msgid "Newsletter (Subscribe)"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4565
+#: src/includes/classes/MenuPage.php:4575
 msgid "Beta Testers"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4569
-msgid "%1$s&trade; Pro v%2$s (<a href=\"https://comment-mail.com/changelog/\" target=\"_blank\">changelog</a>)"
+#: src/includes/classes/MenuPage.php:4579
+msgid "%1$s&trade;%2$s v%3$s (<a href=\"https://comment-mail.com/changelog/\" target=\"_blank\">changelog</a>)"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4579
+#: src/includes/classes/MenuPage.php:4589
 msgid "Options"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4584 src/includes/classes/Plugin.php:1687
-msgid "Preview Pro Features"
-msgstr ""
-
-#: src/includes/classes/MenuPage.php:4586
-msgid "Pro Upgrade"
-msgstr ""
-
-#: src/includes/classes/MenuPage.php:4594
-#: src/includes/classes/MenuPage.php:4601
+#: src/includes/classes/MenuPage.php:4597
+#: src/includes/classes/MenuPage.php:4604
 msgid "StCR Auto-Import"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4628
+#: src/includes/classes/MenuPage.php:4617 src/includes/classes/Plugin.php:1882
+msgid "Preview Pro Features"
+msgstr ""
+
+#: src/includes/classes/MenuPage.php:4619
+msgid "Pro Upgrade"
+msgstr ""
+
+#: src/includes/classes/MenuPage.php:4639
 msgid "Open All Panels"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4629
+#: src/includes/classes/MenuPage.php:4640
 msgid "Close All Panels"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4648
+#: src/includes/classes/MenuPage.php:4659
 msgid "close"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4649
+#: src/includes/classes/MenuPage.php:4660
 msgid "<strong>Pro Features (Preview)</strong> ~ New advanced option panels below. Please explore before <a href=\"%1$s\" target=\"_blank\">upgrading <i class=\"fa fa-heart-o\"></i></a>."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4650
+#: src/includes/classes/MenuPage.php:4661
 msgid "<small><strong>MORE:</strong> in addition to what you see below, the pro version also includes import/export functionality, stats/graphs, and advanced PHP-based template options. [<a href=\"%2$s\" target=\"_blank\">learn more</a>]</small>"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4655
+#: src/includes/classes/MenuPage.php:4666
 msgid "All templates come preconfigured; customization is optional <i class=\"fa fa-smile-o\"></i>"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4660
+#: src/includes/classes/MenuPage.php:4671
 msgid "<strong>Note:</strong> Your <a href=\"%1$s\">Discussion Settings</a> indicate that comment moderation is enabled. That's fine. However, please remember that no emails will be sent until a comment (or reply) is approved."
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4745
+#: src/includes/classes/MenuPage.php:4756
 msgid "Display Chart"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4888
+#: src/includes/classes/MenuPage.php:4899
 msgid "select all; copy"
 msgstr ""
 
-#: src/includes/classes/MenuPageActions.php:100
+#: src/includes/classes/MenuPageActions.php:102
 msgid "%1$s&trade; options updated successfully."
 msgstr ""
 
-#: src/includes/classes/MenuPageActions.php:106
-#: src/includes/classes/MenuPageActions.php:114
+#: src/includes/classes/MenuPageActions.php:108
+#: src/includes/classes/MenuPageActions.php:116
 msgid "Test Email Message sent by %1$s™"
 msgstr ""
 
-#: src/includes/classes/MenuPageActions.php:107
-#: src/includes/classes/MenuPageActions.php:115
+#: src/includes/classes/MenuPageActions.php:109
+#: src/includes/classes/MenuPageActions.php:117
 msgid "Test email message sent by %1$s&trade; from: <code>%2$s</code>."
 msgstr ""
 
-#: src/includes/classes/MenuPageActions.php:142
+#: src/includes/classes/MenuPageActions.php:144
 msgid "Template mode updated to: <code>%2$s</code>."
 msgstr ""
 
-#: src/includes/classes/MenuPageActions.php:177
+#: src/includes/classes/MenuPageActions.php:179
 msgid "%1$s&trade; default options restored successfully."
 msgstr ""
 
-#: src/includes/classes/MenuPageActions.php:412
+#: src/includes/classes/MenuPageActions.php:415
 msgid "Unknown error. Please wait 15 minutes and try again."
 msgstr ""
 
@@ -3846,7 +3849,7 @@ msgstr ""
 
 #: src/includes/classes/MenuPageSubFormBase.php:113
 #: src/includes/classes/MenuPageSubFormBase.php:281
-#: src/includes/classes/UtilsMarkup.php:507
+#: src/includes/classes/UtilsMarkup.php:521
 #: src/includes/templates/type-a/site/sub-actions/manage-sub-form-comment-id-row-via-ajax.php:20
 #: src/includes/templates/type-a/site/sub-actions/manage-sub-form.php:204
 #: src/includes/templates/type-s/site/sub-actions/manage-sub-form-comment-id-row-via-ajax.php:20
@@ -4005,7 +4008,7 @@ msgstr ""
 
 #: src/includes/classes/MenuPageSubsTable.php:66
 #: src/includes/classes/MenuPageTableBase.php:2200
-#: src/includes/classes/UtilsMarkup.php:540
+#: src/includes/classes/UtilsMarkup.php:554
 msgid "Comment"
 msgstr ""
 
@@ -4063,7 +4066,7 @@ msgid "Edit Subscr."
 msgstr ""
 
 #: src/includes/classes/MenuPageSubsTable.php:253
-#: src/includes/classes/Plugin.php:1082
+#: src/includes/classes/Plugin.php:1273
 msgid "Resend email confirmation link? Are you sure?"
 msgstr ""
 
@@ -4092,7 +4095,7 @@ msgid "Trash"
 msgstr ""
 
 #: src/includes/classes/MenuPageSubsTable.php:264
-#: src/includes/classes/Plugin.php:1085 src/includes/classes/UtilsI18n.php:415
+#: src/includes/classes/Plugin.php:1276 src/includes/classes/UtilsI18n.php:419
 msgid "Delete permanently? Are you sure?"
 msgstr ""
 
@@ -4174,156 +4177,152 @@ msgstr ""
 msgid "No %1$s to display."
 msgstr ""
 
-#: src/includes/classes/Plugin.php:825
+#: src/includes/classes/Plugin.php:1001
 msgid "<p style=\"font-size:120%%; font-weight:400; margin:0;\"><strong>%1$s&trade;</strong> + <strong>Subscribe to Comments Reloaded</strong> = Possible Conflict!</p>"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:826
+#: src/includes/classes/Plugin.php:1002
 msgid "<strong>WARNING (ACTION REQUIRED):</strong> Running %1$s&trade; while Subscribe to Comments Reloaded is <em>also</em> an active WordPress plugin <strong>can cause problems</strong>; i.e., these two plugins do the same thing—%1$s being the newer of the two. We recommend keeping %1$s; please <a href=\"%2$s\">deactivate the Subscribe to Comments Reloaded plugin</a> to get rid of this message."
 msgstr ""
 
-#: src/includes/classes/Plugin.php:849
+#: src/includes/classes/Plugin.php:1025
 msgid "<p style=\"font-size:120%%; font-weight:400; margin:0;\"><strong>%1$s&trade;</strong> + <strong>Jetpack Subscriptions module</strong> (with Follow Comments enabled) = Possible Conflict!</p>"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:850
+#: src/includes/classes/Plugin.php:1026
 msgid "<strong>WARNING (ACTION REQUIRED):</strong> Running %1$s&trade; while the Jetpack Subscriptions module (with Follow Comments enabled) is <em>also</em> active in WordPress <strong>can cause problems</strong>; i.e., these two handle the same thing—%1$s being the newer of the two. We recommend keeping %1$s; please deactivate the Follow Comments functionality in the Jetpack Subscriptions module to get rid of this message (see <strong>Dashboard → Settings → Discussion → Jetpack Subscriptions Settings</strong>)."
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1089
+#: src/includes/classes/Plugin.php:1280
 msgid "January"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1090
+#: src/includes/classes/Plugin.php:1281
 msgid "February"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1091
+#: src/includes/classes/Plugin.php:1282
 msgid "March"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1092
+#: src/includes/classes/Plugin.php:1283
 msgid "April"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1093
+#: src/includes/classes/Plugin.php:1284
 msgid "May"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1094
+#: src/includes/classes/Plugin.php:1285
 msgid "June"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1095
+#: src/includes/classes/Plugin.php:1286
 msgid "July"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1096
+#: src/includes/classes/Plugin.php:1287
 msgid "August"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1097
+#: src/includes/classes/Plugin.php:1288
 msgid "September"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1098
+#: src/includes/classes/Plugin.php:1289
 msgid "October"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1099
+#: src/includes/classes/Plugin.php:1290
 msgid "November"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1100
+#: src/includes/classes/Plugin.php:1291
 msgid "December"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1103
+#: src/includes/classes/Plugin.php:1294
 msgid "Sun"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1104
+#: src/includes/classes/Plugin.php:1295
 msgid "Mon"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1105
+#: src/includes/classes/Plugin.php:1296
 msgid "Tue"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1106
+#: src/includes/classes/Plugin.php:1297
 msgid "Wed"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1107
+#: src/includes/classes/Plugin.php:1298
 msgid "Thu"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1108
+#: src/includes/classes/Plugin.php:1299
 msgid "Fri"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1109
+#: src/includes/classes/Plugin.php:1300
 msgid "Sat"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1157 src/includes/classes/Plugin.php:1158
+#: src/includes/classes/Plugin.php:1348 src/includes/classes/Plugin.php:1349
 msgid "Config. Options"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1186 src/includes/classes/Plugin.php:1187
+#: src/includes/classes/Plugin.php:1377 src/includes/classes/Plugin.php:1378
 msgid "Subscriptions"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1191 src/includes/classes/Plugin.php:1205
+#: src/includes/classes/Plugin.php:1382 src/includes/classes/Plugin.php:1396
 msgid "Event Log"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1192
+#: src/includes/classes/Plugin.php:1383
 msgid "Sub. Event Log"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1200 src/includes/classes/Plugin.php:1201
+#: src/includes/classes/Plugin.php:1391 src/includes/classes/Plugin.php:1392
 msgid "Mail Queue"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1206
+#: src/includes/classes/Plugin.php:1397
 msgid "Queue Event Log"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1214 src/includes/classes/Plugin.php:1215
+#: src/includes/classes/Plugin.php:1406 src/includes/classes/Plugin.php:1407
 msgid "Statistics/Charts"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1313 src/includes/classes/Plugin.php:1367
-#: src/includes/classes/Plugin.php:1420 src/includes/classes/Plugin.php:1473
+#: src/includes/classes/Plugin.php:1508 src/includes/classes/Plugin.php:1562
+#: src/includes/classes/Plugin.php:1615 src/includes/classes/Plugin.php:1668
 msgid "Per Page"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1685
+#: src/includes/classes/Plugin.php:1880
 msgid "Settings"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1690
+#: src/includes/classes/Plugin.php:1885
 msgid "Upgrade"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1770
+#: src/includes/classes/Plugin.php:1966
 msgid "<strong>%1$s Pro:</strong> a new version is now available. Please <a href=\"%2$s\">upgrade to v%3$s</a>."
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1988
+#: src/includes/classes/Plugin.php:2189
 msgid "<strong>%1$s is disabled. Please visit the <a href=\"%2$s\">settings</a> and enable the plugin</strong>."
 msgstr ""
 
-#: src/includes/classes/Plugin.php:2057
-msgid "dismiss &times;"
-msgstr ""
-
-#: src/includes/classes/Plugin.php:2455
+#: src/includes/classes/Plugin.php:2657
 msgid "Every 5 Minutes"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:2456
+#: src/includes/classes/Plugin.php:2658
 msgid "Every 15 Minutes"
 msgstr ""
 
@@ -4331,7 +4330,7 @@ msgstr ""
 msgid "Coming soon..."
 msgstr ""
 
-#: src/includes/classes/PostSmallMetaBox.php:64
+#: src/includes/classes/PostSmallMetaBox.php:62
 msgid "Most Recent Subscriptions"
 msgstr ""
 
@@ -4341,7 +4340,7 @@ msgstr ""
 msgid "Insertion failure."
 msgstr ""
 
-#: src/includes/classes/QueueProcessor.php:674
+#: src/includes/classes/QueueProcessor.php:682
 #: src/includes/classes/SubInserter.php:788
 #: src/includes/classes/UserRegister.php:84
 #: src/includes/classes/UserRegister.php:93
@@ -4352,65 +4351,65 @@ msgstr ""
 msgid "Invalid shortcode conditional expression."
 msgstr ""
 
-#: src/includes/classes/SsoFacebook.php:63
-#: src/includes/classes/SsoGoogle.php:63
-#: src/includes/classes/SsoLinkedin.php:66
+#: src/includes/classes/SsoFacebook.php:64
+#: src/includes/classes/SsoGoogle.php:64
+#: src/includes/classes/SsoLinkedin.php:67
 msgid "Missing oAuth code."
 msgstr ""
 
-#: src/includes/classes/SsoFacebook.php:81
-#: src/includes/classes/SsoGoogle.php:81 src/includes/classes/SsoTwitter.php:82
+#: src/includes/classes/SsoFacebook.php:82
+#: src/includes/classes/SsoGoogle.php:82 src/includes/classes/SsoTwitter.php:83
 msgid "Failed to acquire user."
 msgstr ""
 
-#: src/includes/classes/SsoFacebook.php:84
-#: src/includes/classes/SsoGoogle.php:84
-#: src/includes/classes/SsoLinkedin.php:87
-#: src/includes/classes/SsoTwitter.php:85
+#: src/includes/classes/SsoFacebook.php:85
+#: src/includes/classes/SsoGoogle.php:85
+#: src/includes/classes/SsoLinkedin.php:88
+#: src/includes/classes/SsoTwitter.php:86
 msgid "Failed to obtain user."
 msgstr ""
 
-#: src/includes/classes/SsoLinkedin.php:63
+#: src/includes/classes/SsoLinkedin.php:64
 msgid "Missing oAuth code; user refusal."
 msgstr ""
 
-#: src/includes/classes/SsoLinkedin.php:84
+#: src/includes/classes/SsoLinkedin.php:85
 msgid "Failed to acquire user info."
 msgstr ""
 
-#: src/includes/classes/SsoServiceBase.php:209
+#: src/includes/classes/SsoServiceBase.php:210
 msgid "Empty authorization URL."
 msgstr ""
 
-#: src/includes/classes/SsoServiceBase.php:275
+#: src/includes/classes/SsoServiceBase.php:276
 msgid "Auto login failure."
 msgstr ""
 
-#: src/includes/classes/SsoServiceBase.php:280
+#: src/includes/classes/SsoServiceBase.php:281
 msgid "Auto register/login failure."
 msgstr ""
 
-#: src/includes/classes/SsoServiceBase.php:293
+#: src/includes/classes/SsoServiceBase.php:294
 msgid "Redirecting..."
 msgstr ""
 
-#: src/includes/classes/SsoServiceBase.php:332
+#: src/includes/classes/SsoServiceBase.php:333
 msgid "An unexpected error ocurred. Please start over and try again. Sorry!"
 msgstr ""
 
-#: src/includes/classes/SsoStorage.php:113
+#: src/includes/classes/SsoStorage.php:114
 msgid "Token not found."
 msgstr ""
 
-#: src/includes/classes/SsoStorage.php:177
+#: src/includes/classes/SsoStorage.php:178
 msgid "State not found."
 msgstr ""
 
-#: src/includes/classes/SsoStorage.php:241
+#: src/includes/classes/SsoStorage.php:242
 msgid "Extra data not found."
 msgstr ""
 
-#: src/includes/classes/SsoTwitter.php:64
+#: src/includes/classes/SsoTwitter.php:65
 msgid "Missing oAuth token/verifier."
 msgstr ""
 
@@ -4567,20 +4566,28 @@ msgstr ""
 msgid "Empty file."
 msgstr ""
 
-#: src/includes/classes/Template.php:352
+#: src/includes/classes/Template.php:355
 msgid "Missing template: `type-%1$s/%2$s`."
 msgstr ""
 
-#: src/includes/classes/Template.php:407
+#: src/includes/classes/Template.php:410
 msgid "Missing snippet: `%1$s`."
 msgstr ""
 
-#: src/includes/classes/Uninstaller.php:215
+#: src/includes/classes/Uninstaller.php:213
 msgid "DB table deletion failure: `%1$s`."
 msgstr ""
 
 #: src/includes/classes/Upgrader.php:56
 msgid "<strong>%1$s&trade;</strong> was automatically recompiled upon detecting an upgrade to v%2$s. Your existing configuration remains :-)"
+msgstr ""
+
+#: src/includes/classes/UpgraderVs.php:191
+msgid "<p><strong>%1$s has detected that your customized Advanced Templates are incompatible with this version.</strong></p>"
+msgstr ""
+
+#: src/includes/classes/UpgraderVs.php:193
+msgid "<p>%1$s v%2$s was released with a rewritten and improved codebase. This came with the unfortunate side effect of breaking backwards compatibility with any Advanced Templates that had been customized in a previous version.</p>"
 msgstr ""
 
 #: src/includes/classes/UserColumns.php:44
@@ -5057,35 +5064,41 @@ msgstr ""
 msgid "replies only"
 msgstr ""
 
-#: src/includes/classes/UtilsI18n.php:355
-msgid "%1$s subscription"
-msgid_plural "%1$s subscriptions"
+#: src/includes/classes/UtilsI18n.php:356
+msgid "No Subscriptions (View)"
+msgid_plural "No Subscriptions (View)"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/includes/classes/UtilsI18n.php:371
+#: src/includes/classes/UtilsI18n.php:358
+msgid "%1$s Subscriptions Total (View All)"
+msgid_plural "%1$s Subscriptions Total (View All)"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/includes/classes/UtilsI18n.php:375
 msgid "%1$s sub. event log entry"
 msgid_plural "%1$s sub. event log entries"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/includes/classes/UtilsI18n.php:387
+#: src/includes/classes/UtilsI18n.php:391
 msgid "%1$s queued notification"
 msgid_plural "%1$s queued notifications"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/includes/classes/UtilsI18n.php:403
+#: src/includes/classes/UtilsI18n.php:407
 msgid "%1$s queue event log entry"
 msgid_plural "%1$s queue event log entries"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/includes/classes/UtilsI18n.php:416
+#: src/includes/classes/UtilsI18n.php:420
 msgid "WARNING: Deleting log entries is not recommended, as this will have an impact on statistical reporting."
 msgstr ""
 
-#: src/includes/classes/UtilsI18n.php:417
+#: src/includes/classes/UtilsI18n.php:421
 msgid "If you want statistical reports to remain accurate, please leave ALL log entries intact."
 msgstr ""
 
@@ -5124,34 +5137,34 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: src/includes/classes/UtilsMarkup.php:172
-msgid "%1$s Subscription"
-msgid_plural "%1$s Subscriptions"
+msgid "%1$s Subscription Total (View)"
+msgid_plural "%1$s Subscriptions Total (View All)"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/includes/classes/UtilsMarkup.php:242
+#: src/includes/classes/UtilsMarkup.php:256
 msgid "No subscriptions at this time."
 msgstr ""
 
-#: src/includes/classes/UtilsMarkup.php:312
-#: src/includes/classes/UtilsMarkup.php:323
+#: src/includes/classes/UtilsMarkup.php:326
+#: src/includes/classes/UtilsMarkup.php:337
 msgid "User"
 msgstr ""
 
-#: src/includes/classes/UtilsMarkup.php:412
-#: src/includes/classes/UtilsMarkup.php:419
+#: src/includes/classes/UtilsMarkup.php:426
+#: src/includes/classes/UtilsMarkup.php:433
 msgid "Untitled"
 msgstr ""
 
-#: src/includes/classes/UtilsMarkup.php:850
+#: src/includes/classes/UtilsMarkup.php:864
 msgid "for WordPress"
 msgstr ""
 
-#: src/includes/classes/UtilsMarkup.php:852
+#: src/includes/classes/UtilsMarkup.php:866
 msgid "Powered by %1$s"
 msgstr ""
 
-#: src/includes/classes/UtilsMarkup.php:909
+#: src/includes/classes/UtilsMarkup.php:923
 msgid "WP Dashboard"
 msgstr ""
 
@@ -5328,43 +5341,43 @@ msgstr ""
 msgid "[New Comment] %1$s"
 msgstr ""
 
-#: src/includes/templates/type-a/email/footer.php:55
-#: src/includes/templates/type-s/email/footer.php:55
-msgid "Manage Subscriptions"
-msgstr ""
-
 #: src/includes/templates/type-a/email/footer.php:56
 #: src/includes/templates/type-s/email/footer.php:56
-msgid "<a href=\"%1$s\">My Comment Subscriptions</a>"
+msgid "Manage Subscriptions"
 msgstr ""
 
 #: src/includes/templates/type-a/email/footer.php:57
 #: src/includes/templates/type-s/email/footer.php:57
-msgid "<a href=\"%1$s\">One-Click Unsubscribe</a>"
+msgid "<a href=\"%1$s\">My Comment Subscriptions</a>"
 msgstr ""
 
-#: src/includes/templates/type-a/email/footer.php:92
-#: src/includes/templates/type-s/email/footer.php:92
-msgid "Contact Info"
+#: src/includes/templates/type-a/email/footer.php:58
+#: src/includes/templates/type-s/email/footer.php:58
+msgid "<a href=\"%1$s\">One-Click Unsubscribe</a>"
 msgstr ""
 
 #: src/includes/templates/type-a/email/footer.php:93
 #: src/includes/templates/type-s/email/footer.php:93
-msgid "Website URL: <a href=\"%1$s\">%2$s</a>"
+msgid "Contact Info"
 msgstr ""
 
 #: src/includes/templates/type-a/email/footer.php:94
 #: src/includes/templates/type-s/email/footer.php:94
+msgid "Website URL: <a href=\"%1$s\">%2$s</a>"
+msgstr ""
+
+#: src/includes/templates/type-a/email/footer.php:95
+#: src/includes/templates/type-s/email/footer.php:95
 msgid "Report Abuse to: <a href=\"mailto:%1$s\">%2$s</a>"
 msgstr ""
 
-#: src/includes/templates/type-a/email/footer.php:96
-#: src/includes/templates/type-s/email/footer.php:96
+#: src/includes/templates/type-a/email/footer.php:97
+#: src/includes/templates/type-s/email/footer.php:97
 msgid "Privacy Policy: <a href=\"%1$s\">%2$s</a>"
 msgstr ""
 
-#: src/includes/templates/type-a/email/footer.php:100
-#: src/includes/templates/type-s/email/footer.php:100
+#: src/includes/templates/type-a/email/footer.php:101
+#: src/includes/templates/type-s/email/footer.php:101
 msgid "Our Mailing Address"
 msgstr ""
 
