@@ -33,12 +33,15 @@ class Actions extends AbsBase
     {
         parent::__construct();
 
+        /*[pro strip-from="lite"]*/
         $this->maybeDoSsoActions();
+        /*[/pro]*/
         $this->maybeDoSubActions();
         $this->maybeDoWebhookActions();
         $this->maybeDoMenuPageActions();
     }
 
+    /*[pro strip-from="lite"]*/
     /**
      * Single sign-on actions.
      *
@@ -54,6 +57,7 @@ class Actions extends AbsBase
         }
         new SsoActions();
     }
+    /*[/pro]*/
 
     /**
      * Subscriber actions.
