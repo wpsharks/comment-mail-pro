@@ -407,8 +407,11 @@ class Plugin extends AbsBase
             # Core/systematic option keys.
 
             'version'                  => VERSION,
-            'crons_setup'              => '0', // `0` or timestamp.
             'stcr_transition_complete' => '0', // `0|1` transitioned?
+
+            'crons_setup'                             => '0', // `0` or timestamp.
+            'crons_setup_on_namespace'                => '', // The namespace on which they were set up.
+            'crons_setup_on_wp_with_schedules'        => '', // A sha1 hash of `wp_get_schedules()`
 
             # Related to data safeguards.
 
@@ -816,20 +819,8 @@ class Plugin extends AbsBase
          * Setup CRON-related hooks.
          */
         add_filter('cron_schedules', [$this, 'extendCronSchedules'], 10, 1);
+        add_action('init', [$this, 'checkCronSetup'], PHP_INT_MAX);
 
-        if ((integer) $this->options['crons_setup'] < 1382523750) {
-            wp_clear_scheduled_hook('_cron_'.GLOBAL_NS.'_queue_processor');
-            wp_schedule_event(time() + 60, 'every5m', '_cron_'.GLOBAL_NS.'_queue_processor');
-
-            wp_clear_scheduled_hook('_cron_'.GLOBAL_NS.'_sub_cleaner');
-            wp_schedule_event(time() + 60, 'hourly', '_cron_'.GLOBAL_NS.'_sub_cleaner');
-
-            wp_clear_scheduled_hook('_cron_'.GLOBAL_NS.'_log_cleaner');
-            wp_schedule_event(time() + 60, 'hourly', '_cron_'.GLOBAL_NS.'_log_cleaner');
-
-            $this->options['crons_setup'] = (string) time();
-            update_option(GLOBAL_NS.'_options', $this->options);
-        }
         add_action('_cron_'.GLOBAL_NS.'_queue_processor', [$this, 'queueProcessor'], 10);
         add_action('_cron_'.GLOBAL_NS.'_sub_cleaner', [$this, 'subCleaner'], 10);
         add_action('_cron_'.GLOBAL_NS.'_log_cleaner', [$this, 'logCleaner'], 10);
@@ -2667,6 +2658,65 @@ class Plugin extends AbsBase
         $schedules['every15m'] = ['interval' => 900, 'display' => __('Every 15 Minutes', SLUG_TD)];
 
         return apply_filters(__METHOD__, $schedules, get_defined_vars());
+    }
+
+    /**
+     * Checks Cron setup, validates schedules, and reschedules events if necessary.
+     *
+     * @attaches-to `init` hook.
+     *
+     * @since 16xxxx Improving WP Cron setup and validation of schedules
+     */
+    public function checkCronSetup()
+    {
+        if ((integer) $this->options['crons_setup'] < 1465568335
+            || $this->options['crons_setup_on_namespace'] !== __NAMESPACE__
+            || $this->options['crons_setup_on_wp_with_schedules'] !== sha1(serialize(wp_get_schedules()))
+            || !wp_next_scheduled('_cron_'.GLOBAL_NS.'_queue_processor')
+            || !wp_next_scheduled('_cron_'.GLOBAL_NS.'_sub_cleaner')
+            || !wp_next_scheduled('_cron_'.GLOBAL_NS.'_log_cleaner')
+        ) {
+            wp_clear_scheduled_hook('_cron_'.GLOBAL_NS.'_queue_processor');
+            wp_schedule_event(time() + 60, 'every5m', '_cron_'.GLOBAL_NS.'_queue_processor');
+
+            wp_clear_scheduled_hook('_cron_'.GLOBAL_NS.'_sub_cleaner');
+            wp_schedule_event(time() + 60, 'hourly', '_cron_'.GLOBAL_NS.'_sub_cleaner');
+
+            wp_clear_scheduled_hook('_cron_'.GLOBAL_NS.'_log_cleaner');
+            wp_schedule_event(time() + 60, 'hourly', '_cron_'.GLOBAL_NS.'_log_cleaner');
+
+            $this->options['crons_setup']                      = time();
+            $this->options['crons_setup_on_namespace']         = __NAMESPACE__;
+            $this->options['crons_setup_on_wp_with_schedules'] = sha1(serialize(wp_get_schedules()));
+            update_option(GLOBAL_NS.'_options', $this->options);
+        }
+    }
+
+    /**
+     * Resets `crons_setup` and clears WP-Cron schedules.
+     *
+     * @since 16xxxx Fixing bug with Queue Processor cron disappearing in some scenarios
+     *
+     * @note This MUST happen upon uninstall and deactivation due to buggy WP_Cron behavior. Events with a custom schedule will disappear when plugin is not active (see http://bit.ly/1lGdr78).
+     */
+    public function resetCronSetup()
+    {
+        if (is_multisite()) { // Main site CRON jobs.
+            switch_to_blog(get_current_site()->blog_id);
+            wp_clear_scheduled_hook('_cron_'.GLOBAL_NS.'_queue_processor');
+            wp_clear_scheduled_hook('_cron_'.GLOBAL_NS.'_sub_cleaner');
+            wp_clear_scheduled_hook('_cron_'.GLOBAL_NS.'_log_cleaner');
+            restore_current_blog(); // Restore current blog.
+        } else { // Standard WP installation.
+            wp_clear_scheduled_hook('_cron_'.GLOBAL_NS.'_queue_processor');
+            wp_clear_scheduled_hook('_cron_'.GLOBAL_NS.'_sub_cleaner');
+            wp_clear_scheduled_hook('_cron_'.GLOBAL_NS.'_log_cleaner');
+        }
+
+        $this->options['crons_setup']                      = $this->default_options['crons_setup'];
+        $this->options['crons_setup_on_namespace']         = $this->default_options['crons_setup_on_namespace'];
+        $this->options['crons_setup_on_wp_with_schedules'] = $this->default_options['crons_setup_on_wp_with_schedules'];
+        update_option(GLOBAL_NS.'_options', $this->options);
     }
 
     /**
