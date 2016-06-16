@@ -1349,12 +1349,14 @@ class Plugin extends AbsBase
         $_page_title = NAME.'&trade; &#8594; '.__('Config. Options', SLUG_TD);
         add_submenu_page(GLOBAL_NS, $_page_title, $_menu_title, $this->cap, GLOBAL_NS, [$this, 'menuPageOptions']);
 
-        $_menu_title = // Visible on-demand only.
-            '<small><em>'.$child_branch_indent.__('Import/Export', SLUG_TD).'</em></small>';
-        $_page_title = NAME.'&trade; &#8594; '.__('Import/Export', SLUG_TD);
-        //$_menu_parent                                          = $current_menu_page === GLOBAL_NS.'_import_export' ? GLOBAL_NS : NULL;
-        $this->menu_page_hooks[GLOBAL_NS.'_import_export'] = add_submenu_page(GLOBAL_NS, $_page_title, $_menu_title, $this->cap, GLOBAL_NS.'_import_export', [$this, 'menuPageImportExport']);
-        add_action('load-'.$this->menu_page_hooks[GLOBAL_NS.'_import_export'], [$this, 'menuPageImportExportScreen']);
+        if (IS_PRO || ImportStcr::dataExists()) {
+            $_menu_title = // Visible on-demand only.
+                '<small><em>'.$child_branch_indent.__('Import/Export', SLUG_TD).'</em></small>';
+            $_page_title = NAME.'&trade; &#8594; '.__('Import/Export', SLUG_TD);
+            //$_menu_parent                                          = $current_menu_page === GLOBAL_NS.'_import_export' ? GLOBAL_NS : NULL;
+            $this->menu_page_hooks[GLOBAL_NS.'_import_export'] = add_submenu_page(GLOBAL_NS, $_page_title, $_menu_title, $this->cap, GLOBAL_NS.'_import_export', [$this, 'menuPageImportExport']);
+            add_action('load-'.$this->menu_page_hooks[GLOBAL_NS.'_import_export'], [$this, 'menuPageImportExportScreen']);
+        }
 
         $_menu_title = // Visible on-demand only.
             '<small><em>'.$child_branch_indent.__('Email Templates', SLUG_TD).'</em></small>';
