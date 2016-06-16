@@ -2713,6 +2713,10 @@ class Plugin extends AbsBase
             wp_clear_scheduled_hook('_cron_'.GLOBAL_NS.'_log_cleaner');
         }
 
+        if (!empty($GLOBALS[GLOBAL_NS.'_uninstalling'])) {
+            return; // Uninstalling, nothing more to do here
+        }
+
         $this->options['crons_setup']                      = $this->default_options['crons_setup'];
         $this->options['crons_setup_on_namespace']         = $this->default_options['crons_setup_on_namespace'];
         $this->options['crons_setup_on_wp_with_schedules'] = $this->default_options['crons_setup_on_wp_with_schedules'];
