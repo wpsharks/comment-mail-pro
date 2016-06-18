@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Comment Mail Pro package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Comment Mail Pro 160611-RC\n"
+"Project-Id-Version: Comment Mail Pro 160618\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/comment-mail-pro\n"
-"POT-Creation-Date: 2016-06-11 02:07:43+00:00\n"
+"POT-Creation-Date: 2016-06-18 14:40:02+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1790,15 +1790,15 @@ msgstr ""
 
 #: src/includes/classes/MenuPage.php:1781
 #: src/includes/classes/MenuPage.php:2387
-#: src/includes/classes/MenuPage.php:4608 src/includes/classes/Plugin.php:1360
-#: src/includes/classes/Plugin.php:1361
+#: src/includes/classes/MenuPage.php:4608 src/includes/classes/Plugin.php:1362
+#: src/includes/classes/Plugin.php:1363
 msgid "Email Templates"
 msgstr ""
 
 #: src/includes/classes/MenuPage.php:1781
 #: src/includes/classes/MenuPage.php:3020
-#: src/includes/classes/MenuPage.php:4612 src/includes/classes/Plugin.php:1367
-#: src/includes/classes/Plugin.php:1368
+#: src/includes/classes/MenuPage.php:4612 src/includes/classes/Plugin.php:1369
+#: src/includes/classes/Plugin.php:1370
 msgid "Site Templates"
 msgstr ""
 
@@ -2110,8 +2110,8 @@ msgstr ""
 
 #: src/includes/classes/MenuPage.php:2015
 #: src/includes/classes/MenuPage.php:4594
-#: src/includes/classes/MenuPage.php:4601 src/includes/classes/Plugin.php:1353
-#: src/includes/classes/Plugin.php:1354
+#: src/includes/classes/MenuPage.php:4601 src/includes/classes/Plugin.php:1354
+#: src/includes/classes/Plugin.php:1355
 msgid "Import/Export"
 msgstr ""
 
@@ -3430,8 +3430,8 @@ msgid "Queued Notifications by Post ID"
 msgstr ""
 
 #: src/includes/classes/MenuPage.php:4472
-#: src/includes/classes/MenuPage.php:4572 src/includes/classes/Plugin.php:1417
-#: src/includes/classes/Plugin.php:1418
+#: src/includes/classes/MenuPage.php:4572 src/includes/classes/Plugin.php:1419
+#: src/includes/classes/Plugin.php:1420
 msgid "Pro Updater"
 msgstr ""
 
@@ -3504,7 +3504,7 @@ msgstr ""
 msgid "StCR Auto-Import"
 msgstr ""
 
-#: src/includes/classes/MenuPage.php:4617 src/includes/classes/Plugin.php:1882
+#: src/includes/classes/MenuPage.php:4617 src/includes/classes/Plugin.php:1884
 msgid "Preview Pro Features"
 msgstr ""
 
@@ -4273,56 +4273,56 @@ msgstr ""
 msgid "Config. Options"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1377 src/includes/classes/Plugin.php:1378
+#: src/includes/classes/Plugin.php:1379 src/includes/classes/Plugin.php:1380
 msgid "Subscriptions"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1382 src/includes/classes/Plugin.php:1396
+#: src/includes/classes/Plugin.php:1384 src/includes/classes/Plugin.php:1398
 msgid "Event Log"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1383
+#: src/includes/classes/Plugin.php:1385
 msgid "Sub. Event Log"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1391 src/includes/classes/Plugin.php:1392
+#: src/includes/classes/Plugin.php:1393 src/includes/classes/Plugin.php:1394
 msgid "Mail Queue"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1397
+#: src/includes/classes/Plugin.php:1399
 msgid "Queue Event Log"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1406 src/includes/classes/Plugin.php:1407
+#: src/includes/classes/Plugin.php:1408 src/includes/classes/Plugin.php:1409
 msgid "Statistics/Charts"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1508 src/includes/classes/Plugin.php:1562
-#: src/includes/classes/Plugin.php:1615 src/includes/classes/Plugin.php:1668
+#: src/includes/classes/Plugin.php:1510 src/includes/classes/Plugin.php:1564
+#: src/includes/classes/Plugin.php:1617 src/includes/classes/Plugin.php:1670
 msgid "Per Page"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1880
+#: src/includes/classes/Plugin.php:1882
 msgid "Settings"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1885
+#: src/includes/classes/Plugin.php:1887
 msgid "Upgrade"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:1966
+#: src/includes/classes/Plugin.php:1968
 msgid "<strong>%1$s Pro:</strong> a new version is now available. Please <a href=\"%2$s\">upgrade to v%3$s</a>."
 msgstr ""
 
-#: src/includes/classes/Plugin.php:2189
+#: src/includes/classes/Plugin.php:2191
 msgid "<strong>%1$s is disabled. Please visit the <a href=\"%2$s\">settings</a> and enable the plugin</strong>."
 msgstr ""
 
-#: src/includes/classes/Plugin.php:2657
+#: src/includes/classes/Plugin.php:2659
 msgid "Every 5 Minutes"
 msgstr ""
 
-#: src/includes/classes/Plugin.php:2658
+#: src/includes/classes/Plugin.php:2660
 msgid "Every 15 Minutes"
 msgstr ""
 
@@ -5197,7 +5197,7 @@ msgid "<h3 style=\"font-weight:400; margin:0 0 1em 0;\">Upgrading from <strong>S
 msgstr ""
 
 #: src/includes/functions/stcr.php:84
-msgid "%1$s automatically imported many of your StCR options (to learn what was imported, see <a href=\"http://comment-mail.com/kb-article/stcr-options-transitioned-by-comment-mail/\" target=\"_blank\">this article</a>). It's still a good idea to review your %1$s configuration though."
+msgid "%1$s automatically imported many of your StCR options (to learn what was imported, see <a href=\"http://comment-mail.com/r/kb-article-stcr-options-transitioned-by-comment-mail/\" target=\"_blank\">this article</a>). It's still a good idea to review your %1$s configuration though."
 msgstr ""
 
 #: src/includes/functions/stcr.php:85

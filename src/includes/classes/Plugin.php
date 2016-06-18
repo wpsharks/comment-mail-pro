@@ -2667,7 +2667,7 @@ class Plugin extends AbsBase
      *
      * @attaches-to `init` hook.
      *
-     * @since 16xxxx Improving WP Cron setup and validation of schedules
+     * @since 160618 Improving WP Cron setup and validation of schedules
      */
     public function checkCronSetup()
     {
@@ -2697,7 +2697,7 @@ class Plugin extends AbsBase
     /**
      * Resets `crons_setup` and clears WP-Cron schedules.
      *
-     * @since 16xxxx Fixing bug with Queue Processor cron disappearing in some scenarios
+     * @since 160618 Fixing bug with Queue Processor cron disappearing in some scenarios
      *
      * @note This MUST happen upon uninstall and deactivation due to buggy WP_Cron behavior. Events with a custom schedule will disappear when plugin is not active (see http://bit.ly/1lGdr78).
      */
