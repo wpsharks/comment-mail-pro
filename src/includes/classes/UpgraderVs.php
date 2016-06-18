@@ -89,13 +89,13 @@ class UpgraderVs extends AbsBase
     }
 
     /**
-     * Upgrading from a version prior to changes that broke back. compat. w/ Advanced Templates
+     * Upgrading from a Pro version prior to changes that broke back. compat. w/ Advanced Templates
      *
      * @since 160618 First documented version.
      */
     protected function fromLteV160213()
     {
-        if (version_compare($this->prev_version, '160213', '<=')) {
+        if (version_compare($this->prev_version, '160213', '<=') && IS_PRO) {
 
             $_marker = '<?php /* --------------------------- Legacy Template Backup ---------------------------
  * Comment Mail v160618 included changes that were not backwards compatible with your 
