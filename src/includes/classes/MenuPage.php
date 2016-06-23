@@ -4573,6 +4573,8 @@ class MenuPage extends AbsBase
         }
         $heading .= '     <a href="'.esc_attr($this->plugin->utils_url->subscribePage()).'" target="_blank"><i class="fa fa-envelope-o"></i> '.__('Newsletter (Subscribe)', SLUG_TD).'</a>'."\n";
         $heading .= '     <a href="'.esc_attr($this->plugin->utils_url->betaTesterPage()).'" target="_blank"><i class="fa fa-envelope-o"></i> '.__('Beta Testers', SLUG_TD).'</a>'."\n";
+        $heading .= '     <a href="'.esc_attr('https://twitter.com/CommentMail').'" target="_blank"><i class="si si-twitter"></i> '.__('Twitter', SLUG_TD).'</a>'."\n";
+        $heading .= '     <a href="'.esc_attr('https://www.facebook.com/Comment-Mail-565683256946855/').'" target="_blank"><i class="si si-facebook"></i> '.__('Facebook', SLUG_TD).'</a>'."\n";
         $heading .= '  </div>'."\n";
 
         $heading .= '  <div class="pmp-version">'."\n";
