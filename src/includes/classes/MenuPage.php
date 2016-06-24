@@ -4565,8 +4565,6 @@ class MenuPage extends AbsBase
 
         $heading .= '<div class="pmp-heading">'."\n";
 
-        $heading .= '  <button type="button" class="plugin-menu-page-restore-defaults"'.'<a href="#" data-pmp-action="'.esc_attr($this->plugin->utils_url->restoreDefaultOptions()).'" data-pmp-confirmation="'.esc_attr(__('Restore default plugin options? You will lose all of your current settings! Are you absolutely sure?', SLUG_TD)).'"> '.__('Restore', SLUG_TD).' <i class="fa fa-ambulance"></i></button>'.'</a>'."\n";
-
         $heading .= '  <div class="pmp-heading-options">'."\n";
         if (IS_PRO) { // Display Pro Updater link?
             $heading .= '     <a href="'.esc_attr($this->plugin->utils_url->proUpdaterMenuPageOnly()).'" ><i class="fa fa-magic"></i> '.__('Pro Updater', SLUG_TD).'</a>'."\n";
@@ -4610,6 +4608,8 @@ class MenuPage extends AbsBase
         $heading .= '  <a href="'.esc_attr($this->plugin->utils_url->siteTemplatesMenuPageOnly()).'"'.
                     ($this->plugin->utils_env->isMenuPage(GLOBAL_NS.'_site_templates') ? ' class="pmp-active"' : '').'>'.
                     '<i class="fa fa-code"></i> '.__('Site Templates', SLUG_TD).'</a>'."\n";
+
+        $heading .= '  <a href="#" data-pmp-action="'.esc_attr($this->plugin->utils_url->restoreDefaultOptions()).'" data-pmp-confirmation="'.esc_attr(__('Restore default plugin options? You will lose all of your current settings! Are you absolutely sure?', SLUG_TD)).'"> '.__('Restore', SLUG_TD).' <i class="fa fa-ambulance"></i></button>'.'</a>'."\n";
 
         if (!IS_PRO) { // Display pro preview/upgrade related links?
             $heading .= '  <a href="'.esc_attr($this->plugin->utils_url->proPreview()).'"'.
