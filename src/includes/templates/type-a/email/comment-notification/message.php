@@ -68,7 +68,7 @@ $replies_via_email_enable = $sub_post_comments_open && $plugin->options['replies
             <?php if ($sub_comment) : // Subscribed to a specific comment? ?>
 
                 <?php if ($subscribed_to_own_comment) : ?>
-                    <?php echo sprintf(__('New Replies to Your Comment</a> on <em>%1$s</em>', SLUG_TD), esc_html($sub_post_title_clip)); ?>
+                    <?php echo sprintf(__('New Replies to Your Comment on <em>%1$s</em>', SLUG_TD), esc_html($sub_post_title_clip)); ?>
                 <?php else : // The comment was not authored by this subscriber; i.e. it's not their own. ?>
                     <?php echo sprintf(__('New Replies to <a href="%1$s">a Comment</a> on <em>%2$s</em>', SLUG_TD), esc_attr($sub_comment_url), esc_html($sub_post_title_clip)); ?>
                 <?php endif; ?>
@@ -82,7 +82,7 @@ $replies_via_email_enable = $sub_post_comments_open && $plugin->options['replies
             <?php if ($sub_comment) : // Subscribed to a specific comment? ?>
 
                 <?php if ($subscribed_to_own_comment) : ?>
-                    <?php echo sprintf(__('New Reply to Your Comment</a> on <em>%1$s</em>', SLUG_TD), esc_html($sub_post_title_clip)); ?>
+                    <?php echo sprintf(__('New Reply to Your Comment on <em>%1$s</em>', SLUG_TD), esc_html($sub_post_title_clip)); ?>
                 <?php else : // The comment was not authored by this subscriber; i.e. it's not their own. ?>
                     <?php echo sprintf(__('New Reply to <a href="%1$s">a Comment</a> on <em>%2$s</em>', SLUG_TD), esc_attr($sub_comment_url), esc_html($sub_post_title_clip)); ?>
                 <?php endif; ?>
