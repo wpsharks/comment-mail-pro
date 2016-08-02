@@ -117,7 +117,7 @@ $sub_last_update_time_ago = $plugin->utils_date->i18nUtc('M jS, Y @ g:i a T', $s
 
     <p style="color:#888888; font-style:italic;">
         <?php echo __('Note: if you did not make this request, please ignore this email. You will only be subscribed if you confirm.', SLUG_TD); ?>
-        <?php echo sprintf(__('This subscription was requested by %1$s; from IP address: <code>%2$s</code> on %3$s.', SLUG_TD), $sub_name_email_markup, esc_html($sub_last_ip), esc_html($sub_last_update_time_ago)); ?>
+        <?php echo sprintf(__('This subscription was requested by %1$s on %2$s.', SLUG_TD), $sub_name_email_markup, esc_html($sub_last_update_time_ago)); ?>
         <?php echo __('If you need to report any continued abuse, please use the contact info at the bottom of this email.', SLUG_TD); ?>
     </p>
 
