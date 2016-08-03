@@ -72,9 +72,9 @@ namespace WebSharks\CommentMail\Pro;
     </div>
 
     <div class="cso-links">
-        <span class="cso-link-new"><?php echo sprintf(__('Or, you can <a href="%1$s">subscribe without commenting</a>.', SLUG_TD), esc_attr($sub_new_url)); ?></span>
+        <span class="cso-link-new"><?php echo sprintf(__('Or, you can <a href="%1$s" rel="nofollow">subscribe without commenting</a>.', SLUG_TD), esc_attr($sub_new_url)); ?></span>
         <?php if ($current->sub_email) : // TIP: this is optional. If you exclude this, subscribers can still view their summary via emails they receive. ?>
-            <span class="cso-link-summary">~ <a href="<?php echo esc_attr($sub_summary_url); ?>"><?php echo __('manage my subscriptions', SLUG_TD); ?></a></span>
+            <span class="cso-link-summary">~ <a href="<?php echo esc_attr($sub_summary_url); ?>" rel="nofollow"><?php echo __('manage my subscriptions', SLUG_TD); ?></a></span>
         <?php endif; ?>
     </div>
 
