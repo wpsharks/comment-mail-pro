@@ -31,8 +31,8 @@ $home_url = home_url('/'); // Multisite compatible.
 $blog_name_clip = $plugin->utils_string->clip(get_bloginfo('name'));
 
 // Summary return URL; w/ all summary navigation vars preserved.
-$current_email     = (boolean)$this->plugin->utils_sub->currentEmail();
-$has_subscriptions = $current_email ? (boolean)$this->plugin->utils_sub->queryTotal(null, ['sub_email' => $current_email, 'status' => 'subscribed', 'sub_email_or_user_ids' => true]) : false;
+$current_email     = $this->plugin->utils_sub->currentEmail();
+$has_subscriptions = (boolean)$current_email ? (boolean)$this->plugin->utils_sub->queryTotal(null, ['sub_email' => $current_email, 'status' => 'subscribed', 'sub_email_or_user_ids' => true]) : false;
 $sub_summary_return_url = $has_subscriptions && $plugin->utils_url->subManageSummaryUrl(!empty($sub_key) ? $sub_key : '', null, true);
 
 // Current `host[/path]` with support for multisite network child blogs.
