@@ -8,7 +8,7 @@ Text Domain: comment-mail
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Contributors: WebSharks, JasWSInc, raamdev, kristineds, reedyseth, sitegeek, renzms
+Contributors: WebSharks, JasWSInc, raamdev, kristineds, sitegeek, renzms
 Donate link: http://www.websharks-inc.com/r/wp-theme-plugin-donation/
 Tags: comments, subscribe, comment subscription, comment subscriptions, comment subscribe, subscribe comments, comment, comment email, comment notification, notifications, notification
 
