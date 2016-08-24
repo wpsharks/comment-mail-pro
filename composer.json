@@ -17,7 +17,7 @@
     "role": "developer"
   }, {
     "name": "raamdev",
-    "homepage": "http://raam.org/",
+    "homepage": "https://raamdev.com/",
     "role": "developer"
   }, {
     "name": "kristineds",
@@ -36,7 +36,7 @@
 
   "require": {
     "php": ">=5.4",
-    "websharks/wp-php-rv": "150511",
+    "websharks/wp-php-rv": "160824.6416",
     "websharks/sharkicons": "160209",
     "erusev/parsedown": "1.6.0",
     "erusev/parsedown-extra": "0.7.0",
