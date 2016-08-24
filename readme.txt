@@ -1,6 +1,6 @@
 === Comment Mail (WP Comment Subscriptions) ===
 
-Stable tag: 160818
+Stable tag: 160824
 Requires at least: 4.4
 Tested up to: 4.7-alpha
 Text Domain: comment-mail
@@ -251,6 +251,10 @@ Released under the terms of the [GNU General Public License](http://www.gnu.org/
 Requires PHP v5.4+.
 
 == Changelog ==
+
+= v160824 =
+
+- **Bug Fix**: Fixed a bug that was generating a fatal error when replying to comments. This bug only affected the Lite version of Comment Mail and was introduced by the previous release (v160818) where [work](https://github.com/websharks/comment-mail/issues/285) was done to strip out unused Pro-only code from the Lite codebase. A few references to Pro-only functions were missed and that resulted in fatal errors for the Lite version in some scenarios. See [Issue #297](https://github.com/websharks/comment-mail/issues/297).
 
 = v160818 =
 

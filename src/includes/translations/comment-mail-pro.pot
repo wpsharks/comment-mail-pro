@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Comment Mail Pro package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Comment Mail Pro 160818\n"
+"Project-Id-Version: Comment Mail Pro 160824\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/comment-mail-pro\n"
-"POT-Creation-Date: 2016-08-18 01:53:48+00:00\n"
+"POT-Creation-Date: 2016-08-24 19:54:55+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -5268,36 +5268,36 @@ msgstr ""
 
 #: src/includes/templates/type-a/email/comment-notification/message.php:157
 #: src/includes/templates/type-a/email/comment-notification/message.php:191
-#: src/includes/templates/type-s/email/comment-notification/message.php:136
-#: src/includes/templates/type-s/email/comment-notification/message.php:170
+#: src/includes/templates/type-s/email/comment-notification/message.php:138
+#: src/includes/templates/type-s/email/comment-notification/message.php:174
 msgid "Continue reading"
 msgstr ""
 
 #: src/includes/templates/type-a/email/comment-notification/message.php:162
 #: src/includes/templates/type-a/email/comment-notification/message.php:196
-#: src/includes/templates/type-s/email/comment-notification/message.php:141
-#: src/includes/templates/type-s/email/comment-notification/message.php:175
+#: src/includes/templates/type-s/email/comment-notification/message.php:143
+#: src/includes/templates/type-s/email/comment-notification/message.php:179
 msgid "Reply to"
 msgstr ""
 
 #: src/includes/templates/type-a/email/comment-notification/message.php:164
 #: src/includes/templates/type-a/email/comment-notification/message.php:198
-#: src/includes/templates/type-s/email/comment-notification/message.php:143
-#: src/includes/templates/type-s/email/comment-notification/message.php:177
+#: src/includes/templates/type-s/email/comment-notification/message.php:145
+#: src/includes/templates/type-s/email/comment-notification/message.php:181
 msgid "Reply"
 msgstr ""
 
 #: src/includes/templates/type-a/email/comment-notification/message.php:169
 #: src/includes/templates/type-a/email/comment-notification/message.php:203
-#: src/includes/templates/type-s/email/comment-notification/message.php:148
-#: src/includes/templates/type-s/email/comment-notification/message.php:182
+#: src/includes/templates/type-s/email/comment-notification/message.php:151
+#: src/includes/templates/type-s/email/comment-notification/message.php:187
 msgid "— or reply to this email &amp; start your message with: <code>%1$s</code>"
 msgstr ""
 
 #: src/includes/templates/type-a/email/comment-notification/message.php:171
 #: src/includes/templates/type-a/email/comment-notification/message.php:205
-#: src/includes/templates/type-s/email/comment-notification/message.php:150
-#: src/includes/templates/type-s/email/comment-notification/message.php:184
+#: src/includes/templates/type-s/email/comment-notification/message.php:153
+#: src/includes/templates/type-s/email/comment-notification/message.php:189
 msgid "— or simply reply to this email"
 msgstr ""
 
@@ -5310,12 +5310,12 @@ msgid "This comment was posted %1$s."
 msgstr ""
 
 #: src/includes/templates/type-a/email/comment-notification/message.php:206
-#: src/includes/templates/type-s/email/comment-notification/message.php:185
+#: src/includes/templates/type-s/email/comment-notification/message.php:190
 msgid "Please Note:"
 msgstr ""
 
 #: src/includes/templates/type-a/email/comment-notification/message.php:206
-#: src/includes/templates/type-s/email/comment-notification/message.php:185
+#: src/includes/templates/type-s/email/comment-notification/message.php:190
 msgid "Your reply will be posted publicly and immediately."
 msgstr ""
 
