@@ -2251,8 +2251,7 @@ class Plugin extends AbsBase
                 if ($_args['persistent']) { // Need [dismiss] link?
                     $_dismiss_style = 'clear: both;'.
                                       'padding-right: 38px;'.
-                                      'position: relative;'.
-                                      'padding-bottom: 10px;';
+                                      'position: relative;';
                     $_dismiss_url   = $this->utils_url->dismissNotice($_key);
                     $_dismiss       = '<a href="'.esc_attr($_dismiss_url).'">'.
                                       '  <button type="button" class="notice-dismiss">'.
