@@ -518,6 +518,80 @@ class MenuPage extends AbsBase
 
         /* ----------------------------------------------------------------------------------------- */
 
+        if (IS_PRO || $this->plugin->utils_env->isProPreview()) {
+            $_panel_body = '<table style="margin:0;">'.
+                           ' <tbody>'.
+                           $form_fields->selectRow(
+                               [
+                                   'label'       => __('Enable MailChimp Integration?', SLUG_TD),
+                                   'placeholder' => __('Select an Option...', SLUG_TD),
+
+                                   'field_class'   => 'pmp-if-change',
+                                   'name'          => 'list_server_enable',
+                                   'current_value' => $current_value_for('list_server_enable'),
+
+                                   'allow_arbitrary' => false,
+
+                                   'options' => [
+                                       '0' => __('No', SLUG_TD),
+                                       '1' => __('Yes', SLUG_TD),
+                                   ],
+                                   'notes_after' => '<div class="pmp-if-enabled-show" style="margin-top:1em !important;">'.
+                                                        '   <p style="font-weight:bold; font-size:110%; margin:0;">'.__('With MailChimp integration enabled:', SLUG_TD).'</p>'.
+                                                        '   <ul class="pmp-list-items">'.
+                                                        '      <li>'.__('When users leave a comment, in addition to subscribing to comment notifications they will also be given the option to subscribe to your site\'s mailing list. This is a powerful, unobtrusive way of inviting users to join your mailing list as they leave a comment or reply.', SLUG_TD).'</li>'.
+                                                        '      <li>'.__('Note that additional email confirmation is not required for this to work. Whenever a user confirms their comment subscription it will also automatically confirm their mailing list subscription at the same time.', SLUG_TD).'</li>'.
+                                                        '   </ul>'.
+                                                        '</div>',
+                               ]
+                           ).
+                           ' </tbody>'.
+                           '</table>';
+
+            $_panel_body .= '<div class="pmp-if-enabled-show"><hr />'.
+
+                            '<a href="https://wpsharks.com/r/mailchimp-api-key" target="_blank">'.
+                            '  <img src="'.esc_attr($this->plugin->utils_url->to('/src/client-s/images/mailchimp.png')).'" class="pmp-right" style="margin:1em 0 0 3em;" />'.
+                            '</a>'.
+
+                            ' <table style="width:auto;">'.
+                            '  <tbody>'.
+                            $form_fields->inputRow(
+                                [
+                                    'type'          => 'password',
+                                    'name'          => 'list_server_mailchimp_api_key',
+                                    'label'         => __('MailChimp API Key:', SLUG_TD),
+                                    'placeholder'   => __('e.g., xxxc1d1ccxxx3e2d0xxb8xxxa1a1xxc6-us1', SLUG_TD),
+                                    'current_value' => $current_value_for('list_server_mailchimp_api_key'),
+                                    'notes_after'   => '<p>'.sprintf(__('e.g., <code>xxxc1d1ccxxx3e2d0xxb8xxxa1a1xxc6-us1</code> See: %1$s', SLUG_TD), $this->plugin->utils_markup->xAnchor('https://wpsharks.com/r/mailchimp-api-key', __('MailChimp API Key', SLUG_TD))).'</p>',
+                                ]
+                            ).
+                            '  </tbody>'.
+                            ' </table>'.
+
+                            ' <table style="width:auto;">'.
+                            '  <tbody>'.
+                            $form_fields->inputRow(
+                                [
+                                    'type'          => 'text',
+                                    'label'         => __('MailChimp List ID:', SLUG_TD),
+                                    'placeholder'   => __('e.g., ecxxaeb6b3', SLUG_TD),
+                                    'name'          => 'list_server_mailchimp_list_id',
+                                    'current_value' => $current_value_for('list_server_mailchimp_list_id'),
+                                    'notes_after'   => '<p>'.__('e.g., <code>ecxxaeb6b3</code> You will find this in your MailChimp account under: <strong>Extras → List Name &amp; Defaults → List ID</strong>', SLUG_TD).'</p>',
+                                ]
+                            ).
+                            '  </tbody>'.
+                            ' </table>'.
+
+                            '</div>';
+
+            echo $this->panel(__('MailChimp Integration', SLUG_TD), $_panel_body, ['pro_only' => true]);
+
+            unset($_panel_body); // Housekeeping.
+        }
+        /* ----------------------------------------------------------------------------------------- */
+
         $_panel_body = '<table style="margin:0;">'.
                        ' <tbody>'.
                        $form_fields->selectRow(
@@ -532,7 +606,7 @@ class MenuPage extends AbsBase
                                    '1' => __('Yes, enable Auto-Subscribe (recommended)', SLUG_TD),
                                    '0' => __('No, disable all Auto-Subscribe functionality', SLUG_TD),
                                ],
-                               'notes_after' => '<div class="pmp-if-enabled-show">'.
+                               'notes_after' => '<div class="pmp-if-enabled-show" style="margin-top:1em !important;">'.
                                                     '  <p style="font-weight:bold; font-size:110%; margin:0;">'.__('When Auto-Subscribe is enabled:', SLUG_TD).'</p>'.
                                                     '  <ul class="pmp-list-items">'.
                                                     '     <li>'.__('The author of a post can be subscribed to all comments/replies automatically. This way they\'ll receive email notifications w/o needing to go through the normal comment subscription process.', SLUG_TD).'</li>'.
@@ -819,7 +893,7 @@ class MenuPage extends AbsBase
                                        '0' => __('No, use the wp_mail function (default behavior)', SLUG_TD),
                                        '1' => __('Yes, integrate w/ an SMTP server of my choosing (as configured below)', SLUG_TD),
                                    ],
-                                   'notes_after' => '<div class="pmp-if-enabled-show">'.
+                                   'notes_after' => '<div class="pmp-if-enabled-show" style="margin-top:1em !important;">'.
                                                         '   <p style="font-weight:bold; font-size:110%; margin:0;">'.__('When SMTP Server Integration is enabled:', SLUG_TD).'</p>'.
                                                         '   <ul class="pmp-list-items">'.
                                                         '      <li>'.sprintf(__('Instead of using the default <code>%2$s</code> function, %1$s will send email confirmation requests &amp; comment/reply notifications through an SMTP server of your choosing; i.e., all email processed by %1$s will be routed through an SMTP server that you\'ve dedicated to comment subscriptions. This is highly recommended, since it can significantly improve the deliverability rate of emails that are sent by %1$s. In addition, it may also speed up your site (i.e., reduce the burden on your own web server). This is because an SMTP host is generally associated with an external server that is dedicated to email processing.', SLUG_TD), esc_html(NAME), $this->plugin->utils_markup->xAnchor('https://developer.wordpress.org/reference/functions/wp_mail/', 'wp_mail')).'</li>'.
@@ -1024,7 +1098,7 @@ class MenuPage extends AbsBase
                                        '0' => __('No, do not allow comment replies via email', SLUG_TD),
                                        '1' => __('Yes, allow subscribers to post comment replies via email (recommended)', SLUG_TD),
                                    ],
-                                   'notes_after' => '<div class="pmp-if-enabled-show">'.
+                                   'notes_after' => '<div class="pmp-if-enabled-show" style="margin-top:1em !important;">'.
                                                         '   <p style="font-weight:bold; font-size:110%; margin:0;">'.__('When Replies via Email are enabled through an RVE Handler:', SLUG_TD).'</p>'.
                                                         '   <ul class="pmp-list-items">'.
                                                         '      <li>'.sprintf(__('%1$s&trade; will allow replies to comments via email using a special <code>Reply-To</code> address that you will need to set up by following the instructions provided below. Any other <code>Reply-To</code> address configured elsewhere in %1$s will be overridden by the address you configure here for an RVE Handler. There are no special exceptions to this. An RVE Handler takes precedence over any other <code>Reply-To</code> you configure.', SLUG_TD), esc_html(NAME)).'</li>'.
@@ -3879,7 +3953,7 @@ class MenuPage extends AbsBase
 
         echo '      <h2>'.sprintf(__('%1$s&trade; &raquo; Edit Subscription', SLUG_TD), esc_html(NAME)).' <i class="'.esc_attr('si si-'.SLUG_TD.'-one').'"></i></h2>'."\n";
 
-        new MenuPageSubEditForm(!empty($_REQUEST['subscription']) ? (integer) $_REQUEST['subscription'] : 0); // Displays form.
+        new MenuPageSubEditForm(!empty($_REQUEST['subscription']) ? (int) $_REQUEST['subscription'] : 0); // Displays form.
 
         echo '   </form>';
         echo '</div>'."\n";
@@ -4713,7 +4787,7 @@ class MenuPage extends AbsBase
         $args = array_merge($default_args, $args);
         $args = array_intersect_key($args, $default_args);
 
-        $auto_chart = (boolean) $args['auto_chart'];
+        $auto_chart = (bool) $args['auto_chart'];
         $slug       = str_replace('_', '-', $view);
 
         $view = '<div class="'.esc_attr('pmp-stats-view pmp-stats-view-'.$slug).'" data-view="'.esc_attr($slug).'">'."\n";
@@ -4800,9 +4874,9 @@ class MenuPage extends AbsBase
 
         $note              = trim((string) $args['note']);
         $icon              = trim((string) $args['icon']);
-        $pro_only          = (boolean) $args['pro_only'];
-        $pro_preview_force = (boolean) $args['pro_preview_force'];
-        $open              = (boolean) $args['open'];
+        $pro_only          = (bool) $args['pro_only'];
+        $pro_preview_force = (bool) $args['pro_preview_force'];
+        $open              = (bool) $args['open'];
 
         if ($pro_only && !IS_PRO && !$pro_preview_force && !$this->plugin->utils_env->isProPreview()) {
             return ''; // Not applicable; not pro, or not a pro preview.
@@ -4850,8 +4924,8 @@ class MenuPage extends AbsBase
 
         $note     = trim((string) $args['note']);
         $icon     = trim((string) $args['icon']);
-        $pro_only = (boolean) $args['pro_only'];
-        $open     = (boolean) $args['open'];
+        $pro_only = (bool) $args['pro_only'];
+        $open     = (bool) $args['open'];
 
         $id = 'pb-'.md5($title.$icon.$note); // Auto-generate.
 
