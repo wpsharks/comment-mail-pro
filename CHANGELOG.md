@@ -1,3 +1,7 @@
+## [coming soon]
+
+- Adding support for MailChimp integration. Requires pro version. It is now possible to give users the option of subscribing to your site-wide mailing list whenever they leave a comment or reply; i.e., in addition to subscribing to comment reply notifications they can also join your MailChimp mailing list. See also: [issue #114](https://github.com/websharks/comment-mail/issues/114) for further details.
+
 = v160824 =
 
 - **Bug Fix**: Fixed a bug that was generating a fatal error when replying to comments. This bug only affected the Lite version of Comment Mail and was introduced by the previous release (v160818) where [work](https://github.com/websharks/comment-mail/issues/285) was done to strip out unused Pro-only code from the Lite codebase. A few references to Pro-only functions were missed and that resulted in fatal errors for the Lite version in some scenarios. See [Issue #297](https://github.com/websharks/comment-mail/issues/297).
