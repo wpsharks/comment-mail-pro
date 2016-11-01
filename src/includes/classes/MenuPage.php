@@ -540,7 +540,7 @@ class MenuPage extends AbsBase
                                                         '   <p style="font-weight:bold; font-size:110%; margin:0;">'.__('With MailChimp integration enabled:', SLUG_TD).'</p>'.
                                                         '   <ul class="pmp-list-items">'.
                                                         '      <li>'.__('When users leave a comment, in addition to subscribing to comment notifications they will also be given the option to subscribe to your site\'s mailing list. This is a powerful, unobtrusive way of inviting users to join your mailing list as they leave a comment or reply.', SLUG_TD).'</li>'.
-                                                        '      <li>'.__('Note that additional email confirmation is not required for this to work. Whenever a user confirms their comment subscription it will also automatically confirm their mailing list subscription at the same time.', SLUG_TD).'</li>'.
+                                                        '      <li>'.__('Note that additional email confirmation is not required for this to work. Whenever a user confirms their comment subscription it will also automatically confirm their mailing list subscription at the same time. Or, in the case of auto-confirm being enabled for comment subscriptions, mailing list subscriptions are silently auto-confirmed as well.', SLUG_TD).'</li>'.
                                                         '   </ul>'.
                                                         '</div>',
                                ]

@@ -32,7 +32,7 @@ class UtilsListServer extends AbsBase
             return ''; // Nothing to do here.
         }
         switch ($this->plugin->options['list_server']) {
-            case 'mailchimp':
+            case 'mailchimp': // MailChimp.
                 $mailchimp = new ListServerMailchimp();
                 return $mailchimp->subscribe([], $args);
         }
