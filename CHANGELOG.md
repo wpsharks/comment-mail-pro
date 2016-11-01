@@ -1,6 +1,6 @@
 ## [coming soon]
 
-- Adding support for MailChimp integration. Requires pro version. It is now possible to give users the option of subscribing to your site-wide mailing list whenever they leave a comment or reply; i.e., in addition to subscribing to comment reply notifications they can also join your MailChimp mailing list. See also: [issue #114](https://github.com/websharks/comment-mail/issues/114) for further details.
+- **New Feature:** Adding support for MailChimp integration. Requires pro version. It is now possible to give users the option of subscribing to your site-wide mailing list whenever they leave a comment or reply; i.e., in addition to subscribing to comment reply notifications they can also join your MailChimp mailing list. See also: [issue #114](https://github.com/websharks/comment-mail/issues/114) for further details.
 
 = v160824 =
 
