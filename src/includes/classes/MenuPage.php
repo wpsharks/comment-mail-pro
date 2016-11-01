@@ -584,6 +584,39 @@ class MenuPage extends AbsBase
                             '  </tbody>'.
                             ' </table>'.
 
+                            ' <table>'.
+                            '  <tbody>'.
+                            $form_fields->inputRow(
+                                [
+                                    'type'          => 'text',
+                                    'label'         => __('Opt-In Checkbox Label (HTML Allowed):', SLUG_TD),
+                                    'placeholder'   => __('e.g., Yes, I want to receive blog updates also.', SLUG_TD),
+                                    'name'          => 'list_server_checkbox_label',
+                                    'current_value' => $current_value_for('list_server_checkbox_label'),
+                                    'notes_after'   => '<p>'.__('e.g., <em>Yes, I want to receive blog updates also.</em>', SLUG_TD).'</p>',
+                                ]
+                            ).
+                            '  </tbody>'.
+                            ' </table>'.
+
+                            ' <table>'.
+                            '  <tbody>'.
+                            $form_fields->selectRow(
+                                [
+                                    'label'           => __('Opt-In Checkbox Default State:', SLUG_TD),
+                                    'placeholder'     => __('Select an Option...', SLUG_TD),
+                                    'name'            => 'list_server_checkbox_default_state',
+                                    'current_value'   => $current_value_for('list_server_checkbox_default_state'),
+                                    'allow_arbitrary' => false, // Must be one of these.
+                                    'options'         => [
+                                        'checked' => __('Checked by default (user must uncheck to avoid a subscription)', SLUG_TD),
+                                        ''        => __('Unchecked (user must check to subscribe)', SLUG_TD),
+                                    ],
+                                ]
+                            ).
+                            '  </tbody>'.
+                            ' </table>'.
+
                             '</div>';
 
             echo $this->panel(__('MailChimp Integration', SLUG_TD), $_panel_body, ['pro_only' => true]);
@@ -3318,6 +3351,7 @@ class MenuPage extends AbsBase
                                            '[inline_icon_svg]'     => __('Inline SVG icon that inherits the color and width of it\'s container automatically. Note, this is a scalable vector graphic that will look great at any size &gt;= 16x16 pixels.', SLUG_TD),
                                            '[sub_type_options]'    => __('Select menu options. Allows a subscriber to choose if they wan\'t to subscribe or not; and in which way.', SLUG_TD),
                                            '[sub_deliver_options]' => __('Select menu options. Allows a subscriber to choose a delivery option; e.g., asap, hourly, daily, weeky. This can be excluded if you wish. A default value of <code>asap</code> will be used in that case.', SLUG_TD),
+                                           '[sub_list_checkbox]'   => __('Checkbox and label for mailing list subscription option; e.g., when MailChimp integration is enabled.', SLUG_TD),
                                            '[sub_type_id]'         => __('The <code>id=""</code> attribute value used in <code>[sub_type_options]</code>.', SLUG_TD),
                                            '[current_sub_email]'   => __('The current subscriber\'s email address, if it is known to have been confirmed; i.e., if it really is their email address. This will be empty if they have not previously confirmed a subscription.', SLUG_TD),
                                            '[sub_new_url]'         => __('A URL leading to the "Add Subscription" page. This allows a visitor to subscribe w/o commenting even.', SLUG_TD),
