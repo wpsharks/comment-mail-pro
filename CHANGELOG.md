@@ -6,6 +6,8 @@
 
 - **PHP v7 Compatibility:** After further testing, it was found that while Comment Mail is compatible with PHP v7.0, you must be running PHP v7.0.9+. Starting with this release of Comment Mail if you're running PHP v7 < v7.0.9 a warning is displayed in the WordPress Dashboard asking the site owner to upgrade to PHP v7.0.9 or higher. Note: While PHP v7.0.9 is adequate, PHP v7.0.10 is strongly recommended. See also: [issue #272](https://github.com/websharks/comment-mail/issues/272) for further details.
 
+- **Template Parsing:** When parsing templates, this release uses `include()` instead of `eval()` whenever possible. This improves compatibility with shared hosting providers and makes it easier to debug template parsing issues should they occur. See also [issue #192](https://github.com/websharks/comment-mail/issues/192) for further details.
+
 = v160824 =
 
 - **Bug Fix**: Fixed a bug that was generating a fatal error when replying to comments. This bug only affected the Lite version of Comment Mail and was introduced by the previous release (v160818) where [work](https://github.com/websharks/comment-mail/issues/285) was done to strip out unused Pro-only code from the Lite codebase. A few references to Pro-only functions were missed and that resulted in fatal errors for the Lite version in some scenarios. See [Issue #297](https://github.com/websharks/comment-mail/issues/297).
