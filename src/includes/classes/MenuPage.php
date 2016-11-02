@@ -1154,8 +1154,8 @@ class MenuPage extends AbsBase
 
             $_panel_body .= '<div class="pmp-if-enabled-show pmp-if-nest"><hr />'.
 
-                            '<a href="http://comment-mail.com/kb-article/mandrill-rve-handler/" target="_blank">'.
-                            '<img src="'.esc_attr($this->plugin->utils_url->to('/src/client-s/images/mandrill-rec.png')).'" class="pmp-right" style="margin-left:3em;" /></a>'.
+                            '<a href="http://comment-mail.com/r/sparkpost-webhooks/" target="_blank">'.
+                            '<img src="'.esc_attr($this->plugin->utils_url->to('/src/client-s/images/sparkpost-rve.png')).'" class="pmp-right" style="margin-left:3em;" /></a>'.
 
                             ' <table style="width:auto; margin-bottom:0;">'.
                             '    <tbody>'.
@@ -1168,14 +1168,46 @@ class MenuPage extends AbsBase
                                     'current_value'   => $current_value_for('replies_via_email_handler'),
                                     'allow_arbitrary' => false, // Must be one of these.
                                     'options'         => [
-                                        ''         => '', // Empty value for the sake of making this somewhat understandable.
-                                        'mandrill' => __('Mandrill RVE Handler (free; recommended)', SLUG_TD),
+                                        ''          => '',
+                                        'sparkpost' => __('SparkPost RVE Handler (recommended)', SLUG_TD),
+                                        'mandrill'  => __('Mandrill RVE Handler (deprecated)', SLUG_TD),
                                     ],
-                                    'notes_after' => '<p>'.sprintf(__('<strong>Note:</strong> %1$s is currently the only choice here; i.e., we have only integrated this with Mandrill thus far <i class="fa fa-smile-o"></i>', SLUG_TD), $this->plugin->utils_markup->xAnchor('http://help.mandrill.com/entries/21699367-Inbound-Email-Processing-Overview', 'Mandrill')).'</p>',
                                 ]
                             ).
                             '    </tbody>'.
                             ' </table>'.
+
+                            ' <div class="pmp-if-enabled-show pmp-if-value-sparkpost pmp-in-if-nest"><hr />'.
+                            '    <table>'.
+                            '       <tbody>'.
+                            $form_fields->inputRow(
+                                [
+                                    'type'          => 'password',
+                                    'label'         => __('SparkPost API Key:', SLUG_TD),
+                                    'placeholder'   => __('e.g., 7xxxxe7598ex6fe60d7cxxxx34a73ccdxxx084', SLUG_TD),
+                                    'name'          => 'rve_sparkpost_api_key',
+                                    'current_value' => $current_value_for('rve_sparkpost_api_key'),
+                                    'notes_after'   => '<p>'.sprintf(__('Please see %1$s for detailed instructions.', SLUG_TD), $this->plugin->utils_markup->xAnchor('http://comment-mail.com/kb-article/sparkpost-rve-handler/', __('this KB article', SLUG_TD))).'</p>',
+                                ]
+                            ).
+                            '       </tbody>'.
+                            '    </table>'.
+
+                            '    <table>'.
+                            '       <tbody>'.
+                            $form_fields->inputRow(
+                                [
+                                    'type'          => 'email',
+                                    'label'         => __('SparkPost <code>Reply-To</code> Address:', SLUG_TD),
+                                    'placeholder'   => sprintf(__('e.g., rve@sparkpost.%1$s', SLUG_TD), $this->plugin->utils_url->currentHostBase()),
+                                    'name'          => 'rve_sparkpost_reply_to_email',
+                                    'current_value' => $current_value_for('rve_sparkpost_reply_to_email'),
+                                    'notes_after'   => '<p>'.sprintf(__('Please see %1$s for detailed instructions.', SLUG_TD), $this->plugin->utils_markup->xAnchor('http://comment-mail.com/kb-article/sparkpost-rve-handler/', __('this KB article', SLUG_TD))).'</p>',
+                                ]
+                            ).
+                            '       </tbody>'.
+                            '    </table>'.
+                            ' </div>'.
 
                             ' <div class="pmp-if-enabled-show pmp-if-value-mandrill pmp-in-if-nest"><hr />'.
                             '    <table>'.
@@ -1187,7 +1219,7 @@ class MenuPage extends AbsBase
                                     'placeholder'   => sprintf(__('e.g., rve@mandrill.%1$s', SLUG_TD), $this->plugin->utils_url->currentHostBase()),
                                     'name'          => 'rve_mandrill_reply_to_email',
                                     'current_value' => $current_value_for('rve_mandrill_reply_to_email'),
-                                    'notes_after'   => '<p class="pmp-note pmp-info">'.sprintf(__('This is really all it takes to get Replies via Email working. However, it requires that you setup a Mandrill account (free) and then configure an Inbound Mailbox Route that will connect to the Webhook URL shown below. <span class="pmp-hilite">Please see %1$s for detailed instructions.</span>', SLUG_TD), $this->plugin->utils_markup->xAnchor('http://comment-mail.com/kb-article/mandrill-rve-handler/', __('this wiki article', SLUG_TD))).'</p>'.
+                                    'notes_after'   => '<p class="pmp-note pmp-info">'.sprintf(__('This is really all it takes to get Replies via Email working. However, it does require that you setup a Mandrill account (free) and then configure an Inbound Mailbox Route that will connect to the Webhook URL shown below. <span class="pmp-hilite">Please see %1$s for detailed instructions.</span>', SLUG_TD), $this->plugin->utils_markup->xAnchor('http://comment-mail.com/kb-article/mandrill-rve-handler/', __('this KB article', SLUG_TD))).'</p>'.
                                                        $this->selectAllField(__('<strong>Mandrill Webhook URL:</strong>', SLUG_TD), IS_PRO ? $this->plugin->utils_url->rveMandrillWebhookUrl() : ''),
                                 ]
                             ).
