@@ -768,6 +768,7 @@ class Plugin extends AbsBase
         add_action('init', [$this, 'jetpackCheck'], 100);
 
         add_action('admin_init', [$this, 'checkVersion'], 10);
+        add_action('admin_init', [$this, 'checkPhpVersion'], 10);
 
         /*[pro strip-from="lite"]*/
         add_action('admin_init', [$this, 'checkLatestProVersion'], 10);
@@ -919,6 +920,44 @@ class Plugin extends AbsBase
             return; // Nothing to do; already @ latest version.
         }
         new Upgrader(); // Upgrade handler.
+    }
+
+    /**
+     * Check current PHP version.
+     *
+     * @since       16xxxx PHP version check.
+     *
+     * @attaches-to `admin_init` action.
+     */
+    public function checkPhpVersion()
+    {
+        $is_php7              = version_compare(PHP_VERSION, '7', '>=');
+        $is_php7_incompatible = $is_php7 && version_compare(PHP_VERSION, '7.0.9', '<');
+        $php_clean_version    = PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION.'.'.PHP_RELEASE_VERSION;
+
+        if ($is_php7 && $is_php7_incompatible) {
+            $markup = sprintf(
+                __('<strong>PHP v7 Warning:</strong> The %1$s&trade; plugin is compatible with PHP v7.0, but you\'re running PHP v%2$s which has a bug that causes problems in Comment Mail. Please upgrade to PHP v7.0.9 or higher.', SLUG_TD),
+                esc_html(NAME),
+                esc_html($php_clean_version)
+            );
+            $this->enqueueWarning($markup, [
+                'persistent'    => true,
+                'persistent_id' => 'php-7-compat',
+                'requires_cap'  => 'administrator',
+            ]);
+        } elseif ($is_php7 && !$is_php7_incompatible) {
+            $notices = get_option(GLOBAL_NS.'_notices');
+            $notices = is_array($notices) ? $notices : [];
+
+            foreach ($notices as $_key => $_notice) {
+                if (!empty($_notice['persistent_id']) && $_notice['persistent_id'] === 'php-7-compat') {
+                    unset($notices[$_key]); // i.e., Get rid of `php-7-compat` warning.
+                    update_option(GLOBAL_NS.'_notices', $notices);
+                    break; // Dismiss persistent key.
+                }
+            } // unset($_key, $_notice);
+        }
     }
 
     /*
