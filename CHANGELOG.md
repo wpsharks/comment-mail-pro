@@ -1,5 +1,7 @@
 ## [coming soon]
 
+- **UI Bug Fix** (Pro): Removed unnecessary padding from the bottom of the Pro Update Dashboard notification. Props @kristineds. See [Issue #296](https://github.com/websharks/comment-mail/issues/296).
+
 - **New Feature:** Adding support for MailChimp integration. Requires pro version. It is now possible to give users the option of subscribing to your site-wide mailing list whenever they leave a comment or reply; i.e., in addition to subscribing to comment reply notifications they can also join your MailChimp mailing list. See also: [issue #114](https://github.com/websharks/comment-mail/issues/114) for further details.
 
 - **PHP v7 Compatibility:** After further testing, it was found that while Comment Mail is compatible with PHP v7.0, you must be running PHP v7.0.9+. Starting with this release of Comment Mail if you're running PHP v7 < v7.0.9 a warning is displayed in the WordPress Dashboard asking the site owner to upgrade to PHP v7.0.9 or higher. Note: While PHP v7.0.9 is adequate, PHP v7.0.10 is strongly recommended. See also: [issue #272](https://github.com/websharks/comment-mail/issues/272) for further details.
