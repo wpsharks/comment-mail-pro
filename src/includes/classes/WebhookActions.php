@@ -74,7 +74,7 @@ class WebhookActions extends AbsBase
     {
         $key = trim((string) $request_args);
 
-        new rveSparkPost($key);
+        new RveSparkPost($key);
 
         exit(); // Stop; always.
     }
