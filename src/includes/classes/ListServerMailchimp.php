@@ -46,8 +46,7 @@ class ListServerMailchimp extends ListServerBase
         $args = array_intersect_key($args, $default_args);
 
         $mailchimp_subscribe_args = [
-            'list_id'      => (string) $list['id'],
-            'double_optin' => $args['double_optin'],
+            'list_id' => (string) $list['id'],
 
             'email'       => ['email' => (string) $args['email']],
             'merge_array' => [
@@ -57,6 +56,8 @@ class ListServerMailchimp extends ListServerBase
                 'OPTIN_TIME' => date('Y-m-d H:i:s'),
             ],
             'email_type' => 'html',
+
+            'double_optin' => $args['double_optin'],
 
             'update_existing'   => true,
             'replace_interests' => true,
