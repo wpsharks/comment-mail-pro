@@ -3,7 +3,7 @@
 /**
  * Replies via Email; SparkPost Webhook Listener.
  *
- * @since     141111 First documented version.
+ * @since 16xxxx Adding SparkPost integration.
  *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
@@ -18,32 +18,31 @@ namespace WebSharks\CommentMail\Pro;
 class RveSparkPost extends AbsBase
 {
     /**
-     * @var string Key for this webhook.
+     * @var string
      *
-     * @since 16xxxx Adding SparkPost integration.
+     * @since 16xxxx
      */
     protected $key;
 
     /**
-     * @var array Mandrill input events.
+     * @var object
      *
-     * @since 16xxxx Adding SparkPost integration.
+     * @since 16xxxx
      */
-    protected $events;
+    protected $message;
 
     /**
      * Class constructor.
      *
-     * @param string $key Input secret key.
+     * @param string $key Secret key.
      *
-     * @since 16xxxx Adding SparkPost integration.
+     * @since 16xxxx Adding SparkPost.
      */
     public function __construct($key)
     {
         parent::__construct();
 
-        $this->key    = trim((string) $key);
-        $this->events = []; // Initialize.
+        $this->key = trim((string) $key);
 
         $this->prepWebhook();
         $this->maybeProcess();
@@ -52,7 +51,7 @@ class RveSparkPost extends AbsBase
     /**
      * Key for this webhook.
      *
-     * @since 16xxxx Adding SparkPost integration.
+     * @since 16xxxx Adding SparkPost.
      */
     public static function key()
     {
@@ -64,7 +63,7 @@ class RveSparkPost extends AbsBase
     /**
      * Prepare webhook.
      *
-     * @since 16xxxx Adding SparkPost integration.
+     * @since 16xxxx Adding SparkPost.
      */
     protected function prepWebhook()
     {
@@ -75,7 +74,7 @@ class RveSparkPost extends AbsBase
     /**
      * Process webhook event.
      *
-     * @since 16xxxx Adding SparkPost integration.
+     * @since 16xxxx Adding SparkPost.
      */
     protected function maybeProcess()
     {
@@ -88,38 +87,34 @@ class RveSparkPost extends AbsBase
         if ($this->key !== static::key()) {
             return; // Not authorized.
         }
-        $this->collectEvents();
-        $this->processEvents();
+        $this->collectMessage();
+        $this->processMessage();
     }
 
     /**
-     * Collect Mandrill events.
+     * Collect SparkPost message.
      *
-     * @since 16xxxx Adding SparkPost integration.
+     * @since 16xxxx Adding SparkPost.
      */
-    protected function collectEvents()
+    protected function collectMessage()
     {
-        $this->events = []; // Initialize.
+        $response = file_get_contents('php://input');
+        $response = json_decode((string) $response);
 
-        if (empty($_REQUEST['mandrill_events'])) {
+        if (empty($response[0]->msys->relay_message)) {
             return; // Nothing to do.
+        } elseif (!is_object($response[0]->msys->relay_message)) {
+            return; // Expecting JSON-encoded message.
         }
-        if (!is_string($_REQUEST['mandrill_events'])) {
-            return; // Expecting JSON-encoded events.
-        }
-        $events = json_decode(trim(stripslashes($_REQUEST['mandrill_events'])));
-        if (!is_array($events)) {
-            $events = []; // Force array.
-        }
-        $this->events = $events; // Collected events.
+        $this->message = $response[0]->msys->relay_message;
     }
 
     /**
-     * Process Mandrill events.
+     * Process SparkPost message.
      *
-     * @since 16xxxx Adding SparkPost integration.
+     * @since 16xxxx Adding SparkPost.
      */
-    protected function processEvents()
+    protected function processMessage()
     {
         foreach ($this->events as $_event) {
             // Iterate all events.
@@ -190,9 +185,9 @@ class RveSparkPost extends AbsBase
     /**
      * Processes a comment reply.
      *
-     * @param array $args Input email/event arguments.
+     * @since 16xxxx Adding SparkPost.
      *
-     * @since 16xxxx Adding SparkPost integration.
+     * @param array $args Input email/event arguments.
      */
     protected function maybeProcessCommentReply(array $args)
     {
@@ -280,7 +275,7 @@ class RveSparkPost extends AbsBase
     /**
      * Setup SparkPost webhook.
      *
-     * @since 16xxxx Adding SparkPost integration.
+     * @since 16xxxx Adding SparkPost.
      */
     public static function setupWebhook()
     {
