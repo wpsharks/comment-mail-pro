@@ -312,7 +312,7 @@ class RveSparkPost extends AbsBase
                         'domain' => $rve_sparkpost_reply_to_domain,
                     ]),
                 ]);
-                $wp_remote_request_response = wp_remote_request('https://api.sparkpost.com/api/v1/relay-webhooks', [
+                $wp_remote_response = wp_remote_request('https://api.sparkpost.com/api/v1/relay-webhooks', [
                     'method'  => 'POST',
                     'timeout' => 5,
 
@@ -330,7 +330,7 @@ class RveSparkPost extends AbsBase
                         ],
                     ]),
                 ]);
-                $api_response = json_decode(wp_remote_retrieve_body($wp_remote_request_response));
+                $api_response = json_decode(wp_remote_retrieve_body($wp_remote_response));
 
                 if (is_object($api_response) && !empty($api_response->results->id)) {
                     $plugin->options['rve_sparkpost_webhook_setup_hash'] = md5($plugin->options['rve_sparkpost_api_key'].$plugin->options['rve_sparkpost_reply_to_email']);
