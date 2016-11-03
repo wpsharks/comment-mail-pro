@@ -284,11 +284,59 @@ class RveSparkPost extends AbsBase
      */
     public static function setupWebhook()
     {
-        // @TODO
-        $plugin                       = plugin();
-        $rve_sparkpost_api_key        = $plugin->options['rve_sparkpost_api_key'];
-        $rve_sparkpost_reply_to_email = $plugin->options['rve_sparkpost_reply_to_email'];
-        //$plugin->options['rve_sparkpost_webhook_setup_hash'] = md5($rve_sparkpost_api_key.$rve_sparkpost_reply_to_email);
-        //$plugin->options['rve_sparkpost_webhook_id']         = '';
+        $plugin = plugin(); // Plugin instance.
+
+        if ($plugin->options['rve_sparkpost_api_key'] && $plugin->options['rve_sparkpost_reply_to_email'] && strpos($plugin->options['rve_sparkpost_reply_to_email'], '@')) {
+            if ($plugin->options['rve_sparkpost_webhook_setup_hash'] !== md5($plugin->options['rve_sparkpost_api_key'].$plugin->options['rve_sparkpost_reply_to_email'])) {
+                $rve_sparkpost_reply_to_domain = trim(strstr($plugin->options['rve_sparkpost_reply_to_email'], '@'), '@');
+
+                if ($plugin->options['rve_sparkpost_webhook_id']) {
+                    wp_remote_request('https://api.sparkpost.com/api/v1/relay-webhooks/'.urlencode($plugin->options['rve_sparkpost_webhook_id']), [
+                        'method'  => 'DELETE',
+                        'timeout' => 5,
+                        'headers' => [
+                            'Authorization' => $plugin->options['rve_sparkpost_api_key'],
+                        ],
+                    ]);
+                    $plugin->options['rve_sparkpost_webhook_id'] = '';
+                }
+                wp_remote_request('https://api.sparkpost.com/api/v1/inbound-domains', [
+                    'method'  => 'POST',
+                    'timeout' => 5,
+
+                    'headers' => [
+                        'Content-Type'  => 'application/json',
+                        'Authorization' => $plugin->options['rve_sparkpost_api_key'],
+                    ],
+                    'body' => json_encode([
+                        'domain' => $rve_sparkpost_reply_to_domain,
+                    ]),
+                ]);
+                $wp_remote_request_response = wp_remote_request('https://api.sparkpost.com/api/v1/relay-webhooks', [
+                    'method'  => 'POST',
+                    'timeout' => 5,
+
+                    'headers' => [
+                        'Content-Type'  => 'application/json',
+                        'Authorization' => $plugin->options['rve_sparkpost_api_key'],
+                    ],
+                    'body' => json_encode([
+                        'name'       => NAME.' Webhook',
+                        'target'     => $plugin->utils_url->rveSparkPostWebhookUrl(),
+                        'auth_token' => md5(wp_salt()),
+                        'match'      => [
+                            'protocol' => 'SMTP',
+                            'domain'   => $rve_sparkpost_reply_to_domain,
+                        ],
+                    ]),
+                ]);
+                $api_response = json_decode(wp_remote_retrieve_body($wp_remote_request_response));
+
+                if (is_object($api_response) && !empty($api_response->results->id)) {
+                    $plugin->options['rve_sparkpost_webhook_setup_hash'] = md5($plugin->options['rve_sparkpost_api_key'].$plugin->options['rve_sparkpost_reply_to_email']);
+                    $plugin->options['rve_sparkpost_webhook_id']         = $api_response->results->id;
+                }
+            }
+        }
     }
 }
