@@ -98,6 +98,9 @@ class RveSparkPost extends AbsBase
      */
     protected function collectMessage()
     {
+        if (strtoupper($_SERVER['REQUEST_METHOD']) !== 'POST') {
+            return; // Nothing to do.
+        }
         $response = json_decode((string) file_get_contents('php://input'));
 
         if (empty($response[0]->msys->relay_message)) {
