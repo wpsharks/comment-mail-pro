@@ -262,7 +262,7 @@ class RveSparkPost extends AbsBase
                 $api_response_code = (int) wp_remote_retrieve_response_code($wp_remote_response);
                 $api_response      = json_decode(wp_remote_retrieve_body($wp_remote_response));
 
-                if ($api_response_code >= 400 && $api_response_code !== 409) {
+                if (!$api_response_code || ($api_response_code >= 400 && $api_response_code !== 409)) {
                     $markup = sprintf(
                         __('<strong>RVE Error:</strong> The %1$s&trade; plugin was unable to complete the integration with SparkPost. When attempting to create an Inbound Domain the SparkPost API said: <pre>%2$s</pre>', SLUG_TD),
                         esc_html(NAME),
@@ -292,7 +292,7 @@ class RveSparkPost extends AbsBase
                 $api_response_code = (int) wp_remote_retrieve_response_code($wp_remote_response);
                 $api_response      = json_decode(wp_remote_retrieve_body($wp_remote_response));
 
-                if ($api_response_code >= 400) {
+                if (!$api_response_code || $api_response_code >= 400) {
                     $markup = sprintf(
                         __('<strong>RVE Error:</strong> The %1$s&trade; plugin was unable to complete the integration with SparkPost. When attempting to create a Relay Webhook the SparkPost API said: <pre>%2$s</pre>', SLUG_TD),
                         esc_html(NAME),
