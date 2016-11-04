@@ -953,6 +953,7 @@ class Plugin extends AbsBase
             );
             $this->enqueueWarning($markup, [
                 'persistent'    => true,
+                'dismissable'   => false,
                 'persistent_id' => 'php-7-compat',
                 'requires_cap'  => 'administrator',
             ]);
@@ -2146,6 +2147,7 @@ class Plugin extends AbsBase
             'for_page'      => '',
             'persistent'    => false,
             'persistent_id' => '',
+            'dismissable'   => true,
             'transient'     => false,
             'push_to_top'   => false,
             'type'          => 'notice',
@@ -2163,6 +2165,7 @@ class Plugin extends AbsBase
 
         $args['persistent']    = (bool) $args['persistent'];
         $args['persistent_id'] = (string) $args['persistent_id'];
+        $args['dismissable']   = (bool) $args['dismissable'];
         $args['transient']     = (bool) $args['transient'];
         $args['push_to_top']   = (bool) $args['push_to_top'];
 
@@ -2271,6 +2274,7 @@ class Plugin extends AbsBase
                 'for_page'      => '',
                 'persistent'    => false,
                 'persistent_id' => '',
+                'dismissable'   => true,
                 'transient'     => false,
                 'push_to_top'   => false,
                 'type'          => 'notice',
@@ -2289,6 +2293,7 @@ class Plugin extends AbsBase
 
             $_args['persistent']    = (bool) $_args['persistent'];
             $_args['persistent_id'] = (string) $_args['persistent_id'];
+            $_args['dismissable']   = (bool) $_args['dismissable'];
             $_args['transient']     = (bool) $_args['transient'];
             $_args['push_to_top']   = (bool) $_args['push_to_top'];
 
@@ -2311,7 +2316,7 @@ class Plugin extends AbsBase
                 continue; // Don't display on this page; i.e. pattern match failure.
             }
             if ($_args['markup']) { // Only display non-empty notices.
-                if ($_args['persistent']) { // Need [dismiss] link?
+                if ($_args['persistent'] && $_args['dismissable']) {
                     $_dismiss_style = 'clear: both;'.
                                       'padding-right: 38px;'.
                                       'position: relative;';
