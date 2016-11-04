@@ -247,7 +247,7 @@ class RveSparkPost extends AbsBase
                     ]);
                     $plugin->options['rve_sparkpost_webhook_id'] = '';
                 }
-                wp_remote_request('https://api.sparkpost.com/api/v1/inbound-domains', [
+                $wp_remote_response = wp_remote_request('https://api.sparkpost.com/api/v1/inbound-domains', [
                     'method'  => 'POST',
                     'timeout' => 5,
 
@@ -259,6 +259,18 @@ class RveSparkPost extends AbsBase
                         'domain' => $rve_sparkpost_reply_to_domain,
                     ]),
                 ]);
+                $api_response_code = (int) wp_remote_retrieve_response_code($wp_remote_response);
+                $api_response      = json_decode(wp_remote_retrieve_body($wp_remote_response));
+
+                if ($api_response_code >= 400 && $api_response_code !== 409) {
+                    $markup = sprintf(
+                        __('<strong>RVE Error:</strong> The %1$s&trade; plugin was unable to complete the integration with SparkPost. When attempting to create an Inbound Domain the SparkPost API said: <pre>%2$s</pre>', SLUG_TD),
+                        esc_html(NAME),
+                        esc_html(!empty($api_response->errors[0]->message) ? $api_response->errors[0]->message : __('Unknown API error.', SLUG_TD))
+                    );
+                    $this->enqueueWarning($markup);
+                    return; // Not possible.
+                }
                 $wp_remote_response = wp_remote_request('https://api.sparkpost.com/api/v1/relay-webhooks', [
                     'method'  => 'POST',
                     'timeout' => 5,
@@ -277,8 +289,18 @@ class RveSparkPost extends AbsBase
                         ],
                     ]),
                 ]);
-                $api_response = json_decode(wp_remote_retrieve_body($wp_remote_response));
+                $api_response_code = (int) wp_remote_retrieve_response_code($wp_remote_response);
+                $api_response      = json_decode(wp_remote_retrieve_body($wp_remote_response));
 
+                if ($api_response_code >= 400) {
+                    $markup = sprintf(
+                        __('<strong>RVE Error:</strong> The %1$s&trade; plugin was unable to complete the integration with SparkPost. When attempting to create a Relay Webhook the SparkPost API said: <pre>%2$s</pre>', SLUG_TD),
+                        esc_html(NAME),
+                        esc_html(!empty($api_response->errors[0]->message) ? $api_response->errors[0]->message : __('Unknown API error.', SLUG_TD))
+                    );
+                    $this->enqueueWarning($markup);
+                    return; // Not possible.
+                }
                 if (is_object($api_response) && !empty($api_response->results->id)) {
                     $plugin->options['rve_sparkpost_webhook_setup_hash'] = md5($plugin->options['rve_sparkpost_api_key'].$plugin->options['rve_sparkpost_reply_to_email']);
                     $plugin->options['rve_sparkpost_webhook_id']         = $api_response->results->id;
