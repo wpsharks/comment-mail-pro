@@ -1137,8 +1137,8 @@ class MenuPage extends AbsBase
                                                         '      <li>'.sprintf(__('%1$s&trade; will allow replies to comments via email using a special <code>Reply-To</code> address that you will need to set up by following the instructions provided below. Any other <code>Reply-To</code> address configured elsewhere in %1$s will be overridden by the address you configure here for an RVE Handler. There are no special exceptions to this. An RVE Handler takes precedence over any other <code>Reply-To</code> you configure.', SLUG_TD), esc_html(NAME)).'</li>'.
                                                         '      <li>'.sprintf(__('Replies to comments via email will be functional for all types of notifications sent by %1$s (including digest notifications). However, there are a few things worth noting before you enable an RVE Handler. <a href="#" data-toggle="other" data-other=".pmp-rve-details">Click here to toggle important details</a>.', SLUG_TD), esc_html(NAME)).
                                                         '        <ul class="pmp-rve-details" style="display:none;">'.
-                                                        '           <li>'.sprintf(__('All replies posted via email must be sent to the special <code>Reply-To</code> address that you configure below. Once you configure a <code>Reply-To</code> for an RVE Handler, %1$s will automatically set the <code>Reply-To:</code> header in all email notifications that it sends. This way when somebody replies to a comment notification, their email program will reply to the address required for replies via email to work properly.', SLUG_TD), esc_html(NAME)).'</li>'.
-                                                        '           <li>'.sprintf(__('The <code>Reply-To</code> address that you configure below, will serve as a base for %1$s to work from. For instance, let\'s say you choose: <code>rve@mandrill.%2$s</code>. This base address will be suffixed automatically (at runtime) with details specific to a particular notification that %1$s sends. Ultimately, <code>rve@mandrill.%2$s</code> will look like: <code>rve<strong>+332-96-kgjdgxr4ldqpdrgjdgxr</strong>@mandrill.%2$s</code>. In this example, the additional details (following the <code>+</code> sign) are there to help %1$s route the reply to the proper location, and to provide a means by which to identify the end-user that is posting a reply.', SLUG_TD), esc_html(NAME), esc_html($this->plugin->utils_url->currentHostBase())).'</li>'.
+                                                        '           <li>'.sprintf(__('All replies posted via email must be sent to the special <code>Reply-To</code> address that you configure below. Not to worry though, because once you configure the <code>Reply-To</code> for an RVE Handler, %1$s will automatically set the <code>Reply-To:</code> header in all email notifications that it sends. This way when somebody replies to a comment notification, their email program will reply to the address required for replies via email to work properly.', SLUG_TD), esc_html(NAME)).'</li>'.
+                                                        '           <li>'.sprintf(__('The <code>Reply-To</code> address that you configure below, will serve as a base for %1$s to work from. For instance, let\'s say you choose: <code>rve@spark.%2$s</code>. This base address will be suffixed automatically (at runtime) with details specific to a particular notification that %1$s sends. Ultimately, <code>rve@spark.%2$s</code> will look like: <code>rve<strong>+332-96-kgjdgxr4ldqpdrgjdgxr</strong>@spark.%2$s</code>. In this example, the additional details (following the <code>+</code> sign) are there to help %1$s route the reply to the proper location, and to provide a means by which to identify the end-user that is posting a reply.', SLUG_TD), esc_html(NAME), esc_html($this->plugin->utils_url->currentHostBase())).'</li>'.
                                                         '           <li>'.sprintf(__('For single-comment notifications; i.e., where a subscriber chooses delivery type <code>asap</code> (aka: instantly), there is just a single comment in each notification that a subscriber receives. This works best with replies via email, since the <code>Reply-To:</code> header (on its own) is enough for everything to work as expected. Someone replying via email need only hit the Reply button in their email program and start typing. Very simple.', SLUG_TD), esc_html(NAME)).'</li>'.
                                                         '           <li>'.sprintf(__('For multi-comment notifications; i.e., where a subscriber chooses a delivery type that is not <code>asap</code> (e.g., <code>hourly</code>, <code>daily</code>, etc.); there can be more than a single comment in each notification they receive. If there is more than one comment in the notification, instructions will be provided to the end-user explaining how to reply. The special <code>Reply-To</code> address is still used in this case. However, they also need to specify which comment they want to reply to. To do this, the end-user must start their reply with a special marker provided by %1$s. Again, if there is more than one comment in the notification, instructions will be provided to the end-user explaining how to reply.', SLUG_TD), esc_html(NAME)).'</li>'.
                                                         '           <li>'.sprintf(__('Comments posted via email are still piped through the same underlying WordPress handler that normal on-site comments go through (i.e., <code>/wp-comments-post.php</code>). This means that all of your existing WordPress Discussion Settings (and/or Akismet settings) will still apply to all comments, even if they are posted via email. <strong>With one exception.</strong> When an RVE Handler is enabled, any comments posted via email are allowed through without an end-user being logged-in. If your WordPress Discussion Settings require that users be logged-in to post comments, that will be overridden temporarily whenever a reply via email comes through. Please note that replies posted via email are generally from confirmed subscribers. Any reply via email that is not from a confirmed subscriber will be forced into moderation by %1$s anyway. Otherwise, whatever your current Discussion Settings are configured to allow, will be adhered to for replies via email also. For instance, if you require that all comments be moderated, that will continue to be the case for all replies via email. %1$s will never approve a comment on it\'s own. Approval of comments is always determined by your WP Discussion Settings.', SLUG_TD), esc_html(NAME)).'</li>'.
@@ -1154,8 +1154,8 @@ class MenuPage extends AbsBase
 
             $_panel_body .= '<div class="pmp-if-enabled-show pmp-if-nest"><hr />'.
 
-                            '<a href="http://comment-mail.com/kb-article/mandrill-rve-handler/" target="_blank">'.
-                            '<img src="'.esc_attr($this->plugin->utils_url->to('/src/client-s/images/mandrill-rec.png')).'" class="pmp-right" style="margin-left:3em;" /></a>'.
+                            '<a href="http://comment-mail.com/r/sparkpost/" target="_blank">'.
+                            '<img src="'.esc_attr($this->plugin->utils_url->to('/src/client-s/images/sparkpost-rve.png')).'" class="pmp-right" style="margin-left:3em;" /></a>'.
 
                             ' <table style="width:auto; margin-bottom:0;">'.
                             '    <tbody>'.
@@ -1168,14 +1168,46 @@ class MenuPage extends AbsBase
                                     'current_value'   => $current_value_for('replies_via_email_handler'),
                                     'allow_arbitrary' => false, // Must be one of these.
                                     'options'         => [
-                                        ''         => '', // Empty value for the sake of making this somewhat understandable.
-                                        'mandrill' => __('Mandrill RVE Handler (free; recommended)', SLUG_TD),
+                                        ''          => '',
+                                        'sparkpost' => __('SparkPost RVE Handler (recommended)', SLUG_TD),
+                                        'mandrill'  => __('Mandrill RVE Handler (deprecated)', SLUG_TD),
                                     ],
-                                    'notes_after' => '<p>'.sprintf(__('<strong>Note:</strong> %1$s is currently the only choice here; i.e., we have only integrated this with Mandrill thus far <i class="fa fa-smile-o"></i>', SLUG_TD), $this->plugin->utils_markup->xAnchor('http://help.mandrill.com/entries/21699367-Inbound-Email-Processing-Overview', 'Mandrill')).'</p>',
                                 ]
                             ).
                             '    </tbody>'.
                             ' </table>'.
+
+                            ' <div class="pmp-if-enabled-show pmp-if-value-sparkpost pmp-in-if-nest"><hr />'.
+                            '    <table>'.
+                            '       <tbody>'.
+                            $form_fields->inputRow(
+                                [
+                                    'type'          => 'password',
+                                    'label'         => __('SparkPost API Key:', SLUG_TD),
+                                    'placeholder'   => __('e.g., 7xxxxe7598ex6fe60d7cxxxx34a73ccdxxx084', SLUG_TD),
+                                    'name'          => 'rve_sparkpost_api_key',
+                                    'current_value' => $current_value_for('rve_sparkpost_api_key'),
+                                    'notes_after'   => '<p>'.sprintf(__('Please see %1$s for detailed instructions.', SLUG_TD), $this->plugin->utils_markup->xAnchor('http://comment-mail.com/kb-article/sparkpost-rve-handler/', __('this KB article', SLUG_TD))).'</p>',
+                                ]
+                            ).
+                            '       </tbody>'.
+                            '    </table>'.
+
+                            '    <table>'.
+                            '       <tbody>'.
+                            $form_fields->inputRow(
+                                [
+                                    'type'          => 'email',
+                                    'label'         => __('SparkPost <code>Reply-To</code> Address:', SLUG_TD),
+                                    'placeholder'   => sprintf(__('e.g., rve@spark.%1$s', SLUG_TD), $this->plugin->utils_url->currentHostBase()),
+                                    'name'          => 'rve_sparkpost_reply_to_email',
+                                    'current_value' => $current_value_for('rve_sparkpost_reply_to_email'),
+                                    'notes_after'   => '<p>'.sprintf(__('Please see %1$s for detailed instructions.', SLUG_TD), $this->plugin->utils_markup->xAnchor('http://comment-mail.com/kb-article/sparkpost-rve-handler/', __('this KB article', SLUG_TD))).'</p>',
+                                ]
+                            ).
+                            '       </tbody>'.
+                            '    </table>'.
+                            ' </div>'.
 
                             ' <div class="pmp-if-enabled-show pmp-if-value-mandrill pmp-in-if-nest"><hr />'.
                             '    <table>'.
@@ -1187,7 +1219,7 @@ class MenuPage extends AbsBase
                                     'placeholder'   => sprintf(__('e.g., rve@mandrill.%1$s', SLUG_TD), $this->plugin->utils_url->currentHostBase()),
                                     'name'          => 'rve_mandrill_reply_to_email',
                                     'current_value' => $current_value_for('rve_mandrill_reply_to_email'),
-                                    'notes_after'   => '<p class="pmp-note pmp-info">'.sprintf(__('This is really all it takes to get Replies via Email working. However, it requires that you setup a Mandrill account (free) and then configure an Inbound Mailbox Route that will connect to the Webhook URL shown below. <span class="pmp-hilite">Please see %1$s for detailed instructions.</span>', SLUG_TD), $this->plugin->utils_markup->xAnchor('http://comment-mail.com/kb-article/mandrill-rve-handler/', __('this wiki article', SLUG_TD))).'</p>'.
+                                    'notes_after'   => '<p class="pmp-note pmp-info">'.sprintf(__('This is really all it takes to get Replies via Email working. However, it does require that you setup a Mandrill account (free) and then configure an Inbound Mailbox Route that will connect to the Webhook URL shown below. <span class="pmp-hilite">Please see %1$s for detailed instructions.</span>', SLUG_TD), $this->plugin->utils_markup->xAnchor('http://comment-mail.com/kb-article/mandrill-rve-handler/', __('this KB article', SLUG_TD))).'</p>'.
                                                        $this->selectAllField(__('<strong>Mandrill Webhook URL:</strong>', SLUG_TD), IS_PRO ? $this->plugin->utils_url->rveMandrillWebhookUrl() : ''),
                                 ]
                             ).

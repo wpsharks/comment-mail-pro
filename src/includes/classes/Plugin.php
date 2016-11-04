@@ -293,6 +293,11 @@ class Plugin extends AbsBase
             'replies_via_email_enable',
             'replies_via_email_handler',
 
+            'rve_sparkpost_api_key',
+            'rve_sparkpost_reply_to_email',
+            'rve_sparkpost_webhook_setup_hash',
+            'rve_sparkpost_webhook_id',
+
             'rve_mandrill_reply_to_email',
             'rve_mandrill_max_spam_score',
             'rve_mandrill_spf_check_enable',
@@ -581,8 +586,13 @@ class Plugin extends AbsBase
             # Related to replies via email.
 
             'replies_via_email_enable'  => '0', // `0|1`; enable?
-            'replies_via_email_handler' => '', // `mandrill`.
+            'replies_via_email_handler' => '', // `sparkpost` or `mandrill`.
             // Mandrill is currently the only choice. In the future we may add other options to this list.
+
+            'rve_sparkpost_api_key'            => '', // SparkPost API key.
+            'rve_sparkpost_reply_to_email'     => '', // `Reply-To:` address.
+            'rve_sparkpost_webhook_setup_hash' => '', // Setup hash.
+            'rve_sparkpost_webhook_id'         => '', // Webhook ID.
 
             'rve_mandrill_reply_to_email'    => '', // `Reply-To:` address.
             'rve_mandrill_max_spam_score'    => '5.0', // Max allowable spam score.
@@ -1134,6 +1144,14 @@ class Plugin extends AbsBase
         }
         unset($_key, $_key_data, $_value); // Housekeeping.
         unset($_default_template, $_option_template_nws, $_default_template_nws);
+
+        /*[pro strip-from="lite"]*/
+        if ($this->options['rve_sparkpost_api_key'] && $this->options['rve_sparkpost_reply_to_email']) {
+            if ($this->options['rve_sparkpost_webhook_setup_hash'] !== md5($this->options['rve_sparkpost_api_key'].$this->options['rve_sparkpost_reply_to_email'])) {
+                RveSparkPost::setupWebhook(); // Setup webhook using new options.
+            }
+        }
+        /*[/pro]*/
 
         update_option(GLOBAL_NS.'_options', $this->options); // DB update.
     }

@@ -1,5 +1,7 @@
 ## [coming soon]
 
+- **SparkPost Integration:** It is now possible to use SparkPost for Replies-via-Email (RVE) instead of Mandrill. Note that SparkPost is now the suggested RVE Handler for Comment Mail because Mandrill changed its pricing structure a while back. In short, Mandrill requires a fee, whereas SparkPost (recommended) offers Relay Webhooks as a part of their free plan. See also [issue #265](https://github.com/websharks/comment-mail/issues/265) for additional details.
+
 - **UI Bug Fix** (Pro): Removed unnecessary padding from the bottom of the Pro Update Dashboard notification. Props @kristineds. See [Issue #296](https://github.com/websharks/comment-mail/issues/296).
 
 - **New Feature:** Adding support for MailChimp integration. Requires pro version. It is now possible to give users the option of subscribing to your site-wide mailing list whenever they leave a comment or reply; i.e., in addition to subscribing to comment reply notifications they can also join your MailChimp mailing list. See also: [issue #114](https://github.com/websharks/comment-mail/issues/114) for further details.

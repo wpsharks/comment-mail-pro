@@ -52,11 +52,11 @@ class UtilsRve extends AbsBase
         if (strpos($reply_to, '@', 1) === false) {
             return $reply_to; // Not possible.
         }
-        if (!($post_id = abs((integer) $post_id))) {
+        if (!($post_id = abs((int) $post_id))) {
             return $reply_to; // Not possible.
         }
         if (isset($comment_id)) { // Only if set; `0` has meaning.
-            $comment_id = abs((integer) $comment_id);
+            $comment_id = abs((int) $comment_id);
         }
         $sub_key = trim((string) $sub_key);
 
@@ -80,11 +80,11 @@ class UtilsRve extends AbsBase
      */
     public function irtMarker($post_id, $comment_id = null, $sub_key = '')
     {
-        if (!($post_id = abs((integer) $post_id))) {
+        if (!($post_id = abs((int) $post_id))) {
             return ''; // Not possible.
         }
         if (isset($comment_id)) { // Only if set; `0` has meaning.
-            $comment_id = abs((integer) $comment_id);
+            $comment_id = abs((int) $comment_id);
         }
         $sub_key = trim((string) $sub_key);
 
@@ -174,6 +174,9 @@ class UtilsRve extends AbsBase
         if ($pattern_name === 'wrote_by_line') { // Auto-generated `wrote:` line.
             return '(?i:.*?\s(?:wrote|writes|said|says)\:)'; // Variations.
         }
+        if ($pattern_name === 'original_message') { // Auto-generated `--- Original Message ---`.
+            return '(?i:\-+\s+Original\s+Message\s+\-+)'; // Variations.
+        }
         throw new \exception(__('Invalid `$pattern_name`.', SLUG_TD));
     }
 
@@ -231,10 +234,10 @@ class UtilsRve extends AbsBase
             if ($plain_text_body && preg_match_all('/^'.$regex_irt_marker_frag.'/', $plain_text_body, $m, PREG_SET_ORDER) === 1) {
                 //var_dump($m); // Found an IRT marker at the beginning of the text body.
                 if (!isset($post_id) && isset($m[0]['post_id'][0])) {
-                    $post_id = (integer) $m[0]['post_id'];
+                    $post_id = (int) $m[0]['post_id'];
                 }
                 if (!isset($comment_id) && isset($m[0]['comment_id'][0])) {
-                    $comment_id = (integer) $m[0]['comment_id'];
+                    $comment_id = (int) $m[0]['comment_id'];
                 }
                 if (!isset($sub_key) && isset($m[0]['sub_key'][0])) {
                     $sub_key = $m[0]['sub_key'];
@@ -245,10 +248,10 @@ class UtilsRve extends AbsBase
             if ($reply_to_email && preg_match_all('/'.$regex_irt_suffix_frag.'/', $reply_to_email, $m, PREG_SET_ORDER) === 1) {
                 // var_dump($m); // Found a single IRT suffix in the email address.
                 if (!isset($post_id) && isset($m[0]['post_id'][0])) {
-                    $post_id = (integer) $m[0]['post_id'];
+                    $post_id = (int) $m[0]['post_id'];
                 }
                 if (!isset($comment_id) && isset($m[0]['comment_id'][0])) {
-                    $comment_id = (integer) $m[0]['comment_id'];
+                    $comment_id = (int) $m[0]['comment_id'];
                 }
                 if (!isset($sub_key) && isset($m[0]['sub_key'][0])) {
                     $sub_key = $m[0]['sub_key'];
@@ -259,10 +262,10 @@ class UtilsRve extends AbsBase
             if ($subject && preg_match_all('/'.$regex_irt_marker_frag.'/', $subject, $m, PREG_SET_ORDER) === 1) {
                 //var_dump($m); // Found a single IRT marker in the subject line.
                 if (!isset($post_id) && isset($m[0]['post_id'][0])) {
-                    $post_id = (integer) $m[0]['post_id'];
+                    $post_id = (int) $m[0]['post_id'];
                 }
                 if (!isset($comment_id) && isset($m[0]['comment_id'][0])) {
-                    $comment_id = (integer) $m[0]['comment_id'];
+                    $comment_id = (int) $m[0]['comment_id'];
                 }
                 if (!isset($sub_key) && isset($m[0]['sub_key'][0])) {
                     $sub_key = $m[0]['sub_key'];
@@ -273,10 +276,10 @@ class UtilsRve extends AbsBase
             if ($plain_text_body && preg_match_all('/'.$regex_irt_marker_frag.'/', $plain_text_body, $m, PREG_SET_ORDER) === 1) {
                 //var_dump($m); // Found a single IRT marker in the text body.
                 if (!isset($post_id) && isset($m[0]['post_id'][0])) {
-                    $post_id = (integer) $m[0]['post_id'];
+                    $post_id = (int) $m[0]['post_id'];
                 }
                 if (!isset($comment_id) && isset($m[0]['comment_id'][0])) {
-                    $comment_id = (integer) $m[0]['comment_id'];
+                    $comment_id = (int) $m[0]['comment_id'];
                 }
                 if (!isset($sub_key) && isset($m[0]['sub_key'][0])) {
                     $sub_key = $m[0]['sub_key'];
@@ -348,6 +351,35 @@ class UtilsRve extends AbsBase
     }
 
     /**
+     * Strips `--- Original Message ---`.
+     *
+     * @since 150619 Improving RVE handler.
+     *
+     * @param string $rich_text_body Rich text body.
+     *
+     * @return string Rich text body w/ `--- Original Message ---` stripped away.
+     */
+    public function stripOriginalMessage($rich_text_body)
+    {
+        if (!($rich_text_body = trim((string) $rich_text_body))) {
+            return $rich_text_body; // Empty.
+        }
+        $regex_original_message_frag = $this->regexFragFor('original_message');
+
+        $regex_original_message_body = // Trailing `--- Original Message ---` body.
+
+            '/'.// Open regex; let's find a trailing `--- Original Message ---` body.
+
+            '(?:\s*\<[^\/<>]+\>\s*)*'.// Any HTML open tags wrapping it up.
+
+            '\s*'.$regex_original_message_frag.// Leading whitespace.
+
+            '[\S\s]*/'; // Anything else in the original message is stripped away.
+
+        return preg_replace($regex_original_message_body, '', $rich_text_body);
+    }
+
+    /**
      * Sanitizes reply via email message body.
      *
      * @since 141111 First documented version.
@@ -403,11 +435,13 @@ class UtilsRve extends AbsBase
             $force_moderation               = false; // Found end divider, no need to moderate.
             list($sanitized_rich_text_body) = preg_split($regex_manual_end_divider, $rich_text_body, 2);
             $sanitized_rich_text_body       = $this->stripWroteByLine($sanitized_rich_text_body);
+            $sanitized_rich_text_body       = $this->stripOriginalMessage($sanitized_rich_text_body);
             $sanitized_rich_text_body       = $this->plugin->utils_string->trimHtml($sanitized_rich_text_body);
         } elseif (preg_match($regex_end_divider, $rich_text_body)) {
             $force_moderation               = false; // Found end divider, no need to moderate.
             list($sanitized_rich_text_body) = preg_split($regex_end_divider, $rich_text_body, 2);
             $sanitized_rich_text_body       = $this->stripWroteByLine($sanitized_rich_text_body);
+            $sanitized_rich_text_body       = $this->stripOriginalMessage($sanitized_rich_text_body);
             $sanitized_rich_text_body       = $this->plugin->utils_string->trimHtml($sanitized_rich_text_body);
         } else { // If unable to find a valid end divider; force moderation on this reply.
             $force_moderation         = true; // Force moderation in this case.
@@ -463,15 +497,15 @@ class UtilsRve extends AbsBase
         $sub         = $comment         = null; // Initialize these; needed below.
         $in_reply_to = $this->inReplyTo($reply_to_email, $subject, $rich_text_body);
 
-        $post_id    = (integer) $in_reply_to->post_id; // In reply to post ID.
-        $comment_id = (integer) $in_reply_to->comment_id; // Comment ID.
+        $post_id    = (int) $in_reply_to->post_id; // In reply to post ID.
+        $comment_id = (int) $in_reply_to->comment_id; // Comment ID.
         $sub_key    = (string) $in_reply_to->sub_key; // By sub key.
 
         if ($comment_id) { // In reply to a specific comment ID?
             $comment = get_comment($comment_id); // Try to acquire.
         }
         if (!$post_id && $comment) { // Use comment post ID?
-            $post_id = (integer) $comment->comment_post_ID;
+            $post_id = (int) $comment->comment_post_ID;
         }
         if ($sub_key) { // If sub key is known, get subscription.
             $sub = $this->plugin->utils_sub->get($sub_key);
@@ -493,7 +527,7 @@ class UtilsRve extends AbsBase
         if ($comment_id && !$comment) {
             return; // Invalid comment ID.
         }
-        if ($post_id && $comment && $post_id !== (integer) $comment->comment_post_ID) {
+        if ($post_id && $comment && $post_id !== (int) $comment->comment_post_ID) {
             return; // Post ID to comment ID mismatch in this case.
         }
         if ($sub_key && !$sub) {
@@ -537,6 +571,8 @@ class UtilsRve extends AbsBase
                     GLOBAL_NS.'_rve_sub_key'      => $sub_key, // Subscription key identifier.
                     GLOBAL_NS.'_rve_force_status' => $force_status, // Force a status?
                 ],
+
+                'sslverify' => false, // Local connection.
             ]
         );
         if (is_wp_error($response)) { // Log for possible debugging later.
@@ -651,7 +687,7 @@ class UtilsRve extends AbsBase
             if ($current_hard_status !== 'approve') { // If unapproved, check sub key for authors/admins.
                 if (!empty($comment_data['comment_post_ID']) && ($post = get_post($comment_data['comment_post_ID']))) {
                     if (($user = \WP_User::get_data_by('email', $sub->email)) && ($user = new \WP_User($user->ID))) {
-                        if ($user->ID === (integer) $post->post_author || $user->has_cap($this->plugin->manage_cap) || $user->has_cap($this->plugin->cap)) {
+                        if ($user->ID === (int) $post->post_author || $user->has_cap($this->plugin->manage_cap) || $user->has_cap($this->plugin->cap)) {
                             return $comment_status = 1; // Auto-approve comment from author/admin.
                         }
                     }
