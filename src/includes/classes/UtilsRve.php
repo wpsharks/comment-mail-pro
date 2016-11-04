@@ -374,7 +374,7 @@ class UtilsRve extends AbsBase
 
             '\s*'.$regex_original_message_frag.// Leading whitespace.
 
-            '.*/'; // Anything else in the original message is stripped away.
+            '[\S\s]*/'; // Anything else in the original message is stripped away.
 
         return preg_replace($regex_original_message_body, '', $rich_text_body);
     }
