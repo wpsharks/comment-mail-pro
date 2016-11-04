@@ -174,6 +174,9 @@ class UtilsRve extends AbsBase
         if ($pattern_name === 'wrote_by_line') { // Auto-generated `wrote:` line.
             return '(?i:.*?\s(?:wrote|writes|said|says)\:)'; // Variations.
         }
+        if ($pattern_name === 'original_message') { // Auto-generated `--- Original Message ---`.
+            return '(?i:\-+\s+Original\s+Message\s+\-+)'; // Variations.
+        }
         throw new \exception(__('Invalid `$pattern_name`.', SLUG_TD));
     }
 
@@ -348,6 +351,35 @@ class UtilsRve extends AbsBase
     }
 
     /**
+     * Strips `--- Original Message ---`.
+     *
+     * @since 150619 Improving RVE handler.
+     *
+     * @param string $rich_text_body Rich text body.
+     *
+     * @return string Rich text body w/ `--- Original Message ---` stripped away.
+     */
+    public function stripOriginalMessage($rich_text_body)
+    {
+        if (!($rich_text_body = trim((string) $rich_text_body))) {
+            return $rich_text_body; // Empty.
+        }
+        $regex_original_message_frag = $this->regexFragFor('original_message');
+
+        $regex_original_message_body = // Trailing `--- Original Message ---` body.
+
+            '/'.// Open regex; let's find a trailing `--- Original Message ---` body.
+
+            '(?:\s*\<[^\/<>]+\>\s*)*'.// Any HTML open tags wrapping it up.
+
+            '\s*'.$regex_original_message_frag.// Leading whitespace.
+
+            '.*/'; // Anything else in the original message is stripped away.
+
+        return preg_replace($regex_original_message_body, '', $rich_text_body);
+    }
+
+    /**
      * Sanitizes reply via email message body.
      *
      * @since 141111 First documented version.
@@ -403,11 +435,13 @@ class UtilsRve extends AbsBase
             $force_moderation               = false; // Found end divider, no need to moderate.
             list($sanitized_rich_text_body) = preg_split($regex_manual_end_divider, $rich_text_body, 2);
             $sanitized_rich_text_body       = $this->stripWroteByLine($sanitized_rich_text_body);
+            $sanitized_rich_text_body       = $this->stripOriginalMessage($sanitized_rich_text_body);
             $sanitized_rich_text_body       = $this->plugin->utils_string->trimHtml($sanitized_rich_text_body);
         } elseif (preg_match($regex_end_divider, $rich_text_body)) {
             $force_moderation               = false; // Found end divider, no need to moderate.
             list($sanitized_rich_text_body) = preg_split($regex_end_divider, $rich_text_body, 2);
             $sanitized_rich_text_body       = $this->stripWroteByLine($sanitized_rich_text_body);
+            $sanitized_rich_text_body       = $this->stripOriginalMessage($sanitized_rich_text_body);
             $sanitized_rich_text_body       = $this->plugin->utils_string->trimHtml($sanitized_rich_text_body);
         } else { // If unable to find a valid end divider; force moderation on this reply.
             $force_moderation         = true; // Force moderation in this case.
