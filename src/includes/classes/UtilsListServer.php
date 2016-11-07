@@ -33,10 +33,15 @@ class UtilsListServer extends AbsBase
         }
         switch ($this->plugin->options['list_server']) {
             case 'mailchimp': // MailChimp.
-                $mailchimp = new ListServerMailchimp();
-                return $mailchimp->subscribe([], $args);
+                try {
+                    $Mailchimp    = new ListServerMailchimp();
+                    $api_response = $Mailchimp->subscribe([], $args);
+                    return !empty($api_response['leid']) ? (string) $api_response['leid'] : '';
+                } catch (\Exception $Exception) {
+                    return '';
+                }
         }
-        return ''; // Default; i.e., unsupported list server.
+        return '';
     }
 
     /**
@@ -55,9 +60,14 @@ class UtilsListServer extends AbsBase
         }
         switch ($this->plugin->options['list_server']) {
             case 'mailchimp':
-                $mailchimp = new ListServerMailchimp();
-                return $mailchimp->unsubscribe([], $args);
+                try {
+                    $Mailchimp    = new ListServerMailchimp();
+                    $api_response = $Mailchimp->unsubscribe([], $args);
+                    return !empty($api_response['complete']) ? true : false;
+                } catch (\Exception $Exception) {
+                    return false;
+                }
         }
-        return false; // Default; i.e., unsupported list server.
+        return false;
     }
 }
