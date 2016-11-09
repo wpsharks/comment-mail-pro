@@ -38,19 +38,10 @@ class UtilsListServer extends AbsBase
                     $api_response = $Mailchimp->subscribe([], $args);
                     return !empty($api_response['leid']) ? (string) $api_response['leid'] : '';
                 } catch (\Exception $Exception) {
-                    // See: https://github.com/websharks/comment-mail/issues/114#issuecomment-259088342
-                    // If `double_optin=false` is not possible, try it again with `double_optin=true`.
-                    if (isset($args['double_optin']) && $args['double_optin'] === false) {
-                        try {
-                            $args['double_optin'] = true; // Try it like this.
-                            $api_response         = $Mailchimp->subscribe([], $args);
-                            return !empty($api_response['leid']) ? (string) $api_response['leid'] : '';
-                        } catch (\Exception $Exception) {
-                            return '';
-                        }
-                    } else {
-                        return '';
-                    }
+                    return ''; // NOTE: If the user already unsubscribed, an exception is thrown.
+                    // See: <https://github.com/websharks/comment-mail/issues/114#issuecomment-259559795>
+                    // Nothing we can do about this at the present time.
+                    // @TODO Check this in the planned API upgrade to see if there is a workaround.
                 }
         }
         return '';
