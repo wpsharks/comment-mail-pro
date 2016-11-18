@@ -268,7 +268,7 @@ class RveSparkPost extends AbsBase
                         esc_html(NAME),
                         esc_html(!empty($api_response->errors[0]->message) ? $api_response->errors[0]->message : __('Unknown API error.', SLUG_TD))
                     );
-                    $this->enqueueWarning($markup);
+                    $plugin->enqueueWarning($markup);
                     return; // Not possible.
                 }
                 $wp_remote_response = wp_remote_request('https://api.sparkpost.com/api/v1/relay-webhooks', [
@@ -298,7 +298,7 @@ class RveSparkPost extends AbsBase
                         esc_html(NAME),
                         esc_html(!empty($api_response->errors[0]->message) ? $api_response->errors[0]->message : __('Unknown API error.', SLUG_TD))
                     );
-                    $this->enqueueWarning($markup);
+                    $plugin->enqueueWarning($markup);
                     return; // Not possible.
                 }
                 if (is_object($api_response) && !empty($api_response->results->id)) {
