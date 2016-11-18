@@ -3,7 +3,7 @@
 /**
  * Replies via Email; SparkPost Webhook Listener.
  *
- * @since 16xxxx Adding SparkPost integration.
+ * @since 161118 Adding SparkPost integration.
  *
  * @copyright WebSharks, Inc. <http://www.websharks-inc.com>
  * @license   GNU General Public License, version 3
@@ -13,21 +13,21 @@ namespace WebSharks\CommentMail\Pro;
 /**
  * Replies via Email; SparkPost Webhook Listener.
  *
- * @since 16xxxx Adding SparkPost integration.
+ * @since 161118 Adding SparkPost integration.
  */
 class RveSparkPost extends AbsBase
 {
     /**
      * @var string
      *
-     * @since 16xxxx
+     * @since 161118
      */
     protected $key;
 
     /**
      * @var object
      *
-     * @since 16xxxx
+     * @since 161118
      */
     protected $message;
 
@@ -36,7 +36,7 @@ class RveSparkPost extends AbsBase
      *
      * @param string $key Secret key.
      *
-     * @since 16xxxx Adding SparkPost.
+     * @since 161118 Adding SparkPost.
      */
     public function __construct($key)
     {
@@ -51,7 +51,7 @@ class RveSparkPost extends AbsBase
     /**
      * Key for this webhook.
      *
-     * @since 16xxxx Adding SparkPost.
+     * @since 161118 Adding SparkPost.
      */
     public static function key()
     {
@@ -63,7 +63,7 @@ class RveSparkPost extends AbsBase
     /**
      * Prepare webhook.
      *
-     * @since 16xxxx Adding SparkPost.
+     * @since 161118 Adding SparkPost.
      */
     protected function prepWebhook()
     {
@@ -74,7 +74,7 @@ class RveSparkPost extends AbsBase
     /**
      * Process webhook event.
      *
-     * @since 16xxxx Adding SparkPost.
+     * @since 161118 Adding SparkPost.
      */
     protected function maybeProcess()
     {
@@ -94,7 +94,7 @@ class RveSparkPost extends AbsBase
     /**
      * Collect SparkPost message.
      *
-     * @since 16xxxx Adding SparkPost.
+     * @since 161118 Adding SparkPost.
      */
     protected function collectMessage()
     {
@@ -114,7 +114,7 @@ class RveSparkPost extends AbsBase
     /**
      * Process SparkPost message.
      *
-     * @since 16xxxx Adding SparkPost.
+     * @since 161118 Adding SparkPost.
      */
     protected function processMessage()
     {
@@ -172,7 +172,7 @@ class RveSparkPost extends AbsBase
     /**
      * Processes a comment reply.
      *
-     * @since 16xxxx Adding SparkPost.
+     * @since 161118 Adding SparkPost.
      *
      * @param array $args Input email/event arguments.
      */
@@ -227,7 +227,7 @@ class RveSparkPost extends AbsBase
     /**
      * Setup SparkPost webhook.
      *
-     * @since 16xxxx Adding SparkPost.
+     * @since 161118 Adding SparkPost.
      */
     public static function setupWebhook()
     {

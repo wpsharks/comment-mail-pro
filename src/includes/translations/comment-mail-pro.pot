@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Comment Mail Pro package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Comment Mail Pro 161110-RC\n"
+"Project-Id-Version: Comment Mail Pro 161118\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/comment-mail-pro\n"
-"POT-Creation-Date: 2016-11-10 00:54:49+00:00\n"
+"POT-Creation-Date: 2016-11-18 00:46:08+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
