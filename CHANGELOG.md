@@ -1,4 +1,4 @@
-## [coming soon]
+## v161129
 
 - **Bug Fix:** This release corrects a nasty bug that was first introduced in the previous release, resulting in the loss of template modifications when/if any Comment Mail options were edited after having upgraded to the previous release. See [Issue #322](https://github.com/websharks/comment-mail/issues/322).
 
