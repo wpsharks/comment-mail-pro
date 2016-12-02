@@ -1,5 +1,7 @@
 ## [coming soon]
 
+- **Bug Fix:** Searching by email address alone should always narrow to the search to that specific email address and not result in any fuzzy or fulltext matching. See [Issue #226](https://github.com/websharks/comment-mail/issues/226).
+
 - **Bug Fix:** The conflict check for 'Subscribe to Comments Reloaded' was not working in the previous release; i.e., if you attempt to activate both Comment Mail and the 'Subscribe to Comments Reloaded' plugin at the same, this should result in a Dashboard warning. Fixed in this release. See [Issue #315](https://github.com/websharks/comment-mail/issues/315).
 
 - **Bug Fix:** Prevent browser autocomplete in Comment Mail options. See [Issue #319](https://github.com/websharks/comment-mail/issues/319).
