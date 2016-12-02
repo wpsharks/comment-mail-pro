@@ -353,6 +353,7 @@ class Plugin extends AbsBase
             'post_select_options_media_enable',
             'comment_select_options_enable',
             'user_select_options_enable',
+            'enhance_select_options_enable',
             'max_select_options',
 
             # Menu pages; i.e. logo display.
@@ -653,6 +654,7 @@ class Plugin extends AbsBase
             'post_select_options_media_enable' => '0', // `0|1`; enable?
             'comment_select_options_enable'    => '1', // `0|1`; enable?
             'user_select_options_enable'       => '1', // `0|1`; enable?
+            'enhance_select_options_enable'    => '1', // `0|1`; enable?
             'max_select_options'               => '2000', // Max options.
 
             # Related to menu pages; i.e. logo display.
