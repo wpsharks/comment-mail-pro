@@ -23,6 +23,11 @@ function stcr_transition()
     if (!get_option('subscribe_reloaded_version')) {
         return; // Not applicable.
     }
+    # Is the StCR plugin actually installed; i.e., dir exists?
+
+    if (!is_dir(WP_PLUGIN_DIR.'/subscribe-to-comments-reloaded')) {
+        return; // Not applicable.
+    }
     # StCR to consider during a transition.
 
     $subscribe_reloaded_show_subscription_box         = get_option('subscribe_reloaded_show_subscription_box');

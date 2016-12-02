@@ -1,5 +1,7 @@
 ## [coming soon]
 
+- **Bug Fix:** Do not attempt to import StCR settings if StCR is no longer installed, even if old StCR options exist in the database. See [Issue #294](https://github.com/websharks/comment-mail/issues/294).
+
 - **Bug Fix:** Notify StCR users about the comment form template being disabled under certain scenarios. See [Issue #314](https://github.com/websharks/comment-mail/issues/314).
 
 - **Bug Fix:** Searching by email address alone should always narrow to the search to that specific email address and not result in any fuzzy or fulltext matching. See [Issue #226](https://github.com/websharks/comment-mail/issues/226).
