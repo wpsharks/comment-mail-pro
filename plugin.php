@@ -8,7 +8,7 @@
  * @license   GNU General Public License, version 3
  */
 /*
-Version: 161129
+Version: 161202
 Text Domain: comment-mail
 Plugin Name: Comment Mail Pro
 

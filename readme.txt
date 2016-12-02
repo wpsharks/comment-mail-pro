@@ -1,6 +1,6 @@
 === Comment Mail (WP Comment Subscriptions) ===
 
-Stable tag: 161129
+Stable tag: 161202
 Requires at least: 4.4
 Tested up to: 4.7-alpha
 Text Domain: comment-mail
