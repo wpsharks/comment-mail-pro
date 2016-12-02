@@ -81,7 +81,7 @@ class MenuPage extends AbsBase
         /* ----------------------------------------------------------------------------------------- */
 
         echo '<div class="'.esc_attr(SLUG_TD.'-menu-page '.SLUG_TD.'-menu-page-options '.SLUG_TD.'-menu-page-area').'">'."\n";
-        echo '   <form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->pageNonceOnly()).'" novalidate="novalidate">'."\n";
+        echo '   <form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->pageNonceOnly()).'" novalidate="novalidate" autocomplete="off">'."\n";
 
         echo '      '.$this->heading(__('Plugin Options', SLUG_TD), 'logo.png').
              '      '.$this->notes(); // Heading/notifications.
@@ -2196,7 +2196,7 @@ class MenuPage extends AbsBase
             ];
             $_form_fields = new FormFields($_form_field_args);
 
-            $_panel_body = '<form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->pageNonceOnly()).'" novalidate="novalidate">'."\n";
+            $_panel_body = '<form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->pageNonceOnly()).'" novalidate="novalidate" autocomplete="off">'."\n";
 
             $_panel_body .= ' <h3 style="margin-bottom:0;">'.sprintf(__('Import New %1$s&trade; Subscriptions, or Update Existing Subscriptions', SLUG_TD), esc_html(NAME)).'</h3>';
             $_panel_body .= ' <p>'.sprintf(__('The importation routine will accept direct CSV input in the textarea below, or you can choose to upload a prepared CSV file.', SLUG_TD), esc_html(NAME)).'</p>';
@@ -2280,8 +2280,7 @@ class MenuPage extends AbsBase
             ];
             $_form_fields = new FormFields($_form_field_args);
 
-            $_panel_body = '<form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->pageNonceOnly()).'"'.
-                           ' target="'.esc_attr(GLOBAL_NS.'_import_stcr_iframe').'" novalidate="novalidate">'."\n";
+            $_panel_body = '<form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->pageNonceOnly()).'" target="'.esc_attr(GLOBAL_NS.'_import_stcr_iframe').'" novalidate="novalidate" autocomplete="off">'."\n";
 
             $_panel_body .= ' <table style="table-layout:auto;">'.
                             '    <tbody>'.
@@ -2341,7 +2340,7 @@ class MenuPage extends AbsBase
             ];
             $_form_fields = new FormFields($_form_field_args);
 
-            $_panel_body = '<form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->pageNonceOnly()).'" novalidate="novalidate">'."\n";
+            $_panel_body = '<form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->pageNonceOnly()).'" novalidate="novalidate" autocomplete="off">'."\n";
 
             $_total_subs_in_db = $this->plugin->utils_sub->queryTotal(null, ['auto_discount_trash' => false]);
             $_panel_body .= ' <h3 style="margin-bottom:0;">'.sprintf(__('Export All of your %1$s&trade; Subscriptions', SLUG_TD), esc_html(NAME)).'</h3>';
@@ -2429,7 +2428,7 @@ class MenuPage extends AbsBase
             ];
             $_form_fields = new FormFields($_form_field_args);
 
-            $_panel_body = '<form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->pageNonceOnly()).'" novalidate="novalidate">'."\n";
+            $_panel_body = '<form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->pageNonceOnly()).'" novalidate="novalidate" autocomplete="off">'."\n";
 
             $_panel_body .= ' <h3 style="margin-bottom:0;">'.sprintf(__('Import a New Set of %1$s&trade; Config. Options', SLUG_TD), esc_html(NAME)).'</h3>';
             $_panel_body .= ' <p>'.sprintf(__('Configuration options are imported using a JSON-encoded file obtained from another copy of %1$s&trade;.', SLUG_TD), esc_html(NAME)).'</p>';
@@ -2472,7 +2471,7 @@ class MenuPage extends AbsBase
             ];
             $_form_fields = new FormFields($_form_field_args);
 
-            $_panel_body = '<form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->pageNonceOnly()).'" novalidate="novalidate">'."\n";
+            $_panel_body = '<form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->pageNonceOnly()).'" novalidate="novalidate" autocomplete="off">'."\n";
 
             $_panel_body .= ' <h3 style="margin-bottom:0;">'.sprintf(__('Export All of your %1$s&trade; Config. Options', SLUG_TD), esc_html(NAME)).'</h3>';
             $_panel_body .= ' <p>'.__('Configuration options are downloaded as a JSON-encoded file.', SLUG_TD).'</p>';
@@ -2542,7 +2541,7 @@ class MenuPage extends AbsBase
         /* ----------------------------------------------------------------------------------------- */
 
         echo '<div class="'.esc_attr(SLUG_TD.'-menu-page '.SLUG_TD.'-menu-page-email-templates '.SLUG_TD.'-menu-page-area').'">'."\n";
-        echo '   <form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->pageNonceOnly()).'" novalidate="novalidate">'."\n";
+        echo '   <form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->pageNonceOnly()).'" novalidate="novalidate" autocomplete="off">'."\n";
 
         echo '      '.$this->heading(__('Email Templates', SLUG_TD), 'logo.png').
              '      '.$this->notes(); // Heading/notifications.
@@ -3175,7 +3174,7 @@ class MenuPage extends AbsBase
         /* ----------------------------------------------------------------------------------------- */
 
         echo '<div class="'.esc_attr(SLUG_TD.'-menu-page '.SLUG_TD.'-menu-page-site-templates '.SLUG_TD.'-menu-page-area').'">'."\n";
-        echo '   <form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->pageNonceOnly()).'" novalidate="novalidate">'."\n";
+        echo '   <form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->pageNonceOnly()).'" novalidate="novalidate" autocomplete="off">'."\n";
 
         echo '      '.$this->heading(__('Site Templates', SLUG_TD), 'logo.png').
              '      '.$this->notes(); // Heading/notifications.
@@ -3998,7 +3997,7 @@ class MenuPage extends AbsBase
             case '': // Also the default case handler.
             default: // Everything else is handled by subs. table.
                 echo '<div class="'.esc_attr(SLUG_TD.'-menu-page-subs '.SLUG_TD.'-menu-page-table '.SLUG_TD.'-menu-page-area wrap').'">'."\n";
-                echo '   <form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->pageNonceTableNavVarsOnly()).'" novalidate="novalidate">'."\n";
+                echo '   <form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->pageNonceTableNavVarsOnly()).'" novalidate="novalidate" autocomplete="off">'."\n";
 
                 echo '      <h2>'.sprintf(__('%1$s&trade; &raquo; Subscriptions', SLUG_TD), esc_html(NAME)).' <i class="'.esc_attr('si si-'.SLUG_TD).'"></i>'.
                      '       <a href="'.esc_attr($this->plugin->utils_url->newSubShort()).'" class="add-new-h2">'.__('Add New', SLUG_TD).'</a></h2>'."\n";
@@ -4018,7 +4017,7 @@ class MenuPage extends AbsBase
     protected function subNew()
     {
         echo '<div class="'.esc_attr(SLUG_TD.'-menu-page-sub-new '.SLUG_TD.'-menu-page-form '.SLUG_TD.'-menu-page-area wrap').'">'."\n";
-        echo '   <form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->pageNonceTableNavVarsOnly(['action'])).'" novalidate="novalidate">'."\n";
+        echo '   <form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->pageNonceTableNavVarsOnly(['action'])).'" novalidate="novalidate" autocomplete="off">'."\n";
 
         echo '      <h2>'.sprintf(__('%1$s&trade; &raquo; New Subscription', SLUG_TD), esc_html(NAME)).' <i class="'.esc_attr('si si-'.SLUG_TD.'-one').'"></i></h2>'."\n";
 
@@ -4036,7 +4035,7 @@ class MenuPage extends AbsBase
     protected function subEdit()
     {
         echo '<div class="'.esc_attr(SLUG_TD.'-menu-page-sub-edit '.SLUG_TD.'-menu-page-form '.SLUG_TD.'-menu-page-area wrap').'">'."\n";
-        echo '   <form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->pageNonceTableNavVarsOnly(['action', 'subscription'])).'" novalidate="novalidate">'."\n";
+        echo '   <form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->pageNonceTableNavVarsOnly(['action', 'subscription'])).'" novalidate="novalidate" autocomplete="off">'."\n";
 
         echo '      <h2>'.sprintf(__('%1$s&trade; &raquo; Edit Subscription', SLUG_TD), esc_html(NAME)).' <i class="'.esc_attr('si si-'.SLUG_TD.'-one').'"></i></h2>'."\n";
 
@@ -4054,7 +4053,7 @@ class MenuPage extends AbsBase
     protected function subEventLogX()
     {
         echo '<div class="'.esc_attr(SLUG_TD.'-menu-page-sub-event-log '.SLUG_TD.'-menu-page-table '.SLUG_TD.'-menu-page-area wrap').'">'."\n";
-        echo '   <form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->pageNonceTableNavVarsOnly()).'" novalidate="novalidate">'."\n";
+        echo '   <form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->pageNonceTableNavVarsOnly()).'" novalidate="novalidate" autocomplete="off">'."\n";
 
         echo '      <h2>'.sprintf(__('%1$s&trade; &raquo; Subscriptions &raquo; Event Log', SLUG_TD), esc_html(NAME)).' <i class="fa fa-history"></i></h2>'."\n";
 
@@ -4072,7 +4071,7 @@ class MenuPage extends AbsBase
     protected function queueX()
     {
         echo '<div class="'.esc_attr(SLUG_TD.'-menu-page-queue '.SLUG_TD.'-menu-page-table '.SLUG_TD.'-menu-page-area wrap').'">'."\n";
-        echo '   <form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->pageNonceTableNavVarsOnly()).'" novalidate="novalidate">'."\n";
+        echo '   <form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->pageNonceTableNavVarsOnly()).'" novalidate="novalidate" autocomplete="off">'."\n";
 
         echo '      <h2>'.sprintf(__('%1$s&trade; &raquo; Queued (Pending) Notifications', SLUG_TD), esc_html(NAME)).' <i class="fa fa-envelope-o"></i></h2>'."\n";
 
@@ -4090,7 +4089,7 @@ class MenuPage extends AbsBase
     protected function queueEventLogX()
     {
         echo '<div class="'.esc_attr(SLUG_TD.'-menu-page-queue-event-log '.SLUG_TD.'-menu-page-table '.SLUG_TD.'-menu-page-area wrap').'">'."\n";
-        echo '   <form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->pageNonceTableNavVarsOnly()).'" novalidate="novalidate">'."\n";
+        echo '   <form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->pageNonceTableNavVarsOnly()).'" novalidate="novalidate" autocomplete="off">'."\n";
 
         echo '      <h2>'.sprintf(__('%1$s&trade; &raquo; Queue &raquo; Event Log', SLUG_TD), esc_html(NAME)).' <i class="fa fa-paper-plane"></i></h2>'."\n";
 
@@ -4628,7 +4627,7 @@ class MenuPage extends AbsBase
             return isset($_this->plugin->options[$key]) ? $_this->plugin->options[$key] : null;
         };
         echo '<div class="'.esc_attr(SLUG_TD.'-menu-page '.SLUG_TD.'-menu-page-pro-updater '.SLUG_TD.'-menu-page-area').'">'."\n";
-        echo '   <form method="post" enctype="multipart/form-data" autocomplete="off" action="'.esc_attr($this->plugin->utils_url->pageNonceOnly()).'" novalidate="novalidate">'."\n";
+        echo '   <form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->pageNonceOnly()).'" novalidate="novalidate" autocomplete="off">'."\n";
 
         echo '     '.$this->heading(__('Pro Updater', SLUG_TD), 'logo.png').
              '     '.$this->notes(); // Heading/notifications.
@@ -4648,7 +4647,6 @@ class MenuPage extends AbsBase
                                 'label'         => __('Customer Username', SLUG_TD),
                                 'placeholder'   => __('e.g., johndoe22', SLUG_TD),
                                 'current_value' => $current_value_for('pro_update_username'),
-                                'other_attrs'   => 'autocomplete="new-password"',
                             ]
                         ).
                         '   </tbody>'.
@@ -4662,7 +4660,6 @@ class MenuPage extends AbsBase
                                 'name'          => 'password',
                                 'label'         => __('Customer Password or Product License Key', SLUG_TD),
                                 'current_value' => $current_value_for('pro_update_password'),
-                                'other_attrs'   => 'autocomplete="new-password"',
                             ]
                         ).
                         '   </tbody>'.

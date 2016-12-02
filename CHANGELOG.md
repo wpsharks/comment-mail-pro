@@ -1,5 +1,7 @@
 ## [coming soon]
 
+- **Bug Fix:** Prevent browser autocomplete in Comment Mail options. See [Issue #319](https://github.com/websharks/comment-mail/issues/319).
+
 - **Bug Fix:** Conflict checks between lite and pro corrected. This was not working properly in the previous release; i.e., installing Comment Mail Pro when Comment Mail Lite is already running should result in Comment Mail Lite being deactivated automatically. See [Issue #270](https://github.com/websharks/comment-mail/issues/270).
 
 - **Accessibility:** This release improves screen reader accessibility by adding `aria-hidden="true"` to all FontAwesome icons. See [Issue #304](https://github.com/websharks/comment-mail/issues/304).
