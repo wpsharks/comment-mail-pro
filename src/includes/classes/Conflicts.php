@@ -31,27 +31,27 @@ class Conflicts
         if (!empty($GLOBALS[GLOBAL_NS.'_conflicting_plugin'])) {
             return $GLOBALS[GLOBAL_NS.'_conflicting_plugin'];
         }
-        $conflicting_plugin_slugs = [
-            str_replace('_', '-', GLOBAL_NS).(IS_PRO ? '' : '-pro'),
-        ];
-        $active_plugins          = (array) get_option('active_plugins', array());
-        $active_sitewide_plugins = is_multisite() ? array_keys((array) get_site_option('active_sitewide_plugins', array())) : array();
-        $active_plugins          = array_unique(array_merge($active_plugins, $active_sitewide_plugins));
+        $lite_slug = str_replace('_', '-', GLOBAL_NS);
+        $pro_slug  = $lite_slug.'-pro'; // Pro suffix.
+
+        $conflicting_plugin_slugs = [IS_PRO ? $lite_slug : $pro_slug];
+        $active_plugins           = (array) get_option('active_plugins', array());
+        $active_sitewide_plugins  = is_multisite() ? array_keys((array) get_site_option('active_sitewide_plugins', array())) : array();
+        $active_plugins           = array_unique(array_merge($active_plugins, $active_sitewide_plugins));
 
         foreach ($active_plugins as $_active_plugin_basename) {
             if (!($_active_plugin_slug = strstr($_active_plugin_basename, '/', true))) {
                 continue; // Nothing to check in this case.
             }
             if (in_array($_active_plugin_slug, $conflicting_plugin_slugs, true)) {
-                if (in_array($_active_plugin_slug, array('comment-mail', 'comment-mail-pro'), true)) {
+                if (in_array($_active_plugin_slug, array($lite_slug, $pro_slug), true)) {
                     add_action('admin_init', function () use ($_active_plugin_basename) {
-                        if (function_exists('deactivate_plugins')) { // Can deactivate?
+                        if (function_exists('deactivate_plugins')) {
                             deactivate_plugins($_active_plugin_basename, true);
-                        }
-                    }, -1000);
-                } else {
-                    return $GLOBALS[GLOBAL_NS.'_conflicting_plugin'] = $_active_plugin_slug;
+                        } // Only if it is possible to deactivate.
+                    }, -1000); // Deactivate automatically.
                 }
+                return $GLOBALS[GLOBAL_NS.'_conflicting_plugin'] = $_active_plugin_slug;
             }
         }
         return $GLOBALS[GLOBAL_NS.'_conflicting_plugin'] = ''; // i.e. No conflicting plugins.
@@ -62,13 +62,18 @@ class Conflicts
      *
      * @since 160618 Rewrite.
      */
-    protected function maybeEnqueueNotice()
+    protected static function maybeEnqueueNotice()
     {
         if (!empty($GLOBALS[GLOBAL_NS.'_uninstalling'])) {
             return; // Not when uninstalling.
-        }
-        if (empty($GLOBALS[GLOBAL_NS.'_conflicting_plugin'])) {
+        } elseif (empty($GLOBALS[GLOBAL_NS.'_conflicting_plugin'])) {
             return; // Not conflicts.
+        }
+        $lite_slug = str_replace('_', '-', GLOBAL_NS);
+        $pro_slug  = $lite_slug.'-pro'; // Pro suffix.
+
+        if (in_array($GLOBALS[GLOBAL_NS.'_conflicting_plugin'], array($lite_slug, $pro_slug), true)) {
+            return; // Not necessary. Will be deactivated automatically.
         }
         add_action('all_admin_notices', function () {
             if (!empty($GLOBALS[GLOBAL_NS.'_conflicting_plugin_lite_pro'])) {
