@@ -1,5 +1,7 @@
 ## [coming soon]
 
+- **New Feature:** It is now possible to manually process the outgoing mail queue. See: **WP Dashboard → Comment Mail → Mail Queue**. See also [Issue #282](https://github.com/websharks/comment-mail/issues/282).
+
 - **Bug Fix:** Do not show SparkPost partner image when Mandrill is selected as the RVE handler. See [Issue #318](https://github.com/websharks/comment-mail/issues/318).
 
 - **Bug Fix:** Do not attempt to import StCR settings if StCR is no longer installed, even if old StCR options exist in the database. See [Issue #294](https://github.com/websharks/comment-mail/issues/294).

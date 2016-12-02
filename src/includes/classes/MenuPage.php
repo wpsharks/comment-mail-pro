@@ -4079,6 +4079,7 @@ class MenuPage extends AbsBase
         echo '   <form method="post" enctype="multipart/form-data" action="'.esc_attr($this->plugin->utils_url->pageNonceTableNavVarsOnly()).'" novalidate="novalidate" autocomplete="off">'."\n";
 
         echo '      <h2>'.sprintf(__('%1$s&trade; &raquo; Queued (Pending) Notifications', SLUG_TD), esc_html(NAME)).' <i class="fa fa-envelope-o"></i></h2>'."\n";
+        echo '      <a href="'.esc_url($this->plugin->utils_url->processQueue()).'" class="pmp-process-queue-manually button button-default" style="vertical-align:middle;"><i class="fa fa-paper-plane fa-fw"></i> '.__('Process Queue Manually', SLUG_TD).'</a> '.__('<em><strong>Note:</strong> Manual processing is not a requirement. The queue is also processed automatically behind-the-scenes on a five-minute interval via WP Cron.</em>')."\n";
 
         new MenuPageQueueTable(); // Displays table.
 
