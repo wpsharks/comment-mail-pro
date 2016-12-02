@@ -1,5 +1,7 @@
 ## [coming soon]
 
+- **Bug Fix:** Conflict checks between lite and pro corrected. This was not working properly in the previous release; i.e., installing Comment Mail Pro when Comment Mail Lite is already running should result in Comment Mail Lite being deactivated automatically. See [Issue #270](https://github.com/websharks/comment-mail/issues/270).
+
 - **Accessibility:** This release improves screen reader accessibility by adding `aria-hidden="true"` to all FontAwesome icons. See [Issue #304](https://github.com/websharks/comment-mail/issues/304).
 
 - **Accessibility:** This release improves screen reader accessibility by offering a new setting that allows a site owner to enable or disable select menu option enhancement via jQuery. Disabling select menu option enhancement has the benefit of improving accessibility for screen readers whenever accessibility is of more concern than presentation. See: **Dashboard → Comment Mail → Config Options → Misc. UI-Related Settings**. See also [Issue #304](https://github.com/websharks/comment-mail/issues/304).
