@@ -34,10 +34,13 @@ class Conflicts
         $lite_slug = str_replace('_', '-', GLOBAL_NS);
         $pro_slug  = $lite_slug.'-pro'; // Pro suffix.
 
-        $conflicting_plugin_slugs = [IS_PRO ? $lite_slug : $pro_slug];
-        $active_plugins           = (array) get_option('active_plugins', array());
-        $active_sitewide_plugins  = is_multisite() ? array_keys((array) get_site_option('active_sitewide_plugins', array())) : array();
-        $active_plugins           = array_unique(array_merge($active_plugins, $active_sitewide_plugins));
+        $conflicting_plugin_slugs = [
+            IS_PRO ? $lite_slug : $pro_slug,
+            'subscribe-to-comments-reloaded',
+        ];
+        $active_plugins          = (array) get_option('active_plugins', array());
+        $active_sitewide_plugins = is_multisite() ? array_keys((array) get_site_option('active_sitewide_plugins', array())) : array();
+        $active_plugins          = array_unique(array_merge($active_plugins, $active_sitewide_plugins));
 
         foreach ($active_plugins as $_active_plugin_basename) {
             if (!($_active_plugin_slug = strstr($_active_plugin_basename, '/', true))) {
@@ -97,7 +100,7 @@ class Conflicts
             }
             echo '<div class="error">'.// Error notice.
                  '   <p>'.// Running one or more conflicting plugins at the same time.
-                 '      '.sprintf(__('<strong>%1$s</strong> is NOT running. A conflicting plugin, <strong>%2$s</strong>, is currently active. Please deactivate the %2$s plugin to clear this message.', SLUG_TD), esc_html($this_plugin_name), esc_html($conflicting_plugin_name)).
+                 '      '.sprintf(__('<strong>%1$s</strong> is not running. A conflicting plugin, <strong>%2$s</strong>, is currently active at the same time. Please deactivate the <strong>%2$s</strong> plugin to clear this message.', SLUG_TD), esc_html($this_plugin_name), esc_html($conflicting_plugin_name)).
                  '   </p>'.
                  '</div>';
         });
