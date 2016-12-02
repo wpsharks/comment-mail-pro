@@ -2108,7 +2108,7 @@ class MenuPage extends AbsBase
                                         '1' => __('Yes, enhance select menu options using jQuery Chosen extension', SLUG_TD),
                                         '0' => __('No, do not enhance (better accessibility; i.e., better screen reader compatibility)', SLUG_TD),
                                     ],
-                                    'notes_after' => '<p>'.__('Set this to <code>No</code> is you are more concerned about accessibility than presentation; i.e., <code>No</code> = more friendly to the visually impaired.', SLUG_TD).'</p>',
+                                    'notes_after' => '<p>'.__('Set this to <code>No</code> if you are more concerned about accessibility than presentation; i.e., <code>No</code> = more friendly to the visually impaired.', SLUG_TD).'</p>',
                                 ]
                             ).
                             '  </tbody>'.
