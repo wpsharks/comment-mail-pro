@@ -883,7 +883,7 @@ class MenuPage extends AbsBase
                                    'name'          => 'comment_notification_parent_content_clip_max_chars',
                                    'other_attrs'   => 'min="1"',
                                    'current_value' => $current_value_for('comment_notification_parent_content_clip_max_chars'),
-                                   'notes_after'   => '<p>'.sprintf(__('When %1$s notifies someone about a reply to their comment, there will first be a short clip of the original comment displayed to help offer some context; i.e., to show what the reply is pertaining to. How many characters (maximum) do you want to display in that short clip of the parent comment? The recommended setting is <code>100</code> characters, but you can change this to whatever you like. A very large number will prevent the parent comment from being clipped at all.', SLUG_TD), esc_html(NAME)).'</p>',
+                                   'notes_after'   => '<p>'.sprintf(__('When %1$s notifies someone about a reply to their comment, there will first be a short clip of the original comment displayed to help offer some context; i.e., to show what the reply is pertaining to. How many characters (maximum) do you want to display in that short clip of the parent comment? The recommended setting is <code>100</code> characters, but you can change this to whatever you like. <em><strong>Note:<strong> A very large number will prevent the parent comment from being clipped at all.</em>', SLUG_TD), esc_html(NAME)).'</p>',
                                ]
                            ).
                            '  </tbody>'.
@@ -899,7 +899,7 @@ class MenuPage extends AbsBase
                                     'name'          => 'comment_notification_content_clip_max_chars',
                                     'other_attrs'   => 'min="1"',
                                     'current_value' => $current_value_for('comment_notification_content_clip_max_chars'),
-                                    'notes_after'   => '<p>'.sprintf(__('For all other comment/reply notifications, there will be a short clip of the comment, along with a link to [continue reading] on your website. How many characters (maximum) do you want to display in those short clips of the comment or reply? The recommended setting is <code>200</code> characters, but you can change this to whatever you like. A very large number will prevent comments from being clipped at all.', SLUG_TD), esc_html(NAME)).'</p>',
+                                    'notes_after'   => '<p>'.sprintf(__('For all other comment/reply notifications, there will be a short clip of the comment, along with a link to [continue reading] on your website. How many characters (maximum) do you want to display in those short clips of the comment or reply? The recommended setting is <code>200</code> characters, but you can change this to whatever you like. <em><strong>Note:<strong> A very large number will prevent comments from being clipped at all.</em>', SLUG_TD), esc_html(NAME)).'</p>',
                                 ]
                             ).
                             '  </tbody>'.
@@ -1154,8 +1154,13 @@ class MenuPage extends AbsBase
 
             $_panel_body .= '<div class="pmp-if-enabled-show pmp-if-nest"><hr />'.
 
-                            '<a href="http://comment-mail.com/r/sparkpost/" target="_blank">'.
-                            '<img src="'.esc_attr($this->plugin->utils_url->to('/src/client-s/images/sparkpost-rve.png')).'" class="pmp-right" style="margin-left:3em;" /></a>'.
+                            ' <div class="pmp-if-enabled-show pmp-if-value-sparkpost pmp-in-if-nest">'.
+                            '    <a href="http://comment-mail.com/r/sparkpost/" target="_blank"><img src="'.esc_attr($this->plugin->utils_url->to('/src/client-s/images/sparkpost-rve.png')).'" class="pmp-right" style="margin-left:3em;" /></a>'.
+                            '</div>'.
+
+                            ' <div class="pmp-if-enabled-show pmp-if-value-mandrill pmp-in-if-nest">'.
+                            '    <a href="http://comment-mail.com/r/mandrill/" target="_blank"><img src="'.esc_attr($this->plugin->utils_url->to('/src/client-s/images/mandrill-rve.png')).'" class="pmp-right" style="margin-left:3em;" /></a>'.
+                            '</div>'.
 
                             ' <table style="width:auto; margin-bottom:0;">'.
                             '    <tbody>'.
