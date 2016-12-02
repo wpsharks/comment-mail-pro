@@ -2012,7 +2012,7 @@ class MenuPage extends AbsBase
                             '  <tbody>'.
                             $form_fields->selectRow(
                                 [
-                                    'label'           => __('Select Menu Options; List Posts?', SLUG_TD),
+                                    'label'           => __('Select Menu Options: List Posts?', SLUG_TD),
                                     'placeholder'     => __('Select an Option...', SLUG_TD),
                                     'name'            => 'post_select_options_enable',
                                     'current_value'   => $current_value_for('post_select_options_enable'),
@@ -2031,7 +2031,7 @@ class MenuPage extends AbsBase
                             '  <tbody>'.
                             $form_fields->selectRow(
                                 [
-                                    'label'           => __('Post Select Menu Options; Include Media?', SLUG_TD),
+                                    'label'           => __('Post Select Menu Options: Include Media?', SLUG_TD),
                                     'placeholder'     => __('Select an Option...', SLUG_TD),
                                     'name'            => 'post_select_options_media_enable',
                                     'current_value'   => $current_value_for('post_select_options_media_enable'),
@@ -2052,7 +2052,7 @@ class MenuPage extends AbsBase
                             '  <tbody>'.
                             $form_fields->selectRow(
                                 [
-                                    'label'           => __('Select Menu Options; List Comments?', SLUG_TD),
+                                    'label'           => __('Select Menu Options: List Comments?', SLUG_TD),
                                     'placeholder'     => __('Select an Option...', SLUG_TD),
                                     'name'            => 'comment_select_options_enable',
                                     'current_value'   => $current_value_for('comment_select_options_enable'),
@@ -2073,7 +2073,7 @@ class MenuPage extends AbsBase
                             '  <tbody>'.
                             $form_fields->selectRow(
                                 [
-                                    'label'           => __('Select Menu Options; List Users?', SLUG_TD),
+                                    'label'           => __('Select Menu Options: List Users?', SLUG_TD),
                                     'placeholder'     => __('Select an Option...', SLUG_TD),
                                     'name'            => 'user_select_options_enable',
                                     'current_value'   => $current_value_for('user_select_options_enable'),
@@ -2083,6 +2083,27 @@ class MenuPage extends AbsBase
                                         '0' => __('No, disable user selection; I can enter user IDs manually', SLUG_TD),
                                     ],
                                     'notes_after' => '<p>'.sprintf(__('On the back-end of %1$s, when you add/edit a subscription, %1$s can provide a drop-down menu with a list of all existing users for you to choose from. Would you like to enable or disable this feature? If disabled, you will need to enter any user IDs manually instead of being able to choose from a drop-down menu.', SLUG_TD), esc_html(NAME)).'</p>',
+                                ]
+                            ).
+                            '  </tbody>'.
+                            '</table>';
+
+            $_panel_body .= '<hr />';
+
+            $_panel_body .= '<table>'.
+                            '  <tbody>'.
+                            $form_fields->selectRow(
+                                [
+                                    'label'           => __('Select Menu Options: Enhance?', SLUG_TD),
+                                    'placeholder'     => __('Select an Option...', SLUG_TD),
+                                    'name'            => 'enhance_select_options_enable',
+                                    'current_value'   => $current_value_for('enhance_select_options_enable'),
+                                    'allow_arbitrary' => false,
+                                    'options'         => [
+                                        '1' => __('Yes, enhance select menu options using jQuery Chosen extension', SLUG_TD),
+                                        '0' => __('No, do not enhance (better accessibility; i.e., better screen reader compatibility)', SLUG_TD),
+                                    ],
+                                    'notes_after' => '<p>'.__('Set this to <code>No</code> is you are more concerned about accessibility than presentation; i.e., <code>No</code> = more friendly to the visually impaired.', SLUG_TD).'</p>',
                                 ]
                             ).
                             '  </tbody>'.

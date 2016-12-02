@@ -1,3 +1,9 @@
+## [coming soon]
+
+- **Accessibility:** This release improves screen reader accessibility by adding `aria-hidden="true"` to all FontAwesome icons. See [Issue #304](https://github.com/websharks/comment-mail/issues/304).
+
+- **Accessibility:** This release improves screen reader accessibility by offering a new setting that allows a site owner to enable or disable select menu option enhancement via jQuery. Disabling select menu option enhancement has the benefit of improving accessibility for screen readers whenever accessibility is of more concern than presentation. See: **Dashboard → Comment Mail → Config Options → Misc. UI-Related Settings**. See also [Issue #304](https://github.com/websharks/comment-mail/issues/304).
+
 ## v161129
 
 - **Bug Fix:** This release corrects a nasty bug that was first introduced in the previous release, resulting in the loss of template modifications when/if any Comment Mail options were edited after having upgraded to the previous release. See [Issue #322](https://github.com/websharks/comment-mail/issues/322).
