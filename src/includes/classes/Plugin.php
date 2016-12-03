@@ -340,6 +340,7 @@ class Plugin extends AbsBase
 
             # Comment notifications.
 
+            'comment_notification_clipping_enable',
             'comment_notification_parent_content_clip_max_chars',
             'comment_notification_content_clip_max_chars',
 
@@ -641,6 +642,7 @@ class Plugin extends AbsBase
 
             # Related to comment notifications.
 
+            'comment_notification_clipping_enable'               => '1', // `0|1`; enable?
             'comment_notification_parent_content_clip_max_chars' => '100', // Max chars to include in notifications.
             'comment_notification_content_clip_max_chars'        => '200', // Max chars to include in notifications.
 

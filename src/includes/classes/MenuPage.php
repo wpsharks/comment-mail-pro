@@ -873,23 +873,44 @@ class MenuPage extends AbsBase
         /* ----------------------------------------------------------------------------------------- */
 
         if (IS_PRO || $this->plugin->utils_env->isProPreview()) {
-            $_panel_body = '<table>'.
-                           '  <tbody>'.
-                           $form_fields->inputRow(
+            $_panel_body = '<table style="margin:0;">'.
+                           ' <tbody>'.
+                           $form_fields->selectRow(
                                [
-                                   'type'          => 'number',
-                                   'label'         => __('Maximum Chars in Parent Comment Clips:', SLUG_TD),
-                                   'placeholder'   => __('e.g., 100', SLUG_TD),
-                                   'name'          => 'comment_notification_parent_content_clip_max_chars',
-                                   'other_attrs'   => 'min="1"',
-                                   'current_value' => $current_value_for('comment_notification_parent_content_clip_max_chars'),
-                                   'notes_after'   => '<p>'.sprintf(__('When %1$s notifies someone about a reply to their comment, there will first be a short clip of the original comment displayed to help offer some context; i.e., to show what the reply is pertaining to. How many characters (maximum) do you want to display in that short clip of the parent comment? The recommended setting is <code>100</code> characters, but you can change this to whatever you like. <em><strong>Note:<strong> A very large number will prevent the parent comment from being clipped at all.</em>', SLUG_TD), esc_html(NAME)).'</p>',
+                                   'label'           => __('Enable Comment Content Clipping?', SLUG_TD),
+                                   'placeholder'     => __('Select an Option...', SLUG_TD),
+                                   'field_class'     => 'pmp-if-change', // JS change handler.
+                                   'name'            => 'comment_notification_clipping_enable',
+                                   'current_value'   => $current_value_for('comment_notification_clipping_enable'),
+                                   'allow_arbitrary' => false, // Must be one of these.
+                                   'options'         => [
+                                       '1' => __('Yes, clip comment content in email notifications (default behavhior)', SLUG_TD),
+                                       '0' => __('No, do not clip comment content, use the full raw HTML in email notifications', SLUG_TD),
+                                   ],
                                ]
                            ).
-                           '  </tbody>'.
+                           ' </tbody>'.
                            '</table>';
 
-            $_panel_body .= '<table>'.
+            $_panel_body .= '<div class="pmp-if-enabled-show"><hr />'.
+
+                            ' <table>'.
+                            '  <tbody>'.
+                            $form_fields->inputRow(
+                                [
+                                    'type'          => 'number',
+                                    'label'         => __('Maximum Chars in Parent Comment Clips:', SLUG_TD),
+                                    'placeholder'   => __('e.g., 100', SLUG_TD),
+                                    'name'          => 'comment_notification_parent_content_clip_max_chars',
+                                    'other_attrs'   => 'min="1"',
+                                    'current_value' => $current_value_for('comment_notification_parent_content_clip_max_chars'),
+                                    'notes_after'   => '<p>'.sprintf(__('When %1$s notifies someone about a reply to their comment, there will first be a short clip of the original comment displayed to help offer some context; i.e., to show what the reply is pertaining to. How many characters (maximum) do you want to display in that short clip of the parent comment? The recommended setting is <code>100</code> characters, but you can change this to whatever you like.', SLUG_TD), esc_html(NAME)).'</p>',
+                                ]
+                            ).
+                            '  </tbody>'.
+                            ' </table>'.
+
+                            ' <table>'.
                             '  <tbody>'.
                             $form_fields->inputRow(
                                 [
@@ -899,11 +920,13 @@ class MenuPage extends AbsBase
                                     'name'          => 'comment_notification_content_clip_max_chars',
                                     'other_attrs'   => 'min="1"',
                                     'current_value' => $current_value_for('comment_notification_content_clip_max_chars'),
-                                    'notes_after'   => '<p>'.sprintf(__('For all other comment/reply notifications, there will be a short clip of the comment, along with a link to [continue reading] on your website. How many characters (maximum) do you want to display in those short clips of the comment or reply? The recommended setting is <code>200</code> characters, but you can change this to whatever you like. <em><strong>Note:<strong> A very large number will prevent comments from being clipped at all.</em>', SLUG_TD), esc_html(NAME)).'</p>',
+                                    'notes_after'   => '<p>'.sprintf(__('For all other comment/reply notifications, there will be a short clip of the comment, along with a link to [continue reading] on your website. How many characters (maximum) do you want to display in those short clips of the comment or reply? The recommended setting is <code>200</code> characters, but you can change this to whatever you like.', SLUG_TD), esc_html(NAME)).'</p>',
                                 ]
                             ).
                             '  </tbody>'.
-                            '</table>';
+                            ' </table>'.
+
+                            '</div>';
 
             echo $this->panel(__('Email Notification Clips', SLUG_TD), $_panel_body, ['pro_only' => true]);
 
@@ -2794,10 +2817,10 @@ class MenuPage extends AbsBase
                                    'notes_after' => '<p class="pmp-note pmp-info">'.__('<strong>Tip:</strong> If you mess up your template by accident; empty the field completely and save your options. This reverts you back to the default template file automatically.', SLUG_TD).'</p>',
                                    'cm_details'  => $shortcode_details(
                                        [
-                                           '[comment_parent_url]'    => __('Parent comment URL.', SLUG_TD),
-                                           '[comment_parent_id]'     => __('Parent comment ID.', SLUG_TD),
-                                           '[comment_parent_author]' => __('Parent comment author name.', SLUG_TD),
-                                           '[comment_parent_clip]'   => __('A shorter clip of the full parent comment message body.', SLUG_TD),
+                                           '[comment_parent_url]'     => __('Parent comment URL.', SLUG_TD),
+                                           '[comment_parent_id]'      => __('Parent comment ID.', SLUG_TD),
+                                           '[comment_parent_author]'  => __('Parent comment author name.', SLUG_TD),
+                                           '[comment_parent_content]' => __('A shorter clip of the full parent comment message body. Or, if clipping is disabled, the full comment message content (raw HTML).', SLUG_TD),
                                        ]
                                    ),
                                ]
@@ -2829,7 +2852,7 @@ class MenuPage extends AbsBase
                                            '[comment_id]'       => __('Comment reply ID.', SLUG_TD),
                                            '[comment_time_ago]' => __('How long ago the comment reply was posted (human readable).', SLUG_TD),
                                            '[comment_author]'   => __('Comment reply author\'s name.', SLUG_TD),
-                                           '[comment_clip]'     => __('A shorter clip of the full comment reply message body.', SLUG_TD),
+                                           '[comment_content]'  => __('A shorter clip of the full comment reply message body. Or, if clipping is disabled, the full comment reply content (raw HTML).', SLUG_TD),
                                        ]
                                    ),
                                ]
@@ -2861,7 +2884,7 @@ class MenuPage extends AbsBase
                                            '[comment_id]'       => __('Comment ID.', SLUG_TD),
                                            '[comment_time_ago]' => __('How long ago the comment was posted (human readable).', SLUG_TD),
                                            '[comment_author]'   => __('Comment author\'s name.', SLUG_TD),
-                                           '[comment_clip]'     => __('A shorter clip of the full comment message body.', SLUG_TD),
+                                           '[comment_content]'  => __('A shorter clip of the full comment message body. Or, if clipping is disabled, the full comment content (raw HTML).', SLUG_TD),
                                        ]
                                    ),
                                ]
