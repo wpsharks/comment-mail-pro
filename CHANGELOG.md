@@ -1,6 +1,8 @@
 ## [coming soon]
 
-- **New Feature:** It is now possible to manually process the outgoing mail queue. See: **WP Dashboard → Comment Mail → Mail Queue**. See also [Issue #282](https://github.com/websharks/comment-mail/issues/282).
+- **New Feature:** In Comment Mail Pro it is now possible to enable/disable comment content clipping entirely; e.g., if you prefer that email notifications include the full original comment content in raw HTML instead of being clipped and displayed in the email as plain text. See: **WP Dashboard → Comment Mail → Config. Options → Email Notification Clips**. See also: [Issue #281](https://github.com/websharks/comment-mail/issues/281).
+
+- **New Feature:** It is now possible to manually process the outgoing mail queue. See: **WP Dashboard → Comment Mail → Mail Queue**. See also: [Issue #282](https://github.com/websharks/comment-mail/issues/282).
 
 - **Bug Fix:** Do not show SparkPost partner image when Mandrill is selected as the RVE handler. See [Issue #318](https://github.com/websharks/comment-mail/issues/318).
 
