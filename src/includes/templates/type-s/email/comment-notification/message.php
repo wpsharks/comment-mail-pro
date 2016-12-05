@@ -90,7 +90,7 @@ $replies_via_email_enable = $sub_post_comments_open && $plugin->options['replies
         // A shorter clip of the full parent comment message body in plain text.
         // Or, if clipping is disabled, this will be equal to the full comment content (raw HTML).
         if ($_comment_parent && $plugin->options['comment_notification_clipping_enable']) {
-            $_comment_parent_content = $plugin->utils_markup->commentContentClip($_comment_parent, 'notification_parent', false);
+            $_comment_parent_content = esc_html($plugin->utils_markup->commentContentClip($_comment_parent, 'notification_parent', false));
         } elseif ($_comment_parent) {
             $_comment_parent_content = $plugin->utils_markup->commentContent($_comment_parent);
         } else {
@@ -111,7 +111,7 @@ $replies_via_email_enable = $sub_post_comments_open && $plugin->options['replies
         // A shorter clip of the full comment message body in plain text.
         // Or, if clipping is disabled, this will be equal to the full comment content (raw HTML).
         if ($plugin->options['comment_notification_clipping_enable']) {
-            $_comment_content = $plugin->utils_markup->commentContentClip($_comment, 'notification', false);
+            $_comment_content = esc_html($plugin->utils_markup->commentContentClip($_comment, 'notification', false));
         } else {
             $_comment_content = $plugin->utils_markup->commentContent($_comment);
         }
