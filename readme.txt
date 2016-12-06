@@ -2,7 +2,7 @@
 
 Stable tag: 161202
 Requires at least: 4.4
-Tested up to: 4.7-alpha
+Tested up to: 4.7
 Text Domain: comment-mail
 
 License: GPLv3 or later
