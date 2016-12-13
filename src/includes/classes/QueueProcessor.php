@@ -126,7 +126,7 @@ class QueueProcessor extends AbsBase
             $this->is_manual = true;
             $this->is_cron   = false;
         } else {
-            $this->is_manual = true;
+            $this->is_manual = false;
             $this->is_cron   = (bool) $is_cron;
         }
         $this->start_time = time(); // Start time.
