@@ -884,7 +884,7 @@ class MenuPage extends AbsBase
                                    'current_value'   => $current_value_for('comment_notification_clipping_enable'),
                                    'allow_arbitrary' => false, // Must be one of these.
                                    'options'         => [
-                                       '1' => __('Yes, clip comment content in email notifications (default behavhior)', SLUG_TD),
+                                       '1' => __('Yes, clip comment content in email notifications (default behavior)', SLUG_TD),
                                        '0' => __('No, do not clip comment content, use the full raw HTML in email notifications', SLUG_TD),
                                    ],
                                ]
