@@ -1055,14 +1055,13 @@ class Plugin extends AbsBase
         if (!$this->options['enable']) {
             return; // Not applicable.
         }
-        if (!class_exists('wp_subscribe_reloaded')) {
+        if (!class_exists('stcr\\stcr_subscribe_reloaded')) {
             return; // Nothing to do here.
         }
         if (!is_admin() || !empty($_REQUEST['action'])) {
             return; // Stay quiet in this case.
         }
-        $conflict = sprintf(__('<p style="font-size:120%%; font-weight:400; margin:0;"><strong>%1$s&trade;</strong> + <strong>Subscribe to Comments Reloaded</strong> = Possible Conflict!</p>', SLUG_TD), esc_html(NAME));
-        $conflict .= '<p style="margin:0;">'.sprintf(__('<strong>WARNING (ACTION REQUIRED):</strong> Running %1$s&trade; while Subscribe to Comments Reloaded is <em>also</em> an active WordPress plugin <strong>can cause problems</strong>; i.e., these two plugins do the same thing—%1$s being the newer of the two. We recommend keeping %1$s; please <a href="%2$s">deactivate the Subscribe to Comments Reloaded plugin</a> to get rid of this message.', SLUG_TD), esc_html(NAME), esc_html(admin_url('plugins.php'))).'</p>';
+        $conflict = '<p>'.sprintf(__('<strong>WARNING (ACTION REQUIRED):</strong> Running %1$s &amp; Subscribe to Comments Reloaded at the same time can cause problems. These two plugins do the same thing — %1$s being the newer of the two. We recommend keeping %1$s. Please deactivate the Subscribe to Comments Reloaded plugin to get rid of this message.', SLUG_TD), esc_html(NAME)).'</p>';
         $this->enqueueError($conflict);
     }
 
