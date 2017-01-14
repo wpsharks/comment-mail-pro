@@ -10,7 +10,7 @@
 // @codingStandardsIgnoreFile
 
 if (!defined('WPINC')) {
-    exit('Do NOT access this file directly: '.basename(__FILE__));
+    exit('Do NOT access this file directly.');
 }
 add_action('init', function () {
     if (!is_admin() && !function_exists('subscribe_reloaded_show')) :

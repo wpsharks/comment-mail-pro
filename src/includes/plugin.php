@@ -7,7 +7,7 @@
 namespace WebSharks\CommentMail\Pro;
 
 if (!defined('WPINC')) {
-    exit('Do NOT access this file directly: '.basename(__FILE__));
+    exit('Do NOT access this file directly.');
 }
 require_once __DIR__.'/stub.php';
 
