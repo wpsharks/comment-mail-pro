@@ -176,7 +176,7 @@ class ScConditionals extends AbsBase
                 ) // End of regex; pattern delimiter.
 
                 ) { // We only allow variables to be tested by shortcodes; against integers, floats, strings, booleans.
-                    throw new \exception(__('Invalid shortcode conditional expression.', SLUG_TD));
+                    throw new \exception('Invalid shortcode conditional expression.');
                 }
                 $token = count($_this->tokens);
                 $_this->tokens[$token] = '<?php '.$if.'('.$expression.'): ?>';

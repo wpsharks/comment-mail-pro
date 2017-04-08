@@ -207,7 +207,7 @@ abstract class SsoServiceBase extends AbsBase
     {
         try { // Catch exceptions and log them for debugging.
             if (!($url = trim((string) $url))) {
-                throw new \exception(__('Empty authorization URL.', SLUG_TD));
+                throw new \exception('Empty authorization URL.');
             }
             wp_redirect($url);
             exit();
@@ -273,12 +273,12 @@ abstract class SsoServiceBase extends AbsBase
             }
             if ($user_exists) { // This user already exists?
                 if (!$this->plugin->utils_sso->autoLogin($this->service, $sso_id, $args)) {
-                    throw new \exception(__('Auto login failure.', SLUG_TD));
+                    throw new \exception('Auto login failure.');
                 }
                 goto redirect; // Perform redirection, the user is now logged-in.
             }
             if (!$this->plugin->utils_sso->autoRegisterLogin($this->service, $sso_id, $args)) {
-                throw new \exception(__('Auto register/login failure.', SLUG_TD));
+                throw new \exception('Auto register/login failure.');
             }
             redirect: // Target point; perform redirection.
 

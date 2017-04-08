@@ -333,7 +333,7 @@ class ChartData extends AbsBase
                     ' LIMIT 1'; // Only need one to check.
 
             if ($this->plugin->utils_db->wp->query($_sql) === false) {
-                throw new \exception(__('Query failure.', SLUG_TD));
+                throw new \exception('Query failure.');
             }
             $data[] = (integer) $this->plugin->utils_db->wp->get_var('SELECT FOUND_ROWS()');
         }
@@ -563,12 +563,12 @@ class ChartData extends AbsBase
                      ' LIMIT 1'; // Only need one to check.
 
             if ($this->plugin->utils_db->wp->query($_sql1) === false) {
-                throw new \exception(__('Query failure.', SLUG_TD));
+                throw new \exception('Query failure.');
             }
             $data1[] = (integer) $this->plugin->utils_db->wp->get_var('SELECT FOUND_ROWS()');
 
             if ($this->plugin->utils_db->wp->query($_sql2) === false) {
-                throw new \exception(__('Query failure.', SLUG_TD));
+                throw new \exception('Query failure.');
             }
             $data2[] = (integer) $this->plugin->utils_db->wp->get_var('SELECT FOUND_ROWS()');
         }
@@ -906,7 +906,7 @@ class ChartData extends AbsBase
                     ' LIMIT 1'; // Only need one to check.
 
             if ($this->plugin->utils_db->wp->query($_sql) === false) {
-                throw new \exception(__('Query failure.', SLUG_TD));
+                throw new \exception('Query failure.');
             }
             $data[] = (integer) $this->plugin->utils_db->wp->get_var('SELECT FOUND_ROWS()');
         }
@@ -974,12 +974,12 @@ class ChartData extends AbsBase
                      ' LIMIT 1'; // Only need one to check.
 
             if ($this->plugin->utils_db->wp->query($_sql1) === false) {
-                throw new \exception(__('Query failure.', SLUG_TD));
+                throw new \exception('Query failure.');
             }
             $data1[] = (integer) $this->plugin->utils_db->wp->get_var('SELECT FOUND_ROWS()');
 
             if ($this->plugin->utils_db->wp->query($_sql2) === false) {
-                throw new \exception(__('Query failure.', SLUG_TD));
+                throw new \exception('Query failure.');
             }
             $data2[] = (integer) $this->plugin->utils_db->wp->get_var('SELECT FOUND_ROWS()');
         }
@@ -1317,7 +1317,7 @@ class ChartData extends AbsBase
                 break; // Break switch handler.
 
             default: // Unexpected breakdown "by" syntax?
-                throw new \exception(__('Unexcpected Breakdown.', SLUG_TD));
+                throw new \exception('Unexpected Breakdown.');
         }
         # Invalid times after adjustments/rounding above?
 

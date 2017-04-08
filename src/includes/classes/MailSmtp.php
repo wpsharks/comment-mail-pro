@@ -147,10 +147,10 @@ class MailSmtp extends AbsBase
         $this->mailer = new \PHPMailer(true);
 
         if (!$this->plugin->options['smtp_enable']) {
-            throw new \exception(__('SMTP not enabled.', SLUG_TD));
+            throw new \exception('SMTP not enabled.');
         }
         if (!$this->plugin->options['smtp_host'] || !$this->plugin->options['smtp_port']) {
-            throw new \exception(__('SMTP host/port missing.', SLUG_TD));
+            throw new \exception('SMTP host/port missing.');
         }
     }
 

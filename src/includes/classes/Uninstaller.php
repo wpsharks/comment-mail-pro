@@ -210,7 +210,7 @@ class Uninstaller extends AbsBase
                 $_sql_file_table = $this->plugin->utils_db->prefix().$_sql_file_table;
 
                 if (!$this->plugin->utils_db->wp->query('DROP TABLE IF EXISTS `'.esc_sql($_sql_file_table).'`')) {
-                    throw new \exception(sprintf(__('DB table deletion failure: `%1$s`.', SLUG_TD), $_sql_file_table));
+                    throw new \exception(sprintf('DB table deletion failure: `%1$s`.', $_sql_file_table));
                 }
             }
         }

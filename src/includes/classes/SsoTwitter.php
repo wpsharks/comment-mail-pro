@@ -62,7 +62,7 @@ class SsoTwitter extends SsoServiceBase
     {
         try { // Catch exceptions and log them for debugging.
             if (!$this->request_args['oauth_token'] || !$this->request_args['oauth_verifier']) {
-                throw new \exception(__('Missing oAuth token/verifier.', SLUG_TD));
+                throw new \exception('Missing oAuth token/verifier.');
             }
             $service_factory = new \OAuth\ServiceFactory();
             $credentials     = new \OAuth\Common\Consumer\Credentials(
@@ -80,10 +80,10 @@ class SsoTwitter extends SsoServiceBase
             # Acquire and validate data received from this service.
 
             if (!is_object($service_user = json_decode($service->request('account/verify_credentials.json')))) {
-                throw new \exception(__('Failed to acquire user.', SLUG_TD));
+                throw new \exception('Failed to acquire user.');
             }
             if (empty($service_user->id) || !($sso_id = (string) $service_user->id)) {
-                throw new \exception(__('Failed to obtain user.', SLUG_TD));
+                throw new \exception('Failed to obtain user.');
             }
             foreach (['name', 'screen_name'] as $_prop) {
                 if (!isset($service_user->{$_prop})) {

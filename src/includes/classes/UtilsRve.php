@@ -177,7 +177,7 @@ class UtilsRve extends AbsBase
         if ($pattern_name === 'original_message') { // Auto-generated `--- Original Message ---`.
             return '(?i:\-+\s+Original\s+Message\s+\-+)'; // Variations.
         }
-        throw new \exception(__('Invalid `$pattern_name`.', SLUG_TD));
+        throw new \exception('Invalid `$pattern_name`.');
     }
 
     /**
