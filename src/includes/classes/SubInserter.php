@@ -718,10 +718,10 @@ class SubInserter extends AbsBase
         unset($data_to_insert['ID']); // We never want to insert an ID.
 
         if (($insert_replace = $this->plugin->utils_db->wp->replace($table, $data_to_insert)) === false) {
-            throw new \exception(__('Insert/replace failure.', SLUG_TD));
+            throw new \exception('Insert/replace failure.');
         }
         if (!($this->insert_id = (int) $this->plugin->utils_db->wp->insert_id)) {
-            throw new \exception(__('Insert/replace failure.', SLUG_TD));
+            throw new \exception('Insert/replace failure.');
         }
         $this->inserted = true; // Flag as `TRUE` now; i.e. the Insert/replace was a success.
 
@@ -733,7 +733,7 @@ class SubInserter extends AbsBase
         $this->plugin->utils_sub->nullifyCache([$this->insert_id, $this->data['key']]);
 
         if (!($this->sub = $this->plugin->utils_sub->get($this->insert_id, true))) {
-            throw new \exception(__('Sub after insert failure.', SLUG_TD));
+            throw new \exception('Sub after insert failure.');
         }
         $this->successes['inserted_successfully'] = __('Subscription created successfully.', SLUG_TD);
 
@@ -796,14 +796,14 @@ class SubInserter extends AbsBase
         unset($data_to_update['ID']); // We don't need to update the `ID`.
 
         if ($this->plugin->utils_db->wp->update($table, $data_to_update, ['ID' => $this->sub->ID]) === false) {
-            throw new \exception(__('Update failure.', SLUG_TD));
+            throw new \exception('Update failure.');
         }
         $this->updated = true; // Flag as `TRUE` now; i.e. the update was a success.
 
         $this->plugin->utils_sub->nullifyCache([$this->sub->ID, $this->sub->key]);
 
         if (!($sub_after = $this->plugin->utils_sub->get($this->sub->ID, true))) {
-            throw new \exception(__('Sub after update failure.', SLUG_TD));
+            throw new \exception('Sub after update failure.');
         }
         foreach ($sub_after as $_property => $_value) { // Updates object properties.
             $this->sub->{$_property} = $_value; // Update property references.
@@ -1097,7 +1097,7 @@ class SubInserter extends AbsBase
                 return $this->sub->{$key_prop};
             }
         }
-        throw new \exception(sprintf(__('Missing key/prop: `%1$s`.', SLUG_TD), $key_prop));
+        throw new \exception(sprintf('Missing key/prop: `%1$s`.', $key_prop));
     }
 
     /*

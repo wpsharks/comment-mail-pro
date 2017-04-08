@@ -635,7 +635,7 @@ class UtilsSub extends AbsBase
                ' LIMIT 1'; // Just one to check.
 
         if ($this->plugin->utils_db->wp->query($sql) === false) {
-            throw new \exception(sprintf(__('Query failure on SQL: `%1$s`', SLUG_TD), $sql));
+            throw new \exception(sprintf('Query failure on SQL: `%1$s`', $sql));
         }
         return $total = (integer) $this->plugin->utils_db->wp->get_var('SELECT FOUND_ROWS()');
     }
@@ -1162,10 +1162,10 @@ class UtilsSub extends AbsBase
 
         if (isset($sub_email[0])) { // Double-check security issues here.
             if (!$sub_key || !in_array($sub_key, $this->emailKeys($sub_email), true)) {
-                throw new \exception(__('Key-to-email mismatch; possible security issue.', SLUG_TD));
+                throw new \exception('Key-to-email mismatch; possible security issue.');
             }
             if (is_admin() || (!isset($_REQUEST[GLOBAL_NS]['confirm']) && !isset($_REQUEST[GLOBAL_NS]['unsubscribe']) && !isset($_REQUEST[GLOBAL_NS]['manage']))) {
-                throw new \exception(__('Trying to set current email w/o a user-initiated sub. action.', SLUG_TD));
+                throw new \exception('Trying to set current email w/o a user-initiated sub. action.');
             }
         }
         // Cookie is ONLY set for subscribers that received a secret `key` in one way or another.

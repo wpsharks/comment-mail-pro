@@ -89,9 +89,7 @@ class UtilsPhp extends AbsBase
             return ob_get_clean();
         }
         throw new \exception(
-            __('The PHP `eval()` function (an application requirement) has been disabled on this server. Please check with your hosting provider to resolve this issue and have the PHP `eval()` function enabled.', SLUG_TD).
-
-            // The rest of this explanation is not translatable; allowing us to keep it on multiple lines.
+            'The PHP `eval()` function (an application requirement) has been disabled on this server. Please check with your hosting provider to resolve this issue and have the PHP `eval()` function enabled.'.
             ' The use of `eval()` in this software is limited to areas where it is absolutely necessary to achieve a desired functionality.'.
             ' For instance, where PHP code is supplied by a site owner (or by their developer) to achieve advanced customization through a UI panel. This can be evaluated at runtime to allow for the inclusion of PHP conditionals or dynamic values.'.
             ' In cases such as these, the PHP `eval()` function serves a valid/useful purpose. This does NOT introduce a vulnerability, because the code being evaluated has actually been introduced by the site owner (i.e. the PHP code can be trusted in this case).'.

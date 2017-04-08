@@ -118,7 +118,7 @@ class LogCleaner extends AbsBase
                " WHERE `time` < '".esc_sql($exp_time)."'";
 
         if ($this->plugin->utils_db->wp->query($sql) === false) {
-            throw new \exception(__('Deletion failure.', SLUG_TD));
+            throw new \exception('Deletion failure.');
         }
     }
 
@@ -142,7 +142,7 @@ class LogCleaner extends AbsBase
                " WHERE `time` < '".esc_sql($exp_time)."'";
 
         if ($this->plugin->utils_db->wp->query($sql) === false) {
-            throw new \exception(__('Deletion failure.', SLUG_TD));
+            throw new \exception('Deletion failure.');
         }
     }
 

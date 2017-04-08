@@ -88,14 +88,14 @@ class Template extends AbsBase
             $this->type = $this->plugin->options['template_type'];
         }
         if (!$this->type) { // Empty type property?
-            throw new \exception(__('Empty type.', SLUG_TD));
+            throw new \exception('Empty type.');
         }
         $this->file = (string) $file; // Initialize.
         $this->file = $this->plugin->utils_string->trimDeep($this->file, '', '/');
         $this->file = $this->plugin->utils_fs->nSeps($this->file);
 
         if (!$this->file) { // Empty file property?
-            throw new \exception(__('Empty file.', SLUG_TD));
+            throw new \exception('Empty file.');
         }
         $this->force_default = (bool) $force_default; // Before `getFilePath()`.
 
@@ -373,7 +373,7 @@ class Template extends AbsBase
             }
         } // unset($_dir); // Housekeeping.
 
-        throw new \exception(sprintf(__('Missing template: `type-%1$s/%2$s`.', SLUG_TD), $this->type, $this->file));
+        throw new \exception(sprintf('Missing template: `type-%1$s/%2$s`.', $this->type, $this->file));
     }
 
     /**
@@ -398,7 +398,7 @@ class Template extends AbsBase
             // Strip legacy template backup, if applicable; see `fromLteV160213()` in `UpgraderVs.php`
             return $this->plugin->options[$option_key] = preg_replace('/\<\?php\s+\/\*\s+\-{3,}\s+Legacy\s+Template\s+Backup\s+\-{3,}.*/uis', '', $this->plugin->options[$option_key]);
         }
-        throw new \exception(sprintf(__('Missing template: `type-%1$s/%2$s`.', SLUG_TD), $this->type, $this->file));
+        throw new \exception(sprintf('Missing template: `type-%1$s/%2$s`.', $this->type, $this->file));
     }
 
     /**
@@ -451,7 +451,7 @@ class Template extends AbsBase
             }
         } // unset($_dir); // Housekeeping.
 
-        throw new \exception(sprintf(__('Missing snippet: `%1$s`.', SLUG_TD), 'type-'.$this->type.'/'.$this->snippet_sub_dir.'/'.$file));
+        throw new \exception(sprintf('Missing snippet: `%1$s`.', 'type-'.$this->type.'/'.$this->snippet_sub_dir.'/'.$file));
     }
 
     /**
@@ -477,7 +477,7 @@ class Template extends AbsBase
         if (!empty($this->plugin->options[$option_key])) {
             return $this->plugin->options[$option_key];
         }
-        throw new \exception(sprintf(__('Missing snippet: `%1$s`.', SLUG_TD), 'type-'.$this->type.'/'.$this->snippet_sub_dir.'/'.$file));
+        throw new \exception(sprintf('Missing snippet: `%1$s`.', 'type-'.$this->type.'/'.$this->snippet_sub_dir.'/'.$file));
     }
 
     /**

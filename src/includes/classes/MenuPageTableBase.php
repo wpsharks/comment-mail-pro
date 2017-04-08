@@ -2018,7 +2018,7 @@ abstract class MenuPageTableBase extends \WP_List_Table
 
         if ($search_box) { // Only if there is a search box; it doesn't always display.
             if (!($search_box = preg_replace($regex, 'name="search-submit" id="search-submit"', $search_box, 1, $replacements)) || !$replacements) {
-                throw new \exception(__('Unable to set `name="search-submit"` attribute.', SLUG_TD));
+                throw new \exception('Unable to set `name="search-submit"` attribute.');
             }
         }
         echo $search_box; // Display.

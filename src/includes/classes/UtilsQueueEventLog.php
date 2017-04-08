@@ -75,7 +75,7 @@ class UtilsQueueEventLog extends AbsBase
                " WHERE `ID` = '".esc_sql($log_entry_id)."'";
 
         if (($deleted = $this->plugin->utils_db->wp->query($sql)) === false) {
-            throw new \exception(__('Deletion failure.', SLUG_TD));
+            throw new \exception('Deletion failure.');
         }
         return (boolean) $deleted; // Convert to boolean value.
     }

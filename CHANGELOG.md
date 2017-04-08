@@ -1,5 +1,6 @@
-## [coming soon]
+## $v
 
+- **Code Maintenance**: Cleaned up PHP Exception message strings that were unnecessarily being passed through WordPress `__()` translation functions. See [Issue #316](https://github.com/websharks/comment-mail/issues/316).
 - **UX Bug Fix**: When upgrading from Comment Mail Lite to Comment Mail Pro, if you try to activate both versions at the same time, you'll now get a proper Dashboard  error message explaining that you need to deactivate one to use the other. See [Issue #325](https://github.com/websharks/comment-mail/issues/325).
 - **UX Bug Fix**: The previous release made it impossible to activate Comment Mail when the Subscribe to Comments Reloaded (StCR) plugin was active. This release improves upon this behavior by allowing you to activate Comment Mail so that you can review the configuration when migrating from one to the other, and only shows the warning message when you _enable_ Comment Mail. See [Issue #328](https://github.com/websharks/comment-mail/issues/328).
 

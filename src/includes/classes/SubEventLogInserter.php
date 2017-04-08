@@ -144,7 +144,7 @@ class SubEventLogInserter extends AbsBase
             return; // Not applicable.
         }
         if (!$this->plugin->utils_db->wp->insert($this->plugin->utils_db->prefix().'sub_event_log', $this->entry)) {
-            throw new \exception(__('Insertion failure.', SLUG_TD));
+            throw new \exception('Insertion failure.');
         }
     }
 }

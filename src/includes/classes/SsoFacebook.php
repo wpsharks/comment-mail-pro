@@ -61,7 +61,7 @@ class SsoFacebook extends SsoServiceBase
     {
         try { // Catch exceptions and log them for debugging.
             if (!$this->request_args['code']) { // Must have this.
-                throw new \exception(__('Missing oAuth code.', SLUG_TD));
+                throw new \exception('Missing oAuth code.');
             }
             $service_factory = new \OAuth\ServiceFactory();
             $credentials     = new \OAuth\Common\Consumer\Credentials(
@@ -79,10 +79,10 @@ class SsoFacebook extends SsoServiceBase
             # Acquire and validate data received from this service.
 
             if (!is_object($service_user = json_decode($service->request('/me')))) {
-                throw new \exception(__('Failed to acquire user.', SLUG_TD));
+                throw new \exception('Failed to acquire user.');
             }
             if (empty($service_user->id) || !($sso_id = (string) $service_user->id)) {
-                throw new \exception(__('Failed to obtain user.', SLUG_TD));
+                throw new \exception('Failed to obtain user.');
             }
             foreach (['first_name', 'last_name', 'name', 'email'] as $_prop) {
                 if (!isset($service_user->{$_prop})) {

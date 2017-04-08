@@ -203,7 +203,7 @@ class UtilsDb extends AbsBase
                 return 'delete';
 
             default: // Throw exception on anything else.
-                throw new \exception(sprintf(__('Unexpected comment status: `%1$s`.', SLUG_TD), $status));
+                throw new \exception(sprintf('Unexpected comment status: `%1$s`.', $status));
         }
     }
 
@@ -237,7 +237,7 @@ class UtilsDb extends AbsBase
                 return 'closed';
 
             default: // Throw exception on anything else.
-                throw new \exception(sprintf(__('Unexpected post comment status: `%1$s`.', SLUG_TD), $status));
+                throw new \exception(sprintf('Unexpected post comment status: `%1$s`.', $status));
         }
     }
 
@@ -272,7 +272,7 @@ class UtilsDb extends AbsBase
                ' LIMIT 1'; // One to check.
 
         if ($this->wp->query($sql) === false) { // Initial query failure?
-            throw new \exception(__('Query failure.', SLUG_TD));
+            throw new \exception('Query failure.');
         }
         return $total = (int) $this->wp->get_var('SELECT FOUND_ROWS()');
     }
@@ -384,7 +384,7 @@ class UtilsDb extends AbsBase
                ' LIMIT 1'; // One to check.
 
         if ($this->wp->query($sql) === false) { // Initial query failure?
-            throw new \exception(__('Query failure.', SLUG_TD));
+            throw new \exception('Query failure.');
         }
         return $total = (int) $this->wp->get_var('SELECT FOUND_ROWS()');
     }
@@ -556,7 +556,7 @@ class UtilsDb extends AbsBase
                ' LIMIT 1'; // One to check.
 
         if ($this->wp->query($sql) === false) { // Initial query failure?
-            throw new \exception(__('Query failure.', SLUG_TD));
+            throw new \exception('Query failure.');
         }
         return $total = (int) $this->wp->get_var('SELECT FOUND_ROWS()');
     }
